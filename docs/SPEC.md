@@ -169,6 +169,7 @@ Implementação do PRD §5.5, §10.
 - O app Expo é exportado para web com `expo export --platform web`, gerando um bundle estático (ou com API routes via Expo Router se necessário).
 - Deploy no Vercel via integração direta com o repositório (build command = export do Expo), sem necessidade de workflow próprio no GitHub Actions **a menos que** surjam passos customizados de pré-build (ex.: gerar tipos do Supabase antes do build) — nesse caso, mover para `.github/workflows/web-deploy.yml` chamando o Vercel via CLI/token.
 - **SDD-8:** variáveis de ambiente (chave pública do Supabase, URL do projeto) ficam nas Environment Variables do Vercel para produção e em `.env.local` (git-ignored) para desenvolvimento — nunca hardcoded.
+- **SDD-15:** o projeto Vercel foi criado com Framework Preset "Next.js" (herdado do scaffold inicial, mesma origem do problema descrito na SDD-14), o que quebra o build pois este projeto não usa Next.js. Corrigido com `vercel.json` na raiz do monorepo, fixando `framework: null`, `buildCommand: "pnpm --filter @serdono/app run build:web"` (script que roda `expo export --platform web`) e `outputDirectory: "apps/app/dist"`. **Ação pendente no dashboard:** confirmar em Project Settings → General que o Framework Preset mudou para "Other" após o próximo deploy; se o Vercel continuar assumindo Next.js, trocar manualmente o preset.
 
 ---
 
