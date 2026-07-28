@@ -1,0 +1,15 @@
+# Documentação de skills de terceiros (instalada, não é conteúdo do projeto Ser Dono)
+.agents/skills/
+.claude/skills/
+
+# Variações redundantes de asset de marca (ícones/favicons/logos em múltiplos tamanhos)
+# — a semântica de marca já está coberta por docs/identidade-visual/DESIGN_SYSTEM.md
+# (img/README.md na raiz de img/ continua incluído, pois documenta o uso de cada arquivo)
+img/app-icon/
+img/favicon/
+img/splash/
+img/social/
+img/horizontal/
+img/vertical/
+img/simbolo/
+docs/identidade-visual/identidade-ser-dono/

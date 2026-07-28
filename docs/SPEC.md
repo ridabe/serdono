@@ -288,5 +288,16 @@ Executa em todo Pull Request:
 ## 11. Decisões que ainda precisam de dono (bloqueiam itens específicos, não o início geral do código)
 
 1. Geração e custódia do keystore Android de produção (SDD-9) — precisa existir antes do primeiro run do workflow §7.
-2. Confirmar se o roteamento de rotas públicas (marketing/SEO) ficará dentro do Expo Router ou em site estático separado (SDD-2) — decisão de negócio de médio prazo, não bloqueia o MVP do app autenticado.
+2. ~~Confirmar se o roteamento de rotas públicas fica no Expo Router ou em site estático separado~~ — **resolvido:** dentro do Expo Router, ver SDD-13.
 3. Gateway de pagamento definitivo (já listado no PRD §17) — define o formato do webhook que a Edge Function de assinatura precisa expor.
+4. Reconciliar nomenclatura de variáveis de ambiente do Supabase no `.env` — ver SDD-14.
+
+---
+
+## 12. Decisões registradas durante a implementação da Home/Landing (retroativas a este PR)
+
+**SDD-13 (resolve o item 2 da seção 11):** a Home pública nasce **dentro do monorepo Expo**, como rota `apps/app/app/index.tsx` do Expo Router, e não como site estático separado fora do monorepo. Decisão do dono do produto: preferir base única desde o início a uma migração posterior de um site estático para dentro do Expo Router (SDD-2 permanece válida como *opção* para o futuro, caso SEO se torne bloqueante — não foi descartada, só não foi a escolha inicial).
+
+**SDD-14 (nomenclatura de env vars do Supabase):** o `.env` da raiz tem `EXPO_PUBLIC_SUPABASE_ANON_KEY` (convenção Expo, correta) mas a URL do projeto está como `NEXT_PUBLIC_SUPABASE_URL` (convenção Next.js, herdada de outro scaffold — este projeto **não usa Next.js**, SPEC §1). `packages/supabase/client.ts` já lê `EXPO_PUBLIC_SUPABASE_URL`. **Ação pendente antes de qualquer tela chamar o Supabase de verdade:** renomear a variável no `.env` (e em qualquer lugar que a gere) para `EXPO_PUBLIC_SUPABASE_URL`, mantendo só a convenção Expo.
+
+**Decisão de Metro/monorepo:** com pnpm workspaces, o `metro.config.js` de `apps/app` **não** deve setar `resolver.disableHierarchicalLookup = true` nem sobrescrever `resolver.nodeModulesPaths` — essa receita é da documentação oficial para monorepos com hoist "flat" (yarn/npm workspaces). O pnpm resolve dependências via `node_modules` simbólico por pacote; forçar a lookup não-hierárquica quebra a resolução de dependências transitivas de pacotes como `expo` (ex.: `expo-modules-core`) e do próprio `expo-router` (`@expo/metro-runtime`, `@react-navigation/native` como dependências diretas de `apps/app`). A única customização necessária é ampliar `watchFolders` para a raiz do monorepo.

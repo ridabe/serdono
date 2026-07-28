@@ -30,3 +30,7 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 .idea/
+
+# graphify — regenerável via `graphify . --backend claude-cli` / `graphify update .`
+graphify-out/.graphify_*
+graphify-out/cache/
