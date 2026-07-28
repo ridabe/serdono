@@ -1,9 +1,12 @@
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Pressable, ScrollView, Text, TextInput, View } from "react-native";
-import { Button, Logo, color, radius, space, type } from "@serdono/ui";
+import { Button, EntrepreneurBackground, Logo, color, radius, space, type } from "@serdono/ui";
 import { ensureSession, supabase } from "@serdono/supabase";
+import { pickEntrepreneurPhoto } from "../../constants/entrepreneurPhotos";
 import { DIAGNOSTICO_BLOCKS, type DiagnosticoBlock } from "./blocks";
+
+const BACKGROUND_PHOTO = pickEntrepreneurPhoto("diagnostico");
 
 interface Answers {
   capital_disponivel: string | null;
@@ -61,7 +64,31 @@ export function DiagnosticoScreen() {
           .maybeSingle();
         if (fetchError) throw fetchError;
 
-        if (data) {
+        if (data && data.status_preenchimento === "concluido") {
+          // Diagnóstico já concluído antes: /diagnostico aqui significa "refazer",
+          // não "continuar de onde parou" — reseta pra bloco 1 (RN-6, recalcular ao mudar).
+          const { error: resetError } = await supabase
+            .from("diagnostic_responses")
+            .update({
+              capital_disponivel: null,
+              meses_de_folego: null,
+              apetite_risco: null,
+              tempo_disponivel: null,
+              formacao: [],
+              localizacao_cidade: null,
+              localizacao_estado: null,
+              objetivo: null,
+              status_preenchimento: "em_andamento",
+              respondido_em: null,
+            } as never)
+            .eq("user_id", session.user.id);
+          if (resetError) throw resetError;
+
+          setAnswers(EMPTY_ANSWERS);
+          setCidadeInput("");
+          setEstadoInput("");
+          setBlockIndex(0);
+        } else if (data) {
           const loaded: Answers = {
             capital_disponivel: data.capital_disponivel,
             meses_de_folego: data.meses_de_folego,
@@ -140,9 +167,27 @@ export function DiagnosticoScreen() {
   const isLastBlock = blockIndex === DIAGNOSTICO_BLOCKS.length - 1;
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: color.bg.canvas }} contentContainerStyle={{ flexGrow: 1 }}>
-      <View style={{ paddingHorizontal: space[5], paddingTop: space[6], paddingBottom: space[4] }}>
+    <View style={{ flex: 1 }}>
+      <EntrepreneurBackground photoUrl={BACKGROUND_PHOTO.url} />
+      <ScrollView style={{ flex: 1, backgroundColor: "transparent" }} contentContainerStyle={{ flexGrow: 1 }}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          paddingHorizontal: space[5],
+          paddingTop: space[6],
+          paddingBottom: space[4],
+        }}
+      >
         <Logo size={28} />
+        <Pressable
+          onPress={() => router.replace("/")}
+          accessibilityRole="link"
+          style={{ minHeight: 44, justifyContent: "center" }}
+        >
+          <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>← Início</Text>
+        </Pressable>
       </View>
 
       <View style={{ flex: 1, alignItems: "center", paddingHorizontal: space[4], paddingBottom: space[10] }}>
@@ -284,7 +329,8 @@ export function DiagnosticoScreen() {
           </View>
         </View>
       </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 

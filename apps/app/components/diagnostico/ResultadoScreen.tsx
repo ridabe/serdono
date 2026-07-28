@@ -1,9 +1,12 @@
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, ScrollView, Text, View } from "react-native";
-import { Button, Logo, color, content, radius, space, type } from "@serdono/ui";
+import { ActivityIndicator, Pressable, ScrollView, Text, View } from "react-native";
+import { Button, EntrepreneurBackground, Logo, color, content, radius, space, type } from "@serdono/ui";
 import { ensureSession, supabase } from "@serdono/supabase";
+import { pickEntrepreneurPhoto } from "../../constants/entrepreneurPhotos";
 import { CAPITAL_LABEL, OBJETIVO_LABEL, TEMPO_LABEL, formatMoney, stripMarkdown } from "./labels";
+
+const BACKGROUND_PHOTO = pickEntrepreneurPhoto("resultado");
 
 interface MatchRow {
   niche_id: string;
@@ -102,9 +105,27 @@ export function ResultadoScreen() {
     : "";
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: color.bg.canvas }} contentContainerStyle={{ flexGrow: 1 }}>
-      <View style={{ paddingHorizontal: space[5], paddingTop: space[6], paddingBottom: space[2] }}>
+    <View style={{ flex: 1 }}>
+      <EntrepreneurBackground photoUrl={BACKGROUND_PHOTO.url} />
+      <ScrollView style={{ flex: 1, backgroundColor: "transparent" }} contentContainerStyle={{ flexGrow: 1 }}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          paddingHorizontal: space[5],
+          paddingTop: space[6],
+          paddingBottom: space[2],
+        }}
+      >
         <Logo size={28} />
+        <Pressable
+          onPress={() => router.replace("/")}
+          accessibilityRole="link"
+          style={{ minHeight: 44, justifyContent: "center" }}
+        >
+          <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>← Início</Text>
+        </Pressable>
       </View>
 
       <View style={{ alignItems: "center", paddingHorizontal: space[4], paddingBottom: space[10] }}>
@@ -184,6 +205,7 @@ export function ResultadoScreen() {
           </View>
         </View>
       </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }

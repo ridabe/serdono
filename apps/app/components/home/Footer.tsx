@@ -1,8 +1,11 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { useRouter } from "expo-router";
+import { Pressable, Text, View } from "react-native";
 import { color, content, space, type } from "@serdono/ui";
 
 export function Footer({ compact }: { compact: boolean }) {
+  const router = useRouter();
+
   return (
     <View
       style={{
@@ -23,7 +26,17 @@ export function Footer({ compact }: { compact: boolean }) {
         }}
       >
         <Text style={{ ...type.caption, color: "#8FA3BC" }}>© 2026 Ser Dono · serdono.com.br</Text>
-        <Text style={{ ...type.caption, color: "#8FA3BC" }}>Termos · Privacidade · LGPD</Text>
+        <View style={{ flexDirection: "row", gap: space[4] }}>
+          <Pressable onPress={() => router.push("/termos")}>
+            <Text style={{ ...type.caption, color: "#8FA3BC" }}>Termos</Text>
+          </Pressable>
+          <Pressable onPress={() => router.push("/privacidade")}>
+            <Text style={{ ...type.caption, color: "#8FA3BC" }}>Privacidade</Text>
+          </Pressable>
+          <Pressable onPress={() => router.push("/lgpd")}>
+            <Text style={{ ...type.caption, color: "#8FA3BC" }}>LGPD</Text>
+          </Pressable>
+        </View>
       </View>
     </View>
   );

@@ -1,8 +1,11 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { ScrollView, Text, TextInput, View } from "react-native";
-import { Button, Logo, color, radius, space, type } from "@serdono/ui";
+import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { Button, EntrepreneurBackground, Logo, color, radius, space, type } from "@serdono/ui";
 import { ensureSession, isAnonymousSession, supabase } from "@serdono/supabase";
+import { pickEntrepreneurPhoto } from "../../constants/entrepreneurPhotos";
+
+const BACKGROUND_PHOTO = pickEntrepreneurPhoto("cadastro");
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -56,15 +59,32 @@ export function CadastroScreen() {
   }
 
   return (
-    <ScrollView
-      style={{ flex: 1, backgroundColor: color.bg.canvas }}
-      contentContainerStyle={{ flexGrow: 1, alignItems: "center", justifyContent: "center", padding: space[5] }}
-    >
-      <View style={{ width: "100%", maxWidth: 420 }}>
-        <View style={{ alignItems: "center", marginBottom: space[6] }}>
-          <Logo size={36} />
-        </View>
+    <View style={{ flex: 1 }}>
+      <EntrepreneurBackground photoUrl={BACKGROUND_PHOTO.url} />
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          paddingHorizontal: space[5],
+          paddingTop: space[6],
+        }}
+      >
+        <Logo size={28} />
+        <Pressable
+          onPress={() => router.replace("/")}
+          accessibilityRole="link"
+          style={{ minHeight: 44, justifyContent: "center" }}
+        >
+          <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>← Início</Text>
+        </Pressable>
+      </View>
 
+      <ScrollView
+        style={{ flex: 1, backgroundColor: "transparent" }}
+        contentContainerStyle={{ flexGrow: 1, alignItems: "center", justifyContent: "center", padding: space[5] }}
+      >
+      <View style={{ width: "100%", maxWidth: 420 }}>
         <View
           style={{
             backgroundColor: color.bg.surface,
@@ -92,7 +112,8 @@ export function CadastroScreen() {
           <Button label={loading ? "Criando conta..." : "Criar conta e continuar"} variant="primary" fullWidth loading={loading} onPress={handleSubmit} />
         </View>
       </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 

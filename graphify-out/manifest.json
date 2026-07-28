@@ -1,0 +1,362 @@
+{
+  ".claude/launch.json": {
+    "mtime": 1785250278.7136953,
+    "ast_hash": "3da31ab6e5ab8bb0d3b77906997b29fe",
+    "semantic_hash": ""
+  },
+  ".claude/settings.json": {
+    "mtime": 1785251847.2061398,
+    "ast_hash": "598cb075410bcd95220ac90bbb60344a",
+    "semantic_hash": ""
+  },
+  ".claude/settings.local.json": {
+    "mtime": 1785255212.8920324,
+    "ast_hash": "74c44420471f0ba2d1145818ee6325f3",
+    "semantic_hash": ""
+  },
+  ".mcp.json": {
+    "mtime": 1785252206.7942278,
+    "ast_hash": "20c0081b056b119ad36b4c074bd8389f",
+    "semantic_hash": ""
+  },
+  "apps/app/app.config.js": {
+    "mtime": 1785254546.0951943,
+    "ast_hash": "5cd24d2c35afbc2e5665d7d4b862cfd8",
+    "semantic_hash": ""
+  },
+  "apps/app/app/_layout.tsx": {
+    "mtime": 1785249907.674136,
+    "ast_hash": "f5329f6afd5d964c3c9e9eb129b9d725",
+    "semantic_hash": ""
+  },
+  "apps/app/app/cadastro/bem-vindo.tsx": {
+    "mtime": 1785252707.3668451,
+    "ast_hash": "53bcdfbae480dcb7a5f6d7021b1e1a3f",
+    "semantic_hash": ""
+  },
+  "apps/app/app/cadastro/index.tsx": {
+    "mtime": 1785252700.9037628,
+    "ast_hash": "2e013e4ba3affc2826089e477a7859de",
+    "semantic_hash": ""
+  },
+  "apps/app/app/diagnostico/index.tsx": {
+    "mtime": 1785252616.9803996,
+    "ast_hash": "c1973f2e6c80e2d03df666c6f6c7cde5",
+    "semantic_hash": ""
+  },
+  "apps/app/app/diagnostico/resultado.tsx": {
+    "mtime": 1785252662.780341,
+    "ast_hash": "ce47f625ddd4219ed6360d09fb9a8428",
+    "semantic_hash": ""
+  },
+  "apps/app/app/index.tsx": {
+    "mtime": 1785250087.904413,
+    "ast_hash": "f6d9aa371d0f3b52c1583f2cba40dd74",
+    "semantic_hash": ""
+  },
+  "apps/app/babel.config.js": {
+    "mtime": 1785249888.2352097,
+    "ast_hash": "39626410bf17113d7391598a3d40b764",
+    "semantic_hash": ""
+  },
+  "apps/app/components/cadastro/CadastroScreen.tsx": {
+    "mtime": 1785258297.2140303,
+    "ast_hash": "23be481dd8efcafdfe6126c2587ad843",
+    "semantic_hash": ""
+  },
+  "apps/app/components/diagnostico/DiagnosticoScreen.tsx": {
+    "mtime": 1785253071.456968,
+    "ast_hash": "2cd551b133b56e2332597250050a1b93",
+    "semantic_hash": ""
+  },
+  "apps/app/components/diagnostico/ResultadoScreen.tsx": {
+    "mtime": 1785258462.9796968,
+    "ast_hash": "e9b5b993277dfc1ca0f71368ce73bcee",
+    "semantic_hash": ""
+  },
+  "apps/app/components/diagnostico/blocks.ts": {
+    "mtime": 1785252570.5637493,
+    "ast_hash": "897424ec6a91ffcba04f4696866f8244",
+    "semantic_hash": ""
+  },
+  "apps/app/components/diagnostico/labels.ts": {
+    "mtime": 1785258437.7237155,
+    "ast_hash": "5017b4190f5ea9af4325b473197028a7",
+    "semantic_hash": ""
+  },
+  "apps/app/components/home/FinalCta.tsx": {
+    "mtime": 1785252773.6834602,
+    "ast_hash": "7c1025c8de633afa11c1d09faec9951b",
+    "semantic_hash": ""
+  },
+  "apps/app/components/home/Footer.tsx": {
+    "mtime": 1785250035.897144,
+    "ast_hash": "491ded9504e7a638003a82ac8c9c12bc",
+    "semantic_hash": ""
+  },
+  "apps/app/components/home/ForWhomSection.tsx": {
+    "mtime": 1785250050.4509716,
+    "ast_hash": "a9f20523c8f918c9b796c2b85baae12b",
+    "semantic_hash": ""
+  },
+  "apps/app/components/home/Hero.tsx": {
+    "mtime": 1785252733.96386,
+    "ast_hash": "1eb380eb0d4f84972c2d4be2e16994f5",
+    "semantic_hash": ""
+  },
+  "apps/app/components/home/HomeScreen.tsx": {
+    "mtime": 1785250085.6687293,
+    "ast_hash": "7e53e050a366d2adcb970a1f63bf06e8",
+    "semantic_hash": ""
+  },
+  "apps/app/components/home/HowItWorks.tsx": {
+    "mtime": 1785250025.3735871,
+    "ast_hash": "74a93ed1e35574ec8a24b4aeab3cce98",
+    "semantic_hash": ""
+  },
+  "apps/app/components/home/NavBar.tsx": {
+    "mtime": 1785252788.3261027,
+    "ast_hash": "109b707757cd49652ff9416a67dceed8",
+    "semantic_hash": ""
+  },
+  "apps/app/components/home/QuizPreviewCard.tsx": {
+    "mtime": 1785252763.824775,
+    "ast_hash": "710fcbfa527cc03e073f67747ca4b6ad",
+    "semantic_hash": ""
+  },
+  "apps/app/components/home/StatsSection.tsx": {
+    "mtime": 1785250016.8136299,
+    "ast_hash": "5ad1dccbfb5f70b5eb750e8325d75cea",
+    "semantic_hash": ""
+  },
+  "apps/app/components/home/TestimonialSection.tsx": {
+    "mtime": 1785250071.2229843,
+    "ast_hash": "81a0718bbab24736477bd7b765af818f",
+    "semantic_hash": ""
+  },
+  "apps/app/metro.config.js": {
+    "mtime": 1785252209.8958595,
+    "ast_hash": "767aa0ad6d881656bb3cff7222004603",
+    "semantic_hash": ""
+  },
+  "apps/app/package.json": {
+    "mtime": 1785253600.6237779,
+    "ast_hash": "2cf4b89337d3992f0b2e853e0dbfb6cb",
+    "semantic_hash": ""
+  },
+  "apps/app/tsconfig.json": {
+    "mtime": 1785253106.5401924,
+    "ast_hash": "70ae5b7763e0f990f5714771f5f0ec92",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1785249536.8702722,
+    "ast_hash": "c21c62732bd25a34d4daf00c80655845",
+    "semantic_hash": ""
+  },
+  "packages/config/package.json": {
+    "mtime": 1785249547.2158146,
+    "ast_hash": "469360248d9c25de90f2ef9ae69b7c1f",
+    "semantic_hash": ""
+  },
+  "packages/config/tsconfig.base.json": {
+    "mtime": 1785249548.809828,
+    "ast_hash": "91400ef94983100e033439946d8b53c8",
+    "semantic_hash": ""
+  },
+  "packages/core/fitScore.test.ts": {
+    "mtime": 1785251933.5208573,
+    "ast_hash": "d53afcf985a70fdc668442903c4b35e3",
+    "semantic_hash": ""
+  },
+  "packages/core/fitScore.ts": {
+    "mtime": 1785251917.7516813,
+    "ast_hash": "38af47220edc38a6eb09a4e9031df6db",
+    "semantic_hash": ""
+  },
+  "packages/core/index.ts": {
+    "mtime": 1785251936.7691114,
+    "ast_hash": "37b14906ac394a79bca6e0d41c9994b7",
+    "semantic_hash": ""
+  },
+  "packages/core/package.json": {
+    "mtime": 1785251949.3173413,
+    "ast_hash": "c71288b4d35881998088e7f82f5ded30",
+    "semantic_hash": ""
+  },
+  "packages/core/tsconfig.json": {
+    "mtime": 1785251952.706622,
+    "ast_hash": "0620dcaf718d6b504f6addba5f792399",
+    "semantic_hash": ""
+  },
+  "packages/supabase/client.ts": {
+    "mtime": 1785254559.4370544,
+    "ast_hash": "44812683c2583cb88d47d4a9b2028fa5",
+    "semantic_hash": ""
+  },
+  "packages/supabase/index.ts": {
+    "mtime": 1785252317.5218806,
+    "ast_hash": "353fb87513ce246899de669c8f7c79dc",
+    "semantic_hash": ""
+  },
+  "packages/supabase/package.json": {
+    "mtime": 1785254574.416687,
+    "ast_hash": "c642a0e7300de402d075a08b953c4530",
+    "semantic_hash": ""
+  },
+  "packages/supabase/session.ts": {
+    "mtime": 1785252220.8046372,
+    "ast_hash": "195abc3d1ae1f0eee4f41faccff483ec",
+    "semantic_hash": ""
+  },
+  "packages/supabase/tsconfig.json": {
+    "mtime": 1785252286.1230738,
+    "ast_hash": "ca4bb1cea9e69a33e5e3ac7a5749d40c",
+    "semantic_hash": ""
+  },
+  "packages/supabase/types.ts": {
+    "mtime": 1785252923.7227426,
+    "ast_hash": "fed13eed063e2ec9672abd76a7b3fc4f",
+    "semantic_hash": ""
+  },
+  "packages/ui/components/Button.tsx": {
+    "mtime": 1785250006.2454708,
+    "ast_hash": "a174f9979584b1ddc83c432e3309ffc0",
+    "semantic_hash": ""
+  },
+  "packages/ui/components/Card.tsx": {
+    "mtime": 1785249638.4342332,
+    "ast_hash": "02bebdd84a28799345d6848f9e1dbb8a",
+    "semantic_hash": ""
+  },
+  "packages/ui/components/Logo.tsx": {
+    "mtime": 1785249646.5058844,
+    "ast_hash": "378d4ce276c1540f6414394c40ef9e1c",
+    "semantic_hash": ""
+  },
+  "packages/ui/index.ts": {
+    "mtime": 1785249648.9729917,
+    "ast_hash": "c7ebcfa3528f1ae29c9769780026524c",
+    "semantic_hash": ""
+  },
+  "packages/ui/package.json": {
+    "mtime": 1785250744.3528197,
+    "ast_hash": "c3cdd0ca7118183fc564cf453ca254d5",
+    "semantic_hash": ""
+  },
+  "packages/ui/tsconfig.json": {
+    "mtime": 1785249556.1874366,
+    "ast_hash": "2b05bfc92325dda0e30638c813f3a643",
+    "semantic_hash": ""
+  },
+  "skills-lock.json": {
+    "mtime": 1785252246.1158373,
+    "ast_hash": "4a14c8e3a0282a2525a02d6d07df3fb6",
+    "semantic_hash": ""
+  },
+  "supabase/functions/_shared/cors.ts": {
+    "mtime": 1785252385.1264243,
+    "ast_hash": "83abdecde302518ec56d22c6d24cf2e5",
+    "semantic_hash": ""
+  },
+  "supabase/functions/diagnostic-match/index.ts": {
+    "mtime": 1785258424.6904318,
+    "ast_hash": "9b8e04c9a7cad71dceecee9278c25e17",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/202607281300_diagnostico_e_nichos.sql": {
+    "mtime": 1785251778.5181403,
+    "ast_hash": "0b0798227515974e3c3d93f395e920bb",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/202607281301_seed_nichos_mvp.sql": {
+    "mtime": 1785251862.3369837,
+    "ast_hash": "7d99b4c5ca6406029ee637bae0a6b447",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/202607281400_grants_padrao_supabase.sql": {
+    "mtime": 1785255196.2832832,
+    "ast_hash": "b428b5c07fa1728016991d8868ddf404",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/202607281400_hardening_functions_search_path_and_execute.sql": {
+    "mtime": 1785253231.6732185,
+    "ast_hash": "de4a347af303829fa6bbe778184abf4f",
+    "semantic_hash": ""
+  },
+  "vercel.json": {
+    "mtime": 1785253604.4080176,
+    "ast_hash": "d51a6fa1882820187507490a96710f07",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1785251847.2041397,
+    "ast_hash": "c085186cfa060d1cd37bf0523a4d99ab",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1785248903.1002312,
+    "ast_hash": "37a37a169b5cadbef8ca9a66afadabf5",
+    "semantic_hash": ""
+  },
+  "docs/PRD.md": {
+    "mtime": 1785248903.1012354,
+    "ast_hash": "3dd0958f66195237a004873dee2ecdc5",
+    "semantic_hash": ""
+  },
+  "docs/SPEC.md": {
+    "mtime": 1785255278.500241,
+    "ast_hash": "8f017dfc48474fbda4b6e49362c9b216",
+    "semantic_hash": ""
+  },
+  "docs/identidade-visual/DESIGN_SYSTEM.md": {
+    "mtime": 1785248903.1072304,
+    "ast_hash": "6b7afba63e37628a67326815df2c1262",
+    "semantic_hash": ""
+  },
+  "docs/identidade-visual/Ser Dono - Painel de Conceitos de Marca.html": {
+    "mtime": 1785248903.1082368,
+    "ast_hash": "b19c13af2b8840ef087770b32a480556",
+    "semantic_hash": ""
+  },
+  "docs/identidade-visual/mockups/app-mobile.html": {
+    "mtime": 1785248903.1244686,
+    "ast_hash": "7259093b32bf17b6d4a7512510cfda35",
+    "semantic_hash": ""
+  },
+  "docs/identidade-visual/mockups/portal-web.html": {
+    "mtime": 1785248903.1250105,
+    "ast_hash": "e9fcfddca00ae396d031241049fbacc4",
+    "semantic_hash": ""
+  },
+  "img/README.md": {
+    "mtime": 1785248903.1260178,
+    "ast_hash": "4b25f2ecbcef2029adfc4f74928ca60c",
+    "semantic_hash": ""
+  },
+  "pnpm-workspace.yaml": {
+    "mtime": 1785249520.5746949,
+    "ast_hash": "de6b9e7bb156f8dc12f68dc3d1a0b649",
+    "semantic_hash": ""
+  },
+  "Documento de Conceito v0.1.pdf": {
+    "mtime": 1785248903.0942311,
+    "ast_hash": "0daaf3886aa335525f8da0f5c3b22b96",
+    "semantic_hash": ""
+  },
+  "docs/identidade-visual/Ser Dono - Painel de Conceitos de Marca.pdf": {
+    "mtime": 1785248903.1102393,
+    "ast_hash": "0e157eebcc3ef3c53962b34d2013fba4",
+    "semantic_hash": ""
+  },
+  "docs/identidade-visual/mockups/Ser Dono - Telas do App Mobile.pdf": {
+    "mtime": 1785248903.1212368,
+    "ast_hash": "825f2f5d1e4315a6eaf94e3d1bf45635",
+    "semantic_hash": ""
+  },
+  "docs/identidade-visual/mockups/Ser Dono - Telas do Portal Web.pdf": {
+    "mtime": 1785248903.1232908,
+    "ast_hash": "67ded6ef7a3fd4f7c61db6f007dec67f",
+    "semantic_hash": ""
+  }
+}

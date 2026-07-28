@@ -362,6 +362,16 @@ Componente direto do PRD §6.4 ("marcos visíveis... barra de progresso por tril
 - Ilustração simples ou ícone grande (48–64px) em `brand.100`, título `type.h2`, descrição `type.body` em `color.text.secondary`, botão de ação abaixo quando aplicável.
 - Tom sempre alinhado ao Princípio de Produto do PRD §4 (honestidade sobre risco) — nunca mensagens de erro genéricas tipo "Algo deu errado"; sempre nomear o que aconteceu e o próximo passo possível.
 
+### 9.9 Fotografia de fundo (telas do funil pré-login)
+
+Telas de fundo branco/canvas puro no funil de diagnóstico e cadastro ganham uma camada sutil de fotografia real de empreendedores — reforça que o produto fala de gente real construindo negócio real, não é só formulário. Aplica-se a qualquer tela nova desse funil daqui pra frente (diagnóstico, resultado, cadastro), não só à primeira em que foi usado.
+
+- **Componente:** `EntrepreneurBackground` (`packages/ui/components/EntrepreneurBackground.tsx`), usado como camada absoluta atrás do conteúdo da tela (nunca atrás de texto lido diretamente — só atrás de área com card branco por cima).
+- **Tratamento:** foto cobre a tela inteira, com um véu de `color.bg.canvas` a 90–94% de opacidade por cima — o resultado é uma textura quase imperceptível, nunca uma foto nítida competindo com o conteúdo. **DS-13: nunca reduzir esse véu abaixo de 85% de opacidade** — abaixo disso a foto compete com o texto e quebra o contraste da §2.3.
+- **Banco de imagens:** fotos do catálogo `apps/app/constants/entrepreneurPhotos.ts`, todas sob licença Unsplash (uso comercial livre, sem necessidade de atribuição) — nunca imagem gerada por IA tentando simular uma "pessoa real", nunca foto sem licença clara.
+- **Curadoria:** preferir fotos com bastante espaço negativo, tom quente, pessoa real em contexto de pequeno negócio (loja, bancada, atendimento, notebook) — evitar fotos muito cheias/ruidosas, que não ficam sutis nem com o véu por cima.
+- **DS-14:** toda foto nova desse banco entra primeiro em `entrepreneurPhotos.ts` com URL, crédito do fotógrafo e link do perfil (mesmo a licença não exigindo atribuição, é a forma de manter rastreável de onde veio cada imagem) — nunca uma URL solta direto num componente de tela.
+
 ---
 
 ## 10. Acessibilidade
