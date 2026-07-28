@@ -25,6 +25,20 @@ const ANTHROPIC_MODEL = "claude-haiku-4-5-20251001"; // RN-10: modelo econômico
 
 const PREVIEW_SIZE = 3; // RN-7: prévia gratuita sempre mostra 3 nichos
 
+// Rede de segurança contra markdown residual — o card do app renderiza texto
+// plano, e o prompt já pede pra IA não usar markdown, mas isso garante que
+// nenhum **negrito**, # título ou lista escape para a UI mesmo se o modelo ignorar a instrução.
+function stripMarkdown(text: string): string {
+  return text
+    .replace(/^#{1,6}\s+/gm, "")
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/\*(.+?)\*/g, "$1")
+    .replace(/^[-*]\s+/gm, "")
+    .replace(/\n{2,}/g, " ")
+    .replace(/\n/g, " ")
+    .trim();
+}
+
 interface NicheRow extends NichoParaScore {
   id: string;
   nome: string;
@@ -48,6 +62,8 @@ async function gerarJustificativa(
     "Use exclusivamente os dados estruturados fornecidos abaixo. Nunca invente número de mercado que não",
     "esteja nos dados fornecidos. Se mencionar investimento ou margem, e houver fonte/data fornecidas, cite-as",
     "no formato 'Fonte, mês/ano' ao final da frase.",
+    "Responda em TEXTO PLANO, sem markdown: nunca use **negrito**, # títulos, listas com hífen/asterisco ou",
+    "qualquer outra marcação — o texto vai direto num card de app que não interpreta markdown, só texto corrido.",
   ].join(" ");
 
   const contexto = {
@@ -94,7 +110,7 @@ async function gerarJustificativa(
 
   const data = await response.json();
   const text = data.content?.[0]?.text?.trim();
-  return text || "Combina com o seu perfil de acordo com o cálculo do diagnóstico.";
+  return stripMarkdown(text || "Combina com o seu perfil de acordo com o cálculo do diagnóstico.");
 }
 
 Deno.serve(async (req) => {

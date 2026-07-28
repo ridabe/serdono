@@ -20,3 +20,16 @@ export const OBJETIVO_LABEL: Record<string, string> = {
 export function formatMoney(value: number): string {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
 }
+
+// Defesa extra no client: linhas geradas antes do ajuste do prompt (Edge Function
+// diagnostic-match) podem ter markdown salvo em niche_matches.justificativa_ia.
+export function stripMarkdown(text: string): string {
+  return text
+    .replace(/^#{1,6}\s+/gm, "")
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/\*(.+?)\*/g, "$1")
+    .replace(/^[-*]\s+/gm, "")
+    .replace(/\n{2,}/g, " ")
+    .replace(/\n/g, " ")
+    .trim();
+}

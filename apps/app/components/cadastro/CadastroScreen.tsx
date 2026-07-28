@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Text, TextInput, View } from "react-native";
+import { ScrollView, Text, TextInput, View } from "react-native";
 import { Button, Logo, color, radius, space, type } from "@serdono/ui";
 import { ensureSession, isAnonymousSession, supabase } from "@serdono/supabase";
 
@@ -56,7 +56,10 @@ export function CadastroScreen() {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: color.bg.canvas, alignItems: "center", justifyContent: "center", padding: space[5] }}>
+    <ScrollView
+      style={{ flex: 1, backgroundColor: color.bg.canvas }}
+      contentContainerStyle={{ flexGrow: 1, alignItems: "center", justifyContent: "center", padding: space[5] }}
+    >
       <View style={{ width: "100%", maxWidth: 420 }}>
         <View style={{ alignItems: "center", marginBottom: space[6] }}>
           <Logo size={36} />
@@ -89,7 +92,7 @@ export function CadastroScreen() {
           <Button label={loading ? "Criando conta..." : "Criar conta e continuar"} variant="primary" fullWidth loading={loading} onPress={handleSubmit} />
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 

@@ -1,9 +1,9 @@
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, Text, View } from "react-native";
+import { ActivityIndicator, ScrollView, Text, View } from "react-native";
 import { Button, Logo, color, content, radius, space, type } from "@serdono/ui";
 import { ensureSession, supabase } from "@serdono/supabase";
-import { CAPITAL_LABEL, OBJETIVO_LABEL, TEMPO_LABEL, formatMoney } from "./labels";
+import { CAPITAL_LABEL, OBJETIVO_LABEL, TEMPO_LABEL, formatMoney, stripMarkdown } from "./labels";
 
 interface MatchRow {
   niche_id: string;
@@ -102,12 +102,12 @@ export function ResultadoScreen() {
     : "";
 
   return (
-    <View style={{ flex: 1, backgroundColor: color.bg.canvas }}>
+    <ScrollView style={{ flex: 1, backgroundColor: color.bg.canvas }} contentContainerStyle={{ flexGrow: 1 }}>
       <View style={{ paddingHorizontal: space[5], paddingTop: space[6], paddingBottom: space[2] }}>
         <Logo size={28} />
       </View>
 
-      <View style={{ flex: 1, alignItems: "center", paddingHorizontal: space[4], paddingBottom: space[10] }}>
+      <View style={{ alignItems: "center", paddingHorizontal: space[4], paddingBottom: space[10] }}>
         <View style={{ width: "100%", maxWidth: content.maxWidthWide }}>
           <View style={{ backgroundColor: color.bg.brand, borderRadius: radius.lg, padding: space[6], marginBottom: space[6] }}>
             <Text style={{ ...type.overline, color: color.action.primary, marginBottom: space[2] }}>
@@ -158,7 +158,7 @@ export function ResultadoScreen() {
                 </View>
 
                 <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[3] }}>
-                  {match.justificativa_ia}
+                  {match.justificativa_ia ? stripMarkdown(match.justificativa_ia) : ""}
                 </Text>
 
                 {match.niches ? (
@@ -184,6 +184,6 @@ export function ResultadoScreen() {
           </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
