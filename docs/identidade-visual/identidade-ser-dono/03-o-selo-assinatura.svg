@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="960" height="240">
+  <title>Ser Dono — O Selo — assinatura horizontal</title>
+  <circle cx="26" cy="40" r="23" fill="#B5502F"/>
+  <circle cx="26" cy="40" r="17.5" fill="none" stroke="#F7E7D8" stroke-width="2.4" stroke-dasharray="4 4"/>
+  <text x="26" y="46" text-anchor="middle" font-family="Archivo,Arial,sans-serif" font-size="15" font-weight="800" fill="#F7E7D8" letter-spacing="0.6">SD</text>
+  <text x="62" y="52" font-family="Archivo,Arial,sans-serif" font-size="33" font-weight="700" fill="#3A2A22" letter-spacing="-0.6">SER DONO</text>
+</svg>

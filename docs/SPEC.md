@@ -1,0 +1,292 @@
+# Ser Dono — SPEC (Especificação Técnica / SDD)
+
+**Versão 0.1 · 27 de julho de 2026 · Documento vivo — este projeto é Spec-Driven Development (SDD): nenhuma implementação começa sem uma seção correspondente aqui**
+
+> Este documento define **como** construir o que o `PRD.md` define **o quê** construir. Toda dúvida técnica durante a codificação deve primeiro ser resolvida aqui; se a SPEC não cobre o caso, atualize a SPEC antes de escrever código, não depois.
+
+---
+
+## 0. Papel deste documento no fluxo de trabalho
+
+1. `PRD.md` — o quê construir e por quê (produto, regras de negócio, critérios de aceite).
+2. `SPEC.md` (este arquivo) — como construir: stack, arquitetura, estrutura de pastas, convenções, pipelines.
+3. Código — implementa exatamente o que PRD + SPEC descrevem. Divergência do código em relação à SPEC é bug de processo, não "detalhe de implementação".
+
+**Regra SDD-0:** qualquer decisão técnica tomada durante a codificação que não esteja prevista aqui deve ser adicionada a este arquivo no mesmo PR que a implementa.
+
+---
+
+## 1. Stack Definida
+
+| Camada | Escolha | Versão-alvo |
+|---|---|---|
+| Framework de UI | React + React Native, código único | — |
+| Toolchain mobile/web | Expo | **SDK 54** (fixado — ver §1.1) |
+| React Native | via Expo SDK 54 | 0.81 |
+| Web | Expo exportado para web (`react-native-web`), **sem Next.js** | — |
+| Roteamento | Expo Router (file-based, funciona em native e web) | |
+| Backend/dados | Supabase (Postgres, Auth, Storage, Edge Functions, RLS) | |
+| Hospedagem web | Vercel (build estático/SSR do export do Expo) | |
+| IA | API Anthropic (Claude) — Haiku (econômico) e Sonnet (avançado), conforme PRD §5.5 | |
+| CI/CD mobile | GitHub Actions — `expo prebuild` + Gradle, **sem EAS Build** | |
+| Linguagem | TypeScript em 100% do código de aplicação | |
+| Gerenciador de pacotes | pnpm (workspaces) | |
+
+### 1.1 Por que Expo SDK 54, fixado, e não a versão mais nova
+
+SDK 54 traz React Native 0.81 e é a **última versão que ainda permite Legacy Architecture** (`newArchEnabled: false`). A partir do React Native 0.82 (usado a partir do SDK 55) não é mais possível desativar a New Architecture. Fixamos em 54 deliberadamente para ter uma janela estável de desenvolvimento no MVP sem a obrigatoriedade de migrar para a New Architecture no meio do caminho — a migração é tratada como item de roadmap técnico (§10), não como bloqueio do MVP.
+
+**SDD-1:** Não atualizar o SDK do Expo durante a Fase 1 (MVP) sem passar por uma seção nova aqui documentando o motivo e o plano de migração de New Architecture, caso a versão-alvo exija.
+
+---
+
+## 2. Por que um código único para Web e Mobile (e o que isso custa)
+
+**Decisão:** Expo puro (React Native + `react-native-web`) para as três plataformas, em vez de Next.js separado para web + Expo para mobile.
+
+**Ganho:** uma tela, um componente, uma correção — vale para iOS, Android e Web ao mesmo tempo. É a exigência explícita do projeto ("um único código que possa ser usado para os dois tipos de sistema").
+
+**Custo assumido conscientemente:** o Expo Router web não tem a mesma maturidade de SEO/SSR que o Next.js. Para o MVP isso é aceitável porque a jornada principal (diagnóstico → workflow) é majoritariamente pós-login, sem necessidade de indexação profunda no Google. Se o marketing (Documento de Conceito §12, canal orgânico) precisar de páginas públicas fortemente otimizadas para SEO (landing pages, blog), essas páginas **podem** viver fora do monorepo, em um site estático simples — decisão isolada, que não contamina o app.
+
+**SDD-2:** Páginas 100% públicas e voltadas a SEO (landing, blog, páginas institucionais) são candidatas a ficar fora do app Expo. Qualquer tela que exija autenticação ou dado do usuário fica dentro do monorepo único.
+
+---
+
+## 3. Estrutura do Monorepo
+
+```
+serdono/
+├── CLAUDE.md
+├── docs/
+│   ├── PRD.md
+│   ├── SPEC.md                      (este arquivo)
+│   └── identidade-visual/
+│       └── DESIGN_SYSTEM.md         # cores, tipografia, tokens e spec de componentes
+├── apps/
+│   └── app/                         # o único app Expo — roda em iOS, Android e Web
+│       ├── app.json                 # versão/build number — ver §7
+│       ├── app/                     # Expo Router — rotas file-based
+│       │   ├── (auth)/              # telas de cadastro/login
+│       │   ├── (onboarding)/        # diagnóstico — PRD §7
+│       │   ├── (workflow)/          # trilhas A-F — PRD §9
+│       │   └── (paywall)/           # planos e checkout — PRD §8
+│       ├── android/                 # gerado por `expo prebuild`, não versionado (ver §7.2)
+│       └── ios/                     # idem
+├── packages/
+│   ├── ui/                          # componentes compartilhados + tokens visuais (ver docs/identidade-visual/DESIGN_SYSTEM.md §8)
+│   ├── core/                        # regras de negócio puras: cálculo de Fit Score, validações (PRD §5, §13)
+│   ├── supabase/                    # client Supabase, tipos gerados, hooks de dados
+│   └── config/                      # tsconfig, eslint, tailwind/nativewind compartilhados
+├── supabase/
+│   ├── migrations/                  # SQL versionado — fonte de verdade do schema (PRD §5)
+│   └── functions/                   # Edge Functions (ex.: webhook de pagamento, roteamento de IA)
+├── .github/
+│   └── workflows/
+│       ├── android-release.yml      # §7
+│       ├── web-deploy.yml           # Vercel (pode ser só integração nativa, ver §6)
+│       └── ci.yml                   # lint, typecheck, testes em todo PR
+├── pnpm-workspace.yaml
+└── package.json
+```
+
+**SDD-3:** Nenhuma lógica de negócio (cálculo, validação, regra de RN-x do PRD) vive dentro de `apps/app` — sempre em `packages/core`, para poder ser testada isoladamente e para impedir duplicação futura caso um segundo app apareça (ex.: painel admin separado).
+
+---
+
+## 4. Modelo de Dados → Supabase
+
+O modelo lógico está no `PRD.md` §5. Aqui ficam as convenções de implementação.
+
+### 4.1 Migrations
+- Toda alteração de schema é um arquivo SQL em `supabase/migrations/`, nunca uma alteração manual no painel do Supabase em produção.
+- Nome do arquivo: `YYYYMMDDHHMM_descricao_curta.sql`.
+- Cada tabela criada já nasce com RLS habilitada (`ALTER TABLE ... ENABLE ROW LEVEL SECURITY`) no mesmo arquivo de migration que a cria — nunca em migration separada posterior (janela de exposição zero).
+
+### 4.2 Padrão de políticas RLS
+
+**SDD-4 (política padrão de dado pessoal):** para toda tabela listada no PRD §5 com `user_id`, aplicar o padrão:
+
+```sql
+-- leitura e escrita restritas ao dono da linha
+create policy "select_own" on public.<tabela>
+  for select using (auth.uid() = user_id);
+
+create policy "insert_own" on public.<tabela>
+  for insert with check (auth.uid() = user_id);
+
+create policy "update_own" on public.<tabela>
+  for update using (auth.uid() = user_id);
+```
+
+**SDD-5 (dado de configuração/catálogo):** `niches` e `step_templates` (PRD §5.3, §5.4) são somente-leitura para qualquer usuário autenticado e somente-escrita por um papel `admin` (via claim customizada no JWT, não por tabela de usuários — ver §4.3):
+
+```sql
+create policy "niches_read_all" on public.niches
+  for select using (auth.role() = 'authenticated');
+
+create policy "niches_write_admin" on public.niches
+  for all using (auth.jwt() ->> 'user_role' = 'admin');
+```
+
+**SDD-6 (conteúdo bloqueado por assinatura):** o Fit Score e a prévia (PRD RN-7) são de leitura livre; o `playbook_md` completo de um nicho só é lido se existir uma linha em `subscriptions` ativa com aquele nicho destravado. Isso **não** é feito filtrando no client — a política de RLS em `niches` (ou em uma view derivada `niches_dossie`) precisa verificar a assinatura via subquery:
+
+```sql
+create policy "dossie_completo_apenas_assinantes" on public.niches_dossie
+  for select using (
+    exists (
+      select 1 from public.subscriptions s
+      where s.user_id = auth.uid()
+        and s.status = 'ativa'
+        and niches_dossie.niche_id = any(s.nichos_destravados_ids)
+    )
+  );
+```
+
+Isso implementa diretamente o **CA-4** do PRD ("usuário sem assinatura não consegue, por nenhuma rota de URL direta, ler o conteúdo completo").
+
+### 4.3 Papéis e claims
+- Papel `admin` (curadoria de nichos) é setado via **custom claim** no JWT (Supabase Auth Hook), não por uma coluna `is_admin` em `users` — evita que RLS mal escrita em `users` vaze a informação de quem é admin.
+- **SDD-7:** toda nova tabela criada é revisada com a pergunta "quem pode ler, quem pode escrever" antes do merge — isso é item obrigatório de checklist de PR (ver §9).
+
+### 4.4 Tipos TypeScript
+- Gerar tipos automaticamente do schema com `supabase gen types typescript` e publicar em `packages/supabase/types.ts` a cada migration aplicada — nunca escrever tipos de tabela manualmente.
+
+---
+
+## 5. Camada de IA (Copiloto)
+
+Implementação do PRD §5.5, §10.
+
+- Todas as chamadas à API Anthropic passam por uma **Edge Function do Supabase** (`supabase/functions/ai-copilot`), nunca diretamente do client — protege a chave de API e centraliza o log de `tokens_entrada`/`tokens_saida`/`modelo_usado` exigido em RNF-1.
+- Roteamento de modelo (RN-10) é uma função pura em `packages/core/ai/routeModel.ts`, testável sem rede.
+- Cache de prompt (RN-12): usar o recurso de prompt caching nativo da API Anthropic no prefixo fixo (instruções de sistema + playbook do nicho), montado a partir de `business_memory` (RN-11).
+- Guardrails (PRD §10.2): validação de citação de fonte (RF-3) é um teste automatizado que roda contra uma amostra de respostas antes de qualquer deploy que toque o prompt de sistema — não é apenas revisão manual.
+
+---
+
+## 6. Web em Produção (Vercel)
+
+- O app Expo é exportado para web com `expo export --platform web`, gerando um bundle estático (ou com API routes via Expo Router se necessário).
+- Deploy no Vercel via integração direta com o repositório (build command = export do Expo), sem necessidade de workflow próprio no GitHub Actions **a menos que** surjam passos customizados de pré-build (ex.: gerar tipos do Supabase antes do build) — nesse caso, mover para `.github/workflows/web-deploy.yml` chamando o Vercel via CLI/token.
+- **SDD-8:** variáveis de ambiente (chave pública do Supabase, URL do projeto) ficam nas Environment Variables do Vercel para produção e em `.env.local` (git-ignored) para desenvolvimento — nunca hardcoded.
+
+---
+
+## 7. Build Mobile Automatizado (GitHub Actions, sem EAS)
+
+Requisito do projeto: **toda vez que a versão em `app.json` for atualizada, gerar automaticamente o `.aab` do Android, sem depender do EAS Build.**
+
+### 7.1 Gatilho
+Workflow dispara em `push` na branch principal com alteração no arquivo `apps/app/app.json`, e adicionalmente compara `expo.version` / `expo.android.versionCode` com o valor do commit anterior para evitar rebuilds em alterações do `app.json` que não mudem versão.
+
+### 7.2 Por que gerar a pasta `android/` no CI, e não versionar
+`expo prebuild` gera a pasta `android/` (projeto nativo puro) a partir de `app.json` e dos plugins de config. Essa pasta **não é versionada no git** — é regenerada a cada build, garantindo que `app.json` continue sendo a única fonte de verdade de configuração nativa (evita divergência entre config declarada e projeto nativo commitado).
+
+### 7.3 Pipeline (`.github/workflows/android-release.yml`)
+
+```yaml
+name: Android Release (AAB)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/app/app.json"
+
+jobs:
+  build-aab:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/app
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: "pnpm" }
+
+      - uses: actions/setup-java@v4
+        with: { distribution: "temurin", java-version: "17" }
+
+      - name: Instalar dependências
+        run: pnpm install --frozen-lockfile
+
+      - name: Gerar projeto nativo Android (expo prebuild)
+        run: npx expo prebuild --platform android --clean
+
+      - name: Restaurar keystore de assinatura
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > android/app/release.keystore
+
+      - name: Configurar credenciais de assinatura
+        run: |
+          cat >> android/gradle.properties <<EOF
+          RELEASE_STORE_FILE=release.keystore
+          RELEASE_STORE_PASSWORD=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          RELEASE_KEY_ALIAS=${{ secrets.ANDROID_KEY_ALIAS }}
+          RELEASE_KEY_PASSWORD=${{ secrets.ANDROID_KEY_PASSWORD }}
+          EOF
+
+      - name: Build do AAB
+        run: cd android && ./gradlew bundleRelease
+
+      - name: Publicar artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release.aab
+          path: apps/app/android/app/build/outputs/bundle/release/app-release.aab
+```
+
+**Pré-requisitos deste pipeline (decisões pendentes — ver PRD §17):**
+- `android/app/build.gradle` precisa referenciar `RELEASE_STORE_FILE` / `RELEASE_KEY_ALIAS` / `RELEASE_KEY_PASSWORD` no bloco `signingConfigs.release` — configurado uma vez, versionado (o gradle não é regenerado do zero de forma a perder customização: usar um **config plugin do Expo**, `withAndroidSigningConfig`, para que `expo prebuild` sempre recrie o bloco de assinatura corretamente a cada execução do CI).
+- **`ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, `ANDROID_KEY_PASSWORD`** precisam existir como GitHub Secrets antes do primeiro run. **SDD-9:** o keystore de produção, uma vez gerado, nunca é regenerado — perdê-lo impede atualizar o app publicado na Play Store. Guardar backup fora do GitHub também (ex.: cofre do 1Password/Bitwarden da empresa).
+- `versionCode` do Android precisa incrementar a cada build enviado à Play Store — **SDD-10:** usar `expo.android.versionCode` em `app.json` como campo controlado manualmente (não autoincrement do CI), para manter `app.json` como única fonte de verdade de versão, conforme o requisito original.
+
+### 7.4 Publicação na Play Store
+Este pipeline gera o artefato `.aab` (`upload-artifact`). O upload para a Play Console pode ser manual no MVP ou automatizado depois com a action `r0adkll/upload-google-play`, usando uma service account do Google Play Console — tratado como item de roadmap técnico (§10), não bloqueio do MVP.
+
+### 7.5 iOS
+Fora do escopo deste pipeline (Android apenas, por pedido explícito). Build de iOS exige macOS runner e assinatura via conta Apple Developer — a ser especificado em seção própria quando for priorizado.
+
+---
+
+## 8. Ambientes
+
+| Ambiente | Supabase | Vercel | Mobile |
+|---|---|---|---|
+| Desenvolvimento local | projeto Supabase local (`supabase start`, Docker) | `expo start --web` | `expo start` + Expo Go ou dev client |
+| Staging | projeto Supabase de staging | branch preview do Vercel | build interno via Actions (manual dispatch) |
+| Produção | projeto Supabase de produção | branch `main` | pipeline §7, disparado por `app.json` |
+
+**SDD-11:** migrations de banco (§4.1) são aplicadas primeiro em staging, validadas, e só then aplicadas em produção — nunca direto em produção a partir da máquina local.
+
+---
+
+## 9. Qualidade e CI (`ci.yml`)
+
+Executa em todo Pull Request:
+1. `pnpm install --frozen-lockfile`
+2. `pnpm typecheck` (TypeScript em todos os packages)
+3. `pnpm lint`
+4. `pnpm test` (testes unitários de `packages/core` — regras de negócio do PRD, especialmente cálculo de Fit Score e roteamento de IA)
+5. Checklist de PR obrigatório (texto no template do PR): *"Esta mudança altera uma tabela? Se sim, RLS foi revisada (SDD-7)? Se altera `app.json`, a versão foi incrementada corretamente (SDD-10)?"*
+
+---
+
+## 10. Itens de Roadmap Técnico (fora do MVP, não bloqueiam)
+
+- Migração para New Architecture do React Native, antes ou junto da atualização para SDK 55+ (ver §1.1).
+- Automatizar publicação do `.aab` direto na Play Console via `upload-google-play` action.
+- Pipeline de build iOS (`.ipa`) via runner macOS.
+- Avaliar Solito ou abordagem equivalente **apenas se** for necessário separar uma landing page pública (SDD-2) sem duplicar lógica de autenticação/dados.
+
+---
+
+## 11. Decisões que ainda precisam de dono (bloqueiam itens específicos, não o início geral do código)
+
+1. Geração e custódia do keystore Android de produção (SDD-9) — precisa existir antes do primeiro run do workflow §7.
+2. Confirmar se o roteamento de rotas públicas (marketing/SEO) ficará dentro do Expo Router ou em site estático separado (SDD-2) — decisão de negócio de médio prazo, não bloqueia o MVP do app autenticado.
+3. Gateway de pagamento definitivo (já listado no PRD §17) — define o formato do webhook que a Edge Function de assinatura precisa expor.

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="960" height="240">
+  <title>Ser Dono — A Porta — assinatura horizontal</title>
+  <path d="M8 58 L8 36 A15 15 0 0 1 38 36 L38 58" fill="none" stroke="#22262B" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="23" cy="45" r="6.5" fill="#F59331"/>
+  <text x="58" y="52" font-family="Inter Tight,Arial,sans-serif" font-size="34" font-weight="700" fill="#22262B" letter-spacing="-0.5">Ser Dono</text>
+</svg>

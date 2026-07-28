@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="960" height="240">
+  <title>Ser Dono — A Chave — assinatura horizontal</title>
+  <circle cx="20" cy="24" r="10.5" fill="none" stroke="#2E2A6B" stroke-width="7"/>
+  <path d="M20 34 V62" stroke="#FF6B5A" stroke-width="7" stroke-linecap="round"/>
+  <path d="M20 47 H32" stroke="#FF6B5A" stroke-width="7" stroke-linecap="round"/>
+  <path d="M20 56 H29" stroke="#FF6B5A" stroke-width="7" stroke-linecap="round"/>
+  <text x="62" y="52" font-family="Manrope,Arial,sans-serif" font-size="34" font-weight="800" fill="#2E2A6B" letter-spacing="-0.5">Ser Dono</text>
+</svg>

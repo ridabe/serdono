@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ser Dono — Conceito de Telas · Portal Web</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ==== TOKENS — DESIGN_SYSTEM.md §8 ==== */
+:root{
+  --bg-canvas:#F7F9FC; --bg-surface:#FFFFFF; --bg-surface-alt:#F3F4F6;
+  --bg-brand:#0E3A4F; --bg-brand-700:#17546E; --bg-brand-subtle:#BFD4DC;
+  --action-primary:#F2B03D; --action-primary-hover:#D89620; --action-secondary:#0E3A4F;
+  --gold-100:#FCE9C2;
+  --text-primary:#111827; --text-secondary:#374151; --text-muted:#6B7280;
+  --text-on-brand:#FFFFFF; --text-on-action:#0E3A4F;
+  --border:#D1D5DB; --border-focus:#17546E;
+  --success:#1E8E5A; --success-bg:#DCF3E7;
+  --warning:#B5760E; --warning-bg:#FBEBD2;
+  --danger:#C23B2E;  --danger-bg:#F9DEDB;
+  --info:#2464B0;    --info-bg:#DCE8F7;
+  --r-sm:6px; --r-md:10px; --r-lg:14px; --r-full:999px;
+  --e1:0 1px 3px rgba(17,24,39,.08);
+  --e2:0 4px 12px rgba(17,24,39,.12);
+  --e3:0 12px 32px rgba(17,24,39,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#E7ECF2;font-family:Inter,system-ui,sans-serif;color:var(--text-primary);padding:40px 20px 90px}
+.page{max-width:1240px;margin:0 auto}
+
+/* chrome do documento (não faz parte do produto) */
+.doc-hero{background:var(--bg-brand);color:#fff;border-radius:16px;padding:34px 38px;margin-bottom:26px}
+.doc-hero .kick{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--action-primary)}
+.doc-hero h1{font-family:Sora;font-size:34px;margin:8px 0 10px;letter-spacing:-.6px}
+.doc-hero p{color:#C7D3E3;font-size:14px;line-height:1.65;max-width:780px}
+.screen-label{display:flex;align-items:baseline;gap:12px;margin:38px 0 12px}
+.screen-label .n{font-family:Sora;font-size:13px;font-weight:700;color:#fff;background:var(--action-primary);width:26px;height:26px;border-radius:var(--r-full);display:flex;align-items:center;justify-content:center;flex:none}
+.screen-label h2{font-family:Sora;font-size:20px;color:var(--bg-brand)}
+.screen-label span{font-size:12.5px;color:#5B6B7C}
+.frame{background:var(--bg-surface);border-radius:14px;overflow:hidden;box-shadow:var(--e2);border:1px solid #D8DEE7}
+.browserbar{background:#EDF1F6;border-bottom:1px solid #DCE3EC;padding:9px 14px;display:flex;align-items:center;gap:8px}
+.dot{width:10px;height:10px;border-radius:var(--r-full)}
+.url{flex:1;background:#fff;border-radius:var(--r-full);font-size:11.5px;color:var(--text-muted);padding:5px 12px;margin-left:8px}
+.note{font-size:12px;color:#5B6B7C;line-height:1.6;margin-top:9px;padding-left:38px}
+.note b{color:var(--bg-brand)}
+
+/* ==== LOGO ==== */
+.logo{display:flex;align-items:center;gap:9px}
+.logo svg{flex:none}
+.logo .wm{font-family:Sora;font-weight:700;font-size:19px;letter-spacing:-.4px}
+
+/* ==== COMPONENTES DO PRODUTO — DESIGN_SYSTEM.md §9 ==== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 20px;
+  border-radius:var(--r-md);font-family:Inter;font-size:15px;font-weight:600;border:none;cursor:pointer;text-decoration:none}
+.btn-primary{background:var(--action-primary);color:var(--text-on-action)}
+.btn-secondary{background:var(--action-secondary);color:#fff}
+.btn-outline{background:transparent;color:var(--action-secondary);border:1.5px solid var(--action-secondary)}
+.btn-ghost{background:transparent;color:var(--text-secondary)}
+.btn-sm{height:36px;font-size:13.5px;padding:0 14px}
+.btn-block{width:100%}
+
+.field{margin-bottom:16px}
+.field label{display:block;font-size:14px;font-weight:600;margin-bottom:6px;color:var(--text-primary)}
+.input{width:100%;height:48px;border:1px solid var(--border);border-radius:var(--r-md);padding:0 16px;font-family:Inter;font-size:14px;background:#fff;color:var(--text-primary)}
+.input.focus{border:2px solid var(--border-focus);box-shadow:var(--e1)}
+.input::placeholder{color:var(--text-muted)}
+
+.card{background:var(--bg-surface);border-radius:var(--r-lg);box-shadow:var(--e1);padding:24px}
+.card-outline{background:var(--bg-surface);border-radius:var(--r-lg);border:1px solid var(--border);padding:20px}
+.card-brand{background:var(--bg-brand);color:var(--text-on-brand);border-radius:var(--r-lg);padding:24px}
+
+.badge{display:inline-flex;align-items:center;gap:5px;border-radius:var(--r-sm);padding:4px 10px;font-size:12px;font-weight:600}
+.b-blocked{background:var(--bg-surface-alt);color:var(--text-muted)}
+.b-available{background:var(--info-bg);color:var(--info)}
+.b-progress{background:var(--bg-brand-subtle);color:var(--bg-brand)}
+.b-waiting{background:var(--warning-bg);color:var(--warning)}
+.b-done{background:var(--success-bg);color:var(--success)}
+
+.overline{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted)}
+.h-display{font-family:Sora;font-size:32px;line-height:40px;font-weight:700;letter-spacing:-.5px}
+.h1{font-family:Sora;font-size:24px;line-height:32px;font-weight:700}
+.h2{font-family:Sora;font-size:20px;line-height:28px;font-weight:600}
+.h3{font-size:17px;line-height:24px;font-weight:600}
+.body-lg{font-size:16px;line-height:24px}
+.body{font-size:14px;line-height:20px}
+.caption{font-size:12px;line-height:16px;font-weight:500;color:var(--text-muted)}
+
+.bar{height:8px;background:var(--border);border-radius:var(--r-full);overflow:hidden}
+.bar > i{display:block;height:100%;background:var(--action-primary);border-radius:var(--r-full)}
+.src{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;color:var(--text-muted)}
+
+/* ==== TELA 1 — LANDING ==== */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:18px 40px;border-bottom:1px solid #E7ECF2}
+.nav .links{display:flex;gap:26px;font-size:14px;color:var(--text-secondary);font-weight:500}
+.hero{background:var(--bg-brand);color:#fff;padding:64px 40px 72px;position:relative;overflow:hidden}
+.hero .inner{max-width:1024px;margin:0 auto;display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;position:relative;z-index:2}
+.hero .blob{position:absolute;border-radius:50%;z-index:1}
+.hero h1{font-family:Sora;font-size:42px;line-height:1.14;letter-spacing:-1.2px;margin-bottom:16px}
+.hero h1 em{font-style:normal;color:var(--action-primary)}
+.hero p{color:#C7D3E3;font-size:17px;line-height:1.6;margin-bottom:26px;max-width:460px}
+.hero .cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.hero .trust{margin-top:22px;font-size:12.5px;color:#8FA3BC}
+.quizcard{background:#fff;border-radius:var(--r-lg);padding:24px;box-shadow:var(--e3);color:var(--text-primary)}
+.optrow{display:flex;flex-direction:column;gap:8px;margin:14px 0 18px}
+.opt{border:1px solid var(--border);border-radius:var(--r-md);padding:12px 14px;font-size:14px;display:flex;align-items:center;gap:10px}
+.opt.sel{border:2px solid var(--bg-brand);background:#F5F9FB;font-weight:600}
+.radio{width:18px;height:18px;border-radius:var(--r-full);border:2px solid var(--border);flex:none}
+.opt.sel .radio{border-color:var(--bg-brand);background:var(--bg-brand);box-shadow:inset 0 0 0 3px #fff}
+.stats{background:var(--bg-canvas);padding:44px 40px;display:flex;justify-content:center;gap:64px;flex-wrap:wrap;text-align:center}
+.stat b{font-family:Sora;font-size:32px;color:var(--bg-brand);display:block}
+.stat span{font-size:12.5px;color:var(--text-muted);line-height:1.5;display:block;margin-top:4px}
+.steps{padding:56px 40px;background:#fff}
+.steps .inner{max-width:1024px;margin:0 auto}
+.stepgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:26px}
+.stepbox{border:1px solid #E7ECF2;border-radius:var(--r-lg);padding:20px}
+.stepnum{width:30px;height:30px;border-radius:var(--r-full);background:var(--bg-brand);color:var(--action-primary);
+  display:flex;align-items:center;justify-content:center;font-family:Sora;font-weight:700;font-size:14px;margin-bottom:12px}
+.footer{background:var(--bg-brand);color:#8FA3BC;padding:26px 40px;font-size:12px;display:flex;justify-content:space-between;align-items:center}
+
+/* ==== TELA 2 — LOGIN ==== */
+.split{display:grid;grid-template-columns:1fr 1fr;min-height:600px}
+.split .left{background:var(--bg-brand);color:#fff;padding:52px 46px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.split .right{padding:52px 60px;display:flex;flex-direction:column;justify-content:center;background:#fff}
+.loginform{max-width:380px;width:100%;margin:0 auto}
+.divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--text-muted);font-size:12.5px}
+.divider:before,.divider:after{content:"";flex:1;height:1px;background:var(--border)}
+.social{display:flex;align-items:center;justify-content:center;gap:9px;height:48px;border:1px solid var(--border);border-radius:var(--r-md);font-size:14.5px;font-weight:600;color:var(--text-primary)}
+.testimonial{background:rgba(255,255,255,.08);border-radius:var(--r-lg);padding:20px;position:relative;z-index:2}
+
+/* ==== TELAS INTERNAS — SHELL ==== */
+.app{display:grid;grid-template-columns:240px 1fr;min-height:660px;background:var(--bg-canvas)}
+.side{background:var(--bg-brand);padding:22px 16px;display:flex;flex-direction:column}
+.side .logo{padding:0 8px 22px}
+.navitem{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:var(--r-md);color:#9FB4C6;font-size:14px;font-weight:500;margin-bottom:2px}
+.navitem.on{background:rgba(255,255,255,.1);color:#fff;font-weight:600}
+.navitem .ic{width:20px;height:20px;flex:none;opacity:.9}
+.side .foot{margin-top:auto;border-top:1px solid rgba(255,255,255,.12);padding-top:14px;display:flex;align-items:center;gap:10px}
+.avatar{width:34px;height:34px;border-radius:var(--r-full);background:var(--bg-brand-subtle);color:var(--bg-brand);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex:none}
+.main{padding:26px 30px;overflow:auto}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+
+/* grid interno */
+.g2{display:grid;grid-template-columns:1.5fr 1fr;gap:18px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.trail{display:flex;flex-direction:column;gap:10px}
+.trailrow{display:flex;align-items:center;gap:14px;padding:13px 16px;background:#fff;border:1px solid #E7ECF2;border-radius:var(--r-md)}
+.tletter{width:30px;height:30px;border-radius:var(--r-sm);background:var(--bg-brand);color:var(--action-primary);
+  display:flex;align-items:center;justify-content:center;font-family:Sora;font-weight:700;font-size:13px;flex:none}
+
+/* stepper da etapa */
+.stepper{display:flex;flex-direction:column;gap:0}
+.st{display:flex;gap:14px}
+.st .dotcol{display:flex;flex-direction:column;align-items:center;flex:none}
+.st .circ{width:24px;height:24px;border-radius:var(--r-full);display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;flex:none}
+.st .line{width:2px;flex:1;background:var(--border);min-height:16px}
+.circ.done{background:var(--action-primary);color:#fff}
+.circ.now{background:#fff;border:2px solid var(--bg-brand);color:var(--bg-brand)}
+.circ.future{background:var(--border);color:#fff}
+.st .txt{padding-bottom:16px}
+.st .txt b{font-size:14px;display:block;margin-bottom:2px}
+.st .txt span{font-size:12.5px;color:var(--text-muted);line-height:1.5}
+
+/* copiloto */
+.chat{display:flex;flex-direction:column;gap:12px}
+.msg{max-width:88%;padding:12px 14px;border-radius:var(--r-lg);font-size:14px;line-height:20px}
+.msg.ai{background:var(--bg-surface-alt);align-self:flex-start;border-top-left-radius:var(--r-sm)}
+.msg.me{background:var(--bg-brand);color:#fff;align-self:flex-end;border-top-right-radius:var(--r-sm)}
+.aihead{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.guard{background:var(--info-bg);border-left:3px solid var(--info);border-radius:var(--r-sm);padding:10px 12px;font-size:12.5px;line-height:1.55;color:#1C3F6B;margin-top:10px}
+.chatinput{display:flex;gap:8px;margin-top:14px;align-items:center}
+
+/* paywall */
+.locked{position:relative;overflow:hidden}
+.locked .blur{filter:blur(5px);opacity:.5;user-select:none}
+.lockover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  background:linear-gradient(to bottom,rgba(255,255,255,.4),rgba(255,255,255,.96) 55%)}
+.plan{border:1px solid var(--border);border-radius:var(--r-lg);padding:20px;background:#fff}
+.plan.best{border:2px solid var(--bg-brand);box-shadow:var(--e2)}
+.price{font-family:Sora;font-size:28px;font-weight:700;color:var(--bg-brand)}
+.ck{display:flex;gap:8px;font-size:13px;color:var(--text-secondary);margin-bottom:7px;line-height:1.45}
+@media(max-width:900px){.hero .inner,.split,.g2{grid-template-columns:1fr}.stepgrid,.g3{grid-template-columns:1fr 1fr}.app{grid-template-columns:1fr}}
+
+/* ===== IMPRESSÃO / PDF ===== */
+@page{size:A4 landscape;margin:9mm 10mm}
+@media print{
+  body{background:#fff;padding:0}
+  .page{max-width:none}
+  .doc-hero{border-radius:12px;padding:26px 30px;margin-bottom:0;break-after:page}
+  .doc-hero h1{font-size:30px}
+  .screen-label{break-before:page;margin:0 0 10px}
+  .frame{box-shadow:none;border:1px solid #C9D3DE}
+  .note{break-inside:avoid;margin-top:8px}
+  .browserbar{display:none}
+}
+</style></head><body><div class="page">
+
+<div class="doc-hero">
+  <div class="kick">CONCEITO DE TELAS · PORTAL WEB · v0.1</div>
+  <h1>Ser Dono — Portal Web</h1>
+  <p>Cinco telas de referência construídas com os tokens de <b>DESIGN_SYSTEM.md</b> (cores, tipografia, espaçamento e componentes) e as regras de produto do <b>PRD.md</b>. Nenhum valor visual foi inventado fora do design system — este arquivo serve como prova de que os tokens funcionam na prática antes de virar código.</p>
+</div>
+
+<!-- ================= 1. LANDING ================= -->
+<div class="screen-label"><span class="n">1</span><h2>Tela inicial (pública)</h2><span>Topo de funil · diagnóstico gratuito · PRD §7</span></div>
+<div class="frame">
+  <div class="browserbar"><span class="dot" style="background:#F05B4F"></span><span class="dot" style="background:#F5BF4F"></span><span class="dot" style="background:#5FCF65"></span><div class="url">serdono.com.br</div></div>
+
+  <div class="nav">
+    <div class="logo">
+      <svg width="34" height="34" viewBox="0 0 100 100"><rect width="100" height="100" rx="24" fill="#0E3A4F"/><path d="M23 78 H41 V62 H59 V46 H72" fill="none" stroke="#BFD4DC" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><circle cx="72" cy="27" r="9" fill="#F2B03D"/></svg>
+      <span class="wm" style="color:#0E3A4F">Ser<span style="color:#F2B03D">Dono</span></span>
+    </div>
+    <div class="links"><span>Como funciona</span><span>Planos</span><span>Para quem é</span><span>Ajuda</span></div>
+    <div style="display:flex;gap:10px"><a class="btn btn-ghost btn-sm">Entrar</a><a class="btn btn-primary btn-sm">Começar grátis</a></div>
+  </div>
+
+  <div class="hero">
+    <div class="blob" style="width:340px;height:340px;background:#17546E;opacity:.55;right:-90px;top:-120px"></div>
+    <div class="blob" style="width:190px;height:190px;background:#F2B03D;opacity:.12;right:60px;bottom:-70px"></div>
+    <div class="inner">
+      <div>
+        <div class="overline" style="color:#F2B03D;margin-bottom:12px">O SÓCIO QUE VOCÊ AINDA NÃO TEM</div>
+        <h1>Descubra qual negócio<br>combina com você —<br>e <em>abra ele de verdade</em>.</h1>
+        <p>Responda 6 minutos de perguntas. A gente cruza seu perfil, seu dinheiro e sua cidade para mostrar quais negócios fazem sentido — e depois te acompanha até o primeiro cliente.</p>
+        <div class="cta">
+          <a class="btn btn-primary">Fazer meu diagnóstico grátis</a>
+          <a class="btn btn-ghost" style="color:#C7D3E3">Ver como funciona</a>
+        </div>
+        <div class="trust">Sem cartão de crédito · Resultado na hora</div>
+      </div>
+
+      <div class="quizcard">
+        <div class="overline">PERGUNTA 1 DE 18</div>
+        <div class="bar" style="margin:10px 0 16px"><i style="width:6%"></i></div>
+        <div class="h3" style="margin-bottom:4px">Quanto você tem guardado para começar?</div>
+        <div class="caption" style="margin-bottom:2px">Não precisa ser exato — é só pra entender seu ponto de partida.</div>
+        <div class="optrow">
+          <div class="opt"><span class="radio"></span>Até R$ 5 mil</div>
+          <div class="opt sel"><span class="radio"></span>De R$ 5 mil a R$ 15 mil</div>
+          <div class="opt"><span class="radio"></span>De R$ 15 mil a R$ 40 mil</div>
+          <div class="opt"><span class="radio"></span>Mais de R$ 40 mil</div>
+        </div>
+        <a class="btn btn-secondary btn-block">Continuar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>2,05 mi</b><span>pequenos negócios abertos<br>em 4 meses de 2026</span></div>
+    <div class="stat"><b>6 em 10</b><span>fecham em até 5 anos —<br>quase sempre pelos mesmos motivos</span></div>
+    <div class="stat"><b>78%</b><span>das novas empresas<br>são MEI</span></div>
+  </div>
+
+  <div class="steps">
+    <div class="inner">
+      <div class="overline">COMO FUNCIONA</div>
+      <div class="h1" style="margin:6px 0 4px;color:var(--bg-brand)">Do "não sei o que abrir" ao negócio funcionando</div>
+      <div class="stepgrid">
+        <div class="stepbox"><div class="stepnum">1</div><div class="h3">Diagnóstico</div><div class="body" style="color:var(--text-secondary);margin-top:5px">A gente entende seu perfil, seu capital e sua cidade.</div></div>
+        <div class="stepbox"><div class="stepnum">2</div><div class="h3">Seus nichos</div><div class="body" style="color:var(--text-secondary);margin-top:5px">Mostramos os negócios que mais combinam com você, e por quê.</div></div>
+        <div class="stepbox"><div class="stepnum">3</div><div class="h3">Passo a passo</div><div class="body" style="color:var(--text-secondary);margin-top:5px">Um caminho guiado, do estudo de viabilidade ao CNPJ.</div></div>
+        <div class="stepbox"><div class="stepnum">4</div><div class="h3">Primeiros clientes</div><div class="body" style="color:var(--text-secondary);margin-top:5px">Preço, canais e divulgação — com o copiloto do seu lado.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer"><span>© 2026 Ser Dono · serdono.com.br</span><span>Termos · Privacidade · LGPD</span></div>
+</div>
+<div class="note"><b>Decisões de design:</b> o questionário aparece já na dobra inicial (reduz atrito da persona primária, PRD §2.1) · números de mercado com fonte declarada no rodapé da seção (RN-20) · capital em faixas, nunca campo numérico livre (RN-5) · CTA principal em dourado com texto <code>brand.900</code>, nunca branco (DS §2.3).</div>
+
+<!-- ================= 2. LOGIN ================= -->
+<div class="screen-label"><span class="n">2</span><h2>Login</h2><span>Entrada de quem já se cadastrou</span></div>
+<div class="frame">
+  <div class="browserbar"><span class="dot" style="background:#F05B4F"></span><span class="dot" style="background:#F5BF4F"></span><span class="dot" style="background:#5FCF65"></span><div class="url">serdono.com.br/entrar</div></div>
+  <div class="split">
+    <div class="left">
+      <div class="blob" style="position:absolute;width:300px;height:300px;border-radius:50%;background:#17546E;opacity:.5;left:-110px;bottom:-110px"></div>
+      <div class="logo" style="position:relative;z-index:2">
+        <svg width="34" height="34" viewBox="0 0 100 100"><rect width="100" height="100" rx="24" fill="#F2B03D"/><path d="M23 78 H41 V62 H59 V46 H72" fill="none" stroke="#0E3A4F" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity=".45"/><circle cx="72" cy="27" r="9" fill="#0E3A4F"/></svg>
+        <span class="wm" style="color:#fff">Ser<span style="color:#F2B03D">Dono</span></span>
+      </div>
+      <div style="position:relative;z-index:2">
+        <div class="h-display" style="font-size:28px;line-height:36px;margin-bottom:14px">Seu negócio<br>continua de onde parou.</div>
+        <div class="body-lg" style="color:#C7D3E3;margin-bottom:26px">Todas as suas decisões, documentos e o próximo passo estão salvos esperando por você.</div>
+        <div class="testimonial">
+          <div class="body" style="color:#E6EDF5;line-height:1.6">"Eu sabia que queria sair do emprego, mas não fazia ideia do que abrir. Em três meses eu tinha o CNPJ e o primeiro cliente."</div>
+          <div class="caption" style="color:#8FA3BC;margin-top:10px">Marcos R. · Serviços domiciliares · Campinas/SP</div>
+        </div>
+      </div>
+      <div class="caption" style="color:#6E8299;position:relative;z-index:2">Confidencial · Seus dados são protegidos conforme a LGPD</div>
+    </div>
+
+    <div class="right">
+      <div class="loginform">
+        <div class="h1" style="color:var(--bg-brand);margin-bottom:6px">Entrar na sua conta</div>
+        <div class="body" style="color:var(--text-secondary);margin-bottom:24px">Ainda não tem conta? <b style="color:var(--bg-brand)">Fazer diagnóstico grátis</b></div>
+
+        <div class="field"><label>E-mail</label><input class="input" value="marcos.ribeiro@email.com"></div>
+        <div class="field">
+          <label>Senha</label>
+          <input class="input focus" type="password" value="••••••••••">
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin:-6px 0 20px"><span class="caption" style="color:var(--bg-brand);font-weight:600">Esqueci minha senha</span></div>
+
+        <a class="btn btn-primary btn-block">Entrar</a>
+        <div class="divider">ou</div>
+        <div class="social">
+          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#4285F4" d="M45 24c0-1.6-.1-2.7-.4-3.9H24v7.1h12c-.2 1.9-1.5 4.7-4.4 6.6l6.7 5.2C42.2 35.5 45 30.3 45 24z"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.4c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.8-12.5-9.1l-7.1 5.5C8 40.4 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4l-7.1-5.5C2.9 17 2 20.4 2 24s.9 7 2.4 9.9l7.1-5.5z"/><path fill="#EA4335" d="M24 10.6c4.1 0 6.9 1.8 8.5 3.3l6.2-6C34.9 4.4 29.9 2 24 2 15.4 2 8 7.6 4.4 14.1l7.1 5.5c1.8-5.3 6.7-9 12.5-9z"/></svg>
+          Continuar com Google
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="note"><b>Decisões de design:</b> label sempre visível acima do campo, nunca só placeholder (DS §9.2) · campo em foco usa borda 2px <code>border.focus</code> · prova social no painel escuro atende ao gatilho de decisão da persona primária ("outras pessoas como eu conseguiram", PRD §2.1).</div>
+
+<!-- ================= 3. RESULTADO + PAYWALL ================= -->
+<div class="screen-label"><span class="n">3</span><h2>Resultado do diagnóstico e paywall</h2><span>Prévia grátis de 3 nichos · RN-7, CA-4 · PRD §8</span></div>
+<div class="frame">
+  <div class="browserbar"><span class="dot" style="background:#F05B4F"></span><span class="dot" style="background:#F5BF4F"></span><span class="dot" style="background:#5FCF65"></span><div class="url">serdono.com.br/meus-nichos</div></div>
+  <div style="background:var(--bg-canvas);padding:30px 40px">
+    <div style="max-width:1000px;margin:0 auto">
+
+      <div class="card-brand" style="margin-bottom:20px">
+        <div class="overline" style="color:var(--action-primary)">SEU PERFIL EMPREENDEDOR</div>
+        <div class="h1" style="margin:8px 0 10px">Você tem perfil de execução, com apetite moderado a risco.</div>
+        <div class="body-lg" style="color:#C7D3E3;max-width:640px">Capital entre R$ 5 e 15 mil · Dedicação parcial no início · Campinas/SP · Prefere contato direto com o cliente a operação de bastidor.</div>
+        <div style="display:flex;gap:10px;margin-top:18px"><a class="btn btn-outline btn-sm" style="color:#fff;border-color:rgba(255,255,255,.4)">Revisar respostas</a></div>
+      </div>
+
+      <div class="h2" style="color:var(--bg-brand);margin-bottom:4px">Os 3 negócios que mais combinam com você</div>
+      <div class="body" style="color:var(--text-secondary);margin-bottom:18px">Calculado a partir das suas respostas — não é sugestão genérica.</div>
+
+      <div class="g3" style="margin-bottom:24px">
+        <div class="card" style="border:2px solid var(--action-primary)">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+            <div class="h3">Serviços domiciliares</div>
+            <div style="text-align:center;flex:none;margin-left:8px">
+              <div style="font-family:Sora;font-size:24px;font-weight:700;color:var(--bg-brand);line-height:1">87</div>
+              <div class="caption" style="font-size:10px">FIT SCORE</div>
+            </div>
+          </div>
+          <div class="bar" style="margin-bottom:12px"><i style="width:87%"></i></div>
+          <div class="body" style="color:var(--text-secondary);margin-bottom:12px">Cabe no seu capital, aproveita sua experiência anterior e tem demanda alta no seu bairro.</div>
+          <div class="caption">Investimento inicial<br><b style="color:var(--text-primary);font-size:14px">R$ 4 mil a R$ 9 mil</b></div>
+        </div>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+            <div class="h3">Alimentação delivery</div>
+            <div style="text-align:center;flex:none;margin-left:8px">
+              <div style="font-family:Sora;font-size:24px;font-weight:700;color:var(--bg-brand);line-height:1">79</div>
+              <div class="caption" style="font-size:10px">FIT SCORE</div>
+            </div>
+          </div>
+          <div class="bar" style="margin-bottom:12px"><i style="width:79%"></i></div>
+          <div class="body" style="color:var(--text-secondary);margin-bottom:12px">Retorno mais rápido, mas exige rotina intensa e licença sanitária.</div>
+          <div class="caption">Investimento inicial<br><b style="color:var(--text-primary);font-size:14px">R$ 8 mil a R$ 18 mil</b></div>
+        </div>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+            <div class="h3">Comércio de bairro</div>
+            <div style="text-align:center;flex:none;margin-left:8px">
+              <div style="font-family:Sora;font-size:24px;font-weight:700;color:var(--bg-brand);line-height:1">68</div>
+              <div class="caption" style="font-size:10px">FIT SCORE</div>
+            </div>
+          </div>
+          <div class="bar" style="margin-bottom:12px"><i style="width:68%"></i></div>
+          <div class="body" style="color:var(--text-secondary);margin-bottom:12px">Boa demanda local, mas o capital fica apertado para estoque inicial.</div>
+          <div class="caption">Investimento inicial<br><b style="color:var(--text-primary);font-size:14px">R$ 15 mil a R$ 35 mil</b></div>
+        </div>
+      </div>
+
+      <div class="card locked" style="padding:0;overflow:hidden">
+        <div class="blur" style="padding:24px">
+          <div class="h2">Dossiê completo — Serviços domiciliares</div>
+          <div class="body" style="margin:10px 0">Panorama de mercado · Perfil do cliente · Estrutura de custos e receitas · Riscos e barreiras · Exigências legais em Campinas/SP · Principais erros de quem começa · Benchmarks de preço e margem · Tempo estimado até operar.</div>
+          <div class="body" style="color:var(--text-secondary)">O ticket médio praticado na região gira em torno de R$ 180 por atendimento, com margem líquida típica de 42% depois de deslocamento e material...</div>
+        </div>
+        <div class="lockover">
+          <div style="width:44px;height:44px;border-radius:var(--r-full);background:var(--bg-brand);display:flex;align-items:center;justify-content:center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F2B03D" stroke-width="2.2" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          </div>
+          <div class="h2" style="color:var(--bg-brand);text-align:center">Destrave o caminho completo</div>
+          <div class="body" style="color:var(--text-secondary);text-align:center;max-width:440px">Você já sabe qual negócio combina com você. Agora falta o passo a passo para tirar do papel.</div>
+        </div>
+      </div>
+
+      <div class="g3" style="margin-top:20px">
+        <div class="plan">
+          <div class="overline">ESSENCIAL</div>
+          <div class="price" style="margin:6px 0 2px">R$ 19,90<span style="font-size:14px;font-weight:500;color:var(--text-muted)">/mês</span></div>
+          <div class="caption" style="margin-bottom:14px">1 nicho destravado</div>
+          <div class="ck">✓ Dossiê completo do nicho</div>
+          <div class="ck">✓ Workflow guiado até a abertura</div>
+          <div class="ck">✓ Copiloto de IA especializado</div>
+          <a class="btn btn-outline btn-block btn-sm" style="margin-top:14px">Assinar Essencial</a>
+        </div>
+        <div class="plan best">
+          <div style="display:flex;justify-content:space-between;align-items:center"><div class="overline">MULTI</div><span class="badge b-progress">Mais escolhido</span></div>
+          <div class="price" style="margin:6px 0 2px">R$ 29,90<span style="font-size:14px;font-weight:500;color:var(--text-muted)">/mês</span></div>
+          <div class="caption" style="margin-bottom:14px">Até 3 nichos destravados</div>
+          <div class="ck">✓ Tudo do Essencial</div>
+          <div class="ck">✓ Comparação lado a lado dos nichos</div>
+          <div class="ck">✓ Prioridade no copiloto</div>
+          <a class="btn btn-primary btn-block btn-sm" style="margin-top:14px">Assinar Multi</a>
+        </div>
+        <div class="plan">
+          <div class="overline">OPERAÇÃO</div>
+          <div class="price" style="margin:6px 0 2px">Em breve</div>
+          <div class="caption" style="margin-bottom:14px">Para quem já abriu</div>
+          <div class="ck">✓ Tudo do Multi</div>
+          <div class="ck">✓ Assistente de marketing</div>
+          <div class="ck">✓ Assistente financeiro e hub B2B</div>
+          <a class="btn btn-ghost btn-block btn-sm" style="margin-top:14px">Avisar quando lançar</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="note"><b>Decisões de design:</b> o conteúdo bloqueado é borrado <i>visualmente</i>, mas o bloqueio real acontece na RLS do Supabase — o dossiê nem chega ao navegador (CA-4, SPEC §4.2 SDD-6) · o Fit Score aparece com os 4 componentes explicados no dossiê, reforçando que é calculado e não gerado por IA · o terceiro nicho mostra ressalva honesta sobre capital apertado (Princípio 5 do PRD §4).</div>
+
+<!-- ================= 4. PAINEL DO NEGÓCIO ================= -->
+<div class="screen-label"><span class="n">4</span><h2>Painel do Negócio</h2><span>Tela inicial do assinante · PRD §14.2</span></div>
+<div class="frame">
+  <div class="browserbar"><span class="dot" style="background:#F05B4F"></span><span class="dot" style="background:#F5BF4F"></span><span class="dot" style="background:#5FCF65"></span><div class="url">serdono.com.br/painel</div></div>
+  <div class="app">
+    <div class="side">
+      <div class="logo">
+        <svg width="30" height="30" viewBox="0 0 100 100"><rect width="100" height="100" rx="24" fill="#F2B03D"/><path d="M23 78 H41 V62 H59 V46 H72" fill="none" stroke="#0E3A4F" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity=".45"/><circle cx="72" cy="27" r="9" fill="#0E3A4F"/></svg>
+        <span class="wm" style="color:#fff;font-size:17px">Ser<span style="color:#F2B03D">Dono</span></span>
+      </div>
+      <div class="navitem on"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Painel</div>
+      <div class="navitem"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Meu workflow</div>
+      <div class="navitem"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Dossiê</div>
+      <div class="navitem"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Copiloto</div>
+      <div class="navitem"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6h.09A1.65 1.65 0 0 0 10 3.09V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Configurações</div>
+      <div class="foot"><div class="avatar">MR</div><div><div style="font-size:13px;font-weight:600;color:#fff">Marcos R.</div><div style="font-size:11px;color:#8FA3BC">Plano Multi</div></div></div>
+    </div>
+
+    <div class="main">
+      <div class="topbar">
+        <div>
+          <div class="overline">SERVIÇOS DOMICILIARES · CAMPINAS/SP</div>
+          <div class="h1" style="color:var(--bg-brand);margin-top:2px">Bom te ver, Marcos.</div>
+        </div>
+        <a class="btn btn-primary btn-sm">Continuar de onde parei</a>
+      </div>
+
+      <div class="g2" style="margin-bottom:18px">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+            <div class="h3">Seu próximo passo</div>
+            <span class="badge b-progress">Trilha A · Validação</span>
+          </div>
+          <div class="h2" style="color:var(--bg-brand);margin-bottom:8px">Estudo de viabilidade econômica</div>
+          <div class="body" style="color:var(--text-secondary);margin-bottom:16px">Vamos montar os números do seu negócio: quanto entra, quanto sai, e em quantos meses ele se paga. É a etapa que decide se vale seguir — e ela libera a trilha de formalização.</div>
+          <div style="display:flex;gap:10px"><a class="btn btn-primary btn-sm">Começar esta etapa</a><a class="btn btn-ghost btn-sm">Ver outra trilha</a></div>
+        </div>
+
+        <div class="card-brand">
+          <div class="overline" style="color:var(--action-primary)">PROGRESSO GERAL</div>
+          <div style="display:flex;align-items:baseline;gap:8px;margin:10px 0 4px">
+            <span style="font-family:Sora;font-size:38px;font-weight:700">34%</span>
+            <span class="body" style="color:#C7D3E3">9 de 26 etapas</span>
+          </div>
+          <div class="bar" style="background:rgba(255,255,255,.2);margin:12px 0 18px"><i style="width:34%"></i></div>
+          <div class="body" style="color:#C7D3E3">No seu ritmo atual, seu negócio estará aberto por volta de <b style="color:#fff">outubro de 2026</b>.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div class="h3">Suas trilhas</div>
+        <span class="caption">Trilhas correm em paralelo — nada te trava</span>
+      </div>
+
+      <div class="trail">
+        <div class="trailrow">
+          <div class="tletter">A</div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:600">Validação</div><div class="caption">4 de 5 etapas concluídas</div></div>
+          <div class="bar" style="width:140px"><i style="width:80%"></i></div>
+          <span class="badge b-progress">Em andamento</span>
+        </div>
+        <div class="trailrow">
+          <div class="tletter">B</div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:600">Identidade</div><div class="caption">Nome definido · registro de marca enviado ao INPI</div></div>
+          <div class="bar" style="width:140px"><i style="width:60%"></i></div>
+          <span class="badge b-waiting">Aguardando</span>
+        </div>
+        <div class="trailrow">
+          <div class="tletter">C</div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:600">Formalização</div><div class="caption">Libera quando a viabilidade econômica for concluída</div></div>
+          <div class="bar" style="width:140px"><i style="width:0%"></i></div>
+          <span class="badge b-blocked">Bloqueada</span>
+        </div>
+        <div class="trailrow">
+          <div class="tletter">D</div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:600">Estrutura</div><div class="caption">2 de 5 etapas concluídas</div></div>
+          <div class="bar" style="width:140px"><i style="width:40%"></i></div>
+          <span class="badge b-available">Disponível</span>
+        </div>
+      </div>
+
+      <div class="card-outline" style="margin-top:16px;display:flex;gap:14px;align-items:flex-start;background:var(--warning-bg);border-color:#EFD3A8">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B5760E" stroke-width="2" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <div>
+          <div style="font-size:14px;font-weight:600;color:#7A4A22">Seu registro de marca está há 9 dias com o INPI</div>
+          <div class="body" style="color:#7A4A22;margin-top:3px">Isso é normal e não te impede de avançar. Enquanto isso, siga na trilha A ou D — a gente te avisa quando houver retorno.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="note"><b>Decisões de design:</b> a tela sempre responde "qual é o próximo passo" antes de mostrar qualquer outra coisa (Princípio 1 do PRD §4) · trilha bloqueada explica <i>o que</i> a desbloqueia, nunca apenas "bloqueada" (RN-18) · etapa em espera vira aviso âmbar com sugestão de alternativa, nunca um erro vermelho (RN-14, DS §9.4) · badges usam exatamente as cores mapeadas para os <code>status</code> de <code>workflow_steps</code>.</div>
+
+<!-- ================= 5. ETAPA + COPILOTO ================= -->
+<div class="screen-label"><span class="n">5</span><h2>Etapa do workflow com o Copiloto</h2><span>Anatomia da etapa · PRD §9.1 e §10</span></div>
+<div class="frame">
+  <div class="browserbar"><span class="dot" style="background:#F05B4F"></span><span class="dot" style="background:#F5BF4F"></span><span class="dot" style="background:#5FCF65"></span><div class="url">serdono.com.br/workflow/validacao/viabilidade</div></div>
+  <div class="app">
+    <div class="side">
+      <div class="logo">
+        <svg width="30" height="30" viewBox="0 0 100 100"><rect width="100" height="100" rx="24" fill="#F2B03D"/><path d="M23 78 H41 V62 H59 V46 H72" fill="none" stroke="#0E3A4F" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity=".45"/><circle cx="72" cy="27" r="9" fill="#0E3A4F"/></svg>
+        <span class="wm" style="color:#fff;font-size:17px">Ser<span style="color:#F2B03D">Dono</span></span>
+      </div>
+      <div class="navitem"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Painel</div>
+      <div class="navitem on"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Meu workflow</div>
+      <div class="navitem"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Dossiê</div>
+      <div class="navitem"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Copiloto</div>
+      <div class="foot"><div class="avatar">MR</div><div><div style="font-size:13px;font-weight:600;color:#fff">Marcos R.</div><div style="font-size:11px;color:#8FA3BC">Plano Multi</div></div></div>
+    </div>
+
+    <div class="main">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span class="badge b-progress">Trilha A · Etapa 5 de 5</span>
+        <span class="caption">Estimativa: 25 min</span>
+      </div>
+      <div class="h1" style="color:var(--bg-brand);margin-bottom:20px">Estudo de viabilidade econômica</div>
+
+      <div class="g2">
+        <div>
+          <div class="card" style="margin-bottom:16px">
+            <div class="stepper">
+              <div class="st"><div class="dotcol"><div class="circ done">✓</div><div class="line" style="background:var(--action-primary)"></div></div>
+                <div class="txt"><b>Contexto</b><span>Por que esta etapa existe e o que acontece se ela for mal feita.</span></div></div>
+              <div class="st"><div class="dotcol"><div class="circ done">✓</div><div class="line" style="background:var(--action-primary)"></div></div>
+                <div class="txt"><b>Dados</b><span>Ticket médio, margem e sazonalidade do seu nicho na sua região.</span></div></div>
+              <div class="st"><div class="dotcol"><div class="circ now">3</div><div class="line"></div></div>
+                <div class="txt"><b>Decisão</b><span>Definir preço, volume esperado e custos fixos do primeiro ano.</span></div></div>
+              <div class="st"><div class="dotcol"><div class="circ future">4</div><div class="line"></div></div>
+                <div class="txt"><b>Ação</b><span>Preencher a planilha de cenários com os três casos.</span></div></div>
+              <div class="st"><div class="dotcol"><div class="circ future">5</div><div class="line"></div></div>
+                <div class="txt"><b>Entregável</b><span>Relatório de viabilidade + planilha, salvos no seu dossiê.</span></div></div>
+              <div class="st"><div class="dotcol"><div class="circ future">6</div></div>
+                <div class="txt" style="padding-bottom:0"><b>Checagem</b><span>O copiloto confere os números antes de liberar o avanço.</span></div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="overline">DADOS DO SEU NICHO NA SUA REGIÃO</div>
+            <div class="h3" style="margin:10px 0 12px">Referências de mercado — serviços domiciliares em Campinas/SP</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
+              <div class="card-outline" style="padding:14px"><div class="caption">Ticket médio</div><div style="font-family:Sora;font-size:22px;font-weight:700;color:var(--bg-brand);margin-top:3px">R$ 180</div></div>
+              <div class="card-outline" style="padding:14px"><div class="caption">Margem típica</div><div style="font-family:Sora;font-size:22px;font-weight:700;color:var(--bg-brand);margin-top:3px">42%</div></div>
+              <div class="card-outline" style="padding:14px"><div class="caption">Ponto de equilíbrio</div><div style="font-family:Sora;font-size:22px;font-weight:700;color:var(--bg-brand);margin-top:3px">7 meses</div></div>
+            </div>
+            <div class="src">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              SEBRAE · Painel de Serviços · jul/2026
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex;flex-direction:column">
+          <div class="aihead">
+            <svg width="28" height="28" viewBox="0 0 100 100"><rect width="100" height="100" rx="24" fill="#0E3A4F"/><path d="M23 78 H41 V62 H59 V46 H72" fill="none" stroke="#BFD4DC" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><circle cx="72" cy="27" r="9" fill="#F2B03D"/></svg>
+            <div><div style="font-size:14px;font-weight:600">Seu copiloto</div><div class="caption">Especialista no seu nicho</div></div>
+          </div>
+
+          <div class="chat" style="flex:1">
+            <div class="msg ai">
+              Vi que você definiu R$ 150 por atendimento. Isso está 17% abaixo da média da sua região, e com seus custos declarados a margem cairia para 28%.
+              <div class="src" style="margin-top:8px">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                SEBRAE · Painel de Serviços · jul/2026
+              </div>
+            </div>
+            <div class="msg me">Mas eu queria entrar mais barato pra pegar os primeiros clientes.</div>
+            <div class="msg ai">
+              Faz sentido como estratégia de entrada — só precisa ser por tempo definido. Nos seus números, R$ 150 exige 34 atendimentos por mês só para empatar; a R$ 180 seriam 26. Quer que eu monte os dois cenários lado a lado?
+              <div class="guard">
+                <b>Vale lembrar:</b> a definição do seu preço tem efeito tributário. Antes de fechar, vale confirmar com um contador — posso te indicar um parceiro.
+              </div>
+            </div>
+          </div>
+
+          <div class="chatinput">
+            <input class="input" placeholder="Pergunte qualquer coisa sobre esta etapa..." style="flex:1">
+            <a class="btn btn-primary" style="width:48px;padding:0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E3A4F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:18px;align-items:center">
+        <a class="btn btn-primary">Concluir etapa</a>
+        <a class="btn btn-ghost">Salvar e sair</a>
+        <span class="caption" style="margin-left:auto">O copiloto confere seus números antes de liberar o avanço</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="note"><b>Decisões de design:</b> a anatomia de 6 passos da etapa é literal do PRD §9.1 · todo número de mercado carrega fonte e data visíveis, em linha separada e escaneável (RN-20, DS §9.6) · o copiloto <i>discorda</i> do usuário quando a conta não fecha, em vez de concordar (RF-5, Princípio 5) · o aviso fiscal usa o padrão azul de ressalva, nunca vermelho de erro — não é um problema, é um cuidado (RN-21).</div>
+
+<div style="margin-top:44px;padding:22px 26px;background:#fff;border-radius:14px;border:1px solid #D8DEE7;font-size:12.5px;color:#5B6B7C;line-height:1.75">
+  <b style="color:var(--bg-brand)">Sobre este arquivo:</b> mockup de conceito, não implementação. Serve para validar as decisões visuais antes de virar componente em <code>packages/ui</code>. Todos os valores de cor, tipografia e espaçamento vêm de <code>docs/identidade-visual/DESIGN_SYSTEM.md</code> §2, §3, §4 e §8 — se alguma tela precisar de um valor que não existe lá, o design system é atualizado primeiro (regra DS-0).<br><br>
+  Ser Dono · Conceito de telas do Portal Web v0.1 · 27 de julho de 2026 · Confidencial
+</div>
+
+</div></body></html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ser Dono — Painel de Conceitos de Marca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Archivo:wght@600;700;800&family=Manrope:wght@600;700;800&family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F4F6F9;font-family:Inter,system-ui,sans-serif;color:#1F2937;padding:40px 24px 80px}
+.page{max-width:1080px;margin:0 auto}
+.hero{background:#0B2340;color:#fff;border-radius:18px;padding:38px 40px;margin-bottom:14px}
+.hero .kick{font-size:12px;font-weight:600;letter-spacing:.18em;color:#C9922B}
+.hero h1{font-size:40px;margin:8px 0 10px;letter-spacing:-1px}
+.hero p{margin:0;color:#C7D3E3;font-size:15px;max-width:760px;line-height:1.6}
+.brief{background:#fff;border:1px solid #E3E8EF;border-radius:14px;padding:22px 26px;margin-bottom:26px}
+.brief h3{margin:0 0 10px;font-size:14px;letter-spacing:.06em;color:#0B2340}
+.brief ul{margin:0;padding-left:18px;color:#374151;font-size:13.5px;line-height:1.75}
+.card{background:#fff;border:1px solid #E3E8EF;border-radius:16px;padding:26px 28px;margin-bottom:20px}
+.card header{margin-bottom:18px}
+.idx{font-size:11px;font-weight:600;letter-spacing:.14em;color:#8A94A6}
+.card h2{margin:2px 0 0;font-size:24px;letter-spacing:-.5px;color:#0B2340}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cap{display:block;font-size:10.5px;font-weight:600;letter-spacing:.09em;color:#8A94A6;text-transform:uppercase;margin-bottom:7px}
+.box{background:#FAFBFD;border:1px solid #EDF1F6;border-radius:11px;height:132px;display:flex;align-items:center;justify-content:center;padding:10px}
+.box.row{gap:18px}
+.box.dark{border-color:transparent}
+.palette{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0 4px}
+.chip{display:flex;flex-direction:column;gap:5px}
+.chip span{height:44px;border-radius:8px;border:1px solid rgba(0,0,0,.07)}
+.chip b{font-size:12px}
+.chip code{font-size:10.5px;color:#6B7280;font-family:ui-monospace,Menlo,monospace}
+.type{display:flex;gap:44px;margin:20px 0 14px;padding-top:16px;border-top:1px solid #EDF1F6}
+.type b{font-size:21px;display:block;margin-top:2px;color:#0B2340}
+.rat{font-size:13.5px;line-height:1.65;color:#374151}
+.pros{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.pro,.con{font-size:12.5px;line-height:1.55;padding:12px 14px;border-radius:10px}
+.pro{background:#F1F7F1;color:#24503A}
+.con{background:#FDF4EC;color:#7A4A22}
+.foot{margin-top:28px;font-size:12px;color:#6B7280;line-height:1.7}
+@media(max-width:860px){.grid,.palette,.pros{grid-template-columns:1fr 1fr}}
+
+@page { size: A4 landscape; margin: 11mm 12mm; }
+@media print {
+  body{background:#fff;padding:0}
+  .page{max-width:none}
+  .hero{border-radius:14px;padding:26px 30px;margin-bottom:12px}
+  .hero h1{font-size:32px}
+  .brief{break-after:page;margin-bottom:0}
+  .card{break-inside:avoid;break-before:page;margin-bottom:0;border:none;padding:0}
+  .box{height:112px}
+  .type{margin:16px 0 12px}
+  .foot{break-before:page}
+}
+</style></head><body><div class="page">
+
+<div class="hero">
+  <div class="kick">IDENTIDADE VISUAL · V0.1</div>
+  <h1>Ser Dono — 5 conceitos de marca</h1>
+  <p>Cinco direções distintas para escolha, cada uma com símbolo, assinatura horizontal, versão em fundo escuro, teste de redução, paleta e tipografia. Os arquivos vetoriais estão na pasta <b>identidade-ser-dono</b>.</p>
+</div>
+
+<div class="brief">
+  <h3>O QUE A PESQUISA DE MERCADO INDICOU</h3>
+  <ul>
+    <li><b>Simplicidade, escalabilidade e distintividade</b> seguem sendo os três critérios que definem um logo eficaz em tecnologia — nada decorativo, porque precisa funcionar a 16 pixels.</li>
+    <li><b>Neo-minimalismo é a corrente dominante em 2026:</b> linhas limpas e espaço em branco, mas com calor — curvas suaves, formas orgânicas e paletas menos frias. É exatamente o território de SaaS e serviços financeiros.</li>
+    <li><b>Azul é o padrão de confiança</b> em fintech e SaaS. Seguir o padrão é seguro; fugir dele foi justamente o que fez o Nubank se destacar ao adotar roxo num setor de azuis e verdes.</li>
+    <li><b>Tipografia:</b> sans-serifs geométricas (racionais, modernas) ou humanistas (acessíveis, confiáveis). Poppins está saturada e lê como padrão, não como escolha. As referências atuais são Inter, Satoshi, Manrope, Plus Jakarta Sans e Sora.</li>
+    <li><b>Recomendação estrutural:</b> uma fonte com personalidade para a marca e títulos, e Inter para a interface. É a base usada por Linear, Vercel e Figma.</li>
+  </ul>
+</div>
+
+
+<section class="card">
+  <header>
+    <div class="idx">CONCEITO 01</div>
+    <h2>O Marco</h2>
+  </header>
+
+  <div class="grid">
+    <div class="cell">
+      <div class="cap">Símbolo</div>
+      <div class="box"><svg viewBox="0 0 100 100" width="110" height="110"><rect width="100" height="100" rx="24" fill="#0E3A4F"/>
+  <path d="M23 78 H41 V62 H59 V46 H72" fill="none" stroke="#BFD4DC" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="72" cy="27" r="9" fill="#F2B03D"/></svg></div>
+    </div>
+    <div class="cell">
+      <div class="cap">Assinatura horizontal</div>
+      <div class="box"><svg viewBox="0 0 320 80" width="290" height="72"><path d="M2 57 H15 V45 H28 V33 H37" fill="none" stroke="#0E3A4F" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="37" cy="20" r="6.5" fill="#F2B03D"/>
+  <text x="52" y="52" font-family="Sora,Arial,sans-serif" font-size="34" font-weight="700" fill="#0E3A4F" letter-spacing="-0.5">Ser<tspan fill="#F2B03D">Dono</tspan></text></svg></div>
+    </div>
+    <div class="cell">
+      <div class="cap">Fundo escuro</div>
+      <div class="box dark" style="background:#0E3A4F"><svg viewBox="0 0 320 80" width="250" height="62"><path d="M2 57 H15 V45 H28 V33 H37" fill="none" stroke="#FFFFFF" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="37" cy="20" r="6.5" fill="#F2B03D"/>
+  <text x="52" y="52" font-family="Sora,Arial,sans-serif" font-size="34" font-weight="700" fill="#FFFFFF" letter-spacing="-0.5">Ser<tspan fill="#F2B03D">Dono</tspan></text></svg></div>
+    </div>
+    <div class="cell">
+      <div class="cap">Ícone de app e favicon</div>
+      <div class="box row">
+        <svg viewBox="0 0 100 100" width="64" height="64"><rect width="100" height="100" rx="24" fill="#0E3A4F"/>
+  <path d="M23 78 H41 V62 H59 V46 H72" fill="none" stroke="#BFD4DC" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="72" cy="27" r="9" fill="#F2B03D"/></svg>
+        <svg viewBox="0 0 100 100" width="32" height="32"><rect width="100" height="100" rx="24" fill="#0E3A4F"/>
+  <path d="M23 78 H41 V62 H59 V46 H72" fill="none" stroke="#BFD4DC" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="72" cy="27" r="9" fill="#F2B03D"/></svg>
+        <svg viewBox="0 0 100 100" width="16" height="16"><rect width="100" height="100" rx="24" fill="#0E3A4F"/>
+  <path d="M23 78 H41 V62 H59 V46 H72" fill="none" stroke="#BFD4DC" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="72" cy="27" r="9" fill="#F2B03D"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette"><div class="chip"><span style="background:#0E3A4F"></span><b>Azul-petróleo</b><code>#0E3A4F</code></div><div class="chip"><span style="background:#F2B03D"></span><b>Ouro</b><code>#F2B03D</code></div><div class="chip"><span style="background:#BFD4DC"></span><b>Azul-gelo</b><code>#BFD4DC</code></div><div class="chip"><span style="background:#F7F9FC"></span><b>Neutro claro</b><code>#F7F9FC</code></div></div>
+
+  <div class="type">
+    <div><span class="cap">Tipografia da marca</span><b style="font-family:'Sora',sans-serif">Sora</b></div>
+    <div><span class="cap">Tipografia de interface</span><b style="font-family:Inter,sans-serif">Inter</b></div>
+  </div>
+
+  <div class="rat">Degraus que sobem até o marco dourado — progresso e conquista, o mesmo arco do workflow do produto. Azul-petróleo é a zona de confiança que o mercado financeiro reconhece; o dourado tira o ar corporativo frio.</div>
+  <div class="pros">
+    <div class="pro"><span class="cap">Força</span>Comunica seriedade instantaneamente. É a opção mais segura.</div>
+    <div class="con"><span class="cap">Ponto de atenção</span>Degraus ascendentes são um recurso comum em marcas de consultoria e finanças.</div>
+  </div>
+</section>
+
+<section class="card">
+  <header>
+    <div class="idx">CONCEITO 02</div>
+    <h2>De Pé</h2>
+  </header>
+
+  <div class="grid">
+    <div class="cell">
+      <div class="cap">Símbolo</div>
+      <div class="box"><svg viewBox="0 0 100 100" width="110" height="110"><rect width="100" height="100" rx="24" fill="#12402F"/>
+  <circle cx="34" cy="30" r="9.5" fill="#A8E063"/>
+  <rect x="27" y="45" width="14" height="30" rx="7" fill="#A8E063"/>
+  <path d="M48 45 A17 15 0 0 1 48 75" fill="none" stroke="#F2F7F0" stroke-width="11" stroke-linecap="round"/></svg></div>
+    </div>
+    <div class="cell">
+      <div class="cap">Assinatura horizontal</div>
+      <div class="box"><svg viewBox="0 0 320 80" width="290" height="72"><circle cx="14" cy="22" r="7.5" fill="#A8E063"/>
+  <rect x="8" y="34" width="12" height="24" rx="6" fill="#12402F"/>
+  <path d="M27 34 A14 12 0 0 1 27 58" fill="none" stroke="#12402F" stroke-width="9" stroke-linecap="round"/>
+  <text x="58" y="52" font-family="Plus Jakarta Sans,Arial,sans-serif" font-size="34" font-weight="800" fill="#12402F" letter-spacing="-0.4">ser dono</text></svg></div>
+    </div>
+    <div class="cell">
+      <div class="cap">Fundo escuro</div>
+      <div class="box dark" style="background:#12402F"><svg viewBox="0 0 320 80" width="250" height="62"><circle cx="14" cy="22" r="7.5" fill="#A8E063"/>
+  <rect x="8" y="34" width="12" height="24" rx="6" fill="#FFFFFF"/>
+  <path d="M27 34 A14 12 0 0 1 27 58" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round"/>
+  <text x="58" y="52" font-family="Plus Jakarta Sans,Arial,sans-serif" font-size="34" font-weight="800" fill="#FFFFFF" letter-spacing="-0.4">ser dono</text></svg></div>
+    </div>
+    <div class="cell">
+      <div class="cap">Ícone de app e favicon</div>
+      <div class="box row">
+        <svg viewBox="0 0 100 100" width="64" height="64"><rect width="100" height="100" rx="24" fill="#12402F"/>
+  <circle cx="34" cy="30" r="9.5" fill="#A8E063"/>
+  <rect x="27" y="45" width="14" height="30" rx="7" fill="#A8E063"/>
+  <path d="M48 45 A17 15 0 0 1 48 75" fill="none" stroke="#F2F7F0" stroke-width="11" stroke-linecap="round"/></svg>
+        <svg viewBox="0 0 100 100" width="32" height="32"><rect width="100" height="100" rx="24" fill="#12402F"/>
+  <circle cx="34" cy="30" r="9.5" fill="#A8E063"/>
+  <rect x="27" y="45" width="14" height="30" rx="7" fill="#A8E063"/>
+  <path d="M48 45 A17 15 0 0 1 48 75" fill="none" stroke="#F2F7F0" stroke-width="11" stroke-linecap="round"/></svg>
+        <svg viewBox="0 0 100 100" width="16" height="16"><rect width="100" height="100" rx="24" fill="#12402F"/>
+  <circle cx="34" cy="30" r="9.5" fill="#A8E063"/>
+  <rect x="27" y="45" width="14" height="30" rx="7" fill="#A8E063"/>
+  <path d="M48 45 A17 15 0 0 1 48 75" fill="none" stroke="#F2F7F0" stroke-width="11" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette"><div class="chip"><span style="background:#12402F"></span><b>Verde-mata</b><code>#12402F</code></div><div class="chip"><span style="background:#A8E063"></span><b>Lima</b><code>#A8E063</code></div><div class="chip"><span style="background:#D7E8C8"></span><b>Verde-claro</b><code>#D7E8C8</code></div><div class="chip"><span style="background:#FAFBF8"></span><b>Neutro claro</b><code>#FAFBF8</code></div></div>
+
+  <div class="type">
+    <div><span class="cap">Tipografia da marca</span><b style="font-family:'Plus Jakarta Sans',sans-serif">Plus Jakarta Sans</b></div>
+    <div><span class="cap">Tipografia de interface</span><b style="font-family:Inter,sans-serif">Inter</b></div>
+  </div>
+
+  <div class="rat">Uma pessoa em pé que também é a letra D: ponto, haste e a barriga do D. O dono, ereto, no comando. Verde-escuro com lima foge do azul padrão sem soar alternativo.</div>
+  <div class="pros">
+    <div class="pro"><span class="cap">Força</span>Símbolo com significado duplo, humano e memorável. Cor diferenciada.</div>
+    <div class="con"><span class="cap">Ponto de atenção</span>Verde é muito usado por agro e sustentabilidade; o tom precisa ser bem calibrado.</div>
+  </div>
+</section>
+
+<section class="card">
+  <header>
+    <div class="idx">CONCEITO 03</div>
+    <h2>O Selo</h2>
+  </header>
+
+  <div class="grid">
+    <div class="cell">
+      <div class="cap">Símbolo</div>
+      <div class="box"><svg viewBox="0 0 100 100" width="110" height="110"><rect width="100" height="100" rx="24" fill="#B5502F"/>
+  <circle cx="50" cy="50" r="31" fill="none" stroke="#F7E7D8" stroke-width="3.5" stroke-dasharray="5 5.4"/>
+  <text x="50" y="62" text-anchor="middle" font-family="Archivo,Arial,sans-serif" font-size="30" font-weight="800" fill="#F7E7D8" letter-spacing="1">SD</text></svg></div>
+    </div>
+    <div class="cell">
+      <div class="cap">Assinatura horizontal</div>
+      <div class="box"><svg viewBox="0 0 320 80" width="290" height="72"><circle cx="26" cy="40" r="23" fill="#B5502F"/>
+  <circle cx="26" cy="40" r="17.5" fill="none" stroke="#F7E7D8" stroke-width="2.4" stroke-dasharray="4 4"/>
+  <text x="26" y="46" text-anchor="middle" font-family="Archivo,Arial,sans-serif" font-size="15" font-weight="800" fill="#F7E7D8" letter-spacing="0.6">SD</text>
+  <text x="62" y="52" font-family="Archivo,Arial,sans-serif" font-size="33" font-weight="700" fill="#3A2A22" letter-spacing="-0.6">SER DONO</text></svg></div>
+    </div>
+    <div class="cell">
+      <div class="cap">Fundo escuro</div>
+      <div class="box dark" style="background:#B5502F"><svg viewBox="0 0 320 80" width="250" height="62"><circle cx="26" cy="40" r="23" fill="#FFFFFF"/>
+  <circle cx="26" cy="40" r="17.5" fill="none" stroke="#F7E7D8" stroke-width="2.4" stroke-dasharray="4 4"/>
+  <text x="26" y="46" text-anchor="middle" font-family="Archivo,Arial,sans-serif" font-size="15" font-weight="800" fill="#F7E7D8" letter-spacing="0.6">SD</text>
+  <text x="62" y="52" font-family="Archivo,Arial,sans-serif" font-size="33" font-weight="700" fill="#FFFFFF" letter-spacing="-0.6">SER DONO</text></svg></div>
+    </div>
+    <div class="cell">
+      <div class="cap">Ícone de app e favicon</div>
+      <div class="box row">
+        <svg viewBox="0 0 100 100" width="64" height="64"><rect width="100" height="100" rx="24" fill="#B5502F"/>
+  <circle cx="50" cy="50" r="31" fill="none" stroke="#F7E7D8" stroke-width="3.5" stroke-dasharray="5 5.4"/>
+  <text x="50" y="62" text-anchor="middle" font-family="Archivo,Arial,sans-serif" font-size="30" font-weight="800" fill="#F7E7D8" letter-spacing="1">SD</text></svg>
+        <svg viewBox="0 0 100 100" width="32" height="32"><rect width="100" height="100" rx="24" fill="#B5502F"/>
+  <circle cx="50" cy="50" r="31" fill="none" stroke="#F7E7D8" stroke-width="3.5" stroke-dasharray="5 5.4"/>
+  <text x="50" y="62" text-anchor="middle" font-family="Archivo,Arial,sans-serif" font-size="30" font-weight="800" fill="#F7E7D8" letter-spacing="1">SD</text></svg>
+        <svg viewBox="0 0 100 100" width="16" height="16"><rect width="100" height="100" rx="24" fill="#B5502F"/>
+  <circle cx="50" cy="50" r="31" fill="none" stroke="#F7E7D8" stroke-width="3.5" stroke-dasharray="5 5.4"/>
+  <text x="50" y="62" text-anchor="middle" font-family="Archivo,Arial,sans-serif" font-size="30" font-weight="800" fill="#F7E7D8" letter-spacing="1">SD</text></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette"><div class="chip"><span style="background:#B5502F"></span><b>Terracota</b><code>#B5502F</code></div><div class="chip"><span style="background:#3A2A22"></span><b>Marrom-tinta</b><code>#3A2A22</code></div><div class="chip"><span style="background:#F7E7D8"></span><b>Creme</b><code>#F7E7D8</code></div><div class="chip"><span style="background:#E8B44A"></span><b>Âmbar</b><code>#E8B44A</code></div></div>
+
+  <div class="type">
+    <div><span class="cap">Tipografia da marca</span><b style="font-family:'Archivo',sans-serif">Archivo</b></div>
+    <div><span class="cap">Tipografia de interface</span><b style="font-family:Inter,sans-serif">Inter</b></div>
+  </div>
+
+  <div class="rat">Um carimbo de propriedade — o gesto de 'isto é meu'. Vira naturalmente o Selo Ser Dono usado como prova social. Terracota é praticamente inexistente em software brasileiro.</div>
+  <div class="pros">
+    <div class="pro"><span class="cap">Força</span>O mais distintivo e o mais fácil de lembrar. Sotaque brasileiro.</div>
+    <div class="con"><span class="cap">Ponto de atenção</span>É o mais distante do visual de tecnologia; pode soar artesanal demais.</div>
+  </div>
+</section>
+
+<section class="card">
+  <header>
+    <div class="idx">CONCEITO 04</div>
+    <h2>A Chave</h2>
+  </header>
+
+  <div class="grid">
+    <div class="cell">
+      <div class="cap">Símbolo</div>
+      <div class="box"><svg viewBox="0 0 100 100" width="110" height="110"><rect width="100" height="100" rx="24" fill="#2E2A6B"/>
+  <circle cx="50" cy="33" r="14" fill="none" stroke="#FFFFFF" stroke-width="9"/>
+  <path d="M50 47 V79" stroke="#FF6B5A" stroke-width="9" stroke-linecap="round"/>
+  <path d="M50 62 H65" stroke="#FF6B5A" stroke-width="9" stroke-linecap="round"/>
+  <path d="M50 73 H61" stroke="#FF6B5A" stroke-width="9" stroke-linecap="round"/></svg></div>
+    </div>
+    <div class="cell">
+      <div class="cap">Assinatura horizontal</div>
+      <div class="box"><svg viewBox="0 0 320 80" width="290" height="72"><circle cx="20" cy="24" r="10.5" fill="none" stroke="#2E2A6B" stroke-width="7"/>
+  <path d="M20 34 V62" stroke="#FF6B5A" stroke-width="7" stroke-linecap="round"/>
+  <path d="M20 47 H32" stroke="#FF6B5A" stroke-width="7" stroke-linecap="round"/>
+  <path d="M20 56 H29" stroke="#FF6B5A" stroke-width="7" stroke-linecap="round"/>
+  <text x="62" y="52" font-family="Manrope,Arial,sans-serif" font-size="34" font-weight="800" fill="#2E2A6B" letter-spacing="-0.5">Ser Dono</text></svg></div>
+    </div>
+    <div class="cell">
+      <div class="cap">Fundo escuro</div>
+      <div class="box dark" style="background:#2E2A6B"><svg viewBox="0 0 320 80" width="250" height="62"><circle cx="20" cy="24" r="10.5" fill="none" stroke="#FFFFFF" stroke-width="7"/>
+  <path d="M20 34 V62" stroke="#FF6B5A" stroke-width="7" stroke-linecap="round"/>
+  <path d="M20 47 H32" stroke="#FF6B5A" stroke-width="7" stroke-linecap="round"/>
+  <path d="M20 56 H29" stroke="#FF6B5A" stroke-width="7" stroke-linecap="round"/>
+  <text x="62" y="52" font-family="Manrope,Arial,sans-serif" font-size="34" font-weight="800" fill="#FFFFFF" letter-spacing="-0.5">Ser Dono</text></svg></div>
+    </div>
+    <div class="cell">
+      <div class="cap">Ícone de app e favicon</div>
+      <div class="box row">
+        <svg viewBox="0 0 100 100" width="64" height="64"><rect width="100" height="100" rx="24" fill="#2E2A6B"/>
+  <circle cx="50" cy="33" r="14" fill="none" stroke="#FFFFFF" stroke-width="9"/>
+  <path d="M50 47 V79" stroke="#FF6B5A" stroke-width="9" stroke-linecap="round"/>
+  <path d="M50 62 H65" stroke="#FF6B5A" stroke-width="9" stroke-linecap="round"/>
+  <path d="M50 73 H61" stroke="#FF6B5A" stroke-width="9" stroke-linecap="round"/></svg>
+        <svg viewBox="0 0 100 100" width="32" height="32"><rect width="100" height="100" rx="24" fill="#2E2A6B"/>
+  <circle cx="50" cy="33" r="14" fill="none" stroke="#FFFFFF" stroke-width="9"/>
+  <path d="M50 47 V79" stroke="#FF6B5A" stroke-width="9" stroke-linecap="round"/>
+  <path d="M50 62 H65" stroke="#FF6B5A" stroke-width="9" stroke-linecap="round"/>
+  <path d="M50 73 H61" stroke="#FF6B5A" stroke-width="9" stroke-linecap="round"/></svg>
+        <svg viewBox="0 0 100 100" width="16" height="16"><rect width="100" height="100" rx="24" fill="#2E2A6B"/>
+  <circle cx="50" cy="33" r="14" fill="none" stroke="#FFFFFF" stroke-width="9"/>
+  <path d="M50 47 V79" stroke="#FF6B5A" stroke-width="9" stroke-linecap="round"/>
+  <path d="M50 62 H65" stroke="#FF6B5A" stroke-width="9" stroke-linecap="round"/>
+  <path d="M50 73 H61" stroke="#FF6B5A" stroke-width="9" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette"><div class="chip"><span style="background:#2E2A6B"></span><b>Índigo</b><code>#2E2A6B</code></div><div class="chip"><span style="background:#FF6B5A"></span><b>Coral</b><code>#FF6B5A</code></div><div class="chip"><span style="background:#C9C6E8"></span><b>Lilás-claro</b><code>#C9C6E8</code></div><div class="chip"><span style="background:#F8F8FC"></span><b>Neutro claro</b><code>#F8F8FC</code></div></div>
+
+  <div class="type">
+    <div><span class="cap">Tipografia da marca</span><b style="font-family:'Manrope',sans-serif">Manrope</b></div>
+    <div><span class="cap">Tipografia de interface</span><b style="font-family:Inter,sans-serif">Inter</b></div>
+  </div>
+
+  <div class="rat">A chave do próprio negócio. Metáfora que qualquer pessoa decodifica em meio segundo — vantagem real para um público não sofisticado em design. Índigo com coral é a combinação mais atual da lista.</div>
+  <div class="pros">
+    <div class="pro"><span class="cap">Força</span>Leitura imediata. Melhor sustentação para interface de produto.</div>
+    <div class="con"><span class="cap">Ponto de atenção</span>Chave é símbolo bastante usado por imobiliárias e por segurança digital.</div>
+  </div>
+</section>
+
+<section class="card">
+  <header>
+    <div class="idx">CONCEITO 05</div>
+    <h2>A Porta</h2>
+  </header>
+
+  <div class="grid">
+    <div class="cell">
+      <div class="cap">Símbolo</div>
+      <div class="box"><svg viewBox="0 0 100 100" width="110" height="110"><rect width="100" height="100" rx="24" fill="#22262B"/>
+  <path d="M30 74 L30 44 A20 20 0 0 1 70 44 L70 74" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="50" cy="56" r="8.5" fill="#F59331"/></svg></div>
+    </div>
+    <div class="cell">
+      <div class="cap">Assinatura horizontal</div>
+      <div class="box"><svg viewBox="0 0 320 80" width="290" height="72"><path d="M8 58 L8 36 A15 15 0 0 1 38 36 L38 58" fill="none" stroke="#22262B" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="23" cy="45" r="6.5" fill="#F59331"/>
+  <text x="58" y="52" font-family="Inter Tight,Arial,sans-serif" font-size="34" font-weight="700" fill="#22262B" letter-spacing="-0.5">Ser Dono</text></svg></div>
+    </div>
+    <div class="cell">
+      <div class="cap">Fundo escuro</div>
+      <div class="box dark" style="background:#22262B"><svg viewBox="0 0 320 80" width="250" height="62"><path d="M8 58 L8 36 A15 15 0 0 1 38 36 L38 58" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="23" cy="45" r="6.5" fill="#F59331"/>
+  <text x="58" y="52" font-family="Inter Tight,Arial,sans-serif" font-size="34" font-weight="700" fill="#FFFFFF" letter-spacing="-0.5">Ser Dono</text></svg></div>
+    </div>
+    <div class="cell">
+      <div class="cap">Ícone de app e favicon</div>
+      <div class="box row">
+        <svg viewBox="0 0 100 100" width="64" height="64"><rect width="100" height="100" rx="24" fill="#22262B"/>
+  <path d="M30 74 L30 44 A20 20 0 0 1 70 44 L70 74" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="50" cy="56" r="8.5" fill="#F59331"/></svg>
+        <svg viewBox="0 0 100 100" width="32" height="32"><rect width="100" height="100" rx="24" fill="#22262B"/>
+  <path d="M30 74 L30 44 A20 20 0 0 1 70 44 L70 74" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="50" cy="56" r="8.5" fill="#F59331"/></svg>
+        <svg viewBox="0 0 100 100" width="16" height="16"><rect width="100" height="100" rx="24" fill="#22262B"/>
+  <path d="M30 74 L30 44 A20 20 0 0 1 70 44 L70 74" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="50" cy="56" r="8.5" fill="#F59331"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette"><div class="chip"><span style="background:#22262B"></span><b>Grafite</b><code>#22262B</code></div><div class="chip"><span style="background:#F59331"></span><b>Âmbar</b><code>#F59331</code></div><div class="chip"><span style="background:#D5D9DE"></span><b>Cinza-médio</b><code>#D5D9DE</code></div><div class="chip"><span style="background:#FAFAFA"></span><b>Neutro claro</b><code>#FAFAFA</code></div></div>
+
+  <div class="type">
+    <div><span class="cap">Tipografia da marca</span><b style="font-family:'Inter Tight',sans-serif">Inter Tight</b></div>
+    <div><span class="cap">Tipografia de interface</span><b style="font-family:Inter,sans-serif">Inter</b></div>
+  </div>
+
+  <div class="rat">O arco de uma porta que se abre — 'abrir um negócio' virando forma. O ponto âmbar é a pessoa atravessando, e funciona sozinho como avatar e favicon.</div>
+  <div class="pros">
+    <div class="pro"><span class="cap">Força</span>Neo-minimalismo puro: sóbrio com calor. É o que envelhece melhor.</div>
+    <div class="con"><span class="cap">Ponto de atenção</span>O mais neutro da lista — precisa de um sistema visual forte ao redor para não ficar genérico.</div>
+  </div>
+</section>
+
+<div class="foot">
+  <b>Próximos passos depois da escolha:</b> converter os textos do logo em curvas (vetor puro, sem dependência de fonte instalada) · definir área de respiro e tamanho mínimo · gerar as versões monocromática e negativa · exportar PNG e ICO para app e favicon · registrar a marca no INPI na classe correta.<br><br>
+  Os SVGs entregues usam <code>font-family</code> por referência, para você poder testar variações. Antes de qualquer uso oficial, o texto precisa ser vetorizado.<br><br>
+  Ser Dono · Painel preliminar de identidade visual · 27 de julho de 2026 · Confidencial
+</div>
+
+</div></body></html>

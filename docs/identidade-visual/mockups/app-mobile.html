@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ser Dono — Conceito de Telas · App Mobile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ==== TOKENS — DESIGN_SYSTEM.md §8 ==== */
+:root{
+  --bg-canvas:#F7F9FC; --bg-surface:#FFFFFF; --bg-surface-alt:#F3F4F6;
+  --bg-brand:#0E3A4F; --bg-brand-700:#17546E; --bg-brand-subtle:#BFD4DC;
+  --action-primary:#F2B03D; --action-primary-hover:#D89620; --action-secondary:#0E3A4F;
+  --text-primary:#111827; --text-secondary:#374151; --text-muted:#6B7280;
+  --text-on-brand:#FFFFFF; --text-on-action:#0E3A4F;
+  --border:#D1D5DB; --border-focus:#17546E;
+  --success:#1E8E5A; --success-bg:#DCF3E7;
+  --warning:#B5760E; --warning-bg:#FBEBD2;
+  --danger:#C23B2E;  --danger-bg:#F9DEDB;
+  --info:#2464B0;    --info-bg:#DCE8F7;
+  --r-sm:6px; --r-md:10px; --r-lg:14px; --r-full:999px;
+  --e1:0 1px 3px rgba(17,24,39,.08); --e2:0 4px 12px rgba(17,24,39,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#E7ECF2;font-family:Inter,system-ui,sans-serif;color:var(--text-primary);padding:40px 20px 90px}
+.page{max-width:1320px;margin:0 auto}
+.doc-hero{background:var(--bg-brand);color:#fff;border-radius:16px;padding:34px 38px;margin-bottom:30px}
+.doc-hero .kick{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--action-primary)}
+.doc-hero h1{font-family:Sora;font-size:34px;margin:8px 0 10px;letter-spacing:-.6px}
+.doc-hero p{color:#C7D3E3;font-size:14px;line-height:1.65;max-width:800px}
+
+.row{display:flex;gap:28px;flex-wrap:wrap;justify-content:center;margin-bottom:34px}
+.slot{width:330px}
+.slot .cap{margin-bottom:12px}
+.slot .cap .n{display:inline-flex;width:22px;height:22px;border-radius:var(--r-full);background:var(--action-primary);
+  color:#fff;font-family:Sora;font-weight:700;font-size:11px;align-items:center;justify-content:center;margin-right:7px;vertical-align:middle}
+.slot .cap h3{display:inline;font-family:Sora;font-size:16px;color:var(--bg-brand);vertical-align:middle}
+.slot .cap p{font-size:11.5px;color:#5B6B7C;margin-top:5px;line-height:1.55}
+
+/* device */
+.phone{width:330px;height:690px;background:#111;border-radius:42px;padding:11px;box-shadow:0 16px 40px rgba(17,24,39,.22);position:relative}
+.viewport{width:100%;height:100%;background:var(--bg-canvas);border-radius:32px;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.status{height:38px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 22px;font-size:12px;font-weight:600}
+.notch{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:104px;height:24px;background:#111;border-radius:var(--r-full);z-index:20}
+.body-area{flex:1;overflow:hidden;padding:4px 18px 0;display:flex;flex-direction:column}
+.tabbar{flex:none;height:66px;background:#fff;border-top:1px solid #E7ECF2;display:flex;align-items:center;justify-content:space-around;padding-bottom:8px}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:500;color:var(--text-muted)}
+.tab.on{color:var(--bg-brand);font-weight:600}
+.homebar{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);width:120px;height:4px;background:#111;opacity:.25;border-radius:var(--r-full);z-index:20}
+
+/* componentes */
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;height:48px;border-radius:var(--r-md);
+  font-size:15px;font-weight:600;text-decoration:none;width:100%}
+.btn-primary{background:var(--action-primary);color:var(--text-on-action)}
+.btn-secondary{background:var(--action-secondary);color:#fff}
+.btn-outline{background:transparent;color:var(--action-secondary);border:1.5px solid var(--action-secondary)}
+.btn-ghost{background:transparent;color:var(--text-secondary)}
+.input{width:100%;height:48px;border:1px solid var(--border);border-radius:var(--r-md);padding:0 15px;font-family:Inter;font-size:14px;background:#fff;display:flex;align-items:center;color:var(--text-primary)}
+.input.focus{border:2px solid var(--border-focus);box-shadow:var(--e1)}
+.input.ph{color:var(--text-muted)}
+.lbl{font-size:14px;font-weight:600;margin-bottom:6px;display:block}
+.card{background:#fff;border-radius:var(--r-lg);box-shadow:var(--e1);padding:16px}
+.card-outline{background:#fff;border-radius:var(--r-lg);border:1px solid var(--border);padding:14px}
+.card-brand{background:var(--bg-brand);color:#fff;border-radius:var(--r-lg);padding:16px}
+.badge{display:inline-flex;align-items:center;gap:4px;border-radius:var(--r-sm);padding:3px 9px;font-size:11.5px;font-weight:600}
+.b-blocked{background:var(--bg-surface-alt);color:var(--text-muted)}
+.b-available{background:var(--info-bg);color:var(--info)}
+.b-progress{background:var(--bg-brand-subtle);color:var(--bg-brand)}
+.b-waiting{background:var(--warning-bg);color:var(--warning)}
+.b-done{background:var(--success-bg);color:var(--success)}
+.overline{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted)}
+.h1{font-family:Sora;font-size:24px;line-height:31px;font-weight:700}
+.h2{font-family:Sora;font-size:20px;line-height:27px;font-weight:600}
+.h3{font-size:16px;line-height:22px;font-weight:600}
+.body{font-size:14px;line-height:20px}
+.caption{font-size:12px;line-height:16px;font-weight:500;color:var(--text-muted)}
+.bar{height:8px;background:var(--border);border-radius:var(--r-full);overflow:hidden}
+.bar > i{display:block;height:100%;background:var(--action-primary);border-radius:var(--r-full)}
+.src{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:500;color:var(--text-muted)}
+.opt{border:1px solid var(--border);border-radius:var(--r-md);padding:13px 14px;font-size:14px;display:flex;align-items:center;gap:10px;background:#fff;margin-bottom:8px}
+.opt.sel{border:2px solid var(--bg-brand);background:#F5F9FB;font-weight:600}
+.radio{width:18px;height:18px;border-radius:var(--r-full);border:2px solid var(--border);flex:none}
+.opt.sel .radio{border-color:var(--bg-brand);background:var(--bg-brand);box-shadow:inset 0 0 0 3px #fff}
+.msg{max-width:86%;padding:11px 13px;border-radius:var(--r-lg);font-size:13.5px;line-height:19px;margin-bottom:9px}
+.msg.ai{background:var(--bg-surface-alt);border-top-left-radius:var(--r-sm);align-self:flex-start}
+.msg.me{background:var(--bg-brand);color:#fff;border-top-right-radius:var(--r-sm);align-self:flex-end;margin-left:auto}
+.guard{background:var(--info-bg);border-left:3px solid var(--info);border-radius:var(--r-sm);padding:9px 10px;font-size:11.5px;line-height:1.5;color:#1C3F6B;margin-top:8px}
+.trailrow{display:flex;align-items:center;gap:11px;padding:11px 13px;background:#fff;border:1px solid #E7ECF2;border-radius:var(--r-md);margin-bottom:8px}
+.tletter{width:28px;height:28px;border-radius:var(--r-sm);background:var(--bg-brand);color:var(--action-primary);
+  display:flex;align-items:center;justify-content:center;font-family:Sora;font-weight:700;font-size:12px;flex:none}
+.st{display:flex;gap:11px}
+.st .dotcol{display:flex;flex-direction:column;align-items:center;flex:none}
+.st .circ{width:22px;height:22px;border-radius:var(--r-full);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex:none}
+.st .line{width:2px;flex:1;background:var(--border);min-height:12px}
+.circ.done{background:var(--action-primary);color:#fff}
+.circ.now{background:#fff;border:2px solid var(--bg-brand);color:var(--bg-brand)}
+.circ.future{background:var(--border);color:#fff}
+.st .txt{padding-bottom:12px}
+.st .txt b{font-size:13px;display:block;margin-bottom:1px}
+.st .txt span{font-size:11.5px;color:var(--text-muted);line-height:1.45}
+.notebox{background:#fff;border:1px solid #D8DEE7;border-radius:12px;padding:14px 16px;font-size:12px;color:#5B6B7C;line-height:1.65;margin-top:10px}
+.notebox b{color:var(--bg-brand)}
+
+/* ===== IMPRESSÃO / PDF — uma tela por página ===== */
+/* página alta e estreita: cabe o aparelho inteiro, sem cortar conteúdo */
+@page{size:220mm 400mm;margin:16mm}
+@media print{
+  body{background:#fff;padding:0}
+  .page{max-width:none}
+  .doc-hero{border-radius:12px;padding:26px 30px;margin-bottom:0;break-after:page}
+  .doc-hero h1{font-size:30px}
+  .row{display:block;margin:0}
+  .slot{display:block;width:330px;margin:0 auto;break-before:page;break-inside:avoid}
+  .slot .cap{margin-bottom:14px}
+  .slot .cap p{font-size:12px}
+  /* no PDF o aparelho cresce para mostrar a tela inteira, sem rolagem */
+  .phone{box-shadow:none;border:1px solid #333;height:auto;min-height:690px}
+  .viewport{height:auto;min-height:668px;overflow:visible}
+  .body-area{overflow:visible;flex:none;padding-bottom:14px}
+  .body-area .btn{display:block;line-height:48px;text-align:center}
+  .notebox{break-before:page}
+}
+</style></head><body><div class="page">
+
+<div class="doc-hero">
+  <div class="kick">CONCEITO DE TELAS · APP MOBILE · v0.1</div>
+  <h1>Ser Dono — App iOS e Android</h1>
+  <p>Mesmo código, mesmos tokens e mesma funcionalidade do portal web (SPEC §2, RNF-3) — o que muda é só o layout adaptado ao <b>bp.compact</b>: navegação em abas inferiores em vez de barra lateral, coluna única e alvos de toque de 44px. Frames de 390×844 (referência de tela padrão).</p>
+</div>
+
+<div class="row">
+
+  <!-- ============ 1. SPLASH ============ -->
+  <div class="slot">
+    <div class="cap"><span class="n">1</span><h3>Splash</h3>
+      <p>Primeira tela ao abrir. Cobre o carregamento das fontes Sora e Inter via <code>expo-font</code> (DS §3.3) — sem ela, o app renderiza com fonte errada por um instante.</p></div>
+    <div class="phone"><div class="notch"></div><div class="viewport" style="background:var(--bg-brand)">
+      <div class="status" style="color:#fff"><span>9:41</span><span>▮▮▮ ⌁ ▰</span></div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;position:relative;overflow:hidden">
+        <div style="position:absolute;width:300px;height:300px;border-radius:50%;background:#17546E;opacity:.45;top:-90px;right:-110px"></div>
+        <div style="position:absolute;width:180px;height:180px;border-radius:50%;background:#F2B03D;opacity:.09;bottom:60px;left:-70px"></div>
+        <svg width="104" height="104" viewBox="0 0 100 100" style="position:relative;z-index:2">
+          <rect width="100" height="100" rx="24" fill="#F2B03D"/>
+          <path d="M23 78 H41 V62 H59 V46 H72" fill="none" stroke="#0E3A4F" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity=".42"/>
+          <circle cx="72" cy="27" r="9" fill="#0E3A4F"/>
+        </svg>
+        <div style="position:relative;z-index:2;text-align:center">
+          <div style="font-family:Sora;font-size:30px;font-weight:700;color:#fff;letter-spacing:-.5px">Ser<span style="color:#F2B03D">Dono</span></div>
+          <div class="body" style="color:#8FA3BC;margin-top:6px">O sócio que você ainda não tem</div>
+        </div>
+      </div>
+      <div style="padding:0 24px 34px;text-align:center;position:relative;z-index:2">
+        <div style="width:36px;height:36px;border:3px solid rgba(255,255,255,.18);border-top-color:#F2B03D;border-radius:50%;margin:0 auto 14px"></div>
+        <div class="caption" style="color:#6E8299">v1.0.0</div>
+      </div>
+      <div class="homebar" style="background:#fff;opacity:.4"></div>
+    </div></div>
+  </div>
+
+  <!-- ============ 2. LOGIN ============ -->
+  <div class="slot">
+    <div class="cap"><span class="n">2</span><h3>Login</h3>
+      <p>Mesma lógica do portal, adaptada a uma coluna. Botão de 48px de altura e alvos de toque de 44px (DS-8).</p></div>
+    <div class="phone"><div class="notch"></div><div class="viewport">
+      <div class="status"><span>9:41</span><span>▮▮▮ ⌁ ▰</span></div>
+      <div class="body-area" style="padding-top:14px">
+        <div style="margin-bottom:26px">
+          <svg width="52" height="52" viewBox="0 0 100 100"><rect width="100" height="100" rx="24" fill="#0E3A4F"/><path d="M23 78 H41 V62 H59 V46 H72" fill="none" stroke="#BFD4DC" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><circle cx="72" cy="27" r="9" fill="#F2B03D"/></svg>
+        </div>
+        <div class="h1" style="color:var(--bg-brand);margin-bottom:6px">Bem-vindo de volta</div>
+        <div class="body" style="color:var(--text-secondary);margin-bottom:26px">Seu negócio continua de onde você parou.</div>
+
+        <label class="lbl">E-mail</label>
+        <div class="input" style="margin-bottom:16px">marcos.ribeiro@email.com</div>
+
+        <label class="lbl">Senha</label>
+        <div class="input focus" style="margin-bottom:10px">••••••••••</div>
+        <div style="text-align:right;margin-bottom:22px"><span class="caption" style="color:var(--bg-brand);font-weight:600">Esqueci minha senha</span></div>
+
+        <a class="btn btn-primary" style="margin-bottom:14px">Entrar</a>
+
+        <div style="display:flex;align-items:center;gap:10px;margin:6px 0 14px;color:var(--text-muted);font-size:12px">
+          <div style="flex:1;height:1px;background:var(--border)"></div>ou<div style="flex:1;height:1px;background:var(--border)"></div>
+        </div>
+
+        <div class="btn btn-outline" style="border-color:var(--border);color:var(--text-primary);margin-bottom:10px">
+          <svg width="17" height="17" viewBox="0 0 48 48"><path fill="#4285F4" d="M45 24c0-1.6-.1-2.7-.4-3.9H24v7.1h12c-.2 1.9-1.5 4.7-4.4 6.6l6.7 5.2C42.2 35.5 45 30.3 45 24z"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.9-5.4c-1.9 1.3-4.4 2.2-7.6 2.2-5.8 0-10.7-3.8-12.5-9.1l-7.1 5.5C8 40.4 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.5 28.4c-.5-1.4-.7-2.9-.7-4.4s.3-3 .7-4.4l-7.1-5.5C2.9 17 2 20.4 2 24s.9 7 2.4 9.9l7.1-5.5z"/><path fill="#EA4335" d="M24 10.6c4.1 0 6.9 1.8 8.5 3.3l6.2-6C34.9 4.4 29.9 2 24 2 15.4 2 8 7.6 4.4 14.1l7.1 5.5c1.8-5.3 6.7-9 12.5-9z"/></svg>
+          Continuar com Google
+        </div>
+
+        <div style="text-align:center;margin-top:auto;padding-bottom:26px">
+          <span class="body" style="color:var(--text-secondary)">Ainda não tem conta?</span>
+          <span class="body" style="color:var(--bg-brand);font-weight:600"> Fazer diagnóstico grátis</span>
+        </div>
+      </div>
+      <div class="homebar"></div>
+    </div></div>
+  </div>
+
+  <!-- ============ 3. DIAGNÓSTICO ============ -->
+  <div class="slot">
+    <div class="cap"><span class="n">3</span><h3>Diagnóstico</h3>
+      <p>Uma decisão por tela (Princípio 1, PRD §4). Capital em faixas por chips, nunca campo numérico livre (RN-5).</p></div>
+    <div class="phone"><div class="notch"></div><div class="viewport">
+      <div class="status"><span>9:41</span><span>▮▮▮ ⌁ ▰</span></div>
+      <div class="body-area" style="padding-top:10px">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <div style="flex:1"><div class="bar"><i style="width:39%"></i></div></div>
+          <span class="caption">7/18</span>
+        </div>
+
+        <div class="overline" style="margin-bottom:8px">SOBRE O SEU DINHEIRO</div>
+        <div class="h2" style="color:var(--bg-brand);margin-bottom:6px">Quanto você tem guardado para começar?</div>
+        <div class="body" style="color:var(--text-secondary);margin-bottom:20px">Não precisa ser exato. É só pra entender seu ponto de partida e não te sugerir negócio fora da sua realidade.</div>
+
+        <div class="opt"><span class="radio"></span>Até R$ 5 mil</div>
+        <div class="opt sel"><span class="radio"></span>De R$ 5 mil a R$ 15 mil</div>
+        <div class="opt"><span class="radio"></span>De R$ 15 mil a R$ 40 mil</div>
+        <div class="opt"><span class="radio"></span>Mais de R$ 40 mil</div>
+        <div class="opt"><span class="radio"></span>Ainda não sei dizer</div>
+
+        <div class="card-outline" style="margin-top:14px;display:flex;gap:10px;align-items:flex-start;background:var(--info-bg);border-color:#C3D8F0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2464B0" stroke-width="2" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          <div style="font-size:11.5px;line-height:1.5;color:#1C3F6B">Seus dados ficam só com você. A gente usa isso apenas para calcular os nichos que combinam com seu perfil.</div>
+        </div>
+
+        <div style="margin-top:auto;padding:12px 0 24px">
+          <a class="btn btn-primary">Continuar</a>
+        </div>
+      </div>
+      <div class="homebar"></div>
+    </div></div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <!-- ============ 4. PAINEL ============ -->
+  <div class="slot">
+    <div class="cap"><span class="n">4</span><h3>Painel do Negócio</h3>
+      <p>Tela inicial do assinante. Responde "qual é o próximo passo" antes de qualquer outra coisa.</p></div>
+    <div class="phone"><div class="notch"></div><div class="viewport">
+      <div class="status"><span>9:41</span><span>▮▮▮ ⌁ ▰</span></div>
+      <div class="body-area" style="padding-top:10px;overflow-y:auto">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+          <div>
+            <div class="overline">SERVIÇOS DOMICILIARES</div>
+            <div class="h2" style="color:var(--bg-brand);margin-top:3px">Bom te ver,<br>Marcos.</div>
+          </div>
+          <div style="width:38px;height:38px;border-radius:var(--r-full);background:var(--bg-brand-subtle);color:var(--bg-brand);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex:none">MR</div>
+        </div>
+
+        <div class="card-brand" style="margin-bottom:14px">
+          <div class="overline" style="color:var(--action-primary)">PROGRESSO GERAL</div>
+          <div style="display:flex;align-items:baseline;gap:7px;margin:8px 0 2px">
+            <span style="font-family:Sora;font-size:32px;font-weight:700">34%</span>
+            <span class="body" style="color:#C7D3E3">9 de 26 etapas</span>
+          </div>
+          <div class="bar" style="background:rgba(255,255,255,.2);margin:10px 0 12px"><i style="width:34%"></i></div>
+          <div style="font-size:12.5px;line-height:1.5;color:#C7D3E3">No seu ritmo, seu negócio abre por volta de <b style="color:#fff">outubro/2026</b>.</div>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px">
+            <div class="overline">SEU PRÓXIMO PASSO</div>
+            <span class="badge b-progress">Trilha A</span>
+          </div>
+          <div class="h3" style="color:var(--bg-brand);margin-bottom:6px">Estudo de viabilidade econômica</div>
+          <div style="font-size:12.5px;line-height:1.55;color:var(--text-secondary);margin-bottom:13px">Vamos montar os números: quanto entra, quanto sai e em quantos meses o negócio se paga.</div>
+          <a class="btn btn-primary" style="height:44px;font-size:14px">Começar esta etapa</a>
+        </div>
+
+        <div class="card-outline" style="display:flex;gap:10px;align-items:flex-start;background:var(--warning-bg);border-color:#EFD3A8;margin-bottom:16px">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B5760E" stroke-width="2" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <div style="font-size:12px;line-height:1.5;color:#7A4A22"><b>Marca no INPI há 9 dias.</b> Normal, e não te trava — siga na trilha A ou D enquanto isso.</div>
+        </div>
+
+        <div class="h3" style="margin-bottom:10px">Suas trilhas</div>
+        <div class="trailrow"><div class="tletter">A</div><div style="flex:1"><div style="font-size:13px;font-weight:600">Validação</div><div class="caption">4 de 5 etapas</div></div><span class="badge b-progress">Ativa</span></div>
+        <div class="trailrow"><div class="tletter">B</div><div style="flex:1"><div style="font-size:13px;font-weight:600">Identidade</div><div class="caption">3 de 5 etapas</div></div><span class="badge b-waiting">Aguardando</span></div>
+        <div class="trailrow"><div class="tletter">C</div><div style="flex:1"><div style="font-size:13px;font-weight:600">Formalização</div><div class="caption">Libera após a viabilidade</div></div><span class="badge b-blocked">Bloqueada</span></div>
+        <div class="trailrow" style="margin-bottom:16px"><div class="tletter">D</div><div style="flex:1"><div style="font-size:13px;font-weight:600">Estrutura</div><div class="caption">2 de 5 etapas</div></div><span class="badge b-available">Livre</span></div>
+      </div>
+      <div class="tabbar">
+        <div class="tab on"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Painel</div>
+        <div class="tab"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Workflow</div>
+        <div class="tab"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Copiloto</div>
+        <div class="tab"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Dossiê</div>
+      </div>
+      <div class="homebar"></div>
+    </div></div>
+  </div>
+
+  <!-- ============ 5. ETAPA ============ -->
+  <div class="slot">
+    <div class="cap"><span class="n">5</span><h3>Etapa do workflow</h3>
+      <p>Anatomia de 6 passos do PRD §9.1 empilhada em coluna única. Dado de mercado sempre com fonte visível (RN-20).</p></div>
+    <div class="phone"><div class="notch"></div><div class="viewport">
+      <div class="status"><span>9:41</span><span>▮▮▮ ⌁ ▰</span></div>
+      <div class="body-area" style="padding-top:10px;overflow-y:auto">
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:14px">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <span class="badge b-progress">Trilha A · 5 de 5</span>
+          <span class="caption" style="margin-left:auto">25 min</span>
+        </div>
+
+        <div class="h2" style="color:var(--bg-brand);margin-bottom:16px">Estudo de viabilidade econômica</div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="st"><div class="dotcol"><div class="circ done">✓</div><div class="line" style="background:var(--action-primary)"></div></div>
+            <div class="txt"><b>Contexto</b><span>Por que esta etapa existe.</span></div></div>
+          <div class="st"><div class="dotcol"><div class="circ done">✓</div><div class="line" style="background:var(--action-primary)"></div></div>
+            <div class="txt"><b>Dados</b><span>Ticket, margem e sazonalidade da sua região.</span></div></div>
+          <div class="st"><div class="dotcol"><div class="circ now">3</div><div class="line"></div></div>
+            <div class="txt"><b>Decisão</b><span>Definir preço, volume e custos fixos.</span></div></div>
+          <div class="st"><div class="dotcol"><div class="circ future">4</div><div class="line"></div></div>
+            <div class="txt"><b>Ação</b><span>Preencher a planilha de cenários.</span></div></div>
+          <div class="st"><div class="dotcol"><div class="circ future">5</div><div class="line"></div></div>
+            <div class="txt"><b>Entregável</b><span>Relatório salvo no seu dossiê.</span></div></div>
+          <div class="st"><div class="dotcol"><div class="circ future">6</div></div>
+            <div class="txt" style="padding-bottom:0"><b>Checagem</b><span>O copiloto confere os números.</span></div></div>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="overline" style="margin-bottom:10px">REFERÊNCIAS DA SUA REGIÃO</div>
+          <div style="display:flex;gap:9px;margin-bottom:11px">
+            <div class="card-outline" style="flex:1;padding:11px"><div class="caption" style="font-size:10.5px">Ticket médio</div><div style="font-family:Sora;font-size:18px;font-weight:700;color:var(--bg-brand);margin-top:2px">R$ 180</div></div>
+            <div class="card-outline" style="flex:1;padding:11px"><div class="caption" style="font-size:10.5px">Margem</div><div style="font-family:Sora;font-size:18px;font-weight:700;color:var(--bg-brand);margin-top:2px">42%</div></div>
+            <div class="card-outline" style="flex:1;padding:11px"><div class="caption" style="font-size:10.5px">Equilíbrio</div><div style="font-family:Sora;font-size:18px;font-weight:700;color:var(--bg-brand);margin-top:2px">7 meses</div></div>
+          </div>
+          <div class="src">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            SEBRAE · Painel de Serviços · jul/2026
+          </div>
+        </div>
+
+        <label class="lbl">Seu preço por atendimento</label>
+        <div class="input" style="margin-bottom:6px;border-color:var(--danger);border-width:1.5px">R$ 150,00</div>
+        <div style="font-size:11.5px;color:var(--danger);font-weight:500;margin-bottom:16px;line-height:1.45">17% abaixo da média da região. Com seus custos, a margem cai para 28%.</div>
+
+        <div style="padding-bottom:22px">
+          <a class="btn btn-primary" style="margin-bottom:9px">Concluir etapa</a>
+          <a class="btn btn-ghost">Salvar e sair</a>
+        </div>
+      </div>
+      <div class="homebar"></div>
+    </div></div>
+  </div>
+
+  <!-- ============ 6. COPILOTO ============ -->
+  <div class="slot">
+    <div class="cap"><span class="n">6</span><h3>Copiloto de IA</h3>
+      <p>O copiloto discorda quando a conta não fecha (RF-5) e usa o padrão azul de ressalva para temas fiscais, nunca vermelho de erro (RN-21).</p></div>
+    <div class="phone"><div class="notch"></div><div class="viewport">
+      <div class="status"><span>9:41</span><span>▮▮▮ ⌁ ▰</span></div>
+
+      <div style="flex:none;padding:6px 18px 12px;border-bottom:1px solid #E7ECF2;display:flex;align-items:center;gap:10px;background:#fff">
+        <svg width="34" height="34" viewBox="0 0 100 100"><rect width="100" height="100" rx="24" fill="#0E3A4F"/><path d="M23 78 H41 V62 H59 V46 H72" fill="none" stroke="#BFD4DC" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><circle cx="72" cy="27" r="9" fill="#F2B03D"/></svg>
+        <div style="flex:1">
+          <div style="font-size:14.5px;font-weight:600">Seu copiloto</div>
+          <div class="caption">Serviços domiciliares · Campinas/SP</div>
+        </div>
+        <span class="badge b-done">Online</span>
+      </div>
+
+      <div class="body-area" style="padding-top:14px;overflow-y:auto;display:flex;flex-direction:column">
+        <div class="caption" style="text-align:center;margin-bottom:14px">Hoje</div>
+
+        <div class="msg ai">
+          Vi que você definiu <b>R$ 150</b> por atendimento. Isso está 17% abaixo da média da sua região, e com seus custos declarados a margem cairia para 28%.
+          <div class="src" style="margin-top:7px">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            SEBRAE · jul/2026
+          </div>
+        </div>
+
+        <div class="msg me">Mas eu queria entrar mais barato pra pegar os primeiros clientes.</div>
+
+        <div class="msg ai">
+          Faz sentido como estratégia de entrada — só precisa ter prazo definido. Nos seus números: a R$ 150 você precisa de <b>34 atendimentos/mês</b> só pra empatar; a R$ 180, seriam <b>26</b>.
+          <div class="guard">
+            <b>Vale lembrar:</b> a definição de preço tem efeito tributário. Antes de fechar, confirme com um contador — posso indicar um parceiro.
+          </div>
+        </div>
+
+        <div class="msg me">Monta os dois cenários pra mim</div>
+
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin:6px 0 14px">
+          <div style="border:1px solid var(--border);border-radius:var(--r-full);padding:7px 13px;font-size:12.5px;color:var(--text-secondary);background:#fff">Qual o risco de entrar barato?</div>
+          <div style="border:1px solid var(--border);border-radius:var(--r-full);padding:7px 13px;font-size:12.5px;color:var(--text-secondary);background:#fff">E se eu subir depois?</div>
+        </div>
+
+        <div style="margin-top:auto;padding:10px 0 22px;display:flex;gap:8px;align-items:center">
+          <div class="input ph" style="flex:1">Pergunte sobre esta etapa...</div>
+          <div class="btn btn-primary" style="width:48px;flex:none">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E3A4F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="homebar"></div>
+    </div></div>
+  </div>
+
+</div>
+
+<div class="notebox">
+  <b>Sobre este arquivo:</b> mockup de conceito, não implementação. As mesmas telas rodam no portal web com o mesmo código (SPEC §2) — o que muda é o breakpoint: <code>bp.compact</code> usa abas inferiores e coluna única; <code>bp.expanded</code> troca as abas por barra lateral (DS §9.7). Todos os valores visuais vêm de <code>docs/identidade-visual/DESIGN_SYSTEM.md</code>.<br><br>
+  <b>Ponto de atenção para a implementação:</b> este preview roda no navegador, onde as fontes carregam via CSS. No app real, React Native não faz fallback automático — Sora e Inter precisam ser empacotadas e carregadas com <code>expo-font</code> antes da primeira renderização, e é exatamente isso que a tela de splash (1) cobre.<br><br>
+  Ser Dono · Conceito de telas do App Mobile v0.1 · 27 de julho de 2026 · Confidencial
+</div>
+
+</div></body></html>
