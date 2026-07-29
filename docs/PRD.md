@@ -54,6 +54,8 @@ Chega por canal institucional (ver Documento de Conceito, seção 9.2). Mais vel
 
 **RN-2:** Nenhuma tela ou tabela de dados das Fases 2–3 deve ser construída antes das da Fase 1 estarem em produção, exceto os campos de dados que a Fase 1 já precisa prever (ver seção 5, campos marcados `[futuro]`).
 
+**Exceção à RN-2, registrada em 29/07/2026 (decisão do dono do produto):** o **Painel Admin** (dashboard, gestão de usuários, e o **framework** de módulos — menu → tela de módulos, liberação por cliente independente de plano) deixa de esperar a Fase 1 estar em produção. Motivo: é infraestrutura de administração do próprio sistema, não um módulo de negócio voltado ao cliente — o dono do produto decidiu que "toda administração do sistema parte da área de admin" precisa existir desde já, para que os módulos de Fase 2/3 (e o próprio conteúdo de Fase 1 que ainda falta) nasçam dentro dessa estrutura em vez de serem encaixados depois. **O que continua Fase 3 e não é liberado por esta exceção:** o *conteúdo* de cada módulo de negócio (financeiro de verdade, marketing, hub B2B — ver §12) — só o framework que os hospeda (catálogo de módulos + liberação por cliente) é construído agora. O primeiro módulo de conteúdo real só entra depois que o framework estiver pronto e funcionando (ver §12.1).
+
 ---
 
 ## 4. Princípios de Produto (não negociáveis)
@@ -358,6 +360,10 @@ Não detalhar fluxo de tela agora. Ao chegar a esta fase, abrir PRD específico 
 ## 12. Módulos Fase 3 (Ecossistema pós-abertura) — esqueleto
 
 Marketing, Financeiro, Hub B2B — ver Documento de Conceito §8. Mesma regra da seção 11: PRD próprio no momento da priorização.
+
+### 12.1 Framework de módulos (exceção à RN-2, ver §3) — construído agora, conteúdo ainda não
+
+O **Painel Admin** ganha, desde já, o mecanismo genérico que vai hospedar esses módulos (e os de Fase 2) quando cada um for priorizado: um catálogo de módulos (nome, slug, ícone, descrição) e uma tabela de liberação por cliente (`client_id`, `module_id`, `habilitado`), **independente de plano pago** — planos pagos ainda não existem no produto (PRD §17 trata gateway como decisão pendente), então por ora liberação é 1:1 por cliente, controlada manualmente pelo admin. O menu do app (lado cliente) mostra só os módulos liberados pra aquele cliente; o lado admin mostra o catálogo inteiro + toggle de liberação por cliente. Nenhum módulo de conteúdo (financeiro, marketing, hub B2B) é implementado nesta etapa — só a casca que os hospeda. Detalhamento técnico em SPEC.md.
 
 ---
 

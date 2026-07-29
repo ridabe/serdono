@@ -229,6 +229,39 @@ export type Database = {
           },
         ]
       }
+      modules: {
+        Row: {
+          ativo: boolean
+          created_at: string
+          descricao: string | null
+          id: string
+          nome: string
+          ordem: number
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          ativo?: boolean
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          nome: string
+          ordem?: number
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          ativo?: boolean
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          nome?: string
+          ordem?: number
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       niche_matches: {
         Row: {
           fit_score: number
@@ -345,9 +378,42 @@ export type Database = {
         }
         Relationships: []
       }
+      user_modules: {
+        Row: {
+          habilitado: boolean
+          habilitado_em: string
+          id: string
+          module_id: string
+          user_id: string
+        }
+        Insert: {
+          habilitado?: boolean
+          habilitado_em?: string
+          id?: string
+          module_id: string
+          user_id: string
+        }
+        Update: {
+          habilitado?: boolean
+          habilitado_em?: string
+          id?: string
+          module_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_modules_module_id_fkey"
+            columns: ["module_id"]
+            isOneToOne: false
+            referencedRelation: "modules"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       users: {
         Row: {
           avatar_url: string | null
+          bloqueado: boolean
           cidade: string | null
           created_at: string
           criado_via: string
@@ -362,6 +428,7 @@ export type Database = {
         }
         Insert: {
           avatar_url?: string | null
+          bloqueado?: boolean
           cidade?: string | null
           created_at?: string
           criado_via?: string
@@ -376,6 +443,7 @@ export type Database = {
         }
         Update: {
           avatar_url?: string | null
+          bloqueado?: boolean
           cidade?: string | null
           created_at?: string
           criado_via?: string
@@ -395,6 +463,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_dashboard_stats: { Args: never; Returns: Json }
       custom_access_token_hook: { Args: { event: Json }; Returns: Json }
       match_knowledge_chunks: {
         Args: {

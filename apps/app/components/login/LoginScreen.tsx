@@ -3,7 +3,7 @@ import { useRouter } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import { Platform, Pressable, ScrollView, Text, View } from "react-native";
 import * as WebBrowser from "expo-web-browser";
-import { Button, EntrepreneurBackground, Logo, color, radius, space, type } from "@serdono/ui";
+import { Button, EntrepreneurBackground, Input, Logo, color, radius, space, type } from "@serdono/ui";
 import {
   getCurrentSession,
   getUserRole,
@@ -13,7 +13,6 @@ import {
   supabase,
 } from "@serdono/supabase";
 import { pickEntrepreneurPhoto } from "../../constants/entrepreneurPhotos";
-import { Field } from "./Field";
 
 const BACKGROUND_PHOTO = pickEntrepreneurPhoto("cadastro");
 
@@ -142,8 +141,8 @@ export function LoginScreen() {
               Acesse sua conta pra continuar de onde parou.
             </Text>
 
-            <Field label="E-mail" value={email} onChangeText={setEmail} placeholder="voce@email.com" keyboardType="email-address" autoCapitalize="none" />
-            <Field
+            <Input label="E-mail" value={email} onChangeText={setEmail} placeholder="voce@email.com" keyboardType="email-address" autoCapitalize="none" />
+            <Input
               label="Senha"
               value={senha}
               onChangeText={setSenha}

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
-import { color, radius, space, type } from "@serdono/ui";
+import { color, radius, space, type } from "../tokens";
 
-export function Field(props: {
+export interface InputProps {
   label: string;
   value: string;
   onChangeText: (v: string) => void;
@@ -10,7 +10,9 @@ export function Field(props: {
   secureTextEntry?: boolean;
   keyboardType?: "default" | "email-address";
   autoCapitalize?: "none" | "sentences";
-}) {
+}
+
+export function Input(props: InputProps) {
   // Alterna a visibilidade só quando o campo é de senha — evita expor a API
   // de toggle em campos que nunca são mascarados.
   const [visible, setVisible] = useState(false);

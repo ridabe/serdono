@@ -2,10 +2,9 @@ import * as Linking from "expo-linking";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Platform, ScrollView, Text, View } from "react-native";
-import { Button, EntrepreneurBackground, Logo, color, radius, space, type } from "@serdono/ui";
+import { Button, EntrepreneurBackground, Input, Logo, color, radius, space, type } from "@serdono/ui";
 import { confirmPasswordRecovery, supabase, updatePassword } from "@serdono/supabase";
 import { pickEntrepreneurPhoto } from "../../constants/entrepreneurPhotos";
-import { Field } from "./Field";
 
 const BACKGROUND_PHOTO = pickEntrepreneurPhoto("cadastro");
 
@@ -194,7 +193,7 @@ export function RedefinirSenhaScreen() {
                   Escolha uma nova senha pra sua conta.
                 </Text>
 
-                <Field
+                <Input
                   label="Nova senha"
                   value={senha}
                   onChangeText={setSenha}
@@ -202,7 +201,7 @@ export function RedefinirSenhaScreen() {
                   secureTextEntry
                   autoCapitalize="none"
                 />
-                <Field
+                <Input
                   label="Confirmar nova senha"
                   value={confirmarSenha}
                   onChangeText={setConfirmarSenha}

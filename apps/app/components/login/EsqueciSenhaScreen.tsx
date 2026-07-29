@@ -2,10 +2,9 @@ import * as Linking from "expo-linking";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
-import { Button, EntrepreneurBackground, Logo, color, radius, space, type } from "@serdono/ui";
+import { Button, EntrepreneurBackground, Input, Logo, color, radius, space, type } from "@serdono/ui";
 import { requestPasswordReset } from "@serdono/supabase";
 import { pickEntrepreneurPhoto } from "../../constants/entrepreneurPhotos";
-import { Field } from "./Field";
 
 const BACKGROUND_PHOTO = pickEntrepreneurPhoto("cadastro");
 
@@ -90,7 +89,7 @@ export function EsqueciSenhaScreen() {
                   Digite seu e-mail e enviaremos um link pra você criar uma nova senha.
                 </Text>
 
-                <Field
+                <Input
                   label="E-mail"
                   value={email}
                   onChangeText={setEmail}
