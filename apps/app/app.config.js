@@ -1,5 +1,8 @@
 const path = require("path");
-require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
+// `quiet: true` evita que o dotenv 17 escreva uma mensagem "tip" no stdout —
+// o workflow de release (SDD-28) captura a saída de `node -e "require('./app.config.js')..."`
+// pra ler version/versionCode, e essa linha extra quebraria a captura.
+require("dotenv").config({ path: path.resolve(__dirname, "../../.env"), quiet: true });
 
 // SDD-14 (SPEC.md): config dinâmica em vez de app.json estático — o mecanismo
 // EXPO_PUBLIC_* de inlining via `expo/virtual/env` se mostrou instável no modo
@@ -60,6 +63,13 @@ module.exports = {
     extra: {
       supabaseUrl: process.env.EXPO_PUBLIC_SUPABASE_URL,
       supabaseAnonKey: process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY,
+      // SDD-28 (SPEC.md §7): gerado via `eas init --account ridabe_2026` em
+      // 29/07/2026 — colado manualmente porque a EAS CLI não escreve em
+      // app.config.js dinâmico (só em app.json estático).
+      eas: {
+        projectId: "611b9ff0-7891-4294-890f-d41664b1d192",
+      },
     },
+    owner: "ridabe_2026",
   },
 };

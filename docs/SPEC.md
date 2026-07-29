@@ -173,15 +173,17 @@ Implementação do PRD §5.5, §10.
 
 ---
 
-## 7. Build Mobile Automatizado (GitHub Actions, sem EAS)
+## 7. Build Mobile Automatizado (GitHub Actions + EAS local)
 
-Requisito do projeto: **toda vez que a versão em `app.json` for atualizada, gerar automaticamente o `.aab` do Android, sem depender do EAS Build.**
+Requisito do projeto: **toda vez que a versão em `apps/app/app.config.js` for atualizada, gerar automaticamente o `.aab` do Android.**
+
+**SDD-28 (substitui a abordagem "sem EAS" anterior — supera SDD-9/SDD-10):** o pipeline usa **EAS Build em modo `--local`**, não a combinação `expo prebuild` + Gradle + keystore próprio documentada originalmente aqui. Motivo da troca: `--local` roda o mesmo CLI da EAS **dentro do runner do GitHub Actions**, sem consumir minutos/créditos de build na nuvem da Expo — não é "build remoto pago", é só o binário da EAS rodando local, então o argumento original contra EAS (custo/limite de fila) não se aplica. Em troca, ganha-se: a EAS gerencia e guarda o keystore de assinatura (elimina o risco descrito na SDD-9 de perder um keystore autogerido e nunca mais poder atualizar o app publicado), e elimina a manutenção do config plugin de assinatura (`withAndroidSigningConfig`) que a abordagem anterior exigia a cada `expo prebuild`. O workflow original nunca chegou a ser implementado de fato (só especificado) e o keystore próprio nunca foi gerado — a troca não migra nada, só decide o caminho antes de existir.
 
 ### 7.1 Gatilho
-Workflow dispara em `push` na branch principal com alteração no arquivo `apps/app/app.json`, e adicionalmente compara `expo.version` / `expo.android.versionCode` com o valor do commit anterior para evitar rebuilds em alterações do `app.json` que não mudem versão.
+Workflow dispara em `push` na branch principal com alteração no arquivo `apps/app/app.config.js`, e adicionalmente compara `expo.version` / `expo.android.versionCode` com o valor do commit anterior para evitar rebuilds em alterações do arquivo que não mudem versão.
 
-### 7.2 Por que gerar a pasta `android/` no CI, e não versionar
-`expo prebuild` gera a pasta `android/` (projeto nativo puro) a partir de `app.json` e dos plugins de config. Essa pasta **não é versionada no git** — é regenerada a cada build, garantindo que `app.json` continue sendo a única fonte de verdade de configuração nativa (evita divergência entre config declarada e projeto nativo commitado).
+### 7.2 `app.config.js` continua a única fonte de verdade de versão
+`eas.json` fixa `cli.appVersionSource: "local"` — a EAS lê `version`/`android.versionCode` de `app.config.js` em vez de gerenciar/autoincrementar a versão do lado dela. Mantém o mesmo princípio da SDD-10 original (versionCode controlado manualmente, nunca autoincrement do CI), só troca quem executa o build.
 
 ### 7.3 Pipeline (`.github/workflows/android-release.yml`)
 
@@ -192,62 +194,54 @@ on:
   push:
     branches: [main]
     paths:
-      - "apps/app/app.json"
+      - "apps/app/app.config.js"
 
 jobs:
-  build-aab:
+  check-version:
+    # compara expo.version / expo.android.versionCode com o commit anterior
+    # (lido via `node -e "require('./app.config.js')..."`, já que não é
+    # app.json estático — `jq` não serve aqui)
+    ...
+
+  build:
+    needs: check-version
+    if: needs.check-version.outputs.changed == 'true'
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: apps/app
     steps:
       - uses: actions/checkout@v4
-
       - uses: pnpm/action-setup@v4
         with: { version: 9 }
-
       - uses: actions/setup-node@v4
         with: { node-version: 20, cache: "pnpm" }
-
       - uses: actions/setup-java@v4
         with: { distribution: "temurin", java-version: "17" }
-
-      - name: Instalar dependências
-        run: pnpm install --frozen-lockfile
-
-      - name: Gerar projeto nativo Android (expo prebuild)
-        run: npx expo prebuild --platform android --clean
-
-      - name: Restaurar keystore de assinatura
-        run: |
-          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > android/app/release.keystore
-
-      - name: Configurar credenciais de assinatura
-        run: |
-          cat >> android/gradle.properties <<EOF
-          RELEASE_STORE_FILE=release.keystore
-          RELEASE_STORE_PASSWORD=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-          RELEASE_KEY_ALIAS=${{ secrets.ANDROID_KEY_ALIAS }}
-          RELEASE_KEY_PASSWORD=${{ secrets.ANDROID_KEY_PASSWORD }}
-          EOF
-
-      - name: Build do AAB
-        run: cd android && ./gradlew bundleRelease
-
-      - name: Publicar artefato
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-release.aab
-          path: apps/app/android/app/build/outputs/bundle/release/app-release.aab
+      - name: Instalar NDK 27.1.12297006
+        run: echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "ndk;27.1.12297006"
+      - run: pnpm install --frozen-lockfile
+      - uses: expo/expo-github-action@v8
+        with: { eas-version: latest, token: ${{ secrets.EXPO_TOKEN }} }
+      - name: Build AAB (production)
+        working-directory: apps/app
+        run: eas build --platform android --profile production --local --non-interactive --output ./build/app-release.aab
+        env:
+          EXPO_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+      - uses: actions/upload-artifact@v4
+        with: { name: serdono-v${{ needs.check-version.outputs.version }}-vc${{ needs.check-version.outputs.version_code }}, path: apps/app/build/app-release.aab }
+      - uses: softprops/action-gh-release@v2
+        with: { tag_name: v${{ needs.check-version.outputs.version }}, files: apps/app/build/app-release.aab }
 ```
 
-**Pré-requisitos deste pipeline (decisões pendentes — ver PRD §17):**
-- `android/app/build.gradle` precisa referenciar `RELEASE_STORE_FILE` / `RELEASE_KEY_ALIAS` / `RELEASE_KEY_PASSWORD` no bloco `signingConfigs.release` — configurado uma vez, versionado (o gradle não é regenerado do zero de forma a perder customização: usar um **config plugin do Expo**, `withAndroidSigningConfig`, para que `expo prebuild` sempre recrie o bloco de assinatura corretamente a cada execução do CI).
-- **`ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, `ANDROID_KEY_PASSWORD`** precisam existir como GitHub Secrets antes do primeiro run. **SDD-9:** o keystore de produção, uma vez gerado, nunca é regenerado — perdê-lo impede atualizar o app publicado na Play Store. Guardar backup fora do GitHub também (ex.: cofre do 1Password/Bitwarden da empresa).
-- `versionCode` do Android precisa incrementar a cada build enviado à Play Store — **SDD-10:** usar `expo.android.versionCode` em `app.json` como campo controlado manualmente (não autoincrement do CI), para manter `app.json` como única fonte de verdade de versão, conforme o requisito original.
+(Arquivo completo em `.github/workflows/android-release.yml` — o trecho acima é resumido.)
+
+**Pré-requisitos deste pipeline (ação manual, única vez — ver §11 item 12):**
+1. `eas login` (conta Expo do projeto) + `eas init` dentro de `apps/app` — gera o `projectId`. **Armadilha:** a EAS CLI só escreve o `projectId` automaticamente em `app.json` **estático**; como `apps/app/app.config.js` é dinâmico (SDD-14b), o `projectId` gerado precisa ser colado **manualmente** em `extra.eas.projectId` (já deixado como placeholder no arquivo).
+2. Um primeiro `eas build --platform android --profile production` **interativo** (fora do CI, na máquina local) — é esse primeiro build que gera e sobe o keystore de assinatura pros servidores da EAS. As execuções seguintes, incluindo todas as do CI (`--non-interactive`), reaproveitam essas credenciais sem precisar de nenhum secret de keystore.
+3. **`EXPO_TOKEN`** como GitHub Secret (expo.dev → Account Settings → Access Tokens) — autentica o runner do CI na conta EAS sem precisar de login interativo.
+4. **`SUPABASE_URL`**/**`SUPABASE_ANON_KEY`** como GitHub Secrets — os mesmos valores de `EXPO_PUBLIC_SUPABASE_URL`/`EXPO_PUBLIC_SUPABASE_ANON_KEY` do `.env`, necessários porque o build de produção não lê `.env` local.
 
 ### 7.4 Publicação na Play Store
-Este pipeline gera o artefato `.aab` (`upload-artifact`). O upload para a Play Console pode ser manual no MVP ou automatizado depois com a action `r0adkll/upload-google-play`, usando uma service account do Google Play Console — tratado como item de roadmap técnico (§10), não bloqueio do MVP.
+Este pipeline gera o artefato `.aab` (`upload-artifact` + GitHub Release). O upload para a Play Console pode ser manual no MVP ou automatizado depois com a action `r0adkll/upload-google-play`, usando uma service account do Google Play Console — tratado como item de roadmap técnico (§10), não bloqueio do MVP.
 
 ### 7.5 iOS
 Fora do escopo deste pipeline (Android apenas, por pedido explícito). Build de iOS exige macOS runner e assinatura via conta Apple Developer — a ser especificado em seção própria quando for priorizado.
@@ -288,7 +282,7 @@ Executa em todo Pull Request:
 
 ## 11. Decisões que ainda precisam de dono (bloqueiam itens específicos, não o início geral do código)
 
-1. Geração e custódia do keystore Android de produção (SDD-9) — precisa existir antes do primeiro run do workflow §7.
+1. ~~Geração e custódia do keystore Android de produção~~ — **superado por SDD-28:** com a troca pra EAS Build local, o keystore passou a ser gerado e guardado pela própria EAS (não mais autogerido), disparado por um primeiro `eas build` interativo (ver item 12).
 2. ~~Confirmar se o roteamento de rotas públicas fica no Expo Router ou em site estático separado~~ — **resolvido:** dentro do Expo Router, ver SDD-13.
 3. Gateway de pagamento definitivo (já listado no PRD §17) — define o formato do webhook que a Edge Function de assinatura precisa expor.
 4. ~~Habilitar "Anonymous sign-ins" no projeto Supabase~~ — **resolvido** em 28/07/2026 (ver SDD-18).
@@ -300,6 +294,8 @@ Executa em todo Pull Request:
 10. Configurar SMTP customizado no Supabase (Resend) — **resolvido** em 29/07/2026, ver SDD-24. Domínio `serdono.com.br` verificado no Resend; sender `contato@serdono.com.br`.
 11. Configurar **URL Configuration** (Site URL / Redirect URLs) do Supabase Auth pra produção — **resolvido** em 29/07/2026, ver SDD-24.
 12. Adicionar `serdono://login/redefinir-senha` e `<domínio de produção>/login/redefinir-senha` à lista de **Redirect URLs** do Supabase Auth, pra viabilizar o fluxo de recuperação de senha (SDD-27) — bloqueia o link de recuperação funcionar de ponta a ponta em produção e no app nativo até ser feito.
+13. `eas login` + `eas init` — **resolvido** em 29/07/2026: `eas init --account ridabe_2026 --non-interactive` linkado ao projeto já existente `@ridabe_2026/serdono`, `projectId` `611b9ff0-7891-4294-890f-d41664b1d192` colado em `apps/app/app.config.js` → `extra.eas.projectId` (a EAS CLI não escreve em config dinâmica, por isso manual). **Ainda pendente:** (a) `EXPO_TOKEN` como GitHub Secret — o valor já existe em `.env` como `EXPO_TOKEN_SECRET`, só falta colar em Settings → Secrets and variables → Actions do repositório; (b) um primeiro `eas build --platform android --profile production` **interativo**, fora do CI, pra gerar/subir o keystore gerenciado pela EAS (as execuções seguintes do CI, `--non-interactive`, reaproveitam essas credenciais) — sem isso o workflow `.github/workflows/android-release.yml` falha na primeira execução.
+14. Atualizar a linha do `app_versions` (`platform = 'android'`) toda vez que uma nova versão for publicada na Play Store — `current_version`/`current_version_code` sempre acompanhando o que está publicado, `min_version_code`/`force_update` só quando uma versão antiga precisar ser bloqueada (SDD-29). Sem isso, o popup de atualização nunca aparece (o seed inicial já deixa a versão instalada = versão "atual" no banco, então por padrão nada dispara).
 
 ---
 
@@ -361,5 +357,13 @@ Executa em todo Pull Request:
 - **Consumo do link de recuperação — web vs. nativo:** no web, `detectSessionInUrl: true` (já configurado em `client.ts`, SDD-22) processa automaticamente tokens no fragmento da URL (`#access_token=...`) ou `?code=` e dispara o evento `PASSWORD_RECOVERY` do supabase-js ao inscrever um `onAuthStateChange` — é esse listener que aciona o processamento, não algo que já tenha necessariamente acontecido antes do componente montar. Como fallback (formato `?token_hash=...&type=recovery`, não coberto por `detectSessionInUrl`), a tela também tenta consumir a URL manualmente via `verifyOtp`. Fora da web, `detectSessionInUrl` é `false` (SDD-22), então o app precisa ler a URL de abertura manualmente (`Linking.getInitialURL` + listener `Linking.addEventListener("url", ...)`), no mesmo padrão de parsing de fragmento já usado no retorno do OAuth do Google.
 - **Deep link nativo:** `redirectTo` passado para `resetPasswordForEmail` usa `Linking.createURL("login/redefinir-senha")`, resultando em `serdono://login/redefinir-senha` — mesmo esquema (`serdono`) já registrado em `app.config.js` para o retorno do Google.
 - **Ação pendente no dashboard do Supabase:** a lista de **Redirect URLs** (Authentication → URL Configuration, já mencionada na SDD-24 item 3) precisa incluir explicitamente `serdono://login/redefinir-senha` (nativo) e `<domínio de produção>/login/redefinir-senha` (web) — sem isso, o Supabase rejeita o `redirectTo` do link de recuperação e cai de volta na Site URL padrão.
+
+**SDD-29 (Aviso de atualização obrigatória/opcional — RN-22, só Android):**
+
+- **Dado:** tabela `public.app_versions` (`supabase/migrations/202607291000_app_versions.sql`) — uma linha por `platform` (`'android'`/`'ios'`, hoje só `'android'` é populada), com `current_version`/`current_version_code` (o que está publicado), `min_version_code` (abaixo disso, a versão instalada não é mais suportada), `force_update` (se o bloqueio é obrigatório ou só um aviso) e `store_url`/`release_notes`. RLS habilitada com uma única policy de leitura (`using (true)`) — **de propósito mais aberta que o padrão `niches`/`knowledge_*` (que exigem `auth.role() = 'authenticated'`)**, porque essa checagem precisa funcionar antes de qualquer sessão (nem anônima) existir, logo na abertura do app. Sem policy de escrita — atualizar a linha (a cada release) é operação manual via SQL/dashboard, não tem UI de admin ainda (fora de escopo).
+- **Leitura do lado do app:** `packages/supabase/appVersion.ts` (`getAppVersionInfo(platform)`) + `apps/app/hooks/useAppVersion.ts`, que compara `Constants.expoConfig.android.versionCode` (versão instalada, lida via `expo-constants` — mesmo mecanismo estabelecido na SDD-14b, não `require` direto do `app.config.js` como no protótipo de referência) com `min_version_code`/`current_version_code` do banco. Três estados: `up-to-date`, `optional` (dispensável) e `required` (bloqueia).
+- **UI:** `apps/app/components/AppUpdateAlert.tsx`, montado no `_layout.tsx` raiz (fora de qualquer rota específica, cobre o app inteiro) — modal com botão "Atualizar agora" (`Linking.openURL(store_url)`) e, se não for obrigatório, "Lembrar mais tarde" (dispensa até a próxima abertura do app, não persiste — reaparece a cada cold start enquanto a versão continuar desatualizada, de propósito). Quando obrigatório, intercepta o botão físico "voltar" do Android (`BackHandler`) pra impedir que o usuário contorne o bloqueio saindo da tela.
+- **Só Android:** a checagem roda apenas com `Platform.OS === "android"` (RN-22) — web não passa por Play Store, e não há pipeline de build iOS ainda (SPEC §7.5).
+- **Seed inicial:** `current_version`/`current_version_code` = `0.1.0`/`1` (o que está em `app.config.js` hoje), `min_version_code` = `1` (nada bloqueado por padrão), `store_url` já apontando pro pacote `br.com.serdono.app` na Play Store — funcional mesmo antes do app existir de fato na loja (só o link fica quebrado até a primeira publicação). **Ação pendente:** manter essa linha atualizada a cada release (SPEC §11 item 14).
 
 **Decisão de Metro/monorepo:** com pnpm workspaces, o `metro.config.js` de `apps/app` **não** deve setar `resolver.disableHierarchicalLookup = true` nem sobrescrever `resolver.nodeModulesPaths` — essa receita é da documentação oficial para monorepos com hoist "flat" (yarn/npm workspaces). O pnpm resolve dependências via `node_modules` simbólico por pacote; forçar a lookup não-hierárquica quebra a resolução de dependências transitivas de pacotes como `expo` (ex.: `expo-modules-core`) e do próprio `expo-router` (`@expo/metro-runtime`, `@react-navigation/native` como dependências diretas de `apps/app`). A única customização necessária é ampliar `watchFolders` para a raiz do monorepo.

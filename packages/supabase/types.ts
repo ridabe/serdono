@@ -21,6 +21,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      app_versions: {
+        Row: {
+          created_at: string
+          current_version: string
+          current_version_code: number
+          force_update: boolean
+          min_version_code: number
+          platform: string
+          release_notes: string | null
+          store_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          current_version: string
+          current_version_code: number
+          force_update?: boolean
+          min_version_code: number
+          platform: string
+          release_notes?: string | null
+          store_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          current_version?: string
+          current_version_code?: number
+          force_update?: boolean
+          min_version_code?: number
+          platform?: string
+          release_notes?: string | null
+          store_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       diagnostic_responses: {
         Row: {
           apetite_risco: number | null

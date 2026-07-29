@@ -251,7 +251,7 @@ Esqueleto de tabelas a prever desde já para não quebrar migrações depois: `m
 | Hospedagem web | Vercel | Deploy do export web do Expo |
 | Backend/dados | Supabase (Postgres + Auth + Storage + Edge Functions) | Toda a persistência, autenticação, regras de RLS (ver SPEC §4) |
 | IA | API Anthropic (Claude) — modelo econômico (Haiku) e avançado (Sonnet) | Copiloto, geração de entregáveis, checagem de etapas (ver SPEC §5) |
-| Build mobile | GitHub Actions — `expo prebuild` + Gradle, **sem EAS Build**, disparado por mudança de versão em `app.json` (ver SPEC §7) | Geração automática do `.aab` do Android |
+| Build mobile | GitHub Actions — **EAS Build em modo `--local`** (keystore gerenciado pela EAS, sem consumir build na nuvem), disparado por mudança de versão em `apps/app/app.config.js` (ver SPEC §7, SDD-28) | Geração automática do `.aab` do Android |
 | Pagamento | Gateway com suporte a assinatura recorrente no Brasil (Stripe ou Pagar.me — decisão pendente, PRD §17) | Cobrança de planos, webhooks de status |
 | E-mail transacional | Resend ou Postmark | Confirmação, lembretes de etapa em espera (RN-14) |
 
@@ -386,6 +386,7 @@ Marketing, Financeiro, Hub B2B — ver Documento de Conceito §8. Mesma regra da
 | RN-19 | Profundidade real só nas cidades piloto; demais cidades com aviso de conteúdo genérico |
 | RN-20 | Todo dado de mercado citado tem fonte e data visíveis |
 | RN-21 | Toda recomendação sensível traz aviso de não substituir profissional habilitado |
+| RN-22 | App Android verifica versão mínima suportada; abaixo dela, bloqueia uso até atualizar via Play Store |
 
 ---
 

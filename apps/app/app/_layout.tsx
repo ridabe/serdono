@@ -10,6 +10,7 @@ import {
   Inter_700Bold,
 } from "@expo-google-fonts/inter";
 import { color } from "@serdono/ui";
+import { AppUpdateAlert } from "../components/AppUpdateAlert";
 
 // DESIGN_SYSTEM.md §3.3 — RN não faz fallback de fonte do sistema: Sora e Inter
 // precisam estar carregadas via expo-font antes da primeira renderização.
@@ -37,11 +38,14 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-        contentStyle: { backgroundColor: color.bg.canvas },
-      }}
-    />
+    <>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          contentStyle: { backgroundColor: color.bg.canvas },
+        }}
+      />
+      <AppUpdateAlert />
+    </>
   );
 }

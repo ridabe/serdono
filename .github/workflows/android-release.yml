@@ -1,0 +1,136 @@
+name: Android Release (AAB)
+
+# SDD-28 (docs/SPEC.md §7): build via EAS local (--local roda no runner do
+# GitHub, sem consumir minutos/créditos EAS na nuvem — não é build remoto).
+# Substitui a abordagem "sem EAS" documentada anteriormente (superava SDD-9/SDD-10).
+#
+# Secrets necessários (Settings → Secrets and variables → Actions):
+#
+#   EXPO_TOKEN           Token EAS → expo.dev → Account Settings → Access Tokens
+#   SUPABASE_URL         URL do projeto Supabase  (EXPO_PUBLIC_SUPABASE_URL)
+#   SUPABASE_ANON_KEY    Chave anon do Supabase   (EXPO_PUBLIC_SUPABASE_ANON_KEY)
+#
+# Pré-requisito único (ação manual, ver SPEC.md §11 item 12):
+#   `eas login` + `eas init` (cola o projectId gerado em apps/app/app.config.js
+#   → extra.eas.projectId — EAS não escreve em app.config.js dinâmico) + um
+#   primeiro `eas build --platform android --profile production` INTERATIVO
+#   (fora do CI) para gerar/subir o keystore de assinatura gerenciado pela EAS.
+#   As execuções seguintes (aqui, --non-interactive) reaproveitam essas credenciais.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/app/app.config.js"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Forçar build mesmo sem mudança de versão"
+        type: boolean
+        default: false
+
+jobs:
+  # ── 1. Verifica se expo.version ou expo.android.versionCode realmente mudou ──
+  check-version:
+    name: Verificar bump de versão
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/app
+    outputs:
+      changed: ${{ steps.diff.outputs.changed }}
+      version: ${{ steps.diff.outputs.version }}
+      version_code: ${{ steps.diff.outputs.version_code }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Comparar versões
+        id: diff
+        run: |
+          CURRENT_VER=$(node -e "console.log(require('./app.config.js').expo.version)")
+          CURRENT_CODE=$(node -e "console.log(require('./app.config.js').expo.android.versionCode)")
+
+          if git show HEAD~1:apps/app/app.config.js > .prev-app-config.js 2>/dev/null; then
+            PREV_VER=$(node -e "console.log(require('./.prev-app-config.js').expo.version || '')" 2>/dev/null || echo "")
+            PREV_CODE=$(node -e "console.log(require('./.prev-app-config.js').expo.android?.versionCode || '')" 2>/dev/null || echo "")
+          else
+            PREV_VER=""
+            PREV_CODE=""
+          fi
+          rm -f .prev-app-config.js
+
+          echo "version=$CURRENT_VER"       >> "$GITHUB_OUTPUT"
+          echo "version_code=$CURRENT_CODE" >> "$GITHUB_OUTPUT"
+
+          FORCE="${{ github.event.inputs.force }}"
+
+          if [ "$CURRENT_VER" != "$PREV_VER" ] || [ "$CURRENT_CODE" != "$PREV_CODE" ] || [ "$FORCE" = "true" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "✅ Versão alterada: $PREV_VER ($PREV_CODE) → $CURRENT_VER ($CURRENT_CODE)"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "⏭️  Nenhuma mudança de versão detectada. Build ignorado."
+          fi
+
+  # ── 2. Build via EAS --local (keystore gerenciado pela EAS) ──
+  build:
+    name: Build AAB (EAS local)
+    needs: check-version
+    if: needs.check-version.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: "pnpm" }
+
+      - uses: actions/setup-java@v4
+        with: { distribution: "temurin", java-version: "17" }
+
+      - name: Instalar NDK 27.1.12297006
+        run: echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "ndk;27.1.12297006"
+
+      - name: Instalar dependências
+        run: pnpm install --frozen-lockfile
+
+      - name: Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Build AAB (production)
+        working-directory: apps/app
+        run: eas build --platform android --profile production --local --non-interactive --output ./build/app-release.aab
+        env:
+          EXPO_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+
+      - name: Upload artefato AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: serdono-v${{ needs.check-version.outputs.version }}-vc${{ needs.check-version.outputs.version_code }}
+          path: apps/app/build/app-release.aab
+          retention-days: 60
+
+      - name: Criar GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ needs.check-version.outputs.version }}
+          name: "v${{ needs.check-version.outputs.version }} (versionCode ${{ needs.check-version.outputs.version_code }})"
+          files: apps/app/build/app-release.aab
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

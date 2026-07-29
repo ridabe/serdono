@@ -3,4 +3,5 @@ export * from "./session";
 export * from "./auth";
 export * from "./storage";
 export * from "./knowledgeBase";
+export * from "./appVersion";
 export type { Database } from "./types";
