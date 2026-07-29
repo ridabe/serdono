@@ -7,6 +7,7 @@ import { Button, EntrepreneurBackground, Input, Logo, color, radius, space, type
 import {
   getCurrentSession,
   getUserRole,
+  hasModuleAccess,
   isAnonymousSession,
   signInWithEmail,
   signInWithGoogle,
@@ -16,8 +17,15 @@ import { pickEntrepreneurPhoto } from "../../constants/entrepreneurPhotos";
 
 const BACKGROUND_PHOTO = pickEntrepreneurPhoto("cadastro");
 
-function destinationFor(role: "user" | "admin"): "/admin" | "/assistente" {
-  return role === "admin" ? "/admin" : "/assistente";
+type AuthSession = NonNullable<Awaited<ReturnType<typeof getCurrentSession>>>;
+
+// Usuário comum com a Jornada Empreendedora liberada (SDD-31) continua de
+// onde parou — a jornada começa antes do login, no diagnóstico. Sem o
+// módulo, cai no assistente (comportamento anterior, inalterado).
+async function destinationFor(session: AuthSession): Promise<"/admin" | "/jornada" | "/assistente"> {
+  if (getUserRole(session) === "admin") return "/admin";
+  const hasJornada = await hasModuleAccess(session.user.id, "jornada-empreendedora");
+  return hasJornada ? "/jornada" : "/assistente";
 }
 
 export function LoginScreen() {
@@ -34,7 +42,7 @@ export function LoginScreen() {
     const session = await getCurrentSession();
     if (session && !isAnonymousSession(session)) {
       redirected.current = true;
-      router.replace(destinationFor(getUserRole(session)));
+      router.replace(await destinationFor(session));
     }
   }
 
@@ -56,7 +64,7 @@ export function LoginScreen() {
     setLoading(true);
     try {
       const session = await signInWithEmail(email.trim(), senha);
-      if (session) router.replace(destinationFor(getUserRole(session)));
+      if (session) router.replace(await destinationFor(session));
     } catch (e) {
       setError((e as Error).message);
     } finally {

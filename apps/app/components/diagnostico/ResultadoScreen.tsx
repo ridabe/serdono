@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Pressable, ScrollView, Text, View } from "react-native";
 import { Button, EntrepreneurBackground, Logo, color, content, radius, space, type } from "@serdono/ui";
-import { ensureSession, supabase } from "@serdono/supabase";
+import { ensureSession, isAnonymousSession, supabase } from "@serdono/supabase";
 import { pickEntrepreneurPhoto } from "../../constants/entrepreneurPhotos";
 import { CAPITAL_LABEL, OBJETIVO_LABEL, TEMPO_LABEL, formatMoney, stripMarkdown } from "./labels";
 
@@ -34,12 +34,14 @@ export function ResultadoScreen() {
   const [error, setError] = useState<string | null>(null);
   const [perfil, setPerfil] = useState<Perfil | null>(null);
   const [matches, setMatches] = useState<MatchRow[]>([]);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     (async () => {
       try {
         const session = await ensureSession();
         if (!session) throw new Error("Sessão perdida — volte ao diagnóstico.");
+        setLoggedIn(!isAnonymousSession(session));
 
         const { data: diag, error: diagError } = await supabase
           .from("diagnostic_responses")
@@ -195,13 +197,24 @@ export function ResultadoScreen() {
           </View>
 
           <View style={{ alignItems: "center" }}>
-            <Text style={{ ...type.h2, color: color.bg.brand, textAlign: "center", marginBottom: space[2] }}>
-              Quer o passo a passo pra abrir o negócio de verdade?
-            </Text>
-            <Text style={{ ...type.body, color: color.text.secondary, textAlign: "center", marginBottom: space[5], maxWidth: 480 }}>
-              Cria sua conta agora e a gente guarda esse resultado — o próximo passo é destravar o caminho completo até o primeiro cliente.
-            </Text>
-            <Button label="Criar minha conta para continuar" variant="primary" onPress={() => router.push("/cadastro")} />
+            {loggedIn ? (
+              <>
+                <Text style={{ ...type.h2, color: color.bg.brand, textAlign: "center", marginBottom: space[2] }}>
+                  Pronto — agora é só continuar sua jornada.
+                </Text>
+                <Button label="Continuar" variant="primary" onPress={() => router.replace("/jornada")} />
+              </>
+            ) : (
+              <>
+                <Text style={{ ...type.h2, color: color.bg.brand, textAlign: "center", marginBottom: space[2] }}>
+                  Quer o passo a passo pra abrir o negócio de verdade?
+                </Text>
+                <Text style={{ ...type.body, color: color.text.secondary, textAlign: "center", marginBottom: space[5], maxWidth: 480 }}>
+                  Cria sua conta agora e a gente guarda esse resultado — o próximo passo é destravar o caminho completo até o primeiro cliente.
+                </Text>
+                <Button label="Criar minha conta para continuar" variant="primary" onPress={() => router.push("/cadastro")} />
+              </>
+            )}
           </View>
         </View>
       </View>

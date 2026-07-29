@@ -6,4 +6,5 @@ export * from "./knowledgeBase";
 export * from "./appVersion";
 export * from "./adminUsers";
 export * from "./modules";
+export * from "./jornada";
 export type { Database } from "./types";

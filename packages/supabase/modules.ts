@@ -77,3 +77,9 @@ export async function listMyModules(userId: string): Promise<MyModule[]> {
     .map((row) => row.modules)
     .filter((m) => m && m.ativo);
 }
+
+/** Checagem rápida usada no redirecionamento pós-login e nos guards de rota de módulo (SDD-31). */
+export async function hasModuleAccess(userId: string, slug: string): Promise<boolean> {
+  const modules = await listMyModules(userId);
+  return modules.some((m) => m.slug === slug);
+}

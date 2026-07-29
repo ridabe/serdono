@@ -158,7 +158,9 @@ Banco: Postgres via Supabase. Convenção: `snake_case`, chaves primárias `uuid
 
 ### 5.4 Workflow
 
-**`workflow_instances`** — um negócio em construção
+**Substituído pela Jornada Empreendedora (29/07/2026 — ver §12.1, SPEC.md SDD-31):** o modelo abaixo (`workflow_instances`/`workflow_steps`/`step_templates`/`deliverables`, trilhas de letra `A-F`) nunca chegou a ser implementado no banco. Antes de construir o primeiro módulo real (Jornada Empreendedora), o dono do produto decidiu trocar a nomenclatura de trilha-por-letra por **fases nomeadas**: `validacao_ideia`, `planejamento`, `formalizacao`, `marketing`, `financeiro`, `clientes`, `retencao`, `escala` (a antiga trilha A "Validação" § 9.2 vira a fase "Validação da Ideia", detalhada quando essa fase for desenhada — não reescrita aqui ainda). As tabelas novas nascem com prefixo `jornada_*` (`jornada_instances` já existe; `jornada_etapas`/`jornada_etapa_templates`/`jornada_deliverables` nascem quando as etapas de cada fase forem desenhadas, uma de cada vez). A estrutura abaixo permanece como **referência conceitual** dos campos que cada tabela precisa cobrir — só os nomes de tabela/enum mudam.
+
+**`workflow_instances`** (→ `jornada_instances`) — um negócio em construção
 
 | Campo | Tipo | Notas |
 |---|---|---|
@@ -308,6 +310,8 @@ Porta de entrada alternativa citada no Documento de Conceito §8. Fluxo: diagnó
 
 ## 9. Módulo: Workflow de Construção (trilhas A, B, C — MVP)
 
+**Renomeado pela Jornada Empreendedora (ver §5.4, §12.1):** esta seção descreve o conteúdo conceitual das trilhas A/B/C, mas a estrutura de execução real é a Jornada Empreendedora, com fases nomeadas em vez de letras. O conteúdo da **Trilha A — Validação** abaixo é o rascunho que alimenta a futura fase **"Validação da Ideia"** (a próxima a ser desenhada, ainda não detalhada — inclui um checklist específico e geração de Persona/SWOT/Canvas/Proposta de Valor por IA, escopo novo não coberto por este parágrafo). Trilhas B (Identidade) e C (Formalização) mapeiam pras fases "Planejamento"/"Formalização" da Jornada, a detalhar quando chegar a vez delas.
+
 ### 9.1 Anatomia de uma etapa (aplica-se a toda etapa de toda trilha)
 Toda etapa renderiza, nesta ordem fixa: **Contexto** (por que existe) → **Dados** (inteligência de mercado/região, com fonte) → **Decisão** (escolha concreta com trade-offs) → **Ação** (passo a passo operacional) → **Entregável** (artefato salvo) → **Checagem** (copiloto valida `criterio_conclusao` antes de liberar avanço).
 
@@ -361,9 +365,11 @@ Não detalhar fluxo de tela agora. Ao chegar a esta fase, abrir PRD específico 
 
 Marketing, Financeiro, Hub B2B — ver Documento de Conceito §8. Mesma regra da seção 11: PRD próprio no momento da priorização.
 
-### 12.1 Framework de módulos (exceção à RN-2, ver §3) — construído agora, conteúdo ainda não
+### 12.1 Framework de módulos (exceção à RN-2, ver §3) — construído em 29/07/2026
 
-O **Painel Admin** ganha, desde já, o mecanismo genérico que vai hospedar esses módulos (e os de Fase 2) quando cada um for priorizado: um catálogo de módulos (nome, slug, ícone, descrição) e uma tabela de liberação por cliente (`client_id`, `module_id`, `habilitado`), **independente de plano pago** — planos pagos ainda não existem no produto (PRD §17 trata gateway como decisão pendente), então por ora liberação é 1:1 por cliente, controlada manualmente pelo admin. O menu do app (lado cliente) mostra só os módulos liberados pra aquele cliente; o lado admin mostra o catálogo inteiro + toggle de liberação por cliente. Nenhum módulo de conteúdo (financeiro, marketing, hub B2B) é implementado nesta etapa — só a casca que os hospeda. Detalhamento técnico em SPEC.md.
+O **Painel Admin** ganhou o mecanismo genérico que hospeda os módulos (e os de Fase 2) quando cada um for priorizado: um catálogo de módulos (nome, slug, descrição) e uma tabela de liberação por usuário (`modules`/`user_modules`), **independente de plano pago** — planos pagos ainda não existem no produto (PRD §17 trata gateway como decisão pendente), então por ora liberação é 1:1 por usuário, controlada manualmente pelo admin. O menu do app (lado cliente) mostra só os módulos liberados pra aquele usuário; o lado admin mostra o catálogo inteiro + toggle de liberação por usuário. Detalhamento técnico em SPEC.md SDD-30.
+
+**Primeiro módulo de conteúdo (mesma data):** a **Jornada Empreendedora** (ver §5.4, §9, SPEC.md SDD-31) começou a ser construída — ainda sob liberação manual do admin (inclusive pra testes, mesmo sem assinatura), até existir a feature de liberação por plano. É o módulo mais importante do produto: o workflow guiado da escolha do nicho até o negócio aberto e funcionando. Construído incrementalmente, uma etapa de cada vez — a primeira etapa (confirmação/escolha do nicho pós-login) está pronta; a "Fase: Validação da Ideia" é a próxima a ser desenhada.
 
 ---
 

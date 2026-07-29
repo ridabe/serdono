@@ -120,6 +120,47 @@ export type Database = {
         }
         Relationships: []
       }
+      jornada_instances: {
+        Row: {
+          created_at: string
+          fase_atual: string
+          id: string
+          niche_id: string | null
+          nome_negocio: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          fase_atual?: string
+          id?: string
+          niche_id?: string | null
+          nome_negocio?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          fase_atual?: string
+          id?: string
+          niche_id?: string | null
+          nome_negocio?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "jornada_instances_niche_id_fkey"
+            columns: ["niche_id"]
+            isOneToOne: false
+            referencedRelation: "niches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       knowledge_articles: {
         Row: {
           ativo: boolean
