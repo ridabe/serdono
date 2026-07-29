@@ -1,7 +1,8 @@
 import { useRouter } from "expo-router";
+import { useState } from "react";
 import { Text, View } from "react-native";
-import { Button, Card, Input, color, space, type } from "@serdono/ui";
-import type { JornadaInstance } from "@serdono/supabase";
+import { Button, Card, Input, color, radius, space, type } from "@serdono/ui";
+import type { JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { useValidacaoIdeia } from "./useValidacaoIdeia";
 
 interface Persona {
@@ -36,9 +37,16 @@ interface PropostaValor {
   diferenciais: string[];
 }
 
-export function ValidacaoIdeiaScreen({ jornada }: { jornada: JornadaInstance }) {
+interface ValidacaoIdeiaScreenProps {
+  jornada: JornadaInstance;
+  etapas: JornadaEtapa[];
+  onEtapasChanged: () => Promise<void>;
+}
+
+export function ValidacaoIdeiaScreen({ jornada, etapas, onEtapasChanged }: ValidacaoIdeiaScreenProps) {
   const router = useRouter();
-  const v = useValidacaoIdeia(jornada);
+  const v = useValidacaoIdeia(jornada, etapas, onEtapasChanged);
+  const [showDica, setShowDica] = useState(false);
 
   const persona = v.deliverables.find((d) => d.tipo === "persona")?.conteudo as unknown as Persona | undefined;
   const swot = v.deliverables.find((d) => d.tipo === "swot")?.conteudo as unknown as Swot | undefined;
@@ -65,7 +73,7 @@ export function ValidacaoIdeiaScreen({ jornada }: { jornada: JornadaInstance }) 
         <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[3] }}>Checklist</Text>
         <View style={{ gap: space[2] }}>
           {v.checklist.map((item) => (
-            <View key={item.label} style={{ flexDirection: "row", alignItems: "center", gap: space[2] }}>
+            <View key={item.slug} style={{ flexDirection: "row", alignItems: "center", gap: space[2] }}>
               <Text style={{ color: item.done ? color.state.success : color.text.muted }}>{item.done ? "✓" : "○"}</Text>
               <Text style={{ ...type.body, color: item.done ? color.text.primary : color.text.muted }}>{item.label}</Text>
             </View>
@@ -89,6 +97,51 @@ export function ValidacaoIdeiaScreen({ jornada }: { jornada: JornadaInstance }) 
           onPress={v.generate}
         />
       </Card>
+
+      {v.etapaClientesReais ? (
+        <Card variant={v.etapaClientesReais.status === "concluida" ? "outline" : "default"} padding={5}>
+          <View style={{ flexDirection: "row", alignItems: "flex-start", gap: space[3] }}>
+            <View
+              style={{
+                width: 24,
+                height: 24,
+                borderRadius: radius.full,
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: 2,
+                backgroundColor: v.etapaClientesReais.status === "concluida" ? color.state.success : color.state.warningBg,
+                borderWidth: v.etapaClientesReais.status === "concluida" ? 0 : 2,
+                borderColor: color.state.warning,
+              }}
+            >
+              <Text style={{ color: v.etapaClientesReais.status === "concluida" ? "#fff" : color.state.warning, fontSize: 12, fontWeight: "700" }}>
+                {v.etapaClientesReais.status === "concluida" ? "✓" : "!"}
+              </Text>
+            </View>
+            <View style={{ flex: 1, gap: space[1] }}>
+              <Text style={{ ...type.bodyStrong, color: color.text.primary }}>{v.etapaClientesReais.template.titulo}</Text>
+              {v.etapaClientesReais.status !== "concluida" ? (
+                <Text style={{ ...type.caption, color: color.state.warning, fontWeight: "700" }}>AGUARDANDO VOCÊ</Text>
+              ) : null}
+              {showDica && v.etapaClientesReais.template.dica ? (
+                <Text style={{ ...type.body, color: color.text.secondary, marginTop: space[1] }}>{v.etapaClientesReais.template.dica}</Text>
+              ) : null}
+              <View style={{ flexDirection: "row", gap: space[2], flexWrap: "wrap", marginTop: space[2] }}>
+                <Button
+                  label={v.etapaClientesReais.status === "concluida" ? "Desmarcar" : "Marquei, feito"}
+                  variant={v.etapaClientesReais.status === "concluida" ? "outline" : "primary"}
+                  size="sm"
+                  loading={v.togglingClientes}
+                  onPress={v.toggleClientesReais}
+                />
+                {v.etapaClientesReais.template.dica ? (
+                  <Button label={showDica ? "Ocultar dica" : "Como eu faço isso?"} variant="ghost" size="sm" onPress={() => setShowDica((s) => !s)} />
+                ) : null}
+              </View>
+            </View>
+          </View>
+        </Card>
+      ) : null}
 
       {persona ? (
         <Card variant="default" padding={5}>

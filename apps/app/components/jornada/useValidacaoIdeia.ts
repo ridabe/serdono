@@ -3,21 +3,28 @@ import {
   advanceFase,
   generateDeliverables,
   getDeliverables,
+  markEtapaDone,
+  unmarkEtapaDone,
   updateValidacaoInputs,
   type JornadaDeliverable,
-  type JornadaDeliverableTipo,
+  type JornadaEtapa,
   type JornadaInstance,
 } from "@serdono/supabase";
 
-const DOC_TIPOS: JornadaDeliverableTipo[] = ["persona", "swot", "canvas", "proposta_valor"];
+const SLUG_CLIENTES_REAIS = "validacao_clientes_reais";
 
 /**
- * Fase 2 — Validação da Ideia (SDD-32). Checklist é sempre derivado de dado
- * real (RN-9), nunca um toggle manual: público/concorrentes/diferenciais
- * viram ✓ quando o campo está preenchido; persona/produto validado viram ✓
- * quando os documentos de IA correspondentes existem.
+ * Fase 2 — Validação da Ideia (SDD-32/33). O checklist não é mais derivado
+ * no client — vem de `jornada_etapas`, a fonte única de verdade de
+ * progresso, persistida por etapa (RN-9: nunca só um clique manual pra
+ * itens automáticos; para o item manual — conversar com clientes reais — o
+ * clique É a própria ação de confirmar que ela foi feita no mundo real).
  */
-export function useValidacaoIdeia(jornada: JornadaInstance) {
+export function useValidacaoIdeia(
+  jornada: JornadaInstance,
+  etapas: JornadaEtapa[],
+  onEtapasChanged: () => Promise<void>
+) {
   const [publicoAlvo, setPublicoAlvo] = useState(jornada.publico_alvo ?? "");
   const [concorrentes, setConcorrentes] = useState(jornada.concorrentes ?? "");
   const [diferenciais, setDiferenciais] = useState(jornada.diferenciais ?? "");
@@ -25,6 +32,7 @@ export function useValidacaoIdeia(jornada: JornadaInstance) {
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
   const [advancing, setAdvancing] = useState(false);
+  const [togglingClientes, setTogglingClientes] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -42,6 +50,7 @@ export function useValidacaoIdeia(jornada: JornadaInstance) {
         concorrentes: concorrentes.trim() || null,
         diferenciais: diferenciais.trim() || null,
       });
+      await onEtapasChanged();
     } catch (e) {
       setError((e as Error).message);
     }
@@ -54,6 +63,7 @@ export function useValidacaoIdeia(jornada: JornadaInstance) {
       await saveInputs();
       const docs = await generateDeliverables(jornada.id);
       setDeliverables(docs);
+      await onEtapasChanged();
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -61,17 +71,32 @@ export function useValidacaoIdeia(jornada: JornadaInstance) {
     }
   }
 
-  const hasDoc = (tipo: JornadaDeliverableTipo) => deliverables.some((d) => d.tipo === tipo);
-  const allDocsReady = DOC_TIPOS.every(hasDoc);
+  const etapaClientesReais = etapas.find((e) => e.template.slug === SLUG_CLIENTES_REAIS);
 
-  const checklist = [
-    { label: "Público definido", done: publicoAlvo.trim().length > 0 },
-    { label: "Persona criada", done: hasDoc("persona") },
-    { label: "Concorrentes pesquisados", done: concorrentes.trim().length > 0 },
-    { label: "Diferenciais definidos", done: diferenciais.trim().length > 0 },
-    { label: "Produto validado", done: allDocsReady },
-  ];
-  const checklistComplete = checklist.every((item) => item.done);
+  async function toggleClientesReais() {
+    if (!etapaClientesReais) return;
+    setTogglingClientes(true);
+    setError(null);
+    try {
+      if (etapaClientesReais.status === "concluida") {
+        await unmarkEtapaDone(jornada.id, SLUG_CLIENTES_REAIS);
+      } else {
+        await markEtapaDone(jornada.id, SLUG_CLIENTES_REAIS);
+      }
+      await onEtapasChanged();
+    } catch (e) {
+      setError((e as Error).message);
+    } finally {
+      setTogglingClientes(false);
+    }
+  }
+
+  const checklist = etapas.map((e) => ({
+    slug: e.template.slug,
+    label: e.template.titulo,
+    done: e.status === "concluida",
+  }));
+  const checklistComplete = etapas.length > 0 && etapas.every((e) => e.status === "concluida");
 
   async function advance() {
     setAdvancing(true);
@@ -105,5 +130,8 @@ export function useValidacaoIdeia(jornada: JornadaInstance) {
     advance,
     error,
     canGenerate: publicoAlvo.trim().length > 0 && concorrentes.trim().length > 0 && diferenciais.trim().length > 0,
+    etapaClientesReais,
+    togglingClientes,
+    toggleClientesReais,
   };
 }

@@ -158,6 +158,96 @@ export type Database = {
           },
         ]
       }
+      jornada_etapa_templates: {
+        Row: {
+          created_at: string
+          depende_de: string[]
+          descricao: string | null
+          dica: string | null
+          fase: string
+          id: string
+          ordem: number
+          slug: string
+          tipo_conclusao: string
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          depende_de?: string[]
+          descricao?: string | null
+          dica?: string | null
+          fase: string
+          id?: string
+          ordem: number
+          slug: string
+          tipo_conclusao: string
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          depende_de?: string[]
+          descricao?: string | null
+          dica?: string | null
+          fase?: string
+          id?: string
+          ordem?: number
+          slug?: string
+          tipo_conclusao?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      jornada_etapas: {
+        Row: {
+          concluido_em: string | null
+          created_at: string
+          dados_usuario: Json
+          etapa_template_id: string
+          id: string
+          jornada_instance_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          concluido_em?: string | null
+          created_at?: string
+          dados_usuario?: Json
+          etapa_template_id: string
+          id?: string
+          jornada_instance_id: string
+          status: string
+          updated_at?: string
+        }
+        Update: {
+          concluido_em?: string | null
+          created_at?: string
+          dados_usuario?: Json
+          etapa_template_id?: string
+          id?: string
+          jornada_instance_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "jornada_etapas_etapa_template_id_fkey"
+            columns: ["etapa_template_id"]
+            isOneToOne: false
+            referencedRelation: "jornada_etapa_templates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "jornada_etapas_jornada_instance_id_fkey"
+            columns: ["jornada_instance_id"]
+            isOneToOne: false
+            referencedRelation: "jornada_instances"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       jornada_instances: {
         Row: {
           concorrentes: string | null
