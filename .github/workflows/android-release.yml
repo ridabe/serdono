@@ -46,9 +46,19 @@ jobs:
         with:
           fetch-depth: 2
 
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+
       - uses: actions/setup-node@v4
-        with:
-          node-version: 20
+        with: { node-version: 20, cache: "pnpm" }
+
+      - name: Instalar dependências
+        # roda na raiz do workspace (fora do default working-directory deste
+        # job) — precisa do `dotenv` instalado pra `require('./app.config.js')`
+        # funcionar no passo seguinte (app.config.js é config dinâmica, não
+        # app.json estático, então precisa ser executado via node, não `jq`).
+        working-directory: .
+        run: pnpm install --frozen-lockfile
 
       - name: Comparar versões
         id: diff
