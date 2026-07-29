@@ -4,6 +4,7 @@ import { ActivityIndicator, Pressable, ScrollView, Text, View } from "react-nati
 import { Card, Logo, color, space, type } from "@serdono/ui";
 import { getCurrentSession, getMyJornada, signOut, supabase, type JornadaInstance } from "@serdono/supabase";
 import { EscolherNichoScreen } from "./EscolherNichoScreen";
+import { ValidacaoIdeiaScreen } from "./ValidacaoIdeiaScreen";
 
 const FASE_LABEL: Record<string, string> = {
   validacao_ideia: "Validação da Ideia",
@@ -85,17 +86,20 @@ export function JornadaScreen() {
           Acompanhe aqui a evolução do seu negócio, passo a passo.
         </Text>
 
-        <Card variant="default" padding={6}>
+        <Card variant="outline" padding={5} style={{ marginBottom: space[5] }}>
           <Text style={{ ...type.caption, color: color.text.muted, marginBottom: space[1] }}>NICHO ESCOLHIDO</Text>
-          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[4] }}>{nicheName ?? "—"}</Text>
-
+          <Text style={{ ...type.h3, color: color.text.primary, marginBottom: space[3] }}>{nicheName ?? "—"}</Text>
           <Text style={{ ...type.caption, color: color.text.muted, marginBottom: space[1] }}>FASE ATUAL</Text>
-          <Text style={{ ...type.h3, color: color.bg.brand, marginBottom: space[4] }}>{FASE_LABEL[jornada.fase_atual] ?? jornada.fase_atual}</Text>
-
-          <Text style={{ ...type.body, color: color.text.secondary }}>
-            A próxima etapa (checklist de validação da ideia) chega em breve. Sua escolha já está salva.
-          </Text>
+          <Text style={{ ...type.bodyStrong, color: color.bg.brand }}>{FASE_LABEL[jornada.fase_atual] ?? jornada.fase_atual}</Text>
         </Card>
+
+        {jornada.fase_atual === "validacao_ideia" ? (
+          <ValidacaoIdeiaScreen jornada={jornada} />
+        ) : (
+          <Card variant="default" padding={6}>
+            <Text style={{ ...type.body, color: color.text.secondary }}>A próxima etapa chega em breve.</Text>
+          </Card>
+        )}
       </ScrollView>
     </View>
   );

@@ -126,6 +126,56 @@
       "norm_label": "supabase"
     },
     {
+      "label": "app.json",
+      "file_type": "code",
+      "source_file": "app.json",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "app",
+      "community": 82,
+      "norm_label": "app.json"
+    },
+    {
+      "label": "expo",
+      "file_type": "code",
+      "source_file": "app.json",
+      "source_location": "L2",
+      "_origin": "ast",
+      "id": "app_expo",
+      "community": 82,
+      "norm_label": "expo"
+    },
+    {
+      "label": "extra",
+      "file_type": "code",
+      "source_file": "app.json",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "app_expo_extra",
+      "community": 82,
+      "norm_label": "extra"
+    },
+    {
+      "label": "eas",
+      "file_type": "code",
+      "source_file": "app.json",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "app_extra_eas",
+      "community": 82,
+      "norm_label": "eas"
+    },
+    {
+      "label": "projectId",
+      "file_type": "code",
+      "source_file": "app.json",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "app_eas_projectid",
+      "community": 82,
+      "norm_label": "projectid"
+    },
+    {
       "label": "app.config.js",
       "file_type": "code",
       "source_file": "apps/app/app.config.js",
@@ -152,7 +202,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_protected_layout",
-      "community": 27,
+      "community": 224,
       "norm_label": "_layout.tsx"
     },
     {
@@ -162,7 +212,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "apps_app_app_protected_layout_protectedlayout",
-      "community": 27,
+      "community": 224,
       "norm_label": "protectedlayout()"
     },
     {
@@ -172,7 +222,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_protected_admin_layout",
-      "community": 27,
+      "community": 224,
       "norm_label": "_layout.tsx"
     },
     {
@@ -182,7 +232,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_app_app_protected_admin_layout_adminlayout",
-      "community": 27,
+      "community": 224,
       "norm_label": "adminlayout()"
     },
     {
@@ -192,7 +242,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_protected_admin_index",
-      "community": 226,
+      "community": 224,
       "norm_label": "index.tsx"
     },
     {
@@ -202,8 +252,68 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_protected_admin_index_admin",
-      "community": 226,
+      "community": 224,
       "norm_label": "admin()"
+    },
+    {
+      "label": "index.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/app/(protected)/admin/modulos/index.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_app_protected_admin_modulos_index",
+      "community": 27,
+      "norm_label": "index.tsx"
+    },
+    {
+      "label": "AdminModulos()",
+      "file_type": "code",
+      "source_file": "apps/app/app/(protected)/admin/modulos/index.tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "apps_app_app_protected_admin_modulos_index_adminmodulos",
+      "community": 27,
+      "norm_label": "adminmodulos()"
+    },
+    {
+      "label": "[id].tsx",
+      "file_type": "code",
+      "source_file": "apps/app/app/(protected)/admin/usuarios/[id].tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_app_protected_admin_usuarios_id",
+      "community": 27,
+      "norm_label": "[id].tsx"
+    },
+    {
+      "label": "AdminUsuarioModulos()",
+      "file_type": "code",
+      "source_file": "apps/app/app/(protected)/admin/usuarios/[id].tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "apps_app_app_protected_admin_usuarios_id_adminusuariomodulos",
+      "community": 27,
+      "norm_label": "adminusuariomodulos()"
+    },
+    {
+      "label": "index.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/app/(protected)/admin/usuarios/index.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_app_protected_admin_usuarios_index",
+      "community": 27,
+      "norm_label": "index.tsx"
+    },
+    {
+      "label": "AdminUsuarios()",
+      "file_type": "code",
+      "source_file": "apps/app/app/(protected)/admin/usuarios/index.tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "apps_app_app_protected_admin_usuarios_index_adminusuarios",
+      "community": 27,
+      "norm_label": "adminusuarios()"
     },
     {
       "label": "index.tsx",
@@ -212,7 +322,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_protected_assistente_index",
-      "community": 222,
+      "community": 224,
       "norm_label": "index.tsx"
     },
     {
@@ -222,7 +332,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_protected_assistente_index_assistente",
-      "community": 222,
+      "community": 224,
       "norm_label": "assistente()"
     },
     {
@@ -244,6 +354,26 @@
       "id": "apps_app_app_protected_completar_cadastro_index_completarcadastro",
       "community": 219,
       "norm_label": "completarcadastro()"
+    },
+    {
+      "label": "index.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/app/(protected)/modulos/index.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_app_protected_modulos_index",
+      "community": 27,
+      "norm_label": "index.tsx"
+    },
+    {
+      "label": "Modulos()",
+      "file_type": "code",
+      "source_file": "apps/app/app/(protected)/modulos/index.tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "apps_app_app_protected_modulos_index_modulos",
+      "community": 27,
+      "norm_label": "modulos()"
     },
     {
       "label": "index.tsx",
@@ -279,7 +409,7 @@
       "label": "RootLayout()",
       "file_type": "code",
       "source_file": "apps/app/app/_layout.tsx",
-      "source_location": "L18",
+      "source_location": "L19",
       "_origin": "ast",
       "id": "apps_app_app_layout_rootlayout",
       "community": 0,
@@ -292,7 +422,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_cadastro_bem_vindo",
-      "community": 226,
+      "community": 221,
       "norm_label": "bem-vindo.tsx"
     },
     {
@@ -302,7 +432,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_app_app_cadastro_bem_vindo_bemvindo",
-      "community": 226,
+      "community": 221,
       "norm_label": "bemvindo()"
     },
     {
@@ -332,7 +462,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_diagnostico_index",
-      "community": 82,
+      "community": 221,
       "norm_label": "index.tsx"
     },
     {
@@ -342,7 +472,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_diagnostico_index_diagnostico",
-      "community": 82,
+      "community": 221,
       "norm_label": "diagnostico()"
     },
     {
@@ -352,7 +482,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_diagnostico_resultado",
-      "community": 217,
+      "community": 221,
       "norm_label": "resultado.tsx"
     },
     {
@@ -362,7 +492,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_diagnostico_resultado_resultado",
-      "community": 217,
+      "community": 221,
       "norm_label": "resultado()"
     },
     {
@@ -516,24 +646,214 @@
       "norm_label": "babel.config.js"
     },
     {
+      "label": "AppUpdateAlert.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/components/AppUpdateAlert.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_appupdatealert",
+      "community": 0,
+      "norm_label": "appupdatealert.tsx"
+    },
+    {
+      "label": "AppUpdateAlert()",
+      "file_type": "code",
+      "source_file": "apps/app/components/AppUpdateAlert.tsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "apps_app_components_appupdatealert_appupdatealert",
+      "community": 0,
+      "norm_label": "appupdatealert()"
+    },
+    {
       "label": "AdminDashboardScreen.tsx",
       "file_type": "code",
       "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_admin_admindashboardscreen",
-      "community": 226,
+      "community": 224,
       "norm_label": "admindashboardscreen.tsx"
+    },
+    {
+      "label": "DashboardStats",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_admindashboardscreen_dashboardstats",
+      "community": 224,
+      "norm_label": "dashboardstats"
+    },
+    {
+      "label": "INSIGHTS",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_admindashboardscreen_insights",
+      "community": 224,
+      "norm_label": "insights"
     },
     {
       "label": "AdminDashboardScreen()",
       "file_type": "code",
       "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
-      "source_location": "L9",
+      "source_location": "L26",
       "_origin": "ast",
       "id": "apps_app_components_admin_admindashboardscreen_admindashboardscreen",
-      "community": 226,
+      "community": 224,
       "norm_label": "admindashboardscreen()"
+    },
+    {
+      "label": "InsightCard()",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
+      "source_location": "L105",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_admindashboardscreen_insightcard",
+      "community": 224,
+      "norm_label": "insightcard()"
+    },
+    {
+      "label": "NavCard()",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
+      "source_location": "L114",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_admindashboardscreen_navcard",
+      "community": 224,
+      "norm_label": "navcard()"
+    },
+    {
+      "label": "AdminModulesScreen.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/AdminModulesScreen.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_adminmodulesscreen",
+      "community": 27,
+      "norm_label": "adminmodulesscreen.tsx"
+    },
+    {
+      "label": "DIACRITICS_REGEX",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/AdminModulesScreen.tsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_adminmodulesscreen_diacritics_regex",
+      "community": 27,
+      "norm_label": "diacritics_regex"
+    },
+    {
+      "label": "slugify()",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/AdminModulesScreen.tsx",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_adminmodulesscreen_slugify",
+      "community": 27,
+      "norm_label": "slugify()"
+    },
+    {
+      "label": "AdminModulesScreen()",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/AdminModulesScreen.tsx",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_adminmodulesscreen_adminmodulesscreen",
+      "community": 27,
+      "norm_label": "adminmodulesscreen()"
+    },
+    {
+      "label": "AdminUserModulesScreen.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/AdminUserModulesScreen.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_adminusermodulesscreen",
+      "community": 27,
+      "norm_label": "adminusermodulesscreen.tsx"
+    },
+    {
+      "label": "AdminUserModulesScreen()",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/AdminUserModulesScreen.tsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_adminusermodulesscreen_adminusermodulesscreen",
+      "community": 27,
+      "norm_label": "adminusermodulesscreen()"
+    },
+    {
+      "label": "AdminUsersScreen.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/AdminUsersScreen.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_adminusersscreen",
+      "community": 27,
+      "norm_label": "adminusersscreen.tsx"
+    },
+    {
+      "label": "AdminUsersScreen()",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/AdminUsersScreen.tsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_adminusersscreen_adminusersscreen",
+      "community": 27,
+      "norm_label": "adminusersscreen()"
+    },
+    {
+      "label": "Badge()",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/AdminUsersScreen.tsx",
+      "source_location": "L132",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_adminusersscreen_badge",
+      "community": 27,
+      "norm_label": "badge()"
+    },
+    {
+      "label": "useAdminModules.ts",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/useAdminModules.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_useadminmodules",
+      "community": 27,
+      "norm_label": "useadminmodules.ts"
+    },
+    {
+      "label": "useAdminModules()",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/useAdminModules.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_useadminmodules_useadminmodules",
+      "community": 27,
+      "norm_label": "useadminmodules()"
+    },
+    {
+      "label": "useAdminUsers.ts",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/useAdminUsers.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_useadminusers",
+      "community": 224,
+      "norm_label": "useadminusers.ts"
+    },
+    {
+      "label": "useAdminUsers()",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/useAdminUsers.ts",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_useadminusers_useadminusers",
+      "community": 27,
+      "norm_label": "useadminusers()"
     },
     {
       "label": "AssistenteScreen.tsx",
@@ -542,7 +862,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_assistente_assistentescreen",
-      "community": 222,
+      "community": 224,
       "norm_label": "assistentescreen.tsx"
     },
     {
@@ -552,7 +872,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_app_components_assistente_assistentescreen_message",
-      "community": 222,
+      "community": 224,
       "norm_label": "message"
     },
     {
@@ -562,7 +882,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "apps_app_components_assistente_assistentescreen_assistentescreen",
-      "community": 222,
+      "community": 224,
       "norm_label": "assistentescreen()"
     },
     {
@@ -622,7 +942,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen",
-      "community": 82,
+      "community": 221,
       "norm_label": "diagnosticoscreen.tsx"
     },
     {
@@ -632,7 +952,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_background_photo",
-      "community": 82,
+      "community": 221,
       "norm_label": "background_photo"
     },
     {
@@ -642,7 +962,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_answers",
-      "community": 82,
+      "community": 221,
       "norm_label": "answers"
     },
     {
@@ -652,7 +972,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_empty_answers",
-      "community": 82,
+      "community": 221,
       "norm_label": "empty_answers"
     },
     {
@@ -662,7 +982,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_isblockanswered",
-      "community": 82,
+      "community": 221,
       "norm_label": "isblockanswered()"
     },
     {
@@ -672,7 +992,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_diagnosticoscreen",
-      "community": 82,
+      "community": 221,
       "norm_label": "diagnosticoscreen()"
     },
     {
@@ -682,7 +1002,7 @@
       "source_location": "L337",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_singlechoice",
-      "community": 82,
+      "community": 221,
       "norm_label": "singlechoice()"
     },
     {
@@ -692,7 +1012,7 @@
       "source_location": "L389",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_multichoice",
-      "community": 82,
+      "community": 221,
       "norm_label": "multichoice()"
     },
     {
@@ -702,7 +1022,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_resultadoscreen",
-      "community": 217,
+      "community": 221,
       "norm_label": "resultadoscreen.tsx"
     },
     {
@@ -712,7 +1032,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_resultadoscreen_background_photo",
-      "community": 217,
+      "community": 221,
       "norm_label": "background_photo"
     },
     {
@@ -722,7 +1042,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_resultadoscreen_matchrow",
-      "community": 217,
+      "community": 221,
       "norm_label": "matchrow"
     },
     {
@@ -732,7 +1052,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_resultadoscreen_perfil",
-      "community": 217,
+      "community": 221,
       "norm_label": "perfil"
     },
     {
@@ -742,7 +1062,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_resultadoscreen_resultadoscreen",
-      "community": 217,
+      "community": 221,
       "norm_label": "resultadoscreen()"
     },
     {
@@ -752,7 +1072,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks",
-      "community": 82,
+      "community": 81,
       "norm_label": "blocks.ts"
     },
     {
@@ -762,7 +1082,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_diagnosticofield",
-      "community": 82,
+      "community": 81,
       "norm_label": "diagnosticofield"
     },
     {
@@ -772,7 +1092,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_choiceoption",
-      "community": 82,
+      "community": 81,
       "norm_label": "choiceoption"
     },
     {
@@ -782,7 +1102,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_singlechoiceblock",
-      "community": 82,
+      "community": 81,
       "norm_label": "singlechoiceblock"
     },
     {
@@ -792,7 +1112,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_multichoiceblock",
-      "community": 82,
+      "community": 81,
       "norm_label": "multichoiceblock"
     },
     {
@@ -802,7 +1122,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_locationblock",
-      "community": 82,
+      "community": 81,
       "norm_label": "locationblock"
     },
     {
@@ -812,7 +1132,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_diagnosticoblock",
-      "community": 82,
+      "community": 81,
       "norm_label": "diagnosticoblock"
     },
     {
@@ -822,7 +1142,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_diagnostico_blocks",
-      "community": 82,
+      "community": 81,
       "norm_label": "diagnostico_blocks"
     },
     {
@@ -832,7 +1152,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_labels",
-      "community": 217,
+      "community": 221,
       "norm_label": "labels.ts"
     },
     {
@@ -842,7 +1162,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_labels_capital_label",
-      "community": 217,
+      "community": 221,
       "norm_label": "capital_label"
     },
     {
@@ -852,7 +1172,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_labels_tempo_label",
-      "community": 217,
+      "community": 221,
       "norm_label": "tempo_label"
     },
     {
@@ -862,7 +1182,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_labels_objetivo_label",
-      "community": 217,
+      "community": 221,
       "norm_label": "objetivo_label"
     },
     {
@@ -872,7 +1192,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_labels_formatmoney",
-      "community": 217,
+      "community": 221,
       "norm_label": "formatmoney()"
     },
     {
@@ -882,7 +1202,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_labels_stripmarkdown",
-      "community": 217,
+      "community": 221,
       "norm_label": "stripmarkdown()"
     },
     {
@@ -1189,7 +1509,7 @@
       "label": "BACKGROUND_PHOTO",
       "file_type": "code",
       "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L10",
+      "source_location": "L9",
       "_origin": "ast",
       "id": "apps_app_components_login_esquecisenhascreen_background_photo",
       "community": 221,
@@ -1199,7 +1519,7 @@
       "label": "isValidEmail()",
       "file_type": "code",
       "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L12",
+      "source_location": "L11",
       "_origin": "ast",
       "id": "apps_app_components_login_esquecisenhascreen_isvalidemail",
       "community": 221,
@@ -1209,31 +1529,11 @@
       "label": "EsqueciSenhaScreen()",
       "file_type": "code",
       "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L16",
+      "source_location": "L15",
       "_origin": "ast",
       "id": "apps_app_components_login_esquecisenhascreen_esquecisenhascreen",
       "community": 221,
       "norm_label": "esquecisenhascreen()"
-    },
-    {
-      "label": "Field.tsx",
-      "file_type": "code",
-      "source_file": "apps/app/components/login/Field.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "apps_app_components_login_field",
-      "community": 221,
-      "norm_label": "field.tsx"
-    },
-    {
-      "label": "Field()",
-      "file_type": "code",
-      "source_file": "apps/app/components/login/Field.tsx",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "apps_app_components_login_field_field",
-      "community": 221,
-      "norm_label": "field()"
     },
     {
       "label": "LoginScreen.tsx",
@@ -1249,7 +1549,7 @@
       "label": "BACKGROUND_PHOTO",
       "file_type": "code",
       "source_file": "apps/app/components/login/LoginScreen.tsx",
-      "source_location": "L18",
+      "source_location": "L17",
       "_origin": "ast",
       "id": "apps_app_components_login_loginscreen_background_photo",
       "community": 224,
@@ -1259,7 +1559,7 @@
       "label": "destinationFor()",
       "file_type": "code",
       "source_file": "apps/app/components/login/LoginScreen.tsx",
-      "source_location": "L20",
+      "source_location": "L19",
       "_origin": "ast",
       "id": "apps_app_components_login_loginscreen_destinationfor",
       "community": 224,
@@ -1269,7 +1569,7 @@
       "label": "LoginScreen()",
       "file_type": "code",
       "source_file": "apps/app/components/login/LoginScreen.tsx",
-      "source_location": "L24",
+      "source_location": "L23",
       "_origin": "ast",
       "id": "apps_app_components_login_loginscreen_loginscreen",
       "community": 224,
@@ -1289,7 +1589,7 @@
       "label": "BACKGROUND_PHOTO",
       "file_type": "code",
       "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L10",
+      "source_location": "L9",
       "_origin": "ast",
       "id": "apps_app_components_login_redefinirsenhascreen_background_photo",
       "community": 221,
@@ -1299,7 +1599,7 @@
       "label": "consumeRecoveryLink()",
       "file_type": "code",
       "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L17",
+      "source_location": "L16",
       "_origin": "ast",
       "id": "apps_app_components_login_redefinirsenhascreen_consumerecoverylink",
       "community": 221,
@@ -1309,11 +1609,31 @@
       "label": "RedefinirSenhaScreen()",
       "file_type": "code",
       "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L41",
+      "source_location": "L40",
       "_origin": "ast",
       "id": "apps_app_components_login_redefinirsenhascreen_redefinirsenhascreen",
       "community": 221,
       "norm_label": "redefinirsenhascreen()"
+    },
+    {
+      "label": "ModulosScreen.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/components/modulos/ModulosScreen.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_modulos_modulosscreen",
+      "community": 27,
+      "norm_label": "modulosscreen.tsx"
+    },
+    {
+      "label": "ModulosScreen()",
+      "file_type": "code",
+      "source_file": "apps/app/components/modulos/ModulosScreen.tsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "apps_app_components_modulos_modulosscreen_modulosscreen",
+      "community": 27,
+      "norm_label": "modulosscreen()"
     },
     {
       "label": "CompletarCadastroScreen.tsx",
@@ -1464,6 +1784,56 @@
       "id": "apps_app_constants_entrepreneurphotos_pickentrepreneurphoto",
       "community": 221,
       "norm_label": "pickentrepreneurphoto()"
+    },
+    {
+      "label": "useAppVersion.ts",
+      "file_type": "code",
+      "source_file": "apps/app/hooks/useAppVersion.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_hooks_useappversion",
+      "community": 224,
+      "norm_label": "useappversion.ts"
+    },
+    {
+      "label": "UpdateStatus",
+      "file_type": "code",
+      "source_file": "apps/app/hooks/useAppVersion.ts",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "apps_app_hooks_useappversion_updatestatus",
+      "community": 224,
+      "norm_label": "updatestatus"
+    },
+    {
+      "label": "UseAppVersionResult",
+      "file_type": "code",
+      "source_file": "apps/app/hooks/useAppVersion.ts",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "apps_app_hooks_useappversion_useappversionresult",
+      "community": 224,
+      "norm_label": "useappversionresult"
+    },
+    {
+      "label": "UP_TO_DATE",
+      "file_type": "code",
+      "source_file": "apps/app/hooks/useAppVersion.ts",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "apps_app_hooks_useappversion_up_to_date",
+      "community": 224,
+      "norm_label": "up_to_date"
+    },
+    {
+      "label": "useAppVersion()",
+      "file_type": "code",
+      "source_file": "apps/app/hooks/useAppVersion.ts",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "apps_app_hooks_useappversion_useappversion",
+      "community": 0,
+      "norm_label": "useappversion()"
     },
     {
       "label": "metro.config.js",
@@ -2352,7 +2722,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "packages_core_fitscore_capitalfaixa",
-      "community": 82,
+      "community": 81,
       "norm_label": "capitalfaixa"
     },
     {
@@ -2362,7 +2732,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_core_fitscore_tempodisponivel",
-      "community": 82,
+      "community": 81,
       "norm_label": "tempodisponivel"
     },
     {
@@ -2492,7 +2862,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_core_index",
-      "community": 82,
+      "community": 81,
       "norm_label": "index.ts"
     },
     {
@@ -2676,6 +3046,96 @@
       "norm_label": "include"
     },
     {
+      "label": "adminUsers.ts",
+      "file_type": "code",
+      "source_file": "packages/supabase/adminUsers.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "packages_supabase_adminusers",
+      "community": 224,
+      "norm_label": "adminusers.ts"
+    },
+    {
+      "label": "AdminUser",
+      "file_type": "code",
+      "source_file": "packages/supabase/adminUsers.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "packages_supabase_adminusers_adminuser",
+      "community": 224,
+      "norm_label": "adminuser"
+    },
+    {
+      "label": "listUsers()",
+      "file_type": "code",
+      "source_file": "packages/supabase/adminUsers.ts",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "packages_supabase_adminusers_listusers",
+      "community": 224,
+      "norm_label": "listusers()"
+    },
+    {
+      "label": "inviteUser()",
+      "file_type": "code",
+      "source_file": "packages/supabase/adminUsers.ts",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "packages_supabase_adminusers_inviteuser",
+      "community": 224,
+      "norm_label": "inviteuser()"
+    },
+    {
+      "label": "setUserRole()",
+      "file_type": "code",
+      "source_file": "packages/supabase/adminUsers.ts",
+      "source_location": "L29",
+      "_origin": "ast",
+      "id": "packages_supabase_adminusers_setuserrole",
+      "community": 224,
+      "norm_label": "setuserrole()"
+    },
+    {
+      "label": "setUserBlocked()",
+      "file_type": "code",
+      "source_file": "packages/supabase/adminUsers.ts",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "packages_supabase_adminusers_setuserblocked",
+      "community": 224,
+      "norm_label": "setuserblocked()"
+    },
+    {
+      "label": "appVersion.ts",
+      "file_type": "code",
+      "source_file": "packages/supabase/appVersion.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "packages_supabase_appversion",
+      "community": 224,
+      "norm_label": "appversion.ts"
+    },
+    {
+      "label": "AppVersionInfo",
+      "file_type": "code",
+      "source_file": "packages/supabase/appVersion.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "packages_supabase_appversion_appversioninfo",
+      "community": 224,
+      "norm_label": "appversioninfo"
+    },
+    {
+      "label": "getAppVersionInfo()",
+      "file_type": "code",
+      "source_file": "packages/supabase/appVersion.ts",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "packages_supabase_appversion_getappversioninfo",
+      "community": 224,
+      "norm_label": "getappversioninfo()"
+    },
+    {
       "label": "auth.ts",
       "file_type": "code",
       "source_file": "packages/supabase/auth.ts",
@@ -2712,7 +3172,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "packages_supabase_auth_signout",
-      "community": 226,
+      "community": 224,
       "norm_label": "signout()"
     },
     {
@@ -2752,7 +3212,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_client",
-      "community": 218,
+      "community": 224,
       "norm_label": "client.ts"
     },
     {
@@ -2762,7 +3222,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "packages_supabase_client_supabase",
-      "community": 218,
+      "community": 224,
       "norm_label": "supabase"
     },
     {
@@ -2772,7 +3232,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_index",
-      "community": 218,
+      "community": 224,
       "norm_label": "index.ts"
     },
     {
@@ -2782,7 +3242,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase",
-      "community": 218,
+      "community": 224,
       "norm_label": "knowledgebase.ts"
     },
     {
@@ -2792,7 +3252,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase_knowledgecategory",
-      "community": 218,
+      "community": 224,
       "norm_label": "knowledgecategory"
     },
     {
@@ -2802,7 +3262,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase_knowledgesource",
-      "community": 222,
+      "community": 224,
       "norm_label": "knowledgesource"
     },
     {
@@ -2812,7 +3272,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase_knowledgeanswer",
-      "community": 218,
+      "community": 224,
       "norm_label": "knowledgeanswer"
     },
     {
@@ -2822,8 +3282,108 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase_askknowledgebase",
-      "community": 218,
+      "community": 224,
       "norm_label": "askknowledgebase()"
+    },
+    {
+      "label": "modules.ts",
+      "file_type": "code",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "packages_supabase_modules",
+      "community": 27,
+      "norm_label": "modules.ts"
+    },
+    {
+      "label": "ModuleRow",
+      "file_type": "code",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "packages_supabase_modules_modulerow",
+      "community": 27,
+      "norm_label": "modulerow"
+    },
+    {
+      "label": "listModules()",
+      "file_type": "code",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "packages_supabase_modules_listmodules",
+      "community": 27,
+      "norm_label": "listmodules()"
+    },
+    {
+      "label": "createModule()",
+      "file_type": "code",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "packages_supabase_modules_createmodule",
+      "community": 27,
+      "norm_label": "createmodule()"
+    },
+    {
+      "label": "setModuleAtivo()",
+      "file_type": "code",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "packages_supabase_modules_setmoduleativo",
+      "community": 27,
+      "norm_label": "setmoduleativo()"
+    },
+    {
+      "label": "ModuleAccessRow",
+      "file_type": "code",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L33",
+      "_origin": "ast",
+      "id": "packages_supabase_modules_moduleaccessrow",
+      "community": 27,
+      "norm_label": "moduleaccessrow"
+    },
+    {
+      "label": "listUserModuleAccess()",
+      "file_type": "code",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L38",
+      "_origin": "ast",
+      "id": "packages_supabase_modules_listusermoduleaccess",
+      "community": 27,
+      "norm_label": "listusermoduleaccess()"
+    },
+    {
+      "label": "setModuleAccess()",
+      "file_type": "code",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L52",
+      "_origin": "ast",
+      "id": "packages_supabase_modules_setmoduleaccess",
+      "community": 27,
+      "norm_label": "setmoduleaccess()"
+    },
+    {
+      "label": "MyModule",
+      "file_type": "code",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L61",
+      "_origin": "ast",
+      "id": "packages_supabase_modules_mymodule",
+      "community": 27,
+      "norm_label": "mymodule"
+    },
+    {
+      "label": "listMyModules()",
+      "file_type": "code",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L68",
+      "_origin": "ast",
+      "id": "packages_supabase_modules_listmymodules",
+      "community": 27,
+      "norm_label": "listmymodules()"
     },
     {
       "label": "package.json",
@@ -2982,7 +3542,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_session",
-      "community": 27,
+      "community": 224,
       "norm_label": "session.ts"
     },
     {
@@ -2992,7 +3552,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "packages_supabase_session_ensuresession",
-      "community": 27,
+      "community": 221,
       "norm_label": "ensuresession()"
     },
     {
@@ -3002,7 +3562,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "packages_supabase_session_getcurrentsession",
-      "community": 27,
+      "community": 224,
       "norm_label": "getcurrentsession()"
     },
     {
@@ -3012,7 +3572,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "packages_supabase_session_isanonymoussession",
-      "community": 27,
+      "community": 224,
       "norm_label": "isanonymoussession()"
     },
     {
@@ -3022,7 +3582,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "packages_supabase_session_userrole",
-      "community": 27,
+      "community": 224,
       "norm_label": "userrole"
     },
     {
@@ -3032,7 +3592,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "packages_supabase_session_decodebase64url",
-      "community": 27,
+      "community": 224,
       "norm_label": "decodebase64url()"
     },
     {
@@ -3042,7 +3602,7 @@
       "source_location": "L76",
       "_origin": "ast",
       "id": "packages_supabase_session_getuserrole",
-      "community": 27,
+      "community": 224,
       "norm_label": "getuserrole()"
     },
     {
@@ -3052,7 +3612,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_storage",
-      "community": 218,
+      "community": 224,
       "norm_label": "storage.ts"
     },
     {
@@ -3132,7 +3692,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_types",
-      "community": 223,
+      "community": 224,
       "norm_label": "types.ts"
     },
     {
@@ -3142,7 +3702,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "packages_supabase_types_json",
-      "community": 223,
+      "community": 224,
       "norm_label": "json"
     },
     {
@@ -3152,87 +3712,87 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "packages_supabase_types_database",
-      "community": 218,
+      "community": 224,
       "norm_label": "database"
     },
     {
       "label": "DatabaseWithoutInternals",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L392",
+      "source_location": "L497",
       "_origin": "ast",
       "id": "packages_supabase_types_databasewithoutinternals",
-      "community": 223,
+      "community": 224,
       "norm_label": "databasewithoutinternals"
     },
     {
       "label": "DefaultSchema",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L394",
+      "source_location": "L499",
       "_origin": "ast",
       "id": "packages_supabase_types_defaultschema",
-      "community": 223,
+      "community": 224,
       "norm_label": "defaultschema"
     },
     {
       "label": "Tables",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L396",
+      "source_location": "L501",
       "_origin": "ast",
       "id": "packages_supabase_types_tables",
-      "community": 223,
+      "community": 224,
       "norm_label": "tables"
     },
     {
       "label": "TablesInsert",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L425",
+      "source_location": "L530",
       "_origin": "ast",
       "id": "packages_supabase_types_tablesinsert",
-      "community": 223,
+      "community": 224,
       "norm_label": "tablesinsert"
     },
     {
       "label": "TablesUpdate",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L450",
+      "source_location": "L555",
       "_origin": "ast",
       "id": "packages_supabase_types_tablesupdate",
-      "community": 223,
+      "community": 224,
       "norm_label": "tablesupdate"
     },
     {
       "label": "Enums",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L475",
+      "source_location": "L580",
       "_origin": "ast",
       "id": "packages_supabase_types_enums",
-      "community": 223,
+      "community": 224,
       "norm_label": "enums"
     },
     {
       "label": "CompositeTypes",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L492",
+      "source_location": "L597",
       "_origin": "ast",
       "id": "packages_supabase_types_compositetypes",
-      "community": 223,
+      "community": 224,
       "norm_label": "compositetypes"
     },
     {
       "label": "Constants",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L509",
+      "source_location": "L614",
       "_origin": "ast",
       "id": "packages_supabase_types_constants",
-      "community": 223,
+      "community": 224,
       "norm_label": "constants"
     },
     {
@@ -3312,7 +3872,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_components_card",
-      "community": 0,
+      "community": 27,
       "norm_label": "card.tsx"
     },
     {
@@ -3322,7 +3882,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_ui_components_card_cardvariant",
-      "community": 0,
+      "community": 27,
       "norm_label": "cardvariant"
     },
     {
@@ -3332,7 +3892,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "packages_ui_components_card_cardprops",
-      "community": 0,
+      "community": 27,
       "norm_label": "cardprops"
     },
     {
@@ -3342,7 +3902,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_ui_components_card_card",
-      "community": 0,
+      "community": 27,
       "norm_label": "card()"
     },
     {
@@ -3352,7 +3912,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "packages_ui_components_card_styles",
-      "community": 0,
+      "community": 27,
       "norm_label": "styles"
     },
     {
@@ -3384,6 +3944,36 @@
       "id": "packages_ui_components_entrepreneurbackground_entrepreneurbackground",
       "community": 221,
       "norm_label": "entrepreneurbackground()"
+    },
+    {
+      "label": "Input.tsx",
+      "file_type": "code",
+      "source_file": "packages/ui/components/Input.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "packages_ui_components_input",
+      "community": 221,
+      "norm_label": "input.tsx"
+    },
+    {
+      "label": "InputProps",
+      "file_type": "code",
+      "source_file": "packages/ui/components/Input.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "packages_ui_components_input_inputprops",
+      "community": 221,
+      "norm_label": "inputprops"
+    },
+    {
+      "label": "Input()",
+      "file_type": "code",
+      "source_file": "packages/ui/components/Input.tsx",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "packages_ui_components_input_input",
+      "community": 221,
+      "norm_label": "input()"
     },
     {
       "label": "Logo.tsx",
@@ -3432,7 +4022,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_ui_components_logo_logo",
-      "community": 226,
+      "community": 221,
       "norm_label": "logo()"
     },
     {
@@ -3668,6 +4258,46 @@
     {
       "label": "index.ts",
       "file_type": "code",
+      "source_file": "supabase/functions/admin-manage-user/index.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "supabase_functions_admin_manage_user_index",
+      "community": 83,
+      "norm_label": "index.ts"
+    },
+    {
+      "label": "corsHeaders",
+      "file_type": "code",
+      "source_file": "supabase/functions/admin-manage-user/index.ts",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "supabase_functions_admin_manage_user_index_corsheaders",
+      "community": 83,
+      "norm_label": "corsheaders"
+    },
+    {
+      "label": "Action",
+      "file_type": "code",
+      "source_file": "supabase/functions/admin-manage-user/index.ts",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "supabase_functions_admin_manage_user_index_action",
+      "community": 83,
+      "norm_label": "action"
+    },
+    {
+      "label": "getUserRoleFromJwt()",
+      "file_type": "code",
+      "source_file": "supabase/functions/admin-manage-user/index.ts",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "supabase_functions_admin_manage_user_index_getuserrolefromjwt",
+      "community": 83,
+      "norm_label": "getuserrolefromjwt()"
+    },
+    {
+      "label": "index.ts",
+      "file_type": "code",
       "source_file": "supabase/functions/diagnostic-match/index.ts",
       "source_location": "L1",
       "_origin": "ast",
@@ -3812,7 +4442,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "claude",
-      "community": 83,
+      "community": 80,
       "norm_label": "claude.md"
     },
     {
@@ -3822,7 +4452,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "claude_ser_dono_instru\u00e7\u00f5es_do_projeto_para_o_claude",
-      "community": 83,
+      "community": 80,
       "norm_label": "ser dono \u2014 instrucoes do projeto para o claude"
     },
     {
@@ -3832,7 +4462,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "claude_regras_de_trabalho_neste_projeto",
-      "community": 83,
+      "community": 80,
       "norm_label": "regras de trabalho neste projeto"
     },
     {
@@ -3842,7 +4472,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "claude_ordem_de_leitura_recomendada_ao_iniciar_qualquer_tarefa",
-      "community": 83,
+      "community": 80,
       "norm_label": "ordem de leitura recomendada ao iniciar qualquer tarefa"
     },
     {
@@ -3852,7 +4482,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "claude_graphify",
-      "community": 83,
+      "community": 80,
       "norm_label": "graphify"
     },
     {
@@ -3862,7 +4492,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "readme",
-      "community": 83,
+      "community": 80,
       "norm_label": "readme.md"
     },
     {
@@ -3872,7 +4502,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "readme_ser_dono",
-      "community": 83,
+      "community": 80,
       "norm_label": "ser dono"
     },
     {
@@ -3882,7 +4512,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "readme_sobre_o_projeto",
-      "community": 83,
+      "community": 80,
       "norm_label": "sobre o projeto"
     },
     {
@@ -3892,7 +4522,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "readme_personas",
-      "community": 83,
+      "community": 80,
       "norm_label": "personas"
     },
     {
@@ -3902,7 +4532,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "readme_escopo_por_fase",
-      "community": 83,
+      "community": 80,
       "norm_label": "escopo por fase"
     },
     {
@@ -3912,7 +4542,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "readme_princ\u00edpios_de_produto_n\u00e3o_negoci\u00e1veis",
-      "community": 83,
+      "community": 80,
       "norm_label": "principios de produto (nao negociaveis)"
     },
     {
@@ -3922,7 +4552,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "readme_stack",
-      "community": 83,
+      "community": 80,
       "norm_label": "stack"
     },
     {
@@ -3932,7 +4562,7 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "readme_estrutura_do_monorepo_alvo",
-      "community": 83,
+      "community": 80,
       "norm_label": "estrutura do monorepo (alvo)"
     },
     {
@@ -3942,7 +4572,7 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "readme_identidade_visual",
-      "community": 83,
+      "community": 80,
       "norm_label": "identidade visual"
     },
     {
@@ -3952,7 +4582,7 @@
       "source_location": "L81",
       "_origin": "ast",
       "id": "readme_regras_de_trabalho",
-      "community": 83,
+      "community": 80,
       "norm_label": "regras de trabalho"
     },
     {
@@ -3962,7 +4592,7 @@
       "source_location": "L89",
       "_origin": "ast",
       "id": "readme_status",
-      "community": 83,
+      "community": 80,
       "norm_label": "status"
     },
     {
@@ -3972,7 +4602,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "docs_prd",
-      "community": 83,
+      "community": 80,
       "norm_label": "prd.md"
     },
     {
@@ -4079,7 +4709,7 @@
       "label": "4. Princ\u00edpios de Produto (n\u00e3o negoci\u00e1veis)",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L59",
+      "source_location": "L61",
       "_origin": "ast",
       "id": "docs_prd_4_princ\u00edpios_de_produto_n\u00e3o_negoci\u00e1veis",
       "community": 3,
@@ -4089,7 +4719,7 @@
       "label": "5. Modelo de Dados (vis\u00e3o l\u00f3gica)",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L69",
+      "source_location": "L71",
       "_origin": "ast",
       "id": "docs_prd_5_modelo_de_dados_vis\u00e3o_l\u00f3gica",
       "community": 3,
@@ -4099,7 +4729,7 @@
       "label": "5.1 Identidade e assinatura",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L73",
+      "source_location": "L75",
       "_origin": "ast",
       "id": "docs_prd_5_1_identidade_e_assinatura",
       "community": 3,
@@ -4109,7 +4739,7 @@
       "label": "5.2 Diagn\u00f3stico",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L103",
+      "source_location": "L105",
       "_origin": "ast",
       "id": "docs_prd_5_2_diagn\u00f3stico",
       "community": 3,
@@ -4119,7 +4749,7 @@
       "label": "5.3 Nichos e Fit Score",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L124",
+      "source_location": "L126",
       "_origin": "ast",
       "id": "docs_prd_5_3_nichos_e_fit_score",
       "community": 3,
@@ -4129,7 +4759,7 @@
       "label": "5.4 Workflow",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L157",
+      "source_location": "L159",
       "_origin": "ast",
       "id": "docs_prd_5_4_workflow",
       "community": 3,
@@ -4139,7 +4769,7 @@
       "label": "5.5 Copiloto de IA",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L204",
+      "source_location": "L206",
       "_origin": "ast",
       "id": "docs_prd_5_5_copiloto_de_ia",
       "community": 3,
@@ -4149,7 +4779,7 @@
       "label": "5.6 M\u00f3dulos p\u00f3s-abertura `[futuro \u2014 Fase 3]`",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L239",
+      "source_location": "L241",
       "_origin": "ast",
       "id": "docs_prd_5_6_m\u00f3dulos_p\u00f3s_abertura_futuro_fase_3",
       "community": 3,
@@ -4159,7 +4789,7 @@
       "label": "6. Arquitetura (vis\u00e3o macro)",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L244",
+      "source_location": "L246",
       "_origin": "ast",
       "id": "docs_prd_6_arquitetura_vis\u00e3o_macro",
       "community": 3,
@@ -4169,7 +4799,7 @@
       "label": "7. M\u00f3dulo: Diagn\u00f3stico (Fase 0/1 \u2014 gr\u00e1tis)",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L266",
+      "source_location": "L268",
       "_origin": "ast",
       "id": "docs_prd_7_m\u00f3dulo_diagn\u00f3stico_fase_0_1_gr\u00e1tis",
       "community": 3,
@@ -4179,7 +4809,7 @@
       "label": "7.1 Fluxo de tela",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L268",
+      "source_location": "L270",
       "_origin": "ast",
       "id": "docs_prd_7_1_fluxo_de_tela",
       "community": 3,
@@ -4189,7 +4819,7 @@
       "label": "7.2 Regras de neg\u00f3cio",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L275",
+      "source_location": "L277",
       "_origin": "ast",
       "id": "docs_prd_7_2_regras_de_neg\u00f3cio",
       "community": 3,
@@ -4199,7 +4829,7 @@
       "label": "7.3 Crit\u00e9rios de aceite",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L279",
+      "source_location": "L281",
       "_origin": "ast",
       "id": "docs_prd_7_3_crit\u00e9rios_de_aceite",
       "community": 3,
@@ -4209,7 +4839,7 @@
       "label": "8. M\u00f3dulo: Match de Nichos e Paywall",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L286",
+      "source_location": "L288",
       "_origin": "ast",
       "id": "docs_prd_8_m\u00f3dulo_match_de_nichos_e_paywall",
       "community": 3,
@@ -4219,7 +4849,7 @@
       "label": "8.1 Fluxo",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L288",
+      "source_location": "L290",
       "_origin": "ast",
       "id": "docs_prd_8_1_fluxo",
       "community": 3,
@@ -4229,7 +4859,7 @@
       "label": "8.2 Regras de neg\u00f3cio",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L293",
+      "source_location": "L295",
       "_origin": "ast",
       "id": "docs_prd_8_2_regras_de_neg\u00f3cio",
       "community": 3,
@@ -4239,7 +4869,7 @@
       "label": "8.3 M\u00f3dulo \"j\u00e1 tenho neg\u00f3cio\" `[Fase 3, esqueleto de dados j\u00e1 em 5.6]`",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L298",
+      "source_location": "L300",
       "_origin": "ast",
       "id": "docs_prd_8_3_m\u00f3dulo_j\u00e1_tenho_neg\u00f3cio_fase_3_esqueleto_de_dados_j\u00e1_em_5_6",
       "community": 3,
@@ -4249,7 +4879,7 @@
       "label": "8.4 Crit\u00e9rios de aceite",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L301",
+      "source_location": "L303",
       "_origin": "ast",
       "id": "docs_prd_8_4_crit\u00e9rios_de_aceite",
       "community": 3,
@@ -4259,7 +4889,7 @@
       "label": "9. M\u00f3dulo: Workflow de Constru\u00e7\u00e3o (trilhas A, B, C \u2014 MVP)",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L307",
+      "source_location": "L309",
       "_origin": "ast",
       "id": "docs_prd_9_m\u00f3dulo_workflow_de_constru\u00e7\u00e3o_trilhas_a_b_c_mvp",
       "community": 3,
@@ -4269,7 +4899,7 @@
       "label": "9.1 Anatomia de uma etapa (aplica-se a toda etapa de toda trilha)",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L309",
+      "source_location": "L311",
       "_origin": "ast",
       "id": "docs_prd_9_1_anatomia_de_uma_etapa_aplica_se_a_toda_etapa_de_toda_trilha",
       "community": 3,
@@ -4279,7 +4909,7 @@
       "label": "9.2 Trilha A \u2014 Valida\u00e7\u00e3o",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L312",
+      "source_location": "L314",
       "_origin": "ast",
       "id": "docs_prd_9_2_trilha_a_valida\u00e7\u00e3o",
       "community": 3,
@@ -4289,7 +4919,7 @@
       "label": "9.3 Trilha B \u2014 Identidade",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L316",
+      "source_location": "L318",
       "_origin": "ast",
       "id": "docs_prd_9_3_trilha_b_identidade",
       "community": 3,
@@ -4299,7 +4929,7 @@
       "label": "9.4 Trilha C \u2014 Formaliza\u00e7\u00e3o",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L320",
+      "source_location": "L322",
       "_origin": "ast",
       "id": "docs_prd_9_4_trilha_c_formaliza\u00e7\u00e3o",
       "community": 3,
@@ -4309,7 +4939,7 @@
       "label": "9.5 Paralelismo e etapas em espera",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L324",
+      "source_location": "L326",
       "_origin": "ast",
       "id": "docs_prd_9_5_paralelismo_e_etapas_em_espera",
       "community": 3,
@@ -4319,7 +4949,7 @@
       "label": "9.6 Crit\u00e9rios de aceite",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L327",
+      "source_location": "L329",
       "_origin": "ast",
       "id": "docs_prd_9_6_crit\u00e9rios_de_aceite",
       "community": 3,
@@ -4329,7 +4959,7 @@
       "label": "10. M\u00f3dulo: Copiloto de IA",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L334",
+      "source_location": "L336",
       "_origin": "ast",
       "id": "docs_prd_10_m\u00f3dulo_copiloto_de_ia",
       "community": 3,
@@ -4339,7 +4969,7 @@
       "label": "10.1 Superf\u00edcies do copiloto",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L336",
+      "source_location": "L338",
       "_origin": "ast",
       "id": "docs_prd_10_1_superf\u00edcies_do_copiloto",
       "community": 3,
@@ -4349,7 +4979,7 @@
       "label": "10.2 Guardrails (RN-21, RN-20 j\u00e1 citadas \u2014 detalhamento t\u00e9cnico)",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L341",
+      "source_location": "L343",
       "_origin": "ast",
       "id": "docs_prd_10_2_guardrails_rn_21_rn_20_j\u00e1_citadas_detalhamento_t\u00e9cnico",
       "community": 3,
@@ -4359,7 +4989,7 @@
       "label": "10.3 Crit\u00e9rios de aceite",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L346",
+      "source_location": "L348",
       "_origin": "ast",
       "id": "docs_prd_10_3_crit\u00e9rios_de_aceite",
       "community": 3,
@@ -4369,7 +4999,7 @@
       "label": "11. M\u00f3dulos Fase 2 (trilhas D, E, F) \u2014 esqueleto",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L352",
+      "source_location": "L354",
       "_origin": "ast",
       "id": "docs_prd_11_m\u00f3dulos_fase_2_trilhas_d_e_f_esqueleto",
       "community": 3,
@@ -4379,17 +5009,27 @@
       "label": "12. M\u00f3dulos Fase 3 (Ecossistema p\u00f3s-abertura) \u2014 esqueleto",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L358",
+      "source_location": "L360",
       "_origin": "ast",
       "id": "docs_prd_12_m\u00f3dulos_fase_3_ecossistema_p\u00f3s_abertura_esqueleto",
       "community": 3,
       "norm_label": "12. modulos fase 3 (ecossistema pos-abertura) \u2014 esqueleto"
     },
     {
-      "label": "13. Regras de Neg\u00f3cio Transversais (numera\u00e7\u00e3o consolidada)",
+      "label": "12.1 Framework de m\u00f3dulos (exce\u00e7\u00e3o \u00e0 RN-2, ver \u00a73) \u2014 constru\u00eddo agora, conte\u00fado ainda n\u00e3o",
       "file_type": "document",
       "source_file": "docs/PRD.md",
       "source_location": "L364",
+      "_origin": "ast",
+      "id": "docs_prd_12_1_framework_de_m\u00f3dulos_exce\u00e7\u00e3o_\u00e0_rn_2_ver_3_constru\u00eddo_agora_conte\u00fado_ainda_n\u00e3o",
+      "community": 3,
+      "norm_label": "12.1 framework de modulos (excecao a rn-2, ver \u00a73) \u2014 construido agora, conteudo ainda nao"
+    },
+    {
+      "label": "13. Regras de Neg\u00f3cio Transversais (numera\u00e7\u00e3o consolidada)",
+      "file_type": "document",
+      "source_file": "docs/PRD.md",
+      "source_location": "L370",
       "_origin": "ast",
       "id": "docs_prd_13_regras_de_neg\u00f3cio_transversais_numera\u00e7\u00e3o_consolidada",
       "community": 3,
@@ -4399,7 +5039,7 @@
       "label": "14. Requisitos N\u00e3o Funcionais",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L392",
+      "source_location": "L399",
       "_origin": "ast",
       "id": "docs_prd_14_requisitos_n\u00e3o_funcionais",
       "community": 3,
@@ -4409,7 +5049,7 @@
       "label": "15. M\u00e9tricas a Instrumentar desde o Dia 1",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L408",
+      "source_location": "L415",
       "_origin": "ast",
       "id": "docs_prd_15_m\u00e9tricas_a_instrumentar_desde_o_dia_1",
       "community": 3,
@@ -4419,7 +5059,7 @@
       "label": "16. Gloss\u00e1rio r\u00e1pido",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L417",
+      "source_location": "L424",
       "_origin": "ast",
       "id": "docs_prd_16_gloss\u00e1rio_r\u00e1pido",
       "community": 3,
@@ -4429,7 +5069,7 @@
       "label": "17. Decis\u00f5es em aberto (bloqueiam in\u00edcio de c\u00f3digo)",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L426",
+      "source_location": "L433",
       "_origin": "ast",
       "id": "docs_prd_17_decis\u00f5es_em_aberto_bloqueiam_in\u00edcio_de_c\u00f3digo",
       "community": 3,
@@ -4442,7 +5082,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "docs_spec",
-      "community": 83,
+      "community": 80,
       "norm_label": "spec.md"
     },
     {
@@ -4576,40 +5216,40 @@
       "norm_label": "6. web em producao (vercel)"
     },
     {
-      "label": "7. Build Mobile Automatizado (GitHub Actions, sem EAS)",
+      "label": "7. Build Mobile Automatizado (GitHub Actions + EAS local)",
       "file_type": "document",
       "source_file": "docs/SPEC.md",
       "source_location": "L176",
       "_origin": "ast",
-      "id": "docs_spec_7_build_mobile_automatizado_github_actions_sem_eas",
+      "id": "docs_spec_7_build_mobile_automatizado_github_actions_eas_local",
       "community": 80,
-      "norm_label": "7. build mobile automatizado (github actions, sem eas)"
+      "norm_label": "7. build mobile automatizado (github actions + eas local)"
     },
     {
       "label": "7.1 Gatilho",
       "file_type": "document",
       "source_file": "docs/SPEC.md",
-      "source_location": "L180",
+      "source_location": "L182",
       "_origin": "ast",
       "id": "docs_spec_7_1_gatilho",
       "community": 80,
       "norm_label": "7.1 gatilho"
     },
     {
-      "label": "7.2 Por que gerar a pasta `android/` no CI, e n\u00e3o versionar",
+      "label": "7.2 `app.config.js` continua a \u00fanica fonte de verdade de vers\u00e3o",
       "file_type": "document",
       "source_file": "docs/SPEC.md",
-      "source_location": "L183",
+      "source_location": "L185",
       "_origin": "ast",
-      "id": "docs_spec_7_2_por_que_gerar_a_pasta_android_no_ci_e_n\u00e3o_versionar",
+      "id": "docs_spec_7_2_app_config_js_continua_a_\u00fanica_fonte_de_verdade_de_vers\u00e3o",
       "community": 80,
-      "norm_label": "7.2 por que gerar a pasta `android/` no ci, e nao versionar"
+      "norm_label": "7.2 `app.config.js` continua a unica fonte de verdade de versao"
     },
     {
       "label": "7.3 Pipeline (`.github/workflows/android-release.yml`)",
       "file_type": "document",
       "source_file": "docs/SPEC.md",
-      "source_location": "L186",
+      "source_location": "L188",
       "_origin": "ast",
       "id": "docs_spec_7_3_pipeline_github_workflows_android_release_yml",
       "community": 80,
@@ -4619,7 +5259,7 @@
       "label": "7.4 Publica\u00e7\u00e3o na Play Store",
       "file_type": "document",
       "source_file": "docs/SPEC.md",
-      "source_location": "L249",
+      "source_location": "L243",
       "_origin": "ast",
       "id": "docs_spec_7_4_publica\u00e7\u00e3o_na_play_store",
       "community": 80,
@@ -4629,7 +5269,7 @@
       "label": "7.5 iOS",
       "file_type": "document",
       "source_file": "docs/SPEC.md",
-      "source_location": "L252",
+      "source_location": "L246",
       "_origin": "ast",
       "id": "docs_spec_7_5_ios",
       "community": 80,
@@ -4639,7 +5279,7 @@
       "label": "8. Ambientes",
       "file_type": "document",
       "source_file": "docs/SPEC.md",
-      "source_location": "L257",
+      "source_location": "L251",
       "_origin": "ast",
       "id": "docs_spec_8_ambientes",
       "community": 80,
@@ -4649,7 +5289,7 @@
       "label": "9. Qualidade e CI (`ci.yml`)",
       "file_type": "document",
       "source_file": "docs/SPEC.md",
-      "source_location": "L269",
+      "source_location": "L263",
       "_origin": "ast",
       "id": "docs_spec_9_qualidade_e_ci_ci_yml",
       "community": 80,
@@ -4659,7 +5299,7 @@
       "label": "10. Itens de Roadmap T\u00e9cnico (fora do MVP, n\u00e3o bloqueiam)",
       "file_type": "document",
       "source_file": "docs/SPEC.md",
-      "source_location": "L280",
+      "source_location": "L274",
       "_origin": "ast",
       "id": "docs_spec_10_itens_de_roadmap_t\u00e9cnico_fora_do_mvp_n\u00e3o_bloqueiam",
       "community": 80,
@@ -4669,7 +5309,7 @@
       "label": "11. Decis\u00f5es que ainda precisam de dono (bloqueiam itens espec\u00edficos, n\u00e3o o in\u00edcio geral do c\u00f3digo)",
       "file_type": "document",
       "source_file": "docs/SPEC.md",
-      "source_location": "L289",
+      "source_location": "L283",
       "_origin": "ast",
       "id": "docs_spec_11_decis\u00f5es_que_ainda_precisam_de_dono_bloqueiam_itens_espec\u00edficos_n\u00e3o_o_in\u00edcio_geral_do_c\u00f3digo",
       "community": 80,
@@ -4679,7 +5319,7 @@
       "label": "12. Decis\u00f5es registradas durante a implementa\u00e7\u00e3o da Home/Landing (retroativas a este PR)",
       "file_type": "document",
       "source_file": "docs/SPEC.md",
-      "source_location": "L306",
+      "source_location": "L302",
       "_origin": "ast",
       "id": "docs_spec_12_decis\u00f5es_registradas_durante_a_implementa\u00e7\u00e3o_da_home_landing_retroativas_a_este_pr",
       "community": 80,
@@ -4692,7 +5332,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "docs_identidade_visual_design_system",
-      "community": 83,
+      "community": 80,
       "norm_label": "design_system.md"
     },
     {
@@ -9056,6 +9696,46 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "app.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "app",
+      "target": "app_expo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "app_expo",
+      "target": "app_expo_extra",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "app_expo_extra",
+      "target": "app_extra_eas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "app_extra_eas",
+      "target": "app_eas_projectid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "apps/app/app.config.js",
       "source_location": "L1",
       "weight": 1.0,
@@ -9217,6 +9897,102 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/admin/modulos/index.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_admin_modulos_index",
+      "target": "apps_app_app_protected_admin_modulos_index_adminmodulos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/admin/modulos/index.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_admin_modulos_index",
+      "target": "apps_app_components_admin_adminmodulesscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/admin/modulos/index.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_admin_modulos_index",
+      "target": "apps_app_components_admin_adminmodulesscreen_adminmodulesscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/admin/usuarios/[id].tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_admin_usuarios_id",
+      "target": "apps_app_app_protected_admin_usuarios_id_adminusuariomodulos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/admin/usuarios/[id].tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_admin_usuarios_id",
+      "target": "apps_app_components_admin_adminusermodulesscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/admin/usuarios/[id].tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_admin_usuarios_id",
+      "target": "apps_app_components_admin_adminusermodulesscreen_adminusermodulesscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/admin/usuarios/index.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_admin_usuarios_index",
+      "target": "apps_app_app_protected_admin_usuarios_index_adminusuarios",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/admin/usuarios/index.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_admin_usuarios_index",
+      "target": "apps_app_components_admin_adminusersscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/admin/usuarios/index.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_admin_usuarios_index",
+      "target": "apps_app_components_admin_adminusersscreen_adminusersscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "apps/app/app/(protected)/assistente/index.tsx",
       "source_location": "L3",
       "weight": 1.0,
@@ -9281,6 +10057,38 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/modulos/index.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_modulos_index",
+      "target": "apps_app_app_protected_modulos_index_modulos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/modulos/index.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_modulos_index",
+      "target": "apps_app_components_modulos_modulosscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/modulos/index.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_modulos_index",
+      "target": "apps_app_components_modulos_modulosscreen_modulosscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "apps/app/app/(protected)/perfil/index.tsx",
       "source_location": "L3",
       "weight": 1.0,
@@ -9314,10 +10122,32 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/app/_layout.tsx",
-      "source_location": "L18",
+      "source_location": "L19",
       "weight": 1.0,
       "source": "apps_app_app_layout",
       "target": "apps_app_app_layout_rootlayout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/_layout.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "apps_app_app_layout",
+      "target": "apps_app_components_appupdatealert",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/_layout.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "apps_app_app_layout",
+      "target": "apps_app_components_appupdatealert_appupdatealert",
       "confidence_score": 1.0
     },
     {
@@ -9686,11 +10516,116 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/AppUpdateAlert.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "apps_app_components_appupdatealert",
+      "target": "apps_app_components_appupdatealert_appupdatealert",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/AppUpdateAlert.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_appupdatealert",
+      "target": "apps_app_hooks_useappversion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/AppUpdateAlert.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_appupdatealert",
+      "target": "apps_app_hooks_useappversion_useappversion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/AppUpdateAlert.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_appupdatealert",
+      "target": "packages_ui_components_button_button",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/AppUpdateAlert.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_appupdatealert",
+      "target": "packages_ui_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/app/components/AppUpdateAlert.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "apps_app_components_appupdatealert_appupdatealert",
+      "target": "apps_app_hooks_useappversion_useappversion"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
-      "source_location": "L9",
+      "source_location": "L26",
       "weight": 1.0,
       "source": "apps_app_components_admin_admindashboardscreen",
       "target": "apps_app_components_admin_admindashboardscreen_admindashboardscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_admindashboardscreen",
+      "target": "apps_app_components_admin_admindashboardscreen_dashboardstats",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
+      "source_location": "L105",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_admindashboardscreen",
+      "target": "apps_app_components_admin_admindashboardscreen_insightcard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_admindashboardscreen",
+      "target": "apps_app_components_admin_admindashboardscreen_insights",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
+      "source_location": "L114",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_admindashboardscreen",
+      "target": "apps_app_components_admin_admindashboardscreen_navcard",
       "confidence_score": 1.0
     },
     {
@@ -9698,10 +10633,21 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0,
       "source": "apps_app_components_admin_admindashboardscreen",
       "target": "packages_supabase_auth_signout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_admindashboardscreen",
+      "target": "packages_supabase_client_supabase",
       "confidence_score": 1.0
     },
     {
@@ -9709,7 +10655,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0,
       "source": "apps_app_components_admin_admindashboardscreen",
       "target": "packages_supabase_index",
@@ -9720,10 +10666,10 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
-      "source_location": "L3",
+      "source_location": "L4",
       "weight": 1.0,
       "source": "apps_app_components_admin_admindashboardscreen",
-      "target": "packages_ui_components_button_button",
+      "target": "packages_ui_components_card_card",
       "confidence_score": 1.0
     },
     {
@@ -9731,7 +10677,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
-      "source_location": "L3",
+      "source_location": "L4",
       "weight": 1.0,
       "source": "apps_app_components_admin_admindashboardscreen",
       "target": "packages_ui_components_logo_logo",
@@ -9742,10 +10688,486 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
-      "source_location": "L3",
+      "source_location": "L4",
       "weight": 1.0,
       "source": "apps_app_components_admin_admindashboardscreen",
       "target": "packages_ui_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminModulesScreen.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminmodulesscreen",
+      "target": "apps_app_components_admin_adminmodulesscreen_adminmodulesscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminModulesScreen.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminmodulesscreen",
+      "target": "apps_app_components_admin_adminmodulesscreen_diacritics_regex",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminModulesScreen.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminmodulesscreen",
+      "target": "apps_app_components_admin_adminmodulesscreen_slugify",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminModulesScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminmodulesscreen",
+      "target": "apps_app_components_admin_useadminmodules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminModulesScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminmodulesscreen",
+      "target": "apps_app_components_admin_useadminmodules_useadminmodules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminModulesScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminmodulesscreen",
+      "target": "packages_ui_components_button_button",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminModulesScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminmodulesscreen",
+      "target": "packages_ui_components_card_card",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminModulesScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminmodulesscreen",
+      "target": "packages_ui_components_input_input",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminModulesScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminmodulesscreen",
+      "target": "packages_ui_components_logo_logo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminModulesScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminmodulesscreen",
+      "target": "packages_ui_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/app/components/admin/AdminModulesScreen.tsx",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminmodulesscreen_adminmodulesscreen",
+      "target": "apps_app_components_admin_useadminmodules_useadminmodules"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminUserModulesScreen.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminusermodulesscreen",
+      "target": "apps_app_components_admin_adminusermodulesscreen_adminusermodulesscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminUserModulesScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminusermodulesscreen",
+      "target": "packages_supabase_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminUserModulesScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminusermodulesscreen",
+      "target": "packages_supabase_modules_listusermoduleaccess",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminUserModulesScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminusermodulesscreen",
+      "target": "packages_supabase_modules_moduleaccessrow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminUserModulesScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminusermodulesscreen",
+      "target": "packages_supabase_modules_setmoduleaccess",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminUserModulesScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminusermodulesscreen",
+      "target": "packages_ui_components_card_card",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminUserModulesScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminusermodulesscreen",
+      "target": "packages_ui_components_logo_logo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminUserModulesScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminusermodulesscreen",
+      "target": "packages_ui_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminUsersScreen.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminusersscreen",
+      "target": "apps_app_components_admin_adminusersscreen_adminusersscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminUsersScreen.tsx",
+      "source_location": "L132",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminusersscreen",
+      "target": "apps_app_components_admin_adminusersscreen_badge",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminUsersScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminusersscreen",
+      "target": "apps_app_components_admin_useadminusers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminUsersScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminusersscreen",
+      "target": "apps_app_components_admin_useadminusers_useadminusers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminUsersScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminusersscreen",
+      "target": "packages_ui_components_button_button",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminUsersScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminusersscreen",
+      "target": "packages_ui_components_card_card",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminUsersScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminusersscreen",
+      "target": "packages_ui_components_input_input",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminUsersScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminusersscreen",
+      "target": "packages_ui_components_logo_logo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminUsersScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminusersscreen",
+      "target": "packages_ui_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/app/components/admin/AdminUsersScreen.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminusersscreen_adminusersscreen",
+      "target": "apps_app_components_admin_useadminusers_useadminusers"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminModules.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminmodules",
+      "target": "apps_app_components_admin_useadminmodules_useadminmodules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminModules.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminmodules",
+      "target": "packages_supabase_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminModules.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminmodules",
+      "target": "packages_supabase_modules_createmodule",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminModules.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminmodules",
+      "target": "packages_supabase_modules_listmodules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminModules.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminmodules",
+      "target": "packages_supabase_modules_modulerow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminModules.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminmodules",
+      "target": "packages_supabase_modules_setmoduleativo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminUsers.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminusers",
+      "target": "apps_app_components_admin_useadminusers_useadminusers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminUsers.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminusers",
+      "target": "packages_supabase_adminusers_adminuser",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminUsers.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminusers",
+      "target": "packages_supabase_adminusers_inviteuser",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminUsers.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminusers",
+      "target": "packages_supabase_adminusers_listusers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminUsers.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminusers",
+      "target": "packages_supabase_adminusers_setuserblocked",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminUsers.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminusers",
+      "target": "packages_supabase_adminusers_setuserrole",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminUsers.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminusers",
+      "target": "packages_supabase_auth_requestpasswordreset",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminUsers.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminusers",
+      "target": "packages_supabase_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminUsers.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminusers",
+      "target": "packages_supabase_session_userrole",
       "confidence_score": 1.0
     },
     {
@@ -11146,7 +12568,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L10",
+      "source_location": "L9",
       "weight": 1.0,
       "source": "apps_app_components_login_esquecisenhascreen",
       "target": "apps_app_components_login_esquecisenhascreen_background_photo",
@@ -11156,7 +12578,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L16",
+      "source_location": "L15",
       "weight": 1.0,
       "source": "apps_app_components_login_esquecisenhascreen",
       "target": "apps_app_components_login_esquecisenhascreen_esquecisenhascreen",
@@ -11166,32 +12588,10 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L12",
+      "source_location": "L11",
       "weight": 1.0,
       "source": "apps_app_components_login_esquecisenhascreen",
       "target": "apps_app_components_login_esquecisenhascreen_isvalidemail",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "apps_app_components_login_esquecisenhascreen",
-      "target": "apps_app_components_login_field",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "apps_app_components_login_esquecisenhascreen",
-      "target": "apps_app_components_login_field_field",
       "confidence_score": 1.0
     },
     {
@@ -11268,6 +12668,17 @@
       "source_location": "L5",
       "weight": 1.0,
       "source": "apps_app_components_login_esquecisenhascreen",
+      "target": "packages_ui_components_input_input",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_login_esquecisenhascreen",
       "target": "packages_ui_components_logo_logo",
       "confidence_score": 1.0
     },
@@ -11285,73 +12696,8 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/Field.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "apps_app_components_login_field",
-      "target": "apps_app_components_login_field_field",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/Field.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "apps_app_components_login_field",
-      "target": "packages_ui_index",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "apps/app/components/login/LoginScreen.tsx",
-      "source_location": "L16",
-      "weight": 1.0,
-      "source": "apps_app_components_login_loginscreen",
-      "target": "apps_app_components_login_field",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "apps_app_components_login_redefinirsenhascreen",
-      "target": "apps_app_components_login_field",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/LoginScreen.tsx",
-      "source_location": "L16",
-      "weight": 1.0,
-      "source": "apps_app_components_login_loginscreen",
-      "target": "apps_app_components_login_field_field",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "apps_app_components_login_redefinirsenhascreen",
-      "target": "apps_app_components_login_field_field",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/LoginScreen.tsx",
-      "source_location": "L18",
+      "source_location": "L17",
       "weight": 1.0,
       "source": "apps_app_components_login_loginscreen",
       "target": "apps_app_components_login_loginscreen_background_photo",
@@ -11361,7 +12707,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/login/LoginScreen.tsx",
-      "source_location": "L20",
+      "source_location": "L19",
       "weight": 1.0,
       "source": "apps_app_components_login_loginscreen",
       "target": "apps_app_components_login_loginscreen_destinationfor",
@@ -11371,7 +12717,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/login/LoginScreen.tsx",
-      "source_location": "L24",
+      "source_location": "L23",
       "weight": 1.0,
       "source": "apps_app_components_login_loginscreen",
       "target": "apps_app_components_login_loginscreen_loginscreen",
@@ -11506,6 +12852,17 @@
       "source_location": "L6",
       "weight": 1.0,
       "source": "apps_app_components_login_loginscreen",
+      "target": "packages_ui_components_input_input",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/login/LoginScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_login_loginscreen",
       "target": "packages_ui_components_logo_logo",
       "confidence_score": 1.0
     },
@@ -11524,7 +12881,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L10",
+      "source_location": "L9",
       "weight": 1.0,
       "source": "apps_app_components_login_redefinirsenhascreen",
       "target": "apps_app_components_login_redefinirsenhascreen_background_photo",
@@ -11534,7 +12891,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L17",
+      "source_location": "L16",
       "weight": 1.0,
       "source": "apps_app_components_login_redefinirsenhascreen",
       "target": "apps_app_components_login_redefinirsenhascreen_consumerecoverylink",
@@ -11544,7 +12901,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L41",
+      "source_location": "L40",
       "weight": 1.0,
       "source": "apps_app_components_login_redefinirsenhascreen",
       "target": "apps_app_components_login_redefinirsenhascreen_redefinirsenhascreen",
@@ -11646,6 +13003,17 @@
       "source_location": "L5",
       "weight": 1.0,
       "source": "apps_app_components_login_redefinirsenhascreen",
+      "target": "packages_ui_components_input_input",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_login_redefinirsenhascreen",
       "target": "packages_ui_components_logo_logo",
       "confidence_score": 1.0
     },
@@ -11665,10 +13033,97 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L34",
+      "source_location": "L33",
       "weight": 1.0,
       "source": "apps_app_components_login_redefinirsenhascreen_consumerecoverylink",
       "target": "packages_supabase_auth_confirmpasswordrecovery",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/modulos/ModulosScreen.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "apps_app_components_modulos_modulosscreen",
+      "target": "apps_app_components_modulos_modulosscreen_modulosscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/modulos/ModulosScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_modulos_modulosscreen",
+      "target": "packages_supabase_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/modulos/ModulosScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_modulos_modulosscreen",
+      "target": "packages_supabase_modules_listmymodules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/modulos/ModulosScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_modulos_modulosscreen",
+      "target": "packages_supabase_modules_mymodule",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/modulos/ModulosScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_modulos_modulosscreen",
+      "target": "packages_supabase_session_getcurrentsession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/modulos/ModulosScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_modulos_modulosscreen",
+      "target": "packages_ui_components_card_card",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/modulos/ModulosScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_modulos_modulosscreen",
+      "target": "packages_ui_components_logo_logo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/modulos/ModulosScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_modulos_modulosscreen",
+      "target": "packages_ui_index",
       "confidence_score": 1.0
     },
     {
@@ -12055,6 +13510,79 @@
       "weight": 1.0,
       "source": "apps_app_constants_entrepreneurphotos",
       "target": "apps_app_constants_entrepreneurphotos_pickentrepreneurphoto",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/hooks/useAppVersion.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "apps_app_hooks_useappversion",
+      "target": "apps_app_hooks_useappversion_up_to_date",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/hooks/useAppVersion.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_hooks_useappversion",
+      "target": "apps_app_hooks_useappversion_updatestatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/hooks/useAppVersion.ts",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "apps_app_hooks_useappversion",
+      "target": "apps_app_hooks_useappversion_useappversion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/hooks/useAppVersion.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "apps_app_hooks_useappversion",
+      "target": "apps_app_hooks_useappversion_useappversionresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/hooks/useAppVersion.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_hooks_useappversion",
+      "target": "packages_supabase_appversion_appversioninfo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/hooks/useAppVersion.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_hooks_useappversion",
+      "target": "packages_supabase_appversion_getappversioninfo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/hooks/useAppVersion.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_hooks_useappversion",
+      "target": "packages_supabase_index",
       "confidence_score": 1.0
     },
     {
@@ -13391,6 +14919,186 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/adminUsers.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "packages_supabase_adminusers",
+      "target": "packages_supabase_adminusers_adminuser",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/adminUsers.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "packages_supabase_adminusers",
+      "target": "packages_supabase_adminusers_inviteuser",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/adminUsers.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "packages_supabase_adminusers",
+      "target": "packages_supabase_adminusers_listusers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/adminUsers.ts",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "packages_supabase_adminusers",
+      "target": "packages_supabase_adminusers_setuserblocked",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/adminUsers.ts",
+      "source_location": "L29",
+      "weight": 1.0,
+      "source": "packages_supabase_adminusers",
+      "target": "packages_supabase_adminusers_setuserrole",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/adminUsers.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "packages_supabase_adminusers",
+      "target": "packages_supabase_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/adminUsers.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "packages_supabase_adminusers",
+      "target": "packages_supabase_client_supabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/adminUsers.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "packages_supabase_adminusers",
+      "target": "packages_supabase_session",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/adminUsers.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "packages_supabase_adminusers",
+      "target": "packages_supabase_session_userrole",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/adminUsers.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "packages_supabase_adminusers",
+      "target": "packages_supabase_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/adminUsers.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "packages_supabase_adminusers",
+      "target": "packages_supabase_types_tables",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/index.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "packages_supabase_index",
+      "target": "packages_supabase_adminusers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/appVersion.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "packages_supabase_appversion",
+      "target": "packages_supabase_appversion_appversioninfo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/appVersion.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "packages_supabase_appversion",
+      "target": "packages_supabase_appversion_getappversioninfo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/appVersion.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "packages_supabase_appversion",
+      "target": "packages_supabase_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/appVersion.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "packages_supabase_appversion",
+      "target": "packages_supabase_client_supabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "packages_supabase_index",
+      "target": "packages_supabase_appversion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "packages/supabase/auth.ts",
       "source_location": "L39",
       "weight": 1.0,
@@ -13539,6 +15247,17 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "packages_supabase_modules",
+      "target": "packages_supabase_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "packages/supabase/session.ts",
       "source_location": "L1",
       "weight": 1.0,
@@ -13565,6 +15284,17 @@
       "source_location": "L1",
       "weight": 1.0,
       "source": "packages_supabase_knowledgebase",
+      "target": "packages_supabase_client_supabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "packages_supabase_modules",
       "target": "packages_supabase_client_supabase",
       "confidence_score": 1.0
     },
@@ -13606,6 +15336,17 @@
       "context": "export",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/index.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "packages_supabase_index",
+      "target": "packages_supabase_modules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/index.ts",
       "source_location": "L2",
       "weight": 1.0,
       "source": "packages_supabase_index",
@@ -13628,7 +15369,7 @@
       "context": "export",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/index.ts",
-      "source_location": "L6",
+      "source_location": "L9",
       "weight": 1.0,
       "source": "packages_supabase_index",
       "target": "packages_supabase_types",
@@ -13639,7 +15380,7 @@
       "context": "re-export",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/index.ts",
-      "source_location": "L6",
+      "source_location": "L9",
       "weight": 1.0,
       "source": "packages_supabase_index",
       "target": "packages_supabase_types_database",
@@ -13683,6 +15424,129 @@
       "weight": 1.0,
       "source": "packages_supabase_knowledgebase",
       "target": "packages_supabase_knowledgebase_knowledgesource",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "packages_supabase_modules",
+      "target": "packages_supabase_modules_createmodule",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "packages_supabase_modules",
+      "target": "packages_supabase_modules_listmodules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L68",
+      "weight": 1.0,
+      "source": "packages_supabase_modules",
+      "target": "packages_supabase_modules_listmymodules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "packages_supabase_modules",
+      "target": "packages_supabase_modules_listusermoduleaccess",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "packages_supabase_modules",
+      "target": "packages_supabase_modules_moduleaccessrow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "packages_supabase_modules",
+      "target": "packages_supabase_modules_modulerow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "packages_supabase_modules",
+      "target": "packages_supabase_modules_mymodule",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "packages_supabase_modules",
+      "target": "packages_supabase_modules_setmoduleaccess",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "packages_supabase_modules",
+      "target": "packages_supabase_modules_setmoduleativo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "packages_supabase_modules",
+      "target": "packages_supabase_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "packages_supabase_modules",
+      "target": "packages_supabase_types_tables",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/modules.ts",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "packages_supabase_modules_moduleaccessrow",
+      "target": "packages_supabase_modules_modulerow",
       "confidence_score": 1.0
     },
     {
@@ -13960,7 +15824,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L492",
+      "source_location": "L597",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_compositetypes",
@@ -13970,7 +15834,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L509",
+      "source_location": "L614",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_constants",
@@ -13990,7 +15854,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L392",
+      "source_location": "L497",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_databasewithoutinternals",
@@ -14000,7 +15864,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L394",
+      "source_location": "L499",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_defaultschema",
@@ -14010,7 +15874,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L475",
+      "source_location": "L580",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_enums",
@@ -14030,7 +15894,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L396",
+      "source_location": "L501",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_tables",
@@ -14040,7 +15904,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L425",
+      "source_location": "L530",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_tablesinsert",
@@ -14050,7 +15914,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L450",
+      "source_location": "L555",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_tablesupdate",
@@ -14203,10 +16067,41 @@
       "context": "export",
       "confidence": "EXTRACTED",
       "source_file": "packages/ui/index.ts",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0,
       "source": "packages_ui_index",
       "target": "packages_ui_components_entrepreneurbackground",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/ui/components/Input.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "packages_ui_components_input",
+      "target": "packages_ui_components_input_input",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/ui/components/Input.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "packages_ui_components_input",
+      "target": "packages_ui_components_input_inputprops",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/ui/index.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "packages_ui_index",
+      "target": "packages_ui_components_input",
       "confidence_score": 1.0
     },
     {
@@ -14254,7 +16149,7 @@
       "context": "export",
       "confidence": "EXTRACTED",
       "source_file": "packages/ui/index.ts",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0,
       "source": "packages_ui_index",
       "target": "packages_ui_components_logo",
@@ -14492,6 +16387,36 @@
       "weight": 1.0,
       "source": "supabase_functions_knowledge_search_index",
       "target": "supabase_functions_shared_cors_corsheaders",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/admin-manage-user/index.ts",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "supabase_functions_admin_manage_user_index",
+      "target": "supabase_functions_admin_manage_user_index_action",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/admin-manage-user/index.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "supabase_functions_admin_manage_user_index",
+      "target": "supabase_functions_admin_manage_user_index_corsheaders",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/admin-manage-user/index.ts",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "supabase_functions_admin_manage_user_index",
+      "target": "supabase_functions_admin_manage_user_index_getuserrolefromjwt",
       "confidence_score": 1.0
     },
     {
@@ -14819,7 +16744,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L334",
+      "source_location": "L336",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_10_m\u00f3dulo_copiloto_de_ia",
@@ -14829,7 +16754,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L352",
+      "source_location": "L354",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_11_m\u00f3dulos_fase_2_trilhas_d_e_f_esqueleto",
@@ -14839,7 +16764,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L358",
+      "source_location": "L360",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_12_m\u00f3dulos_fase_3_ecossistema_p\u00f3s_abertura_esqueleto",
@@ -14849,7 +16774,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L364",
+      "source_location": "L370",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_13_regras_de_neg\u00f3cio_transversais_numera\u00e7\u00e3o_consolidada",
@@ -14859,7 +16784,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L392",
+      "source_location": "L399",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_14_requisitos_n\u00e3o_funcionais",
@@ -14869,7 +16794,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L408",
+      "source_location": "L415",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_15_m\u00e9tricas_a_instrumentar_desde_o_dia_1",
@@ -14879,7 +16804,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L417",
+      "source_location": "L424",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_16_gloss\u00e1rio_r\u00e1pido",
@@ -14889,7 +16814,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L426",
+      "source_location": "L433",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_17_decis\u00f5es_em_aberto_bloqueiam_in\u00edcio_de_c\u00f3digo",
@@ -14929,7 +16854,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L59",
+      "source_location": "L61",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_4_princ\u00edpios_de_produto_n\u00e3o_negoci\u00e1veis",
@@ -14939,7 +16864,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L69",
+      "source_location": "L71",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_5_modelo_de_dados_vis\u00e3o_l\u00f3gica",
@@ -14949,7 +16874,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L244",
+      "source_location": "L246",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_6_arquitetura_vis\u00e3o_macro",
@@ -14959,7 +16884,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L266",
+      "source_location": "L268",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_7_m\u00f3dulo_diagn\u00f3stico_fase_0_1_gr\u00e1tis",
@@ -14969,7 +16894,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L286",
+      "source_location": "L288",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_8_m\u00f3dulo_match_de_nichos_e_paywall",
@@ -14979,7 +16904,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L307",
+      "source_location": "L309",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_9_m\u00f3dulo_workflow_de_constru\u00e7\u00e3o_trilhas_a_b_c_mvp",
@@ -15039,7 +16964,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L73",
+      "source_location": "L75",
       "weight": 1.0,
       "source": "docs_prd_5_modelo_de_dados_vis\u00e3o_l\u00f3gica",
       "target": "docs_prd_5_1_identidade_e_assinatura",
@@ -15049,7 +16974,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L103",
+      "source_location": "L105",
       "weight": 1.0,
       "source": "docs_prd_5_modelo_de_dados_vis\u00e3o_l\u00f3gica",
       "target": "docs_prd_5_2_diagn\u00f3stico",
@@ -15059,7 +16984,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L124",
+      "source_location": "L126",
       "weight": 1.0,
       "source": "docs_prd_5_modelo_de_dados_vis\u00e3o_l\u00f3gica",
       "target": "docs_prd_5_3_nichos_e_fit_score",
@@ -15069,7 +16994,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L157",
+      "source_location": "L159",
       "weight": 1.0,
       "source": "docs_prd_5_modelo_de_dados_vis\u00e3o_l\u00f3gica",
       "target": "docs_prd_5_4_workflow",
@@ -15079,7 +17004,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L204",
+      "source_location": "L206",
       "weight": 1.0,
       "source": "docs_prd_5_modelo_de_dados_vis\u00e3o_l\u00f3gica",
       "target": "docs_prd_5_5_copiloto_de_ia",
@@ -15089,7 +17014,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L239",
+      "source_location": "L241",
       "weight": 1.0,
       "source": "docs_prd_5_modelo_de_dados_vis\u00e3o_l\u00f3gica",
       "target": "docs_prd_5_6_m\u00f3dulos_p\u00f3s_abertura_futuro_fase_3",
@@ -15099,7 +17024,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L268",
+      "source_location": "L270",
       "weight": 1.0,
       "source": "docs_prd_7_m\u00f3dulo_diagn\u00f3stico_fase_0_1_gr\u00e1tis",
       "target": "docs_prd_7_1_fluxo_de_tela",
@@ -15109,7 +17034,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L275",
+      "source_location": "L277",
       "weight": 1.0,
       "source": "docs_prd_7_m\u00f3dulo_diagn\u00f3stico_fase_0_1_gr\u00e1tis",
       "target": "docs_prd_7_2_regras_de_neg\u00f3cio",
@@ -15119,7 +17044,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L279",
+      "source_location": "L281",
       "weight": 1.0,
       "source": "docs_prd_7_m\u00f3dulo_diagn\u00f3stico_fase_0_1_gr\u00e1tis",
       "target": "docs_prd_7_3_crit\u00e9rios_de_aceite",
@@ -15129,7 +17054,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L288",
+      "source_location": "L290",
       "weight": 1.0,
       "source": "docs_prd_8_m\u00f3dulo_match_de_nichos_e_paywall",
       "target": "docs_prd_8_1_fluxo",
@@ -15139,7 +17064,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L293",
+      "source_location": "L295",
       "weight": 1.0,
       "source": "docs_prd_8_m\u00f3dulo_match_de_nichos_e_paywall",
       "target": "docs_prd_8_2_regras_de_neg\u00f3cio",
@@ -15149,7 +17074,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L298",
+      "source_location": "L300",
       "weight": 1.0,
       "source": "docs_prd_8_m\u00f3dulo_match_de_nichos_e_paywall",
       "target": "docs_prd_8_3_m\u00f3dulo_j\u00e1_tenho_neg\u00f3cio_fase_3_esqueleto_de_dados_j\u00e1_em_5_6",
@@ -15159,7 +17084,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L301",
+      "source_location": "L303",
       "weight": 1.0,
       "source": "docs_prd_8_m\u00f3dulo_match_de_nichos_e_paywall",
       "target": "docs_prd_8_4_crit\u00e9rios_de_aceite",
@@ -15169,7 +17094,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L309",
+      "source_location": "L311",
       "weight": 1.0,
       "source": "docs_prd_9_m\u00f3dulo_workflow_de_constru\u00e7\u00e3o_trilhas_a_b_c_mvp",
       "target": "docs_prd_9_1_anatomia_de_uma_etapa_aplica_se_a_toda_etapa_de_toda_trilha",
@@ -15179,7 +17104,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L312",
+      "source_location": "L314",
       "weight": 1.0,
       "source": "docs_prd_9_m\u00f3dulo_workflow_de_constru\u00e7\u00e3o_trilhas_a_b_c_mvp",
       "target": "docs_prd_9_2_trilha_a_valida\u00e7\u00e3o",
@@ -15189,7 +17114,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L316",
+      "source_location": "L318",
       "weight": 1.0,
       "source": "docs_prd_9_m\u00f3dulo_workflow_de_constru\u00e7\u00e3o_trilhas_a_b_c_mvp",
       "target": "docs_prd_9_3_trilha_b_identidade",
@@ -15199,7 +17124,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L320",
+      "source_location": "L322",
       "weight": 1.0,
       "source": "docs_prd_9_m\u00f3dulo_workflow_de_constru\u00e7\u00e3o_trilhas_a_b_c_mvp",
       "target": "docs_prd_9_4_trilha_c_formaliza\u00e7\u00e3o",
@@ -15209,7 +17134,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L324",
+      "source_location": "L326",
       "weight": 1.0,
       "source": "docs_prd_9_m\u00f3dulo_workflow_de_constru\u00e7\u00e3o_trilhas_a_b_c_mvp",
       "target": "docs_prd_9_5_paralelismo_e_etapas_em_espera",
@@ -15219,7 +17144,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L327",
+      "source_location": "L329",
       "weight": 1.0,
       "source": "docs_prd_9_m\u00f3dulo_workflow_de_constru\u00e7\u00e3o_trilhas_a_b_c_mvp",
       "target": "docs_prd_9_6_crit\u00e9rios_de_aceite",
@@ -15229,7 +17154,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L336",
+      "source_location": "L338",
       "weight": 1.0,
       "source": "docs_prd_10_m\u00f3dulo_copiloto_de_ia",
       "target": "docs_prd_10_1_superf\u00edcies_do_copiloto",
@@ -15239,7 +17164,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L341",
+      "source_location": "L343",
       "weight": 1.0,
       "source": "docs_prd_10_m\u00f3dulo_copiloto_de_ia",
       "target": "docs_prd_10_2_guardrails_rn_21_rn_20_j\u00e1_citadas_detalhamento_t\u00e9cnico",
@@ -15249,10 +17174,20 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L346",
+      "source_location": "L348",
       "weight": 1.0,
       "source": "docs_prd_10_m\u00f3dulo_copiloto_de_ia",
       "target": "docs_prd_10_3_crit\u00e9rios_de_aceite",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/PRD.md",
+      "source_location": "L364",
+      "weight": 1.0,
+      "source": "docs_prd_12_m\u00f3dulos_fase_3_ecossistema_p\u00f3s_abertura_esqueleto",
+      "target": "docs_prd_12_1_framework_de_m\u00f3dulos_exce\u00e7\u00e3o_\u00e0_rn_2_ver_3_constru\u00eddo_agora_conte\u00fado_ainda_n\u00e3o",
       "confidence_score": 1.0
     },
     {
@@ -15279,7 +17214,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/SPEC.md",
-      "source_location": "L280",
+      "source_location": "L274",
       "weight": 1.0,
       "source": "docs_spec_ser_dono_spec_especifica\u00e7\u00e3o_t\u00e9cnica_sdd",
       "target": "docs_spec_10_itens_de_roadmap_t\u00e9cnico_fora_do_mvp_n\u00e3o_bloqueiam",
@@ -15289,7 +17224,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/SPEC.md",
-      "source_location": "L289",
+      "source_location": "L283",
       "weight": 1.0,
       "source": "docs_spec_ser_dono_spec_especifica\u00e7\u00e3o_t\u00e9cnica_sdd",
       "target": "docs_spec_11_decis\u00f5es_que_ainda_precisam_de_dono_bloqueiam_itens_espec\u00edficos_n\u00e3o_o_in\u00edcio_geral_do_c\u00f3digo",
@@ -15299,7 +17234,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/SPEC.md",
-      "source_location": "L306",
+      "source_location": "L302",
       "weight": 1.0,
       "source": "docs_spec_ser_dono_spec_especifica\u00e7\u00e3o_t\u00e9cnica_sdd",
       "target": "docs_spec_12_decis\u00f5es_registradas_durante_a_implementa\u00e7\u00e3o_da_home_landing_retroativas_a_este_pr",
@@ -15372,14 +17307,14 @@
       "source_location": "L176",
       "weight": 1.0,
       "source": "docs_spec_ser_dono_spec_especifica\u00e7\u00e3o_t\u00e9cnica_sdd",
-      "target": "docs_spec_7_build_mobile_automatizado_github_actions_sem_eas",
+      "target": "docs_spec_7_build_mobile_automatizado_github_actions_eas_local",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/SPEC.md",
-      "source_location": "L257",
+      "source_location": "L251",
       "weight": 1.0,
       "source": "docs_spec_ser_dono_spec_especifica\u00e7\u00e3o_t\u00e9cnica_sdd",
       "target": "docs_spec_8_ambientes",
@@ -15389,7 +17324,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/SPEC.md",
-      "source_location": "L269",
+      "source_location": "L263",
       "weight": 1.0,
       "source": "docs_spec_ser_dono_spec_especifica\u00e7\u00e3o_t\u00e9cnica_sdd",
       "target": "docs_spec_9_qualidade_e_ci_ci_yml",
@@ -15449,9 +17384,9 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/SPEC.md",
-      "source_location": "L180",
+      "source_location": "L182",
       "weight": 1.0,
-      "source": "docs_spec_7_build_mobile_automatizado_github_actions_sem_eas",
+      "source": "docs_spec_7_build_mobile_automatizado_github_actions_eas_local",
       "target": "docs_spec_7_1_gatilho",
       "confidence_score": 1.0
     },
@@ -15459,19 +17394,19 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/SPEC.md",
-      "source_location": "L183",
+      "source_location": "L185",
       "weight": 1.0,
-      "source": "docs_spec_7_build_mobile_automatizado_github_actions_sem_eas",
-      "target": "docs_spec_7_2_por_que_gerar_a_pasta_android_no_ci_e_n\u00e3o_versionar",
+      "source": "docs_spec_7_build_mobile_automatizado_github_actions_eas_local",
+      "target": "docs_spec_7_2_app_config_js_continua_a_\u00fanica_fonte_de_verdade_de_vers\u00e3o",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/SPEC.md",
-      "source_location": "L186",
+      "source_location": "L188",
       "weight": 1.0,
-      "source": "docs_spec_7_build_mobile_automatizado_github_actions_sem_eas",
+      "source": "docs_spec_7_build_mobile_automatizado_github_actions_eas_local",
       "target": "docs_spec_7_3_pipeline_github_workflows_android_release_yml",
       "confidence_score": 1.0
     },
@@ -15479,9 +17414,9 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/SPEC.md",
-      "source_location": "L249",
+      "source_location": "L243",
       "weight": 1.0,
-      "source": "docs_spec_7_build_mobile_automatizado_github_actions_sem_eas",
+      "source": "docs_spec_7_build_mobile_automatizado_github_actions_eas_local",
       "target": "docs_spec_7_4_publica\u00e7\u00e3o_na_play_store",
       "confidence_score": 1.0
     },
@@ -15489,9 +17424,9 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/SPEC.md",
-      "source_location": "L252",
+      "source_location": "L246",
       "weight": 1.0,
-      "source": "docs_spec_7_build_mobile_automatizado_github_actions_sem_eas",
+      "source": "docs_spec_7_build_mobile_automatizado_github_actions_eas_local",
       "target": "docs_spec_7_5_ios",
       "confidence_score": 1.0
     },
@@ -17231,5 +19166,5 @@
       "confidence": "EXTRACTED"
     }
   ],
-  "built_at_commit": "1455dc1dabbbc4724a07713f3c149a651f5f5e7d"
+  "built_at_commit": "98113a72c4f619d6db1eb5c9899f47a62d67ae9b"
 }

@@ -120,33 +120,80 @@ export type Database = {
         }
         Relationships: []
       }
+      jornada_deliverables: {
+        Row: {
+          conteudo: Json
+          gerado_em: string
+          gerado_por: string
+          id: string
+          jornada_instance_id: string
+          tipo: string
+          versao: number
+        }
+        Insert: {
+          conteudo: Json
+          gerado_em?: string
+          gerado_por?: string
+          id?: string
+          jornada_instance_id: string
+          tipo: string
+          versao?: number
+        }
+        Update: {
+          conteudo?: Json
+          gerado_em?: string
+          gerado_por?: string
+          id?: string
+          jornada_instance_id?: string
+          tipo?: string
+          versao?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "jornada_deliverables_jornada_instance_id_fkey"
+            columns: ["jornada_instance_id"]
+            isOneToOne: false
+            referencedRelation: "jornada_instances"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       jornada_instances: {
         Row: {
+          concorrentes: string | null
           created_at: string
+          diferenciais: string | null
           fase_atual: string
           id: string
           niche_id: string | null
           nome_negocio: string | null
+          publico_alvo: string | null
           status: string
           updated_at: string
           user_id: string
         }
         Insert: {
+          concorrentes?: string | null
           created_at?: string
+          diferenciais?: string | null
           fase_atual?: string
           id?: string
           niche_id?: string | null
           nome_negocio?: string | null
+          publico_alvo?: string | null
           status?: string
           updated_at?: string
           user_id: string
         }
         Update: {
+          concorrentes?: string | null
           created_at?: string
+          diferenciais?: string | null
           fase_atual?: string
           id?: string
           niche_id?: string | null
           nome_negocio?: string | null
+          publico_alvo?: string | null
           status?: string
           updated_at?: string
           user_id?: string

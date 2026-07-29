@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1785329267.0960193,
-    "ast_hash": "b17248b90ff8d5044c09b141a694f267",
+    "mtime": 1785332543.0499048,
+    "ast_hash": "9faa21d5f9d5f5a940af29b5b824dda4",
     "semantic_hash": ""
   },
   ".mcp.json": {
@@ -20,13 +20,13 @@
     "semantic_hash": ""
   },
   "apps/app/app.config.js": {
-    "mtime": 1785287795.6417782,
-    "ast_hash": "5485a352391272797ed117987bbac69f",
+    "mtime": 1785332269.6928391,
+    "ast_hash": "214813beef10f5d23aa33f847e34355d",
     "semantic_hash": ""
   },
   "apps/app/app/_layout.tsx": {
-    "mtime": 1785249907.674136,
-    "ast_hash": "f5329f6afd5d964c3c9e9eb129b9d725",
+    "mtime": 1785331031.7788188,
+    "ast_hash": "12d449e24858cd216b5cdb0b2b4b7e63",
     "semantic_hash": ""
   },
   "apps/app/app/cadastro/bem-vindo.tsx": {
@@ -195,8 +195,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/index.ts": {
-    "mtime": 1785287795.646266,
-    "ast_hash": "c4039486c12f3d99db697b671857a203",
+    "mtime": 1785335143.7398367,
+    "ast_hash": "63bdd049b4380c61591d9d1d44b2d1ec",
     "semantic_hash": ""
   },
   "packages/supabase/package.json": {
@@ -215,8 +215,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/types.ts": {
-    "mtime": 1785287795.6472654,
-    "ast_hash": "3a12fd85fabcf102e0e0039f9544f03d",
+    "mtime": 1785334881.9758043,
+    "ast_hash": "79fdf598692d004b1076e7692437acbe",
     "semantic_hash": ""
   },
   "packages/ui/components/Button.tsx": {
@@ -235,8 +235,8 @@
     "semantic_hash": ""
   },
   "packages/ui/index.ts": {
-    "mtime": 1785260648.1142879,
-    "ast_hash": "e9d130a8a3ece30d3fa50287e3ec430a",
+    "mtime": 1785335007.853511,
+    "ast_hash": "b479639cf413886665060b3c015a4fa1",
     "semantic_hash": ""
   },
   "packages/ui/package.json": {
@@ -300,13 +300,13 @@
     "semantic_hash": ""
   },
   "docs/PRD.md": {
-    "mtime": 1785287795.6452672,
-    "ast_hash": "bc5c2067ef5c72503b121e2e4f4a5da8",
+    "mtime": 1785333976.374411,
+    "ast_hash": "d95e3362ed5964b73fa731cbfc939d8e",
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1785329518.6000245,
-    "ast_hash": "2632607d0399bca02175862c8256d53a",
+    "mtime": 1785335470.5945964,
+    "ast_hash": "3a62b5bd70f811a2ef9f951b7ddbc7b0",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
@@ -440,18 +440,18 @@
     "semantic_hash": ""
   },
   "apps/app/components/admin/AdminDashboardScreen.tsx": {
-    "mtime": 1785289016.1062615,
-    "ast_hash": "905e67a43d0499cfde0d7054cb21ea81",
+    "mtime": 1785335207.8086753,
+    "ast_hash": "faaf9b75122bc81d6465e3dab5bed70a",
     "semantic_hash": ""
   },
   "apps/app/components/assistente/AssistenteScreen.tsx": {
-    "mtime": 1785289008.19105,
-    "ast_hash": "ddc1d1ccf726e54db1358ab46ae20435",
+    "mtime": 1785335424.5246072,
+    "ast_hash": "6114734b1422a9302d8cb9713b1a396c",
     "semantic_hash": ""
   },
   "apps/app/components/login/LoginScreen.tsx": {
-    "mtime": 1785329116.6343353,
-    "ast_hash": "3157381e7a7750b3986b592e410d6722",
+    "mtime": 1785335046.460822,
+    "ast_hash": "d7bdcbc36649c7a0711aea1feb63f0d3",
     "semantic_hash": ""
   },
   "apps/app/components/perfil/CompletarCadastroScreen.tsx": {
@@ -510,18 +510,123 @@
     "semantic_hash": ""
   },
   "apps/app/components/login/EsqueciSenhaScreen.tsx": {
-    "mtime": 1785329134.287609,
-    "ast_hash": "7544a7af46c68456b94878a30693f2fb",
-    "semantic_hash": ""
-  },
-  "apps/app/components/login/Field.tsx": {
-    "mtime": 1785329090.479521,
-    "ast_hash": "cbdebb864a22b085db99cb0ce430b4a5",
+    "mtime": 1785335060.28651,
+    "ast_hash": "6f80467655fa491268c6c491d3e2c864",
     "semantic_hash": ""
   },
   "apps/app/components/login/RedefinirSenhaScreen.tsx": {
-    "mtime": 1785329436.0192966,
-    "ast_hash": "cd234f4b81cbe10941193eb2cc1ce032",
+    "mtime": 1785335080.1884851,
+    "ast_hash": "b169f9a7dbb683bde2b83813020e6874",
+    "semantic_hash": ""
+  },
+  "app.json": {
+    "mtime": 1785331397.6836655,
+    "ast_hash": "3a0c104de8e0f1760ff78ffc44a35e33",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/admin/modulos/index.tsx": {
+    "mtime": 1785335337.783628,
+    "ast_hash": "732730d2003bcc75f22f85f6d6edb4ab",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/admin/usuarios/[id].tsx": {
+    "mtime": 1785335362.4840977,
+    "ast_hash": "b2195e11132d4246dacf4f039482bf25",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/admin/usuarios/index.tsx": {
+    "mtime": 1785335271.055512,
+    "ast_hash": "6f3a65bc96c7893a4757c2ad0394e160",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/modulos/index.tsx": {
+    "mtime": 1785335413.753376,
+    "ast_hash": "ca1e6f23b0c3957e0ecc6b9a3b3ee584",
+    "semantic_hash": ""
+  },
+  "apps/app/components/AppUpdateAlert.tsx": {
+    "mtime": 1785331020.1618862,
+    "ast_hash": "da5115f4de0f320a5731bffe3a9cd39b",
+    "semantic_hash": ""
+  },
+  "apps/app/components/admin/AdminModulesScreen.tsx": {
+    "mtime": 1785335334.3218093,
+    "ast_hash": "a3157914035b62411479530ea2348930",
+    "semantic_hash": ""
+  },
+  "apps/app/components/admin/AdminUserModulesScreen.tsx": {
+    "mtime": 1785335352.5820394,
+    "ast_hash": "41d13de6f8d793b03c062564bbe7a5db",
+    "semantic_hash": ""
+  },
+  "apps/app/components/admin/AdminUsersScreen.tsx": {
+    "mtime": 1785335374.134008,
+    "ast_hash": "a8efb9bd30c64a078efdc34f78f9f014",
+    "semantic_hash": ""
+  },
+  "apps/app/components/admin/useAdminModules.ts": {
+    "mtime": 1785335296.5508497,
+    "ast_hash": "9f8a451de5373437dbd6e1a827b2666c",
+    "semantic_hash": ""
+  },
+  "apps/app/components/admin/useAdminUsers.ts": {
+    "mtime": 1785335246.4014645,
+    "ast_hash": "a6463ca885fe12d0681c116d3a5b4e2f",
+    "semantic_hash": ""
+  },
+  "apps/app/components/modulos/ModulosScreen.tsx": {
+    "mtime": 1785335404.5745432,
+    "ast_hash": "db4550de60cfa973b91c3cd28ddb00ce",
+    "semantic_hash": ""
+  },
+  "apps/app/eas.json": {
+    "mtime": 1785331107.3390615,
+    "ast_hash": "c53244e460bb191b4d7abbf31eb9bf0e",
+    "semantic_hash": ""
+  },
+  "apps/app/hooks/useAppVersion.ts": {
+    "mtime": 1785331007.2884214,
+    "ast_hash": "7765e1f2c0d25f5cc16658f58d26d62e",
+    "semantic_hash": ""
+  },
+  "packages/supabase/adminUsers.ts": {
+    "mtime": 1785335158.7258885,
+    "ast_hash": "84bf5e18549d853d1972def260d6caea",
+    "semantic_hash": ""
+  },
+  "packages/supabase/appVersion.ts": {
+    "mtime": 1785330995.69134,
+    "ast_hash": "58a23e03e034e40afadfa4a886bcb99d",
+    "semantic_hash": ""
+  },
+  "packages/supabase/modules.ts": {
+    "mtime": 1785335139.5223649,
+    "ast_hash": "fc65166eae1d9a90f85d902931a7fcc5",
+    "semantic_hash": ""
+  },
+  "packages/ui/components/Input.tsx": {
+    "mtime": 1785335004.9967303,
+    "ast_hash": "59dd280dc2631030d466eb3e73c922c7",
+    "semantic_hash": ""
+  },
+  "supabase/functions/admin-manage-user/index.ts": {
+    "mtime": 1785334958.1057143,
+    "ast_hash": "d1736f48a9a7f96099d5510142157bdc",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/202607291000_app_versions.sql": {
+    "mtime": 1785330935.9261162,
+    "ast_hash": "0aad0849fac60f4cf50e5c5d76996716",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/202607291500_admin_panel_foundation.sql": {
+    "mtime": 1785334803.8742025,
+    "ast_hash": "d785dd5d4056b44e8632484302c3df6c",
+    "semantic_hash": ""
+  },
+  ".github/workflows/android-release.yml": {
+    "mtime": 1785333401.028788,
+    "ast_hash": "2b034871a0636e3c81c4be34c6865883",
     "semantic_hash": ""
   }
 }
