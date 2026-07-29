@@ -37,7 +37,7 @@ export function NavBar({ compact }: { compact: boolean }) {
       ) : null}
 
       <View style={{ flexDirection: "row", gap: space[2], alignItems: "center" }}>
-        {!compact ? <Button label="Entrar" variant="ghost" size="sm" /> : null}
+        {!compact ? <Button label="Entrar" variant="ghost" size="sm" onPress={() => router.push("/login")} /> : null}
         <Button label="Começar grátis" variant="primary" size="sm" onPress={() => router.push("/diagnostico")} />
       </View>
     </View>

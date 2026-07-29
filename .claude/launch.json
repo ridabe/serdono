@@ -5,7 +5,8 @@
       "name": "serdono-web",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["--filter", "@serdono/app", "exec", "expo", "start", "--web"],
-      "port": 8081
+      "port": 8081,
+      "autoPort": true
     }
   ]
 }

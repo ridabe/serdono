@@ -34,3 +34,52 @@ export async function getCurrentSession() {
 export function isAnonymousSession(session: { user: { is_anonymous?: boolean } } | null): boolean {
   return Boolean(session?.user?.is_anonymous);
 }
+
+export type UserRole = "user" | "admin";
+
+/**
+ * Lê o claim custom "user_role" injetado no JWT pelo Auth Hook
+ * `custom_access_token_hook` (SPEC.md SDD-5/SDD-22) — nunca de uma coluna
+ * lida por RLS comum, para não vazar quem é admin. Se o Hook ainda não
+ * estiver habilitado no projeto Supabase (ação pendente de dashboard), o
+ * claim não existe e o fallback é sempre "user" — fail-safe, nunca admin
+ * por omissão.
+ */
+const BASE64_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+// Decoder manual em vez de `atob` (indisponível em todo runtime Hermes/RN) —
+// portátil entre web, iOS e Android sem depender de polyfill global.
+function decodeBase64Url(input: string): string {
+  const base64 = input.replace(/-/g, "+").replace(/_/g, "/");
+  let output = "";
+  let buffer = 0;
+  let bits = 0;
+  for (const char of base64) {
+    if (char === "=") break;
+    const value = BASE64_CHARS.indexOf(char);
+    if (value === -1) continue;
+    buffer = (buffer << 6) | value;
+    bits += 6;
+    if (bits >= 8) {
+      bits -= 8;
+      output += String.fromCharCode((buffer >> bits) & 0xff);
+    }
+  }
+  return decodeURIComponent(
+    output
+      .split("")
+      .map((c) => "%" + c.charCodeAt(0).toString(16).padStart(2, "0"))
+      .join("")
+  );
+}
+
+export function getUserRole(session: { access_token: string } | null): UserRole {
+  if (!session?.access_token) return "user";
+  try {
+    const payload = session.access_token.split(".")[1];
+    const json = JSON.parse(decodeBase64Url(payload));
+    return json.user_role === "admin" ? "admin" : "user";
+  } catch {
+    return "user";
+  }
+}
