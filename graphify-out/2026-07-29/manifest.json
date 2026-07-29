@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1785329267.0960193,
-    "ast_hash": "b17248b90ff8d5044c09b141a694f267",
+    "mtime": 1785289082.7951021,
+    "ast_hash": "a54ccfb74079beba747fd67677debdc2",
     "semantic_hash": ""
   },
   ".mcp.json": {
@@ -305,8 +305,8 @@
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1785329518.6000245,
-    "ast_hash": "2632607d0399bca02175862c8256d53a",
+    "mtime": 1785289037.5668402,
+    "ast_hash": "1eab90264abfc2e5ffb990857605dd25",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
@@ -450,8 +450,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/login/LoginScreen.tsx": {
-    "mtime": 1785329116.6343353,
-    "ast_hash": "3157381e7a7750b3986b592e410d6722",
+    "mtime": 1785267742.3287203,
+    "ast_hash": "053a0e000843949936f995469f01457c",
     "semantic_hash": ""
   },
   "apps/app/components/perfil/CompletarCadastroScreen.tsx": {
@@ -460,8 +460,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/auth.ts": {
-    "mtime": 1785329036.2853613,
-    "ast_hash": "90b6449da49b310411d0ef58d6fe6beb",
+    "mtime": 1785267654.8013265,
+    "ast_hash": "baaca3677a41575dda26145d3331b6c7",
     "semantic_hash": ""
   },
   "packages/supabase/storage.ts": {
@@ -497,31 +497,6 @@
   "apps/app/components/perfil/usePerfilForm.ts": {
     "mtime": 1785288945.8785515,
     "ast_hash": "171d24205a1d71d94bac433c89587abf",
-    "semantic_hash": ""
-  },
-  "apps/app/app/login/esqueci-senha.tsx": {
-    "mtime": 1785329210.547729,
-    "ast_hash": "134eb63aee74dc3a851bb44b97abe497",
-    "semantic_hash": ""
-  },
-  "apps/app/app/login/redefinir-senha.tsx": {
-    "mtime": 1785329213.7213147,
-    "ast_hash": "22668c572535d34f00feb27cf6d149c7",
-    "semantic_hash": ""
-  },
-  "apps/app/components/login/EsqueciSenhaScreen.tsx": {
-    "mtime": 1785329134.287609,
-    "ast_hash": "7544a7af46c68456b94878a30693f2fb",
-    "semantic_hash": ""
-  },
-  "apps/app/components/login/Field.tsx": {
-    "mtime": 1785329090.479521,
-    "ast_hash": "cbdebb864a22b085db99cb0ce430b4a5",
-    "semantic_hash": ""
-  },
-  "apps/app/components/login/RedefinirSenhaScreen.tsx": {
-    "mtime": 1785329436.0192966,
-    "ast_hash": "cd234f4b81cbe10941193eb2cc1ce032",
     "semantic_hash": ""
   }
 }

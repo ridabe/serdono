@@ -1,7 +1,7 @@
 import * as Linking from "expo-linking";
 import { useRouter } from "expo-router";
 import { useEffect, useRef, useState } from "react";
-import { Platform, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { Platform, Pressable, ScrollView, Text, View } from "react-native";
 import * as WebBrowser from "expo-web-browser";
 import { Button, EntrepreneurBackground, Logo, color, radius, space, type } from "@serdono/ui";
 import {
@@ -13,6 +13,7 @@ import {
   supabase,
 } from "@serdono/supabase";
 import { pickEntrepreneurPhoto } from "../../constants/entrepreneurPhotos";
+import { Field } from "./Field";
 
 const BACKGROUND_PHOTO = pickEntrepreneurPhoto("cadastro");
 
@@ -142,7 +143,22 @@ export function LoginScreen() {
             </Text>
 
             <Field label="E-mail" value={email} onChangeText={setEmail} placeholder="voce@email.com" keyboardType="email-address" autoCapitalize="none" />
-            <Field label="Senha" value={senha} onChangeText={setSenha} placeholder="Sua senha" secureTextEntry />
+            <Field
+              label="Senha"
+              value={senha}
+              onChangeText={setSenha}
+              placeholder="Sua senha"
+              secureTextEntry
+              autoCapitalize="none"
+            />
+
+            <Pressable
+              onPress={() => router.push("/login/esqueci-senha")}
+              accessibilityRole="link"
+              style={{ alignSelf: "flex-end", minHeight: 44, justifyContent: "center" }}
+            >
+              <Text style={{ ...type.body, color: color.action.secondary }}>Esqueci minha senha</Text>
+            </Pressable>
 
             {error ? <Text style={{ ...type.caption, color: color.state.danger, marginBottom: space[3] }}>{error}</Text> : null}
 
@@ -174,38 +190,6 @@ export function LoginScreen() {
           </View>
         </View>
       </ScrollView>
-    </View>
-  );
-}
-
-function Field(props: {
-  label: string;
-  value: string;
-  onChangeText: (v: string) => void;
-  placeholder?: string;
-  secureTextEntry?: boolean;
-  keyboardType?: "default" | "email-address";
-  autoCapitalize?: "none" | "sentences";
-}) {
-  return (
-    <View style={{ marginBottom: space[4] }}>
-      <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[1] }}>{props.label}</Text>
-      <TextInput
-        value={props.value}
-        onChangeText={props.onChangeText}
-        placeholder={props.placeholder}
-        secureTextEntry={props.secureTextEntry}
-        keyboardType={props.keyboardType}
-        autoCapitalize={props.autoCapitalize ?? "sentences"}
-        style={{
-          height: 48,
-          borderWidth: 1,
-          borderColor: color.border.default,
-          borderRadius: radius.md,
-          paddingHorizontal: space[4],
-          fontSize: 14,
-        }}
-      />
     </View>
   );
 }

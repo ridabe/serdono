@@ -272,7 +272,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_layout",
-      "community": 0,
+      "community": 220,
       "norm_label": "_layout.tsx"
     },
     {
@@ -282,7 +282,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "apps_app_app_layout_rootlayout",
-      "community": 0,
+      "community": 220,
       "norm_label": "rootlayout()"
     },
     {
@@ -292,7 +292,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_cadastro_bem_vindo",
-      "community": 226,
+      "community": 220,
       "norm_label": "bem-vindo.tsx"
     },
     {
@@ -302,7 +302,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_app_app_cadastro_bem_vindo_bemvindo",
-      "community": 226,
+      "community": 220,
       "norm_label": "bemvindo()"
     },
     {
@@ -406,26 +406,6 @@
       "norm_label": "lgpd()"
     },
     {
-      "label": "esqueci-senha.tsx",
-      "file_type": "code",
-      "source_file": "apps/app/app/login/esqueci-senha.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "apps_app_app_login_esqueci_senha",
-      "community": 221,
-      "norm_label": "esqueci-senha.tsx"
-    },
-    {
-      "label": "EsqueciSenha()",
-      "file_type": "code",
-      "source_file": "apps/app/app/login/esqueci-senha.tsx",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "apps_app_app_login_esqueci_senha_esquecisenha",
-      "community": 221,
-      "norm_label": "esquecisenha()"
-    },
-    {
       "label": "index.tsx",
       "file_type": "code",
       "source_file": "apps/app/app/login/index.tsx",
@@ -444,26 +424,6 @@
       "id": "apps_app_app_login_index_login",
       "community": 224,
       "norm_label": "login()"
-    },
-    {
-      "label": "redefinir-senha.tsx",
-      "file_type": "code",
-      "source_file": "apps/app/app/login/redefinir-senha.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "apps_app_app_login_redefinir_senha",
-      "community": 221,
-      "norm_label": "redefinir-senha.tsx"
-    },
-    {
-      "label": "RedefinirSenha()",
-      "file_type": "code",
-      "source_file": "apps/app/app/login/redefinir-senha.tsx",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "apps_app_app_login_redefinir_senha_redefinirsenha",
-      "community": 221,
-      "norm_label": "redefinirsenha()"
     },
     {
       "label": "privacidade.tsx",
@@ -752,7 +712,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks",
-      "community": 82,
+      "community": 81,
       "norm_label": "blocks.ts"
     },
     {
@@ -762,7 +722,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_diagnosticofield",
-      "community": 82,
+      "community": 81,
       "norm_label": "diagnosticofield"
     },
     {
@@ -772,7 +732,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_choiceoption",
-      "community": 82,
+      "community": 81,
       "norm_label": "choiceoption"
     },
     {
@@ -782,7 +742,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_singlechoiceblock",
-      "community": 82,
+      "community": 81,
       "norm_label": "singlechoiceblock"
     },
     {
@@ -792,7 +752,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_multichoiceblock",
-      "community": 82,
+      "community": 81,
       "norm_label": "multichoiceblock"
     },
     {
@@ -802,7 +762,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_locationblock",
-      "community": 82,
+      "community": 81,
       "norm_label": "locationblock"
     },
     {
@@ -812,7 +772,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_diagnosticoblock",
-      "community": 82,
+      "community": 81,
       "norm_label": "diagnosticoblock"
     },
     {
@@ -822,7 +782,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_diagnostico_blocks",
-      "community": 82,
+      "community": 81,
       "norm_label": "diagnostico_blocks"
     },
     {
@@ -1032,7 +992,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_home_navbar",
-      "community": 0,
+      "community": 220,
       "norm_label": "navbar.tsx"
     },
     {
@@ -1042,7 +1002,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "apps_app_components_home_navbar_links",
-      "community": 0,
+      "community": 220,
       "norm_label": "links"
     },
     {
@@ -1176,66 +1136,6 @@
       "norm_label": "legallayout()"
     },
     {
-      "label": "EsqueciSenhaScreen.tsx",
-      "file_type": "code",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "apps_app_components_login_esquecisenhascreen",
-      "community": 221,
-      "norm_label": "esquecisenhascreen.tsx"
-    },
-    {
-      "label": "BACKGROUND_PHOTO",
-      "file_type": "code",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L10",
-      "_origin": "ast",
-      "id": "apps_app_components_login_esquecisenhascreen_background_photo",
-      "community": 221,
-      "norm_label": "background_photo"
-    },
-    {
-      "label": "isValidEmail()",
-      "file_type": "code",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L12",
-      "_origin": "ast",
-      "id": "apps_app_components_login_esquecisenhascreen_isvalidemail",
-      "community": 221,
-      "norm_label": "isvalidemail()"
-    },
-    {
-      "label": "EsqueciSenhaScreen()",
-      "file_type": "code",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L16",
-      "_origin": "ast",
-      "id": "apps_app_components_login_esquecisenhascreen_esquecisenhascreen",
-      "community": 221,
-      "norm_label": "esquecisenhascreen()"
-    },
-    {
-      "label": "Field.tsx",
-      "file_type": "code",
-      "source_file": "apps/app/components/login/Field.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "apps_app_components_login_field",
-      "community": 221,
-      "norm_label": "field.tsx"
-    },
-    {
-      "label": "Field()",
-      "file_type": "code",
-      "source_file": "apps/app/components/login/Field.tsx",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "apps_app_components_login_field_field",
-      "community": 221,
-      "norm_label": "field()"
-    },
-    {
       "label": "LoginScreen.tsx",
       "file_type": "code",
       "source_file": "apps/app/components/login/LoginScreen.tsx",
@@ -1249,7 +1149,7 @@
       "label": "BACKGROUND_PHOTO",
       "file_type": "code",
       "source_file": "apps/app/components/login/LoginScreen.tsx",
-      "source_location": "L18",
+      "source_location": "L17",
       "_origin": "ast",
       "id": "apps_app_components_login_loginscreen_background_photo",
       "community": 224,
@@ -1259,7 +1159,7 @@
       "label": "destinationFor()",
       "file_type": "code",
       "source_file": "apps/app/components/login/LoginScreen.tsx",
-      "source_location": "L20",
+      "source_location": "L19",
       "_origin": "ast",
       "id": "apps_app_components_login_loginscreen_destinationfor",
       "community": 224,
@@ -1269,51 +1169,21 @@
       "label": "LoginScreen()",
       "file_type": "code",
       "source_file": "apps/app/components/login/LoginScreen.tsx",
-      "source_location": "L24",
+      "source_location": "L23",
       "_origin": "ast",
       "id": "apps_app_components_login_loginscreen_loginscreen",
       "community": 224,
       "norm_label": "loginscreen()"
     },
     {
-      "label": "RedefinirSenhaScreen.tsx",
+      "label": "Field()",
       "file_type": "code",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L1",
+      "source_file": "apps/app/components/login/LoginScreen.tsx",
+      "source_location": "L181",
       "_origin": "ast",
-      "id": "apps_app_components_login_redefinirsenhascreen",
-      "community": 221,
-      "norm_label": "redefinirsenhascreen.tsx"
-    },
-    {
-      "label": "BACKGROUND_PHOTO",
-      "file_type": "code",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L10",
-      "_origin": "ast",
-      "id": "apps_app_components_login_redefinirsenhascreen_background_photo",
-      "community": 221,
-      "norm_label": "background_photo"
-    },
-    {
-      "label": "consumeRecoveryLink()",
-      "file_type": "code",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L17",
-      "_origin": "ast",
-      "id": "apps_app_components_login_redefinirsenhascreen_consumerecoverylink",
-      "community": 221,
-      "norm_label": "consumerecoverylink()"
-    },
-    {
-      "label": "RedefinirSenhaScreen()",
-      "file_type": "code",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L41",
-      "_origin": "ast",
-      "id": "apps_app_components_login_redefinirsenhascreen_redefinirsenhascreen",
-      "community": 221,
-      "norm_label": "redefinirsenhascreen()"
+      "id": "apps_app_components_login_loginscreen_field",
+      "community": 224,
+      "norm_label": "field()"
     },
     {
       "label": "CompletarCadastroScreen.tsx",
@@ -1412,7 +1282,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_perfil_useperfilform",
-      "community": 219,
+      "community": 27,
       "norm_label": "useperfilform.ts"
     },
     {
@@ -1432,7 +1302,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_constants_entrepreneurphotos",
-      "community": 221,
+      "community": 82,
       "norm_label": "entrepreneurphotos.ts"
     },
     {
@@ -1442,7 +1312,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "apps_app_constants_entrepreneurphotos_entrepreneurphoto",
-      "community": 221,
+      "community": 82,
       "norm_label": "entrepreneurphoto"
     },
     {
@@ -1452,7 +1322,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "apps_app_constants_entrepreneurphotos_entrepreneur_photos",
-      "community": 221,
+      "community": 82,
       "norm_label": "entrepreneur_photos"
     },
     {
@@ -1462,7 +1332,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "apps_app_constants_entrepreneurphotos_pickentrepreneurphoto",
-      "community": 221,
+      "community": 82,
       "norm_label": "pickentrepreneurphoto()"
     },
     {
@@ -1522,7 +1392,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_package",
-      "community": 1,
+      "community": 218,
       "norm_label": "package.json"
     },
     {
@@ -1532,7 +1402,7 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "apps_app_package_name",
-      "community": 1,
+      "community": 218,
       "norm_label": "name"
     },
     {
@@ -1542,7 +1412,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_package_version",
-      "community": 1,
+      "community": 218,
       "norm_label": "version"
     },
     {
@@ -1552,7 +1422,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "apps_app_package_private",
-      "community": 1,
+      "community": 218,
       "norm_label": "private"
     },
     {
@@ -1562,7 +1432,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "apps_app_package_main",
-      "community": 1,
+      "community": 218,
       "norm_label": "main"
     },
     {
@@ -1572,7 +1442,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "apps_app_package_scripts",
-      "community": 1,
+      "community": 218,
       "norm_label": "scripts"
     },
     {
@@ -1582,7 +1452,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_app_package_scripts_start",
-      "community": 1,
+      "community": 218,
       "norm_label": "start"
     },
     {
@@ -1592,7 +1462,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "apps_app_package_scripts_android",
-      "community": 1,
+      "community": 218,
       "norm_label": "android"
     },
     {
@@ -1602,7 +1472,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "apps_app_package_scripts_ios",
-      "community": 1,
+      "community": 218,
       "norm_label": "ios"
     },
     {
@@ -1612,7 +1482,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "apps_app_package_scripts_web",
-      "community": 1,
+      "community": 218,
       "norm_label": "web"
     },
     {
@@ -1622,7 +1492,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_app_package_scripts_build_web",
-      "community": 1,
+      "community": 218,
       "norm_label": "build:web"
     },
     {
@@ -1632,7 +1502,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "apps_app_package_scripts_typecheck",
-      "community": 1,
+      "community": 218,
       "norm_label": "typecheck"
     },
     {
@@ -1912,7 +1782,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "apps_app_package_devdependencies",
-      "community": 1,
+      "community": 218,
       "norm_label": "devdependencies"
     },
     {
@@ -1922,7 +1792,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "apps_app_package_devdependencies_babel_core",
-      "community": 1,
+      "community": 218,
       "norm_label": "@babel/core"
     },
     {
@@ -1932,7 +1802,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "apps_app_package_devdependencies_types_react",
-      "community": 1,
+      "community": 218,
       "norm_label": "@types/react"
     },
     {
@@ -1942,7 +1812,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "apps_app_package_devdependencies_typescript",
-      "community": 1,
+      "community": 218,
       "norm_label": "typescript"
     },
     {
@@ -2352,7 +2222,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "packages_core_fitscore_capitalfaixa",
-      "community": 82,
+      "community": 81,
       "norm_label": "capitalfaixa"
     },
     {
@@ -2362,7 +2232,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_core_fitscore_tempodisponivel",
-      "community": 82,
+      "community": 81,
       "norm_label": "tempodisponivel"
     },
     {
@@ -2492,7 +2362,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_core_index",
-      "community": 82,
+      "community": 81,
       "norm_label": "index.ts"
     },
     {
@@ -2682,7 +2552,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_auth",
-      "community": 224,
+      "community": 27,
       "norm_label": "auth.ts"
     },
     {
@@ -2716,43 +2586,13 @@
       "norm_label": "signout()"
     },
     {
-      "label": "requestPasswordReset()",
-      "file_type": "code",
-      "source_file": "packages/supabase/auth.ts",
-      "source_location": "L29",
-      "_origin": "ast",
-      "id": "packages_supabase_auth_requestpasswordreset",
-      "community": 224,
-      "norm_label": "requestpasswordreset()"
-    },
-    {
-      "label": "confirmPasswordRecovery()",
-      "file_type": "code",
-      "source_file": "packages/supabase/auth.ts",
-      "source_location": "L39",
-      "_origin": "ast",
-      "id": "packages_supabase_auth_confirmpasswordrecovery",
-      "community": 221,
-      "norm_label": "confirmpasswordrecovery()"
-    },
-    {
-      "label": "updatePassword()",
-      "file_type": "code",
-      "source_file": "packages/supabase/auth.ts",
-      "source_location": "L45",
-      "_origin": "ast",
-      "id": "packages_supabase_auth_updatepassword",
-      "community": 224,
-      "norm_label": "updatepassword()"
-    },
-    {
       "label": "client.ts",
       "file_type": "code",
       "source_file": "packages/supabase/client.ts",
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_client",
-      "community": 218,
+      "community": 27,
       "norm_label": "client.ts"
     },
     {
@@ -2762,7 +2602,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "packages_supabase_client_supabase",
-      "community": 218,
+      "community": 27,
       "norm_label": "supabase"
     },
     {
@@ -2772,7 +2612,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_index",
-      "community": 218,
+      "community": 27,
       "norm_label": "index.ts"
     },
     {
@@ -2782,7 +2622,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase",
-      "community": 218,
+      "community": 222,
       "norm_label": "knowledgebase.ts"
     },
     {
@@ -2792,7 +2632,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase_knowledgecategory",
-      "community": 218,
+      "community": 222,
       "norm_label": "knowledgecategory"
     },
     {
@@ -2812,7 +2652,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase_knowledgeanswer",
-      "community": 218,
+      "community": 222,
       "norm_label": "knowledgeanswer"
     },
     {
@@ -2822,7 +2662,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase_askknowledgebase",
-      "community": 218,
+      "community": 222,
       "norm_label": "askknowledgebase()"
     },
     {
@@ -3052,7 +2892,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_storage",
-      "community": 218,
+      "community": 27,
       "norm_label": "storage.ts"
     },
     {
@@ -3062,7 +2902,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "packages_supabase_storage_uploadavatar",
-      "community": 219,
+      "community": 27,
       "norm_label": "uploadavatar()"
     },
     {
@@ -3152,7 +2992,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "packages_supabase_types_database",
-      "community": 218,
+      "community": 27,
       "norm_label": "database"
     },
     {
@@ -3242,7 +3082,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_components_button",
-      "community": 0,
+      "community": 225,
       "norm_label": "button.tsx"
     },
     {
@@ -3252,7 +3092,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_ui_components_button_buttonvariant",
-      "community": 0,
+      "community": 225,
       "norm_label": "buttonvariant"
     },
     {
@@ -3262,7 +3102,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "packages_ui_components_button_buttonsize",
-      "community": 0,
+      "community": 225,
       "norm_label": "buttonsize"
     },
     {
@@ -3272,7 +3112,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "packages_ui_components_button_buttonprops",
-      "community": 0,
+      "community": 225,
       "norm_label": "buttonprops"
     },
     {
@@ -3282,7 +3122,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "packages_ui_components_button_variantstyles",
-      "community": 0,
+      "community": 225,
       "norm_label": "variantstyles"
     },
     {
@@ -3292,7 +3132,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "packages_ui_components_button_button",
-      "community": 0,
+      "community": 219,
       "norm_label": "button()"
     },
     {
@@ -3302,7 +3142,7 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "packages_ui_components_button_styles",
-      "community": 0,
+      "community": 225,
       "norm_label": "styles"
     },
     {
@@ -3312,7 +3152,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_components_card",
-      "community": 0,
+      "community": 227,
       "norm_label": "card.tsx"
     },
     {
@@ -3322,7 +3162,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_ui_components_card_cardvariant",
-      "community": 0,
+      "community": 227,
       "norm_label": "cardvariant"
     },
     {
@@ -3332,7 +3172,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "packages_ui_components_card_cardprops",
-      "community": 0,
+      "community": 227,
       "norm_label": "cardprops"
     },
     {
@@ -3342,7 +3182,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_ui_components_card_card",
-      "community": 0,
+      "community": 227,
       "norm_label": "card()"
     },
     {
@@ -3352,7 +3192,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "packages_ui_components_card_styles",
-      "community": 0,
+      "community": 227,
       "norm_label": "styles"
     },
     {
@@ -3392,7 +3232,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_components_logo",
-      "community": 0,
+      "community": 220,
       "norm_label": "logo.tsx"
     },
     {
@@ -3402,7 +3242,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_ui_components_logo_symbolcolor",
-      "community": 0,
+      "community": 220,
       "norm_label": "symbolcolor"
     },
     {
@@ -3412,7 +3252,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "packages_ui_components_logo_symbolwhite",
-      "community": 0,
+      "community": 220,
       "norm_label": "symbolwhite"
     },
     {
@@ -3422,7 +3262,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "packages_ui_components_logo_logoprops",
-      "community": 0,
+      "community": 220,
       "norm_label": "logoprops"
     },
     {
@@ -3432,7 +3272,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_ui_components_logo_logo",
-      "community": 226,
+      "community": 220,
       "norm_label": "logo()"
     },
     {
@@ -3442,7 +3282,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_index",
-      "community": 0,
+      "community": 220,
       "norm_label": "index.ts"
     },
     {
@@ -4679,7 +4519,7 @@
       "label": "12. Decis\u00f5es registradas durante a implementa\u00e7\u00e3o da Home/Landing (retroativas a este PR)",
       "file_type": "document",
       "source_file": "docs/SPEC.md",
-      "source_location": "L306",
+      "source_location": "L305",
       "_origin": "ast",
       "id": "docs_spec_12_decis\u00f5es_registradas_durante_a_implementa\u00e7\u00e3o_da_home_landing_retroativas_a_este_pr",
       "community": 80,
@@ -9526,38 +9366,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "apps/app/app/login/esqueci-senha.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "apps_app_app_login_esqueci_senha",
-      "target": "apps_app_app_login_esqueci_senha_esquecisenha",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/app/login/esqueci-senha.tsx",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "apps_app_app_login_esqueci_senha",
-      "target": "apps_app_components_login_esquecisenhascreen",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/app/login/esqueci-senha.tsx",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "apps_app_app_login_esqueci_senha",
-      "target": "apps_app_components_login_esquecisenhascreen_esquecisenhascreen",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "apps/app/app/login/index.tsx",
       "source_location": "L3",
       "weight": 1.0,
@@ -9585,38 +9393,6 @@
       "weight": 1.0,
       "source": "apps_app_app_login_index",
       "target": "apps_app_components_login_loginscreen_loginscreen",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/app/login/redefinir-senha.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "apps_app_app_login_redefinir_senha",
-      "target": "apps_app_app_login_redefinir_senha_redefinirsenha",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/app/login/redefinir-senha.tsx",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "apps_app_app_login_redefinir_senha",
-      "target": "apps_app_components_login_redefinirsenhascreen",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/app/login/redefinir-senha.tsx",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "apps_app_app_login_redefinir_senha",
-      "target": "apps_app_components_login_redefinirsenhascreen_redefinirsenhascreen",
       "confidence_score": 1.0
     },
     {
@@ -11145,213 +10921,8 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L10",
-      "weight": 1.0,
-      "source": "apps_app_components_login_esquecisenhascreen",
-      "target": "apps_app_components_login_esquecisenhascreen_background_photo",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L16",
-      "weight": 1.0,
-      "source": "apps_app_components_login_esquecisenhascreen",
-      "target": "apps_app_components_login_esquecisenhascreen_esquecisenhascreen",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L12",
-      "weight": 1.0,
-      "source": "apps_app_components_login_esquecisenhascreen",
-      "target": "apps_app_components_login_esquecisenhascreen_isvalidemail",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "apps_app_components_login_esquecisenhascreen",
-      "target": "apps_app_components_login_field",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "apps_app_components_login_esquecisenhascreen",
-      "target": "apps_app_components_login_field_field",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "apps_app_components_login_esquecisenhascreen",
-      "target": "apps_app_constants_entrepreneurphotos",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "apps_app_components_login_esquecisenhascreen",
-      "target": "apps_app_constants_entrepreneurphotos_pickentrepreneurphoto",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "apps_app_components_login_esquecisenhascreen",
-      "target": "packages_supabase_auth_requestpasswordreset",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "apps_app_components_login_esquecisenhascreen",
-      "target": "packages_supabase_index",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "apps_app_components_login_esquecisenhascreen",
-      "target": "packages_ui_components_button_button",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "apps_app_components_login_esquecisenhascreen",
-      "target": "packages_ui_components_entrepreneurbackground_entrepreneurbackground",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "apps_app_components_login_esquecisenhascreen",
-      "target": "packages_ui_components_logo_logo",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/EsqueciSenhaScreen.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "apps_app_components_login_esquecisenhascreen",
-      "target": "packages_ui_index",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/Field.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "apps_app_components_login_field",
-      "target": "apps_app_components_login_field_field",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/Field.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "apps_app_components_login_field",
-      "target": "packages_ui_index",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "apps/app/components/login/LoginScreen.tsx",
-      "source_location": "L16",
-      "weight": 1.0,
-      "source": "apps_app_components_login_loginscreen",
-      "target": "apps_app_components_login_field",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "apps_app_components_login_redefinirsenhascreen",
-      "target": "apps_app_components_login_field",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/LoginScreen.tsx",
-      "source_location": "L16",
-      "weight": 1.0,
-      "source": "apps_app_components_login_loginscreen",
-      "target": "apps_app_components_login_field_field",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "apps_app_components_login_redefinirsenhascreen",
-      "target": "apps_app_components_login_field_field",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/LoginScreen.tsx",
-      "source_location": "L18",
+      "source_location": "L17",
       "weight": 1.0,
       "source": "apps_app_components_login_loginscreen",
       "target": "apps_app_components_login_loginscreen_background_photo",
@@ -11361,7 +10932,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/login/LoginScreen.tsx",
-      "source_location": "L20",
+      "source_location": "L19",
       "weight": 1.0,
       "source": "apps_app_components_login_loginscreen",
       "target": "apps_app_components_login_loginscreen_destinationfor",
@@ -11371,7 +10942,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/login/LoginScreen.tsx",
-      "source_location": "L24",
+      "source_location": "L181",
+      "weight": 1.0,
+      "source": "apps_app_components_login_loginscreen",
+      "target": "apps_app_components_login_loginscreen_field",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/login/LoginScreen.tsx",
+      "source_location": "L23",
       "weight": 1.0,
       "source": "apps_app_components_login_loginscreen",
       "target": "apps_app_components_login_loginscreen_loginscreen",
@@ -11518,157 +11099,6 @@
       "weight": 1.0,
       "source": "apps_app_components_login_loginscreen",
       "target": "packages_ui_index",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L10",
-      "weight": 1.0,
-      "source": "apps_app_components_login_redefinirsenhascreen",
-      "target": "apps_app_components_login_redefinirsenhascreen_background_photo",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L17",
-      "weight": 1.0,
-      "source": "apps_app_components_login_redefinirsenhascreen",
-      "target": "apps_app_components_login_redefinirsenhascreen_consumerecoverylink",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L41",
-      "weight": 1.0,
-      "source": "apps_app_components_login_redefinirsenhascreen",
-      "target": "apps_app_components_login_redefinirsenhascreen_redefinirsenhascreen",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "apps_app_components_login_redefinirsenhascreen",
-      "target": "apps_app_constants_entrepreneurphotos",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "apps_app_components_login_redefinirsenhascreen",
-      "target": "apps_app_constants_entrepreneurphotos_pickentrepreneurphoto",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "apps_app_components_login_redefinirsenhascreen",
-      "target": "packages_supabase_auth_confirmpasswordrecovery",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "apps_app_components_login_redefinirsenhascreen",
-      "target": "packages_supabase_auth_updatepassword",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "apps_app_components_login_redefinirsenhascreen",
-      "target": "packages_supabase_client_supabase",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "apps_app_components_login_redefinirsenhascreen",
-      "target": "packages_supabase_index",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "apps_app_components_login_redefinirsenhascreen",
-      "target": "packages_ui_components_button_button",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "apps_app_components_login_redefinirsenhascreen",
-      "target": "packages_ui_components_entrepreneurbackground_entrepreneurbackground",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "apps_app_components_login_redefinirsenhascreen",
-      "target": "packages_ui_components_logo_logo",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "apps_app_components_login_redefinirsenhascreen",
-      "target": "packages_ui_index",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/login/RedefinirSenhaScreen.tsx",
-      "source_location": "L34",
-      "weight": 1.0,
-      "source": "apps_app_components_login_redefinirsenhascreen_consumerecoverylink",
-      "target": "packages_supabase_auth_confirmpasswordrecovery",
       "confidence_score": 1.0
     },
     {
@@ -13392,26 +12822,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/auth.ts",
-      "source_location": "L39",
-      "weight": 1.0,
-      "source": "packages_supabase_auth",
-      "target": "packages_supabase_auth_confirmpasswordrecovery",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/supabase/auth.ts",
-      "source_location": "L29",
-      "weight": 1.0,
-      "source": "packages_supabase_auth",
-      "target": "packages_supabase_auth_requestpasswordreset",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/supabase/auth.ts",
       "source_location": "L4",
       "weight": 1.0,
       "source": "packages_supabase_auth",
@@ -13436,16 +12846,6 @@
       "weight": 1.0,
       "source": "packages_supabase_auth",
       "target": "packages_supabase_auth_signout",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "packages/supabase/auth.ts",
-      "source_location": "L45",
-      "weight": 1.0,
-      "source": "packages_supabase_auth",
-      "target": "packages_supabase_auth_updatepassword",
       "confidence_score": 1.0
     },
     {
@@ -15299,7 +14699,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/SPEC.md",
-      "source_location": "L306",
+      "source_location": "L305",
       "weight": 1.0,
       "source": "docs_spec_ser_dono_spec_especifica\u00e7\u00e3o_t\u00e9cnica_sdd",
       "target": "docs_spec_12_decis\u00f5es_registradas_durante_a_implementa\u00e7\u00e3o_da_home_landing_retroativas_a_este_pr",
@@ -17231,5 +16631,5 @@
       "confidence": "EXTRACTED"
     }
   ],
-  "built_at_commit": "1455dc1dabbbc4724a07713f3c149a651f5f5e7d"
+  "built_at_commit": "da256706ec48721ca115a0b123741266725b94ed"
 }
