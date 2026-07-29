@@ -1,7 +1,7 @@
 {
   ".claude/launch.json": {
-    "mtime": 1785250278.7136953,
-    "ast_hash": "3da31ab6e5ab8bb0d3b77906997b29fe",
+    "mtime": 1785267872.327973,
+    "ast_hash": "a144542d0bfd7504089d287714c893aa",
     "semantic_hash": ""
   },
   ".claude/settings.json": {
@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1785266784.797187,
-    "ast_hash": "4c292520ac66d516010000d9e15b24bf",
+    "mtime": 1785288607.945019,
+    "ast_hash": "ad07d1b7b669684e7c09407d0068932f",
     "semantic_hash": ""
   },
   ".mcp.json": {
@@ -20,8 +20,8 @@
     "semantic_hash": ""
   },
   "apps/app/app.config.js": {
-    "mtime": 1785254546.0951943,
-    "ast_hash": "5cd24d2c35afbc2e5665d7d4b862cfd8",
+    "mtime": 1785287795.6417782,
+    "ast_hash": "5485a352391272797ed117987bbac69f",
     "semantic_hash": ""
   },
   "apps/app/app/_layout.tsx": {
@@ -115,8 +115,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/home/NavBar.tsx": {
-    "mtime": 1785252788.3261027,
-    "ast_hash": "109b707757cd49652ff9416a67dceed8",
+    "mtime": 1785267749.2900803,
+    "ast_hash": "8714978037adfb04053a781d35c9dbd1",
     "semantic_hash": ""
   },
   "apps/app/components/home/QuizPreviewCard.tsx": {
@@ -140,8 +140,8 @@
     "semantic_hash": ""
   },
   "apps/app/package.json": {
-    "mtime": 1785253600.6237779,
-    "ast_hash": "2cf4b89337d3992f0b2e853e0dbfb6cb",
+    "mtime": 1785287795.6442585,
+    "ast_hash": "69e178827d7755ce488f6c7a79ed8d10",
     "semantic_hash": ""
   },
   "apps/app/tsconfig.json": {
@@ -195,8 +195,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/index.ts": {
-    "mtime": 1785266675.5054743,
-    "ast_hash": "9ddc58bd0e5711ab15bb46838418b4ce",
+    "mtime": 1785287795.646266,
+    "ast_hash": "c4039486c12f3d99db697b671857a203",
     "semantic_hash": ""
   },
   "packages/supabase/package.json": {
@@ -205,8 +205,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/session.ts": {
-    "mtime": 1785252220.8046372,
-    "ast_hash": "195abc3d1ae1f0eee4f41faccff483ec",
+    "mtime": 1785267674.2982008,
+    "ast_hash": "667bf11c490f52f6fc51c8aff1792d86",
     "semantic_hash": ""
   },
   "packages/supabase/tsconfig.json": {
@@ -215,8 +215,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/types.ts": {
-    "mtime": 1785252923.7227426,
-    "ast_hash": "fed13eed063e2ec9672abd76a7b3fc4f",
+    "mtime": 1785287795.6472654,
+    "ast_hash": "3a12fd85fabcf102e0e0039f9544f03d",
     "semantic_hash": ""
   },
   "packages/ui/components/Button.tsx": {
@@ -300,13 +300,13 @@
     "semantic_hash": ""
   },
   "docs/PRD.md": {
-    "mtime": 1785248903.1012354,
-    "ast_hash": "3dd0958f66195237a004873dee2ecdc5",
+    "mtime": 1785287795.6452672,
+    "ast_hash": "bc5c2067ef5c72503b121e2e4f4a5da8",
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1785266766.486871,
-    "ast_hash": "29580090f2b51ed966ddab22abad246b",
+    "mtime": 1785287795.646266,
+    "ast_hash": "70d62d7a7f636ba7a6527652b9062f04",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
@@ -407,6 +407,76 @@
   "supabase/migrations/202607281501_seed_knowledge_articles.sql": {
     "mtime": 1785266398.261369,
     "ast_hash": "17050546cd2468fe46d9152f161d40f5",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/_layout.tsx": {
+    "mtime": 1785288336.2275984,
+    "ast_hash": "f8c6c452bfa44ff6bf0331eba507ef7b",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/admin/_layout.tsx": {
+    "mtime": 1785267762.5223343,
+    "ast_hash": "242e232526ded923523a40afc4d63742",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/admin/index.tsx": {
+    "mtime": 1785267811.2718358,
+    "ast_hash": "dadca397dc292826cd99e6fa68d6e9b6",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/assistente/index.tsx": {
+    "mtime": 1785267807.9628437,
+    "ast_hash": "e8dd5ad0095f8fa1df477e4a712ac73d",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/completar-cadastro/index.tsx": {
+    "mtime": 1785287545.4438667,
+    "ast_hash": "1213b2529043d6fda98ea8117099c7ad",
+    "semantic_hash": ""
+  },
+  "apps/app/app/login/index.tsx": {
+    "mtime": 1785267745.7024527,
+    "ast_hash": "431580801aee90dd8fb3e5d4eb1ea72c",
+    "semantic_hash": ""
+  },
+  "apps/app/components/admin/AdminDashboardScreen.tsx": {
+    "mtime": 1785267802.0610116,
+    "ast_hash": "2d8164f0cf35991f46e1a32a399e88d9",
+    "semantic_hash": ""
+  },
+  "apps/app/components/assistente/AssistenteScreen.tsx": {
+    "mtime": 1785287795.6427398,
+    "ast_hash": "daf3bc32547b566499369a1a08ec8bf8",
+    "semantic_hash": ""
+  },
+  "apps/app/components/login/LoginScreen.tsx": {
+    "mtime": 1785267742.3287203,
+    "ast_hash": "053a0e000843949936f995469f01457c",
+    "semantic_hash": ""
+  },
+  "apps/app/components/perfil/CompletarCadastroScreen.tsx": {
+    "mtime": 1785288342.1592422,
+    "ast_hash": "a607d707a052d9d9a5625bc4d0c7c46c",
+    "semantic_hash": ""
+  },
+  "packages/supabase/auth.ts": {
+    "mtime": 1785267654.8013265,
+    "ast_hash": "baaca3677a41575dda26145d3331b6c7",
+    "semantic_hash": ""
+  },
+  "packages/supabase/storage.ts": {
+    "mtime": 1785287507.5464945,
+    "ast_hash": "dad9d420c8d90758a7a718076532d784",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/202607281600_user_roles_admin_claim.sql": {
+    "mtime": 1785287795.6512668,
+    "ast_hash": "1a2d271339fb87e091a8c83281bbe151",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/202607290000_avatar_url_and_avatars_bucket.sql": {
+    "mtime": 1785287392.527445,
+    "ast_hash": "53b990da619d298167fe73db0508760a",
     "semantic_hash": ""
   }
 }

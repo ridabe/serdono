@@ -19,11 +19,20 @@ revoke update (role) on public.users from authenticated, anon;
 -- devolve o mesmo evento com "claims" atualizado. Só supabase_auth_admin pode
 -- executá-la — nunca client-side (senão qualquer usuário logado leria/chamaria
 -- a função e potencialmente inferiria papéis de terceiros).
+--
+-- SECURITY DEFINER é obrigatório aqui: sem isso a função roda com os
+-- privilégios de quem chama (supabase_auth_admin), que não tem SELECT em
+-- public.users (só demos EXECUTE na função) — todo login quebrava com
+-- "permission denied for table users" até essa correção. Com SECURITY
+-- DEFINER a função roda como o dono (postgres), que já tem acesso à tabela;
+-- `set search_path = public` evita search_path hijacking nesse contexto
+-- elevado (mesma prática de public.handle_new_auth_user).
 -- ============================================================================
 create or replace function public.custom_access_token_hook(event jsonb)
 returns jsonb
 language plpgsql
 stable
+security definer
 set search_path = public
 as $$
 declare
@@ -42,5 +51,6 @@ begin
 end;
 $$;
 
+grant usage on schema public to supabase_auth_admin;
 grant execute on function public.custom_access_token_hook to supabase_auth_admin;
 revoke execute on function public.custom_access_token_hook from public, authenticated, anon;

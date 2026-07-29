@@ -79,7 +79,8 @@ Banco: Postgres via Supabase. Convenção: `snake_case`, chaves primárias `uuid
 | id | uuid (PK) | = auth.users.id |
 | nome | text | |
 | email | text | único |
-| telefone | text | opcional, usado em WhatsApp/SMS |
+| telefone | text | usado em WhatsApp/SMS — coletado obrigatoriamente na tela de completar cadastro pós-login (ver SPEC), mesmo a coluna aceitando nulo pra não travar migração de contas antigas |
+| avatar_url | text | foto de perfil, opcional — Supabase Storage, padronizada (ver SPEC) |
 | cidade, estado | text | usado no diagnóstico e na inteligência regional |
 | criado_via | enum | `organico`, `pago`, `indicacao`, `institucional` — alimenta o CAC real (ver Estudo Financeiro) |
 | onboarding_status | enum | `cadastrado`, `diagnostico_concluido`, `assinante`, `negocio_aberto` |

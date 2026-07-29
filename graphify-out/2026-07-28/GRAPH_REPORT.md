@@ -1,16 +1,16 @@
 # Graph Report - serdono  (2026-07-28)
 
 ## Corpus Check
-- 64 files · ~32,938 words
+- 74 files · ~49,222 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 728 nodes · 608 edges · 217 communities (39 shown, 178 thin omitted)
+- 758 nodes · 653 edges · 217 communities (39 shown, 178 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 43 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5642c132`
+- Built from commit: `7574d565`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -238,8 +238,8 @@
 3. `Ser Dono — SPEC (Especificação Técnica / SDD)` - 14 edges
 4. `compilerOptions` - 12 edges
 5. `Ser Dono` - 10 edges
-6. `Documento de Conceito v0.1 — EMPREENDER+ (nome provisório de Ser Dono)` - 10 edges
-7. `9. Especificação de Componentes` - 9 edges
+6. `9. Especificação de Componentes` - 10 edges
+7. `Documento de Conceito v0.1 — EMPREENDER+ (nome provisório de Ser Dono)` - 10 edges
 8. `calculateFitScore()` - 8 edges
 9. `Button()` - 8 edges
 10. `Qual arquivo usar em cada lugar` - 8 edges
@@ -278,8 +278,8 @@ Cohesion: 0.06
 Nodes (28): FinalCta(), Footer(), ForWhomSection(), scenarios, Hero(), HomeScreen(), HowItWorks(), steps (+20 more)
 
 ### Community 1 - "Dependências Expo/React"
-Cohesion: 0.08
-Nodes (24): dependencies, dotenv, expo, expo-constants, expo-font, @expo-google-fonts/inter, @expo-google-fonts/sora, expo-linking (+16 more)
+Cohesion: 0.05
+Nodes (39): dependencies, dotenv, expo, expo-constants, expo-font, @expo-google-fonts/inter, @expo-google-fonts/sora, expo-linking (+31 more)
 
 ### Community 2 - "Módulo Match de Nichos e Paywall"
 Cohesion: 0.12
@@ -359,35 +359,35 @@ Nodes (4): config, { getDefaultConfig }, path, workspaceRoot
 
 ### Community 23 - "Componente Card (UI)"
 Cohesion: 0.05
-Nodes (39): 0. Papel deste documento no fluxo SDD, 10. Acessibilidade, 11. Motion (transições), 12. Governança de assets, 13.1 Portal Web — `mockups/portal-web.html`, 13.2 App Mobile — `mockups/app-mobile.html`, 13. Telas de referência (mockups), 14. Checklist rápido para qualquer tela nova (+31 more)
+Nodes (40): 0. Papel deste documento no fluxo SDD, 10. Acessibilidade, 11. Motion (transições), 12. Governança de assets, 13.1 Portal Web — `mockups/portal-web.html`, 13.2 App Mobile — `mockups/app-mobile.html`, 13. Telas de referência (mockups), 14. Checklist rápido para qualquer tela nova (+32 more)
 
 ### Community 25 - "Métricas e Instrumentação de Funil"
 Cohesion: 0.67
 Nodes (3): Indicadores por etapa do funil (aquisição, ativação, conversão, engajamento, progresso, retenção, confiança, receita adicional), North Star Metric: negócios efetivamente abertos e operando por trimestre, Eventos mínimos a instrumentar (cadastro_criado ... assinatura_cancelada)
 
 ### Community 27 - "Cliente Supabase"
-Cohesion: 0.12
-Nodes (13): CadastroScreen(), CAPITAL_LABEL, formatMoney(), OBJETIVO_LABEL, stripMarkdown(), TEMPO_LABEL, MatchRow, Perfil (+5 more)
+Cohesion: 0.08
+Nodes (23): BACKGROUND_PHOTO, CadastroScreen(), CAPITAL_LABEL, formatMoney(), OBJETIVO_LABEL, stripMarkdown(), TEMPO_LABEL, BACKGROUND_PHOTO (+15 more)
 
 ### Community 80 - "Community 80"
 Cohesion: 0.08
 Nodes (24): 0. Papel deste documento no fluxo de trabalho, 10. Itens de Roadmap Técnico (fora do MVP, não bloqueiam), 11. Decisões que ainda precisam de dono (bloqueiam itens específicos, não o início geral do código), 12. Decisões registradas durante a implementação da Home/Landing (retroativas a este PR), 1.1 Por que Expo SDK 54, fixado, e não a versão mais nova, 1. Stack Definida, 2. Por que um código único para Web e Mobile (e o que isso custa), 3. Estrutura do Monorepo (+16 more)
 
 ### Community 81 - "Community 81"
-Cohesion: 0.16
-Nodes (19): calculateFitScore(), CAPITAL_RANGES, clamp(), DiagnosticoParaScore, FitScoreResult, NichoParaScore, overlapScore(), scoreContexto() (+11 more)
+Cohesion: 0.13
+Nodes (20): calculateFitScore(), CAPITAL_RANGES, clamp(), DiagnosticoParaScore, FitScoreResult, NichoParaScore, overlapScore(), scoreContexto() (+12 more)
 
 ### Community 82 - "Community 82"
-Cohesion: 0.12
-Nodes (12): ChoiceOption, DIAGNOSTICO_BLOCKS, DiagnosticoBlock, DiagnosticoField, LocationBlock, MultiChoiceBlock, SingleChoiceBlock, Answers (+4 more)
+Cohesion: 0.11
+Nodes (13): ChoiceOption, DIAGNOSTICO_BLOCKS, DiagnosticoBlock, DiagnosticoField, LocationBlock, MultiChoiceBlock, SingleChoiceBlock, Answers (+5 more)
 
 ### Community 83 - "Community 83"
 Cohesion: 0.11
 Nodes (14): graphify, Ordem de leitura recomendada ao iniciar qualquer tarefa, Regras de trabalho neste projeto, Ser Dono — Instruções do Projeto para o Claude, Escopo por fase, Estrutura do monorepo (alvo), Identidade visual, Personas (+6 more)
 
 ### Community 84 - "Community 84"
-Cohesion: 0.12
-Nodes (15): devDependencies, @babel/core, @types/react, typescript, main, name, private, scripts (+7 more)
+Cohesion: 0.27
+Nodes (3): LegalLayout(), LegalLayoutProps, LegalSection
 
 ### Community 85 - "Community 85"
 Cohesion: 0.15
@@ -430,7 +430,7 @@ Nodes (3): Bloco funcional: Contas e assinatura, Tabela subscriptions, Tabela us
   Documento de Conceito v0.1.pdf · relation: REFERENCES
 
 ## Knowledge Gaps
-- **514 isolated node(s):** `supabase`, `path`, `Answers`, `EMPTY_ANSWERS`, `MatchRow` (+509 more)
+- **527 isolated node(s):** `supabase`, `path`, `BACKGROUND_PHOTO`, `BACKGROUND_PHOTO`, `Answers` (+522 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **178 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -440,14 +440,14 @@ _Questions this graph is uniquely positioned to answer:_
 - **What is the exact relationship between `Fase 3 — Ecossistema (§12)` and `Fase 4 — Distribuição: white label, crédito/investimentos, app móvel completo`?**
   _Edge tagged AMBIGUOUS (relation: REFERENCES) - confidence is low._
 - **Why does `Ser Dono — PRD (Product Requirements Document)` connect `Configuração Expo (app.json)` to `Community 83`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
+  _High betweenness centrality (0.016) - this node is a cross-community bridge._
 - **Why does `Ser Dono — Design System` connect `Componente Card (UI)` to `Community 83`?**
-  _High betweenness centrality (0.015) - this node is a cross-community bridge._
+  _High betweenness centrality (0.014) - this node is a cross-community bridge._
 - **Why does `Ser Dono — SPEC (Especificação Técnica / SDD)` connect `Community 80` to `Community 83`?**
-  _High betweenness centrality (0.010) - this node is a cross-community bridge._
-- **What connects `supabase`, `path`, `Answers` to the rest of the system?**
-  _514 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+- **What connects `supabase`, `path`, `BACKGROUND_PHOTO` to the rest of the system?**
+  _527 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Layout e Landing Page (App)` be split into smaller, more focused modules?**
   _Cohesion score 0.06207482993197279 - nodes in this community are weakly interconnected._
 - **Should `Dependências Expo/React` be split into smaller, more focused modules?**
-  _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05 - nodes in this community are weakly interconnected._

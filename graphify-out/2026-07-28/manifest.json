@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1785255212.8920324,
-    "ast_hash": "74c44420471f0ba2d1145818ee6325f3",
+    "mtime": 1785266784.797187,
+    "ast_hash": "4c292520ac66d516010000d9e15b24bf",
     "semantic_hash": ""
   },
   ".mcp.json": {
@@ -60,18 +60,18 @@
     "semantic_hash": ""
   },
   "apps/app/components/cadastro/CadastroScreen.tsx": {
-    "mtime": 1785258297.2140303,
-    "ast_hash": "23be481dd8efcafdfe6126c2587ad843",
+    "mtime": 1785261026.241116,
+    "ast_hash": "23bf308d6b5a18c238b6b6792adf825a",
     "semantic_hash": ""
   },
   "apps/app/components/diagnostico/DiagnosticoScreen.tsx": {
-    "mtime": 1785253071.456968,
-    "ast_hash": "2cd551b133b56e2332597250050a1b93",
+    "mtime": 1785260950.1470401,
+    "ast_hash": "c7c92ef5c6bbe3400b31248b1a626e7f",
     "semantic_hash": ""
   },
   "apps/app/components/diagnostico/ResultadoScreen.tsx": {
-    "mtime": 1785258462.9796968,
-    "ast_hash": "e9b5b993277dfc1ca0f71368ce73bcee",
+    "mtime": 1785260982.5914378,
+    "ast_hash": "1c46f4cdde3791ca5e0778e9e5f1f685",
     "semantic_hash": ""
   },
   "apps/app/components/diagnostico/blocks.ts": {
@@ -90,8 +90,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/home/Footer.tsx": {
-    "mtime": 1785250035.897144,
-    "ast_hash": "491ded9504e7a638003a82ac8c9c12bc",
+    "mtime": 1785260152.5206275,
+    "ast_hash": "aaa90c336db0e8788af8342fc6d6c538",
     "semantic_hash": ""
   },
   "apps/app/components/home/ForWhomSection.tsx": {
@@ -195,8 +195,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/index.ts": {
-    "mtime": 1785252317.5218806,
-    "ast_hash": "353fb87513ce246899de669c8f7c79dc",
+    "mtime": 1785266675.5054743,
+    "ast_hash": "9ddc58bd0e5711ab15bb46838418b4ce",
     "semantic_hash": ""
   },
   "packages/supabase/package.json": {
@@ -235,8 +235,8 @@
     "semantic_hash": ""
   },
   "packages/ui/index.ts": {
-    "mtime": 1785249648.9729917,
-    "ast_hash": "c7ebcfa3528f1ae29c9769780026524c",
+    "mtime": 1785260648.1142879,
+    "ast_hash": "e9d130a8a3ece30d3fa50287e3ec430a",
     "semantic_hash": ""
   },
   "packages/ui/package.json": {
@@ -305,13 +305,13 @@
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1785255278.500241,
-    "ast_hash": "8f017dfc48474fbda4b6e49362c9b216",
+    "mtime": 1785266766.486871,
+    "ast_hash": "29580090f2b51ed966ddab22abad246b",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
-    "mtime": 1785248903.1072304,
-    "ast_hash": "6b7afba63e37628a67326815df2c1262",
+    "mtime": 1785260539.978675,
+    "ast_hash": "642ec6ee10c400b4c7bec2e2397a5135",
     "semantic_hash": ""
   },
   "docs/identidade-visual/Ser Dono - Painel de Conceitos de Marca.html": {
@@ -357,6 +357,56 @@
   "docs/identidade-visual/mockups/Ser Dono - Telas do Portal Web.pdf": {
     "mtime": 1785248903.1232908,
     "ast_hash": "67ded6ef7a3fd4f7c61db6f007dec67f",
+    "semantic_hash": ""
+  },
+  "apps/app/app/lgpd.tsx": {
+    "mtime": 1785260145.5273776,
+    "ast_hash": "fb1121db4137105b8cebf761923452c5",
+    "semantic_hash": ""
+  },
+  "apps/app/app/privacidade.tsx": {
+    "mtime": 1785260131.5038881,
+    "ast_hash": "0f91678a1d20fba91b084b91b66f0b4d",
+    "semantic_hash": ""
+  },
+  "apps/app/app/termos.tsx": {
+    "mtime": 1785260113.0744617,
+    "ast_hash": "2845c8ef39b0d7f656af7809ddc14114",
+    "semantic_hash": ""
+  },
+  "apps/app/components/legal/LegalLayout.tsx": {
+    "mtime": 1785260096.0697143,
+    "ast_hash": "7f630a0e45394f19d5183c0521c2d7f5",
+    "semantic_hash": ""
+  },
+  "apps/app/constants/entrepreneurPhotos.ts": {
+    "mtime": 1785260631.7946076,
+    "ast_hash": "76495456362ee9b1763f5f92b67302f7",
+    "semantic_hash": ""
+  },
+  "packages/supabase/knowledgeBase.ts": {
+    "mtime": 1785266667.5354664,
+    "ast_hash": "cbfcfd0d3298af0fa7b85782fe104fbf",
+    "semantic_hash": ""
+  },
+  "packages/ui/components/EntrepreneurBackground.tsx": {
+    "mtime": 1785260641.564317,
+    "ast_hash": "80d7aede6f823705063bc128935ea98a",
+    "semantic_hash": ""
+  },
+  "supabase/functions/knowledge-search/index.ts": {
+    "mtime": 1785266652.8308716,
+    "ast_hash": "63df4328f89c5ae8c93462c7a5620b23",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/202607281500_knowledge_base_rag.sql": {
+    "mtime": 1785266265.5810895,
+    "ast_hash": "f4362f4a2070f6e3cc04c91964bd722a",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/202607281501_seed_knowledge_articles.sql": {
+    "mtime": 1785266398.261369,
+    "ast_hash": "17050546cd2468fe46d9152f161d40f5",
     "semantic_hash": ""
   }
 }

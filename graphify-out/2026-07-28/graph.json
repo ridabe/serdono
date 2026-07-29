@@ -266,6 +266,66 @@
       "norm_label": "index()"
     },
     {
+      "label": "lgpd.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/app/lgpd.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_app_lgpd",
+      "community": 84,
+      "norm_label": "lgpd.tsx"
+    },
+    {
+      "label": "Lgpd()",
+      "file_type": "code",
+      "source_file": "apps/app/app/lgpd.tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "apps_app_app_lgpd_lgpd",
+      "community": 84,
+      "norm_label": "lgpd()"
+    },
+    {
+      "label": "privacidade.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/app/privacidade.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_app_privacidade",
+      "community": 84,
+      "norm_label": "privacidade.tsx"
+    },
+    {
+      "label": "Privacidade()",
+      "file_type": "code",
+      "source_file": "apps/app/app/privacidade.tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "apps_app_app_privacidade_privacidade",
+      "community": 84,
+      "norm_label": "privacidade()"
+    },
+    {
+      "label": "termos.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/app/termos.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_app_termos",
+      "community": 84,
+      "norm_label": "termos.tsx"
+    },
+    {
+      "label": "Termos()",
+      "file_type": "code",
+      "source_file": "apps/app/app/termos.tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "apps_app_app_termos_termos",
+      "community": 84,
+      "norm_label": "termos()"
+    },
+    {
       "label": "babel.config.js",
       "file_type": "code",
       "source_file": "apps/app/babel.config.js",
@@ -286,10 +346,20 @@
       "norm_label": "cadastroscreen.tsx"
     },
     {
+      "label": "BACKGROUND_PHOTO",
+      "file_type": "code",
+      "source_file": "apps/app/components/cadastro/CadastroScreen.tsx",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "apps_app_components_cadastro_cadastroscreen_background_photo",
+      "community": 27,
+      "norm_label": "background_photo"
+    },
+    {
       "label": "isValidEmail()",
       "file_type": "code",
       "source_file": "apps/app/components/cadastro/CadastroScreen.tsx",
-      "source_location": "L7",
+      "source_location": "L10",
       "_origin": "ast",
       "id": "apps_app_components_cadastro_cadastroscreen_isvalidemail",
       "community": 27,
@@ -299,7 +369,7 @@
       "label": "CadastroScreen()",
       "file_type": "code",
       "source_file": "apps/app/components/cadastro/CadastroScreen.tsx",
-      "source_location": "L11",
+      "source_location": "L14",
       "_origin": "ast",
       "id": "apps_app_components_cadastro_cadastroscreen_cadastroscreen",
       "community": 27,
@@ -309,7 +379,7 @@
       "label": "Field()",
       "file_type": "code",
       "source_file": "apps/app/components/cadastro/CadastroScreen.tsx",
-      "source_location": "L99",
+      "source_location": "L120",
       "_origin": "ast",
       "id": "apps_app_components_cadastro_cadastroscreen_field",
       "community": 27,
@@ -326,10 +396,20 @@
       "norm_label": "diagnosticoscreen.tsx"
     },
     {
+      "label": "BACKGROUND_PHOTO",
+      "file_type": "code",
+      "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "apps_app_components_diagnostico_diagnosticoscreen_background_photo",
+      "community": 82,
+      "norm_label": "background_photo"
+    },
+    {
       "label": "Answers",
       "file_type": "code",
       "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
-      "source_location": "L8",
+      "source_location": "L11",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_answers",
       "community": 82,
@@ -339,7 +419,7 @@
       "label": "EMPTY_ANSWERS",
       "file_type": "code",
       "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
-      "source_location": "L19",
+      "source_location": "L22",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_empty_answers",
       "community": 82,
@@ -349,7 +429,7 @@
       "label": "isBlockAnswered()",
       "file_type": "code",
       "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
-      "source_location": "L30",
+      "source_location": "L33",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_isblockanswered",
       "community": 82,
@@ -359,7 +439,7 @@
       "label": "DiagnosticoScreen()",
       "file_type": "code",
       "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
-      "source_location": "L41",
+      "source_location": "L44",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_diagnosticoscreen",
       "community": 82,
@@ -369,7 +449,7 @@
       "label": "SingleChoice()",
       "file_type": "code",
       "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
-      "source_location": "L291",
+      "source_location": "L337",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_singlechoice",
       "community": 82,
@@ -379,7 +459,7 @@
       "label": "MultiChoice()",
       "file_type": "code",
       "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
-      "source_location": "L343",
+      "source_location": "L389",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_multichoice",
       "community": 82,
@@ -396,10 +476,20 @@
       "norm_label": "resultadoscreen.tsx"
     },
     {
+      "label": "BACKGROUND_PHOTO",
+      "file_type": "code",
+      "source_file": "apps/app/components/diagnostico/ResultadoScreen.tsx",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "apps_app_components_diagnostico_resultadoscreen_background_photo",
+      "community": 27,
+      "norm_label": "background_photo"
+    },
+    {
       "label": "MatchRow",
       "file_type": "code",
       "source_file": "apps/app/components/diagnostico/ResultadoScreen.tsx",
-      "source_location": "L8",
+      "source_location": "L11",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_resultadoscreen_matchrow",
       "community": 27,
@@ -409,7 +499,7 @@
       "label": "Perfil",
       "file_type": "code",
       "source_file": "apps/app/components/diagnostico/ResultadoScreen.tsx",
-      "source_location": "L20",
+      "source_location": "L23",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_resultadoscreen_perfil",
       "community": 27,
@@ -419,7 +509,7 @@
       "label": "ResultadoScreen()",
       "file_type": "code",
       "source_file": "apps/app/components/diagnostico/ResultadoScreen.tsx",
-      "source_location": "L28",
+      "source_location": "L31",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_resultadoscreen_resultadoscreen",
       "community": 27,
@@ -599,7 +689,7 @@
       "label": "Footer()",
       "file_type": "code",
       "source_file": "apps/app/components/home/Footer.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "_origin": "ast",
       "id": "apps_app_components_home_footer_footer",
       "community": 0,
@@ -816,6 +906,86 @@
       "norm_label": "testimonialsection()"
     },
     {
+      "label": "LegalLayout.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/components/legal/LegalLayout.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_legal_legallayout",
+      "community": 84,
+      "norm_label": "legallayout.tsx"
+    },
+    {
+      "label": "LegalSection",
+      "file_type": "code",
+      "source_file": "apps/app/components/legal/LegalLayout.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "apps_app_components_legal_legallayout_legalsection",
+      "community": 84,
+      "norm_label": "legalsection"
+    },
+    {
+      "label": "LegalLayoutProps",
+      "file_type": "code",
+      "source_file": "apps/app/components/legal/LegalLayout.tsx",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "apps_app_components_legal_legallayout_legallayoutprops",
+      "community": 84,
+      "norm_label": "legallayoutprops"
+    },
+    {
+      "label": "LegalLayout()",
+      "file_type": "code",
+      "source_file": "apps/app/components/legal/LegalLayout.tsx",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "apps_app_components_legal_legallayout_legallayout",
+      "community": 84,
+      "norm_label": "legallayout()"
+    },
+    {
+      "label": "entrepreneurPhotos.ts",
+      "file_type": "code",
+      "source_file": "apps/app/constants/entrepreneurPhotos.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_constants_entrepreneurphotos",
+      "community": 27,
+      "norm_label": "entrepreneurphotos.ts"
+    },
+    {
+      "label": "EntrepreneurPhoto",
+      "file_type": "code",
+      "source_file": "apps/app/constants/entrepreneurPhotos.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "apps_app_constants_entrepreneurphotos_entrepreneurphoto",
+      "community": 27,
+      "norm_label": "entrepreneurphoto"
+    },
+    {
+      "label": "ENTREPRENEUR_PHOTOS",
+      "file_type": "code",
+      "source_file": "apps/app/constants/entrepreneurPhotos.ts",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "apps_app_constants_entrepreneurphotos_entrepreneur_photos",
+      "community": 27,
+      "norm_label": "entrepreneur_photos"
+    },
+    {
+      "label": "pickEntrepreneurPhoto()",
+      "file_type": "code",
+      "source_file": "apps/app/constants/entrepreneurPhotos.ts",
+      "source_location": "L38",
+      "_origin": "ast",
+      "id": "apps_app_constants_entrepreneurphotos_pickentrepreneurphoto",
+      "community": 27,
+      "norm_label": "pickentrepreneurphoto()"
+    },
+    {
       "label": "metro.config.js",
       "file_type": "code",
       "source_file": "apps/app/metro.config.js",
@@ -872,7 +1042,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_package",
-      "community": 84,
+      "community": 1,
       "norm_label": "package.json"
     },
     {
@@ -882,7 +1052,7 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "apps_app_package_name",
-      "community": 84,
+      "community": 1,
       "norm_label": "name"
     },
     {
@@ -892,7 +1062,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_package_version",
-      "community": 84,
+      "community": 1,
       "norm_label": "version"
     },
     {
@@ -902,7 +1072,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "apps_app_package_private",
-      "community": 84,
+      "community": 1,
       "norm_label": "private"
     },
     {
@@ -912,7 +1082,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "apps_app_package_main",
-      "community": 84,
+      "community": 1,
       "norm_label": "main"
     },
     {
@@ -922,7 +1092,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "apps_app_package_scripts",
-      "community": 84,
+      "community": 1,
       "norm_label": "scripts"
     },
     {
@@ -932,7 +1102,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_app_package_scripts_start",
-      "community": 84,
+      "community": 1,
       "norm_label": "start"
     },
     {
@@ -942,7 +1112,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "apps_app_package_scripts_android",
-      "community": 84,
+      "community": 1,
       "norm_label": "android"
     },
     {
@@ -952,7 +1122,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "apps_app_package_scripts_ios",
-      "community": 84,
+      "community": 1,
       "norm_label": "ios"
     },
     {
@@ -962,7 +1132,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "apps_app_package_scripts_web",
-      "community": 84,
+      "community": 1,
       "norm_label": "web"
     },
     {
@@ -972,7 +1142,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_app_package_scripts_build_web",
-      "community": 84,
+      "community": 1,
       "norm_label": "build:web"
     },
     {
@@ -982,7 +1152,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "apps_app_package_scripts_typecheck",
-      "community": 84,
+      "community": 1,
       "norm_label": "typecheck"
     },
     {
@@ -1232,7 +1402,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "apps_app_package_devdependencies",
-      "community": 84,
+      "community": 1,
       "norm_label": "devdependencies"
     },
     {
@@ -1242,7 +1412,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "apps_app_package_devdependencies_babel_core",
-      "community": 84,
+      "community": 1,
       "norm_label": "@babel/core"
     },
     {
@@ -1252,7 +1422,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "apps_app_package_devdependencies_types_react",
-      "community": 84,
+      "community": 1,
       "norm_label": "@types/react"
     },
     {
@@ -1262,7 +1432,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "apps_app_package_devdependencies_typescript",
-      "community": 84,
+      "community": 1,
       "norm_label": "typescript"
     },
     {
@@ -2026,6 +2196,56 @@
       "norm_label": "index.ts"
     },
     {
+      "label": "knowledgeBase.ts",
+      "file_type": "code",
+      "source_file": "packages/supabase/knowledgeBase.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "packages_supabase_knowledgebase",
+      "community": 27,
+      "norm_label": "knowledgebase.ts"
+    },
+    {
+      "label": "KnowledgeCategory",
+      "file_type": "code",
+      "source_file": "packages/supabase/knowledgeBase.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "packages_supabase_knowledgebase_knowledgecategory",
+      "community": 27,
+      "norm_label": "knowledgecategory"
+    },
+    {
+      "label": "KnowledgeSource",
+      "file_type": "code",
+      "source_file": "packages/supabase/knowledgeBase.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "packages_supabase_knowledgebase_knowledgesource",
+      "community": 27,
+      "norm_label": "knowledgesource"
+    },
+    {
+      "label": "KnowledgeAnswer",
+      "file_type": "code",
+      "source_file": "packages/supabase/knowledgeBase.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "packages_supabase_knowledgebase_knowledgeanswer",
+      "community": 27,
+      "norm_label": "knowledgeanswer"
+    },
+    {
+      "label": "askKnowledgeBase()",
+      "file_type": "code",
+      "source_file": "packages/supabase/knowledgeBase.ts",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "packages_supabase_knowledgebase_askknowledgebase",
+      "community": 27,
+      "norm_label": "askknowledgebase()"
+    },
+    {
       "label": "package.json",
       "file_type": "code",
       "source_file": "packages/supabase/package.json",
@@ -2416,6 +2636,36 @@
       "norm_label": "styles"
     },
     {
+      "label": "EntrepreneurBackground.tsx",
+      "file_type": "code",
+      "source_file": "packages/ui/components/EntrepreneurBackground.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "packages_ui_components_entrepreneurbackground",
+      "community": 27,
+      "norm_label": "entrepreneurbackground.tsx"
+    },
+    {
+      "label": "EntrepreneurBackgroundProps",
+      "file_type": "code",
+      "source_file": "packages/ui/components/EntrepreneurBackground.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "packages_ui_components_entrepreneurbackground_entrepreneurbackgroundprops",
+      "community": 27,
+      "norm_label": "entrepreneurbackgroundprops"
+    },
+    {
+      "label": "EntrepreneurBackground()",
+      "file_type": "code",
+      "source_file": "packages/ui/components/EntrepreneurBackground.tsx",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "packages_ui_components_entrepreneurbackground_entrepreneurbackground",
+      "community": 27,
+      "norm_label": "entrepreneurbackground()"
+    },
+    {
       "label": "Logo.tsx",
       "file_type": "code",
       "source_file": "packages/ui/components/Logo.tsx",
@@ -2734,6 +2984,46 @@
       "id": "supabase_functions_diagnostic_match_index_gerarjustificativa",
       "community": 81,
       "norm_label": "gerarjustificativa()"
+    },
+    {
+      "label": "index.ts",
+      "file_type": "code",
+      "source_file": "supabase/functions/knowledge-search/index.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "supabase_functions_knowledge_search_index",
+      "community": 81,
+      "norm_label": "index.ts"
+    },
+    {
+      "label": "KnowledgeMatch",
+      "file_type": "code",
+      "source_file": "supabase/functions/knowledge-search/index.ts",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "supabase_functions_knowledge_search_index_knowledgematch",
+      "community": 81,
+      "norm_label": "knowledgematch"
+    },
+    {
+      "label": "embedQuestion()",
+      "file_type": "code",
+      "source_file": "supabase/functions/knowledge-search/index.ts",
+      "source_location": "L40",
+      "_origin": "ast",
+      "id": "supabase_functions_knowledge_search_index_embedquestion",
+      "community": 81,
+      "norm_label": "embedquestion()"
+    },
+    {
+      "label": "synthesizeAnswer()",
+      "file_type": "code",
+      "source_file": "supabase/functions/knowledge-search/index.ts",
+      "source_location": "L56",
+      "_origin": "ast",
+      "id": "supabase_functions_knowledge_search_index_synthesizeanswer",
+      "community": 81,
+      "norm_label": "synthesizeanswer()"
     },
     {
       "label": "vercel.json",
@@ -3669,7 +3959,7 @@
       "label": "12. Decis\u00f5es registradas durante a implementa\u00e7\u00e3o da Home/Landing (retroativas a este PR)",
       "file_type": "document",
       "source_file": "docs/SPEC.md",
-      "source_location": "L299",
+      "source_location": "L300",
       "_origin": "ast",
       "id": "docs_spec_12_decis\u00f5es_registradas_durante_a_implementa\u00e7\u00e3o_da_home_landing_retroativas_a_este_pr",
       "community": 80,
@@ -4006,10 +4296,20 @@
       "norm_label": "9.8 empty states e erros"
     },
     {
+      "label": "9.9 Fotografia de fundo (telas do funil pr\u00e9-login)",
+      "file_type": "document",
+      "source_file": "docs/identidade-visual/DESIGN_SYSTEM.md",
+      "source_location": "L365",
+      "_origin": "ast",
+      "id": "docs_identidade_visual_design_system_9_9_fotografia_de_fundo_telas_do_funil_pr\u00e9_login",
+      "community": 23,
+      "norm_label": "9.9 fotografia de fundo (telas do funil pre-login)"
+    },
+    {
       "label": "10. Acessibilidade",
       "file_type": "document",
       "source_file": "docs/identidade-visual/DESIGN_SYSTEM.md",
-      "source_location": "L367",
+      "source_location": "L377",
       "_origin": "ast",
       "id": "docs_identidade_visual_design_system_10_acessibilidade",
       "community": 23,
@@ -4019,7 +4319,7 @@
       "label": "11. Motion (transi\u00e7\u00f5es)",
       "file_type": "document",
       "source_file": "docs/identidade-visual/DESIGN_SYSTEM.md",
-      "source_location": "L377",
+      "source_location": "L387",
       "_origin": "ast",
       "id": "docs_identidade_visual_design_system_11_motion_transi\u00e7\u00f5es",
       "community": 23,
@@ -4029,7 +4329,7 @@
       "label": "12. Governan\u00e7a de assets",
       "file_type": "document",
       "source_file": "docs/identidade-visual/DESIGN_SYSTEM.md",
-      "source_location": "L389",
+      "source_location": "L399",
       "_origin": "ast",
       "id": "docs_identidade_visual_design_system_12_governan\u00e7a_de_assets",
       "community": 23,
@@ -4039,7 +4339,7 @@
       "label": "13. Telas de refer\u00eancia (mockups)",
       "file_type": "document",
       "source_file": "docs/identidade-visual/DESIGN_SYSTEM.md",
-      "source_location": "L412",
+      "source_location": "L422",
       "_origin": "ast",
       "id": "docs_identidade_visual_design_system_13_telas_de_refer\u00eancia_mockups",
       "community": 23,
@@ -4049,7 +4349,7 @@
       "label": "13.1 Portal Web \u2014 `mockups/portal-web.html`",
       "file_type": "document",
       "source_file": "docs/identidade-visual/DESIGN_SYSTEM.md",
-      "source_location": "L416",
+      "source_location": "L426",
       "_origin": "ast",
       "id": "docs_identidade_visual_design_system_13_1_portal_web_mockups_portal_web_html",
       "community": 23,
@@ -4059,7 +4359,7 @@
       "label": "13.2 App Mobile \u2014 `mockups/app-mobile.html`",
       "file_type": "document",
       "source_file": "docs/identidade-visual/DESIGN_SYSTEM.md",
-      "source_location": "L426",
+      "source_location": "L436",
       "_origin": "ast",
       "id": "docs_identidade_visual_design_system_13_2_app_mobile_mockups_app_mobile_html",
       "community": 23,
@@ -4069,7 +4369,7 @@
       "label": "14. Checklist r\u00e1pido para qualquer tela nova",
       "file_type": "document",
       "source_file": "docs/identidade-visual/DESIGN_SYSTEM.md",
-      "source_location": "L441",
+      "source_location": "L451",
       "_origin": "ast",
       "id": "docs_identidade_visual_design_system_14_checklist_r\u00e1pido_para_qualquer_tela_nova",
       "community": 23,
@@ -8227,8 +8527,114 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/lgpd.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_app_lgpd",
+      "target": "apps_app_app_lgpd_lgpd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/lgpd.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_lgpd",
+      "target": "apps_app_components_legal_legallayout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/lgpd.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_lgpd",
+      "target": "apps_app_components_legal_legallayout_legallayout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/privacidade.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_app_privacidade",
+      "target": "apps_app_app_privacidade_privacidade",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/privacidade.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_privacidade",
+      "target": "apps_app_components_legal_legallayout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/privacidade.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_privacidade",
+      "target": "apps_app_components_legal_legallayout_legallayout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/termos.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_app_termos",
+      "target": "apps_app_app_termos_termos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/termos.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_termos",
+      "target": "apps_app_components_legal_legallayout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/termos.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_termos",
+      "target": "apps_app_components_legal_legallayout_legallayout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "apps/app/components/cadastro/CadastroScreen.tsx",
-      "source_location": "L11",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "apps_app_components_cadastro_cadastroscreen",
+      "target": "apps_app_components_cadastro_cadastroscreen_background_photo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/cadastro/CadastroScreen.tsx",
+      "source_location": "L14",
       "weight": 1.0,
       "source": "apps_app_components_cadastro_cadastroscreen",
       "target": "apps_app_components_cadastro_cadastroscreen_cadastroscreen",
@@ -8238,7 +8644,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/cadastro/CadastroScreen.tsx",
-      "source_location": "L99",
+      "source_location": "L120",
       "weight": 1.0,
       "source": "apps_app_components_cadastro_cadastroscreen",
       "target": "apps_app_components_cadastro_cadastroscreen_field",
@@ -8248,10 +8654,32 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/cadastro/CadastroScreen.tsx",
-      "source_location": "L7",
+      "source_location": "L10",
       "weight": 1.0,
       "source": "apps_app_components_cadastro_cadastroscreen",
       "target": "apps_app_components_cadastro_cadastroscreen_isvalidemail",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/cadastro/CadastroScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_cadastro_cadastroscreen",
+      "target": "apps_app_constants_entrepreneurphotos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/cadastro/CadastroScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_cadastro_cadastroscreen",
+      "target": "apps_app_constants_entrepreneurphotos_pickentrepreneurphoto",
       "confidence_score": 1.0
     },
     {
@@ -8317,6 +8745,17 @@
       "source_location": "L4",
       "weight": 1.0,
       "source": "apps_app_components_cadastro_cadastroscreen",
+      "target": "packages_ui_components_entrepreneurbackground_entrepreneurbackground",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/cadastro/CadastroScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_cadastro_cadastroscreen",
       "target": "packages_ui_components_logo_logo",
       "confidence_score": 1.0
     },
@@ -8336,7 +8775,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_diagnosticoscreen",
       "target": "apps_app_components_diagnostico_blocks",
@@ -8347,7 +8786,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_diagnosticoscreen",
       "target": "apps_app_components_diagnostico_blocks_diagnostico_blocks",
@@ -8358,7 +8797,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_diagnosticoscreen",
       "target": "apps_app_components_diagnostico_blocks_diagnosticoblock",
@@ -8368,7 +8807,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
-      "source_location": "L8",
+      "source_location": "L11",
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_diagnosticoscreen",
       "target": "apps_app_components_diagnostico_diagnosticoscreen_answers",
@@ -8378,7 +8817,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
-      "source_location": "L41",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "apps_app_components_diagnostico_diagnosticoscreen",
+      "target": "apps_app_components_diagnostico_diagnosticoscreen_background_photo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
+      "source_location": "L44",
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_diagnosticoscreen",
       "target": "apps_app_components_diagnostico_diagnosticoscreen_diagnosticoscreen",
@@ -8388,7 +8837,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
-      "source_location": "L19",
+      "source_location": "L22",
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_diagnosticoscreen",
       "target": "apps_app_components_diagnostico_diagnosticoscreen_empty_answers",
@@ -8398,7 +8847,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
-      "source_location": "L30",
+      "source_location": "L33",
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_diagnosticoscreen",
       "target": "apps_app_components_diagnostico_diagnosticoscreen_isblockanswered",
@@ -8408,7 +8857,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
-      "source_location": "L343",
+      "source_location": "L389",
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_diagnosticoscreen",
       "target": "apps_app_components_diagnostico_diagnosticoscreen_multichoice",
@@ -8418,10 +8867,32 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
-      "source_location": "L291",
+      "source_location": "L337",
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_diagnosticoscreen",
       "target": "apps_app_components_diagnostico_diagnosticoscreen_singlechoice",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_diagnostico_diagnosticoscreen",
+      "target": "apps_app_constants_entrepreneurphotos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_diagnostico_diagnosticoscreen",
+      "target": "apps_app_constants_entrepreneurphotos_pickentrepreneurphoto",
       "confidence_score": 1.0
     },
     {
@@ -8466,6 +8937,17 @@
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_diagnosticoscreen",
       "target": "packages_ui_components_button_button",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/diagnostico/DiagnosticoScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_diagnostico_diagnosticoscreen",
+      "target": "packages_ui_components_entrepreneurbackground_entrepreneurbackground",
       "confidence_score": 1.0
     },
     {
@@ -8495,7 +8977,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/diagnostico/ResultadoScreen.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_resultadoscreen",
       "target": "apps_app_components_diagnostico_labels",
@@ -8506,7 +8988,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/diagnostico/ResultadoScreen.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_resultadoscreen",
       "target": "apps_app_components_diagnostico_labels_capital_label",
@@ -8517,7 +8999,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/diagnostico/ResultadoScreen.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_resultadoscreen",
       "target": "apps_app_components_diagnostico_labels_formatmoney",
@@ -8528,7 +9010,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/diagnostico/ResultadoScreen.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_resultadoscreen",
       "target": "apps_app_components_diagnostico_labels_objetivo_label",
@@ -8539,7 +9021,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/diagnostico/ResultadoScreen.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_resultadoscreen",
       "target": "apps_app_components_diagnostico_labels_stripmarkdown",
@@ -8550,7 +9032,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/diagnostico/ResultadoScreen.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_resultadoscreen",
       "target": "apps_app_components_diagnostico_labels_tempo_label",
@@ -8560,7 +9042,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/diagnostico/ResultadoScreen.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "apps_app_components_diagnostico_resultadoscreen",
+      "target": "apps_app_components_diagnostico_resultadoscreen_background_photo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/diagnostico/ResultadoScreen.tsx",
+      "source_location": "L11",
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_resultadoscreen",
       "target": "apps_app_components_diagnostico_resultadoscreen_matchrow",
@@ -8570,7 +9062,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/diagnostico/ResultadoScreen.tsx",
-      "source_location": "L20",
+      "source_location": "L23",
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_resultadoscreen",
       "target": "apps_app_components_diagnostico_resultadoscreen_perfil",
@@ -8580,10 +9072,32 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/diagnostico/ResultadoScreen.tsx",
-      "source_location": "L28",
+      "source_location": "L31",
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_resultadoscreen",
       "target": "apps_app_components_diagnostico_resultadoscreen_resultadoscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/diagnostico/ResultadoScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_diagnostico_resultadoscreen",
+      "target": "apps_app_constants_entrepreneurphotos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/diagnostico/ResultadoScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_diagnostico_resultadoscreen",
+      "target": "apps_app_constants_entrepreneurphotos_pickentrepreneurphoto",
       "confidence_score": 1.0
     },
     {
@@ -8628,6 +9142,17 @@
       "weight": 1.0,
       "source": "apps_app_components_diagnostico_resultadoscreen",
       "target": "packages_ui_components_button_button",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/diagnostico/ResultadoScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_diagnostico_resultadoscreen",
+      "target": "packages_ui_components_entrepreneurbackground_entrepreneurbackground",
       "confidence_score": 1.0
     },
     {
@@ -8863,7 +9388,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/home/Footer.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0,
       "source": "apps_app_components_home_footer",
       "target": "apps_app_components_home_footer_footer",
@@ -8874,7 +9399,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/home/Footer.tsx",
-      "source_location": "L3",
+      "source_location": "L4",
       "weight": 1.0,
       "source": "apps_app_components_home_footer",
       "target": "packages_ui_index",
@@ -9316,6 +9841,88 @@
       "weight": 1.0,
       "source": "apps_app_components_home_testimonialsection",
       "target": "packages_ui_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/legal/LegalLayout.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "apps_app_components_legal_legallayout",
+      "target": "apps_app_components_legal_legallayout_legallayout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/legal/LegalLayout.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "apps_app_components_legal_legallayout",
+      "target": "apps_app_components_legal_legallayout_legallayoutprops",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/legal/LegalLayout.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_legal_legallayout",
+      "target": "apps_app_components_legal_legallayout_legalsection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/legal/LegalLayout.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_components_legal_legallayout",
+      "target": "packages_ui_components_logo_logo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/legal/LegalLayout.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_components_legal_legallayout",
+      "target": "packages_ui_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/constants/entrepreneurPhotos.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "apps_app_constants_entrepreneurphotos",
+      "target": "apps_app_constants_entrepreneurphotos_entrepreneur_photos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/constants/entrepreneurPhotos.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "apps_app_constants_entrepreneurphotos",
+      "target": "apps_app_constants_entrepreneurphotos_entrepreneurphoto",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/constants/entrepreneurPhotos.ts",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "apps_app_constants_entrepreneurphotos",
+      "target": "apps_app_constants_entrepreneurphotos_pickentrepreneurphoto",
       "confidence_score": 1.0
     },
     {
@@ -10666,11 +11273,33 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/knowledgeBase.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "packages_supabase_knowledgebase",
+      "target": "packages_supabase_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "packages/supabase/session.ts",
       "source_location": "L1",
       "weight": 1.0,
       "source": "packages_supabase_session",
       "target": "packages_supabase_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/knowledgeBase.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "packages_supabase_knowledgebase",
+      "target": "packages_supabase_client_supabase",
       "confidence_score": 1.0
     },
     {
@@ -10689,6 +11318,17 @@
       "context": "export",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/index.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "packages_supabase_index",
+      "target": "packages_supabase_knowledgebase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/index.ts",
       "source_location": "L2",
       "weight": 1.0,
       "source": "packages_supabase_index",
@@ -10700,7 +11340,7 @@
       "context": "export",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/index.ts",
-      "source_location": "L3",
+      "source_location": "L4",
       "weight": 1.0,
       "source": "packages_supabase_index",
       "target": "packages_supabase_types",
@@ -10711,10 +11351,50 @@
       "context": "re-export",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/index.ts",
-      "source_location": "L3",
+      "source_location": "L4",
       "weight": 1.0,
       "source": "packages_supabase_index",
       "target": "packages_supabase_types_database",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/knowledgeBase.ts",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "packages_supabase_knowledgebase",
+      "target": "packages_supabase_knowledgebase_askknowledgebase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/knowledgeBase.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "packages_supabase_knowledgebase",
+      "target": "packages_supabase_knowledgebase_knowledgeanswer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/knowledgeBase.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "packages_supabase_knowledgebase",
+      "target": "packages_supabase_knowledgebase_knowledgecategory",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/knowledgeBase.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "packages_supabase_knowledgebase",
+      "target": "packages_supabase_knowledgebase_knowledgesource",
       "confidence_score": 1.0
     },
     {
@@ -11072,6 +11752,37 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "packages/ui/components/EntrepreneurBackground.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "packages_ui_components_entrepreneurbackground",
+      "target": "packages_ui_components_entrepreneurbackground_entrepreneurbackground",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/ui/components/EntrepreneurBackground.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "packages_ui_components_entrepreneurbackground",
+      "target": "packages_ui_components_entrepreneurbackground_entrepreneurbackgroundprops",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/ui/index.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "packages_ui_index",
+      "target": "packages_ui_components_entrepreneurbackground",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "packages/ui/components/Logo.tsx",
       "source_location": "L15",
       "weight": 1.0,
@@ -11312,6 +12023,17 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/knowledge-search/index.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "supabase_functions_knowledge_search_index",
+      "target": "supabase_functions_shared_cors",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "supabase/functions/_shared/cors.ts",
@@ -11329,6 +12051,17 @@
       "source_location": "L19",
       "weight": 1.0,
       "source": "supabase_functions_diagnostic_match_index",
+      "target": "supabase_functions_shared_cors_corsheaders",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/knowledge-search/index.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "supabase_functions_knowledge_search_index",
       "target": "supabase_functions_shared_cors_corsheaders",
       "confidence_score": 1.0
     },
@@ -11371,6 +12104,36 @@
       "weight": 1.0,
       "source": "supabase_functions_diagnostic_match_index_gerarjustificativa",
       "target": "supabase_functions_diagnostic_match_index_stripmarkdown",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/knowledge-search/index.ts",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "supabase_functions_knowledge_search_index",
+      "target": "supabase_functions_knowledge_search_index_embedquestion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/knowledge-search/index.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "supabase_functions_knowledge_search_index",
+      "target": "supabase_functions_knowledge_search_index_knowledgematch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/knowledge-search/index.ts",
+      "source_location": "L56",
+      "weight": 1.0,
+      "source": "supabase_functions_knowledge_search_index",
+      "target": "supabase_functions_knowledge_search_index_synthesizeanswer",
       "confidence_score": 1.0
     },
     {
@@ -12107,7 +12870,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/SPEC.md",
-      "source_location": "L299",
+      "source_location": "L300",
       "weight": 1.0,
       "source": "docs_spec_ser_dono_spec_especifica\u00e7\u00e3o_t\u00e9cnica_sdd",
       "target": "docs_spec_12_decis\u00f5es_registradas_durante_a_implementa\u00e7\u00e3o_da_home_landing_retroativas_a_este_pr",
@@ -12327,7 +13090,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/identidade-visual/DESIGN_SYSTEM.md",
-      "source_location": "L367",
+      "source_location": "L377",
       "weight": 1.0,
       "source": "docs_identidade_visual_design_system_ser_dono_design_system",
       "target": "docs_identidade_visual_design_system_10_acessibilidade",
@@ -12337,7 +13100,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/identidade-visual/DESIGN_SYSTEM.md",
-      "source_location": "L377",
+      "source_location": "L387",
       "weight": 1.0,
       "source": "docs_identidade_visual_design_system_ser_dono_design_system",
       "target": "docs_identidade_visual_design_system_11_motion_transi\u00e7\u00f5es",
@@ -12347,7 +13110,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/identidade-visual/DESIGN_SYSTEM.md",
-      "source_location": "L389",
+      "source_location": "L399",
       "weight": 1.0,
       "source": "docs_identidade_visual_design_system_ser_dono_design_system",
       "target": "docs_identidade_visual_design_system_12_governan\u00e7a_de_assets",
@@ -12357,7 +13120,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/identidade-visual/DESIGN_SYSTEM.md",
-      "source_location": "L412",
+      "source_location": "L422",
       "weight": 1.0,
       "source": "docs_identidade_visual_design_system_ser_dono_design_system",
       "target": "docs_identidade_visual_design_system_13_telas_de_refer\u00eancia_mockups",
@@ -12367,7 +13130,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/identidade-visual/DESIGN_SYSTEM.md",
-      "source_location": "L441",
+      "source_location": "L451",
       "weight": 1.0,
       "source": "docs_identidade_visual_design_system_ser_dono_design_system",
       "target": "docs_identidade_visual_design_system_14_checklist_r\u00e1pido_para_qualquer_tela_nova",
@@ -12677,7 +13440,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/identidade-visual/DESIGN_SYSTEM.md",
-      "source_location": "L416",
+      "source_location": "L365",
+      "weight": 1.0,
+      "source": "docs_identidade_visual_design_system_9_especifica\u00e7\u00e3o_de_componentes",
+      "target": "docs_identidade_visual_design_system_9_9_fotografia_de_fundo_telas_do_funil_pr\u00e9_login",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/identidade-visual/DESIGN_SYSTEM.md",
+      "source_location": "L426",
       "weight": 1.0,
       "source": "docs_identidade_visual_design_system_13_telas_de_refer\u00eancia_mockups",
       "target": "docs_identidade_visual_design_system_13_1_portal_web_mockups_portal_web_html",
@@ -12687,7 +13460,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/identidade-visual/DESIGN_SYSTEM.md",
-      "source_location": "L426",
+      "source_location": "L436",
       "weight": 1.0,
       "source": "docs_identidade_visual_design_system_13_telas_de_refer\u00eancia_mockups",
       "target": "docs_identidade_visual_design_system_13_2_app_mobile_mockups_app_mobile_html",
@@ -14029,5 +14802,5 @@
       "confidence": "EXTRACTED"
     }
   ],
-  "built_at_commit": "5642c1327a0de1286bec963a7a95b30f62d47fac"
+  "built_at_commit": "7574d565b8460877ff98409d05cdffd8896ccfa9"
 }

@@ -1,8 +1,8 @@
 import { useRouter } from "expo-router";
-import { useState } from "react";
-import { ActivityIndicator, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, Image, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import { Logo, color, radius, space, type } from "@serdono/ui";
-import { askKnowledgeBase, signOut, type KnowledgeSource } from "@serdono/supabase";
+import { askKnowledgeBase, getCurrentSession, signOut, supabase, type KnowledgeSource } from "@serdono/supabase";
 
 interface Message {
   id: string;
@@ -22,6 +22,16 @@ export function AssistenteScreen() {
     },
   ]);
   const [loading, setLoading] = useState(false);
+  const [perfil, setPerfil] = useState<{ nome: string | null; avatar_url: string | null } | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const session = await getCurrentSession();
+      if (!session) return;
+      const { data } = await supabase.from("users").select("nome, avatar_url").eq("id", session.user.id).maybeSingle();
+      setPerfil(data ?? null);
+    })();
+  }, []);
 
   async function handleSend() {
     const texto = pergunta.trim();
@@ -64,9 +74,29 @@ export function AssistenteScreen() {
         }}
       >
         <Logo size={28} />
-        <Pressable onPress={handleSignOut} accessibilityRole="button" style={{ minHeight: 44, justifyContent: "center" }}>
-          <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>Sair</Text>
-        </Pressable>
+        <View style={{ flexDirection: "row", alignItems: "center", gap: space[3] }}>
+          {perfil?.avatar_url ? (
+            <Image source={{ uri: perfil.avatar_url }} style={{ width: 32, height: 32, borderRadius: radius.full }} />
+          ) : perfil?.nome ? (
+            <View
+              style={{
+                width: 32,
+                height: 32,
+                borderRadius: radius.full,
+                backgroundColor: color.bg.brandSubtle,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Text style={{ ...type.caption, color: color.bg.brand, fontWeight: "700" }}>
+                {perfil.nome.trim()[0]?.toUpperCase()}
+              </Text>
+            </View>
+          ) : null}
+          <Pressable onPress={handleSignOut} accessibilityRole="button" style={{ minHeight: 44, justifyContent: "center" }}>
+            <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>Sair</Text>
+          </Pressable>
+        </View>
       </View>
 
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: space[5], gap: space[4] }}>

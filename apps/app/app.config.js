@@ -42,6 +42,13 @@ module.exports = {
       "expo-font",
       "expo-web-browser",
       [
+        "expo-image-picker",
+        {
+          photosPermission: "O Ser Dono usa suas fotos para você escolher uma foto de perfil.",
+          cameraPermission: "O Ser Dono usa a câmera para você tirar uma foto de perfil.",
+        },
+      ],
+      [
         "expo-splash-screen",
         {
           image: "../../img/splash/splash-icone-1024.png",
