@@ -192,7 +192,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_protected_admin_index",
-      "community": 0,
+      "community": 226,
       "norm_label": "index.tsx"
     },
     {
@@ -202,7 +202,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_protected_admin_index_admin",
-      "community": 0,
+      "community": 226,
       "norm_label": "admin()"
     },
     {
@@ -212,7 +212,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_protected_assistente_index",
-      "community": 27,
+      "community": 222,
       "norm_label": "index.tsx"
     },
     {
@@ -222,7 +222,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_protected_assistente_index_assistente",
-      "community": 27,
+      "community": 222,
       "norm_label": "assistente()"
     },
     {
@@ -232,7 +232,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_protected_completar_cadastro_index",
-      "community": 27,
+      "community": 219,
       "norm_label": "index.tsx"
     },
     {
@@ -242,8 +242,28 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_protected_completar_cadastro_index_completarcadastro",
-      "community": 27,
+      "community": 219,
       "norm_label": "completarcadastro()"
+    },
+    {
+      "label": "index.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/app/(protected)/perfil/index.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_app_protected_perfil_index",
+      "community": 219,
+      "norm_label": "index.tsx"
+    },
+    {
+      "label": "Perfil()",
+      "file_type": "code",
+      "source_file": "apps/app/app/(protected)/perfil/index.tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "apps_app_app_protected_perfil_index_perfil",
+      "community": 219,
+      "norm_label": "perfil()"
     },
     {
       "label": "_layout.tsx",
@@ -252,7 +272,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_layout",
-      "community": 0,
+      "community": 220,
       "norm_label": "_layout.tsx"
     },
     {
@@ -262,7 +282,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "apps_app_app_layout_rootlayout",
-      "community": 0,
+      "community": 220,
       "norm_label": "rootlayout()"
     },
     {
@@ -272,7 +292,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_cadastro_bem_vindo",
-      "community": 0,
+      "community": 220,
       "norm_label": "bem-vindo.tsx"
     },
     {
@@ -282,7 +302,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_app_app_cadastro_bem_vindo_bemvindo",
-      "community": 0,
+      "community": 220,
       "norm_label": "bemvindo()"
     },
     {
@@ -292,7 +312,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_cadastro_index",
-      "community": 27,
+      "community": 221,
       "norm_label": "index.tsx"
     },
     {
@@ -302,7 +322,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_cadastro_index_cadastro",
-      "community": 27,
+      "community": 221,
       "norm_label": "cadastro()"
     },
     {
@@ -392,7 +412,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_login_index",
-      "community": 27,
+      "community": 224,
       "norm_label": "index.tsx"
     },
     {
@@ -402,7 +422,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_login_index_login",
-      "community": 27,
+      "community": 224,
       "norm_label": "login()"
     },
     {
@@ -462,7 +482,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_admin_admindashboardscreen",
-      "community": 0,
+      "community": 226,
       "norm_label": "admindashboardscreen.tsx"
     },
     {
@@ -472,7 +492,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "apps_app_components_admin_admindashboardscreen_admindashboardscreen",
-      "community": 0,
+      "community": 226,
       "norm_label": "admindashboardscreen()"
     },
     {
@@ -482,7 +502,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_assistente_assistentescreen",
-      "community": 27,
+      "community": 222,
       "norm_label": "assistentescreen.tsx"
     },
     {
@@ -492,7 +512,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_app_components_assistente_assistentescreen_message",
-      "community": 27,
+      "community": 222,
       "norm_label": "message"
     },
     {
@@ -502,7 +522,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "apps_app_components_assistente_assistentescreen_assistentescreen",
-      "community": 27,
+      "community": 222,
       "norm_label": "assistentescreen()"
     },
     {
@@ -512,7 +532,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_cadastro_cadastroscreen",
-      "community": 27,
+      "community": 221,
       "norm_label": "cadastroscreen.tsx"
     },
     {
@@ -522,7 +542,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "apps_app_components_cadastro_cadastroscreen_background_photo",
-      "community": 27,
+      "community": 221,
       "norm_label": "background_photo"
     },
     {
@@ -532,7 +552,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "apps_app_components_cadastro_cadastroscreen_isvalidemail",
-      "community": 27,
+      "community": 221,
       "norm_label": "isvalidemail()"
     },
     {
@@ -542,7 +562,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "apps_app_components_cadastro_cadastroscreen_cadastroscreen",
-      "community": 27,
+      "community": 221,
       "norm_label": "cadastroscreen()"
     },
     {
@@ -552,7 +572,7 @@
       "source_location": "L120",
       "_origin": "ast",
       "id": "apps_app_components_cadastro_cadastroscreen_field",
-      "community": 27,
+      "community": 221,
       "norm_label": "field()"
     },
     {
@@ -692,7 +712,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks",
-      "community": 82,
+      "community": 81,
       "norm_label": "blocks.ts"
     },
     {
@@ -702,7 +722,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_diagnosticofield",
-      "community": 82,
+      "community": 81,
       "norm_label": "diagnosticofield"
     },
     {
@@ -712,7 +732,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_choiceoption",
-      "community": 82,
+      "community": 81,
       "norm_label": "choiceoption"
     },
     {
@@ -722,7 +742,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_singlechoiceblock",
-      "community": 82,
+      "community": 81,
       "norm_label": "singlechoiceblock"
     },
     {
@@ -732,7 +752,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_multichoiceblock",
-      "community": 82,
+      "community": 81,
       "norm_label": "multichoiceblock"
     },
     {
@@ -742,7 +762,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_locationblock",
-      "community": 82,
+      "community": 81,
       "norm_label": "locationblock"
     },
     {
@@ -752,7 +772,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_diagnosticoblock",
-      "community": 82,
+      "community": 81,
       "norm_label": "diagnosticoblock"
     },
     {
@@ -762,7 +782,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_diagnostico_blocks",
-      "community": 82,
+      "community": 81,
       "norm_label": "diagnostico_blocks"
     },
     {
@@ -972,7 +992,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_home_navbar",
-      "community": 0,
+      "community": 220,
       "norm_label": "navbar.tsx"
     },
     {
@@ -982,7 +1002,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "apps_app_components_home_navbar_links",
-      "community": 0,
+      "community": 220,
       "norm_label": "links"
     },
     {
@@ -1122,7 +1142,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_login_loginscreen",
-      "community": 27,
+      "community": 224,
       "norm_label": "loginscreen.tsx"
     },
     {
@@ -1132,7 +1152,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "apps_app_components_login_loginscreen_background_photo",
-      "community": 27,
+      "community": 224,
       "norm_label": "background_photo"
     },
     {
@@ -1142,7 +1162,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "apps_app_components_login_loginscreen_destinationfor",
-      "community": 27,
+      "community": 224,
       "norm_label": "destinationfor()"
     },
     {
@@ -1152,7 +1172,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "apps_app_components_login_loginscreen_loginscreen",
-      "community": 27,
+      "community": 224,
       "norm_label": "loginscreen()"
     },
     {
@@ -1162,7 +1182,7 @@
       "source_location": "L181",
       "_origin": "ast",
       "id": "apps_app_components_login_loginscreen_field",
-      "community": 27,
+      "community": 224,
       "norm_label": "field()"
     },
     {
@@ -1172,38 +1192,108 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_perfil_completarcadastroscreen",
-      "community": 27,
+      "community": 219,
       "norm_label": "completarcadastroscreen.tsx"
     },
     {
       "label": "destinationFor()",
       "file_type": "code",
       "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
-      "source_location": "L9",
+      "source_location": "L8",
       "_origin": "ast",
       "id": "apps_app_components_perfil_completarcadastroscreen_destinationfor",
-      "community": 27,
+      "community": 219,
       "norm_label": "destinationfor()"
     },
     {
       "label": "CompletarCadastroScreen()",
       "file_type": "code",
       "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
-      "source_location": "L13",
+      "source_location": "L12",
       "_origin": "ast",
       "id": "apps_app_components_perfil_completarcadastroscreen_completarcadastroscreen",
-      "community": 27,
+      "community": 219,
       "norm_label": "completarcadastroscreen()"
+    },
+    {
+      "label": "PerfilFields.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/components/perfil/PerfilFields.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_perfil_perfilfields",
+      "community": 219,
+      "norm_label": "perfilfields.tsx"
+    },
+    {
+      "label": "PerfilFieldsProps",
+      "file_type": "code",
+      "source_file": "apps/app/components/perfil/PerfilFields.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "apps_app_components_perfil_perfilfields_perfilfieldsprops",
+      "community": 219,
+      "norm_label": "perfilfieldsprops"
+    },
+    {
+      "label": "PerfilFields()",
+      "file_type": "code",
+      "source_file": "apps/app/components/perfil/PerfilFields.tsx",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "apps_app_components_perfil_perfilfields_perfilfields",
+      "community": 219,
+      "norm_label": "perfilfields()"
     },
     {
       "label": "Field()",
       "file_type": "code",
-      "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
-      "source_location": "L166",
+      "source_file": "apps/app/components/perfil/PerfilFields.tsx",
+      "source_location": "L51",
       "_origin": "ast",
-      "id": "apps_app_components_perfil_completarcadastroscreen_field",
-      "community": 27,
+      "id": "apps_app_components_perfil_perfilfields_field",
+      "community": 219,
       "norm_label": "field()"
+    },
+    {
+      "label": "PerfilScreen.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/components/perfil/PerfilScreen.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_perfil_perfilscreen",
+      "community": 219,
+      "norm_label": "perfilscreen.tsx"
+    },
+    {
+      "label": "PerfilScreen()",
+      "file_type": "code",
+      "source_file": "apps/app/components/perfil/PerfilScreen.tsx",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "apps_app_components_perfil_perfilscreen_perfilscreen",
+      "community": 219,
+      "norm_label": "perfilscreen()"
+    },
+    {
+      "label": "usePerfilForm.ts",
+      "file_type": "code",
+      "source_file": "apps/app/components/perfil/usePerfilForm.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_perfil_useperfilform",
+      "community": 27,
+      "norm_label": "useperfilform.ts"
+    },
+    {
+      "label": "usePerfilForm()",
+      "file_type": "code",
+      "source_file": "apps/app/components/perfil/usePerfilForm.ts",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "apps_app_components_perfil_useperfilform_useperfilform",
+      "community": 219,
+      "norm_label": "useperfilform()"
     },
     {
       "label": "entrepreneurPhotos.ts",
@@ -1212,7 +1302,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_constants_entrepreneurphotos",
-      "community": 27,
+      "community": 82,
       "norm_label": "entrepreneurphotos.ts"
     },
     {
@@ -1222,7 +1312,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "apps_app_constants_entrepreneurphotos_entrepreneurphoto",
-      "community": 27,
+      "community": 82,
       "norm_label": "entrepreneurphoto"
     },
     {
@@ -1232,7 +1322,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "apps_app_constants_entrepreneurphotos_entrepreneur_photos",
-      "community": 27,
+      "community": 82,
       "norm_label": "entrepreneur_photos"
     },
     {
@@ -1242,7 +1332,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "apps_app_constants_entrepreneurphotos_pickentrepreneurphoto",
-      "community": 27,
+      "community": 82,
       "norm_label": "pickentrepreneurphoto()"
     },
     {
@@ -2132,7 +2222,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "packages_core_fitscore_capitalfaixa",
-      "community": 82,
+      "community": 81,
       "norm_label": "capitalfaixa"
     },
     {
@@ -2142,7 +2232,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_core_fitscore_tempodisponivel",
-      "community": 82,
+      "community": 81,
       "norm_label": "tempodisponivel"
     },
     {
@@ -2272,7 +2362,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_core_index",
-      "community": 82,
+      "community": 81,
       "norm_label": "index.ts"
     },
     {
@@ -2472,7 +2562,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "packages_supabase_auth_signinwithemail",
-      "community": 27,
+      "community": 224,
       "norm_label": "signinwithemail()"
     },
     {
@@ -2482,7 +2572,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_supabase_auth_signinwithgoogle",
-      "community": 27,
+      "community": 224,
       "norm_label": "signinwithgoogle()"
     },
     {
@@ -2492,7 +2582,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "packages_supabase_auth_signout",
-      "community": 27,
+      "community": 226,
       "norm_label": "signout()"
     },
     {
@@ -2532,7 +2622,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase",
-      "community": 27,
+      "community": 222,
       "norm_label": "knowledgebase.ts"
     },
     {
@@ -2542,7 +2632,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase_knowledgecategory",
-      "community": 27,
+      "community": 222,
       "norm_label": "knowledgecategory"
     },
     {
@@ -2552,7 +2642,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase_knowledgesource",
-      "community": 27,
+      "community": 222,
       "norm_label": "knowledgesource"
     },
     {
@@ -2562,7 +2652,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase_knowledgeanswer",
-      "community": 27,
+      "community": 222,
       "norm_label": "knowledgeanswer"
     },
     {
@@ -2572,7 +2662,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase_askknowledgebase",
-      "community": 27,
+      "community": 222,
       "norm_label": "askknowledgebase()"
     },
     {
@@ -2882,7 +2972,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_types",
-      "community": 27,
+      "community": 223,
       "norm_label": "types.ts"
     },
     {
@@ -2892,7 +2982,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "packages_supabase_types_json",
-      "community": 27,
+      "community": 223,
       "norm_label": "json"
     },
     {
@@ -2912,7 +3002,7 @@
       "source_location": "L392",
       "_origin": "ast",
       "id": "packages_supabase_types_databasewithoutinternals",
-      "community": 27,
+      "community": 223,
       "norm_label": "databasewithoutinternals"
     },
     {
@@ -2922,7 +3012,7 @@
       "source_location": "L394",
       "_origin": "ast",
       "id": "packages_supabase_types_defaultschema",
-      "community": 27,
+      "community": 223,
       "norm_label": "defaultschema"
     },
     {
@@ -2932,7 +3022,7 @@
       "source_location": "L396",
       "_origin": "ast",
       "id": "packages_supabase_types_tables",
-      "community": 27,
+      "community": 223,
       "norm_label": "tables"
     },
     {
@@ -2942,7 +3032,7 @@
       "source_location": "L425",
       "_origin": "ast",
       "id": "packages_supabase_types_tablesinsert",
-      "community": 27,
+      "community": 223,
       "norm_label": "tablesinsert"
     },
     {
@@ -2952,7 +3042,7 @@
       "source_location": "L450",
       "_origin": "ast",
       "id": "packages_supabase_types_tablesupdate",
-      "community": 27,
+      "community": 223,
       "norm_label": "tablesupdate"
     },
     {
@@ -2962,7 +3052,7 @@
       "source_location": "L475",
       "_origin": "ast",
       "id": "packages_supabase_types_enums",
-      "community": 27,
+      "community": 223,
       "norm_label": "enums"
     },
     {
@@ -2972,7 +3062,7 @@
       "source_location": "L492",
       "_origin": "ast",
       "id": "packages_supabase_types_compositetypes",
-      "community": 27,
+      "community": 223,
       "norm_label": "compositetypes"
     },
     {
@@ -2982,7 +3072,7 @@
       "source_location": "L509",
       "_origin": "ast",
       "id": "packages_supabase_types_constants",
-      "community": 27,
+      "community": 223,
       "norm_label": "constants"
     },
     {
@@ -2992,7 +3082,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_components_button",
-      "community": 0,
+      "community": 225,
       "norm_label": "button.tsx"
     },
     {
@@ -3002,7 +3092,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_ui_components_button_buttonvariant",
-      "community": 0,
+      "community": 225,
       "norm_label": "buttonvariant"
     },
     {
@@ -3012,7 +3102,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "packages_ui_components_button_buttonsize",
-      "community": 0,
+      "community": 225,
       "norm_label": "buttonsize"
     },
     {
@@ -3022,7 +3112,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "packages_ui_components_button_buttonprops",
-      "community": 0,
+      "community": 225,
       "norm_label": "buttonprops"
     },
     {
@@ -3032,7 +3122,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "packages_ui_components_button_variantstyles",
-      "community": 0,
+      "community": 225,
       "norm_label": "variantstyles"
     },
     {
@@ -3042,7 +3132,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "packages_ui_components_button_button",
-      "community": 0,
+      "community": 219,
       "norm_label": "button()"
     },
     {
@@ -3052,7 +3142,7 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "packages_ui_components_button_styles",
-      "community": 0,
+      "community": 225,
       "norm_label": "styles"
     },
     {
@@ -3062,7 +3152,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_components_card",
-      "community": 0,
+      "community": 227,
       "norm_label": "card.tsx"
     },
     {
@@ -3072,7 +3162,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_ui_components_card_cardvariant",
-      "community": 0,
+      "community": 227,
       "norm_label": "cardvariant"
     },
     {
@@ -3082,7 +3172,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "packages_ui_components_card_cardprops",
-      "community": 0,
+      "community": 227,
       "norm_label": "cardprops"
     },
     {
@@ -3092,7 +3182,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_ui_components_card_card",
-      "community": 0,
+      "community": 227,
       "norm_label": "card()"
     },
     {
@@ -3102,7 +3192,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "packages_ui_components_card_styles",
-      "community": 0,
+      "community": 227,
       "norm_label": "styles"
     },
     {
@@ -3112,7 +3202,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_components_entrepreneurbackground",
-      "community": 217,
+      "community": 221,
       "norm_label": "entrepreneurbackground.tsx"
     },
     {
@@ -3122,7 +3212,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_ui_components_entrepreneurbackground_entrepreneurbackgroundprops",
-      "community": 217,
+      "community": 221,
       "norm_label": "entrepreneurbackgroundprops"
     },
     {
@@ -3132,7 +3222,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "packages_ui_components_entrepreneurbackground_entrepreneurbackground",
-      "community": 217,
+      "community": 221,
       "norm_label": "entrepreneurbackground()"
     },
     {
@@ -3142,7 +3232,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_components_logo",
-      "community": 0,
+      "community": 220,
       "norm_label": "logo.tsx"
     },
     {
@@ -3152,7 +3242,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_ui_components_logo_symbolcolor",
-      "community": 0,
+      "community": 220,
       "norm_label": "symbolcolor"
     },
     {
@@ -3162,7 +3252,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "packages_ui_components_logo_symbolwhite",
-      "community": 0,
+      "community": 220,
       "norm_label": "symbolwhite"
     },
     {
@@ -3172,7 +3262,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "packages_ui_components_logo_logoprops",
-      "community": 0,
+      "community": 220,
       "norm_label": "logoprops"
     },
     {
@@ -3182,7 +3272,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_ui_components_logo_logo",
-      "community": 0,
+      "community": 220,
       "norm_label": "logo()"
     },
     {
@@ -3192,7 +3282,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_index",
-      "community": 0,
+      "community": 220,
       "norm_label": "index.ts"
     },
     {
@@ -9031,6 +9121,38 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/perfil/index.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_perfil_index",
+      "target": "apps_app_app_protected_perfil_index_perfil",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/perfil/index.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_perfil_index",
+      "target": "apps_app_components_perfil_perfilscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/perfil/index.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_perfil_index",
+      "target": "apps_app_components_perfil_perfilscreen_perfilscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "apps/app/app/_layout.tsx",
       "source_location": "L18",
       "weight": 1.0,
@@ -10983,7 +11105,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
-      "source_location": "L13",
+      "source_location": "L12",
       "weight": 1.0,
       "source": "apps_app_components_perfil_completarcadastroscreen",
       "target": "apps_app_components_perfil_completarcadastroscreen_completarcadastroscreen",
@@ -10993,31 +11115,10 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
-      "source_location": "L9",
+      "source_location": "L8",
       "weight": 1.0,
       "source": "apps_app_components_perfil_completarcadastroscreen",
       "target": "apps_app_components_perfil_completarcadastroscreen_destinationfor",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
-      "source_location": "L166",
-      "weight": 1.0,
-      "source": "apps_app_components_perfil_completarcadastroscreen",
-      "target": "apps_app_components_perfil_completarcadastroscreen_field",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "apps_app_components_perfil_completarcadastroscreen",
-      "target": "packages_supabase_client_supabase",
       "confidence_score": 1.0
     },
     {
@@ -11025,7 +11126,51 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
-      "source_location": "L7",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_completarcadastroscreen",
+      "target": "apps_app_components_perfil_perfilfields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_completarcadastroscreen",
+      "target": "apps_app_components_perfil_perfilfields_perfilfields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_completarcadastroscreen",
+      "target": "apps_app_components_perfil_useperfilform",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_completarcadastroscreen",
+      "target": "apps_app_components_perfil_useperfilform_useperfilform",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
+      "source_location": "L4",
       "weight": 1.0,
       "source": "apps_app_components_perfil_completarcadastroscreen",
       "target": "packages_supabase_index",
@@ -11036,7 +11181,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
-      "source_location": "L7",
+      "source_location": "L4",
       "weight": 1.0,
       "source": "apps_app_components_perfil_completarcadastroscreen",
       "target": "packages_supabase_session_getcurrentsession",
@@ -11047,7 +11192,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
-      "source_location": "L7",
+      "source_location": "L4",
       "weight": 1.0,
       "source": "apps_app_components_perfil_completarcadastroscreen",
       "target": "packages_supabase_session_getuserrole",
@@ -11058,18 +11203,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "apps_app_components_perfil_completarcadastroscreen",
-      "target": "packages_supabase_storage_uploadavatar",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
-      "source_location": "L6",
+      "source_location": "L3",
       "weight": 1.0,
       "source": "apps_app_components_perfil_completarcadastroscreen",
       "target": "packages_ui_components_button_button",
@@ -11080,7 +11214,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
-      "source_location": "L6",
+      "source_location": "L3",
       "weight": 1.0,
       "source": "apps_app_components_perfil_completarcadastroscreen",
       "target": "packages_ui_components_logo_logo",
@@ -11091,10 +11225,236 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
-      "source_location": "L6",
+      "source_location": "L3",
       "weight": 1.0,
       "source": "apps_app_components_perfil_completarcadastroscreen",
       "target": "packages_ui_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/app/components/perfil/CompletarCadastroScreen.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_completarcadastroscreen_completarcadastroscreen",
+      "target": "apps_app_components_perfil_useperfilform_useperfilform"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/PerfilFields.tsx",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_perfilfields",
+      "target": "apps_app_components_perfil_perfilfields_field",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/PerfilFields.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_perfilfields",
+      "target": "apps_app_components_perfil_perfilfields_perfilfields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/PerfilFields.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_perfilfields",
+      "target": "apps_app_components_perfil_perfilfields_perfilfieldsprops",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/PerfilFields.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_perfilfields",
+      "target": "packages_ui_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/PerfilScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_perfilscreen",
+      "target": "apps_app_components_perfil_perfilfields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/PerfilScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_perfilscreen",
+      "target": "apps_app_components_perfil_perfilfields_perfilfields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/PerfilScreen.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_perfilscreen",
+      "target": "apps_app_components_perfil_perfilscreen_perfilscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/PerfilScreen.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_perfilscreen",
+      "target": "apps_app_components_perfil_useperfilform",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/PerfilScreen.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_perfilscreen",
+      "target": "apps_app_components_perfil_useperfilform_useperfilform",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/PerfilScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_perfilscreen",
+      "target": "packages_supabase_auth_signout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/PerfilScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_perfilscreen",
+      "target": "packages_supabase_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/PerfilScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_perfilscreen",
+      "target": "packages_ui_components_button_button",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/PerfilScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_perfilscreen",
+      "target": "packages_ui_components_logo_logo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/PerfilScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_perfilscreen",
+      "target": "packages_ui_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/app/components/perfil/PerfilScreen.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_perfilscreen_perfilscreen",
+      "target": "apps_app_components_perfil_useperfilform_useperfilform"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/usePerfilForm.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_useperfilform",
+      "target": "apps_app_components_perfil_useperfilform_useperfilform",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/usePerfilForm.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_useperfilform",
+      "target": "packages_supabase_client_supabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/usePerfilForm.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_useperfilform",
+      "target": "packages_supabase_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/usePerfilForm.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_useperfilform",
+      "target": "packages_supabase_session_getcurrentsession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/perfil/usePerfilForm.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_perfil_useperfilform",
+      "target": "packages_supabase_storage_uploadavatar",
       "confidence_score": 1.0
     },
     {
@@ -16271,5 +16631,5 @@
       "confidence": "EXTRACTED"
     }
   ],
-  "built_at_commit": "ab5a44f0e68a69f3de4c9a7763f257ef73cd147c"
+  "built_at_commit": "da256706ec48721ca115a0b123741266725b94ed"
 }

@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1785288607.945019,
-    "ast_hash": "ad07d1b7b669684e7c09407d0068932f",
+    "mtime": 1785289082.7951021,
+    "ast_hash": "a54ccfb74079beba747fd67677debdc2",
     "semantic_hash": ""
   },
   ".mcp.json": {
@@ -305,8 +305,8 @@
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1785287795.646266,
-    "ast_hash": "70d62d7a7f636ba7a6527652b9062f04",
+    "mtime": 1785289037.5668402,
+    "ast_hash": "1eab90264abfc2e5ffb990857605dd25",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
@@ -440,13 +440,13 @@
     "semantic_hash": ""
   },
   "apps/app/components/admin/AdminDashboardScreen.tsx": {
-    "mtime": 1785267802.0610116,
-    "ast_hash": "2d8164f0cf35991f46e1a32a399e88d9",
+    "mtime": 1785289016.1062615,
+    "ast_hash": "905e67a43d0499cfde0d7054cb21ea81",
     "semantic_hash": ""
   },
   "apps/app/components/assistente/AssistenteScreen.tsx": {
-    "mtime": 1785287795.6427398,
-    "ast_hash": "daf3bc32547b566499369a1a08ec8bf8",
+    "mtime": 1785289008.19105,
+    "ast_hash": "ddc1d1ccf726e54db1358ab46ae20435",
     "semantic_hash": ""
   },
   "apps/app/components/login/LoginScreen.tsx": {
@@ -455,8 +455,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/perfil/CompletarCadastroScreen.tsx": {
-    "mtime": 1785288342.1592422,
-    "ast_hash": "a607d707a052d9d9a5625bc4d0c7c46c",
+    "mtime": 1785288967.873429,
+    "ast_hash": "dddb2d90f9977263ef545b074c6aef31",
     "semantic_hash": ""
   },
   "packages/supabase/auth.ts": {
@@ -477,6 +477,26 @@
   "supabase/migrations/202607290000_avatar_url_and_avatars_bucket.sql": {
     "mtime": 1785287392.527445,
     "ast_hash": "53b990da619d298167fe73db0508760a",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/perfil/index.tsx": {
+    "mtime": 1785288987.6099012,
+    "ast_hash": "aba20a65def047e7384ad4bde031520b",
+    "semantic_hash": ""
+  },
+  "apps/app/components/perfil/PerfilFields.tsx": {
+    "mtime": 1785288958.4701858,
+    "ast_hash": "583d816d2322838351ea35894c72c95e",
+    "semantic_hash": ""
+  },
+  "apps/app/components/perfil/PerfilScreen.tsx": {
+    "mtime": 1785288981.2998548,
+    "ast_hash": "dc23064538982a8dffb0aedfcb4d3ae9",
+    "semantic_hash": ""
+  },
+  "apps/app/components/perfil/usePerfilForm.ts": {
+    "mtime": 1785288945.8785515,
+    "ast_hash": "171d24205a1d71d94bac433c89587abf",
     "semantic_hash": ""
   }
 }

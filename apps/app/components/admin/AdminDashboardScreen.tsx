@@ -23,7 +23,10 @@ export function AdminDashboardScreen() {
       <Text style={{ ...type.bodyLg, color: "#C7D3E3", textAlign: "center", maxWidth: 420, marginBottom: space[8] }}>
         Curadoria de nichos e gestão do sistema chegam nas próximas fases. Por enquanto, isso confirma que você entrou como admin.
       </Text>
-      <Button label="Sair" variant="ghost" onDark onPress={handleSignOut} />
+      <View style={{ flexDirection: "row", gap: space[3] }}>
+        <Button label="Meu perfil" variant="ghost" onDark onPress={() => router.push("/perfil")} />
+        <Button label="Sair" variant="ghost" onDark onPress={handleSignOut} />
+      </View>
     </View>
   );
 }

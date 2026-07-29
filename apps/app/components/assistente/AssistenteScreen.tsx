@@ -75,24 +75,31 @@ export function AssistenteScreen() {
       >
         <Logo size={28} />
         <View style={{ flexDirection: "row", alignItems: "center", gap: space[3] }}>
-          {perfil?.avatar_url ? (
-            <Image source={{ uri: perfil.avatar_url }} style={{ width: 32, height: 32, borderRadius: radius.full }} />
-          ) : perfil?.nome ? (
-            <View
-              style={{
-                width: 32,
-                height: 32,
-                borderRadius: radius.full,
-                backgroundColor: color.bg.brandSubtle,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Text style={{ ...type.caption, color: color.bg.brand, fontWeight: "700" }}>
-                {perfil.nome.trim()[0]?.toUpperCase()}
-              </Text>
-            </View>
-          ) : null}
+          <Pressable
+            onPress={() => router.push("/perfil")}
+            accessibilityRole="button"
+            accessibilityLabel="Meu perfil"
+            style={{ minHeight: 44, minWidth: 44, alignItems: "center", justifyContent: "center" }}
+          >
+            {perfil?.avatar_url ? (
+              <Image source={{ uri: perfil.avatar_url }} style={{ width: 32, height: 32, borderRadius: radius.full }} />
+            ) : perfil?.nome ? (
+              <View
+                style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: radius.full,
+                  backgroundColor: color.bg.brandSubtle,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Text style={{ ...type.caption, color: color.bg.brand, fontWeight: "700" }}>
+                  {perfil.nome.trim()[0]?.toUpperCase()}
+                </Text>
+              </View>
+            ) : null}
+          </Pressable>
           <Pressable onPress={handleSignOut} accessibilityRole="button" style={{ minHeight: 44, justifyContent: "center" }}>
             <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>Sair</Text>
           </Pressable>
