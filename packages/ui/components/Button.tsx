@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
   ActivityIndicator,
   Animated,
@@ -56,8 +56,21 @@ export function Button({
 
   // DS-16: o botão sobe de leve no hover e afunda no press — movimento só
   // confirma a ação, nunca atrasa a resposta percebida (DS-9).
+  //
+  // `pressed`/`hovered` viram estado local (não a API de `style` como
+  // função do Pressable) de propósito: `Animated.createAnimatedComponent`
+  // precisa inspecionar o `style` pra achar `Animated.Value` dentro dele, e
+  // não sabe lidar com `style` sendo uma função — o resultado é o estilo
+  // inteiro sendo descartado silenciosamente (sem erro, sem warning), só o
+  // texto do botão aparece, sem fundo/padding/tamanho nenhum. Bug real de
+  // produção pego só quando alguém olhou a tela de verdade (30/07/2026) —
+  // toda essa sessão eu só validava botão por texto/clique via árvore de
+  // acessibilidade, nunca por captura visual, por isso passou despercebido
+  // apesar de já existir desde antes desta sessão.
   const lift = useRef(new Animated.Value(0)).current;
   const press = useRef(new Animated.Value(0)).current;
+  const [hovered, setHovered] = useState(false);
+  const [pressed, setPressed] = useState(false);
   const inert = disabled || loading;
 
   function animate(value: Animated.Value, toValue: number, duration: number) {
@@ -81,11 +94,39 @@ export function Button({
       accessibilityLabel={label}
       accessibilityState={{ disabled: inert }}
       onPress={inert ? undefined : onPress}
-      onHoverIn={inert ? undefined : () => animate(lift, 1, motion.base)}
-      onHoverOut={inert ? undefined : () => animate(lift, 0, motion.base)}
-      onPressIn={inert ? undefined : () => animate(press, 1, motion.fast)}
-      onPressOut={inert ? undefined : () => animate(press, 0, motion.base)}
-      style={({ pressed, hovered }: any) => [
+      onHoverIn={
+        inert
+          ? undefined
+          : () => {
+              setHovered(true);
+              animate(lift, 1, motion.base);
+            }
+      }
+      onHoverOut={
+        inert
+          ? undefined
+          : () => {
+              setHovered(false);
+              animate(lift, 0, motion.base);
+            }
+      }
+      onPressIn={
+        inert
+          ? undefined
+          : () => {
+              setPressed(true);
+              animate(press, 1, motion.fast);
+            }
+      }
+      onPressOut={
+        inert
+          ? undefined
+          : () => {
+              setPressed(false);
+              animate(press, 0, motion.base);
+            }
+      }
+      style={[
         styles.base,
         {
           height,

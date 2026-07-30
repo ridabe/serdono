@@ -202,7 +202,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_protected_layout",
-      "community": 238,
+      "community": 239,
       "norm_label": "_layout.tsx"
     },
     {
@@ -212,7 +212,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "apps_app_app_protected_layout_protectedlayout",
-      "community": 238,
+      "community": 239,
       "norm_label": "protectedlayout()"
     },
     {
@@ -238,11 +238,31 @@
     {
       "label": "index.tsx",
       "file_type": "code",
+      "source_file": "apps/app/app/(protected)/admin/fornecedores/index.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_app_protected_admin_fornecedores_index",
+      "community": 27,
+      "norm_label": "index.tsx"
+    },
+    {
+      "label": "AdminFornecedores()",
+      "file_type": "code",
+      "source_file": "apps/app/app/(protected)/admin/fornecedores/index.tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "apps_app_app_protected_admin_fornecedores_index_adminfornecedores",
+      "community": 27,
+      "norm_label": "adminfornecedores()"
+    },
+    {
+      "label": "index.tsx",
+      "file_type": "code",
       "source_file": "apps/app/app/(protected)/admin/index.tsx",
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_protected_admin_index",
-      "community": 220,
+      "community": 232,
       "norm_label": "index.tsx"
     },
     {
@@ -252,7 +272,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_protected_admin_index_admin",
-      "community": 220,
+      "community": 232,
       "norm_label": "admin()"
     },
     {
@@ -262,7 +282,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_protected_admin_modulos_index",
-      "community": 27,
+      "community": 224,
       "norm_label": "index.tsx"
     },
     {
@@ -272,7 +292,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_protected_admin_modulos_index_adminmodulos",
-      "community": 27,
+      "community": 224,
       "norm_label": "adminmodulos()"
     },
     {
@@ -302,7 +322,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_protected_admin_usuarios_index",
-      "community": 0,
+      "community": 224,
       "norm_label": "index.tsx"
     },
     {
@@ -312,7 +332,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_protected_admin_usuarios_index_adminusuarios",
-      "community": 0,
+      "community": 224,
       "norm_label": "adminusuarios()"
     },
     {
@@ -402,7 +422,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_protected_modulos_index",
-      "community": 228,
+      "community": 238,
       "norm_label": "index.tsx"
     },
     {
@@ -412,7 +432,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_protected_modulos_index_modulos",
-      "community": 228,
+      "community": 238,
       "norm_label": "modulos()"
     },
     {
@@ -442,7 +462,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_layout",
-      "community": 0,
+      "community": 223,
       "norm_label": "_layout.tsx"
     },
     {
@@ -452,7 +472,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "apps_app_app_layout_rootlayout",
-      "community": 0,
+      "community": 223,
       "norm_label": "rootlayout()"
     },
     {
@@ -462,7 +482,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_cadastro_bem_vindo",
-      "community": 220,
+      "community": 238,
       "norm_label": "bem-vindo.tsx"
     },
     {
@@ -472,7 +492,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_app_app_cadastro_bem_vindo_bemvindo",
-      "community": 220,
+      "community": 238,
       "norm_label": "bemvindo()"
     },
     {
@@ -502,7 +522,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_diagnostico_index",
-      "community": 232,
+      "community": 81,
       "norm_label": "index.tsx"
     },
     {
@@ -512,7 +532,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_diagnostico_index_diagnostico",
-      "community": 232,
+      "community": 81,
       "norm_label": "diagnostico()"
     },
     {
@@ -562,7 +582,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_lgpd",
-      "community": 220,
+      "community": 228,
       "norm_label": "lgpd.tsx"
     },
     {
@@ -572,7 +592,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_lgpd_lgpd",
-      "community": 220,
+      "community": 228,
       "norm_label": "lgpd()"
     },
     {
@@ -642,7 +662,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_privacidade",
-      "community": 220,
+      "community": 228,
       "norm_label": "privacidade.tsx"
     },
     {
@@ -652,7 +672,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_privacidade_privacidade",
-      "community": 220,
+      "community": 228,
       "norm_label": "privacidade()"
     },
     {
@@ -662,7 +682,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_termos",
-      "community": 220,
+      "community": 228,
       "norm_label": "termos.tsx"
     },
     {
@@ -672,7 +692,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_termos_termos",
-      "community": 220,
+      "community": 228,
       "norm_label": "termos()"
     },
     {
@@ -692,7 +712,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_appupdatealert",
-      "community": 0,
+      "community": 223,
       "norm_label": "appupdatealert.tsx"
     },
     {
@@ -702,7 +722,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_app_components_appupdatealert_appupdatealert",
-      "community": 0,
+      "community": 223,
       "norm_label": "appupdatealert()"
     },
     {
@@ -712,7 +732,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_admin_admindashboardscreen",
-      "community": 220,
+      "community": 232,
       "norm_label": "admindashboardscreen.tsx"
     },
     {
@@ -722,7 +742,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_app_components_admin_admindashboardscreen_dashboardstats",
-      "community": 220,
+      "community": 232,
       "norm_label": "dashboardstats"
     },
     {
@@ -732,7 +752,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "apps_app_components_admin_admindashboardscreen_insights",
-      "community": 220,
+      "community": 232,
       "norm_label": "insights"
     },
     {
@@ -742,28 +762,48 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "apps_app_components_admin_admindashboardscreen_admindashboardscreen",
-      "community": 220,
+      "community": 232,
       "norm_label": "admindashboardscreen()"
     },
     {
       "label": "InsightCard()",
       "file_type": "code",
       "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
-      "source_location": "L105",
+      "source_location": "L110",
       "_origin": "ast",
       "id": "apps_app_components_admin_admindashboardscreen_insightcard",
-      "community": 220,
+      "community": 232,
       "norm_label": "insightcard()"
     },
     {
       "label": "NavCard()",
       "file_type": "code",
       "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
-      "source_location": "L114",
+      "source_location": "L119",
       "_origin": "ast",
       "id": "apps_app_components_admin_admindashboardscreen_navcard",
-      "community": 220,
+      "community": 232,
       "norm_label": "navcard()"
+    },
+    {
+      "label": "AdminFornecedoresScreen.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/AdminFornecedoresScreen.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_adminfornecedoresscreen",
+      "community": 27,
+      "norm_label": "adminfornecedoresscreen.tsx"
+    },
+    {
+      "label": "AdminFornecedoresScreen()",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/AdminFornecedoresScreen.tsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_adminfornecedoresscreen_adminfornecedoresscreen",
+      "community": 27,
+      "norm_label": "adminfornecedoresscreen()"
     },
     {
       "label": "AdminModulesScreen.tsx",
@@ -772,7 +812,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_admin_adminmodulesscreen",
-      "community": 27,
+      "community": 224,
       "norm_label": "adminmodulesscreen.tsx"
     },
     {
@@ -782,7 +822,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_app_components_admin_adminmodulesscreen_diacritics_regex",
-      "community": 27,
+      "community": 224,
       "norm_label": "diacritics_regex"
     },
     {
@@ -792,7 +832,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "apps_app_components_admin_adminmodulesscreen_slugify",
-      "community": 27,
+      "community": 224,
       "norm_label": "slugify()"
     },
     {
@@ -802,7 +842,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "apps_app_components_admin_adminmodulesscreen_adminmodulesscreen",
-      "community": 27,
+      "community": 224,
       "norm_label": "adminmodulesscreen()"
     },
     {
@@ -832,7 +872,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_admin_adminusersscreen",
-      "community": 0,
+      "community": 224,
       "norm_label": "adminusersscreen.tsx"
     },
     {
@@ -842,7 +882,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_app_components_admin_adminusersscreen_adminusersscreen",
-      "community": 0,
+      "community": 224,
       "norm_label": "adminusersscreen()"
     },
     {
@@ -852,8 +892,38 @@
       "source_location": "L132",
       "_origin": "ast",
       "id": "apps_app_components_admin_adminusersscreen_badge",
-      "community": 0,
+      "community": 224,
       "norm_label": "badge()"
+    },
+    {
+      "label": "useAdminFornecedores.ts",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/useAdminFornecedores.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_useadminfornecedores",
+      "community": 27,
+      "norm_label": "useadminfornecedores.ts"
+    },
+    {
+      "label": "NicheOption",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/useAdminFornecedores.ts",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_useadminfornecedores_nicheoption",
+      "community": 27,
+      "norm_label": "nicheoption"
+    },
+    {
+      "label": "useAdminFornecedores()",
+      "file_type": "code",
+      "source_file": "apps/app/components/admin/useAdminFornecedores.ts",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "apps_app_components_admin_useadminfornecedores_useadminfornecedores",
+      "community": 27,
+      "norm_label": "useadminfornecedores()"
     },
     {
       "label": "useAdminModules.ts",
@@ -872,7 +942,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "apps_app_components_admin_useadminmodules_useadminmodules",
-      "community": 27,
+      "community": 224,
       "norm_label": "useadminmodules()"
     },
     {
@@ -882,7 +952,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_admin_useadminusers",
-      "community": 227,
+      "community": 224,
       "norm_label": "useadminusers.ts"
     },
     {
@@ -892,7 +962,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "apps_app_components_admin_useadminusers_useadminusers",
-      "community": 0,
+      "community": 224,
       "norm_label": "useadminusers()"
     },
     {
@@ -982,7 +1052,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen",
-      "community": 232,
+      "community": 81,
       "norm_label": "diagnosticoscreen.tsx"
     },
     {
@@ -992,7 +1062,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_background_photo",
-      "community": 232,
+      "community": 81,
       "norm_label": "background_photo"
     },
     {
@@ -1002,7 +1072,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_answers",
-      "community": 232,
+      "community": 81,
       "norm_label": "answers"
     },
     {
@@ -1012,7 +1082,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_empty_answers",
-      "community": 232,
+      "community": 81,
       "norm_label": "empty_answers"
     },
     {
@@ -1022,7 +1092,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_isblockanswered",
-      "community": 232,
+      "community": 81,
       "norm_label": "isblockanswered()"
     },
     {
@@ -1032,7 +1102,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_diagnosticoscreen",
-      "community": 232,
+      "community": 81,
       "norm_label": "diagnosticoscreen()"
     },
     {
@@ -1042,7 +1112,7 @@
       "source_location": "L337",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_singlechoice",
-      "community": 232,
+      "community": 81,
       "norm_label": "singlechoice()"
     },
     {
@@ -1052,7 +1122,7 @@
       "source_location": "L389",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_multichoice",
-      "community": 232,
+      "community": 81,
       "norm_label": "multichoice()"
     },
     {
@@ -1112,7 +1182,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks",
-      "community": 232,
+      "community": 81,
       "norm_label": "blocks.ts"
     },
     {
@@ -1122,7 +1192,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_diagnosticofield",
-      "community": 232,
+      "community": 81,
       "norm_label": "diagnosticofield"
     },
     {
@@ -1132,7 +1202,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_choiceoption",
-      "community": 232,
+      "community": 81,
       "norm_label": "choiceoption"
     },
     {
@@ -1142,7 +1212,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_singlechoiceblock",
-      "community": 232,
+      "community": 81,
       "norm_label": "singlechoiceblock"
     },
     {
@@ -1152,7 +1222,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_multichoiceblock",
-      "community": 232,
+      "community": 81,
       "norm_label": "multichoiceblock"
     },
     {
@@ -1162,7 +1232,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_locationblock",
-      "community": 232,
+      "community": 81,
       "norm_label": "locationblock"
     },
     {
@@ -1172,7 +1242,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_diagnosticoblock",
-      "community": 232,
+      "community": 81,
       "norm_label": "diagnosticoblock"
     },
     {
@@ -1182,7 +1252,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_blocks_diagnostico_blocks",
-      "community": 232,
+      "community": 81,
       "norm_label": "diagnostico_blocks"
     },
     {
@@ -1252,7 +1322,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_home_finalcta",
-      "community": 0,
+      "community": 218,
       "norm_label": "finalcta.tsx"
     },
     {
@@ -1322,7 +1392,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_home_hero",
-      "community": 0,
+      "community": 218,
       "norm_label": "hero.tsx"
     },
     {
@@ -1596,13 +1666,53 @@
       "norm_label": "escolhernichoscreen()"
     },
     {
+      "label": "EstruturaScreen.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_jornada_estruturascreen",
+      "community": 227,
+      "norm_label": "estruturascreen.tsx"
+    },
+    {
+      "label": "EstruturaScreenProps",
+      "file_type": "code",
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "apps_app_components_jornada_estruturascreen_estruturascreenprops",
+      "community": 227,
+      "norm_label": "estruturascreenprops"
+    },
+    {
+      "label": "ChecklistItemCard()",
+      "file_type": "code",
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "apps_app_components_jornada_estruturascreen_checklistitemcard",
+      "community": 227,
+      "norm_label": "checklistitemcard()"
+    },
+    {
+      "label": "EstruturaScreen()",
+      "file_type": "code",
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L96",
+      "_origin": "ast",
+      "id": "apps_app_components_jornada_estruturascreen_estruturascreen",
+      "community": 227,
+      "norm_label": "estruturascreen()"
+    },
+    {
       "label": "FinanceiroScreen.tsx",
       "file_type": "code",
       "source_file": "apps/app/components/jornada/FinanceiroScreen.tsx",
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_jornada_financeiroscreen",
-      "community": 231,
+      "community": 241,
       "norm_label": "financeiroscreen.tsx"
     },
     {
@@ -1612,7 +1722,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "apps_app_components_jornada_financeiroscreen_financeiroscreenprops",
-      "community": 230,
+      "community": 241,
       "norm_label": "financeiroscreenprops"
     },
     {
@@ -1622,7 +1732,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "apps_app_components_jornada_financeiroscreen_parsemoeda",
-      "community": 231,
+      "community": 241,
       "norm_label": "parsemoeda()"
     },
     {
@@ -1632,7 +1742,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "apps_app_components_jornada_financeiroscreen_parsenumero",
-      "community": 231,
+      "community": 241,
       "norm_label": "parsenumero()"
     },
     {
@@ -1642,7 +1752,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "apps_app_components_jornada_financeiroscreen_resultblock",
-      "community": 231,
+      "community": 241,
       "norm_label": "resultblock()"
     },
     {
@@ -1652,7 +1762,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "apps_app_components_jornada_financeiroscreen_financeiroscreen",
-      "community": 231,
+      "community": 241,
       "norm_label": "financeiroscreen()"
     },
     {
@@ -1662,7 +1772,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_jornada_formalizacaoscreen",
-      "community": 84,
+      "community": 218,
       "norm_label": "formalizacaoscreen.tsx"
     },
     {
@@ -1672,7 +1782,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "apps_app_components_jornada_formalizacaoscreen_formalizacaoscreenprops",
-      "community": 230,
+      "community": 218,
       "norm_label": "formalizacaoscreenprops"
     },
     {
@@ -1682,7 +1792,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "apps_app_components_jornada_formalizacaoscreen_regime_label",
-      "community": 84,
+      "community": 218,
       "norm_label": "regime_label"
     },
     {
@@ -1692,7 +1802,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "apps_app_components_jornada_formalizacaoscreen_etapacard",
-      "community": 84,
+      "community": 218,
       "norm_label": "etapacard()"
     },
     {
@@ -1702,8 +1812,58 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "apps_app_components_jornada_formalizacaoscreen_formalizacaoscreen",
-      "community": 84,
+      "community": 218,
       "norm_label": "formalizacaoscreen()"
+    },
+    {
+      "label": "FornecedoresScreen.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_jornada_fornecedoresscreen",
+      "community": 231,
+      "norm_label": "fornecedoresscreen.tsx"
+    },
+    {
+      "label": "FornecedoresScreenProps",
+      "file_type": "code",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "apps_app_components_jornada_fornecedoresscreen_fornecedoresscreenprops",
+      "community": 231,
+      "norm_label": "fornecedoresscreenprops"
+    },
+    {
+      "label": "ParceiroCard()",
+      "file_type": "code",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "apps_app_components_jornada_fornecedoresscreen_parceirocard",
+      "community": 231,
+      "norm_label": "parceirocard()"
+    },
+    {
+      "label": "FornecedorRow()",
+      "file_type": "code",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L29",
+      "_origin": "ast",
+      "id": "apps_app_components_jornada_fornecedoresscreen_fornecedorrow",
+      "community": 231,
+      "norm_label": "fornecedorrow()"
+    },
+    {
+      "label": "FornecedoresScreen()",
+      "file_type": "code",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L49",
+      "_origin": "ast",
+      "id": "apps_app_components_jornada_fornecedoresscreen_fornecedoresscreen",
+      "community": 231,
+      "norm_label": "fornecedoresscreen()"
     },
     {
       "label": "IdentidadeVisualScreen.tsx",
@@ -1759,7 +1919,7 @@
       "label": "FASES",
       "file_type": "code",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L27",
+      "source_location": "L36",
       "_origin": "ast",
       "id": "apps_app_components_jornada_jornadascreen_fases",
       "community": 241,
@@ -1769,7 +1929,7 @@
       "label": "FASE_LABEL",
       "file_type": "code",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L38",
+      "source_location": "L49",
       "_origin": "ast",
       "id": "apps_app_components_jornada_jornadascreen_fase_label",
       "community": 241,
@@ -1779,7 +1939,7 @@
       "label": "DESCOBERTA_STEPS",
       "file_type": "code",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L52",
+      "source_location": "L65",
       "_origin": "ast",
       "id": "apps_app_components_jornada_jornadascreen_descoberta_steps",
       "community": 241,
@@ -1789,7 +1949,7 @@
       "label": "JornadaScreen()",
       "file_type": "code",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L54",
+      "source_location": "L67",
       "_origin": "ast",
       "id": "apps_app_components_jornada_jornadascreen_jornadascreen",
       "community": 241,
@@ -1802,7 +1962,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_jornada_nomeempresascreen",
-      "community": 242,
+      "community": 230,
       "norm_label": "nomeempresascreen.tsx"
     },
     {
@@ -1812,7 +1972,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "apps_app_components_jornada_nomeempresascreen_nomeempresascreenprops",
-      "community": 242,
+      "community": 230,
       "norm_label": "nomeempresascreenprops"
     },
     {
@@ -1822,7 +1982,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_app_components_jornada_nomeempresascreen_disponibilidade",
-      "community": 242,
+      "community": 230,
       "norm_label": "disponibilidade()"
     },
     {
@@ -1832,7 +1992,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "apps_app_components_jornada_nomeempresascreen_nomeempresascreen",
-      "community": 242,
+      "community": 230,
       "norm_label": "nomeempresascreen()"
     },
     {
@@ -1862,7 +2022,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "apps_app_components_jornada_planejamentoscreen_planejamentoscreen",
-      "community": 241,
+      "community": 230,
       "norm_label": "planejamentoscreen()"
     },
     {
@@ -1899,7 +2059,7 @@
       "label": "StepRailProps",
       "file_type": "code",
       "source_file": "apps/app/components/jornada/StepRail.tsx",
-      "source_location": "L20",
+      "source_location": "L22",
       "_origin": "ast",
       "id": "apps_app_components_jornada_steprail_steprailprops",
       "community": 237,
@@ -1909,7 +2069,7 @@
       "label": "StepRail()",
       "file_type": "code",
       "source_file": "apps/app/components/jornada/StepRail.tsx",
-      "source_location": "L32",
+      "source_location": "L34",
       "_origin": "ast",
       "id": "apps_app_components_jornada_steprail_steprail",
       "community": 237,
@@ -1919,7 +2079,7 @@
       "label": "WideRail()",
       "file_type": "code",
       "source_file": "apps/app/components/jornada/StepRail.tsx",
-      "source_location": "L37",
+      "source_location": "L39",
       "_origin": "ast",
       "id": "apps_app_components_jornada_steprail_widerail",
       "community": 237,
@@ -1929,7 +2089,7 @@
       "label": "StepList()",
       "file_type": "code",
       "source_file": "apps/app/components/jornada/StepRail.tsx",
-      "source_location": "L59",
+      "source_location": "L66",
       "_origin": "ast",
       "id": "apps_app_components_jornada_steprail_steplist",
       "community": 237,
@@ -1939,7 +2099,7 @@
       "label": "CompactRail()",
       "file_type": "code",
       "source_file": "apps/app/components/jornada/StepRail.tsx",
-      "source_location": "L83",
+      "source_location": "L90",
       "_origin": "ast",
       "id": "apps_app_components_jornada_steprail_compactrail",
       "community": 237,
@@ -1949,7 +2109,7 @@
       "label": "FasePill()",
       "file_type": "code",
       "source_file": "apps/app/components/jornada/StepRail.tsx",
-      "source_location": "L118",
+      "source_location": "L131",
       "_origin": "ast",
       "id": "apps_app_components_jornada_steprail_fasepill",
       "community": 237,
@@ -1959,7 +2119,7 @@
       "label": "FaseBadge()",
       "file_type": "code",
       "source_file": "apps/app/components/jornada/StepRail.tsx",
-      "source_location": "L141",
+      "source_location": "L154",
       "_origin": "ast",
       "id": "apps_app_components_jornada_steprail_fasebadge",
       "community": 237,
@@ -1969,7 +2129,7 @@
       "label": "StepDot()",
       "file_type": "code",
       "source_file": "apps/app/components/jornada/StepRail.tsx",
-      "source_location": "L156",
+      "source_location": "L169",
       "_origin": "ast",
       "id": "apps_app_components_jornada_steprail_stepdot",
       "community": 237,
@@ -2032,7 +2192,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "apps_app_components_jornada_validacaoideiascreen_validacaoideiascreenprops",
-      "community": 230,
+      "community": 243,
       "norm_label": "validacaoideiascreenprops"
     },
     {
@@ -2116,10 +2276,20 @@
       "norm_label": "shareordownload()"
     },
     {
+      "label": "printHtmlOnWeb()",
+      "file_type": "code",
+      "source_file": "apps/app/components/jornada/formalizacaoPdf.ts",
+      "source_location": "L91",
+      "_origin": "ast",
+      "id": "apps_app_components_jornada_formalizacaopdf_printhtmlonweb",
+      "community": 84,
+      "norm_label": "printhtmlonweb()"
+    },
+    {
       "label": "exportEtapaPdf()",
       "file_type": "code",
       "source_file": "apps/app/components/jornada/formalizacaoPdf.ts",
-      "source_location": "L88",
+      "source_location": "L125",
       "_origin": "ast",
       "id": "apps_app_components_jornada_formalizacaopdf_exportetapapdf",
       "community": 84,
@@ -2129,7 +2299,7 @@
       "label": "exportChecklistPdf()",
       "file_type": "code",
       "source_file": "apps/app/components/jornada/formalizacaoPdf.ts",
-      "source_location": "L95",
+      "source_location": "L136",
       "_origin": "ast",
       "id": "apps_app_components_jornada_formalizacaopdf_exportchecklistpdf",
       "community": 84,
@@ -2139,11 +2309,31 @@
       "label": "printEtapa()",
       "file_type": "code",
       "source_file": "apps/app/components/jornada/formalizacaoPdf.ts",
-      "source_location": "L102",
+      "source_location": "L147",
       "_origin": "ast",
       "id": "apps_app_components_jornada_formalizacaopdf_printetapa",
       "community": 84,
       "norm_label": "printetapa()"
+    },
+    {
+      "label": "useEstrutura.ts",
+      "file_type": "code",
+      "source_file": "apps/app/components/jornada/useEstrutura.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_jornada_useestrutura",
+      "community": 227,
+      "norm_label": "useestrutura.ts"
+    },
+    {
+      "label": "useEstrutura()",
+      "file_type": "code",
+      "source_file": "apps/app/components/jornada/useEstrutura.ts",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "apps_app_components_jornada_useestrutura_useestrutura",
+      "community": 227,
+      "norm_label": "useestrutura()"
     },
     {
       "label": "useFinanceiro.ts",
@@ -2159,10 +2349,10 @@
       "label": "useFinanceiro()",
       "file_type": "code",
       "source_file": "apps/app/components/jornada/useFinanceiro.ts",
-      "source_location": "L29",
+      "source_location": "L30",
       "_origin": "ast",
       "id": "apps_app_components_jornada_usefinanceiro_usefinanceiro",
-      "community": 231,
+      "community": 241,
       "norm_label": "usefinanceiro()"
     },
     {
@@ -2172,7 +2362,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_jornada_useformalizacao",
-      "community": 84,
+      "community": 229,
       "norm_label": "useformalizacao.ts"
     },
     {
@@ -2182,8 +2372,28 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "apps_app_components_jornada_useformalizacao_useformalizacao",
-      "community": 84,
+      "community": 218,
       "norm_label": "useformalizacao()"
+    },
+    {
+      "label": "useFornecedores.ts",
+      "file_type": "code",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_jornada_usefornecedores",
+      "community": 27,
+      "norm_label": "usefornecedores.ts"
+    },
+    {
+      "label": "useFornecedores()",
+      "file_type": "code",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L31",
+      "_origin": "ast",
+      "id": "apps_app_components_jornada_usefornecedores_usefornecedores",
+      "community": 231,
+      "norm_label": "usefornecedores()"
     },
     {
       "label": "useIdentidadeVisual.ts",
@@ -2212,7 +2422,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_jornada_usenomeempresa",
-      "community": 242,
+      "community": 229,
       "norm_label": "usenomeempresa.ts"
     },
     {
@@ -2222,7 +2432,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "apps_app_components_jornada_usenomeempresa_usenomeempresa",
-      "community": 242,
+      "community": 230,
       "norm_label": "usenomeempresa()"
     },
     {
@@ -2252,7 +2462,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_legal_legallayout",
-      "community": 220,
+      "community": 228,
       "norm_label": "legallayout.tsx"
     },
     {
@@ -2262,7 +2472,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "apps_app_components_legal_legallayout_legalsection",
-      "community": 220,
+      "community": 228,
       "norm_label": "legalsection"
     },
     {
@@ -2272,7 +2482,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "apps_app_components_legal_legallayout_legallayoutprops",
-      "community": 220,
+      "community": 228,
       "norm_label": "legallayoutprops"
     },
     {
@@ -2282,7 +2492,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "apps_app_components_legal_legallayout_legallayout",
-      "community": 220,
+      "community": 228,
       "norm_label": "legallayout()"
     },
     {
@@ -2422,7 +2632,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_modulos_modulosscreen",
-      "community": 228,
+      "community": 238,
       "norm_label": "modulosscreen.tsx"
     },
     {
@@ -2432,7 +2642,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_app_components_modulos_modulosscreen_modulosscreen",
-      "community": 228,
+      "community": 238,
       "norm_label": "modulosscreen()"
     },
     {
@@ -2632,7 +2842,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "apps_app_hooks_useappversion_useappversion",
-      "community": 0,
+      "community": 223,
       "norm_label": "useappversion()"
     },
     {
@@ -3682,7 +3892,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_core_fitscore_tempodisponivel",
-      "community": 232,
+      "community": 81,
       "norm_label": "tempodisponivel"
     },
     {
@@ -4002,7 +4212,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_adminusers",
-      "community": 227,
+      "community": 224,
       "norm_label": "adminusers.ts"
     },
     {
@@ -4012,7 +4222,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_supabase_adminusers_adminuser",
-      "community": 227,
+      "community": 224,
       "norm_label": "adminuser"
     },
     {
@@ -4022,7 +4232,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_supabase_adminusers_listusers",
-      "community": 227,
+      "community": 224,
       "norm_label": "listusers()"
     },
     {
@@ -4032,7 +4242,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "packages_supabase_adminusers_inviteuser",
-      "community": 227,
+      "community": 224,
       "norm_label": "inviteuser()"
     },
     {
@@ -4042,7 +4252,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "packages_supabase_adminusers_setuserrole",
-      "community": 227,
+      "community": 224,
       "norm_label": "setuserrole()"
     },
     {
@@ -4052,7 +4262,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "packages_supabase_adminusers_setuserblocked",
-      "community": 227,
+      "community": 224,
       "norm_label": "setuserblocked()"
     },
     {
@@ -4092,7 +4302,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_auth",
-      "community": 222,
+      "community": 236,
       "norm_label": "auth.ts"
     },
     {
@@ -4102,7 +4312,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "packages_supabase_auth_signinwithemail",
-      "community": 222,
+      "community": 236,
       "norm_label": "signinwithemail()"
     },
     {
@@ -4112,7 +4322,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_supabase_auth_signinwithgoogle",
-      "community": 222,
+      "community": 236,
       "norm_label": "signinwithgoogle()"
     },
     {
@@ -4122,7 +4332,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "packages_supabase_auth_signout",
-      "community": 222,
+      "community": 232,
       "norm_label": "signout()"
     },
     {
@@ -4132,7 +4342,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "packages_supabase_auth_requestpasswordreset",
-      "community": 217,
+      "community": 236,
       "norm_label": "requestpasswordreset()"
     },
     {
@@ -4152,7 +4362,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "packages_supabase_auth_updatepassword",
-      "community": 222,
+      "community": 236,
       "norm_label": "updatepassword()"
     },
     {
@@ -4162,7 +4372,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_client",
-      "community": 223,
+      "community": 224,
       "norm_label": "client.ts"
     },
     {
@@ -4172,8 +4382,178 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "packages_supabase_client_supabase",
-      "community": 223,
+      "community": 239,
       "norm_label": "supabase"
+    },
+    {
+      "label": "fornecedores.ts",
+      "file_type": "code",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "packages_supabase_fornecedores",
+      "community": 27,
+      "norm_label": "fornecedores.ts"
+    },
+    {
+      "label": "FornecedorParceiro",
+      "file_type": "code",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "packages_supabase_fornecedores_fornecedorparceiro",
+      "community": 27,
+      "norm_label": "fornecedorparceiro"
+    },
+    {
+      "label": "JornadaFornecedor",
+      "file_type": "code",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "packages_supabase_fornecedores_jornadafornecedor",
+      "community": 27,
+      "norm_label": "jornadafornecedor"
+    },
+    {
+      "label": "listParceiros()",
+      "file_type": "code",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "packages_supabase_fornecedores_listparceiros",
+      "community": 27,
+      "norm_label": "listparceiros()"
+    },
+    {
+      "label": "ParceiroInput",
+      "file_type": "code",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "packages_supabase_fornecedores_parceiroinput",
+      "community": 27,
+      "norm_label": "parceiroinput"
+    },
+    {
+      "label": "createParceiro()",
+      "file_type": "code",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "packages_supabase_fornecedores_createparceiro",
+      "community": 27,
+      "norm_label": "createparceiro()"
+    },
+    {
+      "label": "updateParceiro()",
+      "file_type": "code",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L39",
+      "_origin": "ast",
+      "id": "packages_supabase_fornecedores_updateparceiro",
+      "community": 27,
+      "norm_label": "updateparceiro()"
+    },
+    {
+      "label": "setParceiroAtivo()",
+      "file_type": "code",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L44",
+      "_origin": "ast",
+      "id": "packages_supabase_fornecedores_setparceiroativo",
+      "community": 27,
+      "norm_label": "setparceiroativo()"
+    },
+    {
+      "label": "getParceirosSugeridos()",
+      "file_type": "code",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L57",
+      "_origin": "ast",
+      "id": "packages_supabase_fornecedores_getparceirossugeridos",
+      "community": 27,
+      "norm_label": "getparceirossugeridos()"
+    },
+    {
+      "label": "JornadaFornecedorInput",
+      "file_type": "code",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L66",
+      "_origin": "ast",
+      "id": "packages_supabase_fornecedores_jornadafornecedorinput",
+      "community": 27,
+      "norm_label": "jornadafornecedorinput"
+    },
+    {
+      "label": "listJornadaFornecedores()",
+      "file_type": "code",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L77",
+      "_origin": "ast",
+      "id": "packages_supabase_fornecedores_listjornadafornecedores",
+      "community": 27,
+      "norm_label": "listjornadafornecedores()"
+    },
+    {
+      "label": "addJornadaFornecedor()",
+      "file_type": "code",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L87",
+      "_origin": "ast",
+      "id": "packages_supabase_fornecedores_addjornadafornecedor",
+      "community": 27,
+      "norm_label": "addjornadafornecedor()"
+    },
+    {
+      "label": "updateJornadaFornecedor()",
+      "file_type": "code",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L92",
+      "_origin": "ast",
+      "id": "packages_supabase_fornecedores_updatejornadafornecedor",
+      "community": 27,
+      "norm_label": "updatejornadafornecedor()"
+    },
+    {
+      "label": "removeJornadaFornecedor()",
+      "file_type": "code",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L97",
+      "_origin": "ast",
+      "id": "packages_supabase_fornecedores_removejornadafornecedor",
+      "community": 27,
+      "norm_label": "removejornadafornecedor()"
+    },
+    {
+      "label": "RoteiroFornecedoresCategoria",
+      "file_type": "code",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L104",
+      "_origin": "ast",
+      "id": "packages_supabase_fornecedores_roteirofornecedorescategoria",
+      "community": 27,
+      "norm_label": "roteirofornecedorescategoria"
+    },
+    {
+      "label": "generateRoteiroFornecedores()",
+      "file_type": "code",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L117",
+      "_origin": "ast",
+      "id": "packages_supabase_fornecedores_generateroteirofornecedores",
+      "community": 27,
+      "norm_label": "generateroteirofornecedores()"
+    },
+    {
+      "label": "getRoteiroFornecedores()",
+      "file_type": "code",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L125",
+      "_origin": "ast",
+      "id": "packages_supabase_fornecedores_getroteirofornecedores",
+      "community": 27,
+      "norm_label": "getroteirofornecedores()"
     },
     {
       "label": "index.ts",
@@ -4182,7 +4562,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_index",
-      "community": 223,
+      "community": 220,
       "norm_label": "index.ts"
     },
     {
@@ -4239,7 +4619,7 @@
       "label": "JornadaEtapaTemplate",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L17",
+      "source_location": "L19",
       "_origin": "ast",
       "id": "packages_supabase_jornada_jornadaetapatemplate",
       "community": 229,
@@ -4249,17 +4629,17 @@
       "label": "JornadaEtapaRow",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L18",
+      "source_location": "L20",
       "_origin": "ast",
       "id": "packages_supabase_jornada_jornadaetaparow",
-      "community": 230,
+      "community": 227,
       "norm_label": "jornadaetaparow"
     },
     {
       "label": "JornadaEtapaStatus",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L19",
+      "source_location": "L21",
       "_origin": "ast",
       "id": "packages_supabase_jornada_jornadaetapastatus",
       "community": 237,
@@ -4269,17 +4649,17 @@
       "label": "JornadaEtapa",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L20",
+      "source_location": "L22",
       "_origin": "ast",
       "id": "packages_supabase_jornada_jornadaetapa",
-      "community": 230,
+      "community": 227,
       "norm_label": "jornadaetapa"
     },
     {
       "label": "getMyJornada()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L31",
+      "source_location": "L33",
       "_origin": "ast",
       "id": "packages_supabase_jornada_getmyjornada",
       "community": 241,
@@ -4289,17 +4669,17 @@
       "label": "startJornada()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L43",
+      "source_location": "L45",
       "_origin": "ast",
       "id": "packages_supabase_jornada_startjornada",
-      "community": 229,
+      "community": 221,
       "norm_label": "startjornada()"
     },
     {
       "label": "seedEtapasForFase()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L67",
+      "source_location": "L69",
       "_origin": "ast",
       "id": "packages_supabase_jornada_seedetapasforfase",
       "community": 229,
@@ -4309,7 +4689,7 @@
       "label": "initialStatus()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L98",
+      "source_location": "L100",
       "_origin": "ast",
       "id": "packages_supabase_jornada_initialstatus",
       "community": 229,
@@ -4319,7 +4699,7 @@
       "label": "restartDiagnostic()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L108",
+      "source_location": "L110",
       "_origin": "ast",
       "id": "packages_supabase_jornada_restartdiagnostic",
       "community": 221,
@@ -4329,7 +4709,7 @@
       "label": "getJornadaEtapas()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L118",
+      "source_location": "L120",
       "_origin": "ast",
       "id": "packages_supabase_jornada_getjornadaetapas",
       "community": 229,
@@ -4339,7 +4719,7 @@
       "label": "setEtapaStatusBySlug()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L127",
+      "source_location": "L129",
       "_origin": "ast",
       "id": "packages_supabase_jornada_setetapastatusbyslug",
       "community": 229,
@@ -4349,7 +4729,7 @@
       "label": "refreshEtapaUnlocks()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L144",
+      "source_location": "L146",
       "_origin": "ast",
       "id": "packages_supabase_jornada_refreshetapaunlocks",
       "community": 229,
@@ -4359,7 +4739,7 @@
       "label": "markEtapaDone()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L160",
+      "source_location": "L162",
       "_origin": "ast",
       "id": "packages_supabase_jornada_marketapadone",
       "community": 229,
@@ -4369,7 +4749,7 @@
       "label": "unmarkEtapaDone()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L165",
+      "source_location": "L167",
       "_origin": "ast",
       "id": "packages_supabase_jornada_unmarketapadone",
       "community": 229,
@@ -4379,7 +4759,7 @@
       "label": "CAMPO_PARA_SLUG",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L171",
+      "source_location": "L173",
       "_origin": "ast",
       "id": "packages_supabase_jornada_campo_para_slug",
       "community": 229,
@@ -4389,7 +4769,7 @@
       "label": "updateValidacaoInputs()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L182",
+      "source_location": "L184",
       "_origin": "ast",
       "id": "packages_supabase_jornada_updatevalidacaoinputs",
       "community": 229,
@@ -4399,7 +4779,7 @@
       "label": "getDeliverables()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L196",
+      "source_location": "L198",
       "_origin": "ast",
       "id": "packages_supabase_jornada_getdeliverables",
       "community": 229,
@@ -4409,7 +4789,7 @@
       "label": "generateDeliverables()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L202",
+      "source_location": "L204",
       "_origin": "ast",
       "id": "packages_supabase_jornada_generatedeliverables",
       "community": 229,
@@ -4419,7 +4799,7 @@
       "label": "advanceFase()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L213",
+      "source_location": "L225",
       "_origin": "ast",
       "id": "packages_supabase_jornada_advancefase",
       "community": 229,
@@ -4429,37 +4809,37 @@
       "label": "CandidatoNomeEmpresa",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L221",
+      "source_location": "L233",
       "_origin": "ast",
       "id": "packages_supabase_jornada_candidatonomeempresa",
-      "community": 242,
+      "community": 229,
       "norm_label": "candidatonomeempresa"
     },
     {
       "label": "generateNomesEmpresa()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L230",
+      "source_location": "L242",
       "_origin": "ast",
       "id": "packages_supabase_jornada_generatenomesempresa",
-      "community": 242,
+      "community": 229,
       "norm_label": "generatenomesempresa()"
     },
     {
       "label": "getNomesEmpresa()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L238",
+      "source_location": "L250",
       "_origin": "ast",
       "id": "packages_supabase_jornada_getnomesempresa",
-      "community": 242,
+      "community": 229,
       "norm_label": "getnomesempresa()"
     },
     {
       "label": "chooseNomeEmpresa()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L252",
+      "source_location": "L264",
       "_origin": "ast",
       "id": "packages_supabase_jornada_choosenomeempresa",
       "community": 229,
@@ -4469,7 +4849,7 @@
       "label": "IdentidadeVisualRespostas",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L265",
+      "source_location": "L277",
       "_origin": "ast",
       "id": "packages_supabase_jornada_identidadevisualrespostas",
       "community": 229,
@@ -4479,7 +4859,7 @@
       "label": "LogoEstilo",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L273",
+      "source_location": "L285",
       "_origin": "ast",
       "id": "packages_supabase_jornada_logoestilo",
       "community": 229,
@@ -4489,7 +4869,7 @@
       "label": "LogoCandidato",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L275",
+      "source_location": "L287",
       "_origin": "ast",
       "id": "packages_supabase_jornada_logocandidato",
       "community": 229,
@@ -4499,7 +4879,7 @@
       "label": "generateIdentidadeVisual()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L281",
+      "source_location": "L293",
       "_origin": "ast",
       "id": "packages_supabase_jornada_generateidentidadevisual",
       "community": 229,
@@ -4509,7 +4889,7 @@
       "label": "getIdentidadeVisual()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L292",
+      "source_location": "L304",
       "_origin": "ast",
       "id": "packages_supabase_jornada_getidentidadevisual",
       "community": 229,
@@ -4519,7 +4899,7 @@
       "label": "chooseLogoFinal()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L306",
+      "source_location": "L318",
       "_origin": "ast",
       "id": "packages_supabase_jornada_chooselogofinal",
       "community": 229,
@@ -4529,7 +4909,7 @@
       "label": "getLogoDownloadUrl()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L316",
+      "source_location": "L328",
       "_origin": "ast",
       "id": "packages_supabase_jornada_getlogodownloadurl",
       "community": 229,
@@ -4539,17 +4919,17 @@
       "label": "RegimeFormalizacao",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L324",
+      "source_location": "L336",
       "_origin": "ast",
       "id": "packages_supabase_jornada_regimeformalizacao",
-      "community": 84,
+      "community": 229,
       "norm_label": "regimeformalizacao"
     },
     {
       "label": "FormalizacaoDocumento",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L326",
+      "source_location": "L338",
       "_origin": "ast",
       "id": "packages_supabase_jornada_formalizacaodocumento",
       "community": 229,
@@ -4559,7 +4939,7 @@
       "label": "chooseRegimeFormalizacao()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L340",
+      "source_location": "L352",
       "_origin": "ast",
       "id": "packages_supabase_jornada_chooseregimeformalizacao",
       "community": 229,
@@ -4569,7 +4949,7 @@
       "label": "FinanceiroDados",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L352",
+      "source_location": "L364",
       "_origin": "ast",
       "id": "packages_supabase_jornada_financeirodados",
       "community": 229,
@@ -4579,11 +4959,41 @@
       "label": "saveFinanceiroDados()",
       "file_type": "code",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L363",
+      "source_location": "L375",
       "_origin": "ast",
       "id": "packages_supabase_jornada_savefinanceirodados",
       "community": 81,
       "norm_label": "savefinanceirodados()"
+    },
+    {
+      "label": "NicheEstruturaInfo",
+      "file_type": "code",
+      "source_file": "packages/supabase/jornada.ts",
+      "source_location": "L393",
+      "_origin": "ast",
+      "id": "packages_supabase_jornada_nicheestruturainfo",
+      "community": 227,
+      "norm_label": "nicheestruturainfo"
+    },
+    {
+      "label": "getNicheEstruturaInfo()",
+      "file_type": "code",
+      "source_file": "packages/supabase/jornada.ts",
+      "source_location": "L399",
+      "_origin": "ast",
+      "id": "packages_supabase_jornada_getnicheestruturainfo",
+      "community": 227,
+      "norm_label": "getnicheestruturainfo()"
+    },
+    {
+      "label": "isEtapaEstruturaRelevante()",
+      "file_type": "code",
+      "source_file": "packages/supabase/jornada.ts",
+      "source_location": "L416",
+      "_origin": "ast",
+      "id": "packages_supabase_jornada_isetapaestruturarelevante",
+      "community": 227,
+      "norm_label": "isetapaestruturarelevante()"
     },
     {
       "label": "knowledgeBase.ts",
@@ -4592,7 +5002,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase",
-      "community": 223,
+      "community": 225,
       "norm_label": "knowledgebase.ts"
     },
     {
@@ -4602,7 +5012,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase_knowledgecategory",
-      "community": 223,
+      "community": 225,
       "norm_label": "knowledgecategory"
     },
     {
@@ -4622,7 +5032,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase_knowledgeanswer",
-      "community": 223,
+      "community": 225,
       "norm_label": "knowledgeanswer"
     },
     {
@@ -4722,7 +5132,7 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "packages_supabase_modules_mymodule",
-      "community": 228,
+      "community": 224,
       "norm_label": "mymodule"
     },
     {
@@ -4732,7 +5142,7 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "packages_supabase_modules_listmymodules",
-      "community": 228,
+      "community": 222,
       "norm_label": "listmymodules()"
     },
     {
@@ -4902,7 +5312,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_session",
-      "community": 238,
+      "community": 239,
       "norm_label": "session.ts"
     },
     {
@@ -4932,7 +5342,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "packages_supabase_session_isanonymoussession",
-      "community": 238,
+      "community": 239,
       "norm_label": "isanonymoussession()"
     },
     {
@@ -4942,7 +5352,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "packages_supabase_session_userrole",
-      "community": 227,
+      "community": 224,
       "norm_label": "userrole"
     },
     {
@@ -4952,7 +5362,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "packages_supabase_session_decodebase64url",
-      "community": 238,
+      "community": 239,
       "norm_label": "decodebase64url()"
     },
     {
@@ -4962,7 +5372,7 @@
       "source_location": "L76",
       "_origin": "ast",
       "id": "packages_supabase_session_getuserrole",
-      "community": 238,
+      "community": 239,
       "norm_label": "getuserrole()"
     },
     {
@@ -4972,7 +5382,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_storage",
-      "community": 223,
+      "community": 220,
       "norm_label": "storage.ts"
     },
     {
@@ -5052,107 +5462,107 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_types",
-      "community": 218,
+      "community": 224,
       "norm_label": "types.ts"
     },
     {
       "label": "Json",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L8",
+      "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_types_json",
-      "community": 218,
+      "community": 224,
       "norm_label": "json"
     },
     {
       "label": "Database",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L16",
+      "source_location": "L9",
       "_origin": "ast",
       "id": "packages_supabase_types_database",
-      "community": 223,
+      "community": 224,
       "norm_label": "database"
     },
     {
       "label": "DatabaseWithoutInternals",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L696",
+      "source_location": "L817",
       "_origin": "ast",
       "id": "packages_supabase_types_databasewithoutinternals",
-      "community": 218,
+      "community": 224,
       "norm_label": "databasewithoutinternals"
     },
     {
       "label": "DefaultSchema",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L698",
+      "source_location": "L819",
       "_origin": "ast",
       "id": "packages_supabase_types_defaultschema",
-      "community": 218,
+      "community": 224,
       "norm_label": "defaultschema"
     },
     {
       "label": "Tables",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L700",
+      "source_location": "L821",
       "_origin": "ast",
       "id": "packages_supabase_types_tables",
-      "community": 218,
+      "community": 224,
       "norm_label": "tables"
     },
     {
       "label": "TablesInsert",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L729",
+      "source_location": "L850",
       "_origin": "ast",
       "id": "packages_supabase_types_tablesinsert",
-      "community": 218,
+      "community": 224,
       "norm_label": "tablesinsert"
     },
     {
       "label": "TablesUpdate",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L754",
+      "source_location": "L875",
       "_origin": "ast",
       "id": "packages_supabase_types_tablesupdate",
-      "community": 218,
+      "community": 224,
       "norm_label": "tablesupdate"
     },
     {
       "label": "Enums",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L779",
+      "source_location": "L900",
       "_origin": "ast",
       "id": "packages_supabase_types_enums",
-      "community": 218,
+      "community": 224,
       "norm_label": "enums"
     },
     {
       "label": "CompositeTypes",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L796",
+      "source_location": "L917",
       "_origin": "ast",
       "id": "packages_supabase_types_compositetypes",
-      "community": 218,
+      "community": 224,
       "norm_label": "compositetypes"
     },
     {
       "label": "Constants",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L813",
+      "source_location": "L934",
       "_origin": "ast",
       "id": "packages_supabase_types_constants",
-      "community": 218,
+      "community": 224,
       "norm_label": "constants"
     },
     {
@@ -5162,7 +5572,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_components_button",
-      "community": 0,
+      "community": 234,
       "norm_label": "button.tsx"
     },
     {
@@ -5172,7 +5582,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_ui_components_button_buttonvariant",
-      "community": 0,
+      "community": 234,
       "norm_label": "buttonvariant"
     },
     {
@@ -5182,7 +5592,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "packages_ui_components_button_buttonsize",
-      "community": 0,
+      "community": 234,
       "norm_label": "buttonsize"
     },
     {
@@ -5192,7 +5602,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "packages_ui_components_button_buttonprops",
-      "community": 0,
+      "community": 234,
       "norm_label": "buttonprops"
     },
     {
@@ -5202,7 +5612,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "packages_ui_components_button_variantstyles",
-      "community": 0,
+      "community": 234,
       "norm_label": "variantstyles"
     },
     {
@@ -5212,7 +5622,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "packages_ui_components_button_animatedpressable",
-      "community": 0,
+      "community": 234,
       "norm_label": "animatedpressable"
     },
     {
@@ -5222,7 +5632,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "packages_ui_components_button_button",
-      "community": 0,
+      "community": 218,
       "norm_label": "button()"
     },
     {
@@ -5232,7 +5642,7 @@
       "source_location": "L115",
       "_origin": "ast",
       "id": "packages_ui_components_button_styles",
-      "community": 0,
+      "community": 234,
       "norm_label": "styles"
     },
     {
@@ -5242,7 +5652,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_components_card",
-      "community": 234,
+      "community": 230,
       "norm_label": "card.tsx"
     },
     {
@@ -5252,7 +5662,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_ui_components_card_cardvariant",
-      "community": 234,
+      "community": 230,
       "norm_label": "cardvariant"
     },
     {
@@ -5262,7 +5672,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "packages_ui_components_card_cardprops",
-      "community": 234,
+      "community": 230,
       "norm_label": "cardprops"
     },
     {
@@ -5282,7 +5692,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "packages_ui_components_card_styles",
-      "community": 234,
+      "community": 230,
       "norm_label": "styles"
     },
     {
@@ -5292,7 +5702,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_components_entrepreneurbackground",
-      "community": 236,
+      "community": 222,
       "norm_label": "entrepreneurbackground.tsx"
     },
     {
@@ -5302,7 +5712,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_ui_components_entrepreneurbackground_entrepreneurbackgroundprops",
-      "community": 236,
+      "community": 222,
       "norm_label": "entrepreneurbackgroundprops"
     },
     {
@@ -5312,7 +5722,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "packages_ui_components_entrepreneurbackground_entrepreneurbackground",
-      "community": 236,
+      "community": 222,
       "norm_label": "entrepreneurbackground()"
     },
     {
@@ -5382,7 +5792,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_components_logo",
-      "community": 220,
+      "community": 238,
       "norm_label": "logo.tsx"
     },
     {
@@ -5392,7 +5802,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_ui_components_logo_symbolcolor",
-      "community": 220,
+      "community": 238,
       "norm_label": "symbolcolor"
     },
     {
@@ -5402,7 +5812,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "packages_ui_components_logo_symbolwhite",
-      "community": 220,
+      "community": 238,
       "norm_label": "symbolwhite"
     },
     {
@@ -5412,7 +5822,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "packages_ui_components_logo_logoprops",
-      "community": 220,
+      "community": 238,
       "norm_label": "logoprops"
     },
     {
@@ -5422,7 +5832,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_ui_components_logo_logo",
-      "community": 220,
+      "community": 238,
       "norm_label": "logo()"
     },
     {
@@ -5432,7 +5842,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_components_maryavatar",
-      "community": 0,
+      "community": 218,
       "norm_label": "maryavatar.tsx"
     },
     {
@@ -5442,7 +5852,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_ui_components_maryavatar_poses",
-      "community": 0,
+      "community": 218,
       "norm_label": "poses"
     },
     {
@@ -5452,7 +5862,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "packages_ui_components_maryavatar_marypose",
-      "community": 0,
+      "community": 218,
       "norm_label": "marypose"
     },
     {
@@ -5462,7 +5872,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "packages_ui_components_maryavatar_maryavatarprops",
-      "community": 0,
+      "community": 218,
       "norm_label": "maryavatarprops"
     },
     {
@@ -5472,7 +5882,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "packages_ui_components_maryavatar_maryavatar",
-      "community": 0,
+      "community": 218,
       "norm_label": "maryavatar()"
     },
     {
@@ -5482,7 +5892,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_components_reveal",
-      "community": 0,
+      "community": 218,
       "norm_label": "reveal.tsx"
     },
     {
@@ -5492,7 +5902,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_ui_components_reveal_revealprops",
-      "community": 0,
+      "community": 218,
       "norm_label": "revealprops"
     },
     {
@@ -5502,7 +5912,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "packages_ui_components_reveal_reveal",
-      "community": 0,
+      "community": 218,
       "norm_label": "reveal()"
     },
     {
@@ -5512,7 +5922,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_index",
-      "community": 0,
+      "community": 238,
       "norm_label": "index.ts"
     },
     {
@@ -5874,6 +6284,56 @@
       "id": "supabase_functions_jornada_gerar_documentos_index_gerardocumentos",
       "community": 219,
       "norm_label": "gerardocumentos()"
+    },
+    {
+      "label": "index.ts",
+      "file_type": "code",
+      "source_file": "supabase/functions/jornada-gerar-fornecedores/index.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "supabase_functions_jornada_gerar_fornecedores_index",
+      "community": 242,
+      "norm_label": "index.ts"
+    },
+    {
+      "label": "corsHeaders",
+      "file_type": "code",
+      "source_file": "supabase/functions/jornada-gerar-fornecedores/index.ts",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "supabase_functions_jornada_gerar_fornecedores_index_corsheaders",
+      "community": 242,
+      "norm_label": "corsheaders"
+    },
+    {
+      "label": "CategoriaIA",
+      "file_type": "code",
+      "source_file": "supabase/functions/jornada-gerar-fornecedores/index.ts",
+      "source_location": "L29",
+      "_origin": "ast",
+      "id": "supabase_functions_jornada_gerar_fornecedores_index_categoriaia",
+      "community": 242,
+      "norm_label": "categoriaia"
+    },
+    {
+      "label": "RoteiroCategoria",
+      "file_type": "code",
+      "source_file": "supabase/functions/jornada-gerar-fornecedores/index.ts",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "supabase_functions_jornada_gerar_fornecedores_index_roteirocategoria",
+      "community": 242,
+      "norm_label": "roteirocategoria"
+    },
+    {
+      "label": "gerarCategorias()",
+      "file_type": "code",
+      "source_file": "supabase/functions/jornada-gerar-fornecedores/index.ts",
+      "source_location": "L40",
+      "_origin": "ast",
+      "id": "supabase_functions_jornada_gerar_fornecedores_index_gerarcategorias",
+      "community": 242,
+      "norm_label": "gerarcategorias()"
     },
     {
       "label": "index.ts",
@@ -6716,10 +7176,30 @@
       "norm_label": "9.5 fase \"financeiro\" \u2014 planejamento financeiro (desenhada em 30/07/2026)"
     },
     {
-      "label": "9.2 Trilha A \u2014 Valida\u00e7\u00e3o",
+      "label": "9.6 Fase \"Estrutura\" (desenhada em 30/07/2026)",
       "file_type": "document",
       "source_file": "docs/PRD.md",
       "source_location": "L368",
+      "_origin": "ast",
+      "id": "docs_prd_9_6_fase_estrutura_desenhada_em_30_07_2026",
+      "community": 240,
+      "norm_label": "9.6 fase \"estrutura\" (desenhada em 30/07/2026)"
+    },
+    {
+      "label": "9.7 Fase \"Fornecedores\" (desenhada em 30/07/2026)",
+      "file_type": "document",
+      "source_file": "docs/PRD.md",
+      "source_location": "L380",
+      "_origin": "ast",
+      "id": "docs_prd_9_7_fase_fornecedores_desenhada_em_30_07_2026",
+      "community": 240,
+      "norm_label": "9.7 fase \"fornecedores\" (desenhada em 30/07/2026)"
+    },
+    {
+      "label": "9.2 Trilha A \u2014 Valida\u00e7\u00e3o",
+      "file_type": "document",
+      "source_file": "docs/PRD.md",
+      "source_location": "L395",
       "_origin": "ast",
       "id": "docs_prd_9_2_trilha_a_valida\u00e7\u00e3o",
       "community": 240,
@@ -6729,7 +7209,7 @@
       "label": "9.3 Trilha B \u2014 Identidade",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L372",
+      "source_location": "L399",
       "_origin": "ast",
       "id": "docs_prd_9_3_trilha_b_identidade",
       "community": 240,
@@ -6739,7 +7219,7 @@
       "label": "9.4 Trilha C \u2014 Formaliza\u00e7\u00e3o",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L376",
+      "source_location": "L403",
       "_origin": "ast",
       "id": "docs_prd_9_4_trilha_c_formaliza\u00e7\u00e3o",
       "community": 240,
@@ -6749,7 +7229,7 @@
       "label": "9.5 Paralelismo e etapas em espera",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L380",
+      "source_location": "L407",
       "_origin": "ast",
       "id": "docs_prd_9_5_paralelismo_e_etapas_em_espera",
       "community": 240,
@@ -6759,7 +7239,7 @@
       "label": "9.6 Crit\u00e9rios de aceite",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L383",
+      "source_location": "L410",
       "_origin": "ast",
       "id": "docs_prd_9_6_crit\u00e9rios_de_aceite",
       "community": 240,
@@ -6769,7 +7249,7 @@
       "label": "10. M\u00f3dulo: Copiloto de IA",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L390",
+      "source_location": "L417",
       "_origin": "ast",
       "id": "docs_prd_10_m\u00f3dulo_copiloto_de_ia",
       "community": 246,
@@ -6779,7 +7259,7 @@
       "label": "10.1 Superf\u00edcies do copiloto",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L392",
+      "source_location": "L419",
       "_origin": "ast",
       "id": "docs_prd_10_1_superf\u00edcies_do_copiloto",
       "community": 246,
@@ -6789,7 +7269,7 @@
       "label": "10.2 Guardrails (RN-21, RN-20 j\u00e1 citadas \u2014 detalhamento t\u00e9cnico)",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L397",
+      "source_location": "L424",
       "_origin": "ast",
       "id": "docs_prd_10_2_guardrails_rn_21_rn_20_j\u00e1_citadas_detalhamento_t\u00e9cnico",
       "community": 246,
@@ -6799,7 +7279,7 @@
       "label": "10.3 Crit\u00e9rios de aceite",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L402",
+      "source_location": "L429",
       "_origin": "ast",
       "id": "docs_prd_10_3_crit\u00e9rios_de_aceite",
       "community": 246,
@@ -6809,7 +7289,7 @@
       "label": "11. M\u00f3dulos Fase 2 (trilhas D, E, F) \u2014 esqueleto",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L408",
+      "source_location": "L435",
       "_origin": "ast",
       "id": "docs_prd_11_m\u00f3dulos_fase_2_trilhas_d_e_f_esqueleto",
       "community": 3,
@@ -6819,7 +7299,7 @@
       "label": "12. M\u00f3dulos Fase 3 (Ecossistema p\u00f3s-abertura) \u2014 esqueleto",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L414",
+      "source_location": "L441",
       "_origin": "ast",
       "id": "docs_prd_12_m\u00f3dulos_fase_3_ecossistema_p\u00f3s_abertura_esqueleto",
       "community": 249,
@@ -6829,7 +7309,7 @@
       "label": "12.1 Framework de m\u00f3dulos (exce\u00e7\u00e3o \u00e0 RN-2, ver \u00a73) \u2014 constru\u00eddo em 29/07/2026",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L418",
+      "source_location": "L445",
       "_origin": "ast",
       "id": "docs_prd_12_1_framework_de_m\u00f3dulos_exce\u00e7\u00e3o_\u00e0_rn_2_ver_3_constru\u00eddo_em_29_07_2026",
       "community": 249,
@@ -6839,7 +7319,7 @@
       "label": "12.2 M\u00f3dulos anunciados na landing (decis\u00e3o do dono do produto, 29/07/2026)",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L424",
+      "source_location": "L451",
       "_origin": "ast",
       "id": "docs_prd_12_2_m\u00f3dulos_anunciados_na_landing_decis\u00e3o_do_dono_do_produto_29_07_2026",
       "community": 249,
@@ -6849,7 +7329,7 @@
       "label": "13. Regras de Neg\u00f3cio Transversais (numera\u00e7\u00e3o consolidada)",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L439",
+      "source_location": "L466",
       "_origin": "ast",
       "id": "docs_prd_13_regras_de_neg\u00f3cio_transversais_numera\u00e7\u00e3o_consolidada",
       "community": 3,
@@ -6859,7 +7339,7 @@
       "label": "14. Requisitos N\u00e3o Funcionais",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L469",
+      "source_location": "L498",
       "_origin": "ast",
       "id": "docs_prd_14_requisitos_n\u00e3o_funcionais",
       "community": 3,
@@ -6869,7 +7349,7 @@
       "label": "15. M\u00e9tricas a Instrumentar desde o Dia 1",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L485",
+      "source_location": "L514",
       "_origin": "ast",
       "id": "docs_prd_15_m\u00e9tricas_a_instrumentar_desde_o_dia_1",
       "community": 3,
@@ -6879,7 +7359,7 @@
       "label": "16. Gloss\u00e1rio r\u00e1pido",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L494",
+      "source_location": "L523",
       "_origin": "ast",
       "id": "docs_prd_16_gloss\u00e1rio_r\u00e1pido",
       "community": 3,
@@ -6889,7 +7369,7 @@
       "label": "17. Decis\u00f5es em aberto (bloqueiam in\u00edcio de c\u00f3digo)",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L503",
+      "source_location": "L532",
       "_origin": "ast",
       "id": "docs_prd_17_decis\u00f5es_em_aberto_bloqueiam_in\u00edcio_de_c\u00f3digo",
       "community": 3,
@@ -11705,6 +12185,38 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/admin/fornecedores/index.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_admin_fornecedores_index",
+      "target": "apps_app_app_protected_admin_fornecedores_index_adminfornecedores",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/admin/fornecedores/index.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_admin_fornecedores_index",
+      "target": "apps_app_components_admin_adminfornecedoresscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/admin/fornecedores/index.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_admin_fornecedores_index",
+      "target": "apps_app_components_admin_adminfornecedoresscreen_adminfornecedoresscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "apps/app/app/(protected)/admin/index.tsx",
       "source_location": "L3",
       "weight": 1.0,
@@ -12528,7 +13040,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
-      "source_location": "L105",
+      "source_location": "L110",
       "weight": 1.0,
       "source": "apps_app_components_admin_admindashboardscreen",
       "target": "apps_app_components_admin_admindashboardscreen_insightcard",
@@ -12548,7 +13060,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/admin/AdminDashboardScreen.tsx",
-      "source_location": "L114",
+      "source_location": "L119",
       "weight": 1.0,
       "source": "apps_app_components_admin_admindashboardscreen",
       "target": "apps_app_components_admin_admindashboardscreen_navcard",
@@ -12619,6 +13131,104 @@
       "source": "apps_app_components_admin_admindashboardscreen",
       "target": "packages_ui_index",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminFornecedoresScreen.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminfornecedoresscreen",
+      "target": "apps_app_components_admin_adminfornecedoresscreen_adminfornecedoresscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminFornecedoresScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminfornecedoresscreen",
+      "target": "apps_app_components_admin_useadminfornecedores",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminFornecedoresScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminfornecedoresscreen",
+      "target": "apps_app_components_admin_useadminfornecedores_useadminfornecedores",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminFornecedoresScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminfornecedoresscreen",
+      "target": "packages_ui_components_button_button",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminFornecedoresScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminfornecedoresscreen",
+      "target": "packages_ui_components_card_card",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminFornecedoresScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminfornecedoresscreen",
+      "target": "packages_ui_components_input_input",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminFornecedoresScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminfornecedoresscreen",
+      "target": "packages_ui_components_logo_logo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/AdminFornecedoresScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminfornecedoresscreen",
+      "target": "packages_ui_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/app/components/admin/AdminFornecedoresScreen.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_adminfornecedoresscreen_adminfornecedoresscreen",
+      "target": "apps_app_components_admin_useadminfornecedores_useadminfornecedores"
     },
     {
       "relation": "contains",
@@ -12932,6 +13542,103 @@
       "weight": 1.0,
       "source": "apps_app_components_admin_adminusersscreen_adminusersscreen",
       "target": "apps_app_components_admin_useadminusers_useadminusers"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminFornecedores.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminfornecedores",
+      "target": "apps_app_components_admin_useadminfornecedores_nicheoption",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminFornecedores.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminfornecedores",
+      "target": "apps_app_components_admin_useadminfornecedores_useadminfornecedores",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminfornecedores",
+      "target": "packages_supabase_client_supabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminfornecedores",
+      "target": "packages_supabase_fornecedores_createparceiro",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminfornecedores",
+      "target": "packages_supabase_fornecedores_fornecedorparceiro",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminfornecedores",
+      "target": "packages_supabase_fornecedores_listparceiros",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminfornecedores",
+      "target": "packages_supabase_fornecedores_parceiroinput",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminfornecedores",
+      "target": "packages_supabase_fornecedores_setparceiroativo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/admin/useAdminFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_admin_useadminfornecedores",
+      "target": "packages_supabase_index",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -13986,7 +14693,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "apps/app/components/jornada/FinanceiroScreen.tsx",
-      "source_location": "L162",
+      "source_location": "L158",
       "weight": 1.0,
       "source": "apps_app_components_jornada_financeiroscreen_financeiroscreen",
       "target": "apps_app_components_diagnostico_labels_formatmoney"
@@ -14919,7 +15626,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L16",
+      "source_location": "L18",
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
       "target": "apps_app_components_jornada_escolhernichoscreen",
@@ -14930,10 +15637,194 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L16",
+      "source_location": "L18",
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
       "target": "apps_app_components_jornada_escolhernichoscreen_escolhernichoscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_estruturascreen",
+      "target": "apps_app_components_jornada_estruturascreen_checklistitemcard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L96",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_estruturascreen",
+      "target": "apps_app_components_jornada_estruturascreen_estruturascreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_estruturascreen",
+      "target": "apps_app_components_jornada_estruturascreen_estruturascreenprops",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_estruturascreen",
+      "target": "apps_app_components_jornada_useestrutura",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_estruturascreen",
+      "target": "apps_app_components_jornada_useestrutura_useestrutura",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_estruturascreen",
+      "target": "packages_supabase_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_estruturascreen",
+      "target": "packages_supabase_jornada_jornadaetapa",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_estruturascreen",
+      "target": "packages_supabase_jornada_jornadainstance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_estruturascreen",
+      "target": "packages_ui_components_button_button",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_estruturascreen",
+      "target": "packages_ui_components_card_card",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_estruturascreen",
+      "target": "packages_ui_components_maryavatar_maryavatar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_estruturascreen",
+      "target": "packages_ui_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_jornadascreen",
+      "target": "apps_app_components_jornada_estruturascreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_estruturascreen_estruturascreenprops",
+      "target": "packages_supabase_jornada_jornadaetapa",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_estruturascreen_estruturascreenprops",
+      "target": "packages_supabase_jornada_jornadainstance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/app/components/jornada/EstruturaScreen.tsx",
+      "source_location": "L98",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_estruturascreen_estruturascreen",
+      "target": "apps_app_components_jornada_useestrutura_useestrutura"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_jornadascreen",
+      "target": "apps_app_components_jornada_estruturascreen_estruturascreen",
       "confidence_score": 1.0
     },
     {
@@ -15027,17 +15918,6 @@
       "source_location": "L3",
       "weight": 1.0,
       "source": "apps_app_components_jornada_financeiroscreen",
-      "target": "packages_supabase_jornada_advancefase",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/app/components/jornada/FinanceiroScreen.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "apps_app_components_jornada_financeiroscreen",
       "target": "packages_supabase_jornada_jornadaetapa",
       "confidence_score": 1.0
     },
@@ -15112,7 +15992,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L17",
+      "source_location": "L20",
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
       "target": "apps_app_components_jornada_financeiroscreen",
@@ -15156,7 +16036,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L17",
+      "source_location": "L20",
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
       "target": "apps_app_components_jornada_financeiroscreen_financeiroscreen",
@@ -15339,7 +16219,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L18",
+      "source_location": "L21",
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
       "target": "apps_app_components_jornada_formalizacaoscreen",
@@ -15383,10 +16263,237 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L18",
+      "source_location": "L21",
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
       "target": "apps_app_components_jornada_formalizacaoscreen_formalizacaoscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen",
+      "target": "apps_app_components_jornada_fornecedoresscreen_fornecedoresscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen",
+      "target": "apps_app_components_jornada_fornecedoresscreen_fornecedoresscreenprops",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L29",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen",
+      "target": "apps_app_components_jornada_fornecedoresscreen_fornecedorrow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen",
+      "target": "apps_app_components_jornada_fornecedoresscreen_parceirocard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen",
+      "target": "apps_app_components_jornada_usefornecedores",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen",
+      "target": "apps_app_components_jornada_usefornecedores_usefornecedores",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen",
+      "target": "packages_supabase_fornecedores_fornecedorparceiro",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen",
+      "target": "packages_supabase_fornecedores_jornadafornecedor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen",
+      "target": "packages_supabase_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen",
+      "target": "packages_supabase_jornada_jornadaetapa",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen",
+      "target": "packages_supabase_jornada_jornadainstance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen",
+      "target": "packages_ui_components_button_button",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen",
+      "target": "packages_ui_components_card_card",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen",
+      "target": "packages_ui_components_input_input",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen",
+      "target": "packages_ui_components_maryavatar_maryavatar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen",
+      "target": "packages_ui_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_jornadascreen",
+      "target": "apps_app_components_jornada_fornecedoresscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen_fornecedoresscreenprops",
+      "target": "packages_supabase_jornada_jornadaetapa",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen_fornecedoresscreenprops",
+      "target": "packages_supabase_jornada_jornadainstance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/app/components/jornada/FornecedoresScreen.tsx",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_fornecedoresscreen_fornecedoresscreen",
+      "target": "apps_app_components_jornada_usefornecedores_usefornecedores"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_jornadascreen",
+      "target": "apps_app_components_jornada_fornecedoresscreen_fornecedoresscreen",
       "confidence_score": 1.0
     },
     {
@@ -15588,7 +16695,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L52",
+      "source_location": "L65",
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
       "target": "apps_app_components_jornada_jornadascreen_descoberta_steps",
@@ -15598,7 +16705,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L38",
+      "source_location": "L49",
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
       "target": "apps_app_components_jornada_jornadascreen_fase_label",
@@ -15608,7 +16715,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L27",
+      "source_location": "L36",
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
       "target": "apps_app_components_jornada_jornadascreen_fases",
@@ -15618,7 +16725,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L54",
+      "source_location": "L67",
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
       "target": "apps_app_components_jornada_jornadascreen_jornadascreen",
@@ -15629,7 +16736,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L19",
+      "source_location": "L23",
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
       "target": "apps_app_components_jornada_planejamentoscreen",
@@ -15640,7 +16747,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L19",
+      "source_location": "L23",
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
       "target": "apps_app_components_jornada_planejamentoscreen_planejamentoscreen",
@@ -15651,7 +16758,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L20",
+      "source_location": "L24",
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
       "target": "apps_app_components_jornada_steprail",
@@ -15662,7 +16769,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L20",
+      "source_location": "L24",
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
       "target": "apps_app_components_jornada_steprail_railfasedata",
@@ -15673,7 +16780,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L20",
+      "source_location": "L24",
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
       "target": "apps_app_components_jornada_steprail_steprail",
@@ -15684,7 +16791,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L21",
+      "source_location": "L25",
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
       "target": "apps_app_components_jornada_validacaoideiascreen",
@@ -15695,7 +16802,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
-      "source_location": "L21",
+      "source_location": "L25",
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
       "target": "apps_app_components_jornada_validacaoideiascreen_validacaoideiascreen",
@@ -15764,6 +16871,17 @@
       "source_location": "L5",
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
+      "target": "packages_supabase_jornada_isetapaestruturarelevante",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_jornadascreen",
       "target": "packages_supabase_jornada_jornadaetapa",
       "confidence_score": 1.0
     },
@@ -15798,6 +16916,17 @@
       "weight": 1.0,
       "source": "apps_app_components_jornada_jornadascreen",
       "target": "packages_supabase_jornada_jornadainstance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/JornadaScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_jornadascreen",
+      "target": "packages_supabase_jornada_nicheestruturainfo",
       "confidence_score": 1.0
     },
     {
@@ -16173,7 +17302,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/StepRail.tsx",
-      "source_location": "L83",
+      "source_location": "L90",
       "weight": 1.0,
       "source": "apps_app_components_jornada_steprail",
       "target": "apps_app_components_jornada_steprail_compactrail",
@@ -16183,7 +17312,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/StepRail.tsx",
-      "source_location": "L141",
+      "source_location": "L154",
       "weight": 1.0,
       "source": "apps_app_components_jornada_steprail",
       "target": "apps_app_components_jornada_steprail_fasebadge",
@@ -16193,7 +17322,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/StepRail.tsx",
-      "source_location": "L118",
+      "source_location": "L131",
       "weight": 1.0,
       "source": "apps_app_components_jornada_steprail",
       "target": "apps_app_components_jornada_steprail_fasepill",
@@ -16223,7 +17352,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/StepRail.tsx",
-      "source_location": "L156",
+      "source_location": "L169",
       "weight": 1.0,
       "source": "apps_app_components_jornada_steprail",
       "target": "apps_app_components_jornada_steprail_stepdot",
@@ -16233,7 +17362,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/StepRail.tsx",
-      "source_location": "L59",
+      "source_location": "L66",
       "weight": 1.0,
       "source": "apps_app_components_jornada_steprail",
       "target": "apps_app_components_jornada_steprail_steplist",
@@ -16243,7 +17372,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/StepRail.tsx",
-      "source_location": "L32",
+      "source_location": "L34",
       "weight": 1.0,
       "source": "apps_app_components_jornada_steprail",
       "target": "apps_app_components_jornada_steprail_steprail",
@@ -16253,7 +17382,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/StepRail.tsx",
-      "source_location": "L20",
+      "source_location": "L22",
       "weight": 1.0,
       "source": "apps_app_components_jornada_steprail",
       "target": "apps_app_components_jornada_steprail_steprailprops",
@@ -16263,7 +17392,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/StepRail.tsx",
-      "source_location": "L37",
+      "source_location": "L39",
       "weight": 1.0,
       "source": "apps_app_components_jornada_steprail",
       "target": "apps_app_components_jornada_steprail_widerail",
@@ -16559,7 +17688,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/formalizacaoPdf.ts",
-      "source_location": "L95",
+      "source_location": "L136",
       "weight": 1.0,
       "source": "apps_app_components_jornada_formalizacaopdf",
       "target": "apps_app_components_jornada_formalizacaopdf_exportchecklistpdf",
@@ -16569,7 +17698,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/formalizacaoPdf.ts",
-      "source_location": "L88",
+      "source_location": "L125",
       "weight": 1.0,
       "source": "apps_app_components_jornada_formalizacaopdf",
       "target": "apps_app_components_jornada_formalizacaopdf_exportetapapdf",
@@ -16579,10 +17708,20 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/formalizacaoPdf.ts",
-      "source_location": "L102",
+      "source_location": "L147",
       "weight": 1.0,
       "source": "apps_app_components_jornada_formalizacaopdf",
       "target": "apps_app_components_jornada_formalizacaopdf_printetapa",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/formalizacaoPdf.ts",
+      "source_location": "L91",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_formalizacaopdf",
+      "target": "apps_app_components_jornada_formalizacaopdf_printhtmlonweb",
       "confidence_score": 1.0
     },
     {
@@ -16655,7 +17794,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/formalizacaoPdf.ts",
-      "source_location": "L96",
+      "source_location": "L137",
       "weight": 1.0,
       "source": "apps_app_components_jornada_formalizacaopdf_exportchecklistpdf",
       "target": "apps_app_components_jornada_formalizacaopdf_builddocumenthtml",
@@ -16666,7 +17805,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/formalizacaoPdf.ts",
-      "source_location": "L89",
+      "source_location": "L126",
       "weight": 1.0,
       "source": "apps_app_components_jornada_formalizacaopdf_exportetapapdf",
       "target": "apps_app_components_jornada_formalizacaopdf_builddocumenthtml",
@@ -16677,7 +17816,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/formalizacaoPdf.ts",
-      "source_location": "L103",
+      "source_location": "L148",
       "weight": 1.0,
       "source": "apps_app_components_jornada_formalizacaopdf_printetapa",
       "target": "apps_app_components_jornada_formalizacaopdf_builddocumenthtml",
@@ -16688,7 +17827,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/formalizacaoPdf.ts",
-      "source_location": "L98",
+      "source_location": "L143",
       "weight": 1.0,
       "source": "apps_app_components_jornada_formalizacaopdf_exportchecklistpdf",
       "target": "apps_app_components_jornada_formalizacaopdf_shareordownload",
@@ -16699,17 +17838,159 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/formalizacaoPdf.ts",
-      "source_location": "L91",
+      "source_location": "L132",
       "weight": 1.0,
       "source": "apps_app_components_jornada_formalizacaopdf_exportetapapdf",
       "target": "apps_app_components_jornada_formalizacaopdf_shareordownload",
       "confidence_score": 1.0
     },
     {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/formalizacaoPdf.ts",
+      "source_location": "L139",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_formalizacaopdf_exportchecklistpdf",
+      "target": "apps_app_components_jornada_formalizacaopdf_printhtmlonweb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/formalizacaoPdf.ts",
+      "source_location": "L128",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_formalizacaopdf_exportetapapdf",
+      "target": "apps_app_components_jornada_formalizacaopdf_printhtmlonweb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/formalizacaoPdf.ts",
+      "source_location": "L150",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_formalizacaopdf_printetapa",
+      "target": "apps_app_components_jornada_formalizacaopdf_printhtmlonweb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useEstrutura.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_useestrutura",
+      "target": "apps_app_components_jornada_useestrutura_useestrutura",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useEstrutura.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_useestrutura",
+      "target": "packages_supabase_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useEstrutura.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_useestrutura",
+      "target": "packages_supabase_jornada_advancefase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useEstrutura.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_useestrutura",
+      "target": "packages_supabase_jornada_getnicheestruturainfo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useEstrutura.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_useestrutura",
+      "target": "packages_supabase_jornada_isetapaestruturarelevante",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useEstrutura.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_useestrutura",
+      "target": "packages_supabase_jornada_jornadaetapa",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useEstrutura.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_useestrutura",
+      "target": "packages_supabase_jornada_jornadainstance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useEstrutura.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_useestrutura",
+      "target": "packages_supabase_jornada_marketapadone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useEstrutura.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_useestrutura",
+      "target": "packages_supabase_jornada_nicheestruturainfo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useEstrutura.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_useestrutura",
+      "target": "packages_supabase_jornada_unmarketapadone",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/jornada/useFinanceiro.ts",
-      "source_location": "L29",
+      "source_location": "L30",
       "weight": 1.0,
       "source": "apps_app_components_jornada_usefinanceiro",
       "target": "apps_app_components_jornada_usefinanceiro_usefinanceiro",
@@ -16801,6 +18082,17 @@
       "weight": 1.0,
       "source": "apps_app_components_jornada_usefinanceiro",
       "target": "packages_supabase_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useFinanceiro.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_usefinanceiro",
+      "target": "packages_supabase_jornada_advancefase",
       "confidence_score": 1.0
     },
     {
@@ -16953,6 +18245,192 @@
       "source_location": "L2",
       "weight": 1.0,
       "source": "apps_app_components_jornada_useformalizacao",
+      "target": "packages_supabase_jornada_unmarketapadone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_usefornecedores",
+      "target": "apps_app_components_jornada_usefornecedores_usefornecedores",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_usefornecedores",
+      "target": "packages_supabase_fornecedores_addjornadafornecedor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_usefornecedores",
+      "target": "packages_supabase_fornecedores_fornecedorparceiro",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_usefornecedores",
+      "target": "packages_supabase_fornecedores_generateroteirofornecedores",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_usefornecedores",
+      "target": "packages_supabase_fornecedores_getparceirossugeridos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_usefornecedores",
+      "target": "packages_supabase_fornecedores_getroteirofornecedores",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_usefornecedores",
+      "target": "packages_supabase_fornecedores_jornadafornecedor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_usefornecedores",
+      "target": "packages_supabase_fornecedores_jornadafornecedorinput",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_usefornecedores",
+      "target": "packages_supabase_fornecedores_listjornadafornecedores",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_usefornecedores",
+      "target": "packages_supabase_fornecedores_removejornadafornecedor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_usefornecedores",
+      "target": "packages_supabase_fornecedores_roteirofornecedorescategoria",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_usefornecedores",
+      "target": "packages_supabase_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_usefornecedores",
+      "target": "packages_supabase_jornada_advancefase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_usefornecedores",
+      "target": "packages_supabase_jornada_jornadaetapa",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_usefornecedores",
+      "target": "packages_supabase_jornada_jornadainstance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_usefornecedores",
+      "target": "packages_supabase_jornada_marketapadone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/jornada/useFornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_jornada_usefornecedores",
       "target": "packages_supabase_jornada_unmarketapadone",
       "confidence_score": 1.0
     },
@@ -20244,6 +21722,17 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_client",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "re_exports",
       "context": "export",
       "confidence": "EXTRACTED",
@@ -20313,6 +21802,17 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_client_supabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
       "source_location": "L1",
       "weight": 1.0,
@@ -20362,6 +21862,199 @@
       "weight": 1.0,
       "source": "packages_supabase_storage",
       "target": "packages_supabase_client_supabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L87",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_fornecedores_addjornadafornecedor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_fornecedores_createparceiro",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_fornecedores_fornecedorparceiro",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L117",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_fornecedores_generateroteirofornecedores",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L57",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_fornecedores_getparceirossugeridos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L125",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_fornecedores_getroteirofornecedores",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_fornecedores_jornadafornecedor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_fornecedores_jornadafornecedorinput",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L77",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_fornecedores_listjornadafornecedores",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_fornecedores_listparceiros",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_fornecedores_parceiroinput",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L97",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_fornecedores_removejornadafornecedor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L104",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_fornecedores_roteirofornecedorescategoria",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_fornecedores_setparceiroativo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L92",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_fornecedores_updatejornadafornecedor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_fornecedores_updateparceiro",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/fornecedores.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "packages_supabase_fornecedores",
+      "target": "packages_supabase_types_tables",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/index.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "packages_supabase_index",
+      "target": "packages_supabase_fornecedores",
       "confidence_score": 1.0
     },
     {
@@ -20424,7 +22117,7 @@
       "context": "export",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/index.ts",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0,
       "source": "packages_supabase_index",
       "target": "packages_supabase_types",
@@ -20435,7 +22128,7 @@
       "context": "re-export",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/index.ts",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0,
       "source": "packages_supabase_index",
       "target": "packages_supabase_types_database",
@@ -20445,7 +22138,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L213",
+      "source_location": "L225",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_advancefase",
@@ -20455,7 +22148,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L171",
+      "source_location": "L173",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_campo_para_slug",
@@ -20465,7 +22158,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L221",
+      "source_location": "L233",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_candidatonomeempresa",
@@ -20475,7 +22168,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L306",
+      "source_location": "L318",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_chooselogofinal",
@@ -20485,7 +22178,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L252",
+      "source_location": "L264",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_choosenomeempresa",
@@ -20495,7 +22188,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L340",
+      "source_location": "L352",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_chooseregimeformalizacao",
@@ -20505,7 +22198,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L352",
+      "source_location": "L364",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_financeirodados",
@@ -20515,7 +22208,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L326",
+      "source_location": "L338",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_formalizacaodocumento",
@@ -20525,7 +22218,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L202",
+      "source_location": "L204",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_generatedeliverables",
@@ -20535,7 +22228,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L281",
+      "source_location": "L293",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_generateidentidadevisual",
@@ -20545,7 +22238,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L230",
+      "source_location": "L242",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_generatenomesempresa",
@@ -20555,7 +22248,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L196",
+      "source_location": "L198",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_getdeliverables",
@@ -20565,7 +22258,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L292",
+      "source_location": "L304",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_getidentidadevisual",
@@ -20575,7 +22268,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L118",
+      "source_location": "L120",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_getjornadaetapas",
@@ -20585,7 +22278,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L316",
+      "source_location": "L328",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_getlogodownloadurl",
@@ -20595,7 +22288,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L31",
+      "source_location": "L33",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_getmyjornada",
@@ -20605,7 +22298,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L238",
+      "source_location": "L399",
+      "weight": 1.0,
+      "source": "packages_supabase_jornada",
+      "target": "packages_supabase_jornada_getnicheestruturainfo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/jornada.ts",
+      "source_location": "L250",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_getnomesempresa",
@@ -20615,7 +22318,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L265",
+      "source_location": "L277",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_identidadevisualrespostas",
@@ -20625,10 +22328,20 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L98",
+      "source_location": "L100",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_initialstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/jornada.ts",
+      "source_location": "L416",
+      "weight": 1.0,
+      "source": "packages_supabase_jornada",
+      "target": "packages_supabase_jornada_isetapaestruturarelevante",
       "confidence_score": 1.0
     },
     {
@@ -20655,7 +22368,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L20",
+      "source_location": "L22",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_jornadaetapa",
@@ -20665,7 +22378,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L18",
+      "source_location": "L20",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_jornadaetaparow",
@@ -20675,7 +22388,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L19",
+      "source_location": "L21",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_jornadaetapastatus",
@@ -20685,7 +22398,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L17",
+      "source_location": "L19",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_jornadaetapatemplate",
@@ -20715,7 +22428,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L275",
+      "source_location": "L287",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_logocandidato",
@@ -20725,7 +22438,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L273",
+      "source_location": "L285",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_logoestilo",
@@ -20735,7 +22448,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L160",
+      "source_location": "L162",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_marketapadone",
@@ -20745,7 +22458,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L144",
+      "source_location": "L393",
+      "weight": 1.0,
+      "source": "packages_supabase_jornada",
+      "target": "packages_supabase_jornada_nicheestruturainfo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/jornada.ts",
+      "source_location": "L146",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_refreshetapaunlocks",
@@ -20755,7 +22478,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L324",
+      "source_location": "L336",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_regimeformalizacao",
@@ -20765,7 +22488,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L108",
+      "source_location": "L110",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_restartdiagnostic",
@@ -20775,7 +22498,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L363",
+      "source_location": "L375",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_savefinanceirodados",
@@ -20785,7 +22508,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L67",
+      "source_location": "L69",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_seedetapasforfase",
@@ -20795,7 +22518,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L127",
+      "source_location": "L129",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_setetapastatusbyslug",
@@ -20805,7 +22528,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L43",
+      "source_location": "L45",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_startjornada",
@@ -20815,7 +22538,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L165",
+      "source_location": "L167",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_unmarketapadone",
@@ -20825,7 +22548,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L182",
+      "source_location": "L184",
       "weight": 1.0,
       "source": "packages_supabase_jornada",
       "target": "packages_supabase_jornada_updatevalidacaoinputs",
@@ -20869,7 +22592,7 @@
       "context": "type",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L20",
+      "source_location": "L22",
       "weight": 1.0,
       "source": "packages_supabase_jornada_jornadaetapa",
       "target": "packages_supabase_jornada_jornadaetaparow",
@@ -20880,7 +22603,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L51",
+      "source_location": "L53",
       "weight": 1.0,
       "source": "packages_supabase_jornada_startjornada",
       "target": "packages_supabase_jornada_seedetapasforfase",
@@ -20891,7 +22614,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L216",
+      "source_location": "L226",
       "weight": 1.0,
       "source": "packages_supabase_jornada_advancefase",
       "target": "packages_supabase_jornada_seedetapasforfase",
@@ -20902,7 +22625,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L343",
+      "source_location": "L355",
       "weight": 1.0,
       "source": "packages_supabase_jornada_chooseregimeformalizacao",
       "target": "packages_supabase_jornada_seedetapasforfase",
@@ -20913,7 +22636,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L145",
+      "source_location": "L147",
       "weight": 1.0,
       "source": "packages_supabase_jornada_refreshetapaunlocks",
       "target": "packages_supabase_jornada_getjornadaetapas",
@@ -20924,7 +22647,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L208",
+      "source_location": "L210",
       "weight": 1.0,
       "source": "packages_supabase_jornada_generatedeliverables",
       "target": "packages_supabase_jornada_setetapastatusbyslug",
@@ -20935,7 +22658,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L161",
+      "source_location": "L163",
       "weight": 1.0,
       "source": "packages_supabase_jornada_marketapadone",
       "target": "packages_supabase_jornada_setetapastatusbyslug",
@@ -20946,7 +22669,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L166",
+      "source_location": "L168",
       "weight": 1.0,
       "source": "packages_supabase_jornada_unmarketapadone",
       "target": "packages_supabase_jornada_setetapastatusbyslug",
@@ -20957,7 +22680,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L191",
+      "source_location": "L193",
       "weight": 1.0,
       "source": "packages_supabase_jornada_updatevalidacaoinputs",
       "target": "packages_supabase_jornada_setetapastatusbyslug",
@@ -20968,7 +22691,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L209",
+      "source_location": "L211",
       "weight": 1.0,
       "source": "packages_supabase_jornada_generatedeliverables",
       "target": "packages_supabase_jornada_refreshetapaunlocks",
@@ -20979,7 +22702,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L162",
+      "source_location": "L164",
       "weight": 1.0,
       "source": "packages_supabase_jornada_marketapadone",
       "target": "packages_supabase_jornada_refreshetapaunlocks",
@@ -20990,7 +22713,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L193",
+      "source_location": "L195",
       "weight": 1.0,
       "source": "packages_supabase_jornada_updatevalidacaoinputs",
       "target": "packages_supabase_jornada_refreshetapaunlocks",
@@ -21001,7 +22724,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L311",
+      "source_location": "L323",
       "weight": 1.0,
       "source": "packages_supabase_jornada_chooselogofinal",
       "target": "packages_supabase_jornada_marketapadone",
@@ -21012,7 +22735,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L258",
+      "source_location": "L270",
       "weight": 1.0,
       "source": "packages_supabase_jornada_choosenomeempresa",
       "target": "packages_supabase_jornada_marketapadone",
@@ -21023,7 +22746,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L344",
+      "source_location": "L356",
       "weight": 1.0,
       "source": "packages_supabase_jornada_chooseregimeformalizacao",
       "target": "packages_supabase_jornada_marketapadone",
@@ -21034,7 +22757,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/jornada.ts",
-      "source_location": "L210",
+      "source_location": "L212",
       "weight": 1.0,
       "source": "packages_supabase_jornada_generatedeliverables",
       "target": "packages_supabase_jornada_getdeliverables",
@@ -21499,7 +23222,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L796",
+      "source_location": "L917",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_compositetypes",
@@ -21509,7 +23232,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L813",
+      "source_location": "L934",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_constants",
@@ -21519,7 +23242,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L16",
+      "source_location": "L9",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_database",
@@ -21529,7 +23252,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L696",
+      "source_location": "L817",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_databasewithoutinternals",
@@ -21539,7 +23262,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L698",
+      "source_location": "L819",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_defaultschema",
@@ -21549,7 +23272,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L779",
+      "source_location": "L900",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_enums",
@@ -21559,7 +23282,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L8",
+      "source_location": "L1",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_json",
@@ -21569,7 +23292,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L700",
+      "source_location": "L821",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_tables",
@@ -21579,7 +23302,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L729",
+      "source_location": "L850",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_tablesinsert",
@@ -21589,7 +23312,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L754",
+      "source_location": "L875",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_tablesupdate",
@@ -22322,6 +24045,57 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/jornada-gerar-fornecedores/index.ts",
+      "source_location": "L29",
+      "weight": 1.0,
+      "source": "supabase_functions_jornada_gerar_fornecedores_index",
+      "target": "supabase_functions_jornada_gerar_fornecedores_index_categoriaia",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/jornada-gerar-fornecedores/index.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "supabase_functions_jornada_gerar_fornecedores_index",
+      "target": "supabase_functions_jornada_gerar_fornecedores_index_corsheaders",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/jornada-gerar-fornecedores/index.ts",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "supabase_functions_jornada_gerar_fornecedores_index",
+      "target": "supabase_functions_jornada_gerar_fornecedores_index_gerarcategorias",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/jornada-gerar-fornecedores/index.ts",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "supabase_functions_jornada_gerar_fornecedores_index",
+      "target": "supabase_functions_jornada_gerar_fornecedores_index_roteirocategoria",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/jornada-gerar-fornecedores/index.ts",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "supabase_functions_jornada_gerar_fornecedores_index_roteirocategoria",
+      "target": "supabase_functions_jornada_gerar_fornecedores_index_categoriaia",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "supabase/functions/jornada-gerar-identidade/index.ts",
       "source_location": "L44",
       "weight": 1.0,
@@ -22858,7 +24632,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L390",
+      "source_location": "L417",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_10_m\u00f3dulo_copiloto_de_ia",
@@ -22868,7 +24642,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L408",
+      "source_location": "L435",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_11_m\u00f3dulos_fase_2_trilhas_d_e_f_esqueleto",
@@ -22878,7 +24652,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L414",
+      "source_location": "L441",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_12_m\u00f3dulos_fase_3_ecossistema_p\u00f3s_abertura_esqueleto",
@@ -22888,7 +24662,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L439",
+      "source_location": "L466",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_13_regras_de_neg\u00f3cio_transversais_numera\u00e7\u00e3o_consolidada",
@@ -22898,7 +24672,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L469",
+      "source_location": "L498",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_14_requisitos_n\u00e3o_funcionais",
@@ -22908,7 +24682,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L485",
+      "source_location": "L514",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_15_m\u00e9tricas_a_instrumentar_desde_o_dia_1",
@@ -22918,7 +24692,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L494",
+      "source_location": "L523",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_16_gloss\u00e1rio_r\u00e1pido",
@@ -22928,7 +24702,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L503",
+      "source_location": "L532",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_17_decis\u00f5es_em_aberto_bloqueiam_in\u00edcio_de_c\u00f3digo",
@@ -23228,7 +25002,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L368",
+      "source_location": "L395",
       "weight": 1.0,
       "source": "docs_prd_9_m\u00f3dulo_workflow_de_constru\u00e7\u00e3o_trilhas_a_b_c_mvp",
       "target": "docs_prd_9_2_trilha_a_valida\u00e7\u00e3o",
@@ -23248,7 +25022,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L372",
+      "source_location": "L399",
       "weight": 1.0,
       "source": "docs_prd_9_m\u00f3dulo_workflow_de_constru\u00e7\u00e3o_trilhas_a_b_c_mvp",
       "target": "docs_prd_9_3_trilha_b_identidade",
@@ -23268,7 +25042,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L376",
+      "source_location": "L403",
       "weight": 1.0,
       "source": "docs_prd_9_m\u00f3dulo_workflow_de_constru\u00e7\u00e3o_trilhas_a_b_c_mvp",
       "target": "docs_prd_9_4_trilha_c_formaliza\u00e7\u00e3o",
@@ -23288,7 +25062,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L380",
+      "source_location": "L407",
       "weight": 1.0,
       "source": "docs_prd_9_m\u00f3dulo_workflow_de_constru\u00e7\u00e3o_trilhas_a_b_c_mvp",
       "target": "docs_prd_9_5_paralelismo_e_etapas_em_espera",
@@ -23298,7 +25072,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L383",
+      "source_location": "L410",
       "weight": 1.0,
       "source": "docs_prd_9_m\u00f3dulo_workflow_de_constru\u00e7\u00e3o_trilhas_a_b_c_mvp",
       "target": "docs_prd_9_6_crit\u00e9rios_de_aceite",
@@ -23308,7 +25082,27 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L392",
+      "source_location": "L368",
+      "weight": 1.0,
+      "source": "docs_prd_9_m\u00f3dulo_workflow_de_constru\u00e7\u00e3o_trilhas_a_b_c_mvp",
+      "target": "docs_prd_9_6_fase_estrutura_desenhada_em_30_07_2026",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/PRD.md",
+      "source_location": "L380",
+      "weight": 1.0,
+      "source": "docs_prd_9_m\u00f3dulo_workflow_de_constru\u00e7\u00e3o_trilhas_a_b_c_mvp",
+      "target": "docs_prd_9_7_fase_fornecedores_desenhada_em_30_07_2026",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/PRD.md",
+      "source_location": "L419",
       "weight": 1.0,
       "source": "docs_prd_10_m\u00f3dulo_copiloto_de_ia",
       "target": "docs_prd_10_1_superf\u00edcies_do_copiloto",
@@ -23318,7 +25112,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L397",
+      "source_location": "L424",
       "weight": 1.0,
       "source": "docs_prd_10_m\u00f3dulo_copiloto_de_ia",
       "target": "docs_prd_10_2_guardrails_rn_21_rn_20_j\u00e1_citadas_detalhamento_t\u00e9cnico",
@@ -23328,7 +25122,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L402",
+      "source_location": "L429",
       "weight": 1.0,
       "source": "docs_prd_10_m\u00f3dulo_copiloto_de_ia",
       "target": "docs_prd_10_3_crit\u00e9rios_de_aceite",
@@ -23338,7 +25132,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L418",
+      "source_location": "L445",
       "weight": 1.0,
       "source": "docs_prd_12_m\u00f3dulos_fase_3_ecossistema_p\u00f3s_abertura_esqueleto",
       "target": "docs_prd_12_1_framework_de_m\u00f3dulos_exce\u00e7\u00e3o_\u00e0_rn_2_ver_3_constru\u00eddo_em_29_07_2026",
@@ -23348,7 +25142,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L424",
+      "source_location": "L451",
       "weight": 1.0,
       "source": "docs_prd_12_m\u00f3dulos_fase_3_ecossistema_p\u00f3s_abertura_esqueleto",
       "target": "docs_prd_12_2_m\u00f3dulos_anunciados_na_landing_decis\u00e3o_do_dono_do_produto_29_07_2026",
@@ -25350,5 +27144,5 @@
       "confidence": "EXTRACTED"
     }
   ],
-  "built_at_commit": "fd0fa929be08fcd87e7efed90b2b4e48802632b4"
+  "built_at_commit": "b9ba82c2259a95b2403327498396c685541a065d"
 }
