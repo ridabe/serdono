@@ -58,12 +58,16 @@ export async function startJornada(userId: string, nicheId: string): Promise<Jor
  * existirem (idempotente — chamada tanto na criação da instância quanto em
  * todo avanço de fase, SDD-36). Sem isso, `advanceFase` só trocava
  * `fase_atual` e a fase nova ficava sem nenhuma etapa própria.
+ *
+ * `aplicaSe` (SDD-38): a fase "formalizacao" bifurca por regime (MEI vs
+ * empresa formal) — sem esse argumento, semeia só os templates com
+ * `aplica_se is null` (a própria pergunta do regime); passando o regime
+ * escolhido, semeia também os templates daquele caminho.
  */
-async function seedEtapasForFase(instanceId: string, fase: JornadaFase): Promise<void> {
-  const { data: templates, error: templatesError } = await supabase
-    .from("jornada_etapa_templates")
-    .select("*")
-    .eq("fase", fase);
+async function seedEtapasForFase(instanceId: string, fase: JornadaFase, aplicaSe?: string): Promise<void> {
+  let query = supabase.from("jornada_etapa_templates").select("*").eq("fase", fase);
+  query = aplicaSe ? query.or(`aplica_se.is.null,aplica_se.eq.${aplicaSe}`) : query.is("aplica_se", null);
+  const { data: templates, error: templatesError } = await query;
   if (templatesError) throw templatesError;
   if (!templates || templates.length === 0) return;
 
@@ -313,4 +317,29 @@ export async function getLogoDownloadUrl(logoPath: string): Promise<string> {
   const { data, error } = await supabase.storage.from(IDENTIDADE_VISUAL_BUCKET).createSignedUrl(logoPath, 3600);
   if (error) throw error;
   return data.signedUrl;
+}
+
+// ---- Fase 5 — Formalização (SDD-38) ----
+
+export type RegimeFormalizacao = "mei" | "formal";
+
+export interface FormalizacaoDocumento {
+  nome: string;
+  como_obter: string;
+}
+
+const SLUG_FORMALIZACAO_REGIME = "formalizacao_regime";
+
+/**
+ * Resposta à pergunta "qual o formato da sua empresa?" — decide o regime e
+ * semeia as etapas daquele caminho (MEI: 3 etapas; formal: 9 etapas). Pode
+ * ser respondida de novo a qualquer momento (nenhuma etapa desta fase trava
+ * outra, SDD-38) — reescolher não apaga etapas já semeadas do caminho
+ * anterior, só passa a exibir/contar o caminho atual (ver `JornadaScreen`).
+ */
+export async function chooseRegimeFormalizacao(instanceId: string, regime: RegimeFormalizacao): Promise<void> {
+  const { error } = await supabase.from("jornada_instances").update({ regime_formalizacao: regime }).eq("id", instanceId);
+  if (error) throw error;
+  await seedEtapasForFase(instanceId, "formalizacao", regime);
+  await markEtapaDone(instanceId, SLUG_FORMALIZACAO_REGIME);
 }

@@ -14,6 +14,7 @@ import {
   type JornadaInstance,
 } from "@serdono/supabase";
 import { EscolherNichoScreen } from "./EscolherNichoScreen";
+import { FormalizacaoScreen } from "./FormalizacaoScreen";
 import { PlanejamentoScreen } from "./PlanejamentoScreen";
 import { StepRail, type RailFaseData } from "./StepRail";
 import { ValidacaoIdeiaScreen } from "./ValidacaoIdeiaScreen";
@@ -111,7 +112,16 @@ export function JornadaScreen() {
   // `etapas` carrega o histórico de TODAS as fases já visitadas (SDD-36) —
   // aqui só interessa o subconjunto da fase atual, tanto pro cálculo de
   // progresso quanto pra passar adiante aos componentes de detalhe.
-  const etapasFaseAtual = etapas.filter((e) => e.template.fase === jornada.fase_atual);
+  // Formalização (SDD-38) bifurca por regime dentro da própria fase — sem
+  // esse filtro extra, trocar de regime (MEI ↔ formal) faria etapas do
+  // caminho abandonado continuarem contando no progresso e na trilha.
+  const etapasFaseAtual = etapas.filter((e) => {
+    if (e.template.fase !== jornada.fase_atual) return false;
+    if (jornada.fase_atual === "formalizacao" && jornada.regime_formalizacao && e.template.aplica_se) {
+      return e.template.aplica_se === jornada.regime_formalizacao;
+    }
+    return true;
+  });
   const fracaoFaseAtual =
     etapasFaseAtual.length > 0 ? etapasFaseAtual.filter((e) => e.status === "concluida").length / etapasFaseAtual.length : 0;
   const progresso = Math.round(((fasesConcluidasAntesDaAtual + fracaoFaseAtual) / TOTAL_FASES) * 100);
@@ -147,6 +157,8 @@ export function JornadaScreen() {
       <ValidacaoIdeiaScreen jornada={jornada} etapas={etapasFaseAtual} onEtapasChanged={() => refreshJornada(jornada.id)} />
     ) : jornada.fase_atual === "planejamento" ? (
       <PlanejamentoScreen jornada={jornada} etapas={etapasFaseAtual} onEtapasChanged={() => refreshJornada(jornada.id)} />
+    ) : jornada.fase_atual === "formalizacao" ? (
+      <FormalizacaoScreen jornada={jornada} etapas={etapasFaseAtual} onEtapasChanged={() => refreshJornada(jornada.id)} />
     ) : (
       <Card variant="default" padding={6}>
         <Text style={{ ...type.body, color: color.text.secondary }}>A próxima etapa chega em breve.</Text>

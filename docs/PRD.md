@@ -331,6 +331,26 @@ Segunda etapa da fase "Planejamento", depende da Etapa 1 (o nome já escolhido e
 
 Detalhamento técnico (provedor de IA de imagem, formato do Storage): ver SPEC.md SDD-35.
 
+### 9.4 Fase "Formalização" (desenhada em 30/07/2026)
+
+Diferente das fases anteriores, o conteúdo de cada etapa **não é gerado por IA** — é o mesmo processo burocrático real para qualquer empreendedor no mesmo regime, então é conteúdo curado uma vez, não personalizado por usuário.
+
+**Etapa 1 — bifurcação por regime:** "Você pretende faturar até R$ 81 mil no primeiro ano?" — a resposta decide o caminho:
+- **Sim → MEI:** 3 etapas (Cadastro no Portal do Empreendedor, Escolha do CNAE, Alvará e licenças).
+- **Não → Empresa formal:** 9 etapas, nesta ordem — Escolha do CNAE, Natureza Jurídica, Capital Social, Sócios, Contrato Social, Registro, Receita Federal, Alvará, Inscrição Estadual.
+
+**Toda etapa (dos dois caminhos) tem:** lista de documentos (cada um com explicação de como obter), explicação da etapa, prazo esperado e botão "Concluir". O empreendedor pode baixar/imprimir em PDF os documentos de uma etapa, ou o checklist completo do seu caminho.
+
+**RN-23 (nova): nenhuma etapa desta fase trava outra.** Diferente do motor genérico de etapas (RN-8), aqui não existe `bloqueada` — o empreendedor precisa poder ir e voltar livremente, inclusive desmarcar uma etapa já concluída para refazê-la, sem que isso trave nenhuma outra. O percentual de conclusão é sempre `concluídas / total` do caminho escolhido — desmarcar já reduz o percentual automaticamente, sem cálculo especial.
+
+**RN-18 satisfeita pela estrutura, não por uma etapa nova:** o RN-18 original (viabilidade econômica bloqueia a abertura de CNPJ) já é garantido pelo modelo de fases sequenciais — não existe caminho para chegar a "Formalização" sem antes completar "Validação da Ideia" e "Planejamento" por inteiro. Nenhuma etapa de "estudo de viabilidade econômica" foi criada separadamente; ela nunca chegou a ser desenhada como etapa própria da Fase 2 construída (SDD-32) — se um dia fizer falta, entra como etapa nova ali, não aqui.
+
+**RN-19 aplicada:** como as cidades-piloto ainda não foram decididas (pendência registrada no fim deste documento), todo o conteúdo de alvará/licenças é **genérico** — cada etapa que depende de exigência municipal diz explicitamente "consulte a prefeitura da sua cidade", nunca finge saber o processo de uma cidade específica.
+
+**RN-21 aplicada:** aviso fixo no topo da tela ("orientação geral, não substitui contador/advogado") + dica pontual em etapas de maior risco (Natureza Jurídica, Contrato Social, Alvará) sugerindo consultar um profissional.
+
+Detalhamento técnico (schema da bifurcação, conteúdo completo por etapa, exportação em PDF): ver SPEC.md SDD-38.
+
 ### 9.2 Trilha A — Validação
 Etapas: estudo de mercado local, mapeamento de concorrentes, pesquisa com clientes potenciais, teste de demanda, estudo de viabilidade econômica.
 **RN-18:** A etapa "estudo de viabilidade econômica" é bloqueante para a trilha C (Formalização) — não faz sentido abrir CNPJ sem viabilidade minimamente validada. É a única dependência cross-trilha do MVP; todas as demais dependências são internas à própria trilha.
@@ -428,6 +448,7 @@ A home passou a apresentar o catálogo de módulos do produto, para que o visita
 | RN-20 | Todo dado de mercado citado tem fonte e data visíveis |
 | RN-21 | Toda recomendação sensível traz aviso de não substituir profissional habilitado |
 | RN-22 | App Android verifica versão mínima suportada; abaixo dela, bloqueia uso até atualizar via Play Store |
+| RN-23 | Etapas da fase Formalização nunca travam entre si — sempre navegáveis e desmarcáveis livremente |
 
 ---
 
