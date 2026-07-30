@@ -161,6 +161,53 @@ export type Database = {
         }
         Relationships: []
       }
+      jornada_clientes_contatos: {
+        Row: {
+          created_at: string
+          email: string | null
+          empresa: string | null
+          id: string
+          jornada_instance_id: string
+          nome: string
+          notas: string | null
+          status: string
+          telefone: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          empresa?: string | null
+          id?: string
+          jornada_instance_id: string
+          nome: string
+          notas?: string | null
+          status?: string
+          telefone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          empresa?: string | null
+          id?: string
+          jornada_instance_id?: string
+          nome?: string
+          notas?: string | null
+          status?: string
+          telefone?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "jornada_clientes_contatos_jornada_instance_id_fkey"
+            columns: ["jornada_instance_id"]
+            isOneToOne: false
+            referencedRelation: "jornada_instances"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       jornada_deliverables: {
         Row: {
           conteudo: Json

@@ -421,6 +421,30 @@ Entra logo depois de Produto — ordem atual: ... → Fornecedores → Produto �
 
 Detalhamento técnico (schema, Edge Function, modelo de IA usado): ver SPEC.md SDD-43.
 
+### 9.10 Fase "Clientes" — Captação de Clientes (desenhada em 30/07/2026, MVP)
+
+Entra logo depois de Marketing — ordem atual: ... → Produto → Marketing → **Clientes** → Retenção → Escala. É o momento em que o empreendedor deixa de estruturar o negócio e passa a buscar receita de forma organizada.
+
+**Escopo do MVP, cortado deliberadamente com o dono do produto:** a concepção original desta fase tinha 9 blocos (meta, canais recomendados, oferta comercial, materiais de prospecção por canal, lista de contatos com importação CSV e sugestão de perfil-alvo, plano diário de execução, follow-up automático, biblioteca de campanhas prontas, critérios de conclusão). Só **4 blocos** entram nesta rodada — os demais ficam fora do MVP, não esquecidos:
+
+1. **Meta de captação** — o empreendedor informa quantos clientes quer conquistar, em quantos dias, e o ticket médio esperado. O sistema calcula o faturamento estimado e quantos contatos são necessários, assumindo uma taxa de conversão fixa de referência de 20% (mesmo espírito didático do Planejamento Financeiro, §9.5 — fórmula e cálculo sempre visíveis, nunca só o número final). Sem chamada de IA, cálculo local (ver SPEC.md SDD-45).
+2. **Oferta comercial** — a IA gera, a partir do que a Jornada já sabe do negócio (nome, slogan, nicho, persona, proposta de valor — mesmo contexto reaproveitado por Marketing, §9.9), uma oferta estruturada em produto, benefício, diferencial, condição, prazo e chamada para ação. Regenerável quantas vezes o empreendedor quiser, mesmo padrão de Marketing (RN-26) — nunca inventa preço ou desconto que não esteja no contexto.
+3. **Lista de contatos** — CRUD livre do empreendedor (nome, telefone, e-mail, empresa, status), mesmo espírito da lista pessoal de Fornecedores (§9.7): ele cadastra, edita e remove à vontade. O `status` de cada contato avança por um funil simples (`novo` → `contatado` → `respondeu` → `orcamento_enviado` → `cliente`) e é o que alimenta o critério de conclusão abaixo. Importação por CSV, sugestão de perfil-alvo sem dado real e canais recomendados por nicho ficam de fora do MVP — entram como incremento quando houver sinal de que a lista manual não é suficiente.
+4. **Critérios de conclusão** — **diferente de toda fase anterior desde Financeiro (RN-24 — nada trava)**, o avanço para Retenção só libera quando todos os critérios reais abaixo forem verdadeiros, calculados sobre dado de verdade, nunca sobre um checklist de "criei uma conta":
+   - Meta de captação definida;
+   - Oferta comercial criada;
+   - Pelo menos 20 contatos cadastrados;
+   - Pelo menos 10 abordagens realizadas (status diferente de `novo`);
+   - Pelo menos 3 respostas recebidas (status `respondeu` ou além);
+   - Pelo menos 1 orçamento enviado (status `orcamento_enviado` ou além);
+   - Primeiro cliente conquistado (pelo menos 1 contato com status `cliente`).
+
+   Esse comportamento bloqueante é uma reintrodução deliberada do padrão de Formalização (RN-23/SDD-38) — a única outra fase que já bloqueia o avanço — e não do padrão "nada trava" (RN-24) usado por Estrutura/Fornecedores/Produto/Marketing: aqui o próprio objetivo da fase (captar cliente de verdade) só é atingido com ação real, então deixar avançar sem nenhuma abordagem feita mascararia isso.
+
+**Fora do MVP, registrado para quando houver sinal de necessidade real:** canais recomendados por nicho (Instagram/WhatsApp/Google/parcerias, priorizados por custo e velocidade), geração de materiais de prospecção por canal (mensagem de WhatsApp, texto de Instagram, e-mail comercial, roteiro de ligação), plano diário de execução (checklist de 7/15/30 dias), follow-up automático por inatividade — este último é o mais custoso: exige infraestrutura de disparo agendado (cron/e-mail/push) que **nenhuma fase do produto construiu ainda** (mesmo adiamento já registrado em Estrutura, SDD-40) — e biblioteca de campanhas prontas curada pelo admin.
+
+Detalhamento técnico (schema de `jornada_clientes_contatos`, Edge Function, cálculo de critérios de conclusão): ver SPEC.md SDD-45.
+
 ### 9.2 Trilha A — Validação
 Etapas: estudo de mercado local, mapeamento de concorrentes, pesquisa com clientes potenciais, teste de demanda, estudo de viabilidade econômica.
 **RN-18:** A etapa "estudo de viabilidade econômica" é bloqueante para a trilha C (Formalização) — não faz sentido abrir CNPJ sem viabilidade minimamente validada. É a única dependência cross-trilha do MVP; todas as demais dependências são internas à própria trilha.

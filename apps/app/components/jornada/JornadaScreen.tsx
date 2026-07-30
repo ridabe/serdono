@@ -15,6 +15,7 @@ import {
   type JornadaInstance,
   type NicheEstruturaInfo,
 } from "@serdono/supabase";
+import { ClientesScreen } from "./ClientesScreen";
 import { EscolherNichoScreen } from "./EscolherNichoScreen";
 import { EstruturaScreen } from "./EstruturaScreen";
 import { FinanceiroScreen } from "./FinanceiroScreen";
@@ -231,6 +232,8 @@ export function JornadaScreen() {
       <ProdutoScreen jornada={jornada} etapas={etapasFaseExibida} onEtapasChanged={() => refreshJornada(jornada.id)} />
     ) : faseExibida === "marketing" ? (
       <MarketingScreen jornada={jornada} etapas={etapasFaseExibida} onEtapasChanged={() => refreshJornada(jornada.id)} />
+    ) : faseExibida === "clientes" ? (
+      <ClientesScreen jornada={jornada} etapas={etapasFaseExibida} onEtapasChanged={() => refreshJornada(jornada.id)} />
     ) : (
       <Card variant="default" padding={6}>
         <Text style={{ ...type.body, color: color.text.secondary }}>A próxima etapa chega em breve.</Text>

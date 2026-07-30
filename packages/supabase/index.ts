@@ -9,4 +9,5 @@ export * from "./modules";
 export * from "./jornada";
 export * from "./fornecedores";
 export * from "./marketing";
+export * from "./clientes";
 export type { Database } from "./types";

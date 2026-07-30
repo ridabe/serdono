@@ -389,6 +389,37 @@ export async function saveFinanceiroDados(instanceId: string, dados: FinanceiroD
   if (error) throw error;
 }
 
+// ---- Fase Clientes — Captação de Clientes (SDD-45) ----
+
+const SLUG_CLIENTES_META = "clientes_meta";
+
+/** Mesmo formato de `MetaCaptacaoInputs` em `packages/core/metaCaptacao.ts` — duplicado de propósito, mesmo motivo de `FinanceiroDados`/`ProdutoPrecificacaoDados` acima. */
+export interface MetaCaptacaoDados {
+  metaClientes: number;
+  periodoDias: number;
+  ticketMedio: number;
+  taxaConversaoPct: number;
+}
+
+/** Salva a meta ajustada pelo usuário e já marca a etapa como concluída — diferente de Financeiro/Produto, aqui preencher a meta É a conclusão da etapa, não uma ação separada (mesmo espírito de `chooseNomeEmpresa`). */
+export async function saveMetaCaptacao(instanceId: string, dados: MetaCaptacaoDados): Promise<void> {
+  const { data: template, error: templateError } = await supabase
+    .from("jornada_etapa_templates")
+    .select("id")
+    .eq("slug", SLUG_CLIENTES_META)
+    .single();
+  if (templateError) throw templateError;
+
+  const { error } = await supabase
+    .from("jornada_etapas")
+    .update({ dados_usuario: dados as unknown as Json })
+    .eq("jornada_instance_id", instanceId)
+    .eq("etapa_template_id", template.id);
+  if (error) throw error;
+
+  await markEtapaDone(instanceId, SLUG_CLIENTES_META);
+}
+
 // ---- Fase 7 — Estrutura (SDD-40) ----
 
 export interface NicheEstruturaInfo {
