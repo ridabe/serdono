@@ -69,6 +69,19 @@ O ícone adaptativo do Android respeita a **safe zone**: todo o desenho fica den
 |---|---|
 | `og-image.png` (1200×630) | `<meta property="og:image">` e `twitter:image` — é a imagem que aparece quando alguém compartilha o link do serdono.com.br |
 
+### `mary/` — mascote do produto
+
+Não é a marca gráfica — é a personagem "Mary", que acompanha o usuário em toda a interface (ver DS-15 em `docs/identidade-visual/DESIGN_SYSTEM.md`). Consumida via componente `MaryAvatar` (`packages/ui/components/MaryAvatar.tsx`), nunca via `require` direto numa tela.
+
+| Arquivo | Pose | Uso |
+|---|---|---|
+| `mary-boas-vindas.png` | `boas-vindas` | Abertura de módulo, primeira impressão |
+| `mary-jornada.png` | `jornada` | Orientando dentro de uma etapa específica |
+| `mary-positivo.png` | `positivo` | Confirmação, conquista, etapa concluída |
+| `mary-checklist.png` | `checklist` | Contexto de lista/checklist, revisão |
+
+Recortes 512×768 de uma imagem de referência fotográfica — ainda sem fundo removido (dívida visual conhecida, ver DS-15). Toda pose nova entra primeiro nesta tabela.
+
 ---
 
 ## Regras de uso

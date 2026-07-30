@@ -315,6 +315,14 @@ Porta de entrada alternativa citada no Documento de Conceito §8. Fluxo: diagnó
 ### 9.1 Anatomia de uma etapa (aplica-se a toda etapa de toda trilha)
 Toda etapa renderiza, nesta ordem fixa: **Contexto** (por que existe) → **Dados** (inteligência de mercado/região, com fonte) → **Decisão** (escolha concreta com trade-offs) → **Ação** (passo a passo operacional) → **Entregável** (artefato salvo) → **Checagem** (copiloto valida `criterio_conclusao` antes de liberar avanço).
 
+### 9.2 Fase "Planejamento" — Etapa 1: Nome da Empresa (desenhada em 29/07/2026)
+
+Primeira etapa da fase "Planejamento" (antiga Trilha B — Identidade, §9). Fluxo: o usuário digita palavras-chave do negócio → a IA gera 10 nomes candidatos → o sistema consulta disponibilidade de **domínio** (.com.br e .com) e um indício de **handle do Instagram** para cada candidato → o usuário escolhe o nome final.
+
+**Escopo reduzido por decisão de produto:** o fluxo conceitual original também previa consultar disponibilidade de nome empresarial (Junta Comercial) e de marca (INPI) antes da escolha final. As duas foram **descartadas do MVP** — nenhuma tem API pública/oficial, e simulá-las daria uma falsa sensação de certeza jurídica/fiscal. Se algum dia entrarem, é como etapa nova e explícita, não reaproveitando esta.
+
+Detalhamento técnico da geração e das checagens: ver SPEC.md SDD-34.
+
 ### 9.2 Trilha A — Validação
 Etapas: estudo de mercado local, mapeamento de concorrentes, pesquisa com clientes potenciais, teste de demanda, estudo de viabilidade econômica.
 **RN-18:** A etapa "estudo de viabilidade econômica" é bloqueante para a trilha C (Formalização) — não faz sentido abrir CNPJ sem viabilidade minimamente validada. É a única dependência cross-trilha do MVP; todas as demais dependências são internas à própria trilha.

@@ -409,6 +409,7 @@ Telas de fundo branco/canvas puro no funil de diagnóstico e cadastro ganham uma
 | `img/favicon/` | `.ico` multi-resolução, SVG, apple-touch-icon e ícones de PWA |
 | `img/splash/` | Ícone central para `expo.splash` e versão de sangria completa |
 | `img/social/` | Open Graph 1200×630 |
+| `img/mary/` | Fotos da mascote Mary, uma por pose (`mary-{pose}.png`) — ver DS-15 |
 | `docs/identidade-visual/identidade-ser-dono/` | Conceitos originais dos 5 logos avaliados (histórico da decisão) |
 | `packages/ui/assets/fonts/` | Sora e Inter em `.ttf`, pesos listados em §3.1 — necessários em runtime (§3.3) |
 | Ícones de interface (Lucide) | via pacote, não versionado como asset próprio |
@@ -416,6 +417,19 @@ Telas de fundo branco/canvas puro no funil de diagnóstico e cadastro ganham uma
 **DS-10:** qualquer novo asset de marca (variação de cor, versão simplificada para tamanhos muito pequenos) é gerado a partir das fontes existentes e registrado em `img/README.md` — nunca colado solto no código sem origem documentada.
 
 **DS-12:** todo SVG de marca tem o wordmark **vetorizado** (`<path>`, nunca `<text>`) e **não usa `opacity`** — transparências são pré-mescladas em hex sólido. As duas regras existem pelo mesmo motivo: um asset de marca precisa renderizar idêntico em qualquer ferramenta, sem depender de fonte instalada nem de suporte a recursos avançados de SVG.
+
+**DS-15 (Mary — mascote do produto, registrada em 29/07/2026):** Mary é a personagem que representa o Ser Dono em toda a interface — dá boas-vindas ao entrar em cada módulo e acompanha o empreendedor etapa a etapa (primeiro uso: Jornada Empreendedora, PRD §9). Componente `MaryAvatar` (`packages/ui/components/MaryAvatar.tsx`), prop `pose`.
+
+| Pose | Arquivo | Uso |
+|---|---|---|
+| `boas-vindas` | `img/mary/mary-boas-vindas.png` | Abertura de módulo, primeira impressão |
+| `jornada` | `img/mary/mary-jornada.png` | Orientando dentro de uma etapa específica |
+| `positivo` | `img/mary/mary-positivo.png` | Confirmação, conquista, etapa concluída |
+| `checklist` | `img/mary/mary-checklist.png` | Contexto de lista/checklist, revisão |
+
+- **Origem:** os 4 arquivos são recortes de uma única imagem de referência fotográfica fornecida pelo dono do produto — ainda **sem fundo removido** (fundo fotográfico original). Antes de qualquer publicação além de protótipo interno, gerar uma versão com fundo transparente e, idealmente, um tratamento ilustrado consistente com o resto da marca (hoje 100% geométrica/vetorial — a mistura com foto realista é uma dívida visual conhecida, não a direção final).
+- **Toda pose nova** entra primeiro aqui e em `img/README.md`, nunca só dentro do componente (mesma lógica de DS-10).
+- Nunca usar a Mary para comunicar erro grave ou aviso sensível (jurídico/fiscal/sanitário, RN-21 do PRD) — a personagem é tom de acompanhamento, não de alerta.
 
 ---
 

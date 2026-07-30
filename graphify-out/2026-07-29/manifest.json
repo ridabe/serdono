@@ -70,8 +70,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/diagnostico/ResultadoScreen.tsx": {
-    "mtime": 1785260982.5914378,
-    "ast_hash": "1c46f4cdde3791ca5e0778e9e5f1f685",
+    "mtime": 1785338997.9403014,
+    "ast_hash": "1d29b33341ef905c4f7f2368d36defb7",
     "semantic_hash": ""
   },
   "apps/app/components/diagnostico/blocks.ts": {
@@ -175,8 +175,8 @@
     "semantic_hash": ""
   },
   "packages/core/index.ts": {
-    "mtime": 1785251936.7691114,
-    "ast_hash": "37b14906ac394a79bca6e0d41c9994b7",
+    "mtime": 1785340333.9028888,
+    "ast_hash": "37f7dcaa294e054dd07ea16c5ec2817e",
     "semantic_hash": ""
   },
   "packages/core/package.json": {
@@ -195,8 +195,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/index.ts": {
-    "mtime": 1785335143.7398367,
-    "ast_hash": "63bdd049b4380c61591d9d1d44b2d1ec",
+    "mtime": 1785338885.4772227,
+    "ast_hash": "768f4866de54a470abdbebfd8f3c9143",
     "semantic_hash": ""
   },
   "packages/supabase/package.json": {
@@ -215,8 +215,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/types.ts": {
-    "mtime": 1785334881.9758043,
-    "ast_hash": "79fdf598692d004b1076e7692437acbe",
+    "mtime": 1785340315.038091,
+    "ast_hash": "c592cf5b9a7e263694cfa296a627e79d",
     "semantic_hash": ""
   },
   "packages/ui/components/Button.tsx": {
@@ -300,13 +300,13 @@
     "semantic_hash": ""
   },
   "docs/PRD.md": {
-    "mtime": 1785333976.374411,
-    "ast_hash": "d95e3362ed5964b73fa731cbfc939d8e",
+    "mtime": 1785339114.8726401,
+    "ast_hash": "c242fa9d4d01bab0c115c9582529b25e",
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1785335470.5945964,
-    "ast_hash": "3a62b5bd70f811a2ef9f951b7ddbc7b0",
+    "mtime": 1785340553.9854093,
+    "ast_hash": "e15fb4224425b76062a045746f816ae5",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
@@ -450,8 +450,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/login/LoginScreen.tsx": {
-    "mtime": 1785335046.460822,
-    "ast_hash": "d7bdcbc36649c7a0711aea1feb63f0d3",
+    "mtime": 1785339060.5764134,
+    "ast_hash": "57d80c5a8fd0fdfd4b79685a46deaa83",
     "semantic_hash": ""
   },
   "apps/app/components/perfil/CompletarCadastroScreen.tsx": {
@@ -600,8 +600,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/modules.ts": {
-    "mtime": 1785335139.5223649,
-    "ast_hash": "fc65166eae1d9a90f85d902931a7fcc5",
+    "mtime": 1785338874.5897267,
+    "ast_hash": "99e287944b2c031b2505b8bfcb8275a2",
     "semantic_hash": ""
   },
   "packages/ui/components/Input.tsx": {
@@ -627,6 +627,61 @@
   ".github/workflows/android-release.yml": {
     "mtime": 1785333401.028788,
     "ast_hash": "2b034871a0636e3c81c4be34c6865883",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/jornada/_layout.tsx": {
+    "mtime": 1785338912.457949,
+    "ast_hash": "496cadd480ec8a0dec974770a0184526",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/jornada/index.tsx": {
+    "mtime": 1785338962.5795443,
+    "ast_hash": "375a9c31df31aa09395a8d7d543a3df9",
+    "semantic_hash": ""
+  },
+  "apps/app/components/jornada/EscolherNichoScreen.tsx": {
+    "mtime": 1785338944.583137,
+    "ast_hash": "5c9ebe1dc76a78e7c5ba9bd1841b0973",
+    "semantic_hash": ""
+  },
+  "apps/app/components/jornada/JornadaScreen.tsx": {
+    "mtime": 1785340516.0709736,
+    "ast_hash": "60cb373bbd8a338c09e6aaf00d536b8b",
+    "semantic_hash": ""
+  },
+  "apps/app/components/jornada/ValidacaoIdeiaScreen.tsx": {
+    "mtime": 1785340498.556728,
+    "ast_hash": "a1c02ed4d4b450f36a4903f242892b62",
+    "semantic_hash": ""
+  },
+  "apps/app/components/jornada/useValidacaoIdeia.ts": {
+    "mtime": 1785340473.6481442,
+    "ast_hash": "ba4a2463845446f9009c04adb41a14aa",
+    "semantic_hash": ""
+  },
+  "packages/core/ai/routeModel.ts": {
+    "mtime": 1785340329.8569918,
+    "ast_hash": "508987f5dcc55db43b363ff1609d4216",
+    "semantic_hash": ""
+  },
+  "packages/supabase/jornada.ts": {
+    "mtime": 1785340439.278973,
+    "ast_hash": "0212df1beb65732783c384bf6743e831",
+    "semantic_hash": ""
+  },
+  "supabase/functions/jornada-gerar-documentos/index.ts": {
+    "mtime": 1785340383.1025827,
+    "ast_hash": "34f922b551228c1a6121f14c67bb1c1b",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/202607292000_jornada_empreendedora.sql": {
+    "mtime": 1785338825.8565829,
+    "ast_hash": "2cfb932e905f761e104fde9c10a870de",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/202607292100_jornada_validacao_ideia.sql": {
+    "mtime": 1785340283.6508713,
+    "ast_hash": "729b087f9de150bed0a31e0853513abf",
     "semantic_hash": ""
   }
 }

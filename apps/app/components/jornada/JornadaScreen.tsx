@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Pressable, ScrollView, Text, useWindowDimensions, View } from "react-native";
-import { breakpoint, Card, color, Logo, space, type } from "@serdono/ui";
+import { breakpoint, Button, Card, color, Logo, MaryAvatar, space, type } from "@serdono/ui";
 import {
   getCurrentSession,
   getJornadaEtapas,
@@ -14,6 +14,7 @@ import {
   type JornadaInstance,
 } from "@serdono/supabase";
 import { EscolherNichoScreen } from "./EscolherNichoScreen";
+import { PlanejamentoScreen } from "./PlanejamentoScreen";
 import { StepRail, type RailFaseData } from "./StepRail";
 import { ValidacaoIdeiaScreen } from "./ValidacaoIdeiaScreen";
 
@@ -53,6 +54,7 @@ export function JornadaScreen() {
   const [jornada, setJornada] = useState<JornadaInstance | null>(null);
   const [nicheName, setNicheName] = useState<string | null>(null);
   const [etapas, setEtapas] = useState<JornadaEtapa[]>([]);
+  const [maryDismissed, setMaryDismissed] = useState(false);
 
   async function refreshEtapas(instanceId: string) {
     setEtapas(await getJornadaEtapas(instanceId));
@@ -90,15 +92,17 @@ export function JornadaScreen() {
     return <EscolherNichoScreen />;
   }
 
-  // Fase 0 (Descoberta) já concluída por definição — é por isso que
-  // fase_atual nasce em "validacao_ideia" (índice 1). % honesta: só
-  // "validacao_ideia" tem etapas desenhadas hoje; fases sem template contam
-  // 0 de fração própria, sem fabricar um total de "16 etapas".
-  const faseIdx = FASES.indexOf(jornada.fase_atual as JornadaFase);
+  // Descoberta já concluída por definição (acontece antes do login) — conta
+  // como 1 fase completa fixa no numerador. TOTAL_FASES = Descoberta + as 8
+  // fases de FASES. % honesta: só "validacao_ideia" tem etapas desenhadas
+  // hoje; fases sem template contam 0 de fração própria, sem fabricar um
+  // total de "16 etapas".
+  const TOTAL_FASES = FASES.length + 1;
+  const fasesConcluidasAntesDaAtual = 1 + FASES.indexOf(jornada.fase_atual as JornadaFase);
   const etapasFaseAtual = etapas; // hoje só carregamos a fase atual (validacao_ideia)
   const fracaoFaseAtual =
     etapasFaseAtual.length > 0 ? etapasFaseAtual.filter((e) => e.status === "concluida").length / etapasFaseAtual.length : 0;
-  const progresso = Math.round(((faseIdx + fracaoFaseAtual) / FASES.length) * 100);
+  const progresso = Math.round(((fasesConcluidasAntesDaAtual + fracaoFaseAtual) / TOTAL_FASES) * 100);
 
   const primeiraPendenteIdx = etapasFaseAtual.findIndex((e) => e.status !== "concluida");
 
@@ -129,6 +133,8 @@ export function JornadaScreen() {
   const detail =
     jornada.fase_atual === "validacao_ideia" ? (
       <ValidacaoIdeiaScreen jornada={jornada} etapas={etapas} onEtapasChanged={() => refreshEtapas(jornada.id)} />
+    ) : jornada.fase_atual === "planejamento" ? (
+      <PlanejamentoScreen jornada={jornada} etapas={etapas} onEtapasChanged={() => refreshEtapas(jornada.id)} />
     ) : (
       <Card variant="default" padding={6}>
         <Text style={{ ...type.body, color: color.text.secondary }}>A próxima etapa chega em breve.</Text>
@@ -173,6 +179,21 @@ export function JornadaScreen() {
       </View>
 
       <ScrollView contentContainerStyle={{ padding: space[5] }}>
+        {!maryDismissed ? (
+          <Card variant="outline" padding={5} style={{ marginBottom: space[5] }}>
+            <View style={{ flexDirection: "row", gap: space[4], alignItems: "flex-start" }}>
+              <MaryAvatar pose="boas-vindas" size={72} />
+              <View style={{ flex: 1, gap: space[1] }}>
+                <Text style={{ ...type.bodyStrong, color: color.text.primary }}>Oi, eu sou a Mary!</Text>
+                <Text style={{ ...type.body, color: color.text.secondary }}>
+                  Vou te acompanhar em cada etapa da sua Jornada Empreendedora — do primeiro passo até o seu negócio
+                  estar de pé. Sempre que precisar de uma explicação, é só continuar por aqui.
+                </Text>
+                <Button label="Entendi" variant="ghost" size="sm" onPress={() => setMaryDismissed(true)} style={{ alignSelf: "flex-start", marginTop: space[1] }} />
+              </View>
+            </View>
+          </Card>
+        ) : null}
         <View style={{ flexDirection: compact ? "column" : "row", gap: space[5], alignItems: "flex-start" }}>
           <StepRail fases={railFases} compact={compact} />
           <View style={{ flex: 1, width: "100%" }}>{detail}</View>

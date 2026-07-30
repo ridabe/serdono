@@ -186,3 +186,106 @@ export async function advanceFase(instanceId: string, fase: JornadaFase): Promis
   const { error } = await supabase.from("jornada_instances").update({ fase_atual: fase }).eq("id", instanceId);
   if (error) throw error;
 }
+
+// ---- Fase 3 — Planejamento: Nome da Empresa (SDD-34) ----
+
+export interface CandidatoNomeEmpresa {
+  nome: string;
+  slug: string;
+  dominio_com_br: { disponivel: boolean | null };
+  dominio_com: { disponivel: boolean | null };
+  instagram: { disponivel: boolean | null };
+}
+
+/** IA gera 10 nomes a partir de palavras-chave e checa domínio/Instagram de cada um. */
+export async function generateNomesEmpresa(instanceId: string, palavrasChave: string[]): Promise<CandidatoNomeEmpresa[]> {
+  const { data, error } = await supabase.functions.invoke("jornada-gerar-nomes", {
+    body: { jornada_instance_id: instanceId, palavras_chave: palavrasChave },
+  });
+  if (error) throw error;
+  return (data as { candidatos: CandidatoNomeEmpresa[] }).candidatos;
+}
+
+export async function getNomesEmpresa(
+  instanceId: string
+): Promise<{ palavras_chave: string[]; candidatos: CandidatoNomeEmpresa[] } | null> {
+  const { data, error } = await supabase
+    .from("jornada_deliverables")
+    .select("conteudo")
+    .eq("jornada_instance_id", instanceId)
+    .eq("tipo", "nomes_empresa")
+    .maybeSingle();
+  if (error) throw error;
+  return (data?.conteudo as unknown as { palavras_chave: string[]; candidatos: CandidatoNomeEmpresa[] }) ?? null;
+}
+
+/** Escolha final do nome — ação do usuário, conclui a etapa (tipo_conclusao 'usuario'). */
+export async function chooseNomeEmpresa(instanceId: string, nome: string): Promise<void> {
+  const { error } = await supabase
+    .from("jornada_instances")
+    .update({ nome_empresa_escolhido: nome })
+    .eq("id", instanceId);
+  if (error) throw error;
+  await markEtapaDone(instanceId, "planejamento_nome_empresa");
+}
+
+// ---- Fase 3 — Planejamento: Identidade Visual (SDD-35) ----
+
+const IDENTIDADE_VISUAL_BUCKET = "identidade-visual";
+
+export interface IdentidadeVisualRespostas {
+  valores: string[];
+  personalidade: string[];
+  tom_comunicacao: string;
+  cores_preferidas: string[];
+  cores_evitar: string[];
+}
+
+export type LogoEstilo = "minimalista" | "moderno" | "classico";
+
+export interface LogoCandidato {
+  estilo: LogoEstilo;
+  imagem_base64: string;
+}
+
+/** IA gera slogan + 3 rascunhos de logo (qualidade baixa) a partir do questionário. */
+export async function generateIdentidadeVisual(
+  instanceId: string,
+  respostas: IdentidadeVisualRespostas
+): Promise<{ slogan: string; candidatos: LogoCandidato[] }> {
+  const { data, error } = await supabase.functions.invoke("jornada-gerar-identidade", {
+    body: { jornada_instance_id: instanceId, respostas },
+  });
+  if (error) throw error;
+  return data as { slogan: string; candidatos: LogoCandidato[] };
+}
+
+export async function getIdentidadeVisual(
+  instanceId: string
+): Promise<{ slogan: string; candidatos: LogoCandidato[] } | null> {
+  const { data, error } = await supabase
+    .from("jornada_deliverables")
+    .select("conteudo")
+    .eq("jornada_instance_id", instanceId)
+    .eq("tipo", "identidade_visual")
+    .maybeSingle();
+  if (error) throw error;
+  return (data?.conteudo as unknown as { slogan: string; candidatos: LogoCandidato[] }) ?? null;
+}
+
+/** Regenera o estilo escolhido em qualidade alta, salva no Storage e conclui a etapa. */
+export async function chooseLogoFinal(instanceId: string, estilo: LogoEstilo): Promise<string> {
+  const { data, error } = await supabase.functions.invoke("jornada-gerar-logo-final", {
+    body: { jornada_instance_id: instanceId, estilo },
+  });
+  if (error) throw error;
+  await markEtapaDone(instanceId, "planejamento_identidade_visual");
+  return (data as { logo_path: string }).logo_path;
+}
+
+/** URL assinada (bucket privado) para o usuário baixar o próprio logo quando quiser. */
+export async function getLogoDownloadUrl(logoPath: string): Promise<string> {
+  const { data, error } = await supabase.storage.from(IDENTIDADE_VISUAL_BUCKET).createSignedUrl(logoPath, 3600);
+  if (error) throw error;
+  return data.signedUrl;
+}
