@@ -8,4 +8,5 @@ export * from "./adminUsers";
 export * from "./modules";
 export * from "./jornada";
 export * from "./fornecedores";
+export * from "./marketing";
 export type { Database } from "./types";

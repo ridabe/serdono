@@ -22,9 +22,14 @@ function formatMoeda(valor: number): string {
 
 function ResultLine({ label, valor, destaque }: { label: string; valor: string; destaque?: boolean }) {
   return (
+    // Linhas vivem dentro de um Card variant="brand" (fundo escuro) — por
+    // isso as cores "on dark" (nunca color.text.primary/secondary, feitas
+    // pra fundo claro) e o destaque em dourado (color.action.primary), não
+    // color.bg.brand — usar a cor do próprio fundo deixava o texto
+    // invisível (bug real reportado pelo usuário, 30/07/2026).
     <View style={{ flexDirection: "row", justifyContent: "space-between", paddingVertical: space[2] }}>
-      <Text style={{ ...type.body, color: color.text.secondary }}>{label}</Text>
-      <Text style={{ ...(destaque ? type.bodyStrong : type.body), color: destaque ? color.bg.brand : color.text.primary }}>{valor}</Text>
+      <Text style={{ ...type.body, color: "#C7D3E3" }}>{label}</Text>
+      <Text style={{ ...(destaque ? type.bodyStrong : type.body), color: destaque ? color.action.primary : color.text.onBrand }}>{valor}</Text>
     </View>
   );
 }

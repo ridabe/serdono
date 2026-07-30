@@ -408,6 +408,19 @@ Entra logo depois de Fornecedores, ainda antes de Marketing — ordem atual: ...
 
 Detalhamento técnico (fórmula de precificação, planilha-modelo, flag do parceiro desenvolvedor): ver SPEC.md SDD-42.
 
+### 9.9 Fase "Marketing" (desenhada em 30/07/2026)
+
+Entra logo depois de Produto — ordem atual: ... → Fornecedores → Produto → **Marketing** → Clientes → Retenção → Escala. Duas partes:
+
+1. **Checklist de contas** — Instagram, Facebook, Perfil da Empresa no Google, TikTok e WhatsApp Business, cada um com explicação de por que importa e um passo a passo de como configurar. TikTok traz a ressalva de que a Loja do TikTok (venda direto no app) só vale a pena pra quem já vende produto físico com estoque pronto — pra quem presta serviço, o TikTok comum já basta.
+2. **Bio, sugestões de post e de anúncio geradas automaticamente** — a partir do que a Jornada já sabe do negócio (nome, slogan, nicho, persona, proposta de valor, todos já coletados nas fases anteriores), sem pedir nada de novo ao empreendedor. As sugestões de anúncio ficam deliberadamente sem preço/promoção inventados — é o empreendedor que completa com a oferta real.
+
+**RN-26 (nova): entregável de Marketing pode ser gerado de novo sempre que o empreendedor quiser.** Pedido explícito do dono do produto — diferente de Persona/SWOT/Canvas/Proposta de Valor (§9.2, geradas uma vez por fase), aqui o botão de gerar continua disponível a cada vez que o empreendedor volta a esta fase, sobrescrevendo o conteúdo anterior.
+
+**RN-24 aplicada:** checklist de contas não trava nada — cada item marcado independentemente, avanço pra Clientes sempre disponível.
+
+Detalhamento técnico (schema, Edge Function, modelo de IA usado): ver SPEC.md SDD-43.
+
 ### 9.2 Trilha A — Validação
 Etapas: estudo de mercado local, mapeamento de concorrentes, pesquisa com clientes potenciais, teste de demanda, estudo de viabilidade econômica.
 **RN-18:** A etapa "estudo de viabilidade econômica" é bloqueante para a trilha C (Formalização) — não faz sentido abrir CNPJ sem viabilidade minimamente validada. É a única dependência cross-trilha do MVP; todas as demais dependências são internas à própria trilha.
@@ -508,6 +521,7 @@ A home passou a apresentar o catálogo de módulos do produto, para que o visita
 | RN-23 | Etapas da fase Formalização nunca travam entre si — sempre navegáveis e desmarcáveis livremente |
 | RN-24 | Checklist da fase Estrutura nunca bloqueia o avanço para a próxima fase; sempre editável, mesmo em fases seguintes |
 | RN-25 | Checklist da fase Estrutura é filtrado por relevância ao tipo de negócio escolhido (nicho) |
+| RN-26 | Entregável de Marketing (bio/posts/anúncios) pode ser regenerado quantas vezes o empreendedor quiser |
 
 ---
 
