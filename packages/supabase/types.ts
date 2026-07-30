@@ -113,6 +113,51 @@ export type Database = {
         }
         Relationships: []
       }
+      fornecedores_parceiros: {
+        Row: {
+          ativo: boolean
+          categoria: string
+          contato: string | null
+          created_at: string
+          descricao: string | null
+          embedding: string | null
+          id: string
+          niches_aplicaveis: string[]
+          nome: string
+          regiao: string | null
+          site: string | null
+          updated_at: string
+        }
+        Insert: {
+          ativo?: boolean
+          categoria: string
+          contato?: string | null
+          created_at?: string
+          descricao?: string | null
+          embedding?: string | null
+          id?: string
+          niches_aplicaveis?: string[]
+          nome: string
+          regiao?: string | null
+          site?: string | null
+          updated_at?: string
+        }
+        Update: {
+          ativo?: boolean
+          categoria?: string
+          contato?: string | null
+          created_at?: string
+          descricao?: string | null
+          embedding?: string | null
+          id?: string
+          niches_aplicaveis?: string[]
+          nome?: string
+          regiao?: string | null
+          site?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       jornada_deliverables: {
         Row: {
           conteudo: Json
@@ -252,6 +297,66 @@ export type Database = {
             columns: ["jornada_instance_id"]
             isOneToOne: false
             referencedRelation: "jornada_instances"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      jornada_fornecedores: {
+        Row: {
+          avaliacao: string | null
+          categoria: string
+          contato: string | null
+          created_at: string
+          id: string
+          jornada_instance_id: string
+          nome_fornecedor: string
+          origem: string
+          parceiro_id: string | null
+          prazo: string | null
+          preco: string | null
+          updated_at: string
+        }
+        Insert: {
+          avaliacao?: string | null
+          categoria: string
+          contato?: string | null
+          created_at?: string
+          id?: string
+          jornada_instance_id: string
+          nome_fornecedor: string
+          origem?: string
+          parceiro_id?: string | null
+          prazo?: string | null
+          preco?: string | null
+          updated_at?: string
+        }
+        Update: {
+          avaliacao?: string | null
+          categoria?: string
+          contato?: string | null
+          created_at?: string
+          id?: string
+          jornada_instance_id?: string
+          nome_fornecedor?: string
+          origem?: string
+          parceiro_id?: string | null
+          prazo?: string | null
+          preco?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "jornada_fornecedores_jornada_instance_id_fkey"
+            columns: ["jornada_instance_id"]
+            isOneToOne: false
+            referencedRelation: "jornada_instances"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "jornada_fornecedores_parceiro_id_fkey"
+            columns: ["parceiro_id"]
+            isOneToOne: false
+            referencedRelation: "fornecedores_parceiros"
             referencedColumns: ["id"]
           },
         ]
@@ -663,6 +768,23 @@ export type Database = {
     Functions: {
       admin_dashboard_stats: { Args: never; Returns: Json }
       custom_access_token_hook: { Args: { event: Json }; Returns: Json }
+      match_fornecedores_parceiros: {
+        Args: {
+          filter_niche_id?: string
+          match_count?: number
+          query_embedding: string
+        }
+        Returns: {
+          categoria: string
+          contato: string
+          descricao: string
+          id: string
+          nome: string
+          regiao: string
+          similarity: number
+          site: string
+        }[]
+      }
       match_knowledge_chunks: {
         Args: {
           filter_category_slug?: string

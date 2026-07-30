@@ -7,4 +7,5 @@ export * from "./appVersion";
 export * from "./adminUsers";
 export * from "./modules";
 export * from "./jornada";
+export * from "./fornecedores";
 export type { Database } from "./types";

@@ -19,6 +19,7 @@ import { EscolherNichoScreen } from "./EscolherNichoScreen";
 import { EstruturaScreen } from "./EstruturaScreen";
 import { FinanceiroScreen } from "./FinanceiroScreen";
 import { FormalizacaoScreen } from "./FormalizacaoScreen";
+import { FornecedoresScreen } from "./FornecedoresScreen";
 import { PlanejamentoScreen } from "./PlanejamentoScreen";
 import { StepRail, type RailFaseData } from "./StepRail";
 import { ValidacaoIdeiaScreen } from "./ValidacaoIdeiaScreen";
@@ -28,13 +29,17 @@ import { ValidacaoIdeiaScreen } from "./ValidacaoIdeiaScreen";
 // mais sentido conhecer a própria saúde financeira antes de gastar com
 // divulgação. Estrutura (SDD-40) entra logo depois, ainda antes de
 // Marketing — faz sentido ter a base operacional (local, conta, site...)
-// minimamente resolvida antes de captar cliente.
+// minimamente resolvida antes de captar cliente. Fornecedores (SDD-41) vem
+// logo depois de Estrutura — só faz sentido negociar fornecedor a sério
+// depois de ter CNPJ/conta PJ, e só faz sentido divulgar (Marketing) depois
+// de saber que consegue comprar/revender.
 const FASES: JornadaFase[] = [
   "validacao_ideia",
   "planejamento",
   "formalizacao",
   "financeiro",
   "estrutura",
+  "fornecedores",
   "marketing",
   "clientes",
   "retencao",
@@ -48,6 +53,7 @@ const FASE_LABEL: Record<JornadaFase, string> = {
   marketing: "Marketing",
   financeiro: "Financeiro",
   estrutura: "Estrutura",
+  fornecedores: "Fornecedores",
   clientes: "Clientes",
   retencao: "Retenção",
   escala: "Escala",
@@ -214,6 +220,8 @@ export function JornadaScreen() {
       <FinanceiroScreen jornada={jornada} etapas={etapasFaseExibida} onEtapasChanged={() => refreshJornada(jornada.id)} />
     ) : faseExibida === "estrutura" ? (
       <EstruturaScreen jornada={jornada} etapas={etapasFaseExibida} onEtapasChanged={() => refreshJornada(jornada.id)} />
+    ) : faseExibida === "fornecedores" ? (
+      <FornecedoresScreen jornada={jornada} etapas={etapasFaseExibida} onEtapasChanged={() => refreshJornada(jornada.id)} />
     ) : (
       <Card variant="default" padding={6}>
         <Text style={{ ...type.body, color: color.text.secondary }}>A próxima etapa chega em breve.</Text>

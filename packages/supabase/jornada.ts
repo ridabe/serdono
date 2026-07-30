@@ -11,6 +11,7 @@ export type JornadaFase =
   | "marketing"
   | "financeiro"
   | "estrutura"
+  | "fornecedores"
   | "clientes"
   | "retencao"
   | "escala";

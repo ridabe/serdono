@@ -7,6 +7,7 @@ import {
   type FinanceiroResultado,
 } from "@serdono/core";
 import {
+  advanceFase,
   markEtapaDone,
   saveFinanceiroDados,
   supabase,
@@ -33,6 +34,7 @@ export function useFinanceiro(jornada: JornadaInstance, etapas: JornadaEtapa[], 
   const [inputs, setInputs] = useState<FinanceiroInputs | null>(null);
   const [saving, setSaving] = useState(false);
   const [toggling, setToggling] = useState(false);
+  const [advancing, setAdvancing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -126,6 +128,28 @@ export function useFinanceiro(jornada: JornadaInstance, etapas: JornadaEtapa[], 
     }
   }
 
+  /**
+   * Sempre disponível quando `etapa` está concluída — nada trava aqui.
+   * Antes essa chamada vivia direto em `FinanceiroScreen.tsx` com um
+   * `catch` que engolia o erro sem avisar ninguém: uma falha (mesmo
+   * transitória, ex.: blip de rede) deixava o usuário "travado" na tela sem
+   * nenhum feedback (bug real de produção, 30/07/2026). Centralizando aqui,
+   * o erro cai em `error` igual a toda outra ação da tela.
+   */
+  async function advance() {
+    setAdvancing(true);
+    setError(null);
+    try {
+      await advanceFase(jornada.id, "estrutura");
+      return true;
+    } catch (e) {
+      setError((e as Error).message);
+      return false;
+    } finally {
+      setAdvancing(false);
+    }
+  }
+
   return {
     loading,
     inputs,
@@ -136,6 +160,8 @@ export function useFinanceiro(jornada: JornadaInstance, etapas: JornadaEtapa[], 
     etapa,
     toggleConcluido,
     toggling,
+    advance,
+    advancing,
     error,
   };
 }

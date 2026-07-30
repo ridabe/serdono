@@ -126,7 +126,7 @@ export function EstruturaScreen({ jornada, etapas, onEtapasChanged }: EstruturaS
 
       <Text style={{ ...type.caption, color: color.text.muted }}>
         Nenhum item bloqueia o avanço para a próxima fase — marque quando resolver, mesmo depois de já estar em
-        Marketing.
+        Fornecedores.
       </Text>
 
       <View style={{ gap: space[3] }}>
@@ -183,10 +183,10 @@ export function EstruturaScreen({ jornada, etapas, onEtapasChanged }: EstruturaS
           </View>
         ) : (
           <Text style={{ ...type.bodyStrong, color: color.text.onBrand, marginBottom: space[4] }}>
-            Pode seguir para Marketing quando quiser — o checklist continua aqui, esperando você voltar.
+            Pode seguir para Fornecedores quando quiser — o checklist continua aqui, esperando você voltar.
           </Text>
         )}
-        <Button label="Avançar para Marketing" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
+        <Button label="Avançar para Fornecedores" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
       </Card>
     </View>
   );

@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import { Text, View } from "react-native";
-import { advanceFase, type JornadaEtapa, type JornadaInstance } from "@serdono/supabase";
+import type { JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { Button, Card, Input, MaryAvatar, color, radius, space, type } from "@serdono/ui";
 import { formatMoney } from "../diagnostico/labels";
 import { useFinanceiro } from "./useFinanceiro";
@@ -60,12 +60,8 @@ export function FinanceiroScreen({ jornada, etapas, onEtapasChanged }: Financeir
   const v = useFinanceiro(jornada, etapas, onEtapasChanged);
 
   async function handleAdvance() {
-    try {
-      await advanceFase(jornada.id, "estrutura");
-      router.replace("/jornada");
-    } catch {
-      // erro já fica visível via v.error na próxima ação; avançar de fase raramente falha sozinho
-    }
+    const ok = await v.advance();
+    if (ok) router.replace("/jornada");
   }
 
   if (v.loading || !v.inputs || !v.resultado) {
@@ -291,7 +287,23 @@ export function FinanceiroScreen({ jornada, etapas, onEtapasChanged }: Financeir
           style={{ marginTop: space[4] }}
         />
         {concluida ? (
-          <Button label="Avançar para Estrutura" variant="secondary" fullWidth onPress={handleAdvance} style={{ marginTop: space[3] }} />
+          <>
+            {/* Repetido aqui (não só lá em cima) porque o erro de avançar
+                de fase acontece bem aqui — sem isso, uma falha parecia o
+                botão não ter feito nada (mesmo bug real de produção do
+                "Escolher logo" em IdentidadeVisualScreen, 30/07/2026). */}
+            {v.error ? (
+              <Text style={{ ...type.caption, color: color.state.danger, marginTop: space[3] }}>{v.error}</Text>
+            ) : null}
+            <Button
+              label="Avançar para Estrutura"
+              variant="secondary"
+              fullWidth
+              loading={v.advancing}
+              onPress={handleAdvance}
+              style={{ marginTop: space[3] }}
+            />
+          </>
         ) : null}
       </Card>
     </View>

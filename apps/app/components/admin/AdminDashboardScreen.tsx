@@ -96,6 +96,11 @@ export function AdminDashboardScreen() {
             description="Catálogo de módulos do sistema e liberação por usuário."
             onPress={() => router.push("/admin/modulos")}
           />
+          <NavCard
+            title="Fornecedores"
+            description="Base de parceiros sugerida ao empreendedor na Fase 8 da Jornada, filtrada por nicho."
+            onPress={() => router.push("/admin/fornecedores")}
+          />
         </View>
       </ScrollView>
     </View>

@@ -377,6 +377,21 @@ Cada item traz: uma explicação do que é, uma dica de como resolver, e é marc
 
 Detalhamento técnico (schema de relevância por nicho, navegação da trilha lateral): ver SPEC.md SDD-40.
 
+### 9.7 Fase "Fornecedores" (desenhada em 30/07/2026)
+
+Entra logo depois de Estrutura, ainda antes de Marketing — ordem atual: Validação da Ideia → Planejamento → Formalização → Financeiro → Estrutura → **Fornecedores** → Marketing → Clientes → Retenção → Escala. A lógica: só faz sentido negociar fornecedor a sério depois de ter CNPJ/conta PJ (preço e prazo B2B costumam depender disso), e só faz sentido divulgar o negócio (Marketing) depois de saber que consegue comprar/revender o que pretende vender.
+
+**Três fontes de fornecedor, deliberadamente separadas:**
+1. **Roteiro de busca gerado por IA** — a IA sugere de 4 a 6 *categorias* de fornecedor/parceiro que aquele tipo de negócio costuma precisar (ex.: embalagem, matéria-prima, equipamento), com o que avaliar em cada uma e uma busca pronta no Google. **A IA nunca gera nome de empresa fornecedora específica** — ela não tem acesso a nenhum fornecedor real, e inventar um nome seria dado fabricado (mesmo princípio do §4, honestidade sobre o que o produto sabe de verdade).
+2. **Base de parceiros curada pelo admin** — nova tela no Painel Admin (`/admin/fornecedores`) onde o admin cadastra parceiros/fornecedores reais (produto ou serviço), cada um podendo ser marcado como aplicável a nichos específicos ou a todos. Aparecem pro empreendedor como sugestão automática, filtrados pelo nicho dele. Nasce vazia — o valor cresce conforme o admin popula.
+3. **Lista pessoal do empreendedor** — ele mesmo cadastra os fornecedores que encontrar (por conta própria ou a partir de uma sugestão de parceiro), no formato Categoria → Fornecedor → Avaliação → Preço → Prazo → Contato. Pode adicionar, editar e remover livremente.
+
+**Preparado para RAG futuro, não construído ainda:** a base de parceiros já nasce com a estrutura pronta para busca semântica (embedding por parceiro, mesmo padrão da base de conhecimento geral do copiloto, RN-20-adjacent) — mas a busca em si (gerar embedding ao cadastrar, buscar por similaridade) só entra quando houver conteúdo real cadastrado; rodar isso sobre uma base vazia não teria valor. Até lá, a sugestão pro empreendedor é um filtro simples por nicho.
+
+**Mesmo espírito "nada trava" da Estrutura:** só existe 1 item de conclusão nesta fase (a lista em si), concluído manualmente pelo empreendedor quando ele achar que já tem o essencial — nunca bloqueia o avanço para Marketing.
+
+Detalhamento técnico (schema das duas tabelas novas, Edge Function do roteiro): ver SPEC.md SDD-41.
+
 ### 9.2 Trilha A — Validação
 Etapas: estudo de mercado local, mapeamento de concorrentes, pesquisa com clientes potenciais, teste de demanda, estudo de viabilidade econômica.
 **RN-18:** A etapa "estudo de viabilidade econômica" é bloqueante para a trilha C (Formalização) — não faz sentido abrir CNPJ sem viabilidade minimamente validada. É a única dependência cross-trilha do MVP; todas as demais dependências são internas à própria trilha.

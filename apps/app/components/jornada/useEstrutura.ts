@@ -70,7 +70,7 @@ export function useEstrutura(jornada: JornadaInstance, etapas: JornadaEtapa[], o
     setAdvancing(true);
     setError(null);
     try {
-      await advanceFase(jornada.id, "marketing");
+      await advanceFase(jornada.id, "fornecedores");
       return true;
     } catch (e) {
       setError((e as Error).message);
