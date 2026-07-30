@@ -1,16 +1,16 @@
 # Graph Report - serdono  (2026-07-29)
 
 ## Corpus Check
-- 142 files · ~193,023 words
+- 145 files · ~193,897 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1019 nodes · 1193 edges · 236 communities (57 shown, 179 thin omitted)
+- 1020 nodes · 1196 edges · 243 communities (61 shown, 182 thin omitted)
 - Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 43 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `74418d0d`
+- Built from commit: `6b0679f4`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -250,6 +250,13 @@
 - [[_COMMUNITY_Community 233|Community 233]]
 - [[_COMMUNITY_Community 234|Community 234]]
 - [[_COMMUNITY_Community 235|Community 235]]
+- [[_COMMUNITY_Community 236|Community 236]]
+- [[_COMMUNITY_Community 237|Community 237]]
+- [[_COMMUNITY_Community 238|Community 238]]
+- [[_COMMUNITY_Community 239|Community 239]]
+- [[_COMMUNITY_Community 240|Community 240]]
+- [[_COMMUNITY_Community 241|Community 241]]
+- [[_COMMUNITY_Community 242|Community 242]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `Button()` - 22 edges
@@ -290,11 +297,11 @@
 - **Lógica econômica do funil: diagnóstico grátis como motor de aquisição, workflow pago como motor de conversão** — doc:economic-logic, doc:plan-free, docs_prd_module_diagnostico, docs_prd_module_workflow [EXTRACTED]
 - **Regra de capital sempre em faixas aplicada de forma idêntica no mockup web e mobile via componente de seleção segmentada** — docs_prd_rn_5, mockweb:screen-landing, mockapp:screen-diagnostico, design:component-input [EXTRACTED]
 
-## Communities (236 total, 179 thin omitted)
+## Communities (243 total, 182 thin omitted)
 
 ### Community 0 - "Layout e Landing Page (App)"
-Cohesion: 0.07
-Nodes (28): AppUpdateAlert(), FinalCta(), Footer(), ForWhomSection(), scenarios, Hero(), HomeScreen(), HowItWorks() (+20 more)
+Cohesion: 0.15
+Nodes (10): FinalCta(), Footer(), ForWhomSection(), scenarios, HomeScreen(), HowItWorks(), steps, stats (+2 more)
 
 ### Community 1 - "Dependências Expo/React"
 Cohesion: 0.05
@@ -385,16 +392,16 @@ Cohesion: 0.67
 Nodes (3): Indicadores por etapa do funil (aquisição, ativação, conversão, engajamento, progresso, retenção, confiança, receita adicional), North Star Metric: negócios efetivamente abertos e operando por trimestre, Eventos mínimos a instrumentar (cadastro_criado ... assinatura_cancelada)
 
 ### Community 27 - "Cliente Supabase"
-Cohesion: 0.08
-Nodes (12): AdminDashboardScreen(), DashboardStats, INSIGHTS, AdminModulesScreen(), DIACRITICS_REGEX, AdminUsersScreen(), useAdminModules(), useAdminUsers() (+4 more)
+Cohesion: 0.38
+Nodes (3): AdminModulesScreen(), DIACRITICS_REGEX, useAdminModules()
 
 ### Community 80 - "Community 80"
 Cohesion: 0.05
 Nodes (38): graphify, Ordem de leitura recomendada ao iniciar qualquer tarefa, Regras de trabalho neste projeto, Ser Dono — Instruções do Projeto para o Claude, 0. Papel deste documento no fluxo de trabalho, 10. Itens de Roadmap Técnico (fora do MVP, não bloqueiam), 11. Decisões que ainda precisam de dono (bloqueiam itens específicos, não o início geral do código), 12. Decisões registradas durante a implementação da Home/Landing (retroativas a este PR) (+30 more)
 
 ### Community 81 - "Community 81"
-Cohesion: 0.06
-Nodes (34): ChoiceOption, DIAGNOSTICO_BLOCKS, DiagnosticoBlock, DiagnosticoField, LocationBlock, MultiChoiceBlock, SingleChoiceBlock, Answers (+26 more)
+Cohesion: 0.13
+Nodes (20): calculateFitScore(), CAPITAL_RANGES, clamp(), DiagnosticoParaScore, FitScoreResult, NichoParaScore, overlapScore(), scoreContexto() (+12 more)
 
 ### Community 82 - "Community 82"
 Cohesion: 0.40
@@ -441,8 +448,8 @@ Cohesion: 0.67
 Nodes (3): Bloco funcional: Contas e assinatura, Tabela subscriptions, Tabela users
 
 ### Community 217 - "Community 217"
-Cohesion: 0.11
-Nodes (12): DESCOBERTA_STEPS, FASE_LABEL, FASES, JornadaScreen(), PlanejamentoScreen(), RailFaseData, RailStepData, StepRail() (+4 more)
+Cohesion: 0.22
+Nodes (6): BACKGROUND_PHOTO, EsqueciSenhaScreen(), ENTREPRENEUR_PHOTOS, EntrepreneurPhoto, pickEntrepreneurPhoto(), requestPasswordReset()
 
 ### Community 218 - "Community 218"
 Cohesion: 0.20
@@ -457,64 +464,80 @@ Cohesion: 0.19
 Nodes (7): CompletarCadastroScreen(), PerfilFields(), PerfilFieldsProps, PerfilScreen(), usePerfilForm(), getCurrentSession(), uploadAvatar()
 
 ### Community 221 - "Community 221"
-Cohesion: 0.06
-Nodes (28): BACKGROUND_PHOTO, CadastroScreen(), CAPITAL_LABEL, formatMoney(), OBJETIVO_LABEL, stripMarkdown(), TEMPO_LABEL, BACKGROUND_PHOTO (+20 more)
+Cohesion: 0.08
+Nodes (19): AdminDashboardScreen(), DashboardStats, INSIGHTS, CAPITAL_LABEL, formatMoney(), OBJETIVO_LABEL, stripMarkdown(), TEMPO_LABEL (+11 more)
 
 ### Community 222 - "Community 222"
 Cohesion: 0.16
-Nodes (9): AuthSession, BACKGROUND_PHOTO, destinationFor(), LoginScreen(), signInWithEmail(), signInWithGoogle(), signOut(), updatePassword() (+1 more)
+Nodes (9): AuthSession, BACKGROUND_PHOTO, destinationFor(), LoginScreen(), signInWithEmail(), signInWithGoogle(), updatePassword(), hasModuleAccess() (+1 more)
 
 ### Community 223 - "Community 223"
-Cohesion: 0.26
-Nodes (5): supabase, decodeBase64Url(), getUserRole(), isAnonymousSession(), Database
+Cohesion: 0.21
+Nodes (8): UP_TO_DATE, UpdateStatus, UseAppVersionResult, AppVersionInfo, getAppVersionInfo(), supabase, isAnonymousSession(), Database
 
 ### Community 224 - "Community 224"
 Cohesion: 0.24
 Nodes (8): AdminUserModulesScreen(), createModule(), listModules(), listUserModuleAccess(), ModuleAccessRow, ModuleRow, setModuleAccess(), setModuleAtivo()
 
 ### Community 225 - "Community 225"
-Cohesion: 0.27
-Nodes (6): AssistenteScreen(), Message, askKnowledgeBase(), KnowledgeAnswer, KnowledgeCategory, KnowledgeSource
+Cohesion: 0.24
+Nodes (7): AssistenteScreen(), Message, signOut(), askKnowledgeBase(), KnowledgeAnswer, KnowledgeCategory, KnowledgeSource
 
 ### Community 226 - "Community 226"
 Cohesion: 0.33
 Nodes (8): CandidatoNome, checarDominio(), checarInstagram(), corsHeaders, extractJson(), gerarNomes(), montarCandidato(), slugify()
 
 ### Community 227 - "Community 227"
-Cohesion: 0.43
-Nodes (6): AdminUser, inviteUser(), listUsers(), setUserBlocked(), setUserRole(), UserRole
-
-### Community 228 - "Community 228"
-Cohesion: 0.40
-Nodes (3): ModulosScreen(), listMyModules(), MyModule
+Cohesion: 0.24
+Nodes (8): AdminUser, inviteUser(), listUsers(), setUserBlocked(), setUserRole(), decodeBase64Url(), getUserRole(), UserRole
 
 ### Community 229 - "Community 229"
-Cohesion: 0.16
-Nodes (21): advanceFase(), CAMPO_PARA_SLUG, chooseLogoFinal(), chooseNomeEmpresa(), generateDeliverables(), generateIdentidadeVisual(), getDeliverables(), getIdentidadeVisual() (+13 more)
+Cohesion: 0.05
+Nodes (58): ESTILO_LABEL, IdentidadeVisualScreen(), IdentidadeVisualScreenProps, DESCOBERTA_STEPS, FASE_LABEL, FASES, JornadaScreen(), NomeEmpresaScreen() (+50 more)
 
 ### Community 230 - "Community 230"
-Cohesion: 0.16
-Nodes (10): NomeEmpresaScreen(), NomeEmpresaScreenProps, useNomeEmpresa(), CandidatoNomeEmpresa, generateNomesEmpresa(), getNomesEmpresa(), MaryAvatar(), MaryAvatarProps (+2 more)
+Cohesion: 0.50
+Nodes (3): MaryAvatarProps, MaryPose, poses
 
 ### Community 231 - "Community 231"
-Cohesion: 0.18
-Nodes (8): useValidacaoIdeia(), Canvas, Persona, PropostaValor, Swot, ValidacaoIdeiaScreen(), Input(), InputProps
+Cohesion: 0.28
+Nodes (4): AdminUsersScreen(), useAdminUsers(), Input(), InputProps
 
 ### Community 232 - "Community 232"
-Cohesion: 0.35
-Nodes (9): ESTILO_LABEL, IdentidadeVisualScreen(), IdentidadeVisualScreenProps, PlanejamentoScreenProps, useIdentidadeVisual(), ValidacaoIdeiaScreenProps, JornadaEtapa, JornadaEtapaRow (+1 more)
+Cohesion: 0.22
+Nodes (4): Answers, BACKGROUND_PHOTO, DiagnosticoScreen(), EMPTY_ANSWERS
 
 ### Community 233 - "Community 233"
 Cohesion: 0.25
 Nodes (7): Contexto, corsHeaders, Estilo, ESTILOS, gerarLogoRascunho(), montarPromptLogo(), Respostas
 
 ### Community 234 - "Community 234"
-Cohesion: 0.40
-Nodes (4): Card(), CardProps, CardVariant, styles
+Cohesion: 0.50
+Nodes (3): CardProps, CardVariant, styles
 
 ### Community 235 - "Community 235"
 Cohesion: 0.40
 Nodes (3): corsHeaders, Estilo, Respostas
+
+### Community 236 - "Community 236"
+Cohesion: 0.24
+Nodes (6): BACKGROUND_PHOTO, consumeRecoveryLink(), RedefinirSenhaScreen(), confirmPasswordRecovery(), EntrepreneurBackground(), EntrepreneurBackgroundProps
+
+### Community 237 - "Community 237"
+Cohesion: 0.20
+Nodes (9): ChoiceOption, DIAGNOSTICO_BLOCKS, DiagnosticoBlock, DiagnosticoField, LocationBlock, MultiChoiceBlock, SingleChoiceBlock, CapitalFaixa (+1 more)
+
+### Community 238 - "Community 238"
+Cohesion: 0.28
+Nodes (6): Hero(), links, NavBar(), options, QuizPreviewCard(), Button()
+
+### Community 239 - "Community 239"
+Cohesion: 0.29
+Nodes (3): BACKGROUND_PHOTO, CadastroScreen(), ensureSession()
+
+### Community 241 - "Community 241"
+Cohesion: 0.33
+Nodes (5): ButtonProps, ButtonSize, ButtonVariant, styles, variantStyles
 
 ## Ambiguous Edges - Review These
 - `Fase 3 — Ecossistema (§12)` → `Fase 4 — Distribuição: white label, crédito/investimentos, app móvel completo`  [AMBIGUOUS]
@@ -523,7 +546,7 @@ Nodes (3): corsHeaders, Estilo, Respostas
 ## Knowledge Gaps
 - **585 isolated node(s):** `supabase`, `projectId`, `path`, `DashboardStats`, `INSIGHTS` (+580 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **179 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **182 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -532,13 +555,13 @@ _Questions this graph is uniquely positioned to answer:_
   _Edge tagged AMBIGUOUS (relation: REFERENCES) - confidence is low._
 - **Why does `Ser Dono — PRD (Product Requirements Document)` connect `Configuração Expo (app.json)` to `Community 80`?**
   _High betweenness centrality (0.011) - this node is a cross-community bridge._
-- **Why does `Logo()` connect `Cliente Supabase` to `Community 224`, `Community 225`, `Layout e Landing Page (App)`, `Community 228`, `Community 81`, `Community 84`, `Community 217`, `Community 220`, `Community 221`, `Community 222`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
-- **Why does `Button()` connect `Layout e Landing Page (App)` to `Community 230`, `Community 231`, `Community 232`, `Community 81`, `Community 217`, `Cliente Supabase`, `Community 220`, `Community 221`, `Community 222`?**
+- **Why does `Button()` connect `Community 238` to `Layout e Landing Page (App)`, `Community 229`, `Community 231`, `Community 232`, `Community 236`, `Community 239`, `Community 240`, `Community 241`, `Community 217`, `Cliente Supabase`, `Community 220`, `Community 221`, `Community 222`?**
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
+- **Why does `supabase` connect `Community 223` to `Community 224`, `Community 225`, `Community 227`, `Community 229`, `Community 232`, `Community 236`, `Community 239`, `Community 220`, `Community 221`, `Community 222`?**
   _High betweenness centrality (0.009) - this node is a cross-community bridge._
 - **What connects `supabase`, `projectId`, `path` to the rest of the system?**
   _585 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Layout e Landing Page (App)` be split into smaller, more focused modules?**
-  _Cohesion score 0.07053140096618357 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.14619883040935672 - nodes in this community are weakly interconnected._
 - **Should `Dependências Expo/React` be split into smaller, more focused modules?**
   _Cohesion score 0.046511627906976744 - nodes in this community are weakly interconnected._

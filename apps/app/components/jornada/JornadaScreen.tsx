@@ -56,8 +56,17 @@ export function JornadaScreen() {
   const [etapas, setEtapas] = useState<JornadaEtapa[]>([]);
   const [maryDismissed, setMaryDismissed] = useState(false);
 
-  async function refreshEtapas(instanceId: string) {
-    setEtapas(await getJornadaEtapas(instanceId));
+  // Recarrega etapas E a própria instância — campos como
+  // `nome_empresa_escolhido`/`logo_path` (SDD-34/35) vivem em
+  // `jornada_instances`, não em `jornada_etapas`. Só recarregar etapas
+  // deixava a UI mostrando dado desatualizado mesmo com o dado já salvo.
+  async function refreshJornada(instanceId: string) {
+    const [novasEtapas, { data: instanceAtualizada, error }] = await Promise.all([
+      getJornadaEtapas(instanceId),
+      supabase.from("jornada_instances").select("*").eq("id", instanceId).single(),
+    ]);
+    setEtapas(novasEtapas);
+    if (!error && instanceAtualizada) setJornada(instanceAtualizada);
   }
 
   useEffect(() => {
@@ -70,7 +79,7 @@ export function JornadaScreen() {
         const { data } = await supabase.from("niches").select("nome").eq("id", instance.niche_id).maybeSingle();
         setNicheName(data?.nome ?? null);
       }
-      if (instance) await refreshEtapas(instance.id);
+      if (instance) await refreshJornada(instance.id);
       setLoading(false);
     })();
   }, []);
@@ -99,7 +108,10 @@ export function JornadaScreen() {
   // total de "16 etapas".
   const TOTAL_FASES = FASES.length + 1;
   const fasesConcluidasAntesDaAtual = 1 + FASES.indexOf(jornada.fase_atual as JornadaFase);
-  const etapasFaseAtual = etapas; // hoje só carregamos a fase atual (validacao_ideia)
+  // `etapas` carrega o histórico de TODAS as fases já visitadas (SDD-36) —
+  // aqui só interessa o subconjunto da fase atual, tanto pro cálculo de
+  // progresso quanto pra passar adiante aos componentes de detalhe.
+  const etapasFaseAtual = etapas.filter((e) => e.template.fase === jornada.fase_atual);
   const fracaoFaseAtual =
     etapasFaseAtual.length > 0 ? etapasFaseAtual.filter((e) => e.status === "concluida").length / etapasFaseAtual.length : 0;
   const progresso = Math.round(((fasesConcluidasAntesDaAtual + fracaoFaseAtual) / TOTAL_FASES) * 100);
@@ -132,9 +144,9 @@ export function JornadaScreen() {
 
   const detail =
     jornada.fase_atual === "validacao_ideia" ? (
-      <ValidacaoIdeiaScreen jornada={jornada} etapas={etapas} onEtapasChanged={() => refreshEtapas(jornada.id)} />
+      <ValidacaoIdeiaScreen jornada={jornada} etapas={etapasFaseAtual} onEtapasChanged={() => refreshJornada(jornada.id)} />
     ) : jornada.fase_atual === "planejamento" ? (
-      <PlanejamentoScreen jornada={jornada} etapas={etapas} onEtapasChanged={() => refreshEtapas(jornada.id)} />
+      <PlanejamentoScreen jornada={jornada} etapas={etapasFaseAtual} onEtapasChanged={() => refreshJornada(jornada.id)} />
     ) : (
       <Card variant="default" padding={6}>
         <Text style={{ ...type.body, color: color.text.secondary }}>A próxima etapa chega em breve.</Text>

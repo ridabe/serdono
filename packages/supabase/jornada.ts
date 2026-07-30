@@ -48,23 +48,47 @@ export async function startJornada(userId: string, nicheId: string): Promise<Jor
     .single();
   if (error) throw error;
 
+  await seedEtapasForFase(instance.id, instance.fase_atual as JornadaFase);
+
+  return instance;
+}
+
+/**
+ * Semeia as `jornada_etapas` de uma fase para a instância, se ainda não
+ * existirem (idempotente — chamada tanto na criação da instância quanto em
+ * todo avanço de fase, SDD-36). Sem isso, `advanceFase` só trocava
+ * `fase_atual` e a fase nova ficava sem nenhuma etapa própria.
+ */
+async function seedEtapasForFase(instanceId: string, fase: JornadaFase): Promise<void> {
   const { data: templates, error: templatesError } = await supabase
     .from("jornada_etapa_templates")
     .select("*")
-    .eq("fase", instance.fase_atual);
+    .eq("fase", fase);
   if (templatesError) throw templatesError;
+  if (!templates || templates.length === 0) return;
 
-  const rows = (templates ?? []).map((t) => ({
-    jornada_instance_id: instance.id,
-    etapa_template_id: t.id,
-    status: initialStatus(t),
-  }));
+  const { data: existentes, error: existentesError } = await supabase
+    .from("jornada_etapas")
+    .select("etapa_template_id")
+    .eq("jornada_instance_id", instanceId)
+    .in(
+      "etapa_template_id",
+      templates.map((t) => t.id)
+    );
+  if (existentesError) throw existentesError;
+  const jaExistem = new Set((existentes ?? []).map((e) => e.etapa_template_id));
+
+  const rows = templates
+    .filter((t) => !jaExistem.has(t.id))
+    .map((t) => ({
+      jornada_instance_id: instanceId,
+      etapa_template_id: t.id,
+      status: initialStatus(t),
+    }));
   if (rows.length > 0) {
     const { error: seedError } = await supabase.from("jornada_etapas").insert(rows);
     if (seedError) throw seedError;
   }
-
-  return instance;
 }
 
 function initialStatus(template: JornadaEtapaTemplate): JornadaEtapaStatus {
@@ -185,6 +209,7 @@ export async function generateDeliverables(instanceId: string): Promise<JornadaD
 export async function advanceFase(instanceId: string, fase: JornadaFase): Promise<void> {
   const { error } = await supabase.from("jornada_instances").update({ fase_atual: fase }).eq("id", instanceId);
   if (error) throw error;
+  await seedEtapasForFase(instanceId, fase);
 }
 
 // ---- Fase 3 — Planejamento: Nome da Empresa (SDD-34) ----

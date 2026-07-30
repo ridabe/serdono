@@ -102,10 +102,24 @@ async function checarDominio(slug: string, tld: "com.br" | "com"): Promise<boole
       ? `https://rdap.registro.br/domain/${slug}.com.br`
       : `https://rdap.verisign.com/com/v1/domain/${slug}.com`;
   try {
-    const res = await fetch(url, { signal: AbortSignal.timeout(5000) });
+    const res = await fetch(url, {
+      signal: AbortSignal.timeout(6000),
+      headers: { "user-agent": "Mozilla/5.0 (compatible; SerDonoBot/1.0)", accept: "application/rdap+json" },
+    });
     if (res.status === 404) return true; // não registrado -> disponível
-    if (res.status === 200) return false; // registrado -> indisponível
-    return null;
+    if (res.status !== 200) return null;
+    // Um 200 só significa "registrado" se o corpo for mesmo um objeto RDAP de
+    // domínio — provedores de RDAP às vezes devolvem 200 com página de erro
+    // genérica pra egress de nuvem (bloqueio silencioso); nesse caso não dá
+    // pra confiar no resultado, então cai em "não verificado" em vez de
+    // inventar "indisponível".
+    try {
+      const body = await res.json();
+      if (body?.objectClassName === "domain" && typeof body?.ldhName === "string") return false;
+      return null;
+    } catch {
+      return null;
+    }
   } catch {
     return null;
   }

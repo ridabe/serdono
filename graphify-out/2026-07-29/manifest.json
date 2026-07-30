@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1785369438.6843739,
-    "ast_hash": "684832fcc7b38222db19466a56de455e",
+    "mtime": 1785371862.1591916,
+    "ast_hash": "3c1cb83ba0560465eb4b23ec31820584",
     "semantic_hash": ""
   },
   ".mcp.json": {
@@ -215,8 +215,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/types.ts": {
-    "mtime": 1785369507.192093,
-    "ast_hash": "2aea9144e0cbbb9b5113c33679e5f133",
+    "mtime": 1785372086.6024334,
+    "ast_hash": "7ae774eb3b5be7ab2a3b1a0d411abf61",
     "semantic_hash": ""
   },
   "packages/ui/components/Button.tsx": {
@@ -300,13 +300,13 @@
     "semantic_hash": ""
   },
   "docs/PRD.md": {
-    "mtime": 1785369178.3045382,
-    "ast_hash": "af5821c93362813aeceb85b47d98ddb4",
+    "mtime": 1785371901.221509,
+    "ast_hash": "fc18068b87984c0b0e0ff9f720d6de3c",
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1785369206.569841,
-    "ast_hash": "f85eed265ce56014eaa5d106b4658d47",
+    "mtime": 1785371938.1302295,
+    "ast_hash": "7298115a449dbfd9a96a2ea5ad99e786",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
@@ -645,8 +645,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/jornada/JornadaScreen.tsx": {
-    "mtime": 1785369148.79119,
-    "ast_hash": "950399c85865c9da0dbe31fca360f9bf",
+    "mtime": 1785370224.5929646,
+    "ast_hash": "d7664e31fc69b8dbe71b7d72483f9831",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/ValidacaoIdeiaScreen.tsx": {
@@ -665,8 +665,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/jornada.ts": {
-    "mtime": 1785369017.4075968,
-    "ast_hash": "eab69d0bce487e36d65090aea152ddba",
+    "mtime": 1785370070.5687761,
+    "ast_hash": "655b6f3151cce2a8a1b5a7b2c6932143",
     "semantic_hash": ""
   },
   "supabase/functions/jornada-gerar-documentos/index.ts": {
@@ -685,8 +685,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/jornada/NomeEmpresaScreen.tsx": {
-    "mtime": 1785369108.3068972,
-    "ast_hash": "f5d32c6e60dc2294e0aa3f3f7aae1be6",
+    "mtime": 1785370151.8504171,
+    "ast_hash": "a6a8bb48cf3de5c0a67d30ccbf6519b7",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/StepRail.tsx": {
@@ -695,8 +695,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/jornada/useNomeEmpresa.ts": {
-    "mtime": 1785369085.336031,
-    "ast_hash": "f18ac63a05ddf9882afe5b2daa57432d",
+    "mtime": 1785370135.350264,
+    "ast_hash": "7738ea27bd1de5bb575bcf7c8a83a6d3",
     "semantic_hash": ""
   },
   "packages/ui/components/MaryAvatar.tsx": {
@@ -737,6 +737,41 @@
   "img/mary/mary-positivo.png": {
     "mtime": 1785368666.5839999,
     "ast_hash": "296cc88809a6479b36af50760229e39e",
+    "semantic_hash": ""
+  },
+  "apps/app/components/jornada/IdentidadeVisualScreen.tsx": {
+    "mtime": 1785370197.7765267,
+    "ast_hash": "7ebd2f6c69c6136c3ecbbbe686dcae27",
+    "semantic_hash": ""
+  },
+  "apps/app/components/jornada/PlanejamentoScreen.tsx": {
+    "mtime": 1785370209.5166583,
+    "ast_hash": "f65fdfdee6f7a9762a941c9bd0bffec0",
+    "semantic_hash": ""
+  },
+  "apps/app/components/jornada/useIdentidadeVisual.ts": {
+    "mtime": 1785370170.869784,
+    "ast_hash": "1feaf02a8979ffc36bb995a4acb6a213",
+    "semantic_hash": ""
+  },
+  "supabase/.temp/linked-project.json": {
+    "mtime": 1785372459.4752445,
+    "ast_hash": "0b40e53eb48cdaef30bbaa973a8d3f88",
+    "semantic_hash": ""
+  },
+  "supabase/functions/jornada-gerar-identidade/index.ts": {
+    "mtime": 1785370006.1546812,
+    "ast_hash": "f361965a65171622b475d5ba3577cf1c",
+    "semantic_hash": ""
+  },
+  "supabase/functions/jornada-gerar-logo-final/index.ts": {
+    "mtime": 1785370050.4709618,
+    "ast_hash": "09477f15254882ea694f54955e8fe361",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/202607292500_jornada_planejamento_identidade_visual.sql": {
+    "mtime": 1785369964.698747,
+    "ast_hash": "562b980d33b86bd2f5eb9887c3e84c37",
     "semantic_hash": ""
   }
 }

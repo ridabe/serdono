@@ -86,7 +86,7 @@ export function IdentidadeVisualScreen({ jornada, etapas, onEtapasChanged }: Ide
         {v.error ? <Text style={{ ...type.caption, color: color.state.danger, marginBottom: space[3] }}>{v.error}</Text> : null}
 
         <Button
-          label={v.generating ? "Gerando..." : v.candidatos.length > 0 ? "Gerar novamente" : "Gerar identidade com IA"}
+          label={v.generating ? "Gerando..." : v.candidatos.length > 0 ? "Gerar novamente" : "Gerar identidade"}
           variant="primary"
           fullWidth
           loading={v.generating}

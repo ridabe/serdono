@@ -89,7 +89,7 @@ export function ValidacaoIdeiaScreen({ jornada, etapas, onEtapasChanged }: Valid
         {v.error ? <Text style={{ ...type.caption, color: color.state.danger, marginBottom: space[3] }}>{v.error}</Text> : null}
 
         <Button
-          label={v.generating ? "Gerando..." : v.deliverables.length > 0 ? "Gerar novamente" : "Gerar documentos com IA"}
+          label={v.generating ? "Gerando..." : v.deliverables.length > 0 ? "Gerar novamente" : "Gerar documentos"}
           variant="primary"
           fullWidth
           loading={v.generating}

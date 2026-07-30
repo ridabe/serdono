@@ -49,7 +49,7 @@ export function NomeEmpresaScreen({ jornada, onEtapasChanged }: NomeEmpresaScree
         {v.error ? <Text style={{ ...type.caption, color: color.state.danger, marginBottom: space[3] }}>{v.error}</Text> : null}
 
         <Button
-          label={v.generating ? "Gerando..." : v.candidatos.length > 0 ? "Gerar novamente" : "Gerar nomes com IA"}
+          label={v.generating ? "Gerando..." : v.candidatos.length > 0 ? "Gerar novamente" : "Gerar nomes"}
           variant="primary"
           fullWidth
           loading={v.generating}
