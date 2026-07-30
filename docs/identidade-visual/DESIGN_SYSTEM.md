@@ -447,6 +447,8 @@ Movimento não é escrito à mão em cada tela — vem de dois componentes de `p
 - **Toda pose nova** entra primeiro aqui e em `img/README.md`, nunca só dentro do componente (mesma lógica de DS-10).
 - Nunca usar a Mary para comunicar erro grave ou aviso sensível (jurídico/fiscal/sanitário, RN-21 do PRD) — a personagem é tom de acompanhamento, não de alerta.
 
+**DS-17 (Voz do produto — nunca nomear "a IA" no texto que o empreendedor lê, registrada em 30/07/2026):** por trás de boa parte do produto tem IA/RAG fazendo o trabalho pesado (gerar documento, montar roteiro, buscar por similaridade), mas isso é implementação, não personagem. Nenhum texto de tela fala na terceira pessoa sobre "a IA" ("a IA sugere...", "a IA vai gerar...", "gerado por IA", botão "com IA") — quem fala é a Mary, em primeira pessoa ("eu gero...", "eu te aponto...", "monto um roteiro..."), porque o empreendedor precisa sentir que tem uma sócia acompanhando, não um sistema processando. Vale pra label de botão, texto de tela e mensagem de erro — não vale pra Termos de Uso/Política de Privacidade (`termos.tsx`/`privacidade.tsx`), onde citar "inteligência artificial"/fornecedor do modelo é obrigação de transparência (LGPD), não voz de personagem.
+
 ---
 
 ## 13. Telas de referência (mockups)

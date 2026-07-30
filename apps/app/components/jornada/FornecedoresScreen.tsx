@@ -102,12 +102,12 @@ export function FornecedoresScreen({ jornada, etapas, onEtapasChanged }: Fornece
       <Card variant="outline" padding={5}>
         <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[1] }}>Roteiro de busca</Text>
         <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[3] }}>
-          A IA sugere quais categorias de fornecedor o seu tipo de negócio costuma precisar, e como avaliar cada uma —
-          ela não inventa nome de empresa, isso você pesquisa e confirma.
+          Eu te aponto quais categorias de fornecedor o seu tipo de negócio costuma precisar, e o que avaliar em cada
+          uma — não invento nome de empresa nenhuma, isso você pesquisa e confirma.
         </Text>
 
         {!v.loading && !v.roteiro ? (
-          <Button label="Gerar roteiro de busca com IA" variant="primary" loading={v.generatingRoteiro} onPress={v.gerarRoteiro} />
+          <Button label="Montar roteiro de busca" variant="primary" loading={v.generatingRoteiro} onPress={v.gerarRoteiro} />
         ) : null}
 
         {v.roteiro ? (
@@ -129,7 +129,7 @@ export function FornecedoresScreen({ jornada, etapas, onEtapasChanged }: Fornece
               </Card>
             ))}
             <Button
-              label="Gerar roteiro novamente"
+              label="Montar roteiro novamente"
               variant="ghost"
               size="sm"
               loading={v.generatingRoteiro}

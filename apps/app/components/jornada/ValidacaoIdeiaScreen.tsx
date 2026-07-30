@@ -65,7 +65,7 @@ export function ValidacaoIdeiaScreen({ jornada, etapas, onEtapasChanged }: Valid
       <View>
         <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>Fase 2 — Validação da Ideia</Text>
         <Text style={{ ...type.body, color: color.text.secondary }}>
-          Preencha os campos abaixo e deixe a IA gerar os documentos que ajudam a validar sua ideia.
+          Preencha os campos abaixo e eu gero os documentos que ajudam a validar sua ideia.
         </Text>
       </View>
 
