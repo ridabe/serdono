@@ -387,6 +387,19 @@ O **Painel Admin** ganhou o mecanismo genérico que hospeda os módulos (e os de
 
 **Primeiro módulo de conteúdo (mesma data):** a **Jornada Empreendedora** (ver §5.4, §9, SPEC.md SDD-31) começou a ser construída — ainda sob liberação manual do admin (inclusive pra testes, mesmo sem assinatura), até existir a feature de liberação por plano. É o módulo mais importante do produto: o workflow guiado da escolha do nicho até o negócio aberto e funcionando. Construído incrementalmente, uma etapa de cada vez — a primeira etapa (confirmação/escolha do nicho pós-login) está pronta; a "Fase: Validação da Ideia" é a próxima a ser desenhada.
 
+### 12.2 Módulos anunciados na landing (decisão do dono do produto, 29/07/2026)
+
+A home passou a apresentar o catálogo de módulos do produto, para que o visitante entenda que o Ser Dono é mais que um passo a passo. São quatro, e **o rótulo de status na tela é obrigatório** — anunciar módulo não construído como pronto contraria o princípio de honestidade do §4 e a RN-2:
+
+| Módulo | Status hoje | Onde vive |
+|---|---|---|
+| **Jornada Empreendedora** | Disponível | §9, SPEC.md SDD-31 a SDD-36 |
+| **Materiais sobre empreendedorismo** | Disponível | Base de 30 artigos curados com fonte/data + assistente sobre ela (SPEC.md SDD-21) |
+| **Tutoriais** | Em breve | Passo a passo prático das tarefas operacionais que travam o empreendedor (emitir nota, abrir conta PJ, usar cada ferramenta) — sem PRD próprio ainda |
+| **Calculadora de Precificação** | Em breve | Ensinar a formar preço: custo, margem e resultado. Tem sobreposição conceitual com a fase "Financeiro" da Jornada (§9) — **decidir na priorização se é módulo separado ou etapa daquela fase**, para não construir a mesma conta em dois lugares |
+
+**Regra:** enquanto um módulo estiver "em breve", ele aparece na landing com o rótulo visível e **sem link** para uma tela que não existe. Nenhum módulo sai de "em breve" na landing antes de estar utilizável em produção.
+
 ---
 
 ## 13. Regras de Negócio Transversais (numeração consolidada)

@@ -131,6 +131,14 @@ export const motion = {
   fast: 120,
   base: 200,
   slow: 320,
+  /** Deslocamento vertical da animação de entrada (`Reveal`) — DS-16. */
+  revealDistance: 16,
+  /** Atraso entre itens de uma mesma lista revelada em sequência — DS-16. */
+  revealStagger: 70,
+  /** Quanto um card sobe no hover (web) — DS-16. */
+  hoverLift: 4,
+  /** Escala aplicada no press de um elemento interativo — DS-16. */
+  pressScale: 0.97,
 } as const;
 
 export const tokens = { color, space, radius, elevation, type, breakpoint, content, layout, icon, a11y, motion };

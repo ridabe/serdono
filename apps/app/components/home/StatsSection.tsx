@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View } from "react-native";
-import { color, content, space, type } from "@serdono/ui";
+import { Reveal, color, content, motion, space, type } from "@serdono/ui";
 
 // RN-20 (PRD §13): todo dado de mercado citado tem fonte e data visíveis.
 const stats = [
@@ -22,14 +22,16 @@ export function StatsSection({ compact }: { compact: boolean }) {
           gap: compact ? space[8] : space[16],
         }}
       >
-        {stats.map((s) => (
-          <View key={s.value} style={{ alignItems: "center" }}>
+        {stats.map((s, i) => (
+          <Reveal key={s.value} delay={motion.revealStagger * i} style={{ alignItems: "center" }}>
             <Text style={{ ...type.display, fontSize: 32, color: color.bg.brand }}>{s.value}</Text>
-            <Text style={{ ...type.caption, textAlign: "center", marginTop: space[1] }}>{s.label}</Text>
-          </View>
+            <Text style={{ ...type.caption, color: color.text.muted, textAlign: "center", marginTop: space[1] }}>
+              {s.label}
+            </Text>
+          </Reveal>
         ))}
       </View>
-      <Text style={{ ...type.caption, textAlign: "center", marginTop: space[8] }}>
+      <Text style={{ ...type.caption, color: color.text.muted, textAlign: "center", marginTop: space[8] }}>
         Fonte: Sebrae — Mapa de Empresas e Boletim de Sobrevivência, 2026
       </Text>
     </View>

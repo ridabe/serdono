@@ -394,6 +394,22 @@ Telas de fundo branco/canvas puro no funil de diagnóstico e cadastro ganham uma
 
 **DS-9:** nenhuma animação acima de 400ms no fluxo principal — a persona primária já tem baixa tolerância a fricção (PRD §2.1); movimento deve confirmar uma ação, nunca atrasar a percepção de resposta (reforça RNF-4 da SPEC/PRD: resposta percebida em até 4s).
 
+### 11.1 Primitivas de movimento (DS-16, registradas em 29/07/2026)
+
+Movimento não é escrito à mão em cada tela — vem de dois componentes de `packages/ui`, pelo mesmo motivo do DS-7 para cor: um lugar só para mudar o comportamento do produto inteiro.
+
+| Primitiva | O que faz | Tokens |
+|---|---|---|
+| `Reveal` | Entrada de conteúdo: *fade* + subida curta. `delay` permite revelar uma lista em sequência | `motion.slow`, `motion.revealDistance`, `motion.revealStagger` |
+| `HoverLift` | Card sobe no hover (web) e afunda no press | `motion.hoverLift`, `motion.pressScale`, `motion.base`, `motion.fast` |
+| `Button` | Já traz o mesmo hover/press embutido — nenhum CTA precisa animar por conta própria | idem |
+
+**DS-16:** todo movimento do produto usa essas primitivas e os tokens de `motion`, nunca duração ou deslocamento escrito solto no componente. Três regras que vêm junto:
+
+1. **A informação nunca depende do movimento.** `Reveal` respeita a preferência de *movimento reduzido* do sistema — com ela ligada, o conteúdo aparece direto, sem animação. Quem não vê a animação não perde nada.
+2. **Movimento confirma, não decora.** Hover e press existem para dizer "isto é clicável / seu toque foi registrado". Nada anima sozinho em laço no fluxo principal.
+3. **Driver nativo só fora da web.** `useNativeDriver` fica `Platform.OS !== "web"` — o `react-native-web` não o suporta. É a mesma divergência plataforma-a-plataforma já registrada no DS-6 para sombra.
+
 ---
 
 ## 12. Governança de assets

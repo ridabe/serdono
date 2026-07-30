@@ -1,11 +1,50 @@
 import React from "react";
 import { useRouter } from "expo-router";
 import { Pressable, ScrollView, Text, View } from "react-native";
-import { Button, Logo, color, space, type } from "@serdono/ui";
+import { Button, Logo, color, radius, space, type } from "@serdono/ui";
+import type { HomeSection } from "./HomeScreen";
 
-const links = ["Como funciona", "Planos", "Para quem é", "Ajuda"];
+// Só destinos que existem de verdade. "Planos" saiu do menu: plano pago ainda
+// não existe no produto (PRD §12.1 / §17 — gateway é decisão pendente), e
+// "Ajuda" não tinha página. Link que não leva a nada é defeito, não conteúdo.
+const links: { label: string; section: HomeSection }[] = [
+  { label: "A Mary", section: "mentor" },
+  { label: "Como funciona", section: "jornada" },
+  { label: "Módulos", section: "modulos" },
+  { label: "Para quem é", section: "paraQuem" },
+];
 
-export function NavBar({ compact }: { compact: boolean }) {
+function NavLink({ label, onPress }: { label: string; onPress: () => void }) {
+  return (
+    <Pressable onPress={onPress} accessibilityRole="link" accessibilityLabel={label} style={{ minHeight: 32 }}>
+      {({ hovered }: any) => (
+        <View style={{ alignItems: "center", gap: space[1] }}>
+          <Text
+            style={{
+              fontFamily: type.body.fontFamily,
+              fontSize: 14,
+              fontWeight: "500",
+              color: hovered ? color.bg.brand : color.text.secondary,
+            }}
+          >
+            {label}
+          </Text>
+          {/* Sublinhado dourado que aparece no hover — DS-16. */}
+          <View
+            style={{
+              height: 2,
+              width: hovered ? "100%" : 0,
+              borderRadius: radius.full,
+              backgroundColor: color.action.primary,
+            }}
+          />
+        </View>
+      )}
+    </Pressable>
+  );
+}
+
+export function NavBar({ compact, onNavigate }: { compact: boolean; onNavigate: (section: HomeSection) => void }) {
   const router = useRouter();
   return (
     <View
@@ -24,13 +63,9 @@ export function NavBar({ compact }: { compact: boolean }) {
 
       {!compact ? (
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ flex: 1, marginHorizontal: space[8] }}>
-          <View style={{ flexDirection: "row", gap: space[6] }}>
-            {links.map((label) => (
-              <Pressable key={label}>
-                <Text style={{ fontFamily: type.body.fontFamily, fontSize: 14, fontWeight: "500", color: color.text.secondary }}>
-                  {label}
-                </Text>
-              </Pressable>
+          <View style={{ flexDirection: "row", gap: space[6], alignItems: "center" }}>
+            {links.map((link) => (
+              <NavLink key={link.label} label={link.label} onPress={() => onNavigate(link.section)} />
             ))}
           </View>
         </ScrollView>
