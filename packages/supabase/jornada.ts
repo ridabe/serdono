@@ -1,5 +1,5 @@
 import { supabase } from "./client";
-import type { Tables } from "./types";
+import type { Json, Tables } from "./types";
 
 export type JornadaInstance = Tables<"jornada_instances">;
 export type JornadaDeliverable = Tables<"jornada_deliverables">;
@@ -342,4 +342,36 @@ export async function chooseRegimeFormalizacao(instanceId: string, regime: Regim
   if (error) throw error;
   await seedEtapasForFase(instanceId, "formalizacao", regime);
   await markEtapaDone(instanceId, SLUG_FORMALIZACAO_REGIME);
+}
+
+// ---- Fase Financeiro — Planejamento Financeiro (SDD-39) ----
+
+const SLUG_FINANCEIRO_PLANEJAMENTO = "financeiro_planejamento";
+
+/** Mesmo formato de `FinanceiroInputs` em `packages/core/financeiro.ts` — duplicado aqui de propósito: `packages/supabase` não depende de `packages/core` (só `apps/app` depende dos dois). */
+export interface FinanceiroDados {
+  capitalDisponivel: number;
+  investimentoInicial: number;
+  custosFixosMensais: number;
+  receitaMensalEsperada: number;
+  margemContribuicaoPct: number;
+  mesesCapitalGiro: number;
+  mesesReserva: number;
+}
+
+/** Salva os valores que o usuário ajustou na calculadora — não marca a etapa como concluída (isso é ação separada, `markEtapaDone`). */
+export async function saveFinanceiroDados(instanceId: string, dados: FinanceiroDados): Promise<void> {
+  const { data: template, error: templateError } = await supabase
+    .from("jornada_etapa_templates")
+    .select("id")
+    .eq("slug", SLUG_FINANCEIRO_PLANEJAMENTO)
+    .single();
+  if (templateError) throw templateError;
+
+  const { error } = await supabase
+    .from("jornada_etapas")
+    .update({ dados_usuario: dados as unknown as Json })
+    .eq("jornada_instance_id", instanceId)
+    .eq("etapa_template_id", template.id);
+  if (error) throw error;
 }

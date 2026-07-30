@@ -8,7 +8,7 @@ export interface InputProps {
   onChangeText: (v: string) => void;
   placeholder?: string;
   secureTextEntry?: boolean;
-  keyboardType?: "default" | "email-address";
+  keyboardType?: "default" | "email-address" | "numeric" | "decimal-pad";
   autoCapitalize?: "none" | "sentences";
 }
 

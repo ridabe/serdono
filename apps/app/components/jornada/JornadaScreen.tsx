@@ -14,17 +14,22 @@ import {
   type JornadaInstance,
 } from "@serdono/supabase";
 import { EscolherNichoScreen } from "./EscolherNichoScreen";
+import { FinanceiroScreen } from "./FinanceiroScreen";
 import { FormalizacaoScreen } from "./FormalizacaoScreen";
 import { PlanejamentoScreen } from "./PlanejamentoScreen";
 import { StepRail, type RailFaseData } from "./StepRail";
 import { ValidacaoIdeiaScreen } from "./ValidacaoIdeiaScreen";
 
+// Ordem reorganizada em 30/07/2026 (decisão do dono do produto, SDD-39):
+// Financeiro passou a vir logo após Formalização, antes de Marketing — faz
+// mais sentido conhecer a própria saúde financeira antes de gastar com
+// divulgação.
 const FASES: JornadaFase[] = [
   "validacao_ideia",
   "planejamento",
   "formalizacao",
-  "marketing",
   "financeiro",
+  "marketing",
   "clientes",
   "retencao",
   "escala",
@@ -159,6 +164,8 @@ export function JornadaScreen() {
       <PlanejamentoScreen jornada={jornada} etapas={etapasFaseAtual} onEtapasChanged={() => refreshJornada(jornada.id)} />
     ) : jornada.fase_atual === "formalizacao" ? (
       <FormalizacaoScreen jornada={jornada} etapas={etapasFaseAtual} onEtapasChanged={() => refreshJornada(jornada.id)} />
+    ) : jornada.fase_atual === "financeiro" ? (
+      <FinanceiroScreen jornada={jornada} etapas={etapasFaseAtual} onEtapasChanged={() => refreshJornada(jornada.id)} />
     ) : (
       <Card variant="default" padding={6}>
         <Text style={{ ...type.body, color: color.text.secondary }}>A próxima etapa chega em breve.</Text>

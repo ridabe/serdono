@@ -1,16 +1,16 @@
-# Graph Report - serdono  (2026-07-30)
+# Graph Report - serdono  (2026-07-29)
 
 ## Corpus Check
-- 157 files · ~206,612 words
+- 145 files · ~193,897 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1078 nodes · 1344 edges · 251 communities (72 shown, 179 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 43 edges (avg confidence: 0.5)
+- 1020 nodes · 1196 edges · 243 communities (61 shown, 182 thin omitted)
+- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 43 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `fd0fa929`
+- Built from commit: `6b0679f4`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -257,26 +257,18 @@
 - [[_COMMUNITY_Community 240|Community 240]]
 - [[_COMMUNITY_Community 241|Community 241]]
 - [[_COMMUNITY_Community 242|Community 242]]
-- [[_COMMUNITY_Community 243|Community 243]]
-- [[_COMMUNITY_Community 244|Community 244]]
-- [[_COMMUNITY_Community 245|Community 245]]
-- [[_COMMUNITY_Community 246|Community 246]]
-- [[_COMMUNITY_Community 247|Community 247]]
-- [[_COMMUNITY_Community 248|Community 248]]
-- [[_COMMUNITY_Community 249|Community 249]]
-- [[_COMMUNITY_Community 250|Community 250]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `Button()` - 24 edges
-2. `supabase` - 21 edges
+1. `Button()` - 22 edges
+2. `supabase` - 20 edges
 3. `Logo()` - 20 edges
-4. `JornadaInstance` - 19 edges
-5. `Ser Dono — PRD (Product Requirements Document)` - 19 edges
-6. `JornadaEtapa` - 18 edges
-7. `Ser Dono — Design System` - 16 edges
-8. `Card()` - 14 edges
-9. `Ser Dono — SPEC (Especificação Técnica / SDD)` - 14 edges
-10. `compilerOptions` - 12 edges
+4. `Ser Dono — PRD (Product Requirements Document)` - 19 edges
+5. `Ser Dono — Design System` - 16 edges
+6. `Ser Dono — SPEC (Especificação Técnica / SDD)` - 14 edges
+7. `JornadaInstance` - 13 edges
+8. `compilerOptions` - 12 edges
+9. `Card()` - 12 edges
+10. `JornadaEtapa` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Fase 4 — Distribuição: white label, crédito/investimentos, app móvel completo` --REFERENCES--> `Fase 3 — Ecossistema (§12)`  [AMBIGUOUS]
@@ -305,23 +297,23 @@
 - **Lógica econômica do funil: diagnóstico grátis como motor de aquisição, workflow pago como motor de conversão** — doc:economic-logic, doc:plan-free, docs_prd_module_diagnostico, docs_prd_module_workflow [EXTRACTED]
 - **Regra de capital sempre em faixas aplicada de forma idêntica no mockup web e mobile via componente de seleção segmentada** — docs_prd_rn_5, mockweb:screen-landing, mockapp:screen-diagnostico, design:component-input [EXTRACTED]
 
-## Communities (251 total, 179 thin omitted)
+## Communities (243 total, 182 thin omitted)
 
 ### Community 0 - "Layout e Landing Page (App)"
-Cohesion: 0.05
-Nodes (39): AdminUsersScreen(), useAdminUsers(), AppUpdateAlert(), FinalCta(), Footer(), ForWhomSection(), scenarios, Hero() (+31 more)
+Cohesion: 0.15
+Nodes (10): FinalCta(), Footer(), ForWhomSection(), scenarios, HomeScreen(), HowItWorks(), steps, stats (+2 more)
 
 ### Community 1 - "Dependências Expo/React"
-Cohesion: 0.04
-Nodes (44): dependencies, dotenv, expo, expo-constants, expo-font, @expo-google-fonts/inter, @expo-google-fonts/sora, expo-image-manipulator (+36 more)
+Cohesion: 0.05
+Nodes (42): dependencies, dotenv, expo, expo-constants, expo-font, @expo-google-fonts/inter, @expo-google-fonts/sora, expo-image-manipulator (+34 more)
 
 ### Community 2 - "Módulo Match de Nichos e Paywall"
 Cohesion: 0.12
 Nodes (17): Módulo pós-abertura: Assistente Financeiro, Módulo pós-abertura: Hub B2B/Fornecedores, Módulo pós-abertura: Assistente de Marketing, Plano Essencial — 1 nicho destravado, Plano Free — R$0, diagnóstico + prévia 3 nichos, Plano Multi — até 3 nichos, ≈2x Essencial, Plano Operação — módulos de marketing/financeiro/B2B, ≈3x Essencial, Risco: público de baixa disposição a pagar (MEI) (+9 more)
 
 ### Community 3 - "Configuração Expo (app.json)"
-Cohesion: 0.18
-Nodes (11): 0. Como usar este documento, 11. Módulos Fase 2 (trilhas D, E, F) — esqueleto, 13. Regras de Negócio Transversais (numeração consolidada), 14. Requisitos Não Funcionais, 15. Métricas a Instrumentar desde o Dia 1, 16. Glossário rápido, 17. Decisões em aberto (bloqueiam início de código), 3. Escopo por Fase (+3 more)
+Cohesion: 0.04
+Nodes (49): 0. Como usar este documento, 10.1 Superfícies do copiloto, 10.2 Guardrails (RN-21, RN-20 já citadas — detalhamento técnico), 10.3 Critérios de aceite, 10. Módulo: Copiloto de IA, 11. Módulos Fase 2 (trilhas D, E, F) — esqueleto, 12.1 Framework de módulos (exceção à RN-2, ver §3) — construído em 29/07/2026, 12. Módulos Fase 3 (Ecossistema pós-abertura) — esqueleto (+41 more)
 
 ### Community 4 - "Workflow, Dossiê e Memória do Negócio"
 Cohesion: 0.22
@@ -393,7 +385,7 @@ Nodes (4): config, { getDefaultConfig }, path, workspaceRoot
 
 ### Community 23 - "Componente Card (UI)"
 Cohesion: 0.05
-Nodes (41): 0. Papel deste documento no fluxo SDD, 10. Acessibilidade, 11.1 Primitivas de movimento (DS-16, registradas em 29/07/2026), 11. Motion (transições), 12. Governança de assets, 13.1 Portal Web — `mockups/portal-web.html`, 13.2 App Mobile — `mockups/app-mobile.html`, 13. Telas de referência (mockups) (+33 more)
+Nodes (40): 0. Papel deste documento no fluxo SDD, 10. Acessibilidade, 11. Motion (transições), 12. Governança de assets, 13.1 Portal Web — `mockups/portal-web.html`, 13.2 App Mobile — `mockups/app-mobile.html`, 13. Telas de referência (mockups), 14. Checklist rápido para qualquer tela nova (+32 more)
 
 ### Community 25 - "Métricas e Instrumentação de Funil"
 Cohesion: 0.67
@@ -408,16 +400,16 @@ Cohesion: 0.05
 Nodes (38): graphify, Ordem de leitura recomendada ao iniciar qualquer tarefa, Regras de trabalho neste projeto, Ser Dono — Instruções do Projeto para o Claude, 0. Papel deste documento no fluxo de trabalho, 10. Itens de Roadmap Técnico (fora do MVP, não bloqueiam), 11. Decisões que ainda precisam de dono (bloqueiam itens específicos, não o início geral do código), 12. Decisões registradas durante a implementação da Home/Landing (retroativas a este PR) (+30 more)
 
 ### Community 81 - "Community 81"
-Cohesion: 0.08
-Nodes (31): ModelKind, calcularPlanejamentoFinanceiro(), CAPITAL_FAIXA_PARA_ESTIMATIVA, estimarCapitalDaFaixa(), FinanceiroInputs, FinanceiroResultado, FluxoCaixaMes, sugerirPlanejamentoFinanceiro() (+23 more)
+Cohesion: 0.13
+Nodes (20): calculateFitScore(), CAPITAL_RANGES, clamp(), DiagnosticoParaScore, FitScoreResult, NichoParaScore, overlapScore(), scoreContexto() (+12 more)
 
 ### Community 82 - "Community 82"
 Cohesion: 0.40
 Nodes (4): projectId, expo, extra, eas
 
 ### Community 84 - "Community 84"
-Cohesion: 0.24
-Nodes (11): buildDocumentHtml(), escapeHtml(), etapaHtml(), exportChecklistPdf(), exportEtapaPdf(), printEtapa(), shareOrDownload(), FormalizacaoScreen() (+3 more)
+Cohesion: 0.27
+Nodes (3): LegalLayout(), LegalLayoutProps, LegalSection
 
 ### Community 85 - "Community 85"
 Cohesion: 0.14
@@ -468,56 +460,52 @@ Cohesion: 0.40
 Nodes (5): corsHeaders, DOC_TIPOS, DocumentosGerados, extractJson(), gerarDocumentos()
 
 ### Community 220 - "Community 220"
-Cohesion: 0.07
-Nodes (16): AdminDashboardScreen(), DashboardStats, INSIGHTS, LegalLayout(), LegalLayoutProps, LegalSection, CompletarCadastroScreen(), PerfilFields() (+8 more)
+Cohesion: 0.19
+Nodes (7): CompletarCadastroScreen(), PerfilFields(), PerfilFieldsProps, PerfilScreen(), usePerfilForm(), getCurrentSession(), uploadAvatar()
 
 ### Community 221 - "Community 221"
-Cohesion: 0.18
-Nodes (12): CAPITAL_LABEL, formatMoney(), OBJETIVO_LABEL, stripMarkdown(), TEMPO_LABEL, BACKGROUND_PHOTO, MatchRow, Perfil (+4 more)
+Cohesion: 0.08
+Nodes (19): AdminDashboardScreen(), DashboardStats, INSIGHTS, CAPITAL_LABEL, formatMoney(), OBJETIVO_LABEL, stripMarkdown(), TEMPO_LABEL (+11 more)
 
 ### Community 222 - "Community 222"
-Cohesion: 0.19
-Nodes (9): AuthSession, BACKGROUND_PHOTO, destinationFor(), LoginScreen(), signInWithEmail(), signInWithGoogle(), signOut(), updatePassword() (+1 more)
+Cohesion: 0.16
+Nodes (9): AuthSession, BACKGROUND_PHOTO, destinationFor(), LoginScreen(), signInWithEmail(), signInWithGoogle(), updatePassword(), hasModuleAccess() (+1 more)
 
 ### Community 223 - "Community 223"
-Cohesion: 0.22
-Nodes (9): UP_TO_DATE, UpdateStatus, UseAppVersionResult, AppVersionInfo, getAppVersionInfo(), supabase, KnowledgeAnswer, KnowledgeCategory (+1 more)
+Cohesion: 0.21
+Nodes (8): UP_TO_DATE, UpdateStatus, UseAppVersionResult, AppVersionInfo, getAppVersionInfo(), supabase, isAnonymousSession(), Database
 
 ### Community 224 - "Community 224"
 Cohesion: 0.24
 Nodes (8): AdminUserModulesScreen(), createModule(), listModules(), listUserModuleAccess(), ModuleAccessRow, ModuleRow, setModuleAccess(), setModuleAtivo()
 
 ### Community 225 - "Community 225"
-Cohesion: 0.38
-Nodes (4): AssistenteScreen(), Message, askKnowledgeBase(), KnowledgeSource
+Cohesion: 0.24
+Nodes (7): AssistenteScreen(), Message, signOut(), askKnowledgeBase(), KnowledgeAnswer, KnowledgeCategory, KnowledgeSource
 
 ### Community 226 - "Community 226"
 Cohesion: 0.33
 Nodes (8): CandidatoNome, checarDominio(), checarInstagram(), corsHeaders, extractJson(), gerarNomes(), montarCandidato(), slugify()
 
 ### Community 227 - "Community 227"
-Cohesion: 0.43
-Nodes (6): AdminUser, inviteUser(), listUsers(), setUserBlocked(), setUserRole(), UserRole
-
-### Community 228 - "Community 228"
-Cohesion: 0.40
-Nodes (3): ModulosScreen(), listMyModules(), MyModule
+Cohesion: 0.24
+Nodes (8): AdminUser, inviteUser(), listUsers(), setUserBlocked(), setUserRole(), decodeBase64Url(), getUserRole(), UserRole
 
 ### Community 229 - "Community 229"
-Cohesion: 0.13
-Nodes (26): advanceFase(), CAMPO_PARA_SLUG, chooseLogoFinal(), chooseNomeEmpresa(), chooseRegimeFormalizacao(), FinanceiroDados, FormalizacaoDocumento, generateDeliverables() (+18 more)
+Cohesion: 0.05
+Nodes (58): ESTILO_LABEL, IdentidadeVisualScreen(), IdentidadeVisualScreenProps, DESCOBERTA_STEPS, FASE_LABEL, FASES, JornadaScreen(), NomeEmpresaScreen() (+50 more)
 
 ### Community 230 - "Community 230"
-Cohesion: 0.27
-Nodes (12): FinanceiroScreenProps, FormalizacaoScreenProps, ESTILO_LABEL, IdentidadeVisualScreen(), IdentidadeVisualScreenProps, PlanejamentoScreenProps, useIdentidadeVisual(), ValidacaoIdeiaScreenProps (+4 more)
+Cohesion: 0.50
+Nodes (3): MaryAvatarProps, MaryPose, poses
 
 ### Community 231 - "Community 231"
-Cohesion: 0.25
-Nodes (4): FinanceiroScreen(), useFinanceiro(), Input(), InputProps
+Cohesion: 0.28
+Nodes (4): AdminUsersScreen(), useAdminUsers(), Input(), InputProps
 
 ### Community 232 - "Community 232"
-Cohesion: 0.12
-Nodes (12): ChoiceOption, DIAGNOSTICO_BLOCKS, DiagnosticoBlock, DiagnosticoField, LocationBlock, MultiChoiceBlock, SingleChoiceBlock, Answers (+4 more)
+Cohesion: 0.22
+Nodes (4): Answers, BACKGROUND_PHOTO, DiagnosticoScreen(), EMPTY_ANSWERS
 
 ### Community 233 - "Community 233"
 Cohesion: 0.25
@@ -536,84 +524,44 @@ Cohesion: 0.24
 Nodes (6): BACKGROUND_PHOTO, consumeRecoveryLink(), RedefinirSenhaScreen(), confirmPasswordRecovery(), EntrepreneurBackground(), EntrepreneurBackgroundProps
 
 ### Community 237 - "Community 237"
-Cohesion: 0.18
-Nodes (5): RailFaseData, RailStepData, StepRail(), StepRailProps, JornadaEtapaStatus
+Cohesion: 0.20
+Nodes (9): ChoiceOption, DIAGNOSTICO_BLOCKS, DiagnosticoBlock, DiagnosticoField, LocationBlock, MultiChoiceBlock, SingleChoiceBlock, CapitalFaixa (+1 more)
 
 ### Community 238 - "Community 238"
-Cohesion: 0.24
-Nodes (4): decodeBase64Url(), getCurrentSession(), getUserRole(), isAnonymousSession()
+Cohesion: 0.28
+Nodes (6): Hero(), links, NavBar(), options, QuizPreviewCard(), Button()
 
 ### Community 239 - "Community 239"
 Cohesion: 0.29
 Nodes (3): BACKGROUND_PHOTO, CadastroScreen(), ensureSession()
 
-### Community 240 - "Community 240"
-Cohesion: 0.18
-Nodes (11): 9.1 Anatomia de uma etapa (aplica-se a toda etapa de toda trilha), 9.2 Fase "Planejamento" — Etapa 1: Nome da Empresa (desenhada em 29/07/2026), 9.2 Trilha A — Validação, 9.3 Fase "Planejamento" — Etapa 2: Identidade Visual (desenhada em 29/07/2026), 9.3 Trilha B — Identidade, 9.4 Fase "Formalização" (desenhada em 30/07/2026), 9.4 Trilha C — Formalização, 9.5 Fase "Financeiro" — Planejamento Financeiro (desenhada em 30/07/2026) (+3 more)
-
 ### Community 241 - "Community 241"
-Cohesion: 0.22
-Nodes (7): DESCOBERTA_STEPS, FASE_LABEL, FASES, JornadaScreen(), PlanejamentoScreen(), getMyJornada(), JornadaFase
-
-### Community 242 - "Community 242"
-Cohesion: 0.28
-Nodes (6): NomeEmpresaScreen(), NomeEmpresaScreenProps, useNomeEmpresa(), CandidatoNomeEmpresa, generateNomesEmpresa(), getNomesEmpresa()
-
-### Community 243 - "Community 243"
-Cohesion: 0.25
-Nodes (6): useValidacaoIdeia(), Canvas, Persona, PropostaValor, Swot, ValidacaoIdeiaScreen()
-
-### Community 244 - "Community 244"
-Cohesion: 0.29
-Nodes (7): 5.1 Identidade e assinatura, 5.2 Diagnóstico, 5.3 Nichos e Fit Score, 5.4 Workflow, 5.5 Copiloto de IA, 5.6 Módulos pós-abertura `[futuro — Fase 3]`, 5. Modelo de Dados (visão lógica)
-
-### Community 245 - "Community 245"
-Cohesion: 0.40
-Nodes (5): 8.1 Fluxo, 8.2 Regras de negócio, 8.3 Módulo "já tenho negócio" `[Fase 3, esqueleto de dados já em 5.6]`, 8.4 Critérios de aceite, 8. Módulo: Match de Nichos e Paywall
-
-### Community 246 - "Community 246"
-Cohesion: 0.50
-Nodes (4): 10.1 Superfícies do copiloto, 10.2 Guardrails (RN-21, RN-20 já citadas — detalhamento técnico), 10.3 Critérios de aceite, 10. Módulo: Copiloto de IA
-
-### Community 247 - "Community 247"
-Cohesion: 0.50
-Nodes (4): 2.1 Persona primária — "Marcos, o decidido indeciso", 2.2 Persona secundária — "Juliana, já tem o CNPJ", 2.3 Persona de calda — "Sr. Aparecido, indicado pelo SEBRAE/prefeitura", 2. Personas
-
-### Community 248 - "Community 248"
-Cohesion: 0.50
-Nodes (4): 7.1 Fluxo de tela, 7.2 Regras de negócio, 7.3 Critérios de aceite, 7. Módulo: Diagnóstico (Fase 0/1 — grátis)
-
-### Community 249 - "Community 249"
-Cohesion: 0.67
-Nodes (3): 12.1 Framework de módulos (exceção à RN-2, ver §3) — construído em 29/07/2026, 12.2 Módulos anunciados na landing (decisão do dono do produto, 29/07/2026), 12. Módulos Fase 3 (Ecossistema pós-abertura) — esqueleto
-
-### Community 250 - "Community 250"
-Cohesion: 0.67
-Nodes (3): 1.1 Objetivo deste documento, 1.2 Fora de escopo deste PRD, 1. Visão do Produto
+Cohesion: 0.33
+Nodes (5): ButtonProps, ButtonSize, ButtonVariant, styles, variantStyles
 
 ## Ambiguous Edges - Review These
 - `Fase 3 — Ecossistema (§12)` → `Fase 4 — Distribuição: white label, crédito/investimentos, app móvel completo`  [AMBIGUOUS]
   Documento de Conceito v0.1.pdf · relation: REFERENCES
 
 ## Knowledge Gaps
-- **601 isolated node(s):** `supabase`, `projectId`, `path`, `DashboardStats`, `INSIGHTS` (+596 more)
+- **585 isolated node(s):** `supabase`, `projectId`, `path`, `DashboardStats`, `INSIGHTS` (+580 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **179 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **182 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **What is the exact relationship between `Fase 3 — Ecossistema (§12)` and `Fase 4 — Distribuição: white label, crédito/investimentos, app móvel completo`?**
   _Edge tagged AMBIGUOUS (relation: REFERENCES) - confidence is low._
-- **Why does `supabase` connect `Community 223` to `Community 224`, `Community 225`, `Community 227`, `Community 229`, `Community 232`, `Community 236`, `Community 238`, `Community 239`, `Community 241`, `Community 81`, `Community 220`, `Community 221`, `Community 222`?**
-  _High betweenness centrality (0.013) - this node is a cross-community bridge._
-- **Why does `Button()` connect `Layout e Landing Page (App)` to `Community 230`, `Community 231`, `Community 232`, `Community 236`, `Community 239`, `Community 241`, `Community 242`, `Community 243`, `Community 84`, `Community 217`, `Cliente Supabase`, `Community 220`, `Community 221`, `Community 222`?**
+- **Why does `Ser Dono — PRD (Product Requirements Document)` connect `Configuração Expo (app.json)` to `Community 80`?**
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+- **Why does `Button()` connect `Community 238` to `Layout e Landing Page (App)`, `Community 229`, `Community 231`, `Community 232`, `Community 236`, `Community 239`, `Community 240`, `Community 241`, `Community 217`, `Cliente Supabase`, `Community 220`, `Community 221`, `Community 222`?**
   _High betweenness centrality (0.010) - this node is a cross-community bridge._
-- **Why does `Ser Dono — Design System` connect `Componente Card (UI)` to `Community 80`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+- **Why does `supabase` connect `Community 223` to `Community 224`, `Community 225`, `Community 227`, `Community 229`, `Community 232`, `Community 236`, `Community 239`, `Community 220`, `Community 221`, `Community 222`?**
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
 - **What connects `supabase`, `projectId`, `path` to the rest of the system?**
-  _601 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _585 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Layout e Landing Page (App)` be split into smaller, more focused modules?**
-  _Cohesion score 0.05432692307692308 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.14619883040935672 - nodes in this community are weakly interconnected._
 - **Should `Dependências Expo/React` be split into smaller, more focused modules?**
-  _Cohesion score 0.044444444444444446 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.046511627906976744 - nodes in this community are weakly interconnected._

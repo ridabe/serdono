@@ -1,6 +1,6 @@
 /**
  * Tipos do schema Supabase — SPEC.md §4.4: gerados a partir do banco real via
- * `mcp__supabase__generate_typescript_types` (equivalente a
+ * `supabase gen types typescript --linked` (equivalente a
  * `supabase gen types typescript --project-id klvmbytlqnvydjsauigy`).
  * Nunca editar à mão — regerar sempre que uma migration alterar o schema.
  */

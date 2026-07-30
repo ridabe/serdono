@@ -351,6 +351,20 @@ Diferente das fases anteriores, o conteúdo de cada etapa **não é gerado por I
 
 Detalhamento técnico (schema da bifurcação, conteúdo completo por etapa, exportação em PDF): ver SPEC.md SDD-38.
 
+### 9.5 Fase "Financeiro" — Planejamento Financeiro (desenhada em 30/07/2026)
+
+**Reordenação (decisão do dono do produto):** esta fase passou a vir logo após Formalização, antes de Marketing — conhecer a própria saúde financeira antes de gastar com divulgação. Ordem atual: Validação da Ideia → Planejamento → Formalização → **Financeiro** → Marketing → Clientes → Retenção → Escala.
+
+**Diferente de todas as fases anteriores, esta não tem nenhuma chamada de IA.** É uma calculadora financeira interativa: o empreendedor informa quanto tem disponível (sugestão de partida vem da faixa de capital já respondida no diagnóstico, Fase 1) e o sistema monta automaticamente 6 blocos — Investimento Inicial, Capital de Giro, Reserva de Emergência, Ponto de Equilíbrio Mensal, Fluxo de Caixa (projeção de 12 meses) e Lucro Esperado Mensal — cada um com a fórmula exibida ao lado e uma explicação em português simples.
+
+**Princípio central: ensinar, não só entregar o número.** Todo input por trás dos 6 blocos é editável (investimento inicial, custos fixos, receita esperada, margem de contribuição, meses de capital de giro, meses de reserva) e o recálculo é 100% local — sem chamada de rede — pra dar resposta instantânea a cada valor testado, exatamente como pedido pelo dono do produto.
+
+**RN-21 aplicada:** aviso fixo de que os números são estimativa de partida e não substituem um contador.
+
+**RN-23 aplicada:** mesmo espírito de Formalização — nada trava, o empreendedor edita e reconclui quantas vezes quiser.
+
+Detalhamento técnico (fórmulas, defaults, fonte dos dados do nicho): ver SPEC.md SDD-39.
+
 ### 9.2 Trilha A — Validação
 Etapas: estudo de mercado local, mapeamento de concorrentes, pesquisa com clientes potenciais, teste de demanda, estudo de viabilidade econômica.
 **RN-18:** A etapa "estudo de viabilidade econômica" é bloqueante para a trilha C (Formalização) — não faz sentido abrir CNPJ sem viabilidade minimamente validada. É a única dependência cross-trilha do MVP; todas as demais dependências são internas à própria trilha.

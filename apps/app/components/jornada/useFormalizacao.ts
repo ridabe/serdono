@@ -66,7 +66,7 @@ export function useFormalizacao(jornada: JornadaInstance, etapas: JornadaEtapa[]
     setAdvancing(true);
     setError(null);
     try {
-      await advanceFase(jornada.id, "marketing");
+      await advanceFase(jornada.id, "financeiro");
       return true;
     } catch (e) {
       setError((e as Error).message);
