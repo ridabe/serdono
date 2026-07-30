@@ -160,39 +160,48 @@ export type Database = {
       }
       jornada_etapa_templates: {
         Row: {
+          aplica_se: string | null
           created_at: string
           depende_de: string[]
           descricao: string | null
           dica: string | null
+          documentos: Json
           fase: string
           id: string
           ordem: number
+          prazo: string | null
           slug: string
           tipo_conclusao: string
           titulo: string
           updated_at: string
         }
         Insert: {
+          aplica_se?: string | null
           created_at?: string
           depende_de?: string[]
           descricao?: string | null
           dica?: string | null
+          documentos?: Json
           fase: string
           id?: string
           ordem: number
+          prazo?: string | null
           slug: string
           tipo_conclusao: string
           titulo: string
           updated_at?: string
         }
         Update: {
+          aplica_se?: string | null
           created_at?: string
           depende_de?: string[]
           descricao?: string | null
           dica?: string | null
+          documentos?: Json
           fase?: string
           id?: string
           ordem?: number
+          prazo?: string | null
           slug?: string
           tipo_conclusao?: string
           titulo?: string
@@ -260,6 +269,7 @@ export type Database = {
           nome_empresa_escolhido: string | null
           nome_negocio: string | null
           publico_alvo: string | null
+          regime_formalizacao: string | null
           slogan_escolhido: string | null
           status: string
           updated_at: string
@@ -276,6 +286,7 @@ export type Database = {
           nome_empresa_escolhido?: string | null
           nome_negocio?: string | null
           publico_alvo?: string | null
+          regime_formalizacao?: string | null
           slogan_escolhido?: string | null
           status?: string
           updated_at?: string
@@ -292,6 +303,7 @@ export type Database = {
           nome_empresa_escolhido?: string | null
           nome_negocio?: string | null
           publico_alvo?: string | null
+          regime_formalizacao?: string | null
           slogan_escolhido?: string | null
           status?: string
           updated_at?: string
