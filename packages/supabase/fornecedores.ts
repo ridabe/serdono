@@ -29,6 +29,8 @@ export interface ParceiroInput {
   contato?: string;
   site?: string;
   niches_aplicaveis?: string[];
+  /** Indicado ao empreendedor na Fase 9 (Produto) pra quem quer sistema próprio, não só planilha. */
+  indicado_desenvolvimento?: boolean;
 }
 
 export async function createParceiro(params: ParceiroInput): Promise<void> {
@@ -59,6 +61,18 @@ export async function getParceirosSugeridos(nicheId: string | null): Promise<For
   if (error) throw error;
   if (!nicheId) return data;
   return data.filter((p) => p.niches_aplicaveis.length === 0 || p.niches_aplicaveis.includes(nicheId));
+}
+
+/** Parceiro(s) indicados pra quem quer sistema próprio (Fase 9 — Produto), independente de nicho. */
+export async function getParceirosDesenvolvimento(): Promise<FornecedorParceiro[]> {
+  const { data, error } = await supabase
+    .from("fornecedores_parceiros")
+    .select("*")
+    .eq("ativo", true)
+    .eq("indicado_desenvolvimento", true)
+    .order("nome");
+  if (error) throw error;
+  return data;
 }
 
 // ---- Lista pessoal do empreendedor ----

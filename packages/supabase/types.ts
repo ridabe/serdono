@@ -122,6 +122,7 @@ export type Database = {
           descricao: string | null
           embedding: string | null
           id: string
+          indicado_desenvolvimento: boolean
           niches_aplicaveis: string[]
           nome: string
           regiao: string | null
@@ -136,6 +137,7 @@ export type Database = {
           descricao?: string | null
           embedding?: string | null
           id?: string
+          indicado_desenvolvimento?: boolean
           niches_aplicaveis?: string[]
           nome: string
           regiao?: string | null
@@ -150,6 +152,7 @@ export type Database = {
           descricao?: string | null
           embedding?: string | null
           id?: string
+          indicado_desenvolvimento?: boolean
           niches_aplicaveis?: string[]
           nome?: string
           regiao?: string | null

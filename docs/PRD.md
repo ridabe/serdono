@@ -392,6 +392,22 @@ Entra logo depois de Estrutura, ainda antes de Marketing — ordem atual: Valida
 
 Detalhamento técnico (schema das duas tabelas novas, Edge Function do roteiro): ver SPEC.md SDD-41.
 
+### 9.8 Fase "Produto" (desenhada em 30/07/2026)
+
+Entra logo depois de Fornecedores, ainda antes de Marketing — ordem atual: ... → Estrutura → Fornecedores → **Produto** → Marketing → Clientes → Retenção → Escala. Só faz sentido divulgar (Marketing) depois de saber o que vai vender e por quanto.
+
+**Não é uma base de dados de produtos do empreendedor** — é uma aula prática + ferramenta, com quatro blocos:
+1. **Orientação de cadastro:** planilha vs. sistema próprio, com recomendação direta (comece pela planilha; migre pra sistema quando o catálogo/operação justificar) — conteúdo curado, igual à Formalização, não gerado por IA nem personalizado por usuário.
+2. **Planilha-modelo pronta pra baixar**, com os campos certos e 2 linhas de exemplo já preenchidas (um produto físico, um serviço).
+3. **Aula de precificação:** explica em linguagem simples (RN-1) os quatro conceitos — custo, despesas variáveis, impostos, margem de lucro — e nomeia o erro mais comum de quem tá começando (calcular imposto/margem em cima do custo em vez do preço de venda).
+4. **Calculadora de precificação:** o empreendedor informa custo, % de despesas variáveis, % de impostos e % de margem desejada, e o sistema calcula o preço de venda na hora — mesmo espírito "ensinar, não só entregar o número" do Planejamento Financeiro (§9.5). Se a soma das três porcentagens passar de 100%, o sistema recusa mostrar um preço (matematicamente impossível) e explica por quê, em vez de mostrar um número quebrado.
+
+**Sugestão de parceiro desenvolvedor:** reaproveita a base de parceiros do admin (§9.7) — se houver algum parceiro marcado como "indicado pra sistema próprio", ele aparece nesta tela como opção pra quem quiser sair da planilha e ter algo sob medida. Sugestão, nunca obrigatória.
+
+**RN-24 aplicada:** mesmo espírito "nada trava" — só existe 1 item de conclusão nesta fase, marcado manualmente quando o empreendedor sentir que entendeu como cadastrar e precificar; nunca bloqueia o avanço para Marketing.
+
+Detalhamento técnico (fórmula de precificação, planilha-modelo, flag do parceiro desenvolvedor): ver SPEC.md SDD-42.
+
 ### 9.2 Trilha A — Validação
 Etapas: estudo de mercado local, mapeamento de concorrentes, pesquisa com clientes potenciais, teste de demanda, estudo de viabilidade econômica.
 **RN-18:** A etapa "estudo de viabilidade econômica" é bloqueante para a trilha C (Formalização) — não faz sentido abrir CNPJ sem viabilidade minimamente validada. É a única dependência cross-trilha do MVP; todas as demais dependências são internas à própria trilha.

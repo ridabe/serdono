@@ -15,6 +15,7 @@ export function AdminFornecedoresScreen() {
   const [contato, setContato] = useState("");
   const [site, setSite] = useState("");
   const [nichesSelecionados, setNichesSelecionados] = useState<string[]>([]);
+  const [indicadoDesenvolvimento, setIndicadoDesenvolvimento] = useState(false);
 
   function toggleNiche(id: string) {
     setNichesSelecionados((prev) => (prev.includes(id) ? prev.filter((n) => n !== id) : [...prev, id]));
@@ -30,6 +31,7 @@ export function AdminFornecedoresScreen() {
       contato: contato.trim() || undefined,
       site: site.trim() || undefined,
       niches_aplicaveis: nichesSelecionados,
+      indicado_desenvolvimento: indicadoDesenvolvimento,
     });
     if (ok) {
       setNome("");
@@ -39,6 +41,7 @@ export function AdminFornecedoresScreen() {
       setContato("");
       setSite("");
       setNichesSelecionados([]);
+      setIndicadoDesenvolvimento(false);
       setShowForm(false);
     }
   }
@@ -98,6 +101,14 @@ export function AdminFornecedoresScreen() {
               ))}
             </View>
 
+            <Button
+              label={indicadoDesenvolvimento ? "✓ Indicado como desenvolvedor de sistema (Fase 9 — Produto)" : "Indicar como desenvolvedor de sistema (Fase 9 — Produto)"}
+              variant={indicadoDesenvolvimento ? "primary" : "outline"}
+              size="sm"
+              onPress={() => setIndicadoDesenvolvimento((v) => !v)}
+              style={{ alignSelf: "flex-start", marginBottom: space[4] }}
+            />
+
             <View style={{ flexDirection: "row", gap: space[3] }}>
               <Button label="Cancelar" variant="ghost" onPress={() => setShowForm(false)} />
               <Button label="Cadastrar" variant="primary" loading={saving} onPress={handleCreate} />
@@ -124,6 +135,9 @@ export function AdminFornecedoresScreen() {
                     <Text style={{ ...type.caption, color: color.text.muted }}>
                       {p.niches_aplicaveis.length === 0 ? "Todos os nichos" : `${p.niches_aplicaveis.length} nicho(s) específico(s)`}
                     </Text>
+                    {p.indicado_desenvolvimento ? (
+                      <Text style={{ ...type.caption, color: color.state.info, marginTop: 2 }}>Indicado como desenvolvedor de sistema</Text>
+                    ) : null}
                   </View>
                   <Button label={p.ativo ? "Ativo" : "Inativo"} variant={p.ativo ? "outline" : "danger"} size="sm" onPress={() => toggleAtivo(p)} />
                 </View>

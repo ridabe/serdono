@@ -144,7 +144,7 @@ export function useFornecedores(jornada: JornadaInstance, etapas: JornadaEtapa[]
     setAdvancing(true);
     setError(null);
     try {
-      await advanceFase(jornada.id, "marketing");
+      await advanceFase(jornada.id, "produto");
       return true;
     } catch (e) {
       setError((e as Error).message);

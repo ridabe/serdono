@@ -12,6 +12,7 @@ export type JornadaFase =
   | "financeiro"
   | "estrutura"
   | "fornecedores"
+  | "produto"
   | "clientes"
   | "retencao"
   | "escala";
@@ -418,4 +419,33 @@ export function isEtapaEstruturaRelevante(template: JornadaEtapaTemplate, niche:
   if (template.dispensavel_sem_ponto_fisico && niche.dependencia_ponto_fisico === false) return false;
   if (niche.categoria && template.dispensavel_categorias.includes(niche.categoria)) return false;
   return true;
+}
+
+// ---- Fase 9 — Produto (SDD-42) ----
+
+const SLUG_PRODUTO_CADASTRO = "produto_cadastro";
+
+/** Mesmo formato de `PrecificacaoInputs` em `packages/core/precificacao.ts` — duplicado de propósito, mesmo motivo de `FinanceiroDados` acima (`packages/supabase` não depende de `packages/core`). */
+export interface ProdutoPrecificacaoDados {
+  custo: number;
+  despesasVariaveisPct: number;
+  impostosPct: number;
+  margemDesejadaPct: number;
+}
+
+/** Salva os valores que o usuário ajustou na calculadora de precificação — não marca a etapa como concluída (ação separada, `markEtapaDone`). */
+export async function saveProdutoDados(instanceId: string, dados: ProdutoPrecificacaoDados): Promise<void> {
+  const { data: template, error: templateError } = await supabase
+    .from("jornada_etapa_templates")
+    .select("id")
+    .eq("slug", SLUG_PRODUTO_CADASTRO)
+    .single();
+  if (templateError) throw templateError;
+
+  const { error } = await supabase
+    .from("jornada_etapas")
+    .update({ dados_usuario: dados as unknown as Json })
+    .eq("jornada_instance_id", instanceId)
+    .eq("etapa_template_id", template.id);
+  if (error) throw error;
 }
