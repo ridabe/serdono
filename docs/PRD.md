@@ -323,6 +323,14 @@ Primeira etapa da fase "Planejamento" (antiga Trilha B — Identidade, §9). Flu
 
 Detalhamento técnico da geração e das checagens: ver SPEC.md SDD-34.
 
+### 9.3 Fase "Planejamento" — Etapa 2: Identidade Visual (desenhada em 29/07/2026)
+
+Segunda etapa da fase "Planejamento", depende da Etapa 1 (o nome já escolhido entra no prompt de geração). Fluxo: questionário curto sobre a "alma da marca" (valores, personalidade em 3 palavras, tom de comunicação formal/casual, cores preferidas e cores a evitar) → a IA gera **1 slogan** e **3 opções de logo** (estilos fixos: minimalista, moderno, clássico) → o usuário escolhe um logo → o sistema gera a versão escolhida em **qualidade alta** e guarda no Storage do usuário, disponível para download a qualquer momento.
+
+**Princípio de custo:** os 3 rascunhos de logo são gerados em qualidade baixa (barato) — o gasto maior com geração de imagem em alta qualidade só acontece **uma vez**, depois da escolha do usuário, nunca nas 3 opções de rascunho.
+
+Detalhamento técnico (provedor de IA de imagem, formato do Storage): ver SPEC.md SDD-35.
+
 ### 9.2 Trilha A — Validação
 Etapas: estudo de mercado local, mapeamento de concorrentes, pesquisa com clientes potenciais, teste de demanda, estudo de viabilidade econômica.
 **RN-18:** A etapa "estudo de viabilidade econômica" é bloqueante para a trilha C (Formalização) — não faz sentido abrir CNPJ sem viabilidade minimamente validada. É a única dependência cross-trilha do MVP; todas as demais dependências são internas à própria trilha.

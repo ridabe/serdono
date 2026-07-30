@@ -255,9 +255,12 @@ export type Database = {
           diferenciais: string | null
           fase_atual: string
           id: string
+          logo_path: string | null
           niche_id: string | null
+          nome_empresa_escolhido: string | null
           nome_negocio: string | null
           publico_alvo: string | null
+          slogan_escolhido: string | null
           status: string
           updated_at: string
           user_id: string
@@ -268,9 +271,12 @@ export type Database = {
           diferenciais?: string | null
           fase_atual?: string
           id?: string
+          logo_path?: string | null
           niche_id?: string | null
+          nome_empresa_escolhido?: string | null
           nome_negocio?: string | null
           publico_alvo?: string | null
+          slogan_escolhido?: string | null
           status?: string
           updated_at?: string
           user_id: string
@@ -281,9 +287,12 @@ export type Database = {
           diferenciais?: string | null
           fase_atual?: string
           id?: string
+          logo_path?: string | null
           niche_id?: string | null
+          nome_empresa_escolhido?: string | null
           nome_negocio?: string | null
           publico_alvo?: string | null
+          slogan_escolhido?: string | null
           status?: string
           updated_at?: string
           user_id?: string

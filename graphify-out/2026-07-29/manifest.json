@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1785332543.0499048,
-    "ast_hash": "9faa21d5f9d5f5a940af29b5b824dda4",
+    "mtime": 1785369438.6843739,
+    "ast_hash": "684832fcc7b38222db19466a56de455e",
     "semantic_hash": ""
   },
   ".mcp.json": {
@@ -215,8 +215,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/types.ts": {
-    "mtime": 1785340315.038091,
-    "ast_hash": "c592cf5b9a7e263694cfa296a627e79d",
+    "mtime": 1785369507.192093,
+    "ast_hash": "2aea9144e0cbbb9b5113c33679e5f133",
     "semantic_hash": ""
   },
   "packages/ui/components/Button.tsx": {
@@ -235,8 +235,8 @@
     "semantic_hash": ""
   },
   "packages/ui/index.ts": {
-    "mtime": 1785335007.853511,
-    "ast_hash": "b479639cf413886665060b3c015a4fa1",
+    "mtime": 1785369052.6025975,
+    "ast_hash": "eafca75efbb607e5030e3a662d9cdc36",
     "semantic_hash": ""
   },
   "packages/ui/package.json": {
@@ -300,18 +300,18 @@
     "semantic_hash": ""
   },
   "docs/PRD.md": {
-    "mtime": 1785339114.8726401,
-    "ast_hash": "c242fa9d4d01bab0c115c9582529b25e",
+    "mtime": 1785369178.3045382,
+    "ast_hash": "af5821c93362813aeceb85b47d98ddb4",
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1785340553.9854093,
-    "ast_hash": "e15fb4224425b76062a045746f816ae5",
+    "mtime": 1785369206.569841,
+    "ast_hash": "f85eed265ce56014eaa5d106b4658d47",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
-    "mtime": 1785260539.978675,
-    "ast_hash": "642ec6ee10c400b4c7bec2e2397a5135",
+    "mtime": 1785369229.018504,
+    "ast_hash": "e24d1ed632d627e77ceadd6f3f4d7c3c",
     "semantic_hash": ""
   },
   "docs/identidade-visual/Ser Dono - Painel de Conceitos de Marca.html": {
@@ -330,8 +330,8 @@
     "semantic_hash": ""
   },
   "img/README.md": {
-    "mtime": 1785248903.1260178,
-    "ast_hash": "4b25f2ecbcef2029adfc4f74928ca60c",
+    "mtime": 1785369248.2447288,
+    "ast_hash": "ff6e88068b3c10a40f6ddcf023493e79",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
@@ -645,18 +645,18 @@
     "semantic_hash": ""
   },
   "apps/app/components/jornada/JornadaScreen.tsx": {
-    "mtime": 1785340516.0709736,
-    "ast_hash": "60cb373bbd8a338c09e6aaf00d536b8b",
+    "mtime": 1785369148.79119,
+    "ast_hash": "950399c85865c9da0dbe31fca360f9bf",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/ValidacaoIdeiaScreen.tsx": {
-    "mtime": 1785340498.556728,
-    "ast_hash": "a1c02ed4d4b450f36a4903f242892b62",
+    "mtime": 1785352369.6295757,
+    "ast_hash": "1bdf39ab14ab6088591b934338651f03",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/useValidacaoIdeia.ts": {
-    "mtime": 1785340473.6481442,
-    "ast_hash": "ba4a2463845446f9009c04adb41a14aa",
+    "mtime": 1785352333.3927279,
+    "ast_hash": "5f016a2921c050abf644296bd7aefbee",
     "semantic_hash": ""
   },
   "packages/core/ai/routeModel.ts": {
@@ -665,8 +665,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/jornada.ts": {
-    "mtime": 1785340439.278973,
-    "ast_hash": "0212df1beb65732783c384bf6743e831",
+    "mtime": 1785369017.4075968,
+    "ast_hash": "eab69d0bce487e36d65090aea152ddba",
     "semantic_hash": ""
   },
   "supabase/functions/jornada-gerar-documentos/index.ts": {
@@ -682,6 +682,61 @@
   "supabase/migrations/202607292100_jornada_validacao_ideia.sql": {
     "mtime": 1785340283.6508713,
     "ast_hash": "729b087f9de150bed0a31e0853513abf",
+    "semantic_hash": ""
+  },
+  "apps/app/components/jornada/NomeEmpresaScreen.tsx": {
+    "mtime": 1785369108.3068972,
+    "ast_hash": "f5d32c6e60dc2294e0aa3f3f7aae1be6",
+    "semantic_hash": ""
+  },
+  "apps/app/components/jornada/StepRail.tsx": {
+    "mtime": 1785352221.5333104,
+    "ast_hash": "233f48d25a3af1bb51511b59233f85e0",
+    "semantic_hash": ""
+  },
+  "apps/app/components/jornada/useNomeEmpresa.ts": {
+    "mtime": 1785369085.336031,
+    "ast_hash": "f18ac63a05ddf9882afe5b2daa57432d",
+    "semantic_hash": ""
+  },
+  "packages/ui/components/MaryAvatar.tsx": {
+    "mtime": 1785369034.6493344,
+    "ast_hash": "742d730c563cea40706120c5ce000b82",
+    "semantic_hash": ""
+  },
+  "supabase/functions/jornada-gerar-nomes/index.ts": {
+    "mtime": 1785369002.7798808,
+    "ast_hash": "eb234a889b7afbaefe1a11685dad6d9d",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/202607292200_jornada_motor_etapas.sql": {
+    "mtime": 1785352058.250047,
+    "ast_hash": "7b664c0859d608fae70174b5f1862efc",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/202607292300_jornada_planejamento_nome_empresa.sql": {
+    "mtime": 1785368791.9479647,
+    "ast_hash": "b5cc9e8c6f27b5c2c08737a574633b48",
+    "semantic_hash": ""
+  },
+  "img/mary/mary-boas-vindas.png": {
+    "mtime": 1785368666.4221144,
+    "ast_hash": "955a18bcb7609ec8dae315be605b1113",
+    "semantic_hash": ""
+  },
+  "img/mary/mary-checklist.png": {
+    "mtime": 1785368666.6656485,
+    "ast_hash": "1d6d60d68636254efb30caf84f25f599",
+    "semantic_hash": ""
+  },
+  "img/mary/mary-jornada.png": {
+    "mtime": 1785368666.5044978,
+    "ast_hash": "96b35ea03c293af55802b83bfa472de5",
+    "semantic_hash": ""
+  },
+  "img/mary/mary-positivo.png": {
+    "mtime": 1785368666.5839999,
+    "ast_hash": "296cc88809a6479b36af50760229e39e",
     "semantic_hash": ""
   }
 }
