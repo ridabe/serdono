@@ -70,23 +70,64 @@ function buildDocumentHtml(titulo: string, etapas: JornadaEtapa[]): string {
 }
 
 async function shareOrDownload(uri: string, filename: string): Promise<void> {
-  if (Platform.OS === "web") {
-    const a = document.createElement("a");
-    a.href = uri;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    return;
-  }
   if (await Sharing.isAvailableAsync()) {
     await Sharing.shareAsync(uri, { mimeType: "application/pdf", dialogTitle: filename });
   }
 }
 
+/**
+ * `expo-print` na web NÃO renderiza o `html` recebido — a própria doc do
+ * pacote avisa ("on web this prints the HTML from the page"), e
+ * `printToFileAsync`/`printAsync` viram só `window.print()` da página atual
+ * (bug real de produção, 30/07/2026: o PDF saía com a tela inteira do app —
+ * cabeçalho, trilha lateral etc. — em vez do conteúdo da etapa). Na web,
+ * contornamos com um `<iframe>` oculto só com o HTML do documento e
+ * imprimimos ele — o diálogo "Salvar como PDF" do navegador continua
+ * disponível, aplicado ao conteúdo certo. Iframe em vez de `window.open`
+ * de propósito: `window.open` cai em bloqueio de pop-up em vários
+ * navegadores/extensões mesmo disparado por clique direto do usuário; um
+ * iframe embutido na própria página não é pop-up, não tem esse risco.
+ */
+function printHtmlOnWeb(html: string): void {
+  const iframe = document.createElement("iframe");
+  iframe.style.position = "fixed";
+  iframe.style.right = "0";
+  iframe.style.bottom = "0";
+  iframe.style.width = "0";
+  iframe.style.height = "0";
+  iframe.style.border = "0";
+  document.body.appendChild(iframe);
+
+  const cleanup = () => {
+    if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
+  };
+
+  const doc = iframe.contentWindow?.document;
+  if (!doc) {
+    cleanup();
+    return;
+  }
+
+  iframe.onload = () => {
+    iframe.contentWindow?.focus();
+    iframe.contentWindow?.print();
+    // Remove só depois de um tempo — se o iframe sai do DOM antes do
+    // diálogo de impressão fechar, alguns navegadores cancelam a impressão.
+    setTimeout(cleanup, 1000);
+  };
+
+  doc.open();
+  doc.write(html);
+  doc.close();
+}
+
 /** Gera e baixa/compartilha o PDF de uma única etapa. */
 export async function exportEtapaPdf(etapa: JornadaEtapa): Promise<void> {
   const html = buildDocumentHtml(etapa.template.titulo, [etapa]);
+  if (Platform.OS === "web") {
+    printHtmlOnWeb(html);
+    return;
+  }
   const { uri } = await Print.printToFileAsync({ html });
   await shareOrDownload(uri, `${etapa.template.slug}.pdf`);
 }
@@ -94,6 +135,10 @@ export async function exportEtapaPdf(etapa: JornadaEtapa): Promise<void> {
 /** Gera e baixa/compartilha o PDF com todas as etapas do caminho escolhido. */
 export async function exportChecklistPdf(titulo: string, etapas: JornadaEtapa[]): Promise<void> {
   const html = buildDocumentHtml(titulo, etapas);
+  if (Platform.OS === "web") {
+    printHtmlOnWeb(html);
+    return;
+  }
   const { uri } = await Print.printToFileAsync({ html });
   await shareOrDownload(uri, "checklist-formalizacao.pdf");
 }
@@ -101,5 +146,9 @@ export async function exportChecklistPdf(titulo: string, etapas: JornadaEtapa[])
 /** Abre o diálogo de impressão do sistema direto, sem gerar arquivo. */
 export async function printEtapa(etapa: JornadaEtapa): Promise<void> {
   const html = buildDocumentHtml(etapa.template.titulo, [etapa]);
+  if (Platform.OS === "web") {
+    printHtmlOnWeb(html);
+    return;
+  }
   await Print.printAsync({ html });
 }
