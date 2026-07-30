@@ -365,6 +365,18 @@ Detalhamento técnico (schema da bifurcação, conteúdo completo por etapa, exp
 
 Detalhamento técnico (fórmulas, defaults, fonte dos dados do nicho): ver SPEC.md SDD-39.
 
+### 9.6 Fase "Estrutura" (desenhada em 30/07/2026)
+
+Checklist da infraestrutura básica que o negócio precisa pra funcionar no dia a dia: Local, Internet, Telefone, Notebook, ERP, Conta Bancária, Pix, Maquininha, E-mail, Domínio, Site, CRM. Entra logo após Financeiro, antes de Marketing — ordem atual: Validação da Ideia → Planejamento → Formalização → Financeiro → **Estrutura** → Marketing → Clientes → Retenção → Escala.
+
+Cada item traz: uma explicação do que é, uma dica de como resolver, e é marcado "concluído"/"pendente" pelo próprio empreendedor (ação no mundo real, igual às etapas de Formalização) — sem geração por IA, é conteúdo curado uma vez.
+
+**RN-24 (nova): o checklist de Estrutura nunca bloqueia o avanço para a próxima fase.** Diferente de toda outra fase do produto (inclusive Formalização, RN-23, cujo botão de avançar só libera com o checklist 100% completo), aqui o empreendedor pode seguir para Marketing a qualquer momento, com qualquer parte do checklist pendente, e voltar depois — mesmo já estando em fases seguintes — pra marcar o que resolveu. São indicações do que ele vai precisar, não uma condição de avanço. Para viabilizar o "voltar depois", a trilha lateral de fases passou a permitir clicar em qualquer fase já visitada para revisá-la, não só a atual.
+
+**RN-25 (nova): o checklist é adaptado ao tipo de negócio escolhido.** Nem todo item se aplica a todo nicho — ex.: Maquininha não é essencial pra quem não depende de ponto físico; ERP e CRM não são essenciais pra quem vende de balcão sem controle de estoque ou relacionamento recorrente de cliente. O sistema separa os itens em "essenciais" (contam para o percentual de conclusão da fase) e "não essenciais para o seu tipo de negócio" (ficam numa seção à parte, continuam editáveis, mas não contam) — critério guardado como dado de configuração junto de cada item, não uma regra fixa de código, pra poder ser ajustado/expandido sem alterar o app.
+
+Detalhamento técnico (schema de relevância por nicho, navegação da trilha lateral): ver SPEC.md SDD-40.
+
 ### 9.2 Trilha A — Validação
 Etapas: estudo de mercado local, mapeamento de concorrentes, pesquisa com clientes potenciais, teste de demanda, estudo de viabilidade econômica.
 **RN-18:** A etapa "estudo de viabilidade econômica" é bloqueante para a trilha C (Formalização) — não faz sentido abrir CNPJ sem viabilidade minimamente validada. É a única dependência cross-trilha do MVP; todas as demais dependências são internas à própria trilha.
@@ -463,6 +475,8 @@ A home passou a apresentar o catálogo de módulos do produto, para que o visita
 | RN-21 | Toda recomendação sensível traz aviso de não substituir profissional habilitado |
 | RN-22 | App Android verifica versão mínima suportada; abaixo dela, bloqueia uso até atualizar via Play Store |
 | RN-23 | Etapas da fase Formalização nunca travam entre si — sempre navegáveis e desmarcáveis livremente |
+| RN-24 | Checklist da fase Estrutura nunca bloqueia o avanço para a próxima fase; sempre editável, mesmo em fases seguintes |
+| RN-25 | Checklist da fase Estrutura é filtrado por relevância ao tipo de negócio escolhido (nicho) |
 
 ---
 

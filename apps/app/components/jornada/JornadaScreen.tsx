@@ -6,14 +6,17 @@ import {
   getCurrentSession,
   getJornadaEtapas,
   getMyJornada,
+  isEtapaEstruturaRelevante,
   signOut,
   supabase,
   type JornadaEtapa,
   type JornadaEtapaStatus,
   type JornadaFase,
   type JornadaInstance,
+  type NicheEstruturaInfo,
 } from "@serdono/supabase";
 import { EscolherNichoScreen } from "./EscolherNichoScreen";
+import { EstruturaScreen } from "./EstruturaScreen";
 import { FinanceiroScreen } from "./FinanceiroScreen";
 import { FormalizacaoScreen } from "./FormalizacaoScreen";
 import { PlanejamentoScreen } from "./PlanejamentoScreen";
@@ -23,12 +26,15 @@ import { ValidacaoIdeiaScreen } from "./ValidacaoIdeiaScreen";
 // Ordem reorganizada em 30/07/2026 (decisão do dono do produto, SDD-39):
 // Financeiro passou a vir logo após Formalização, antes de Marketing — faz
 // mais sentido conhecer a própria saúde financeira antes de gastar com
-// divulgação.
+// divulgação. Estrutura (SDD-40) entra logo depois, ainda antes de
+// Marketing — faz sentido ter a base operacional (local, conta, site...)
+// minimamente resolvida antes de captar cliente.
 const FASES: JornadaFase[] = [
   "validacao_ideia",
   "planejamento",
   "formalizacao",
   "financeiro",
+  "estrutura",
   "marketing",
   "clientes",
   "retencao",
@@ -41,6 +47,7 @@ const FASE_LABEL: Record<JornadaFase, string> = {
   formalizacao: "Formalização",
   marketing: "Marketing",
   financeiro: "Financeiro",
+  estrutura: "Estrutura",
   clientes: "Clientes",
   retencao: "Retenção",
   escala: "Escala",
@@ -59,8 +66,14 @@ export function JornadaScreen() {
   const [loading, setLoading] = useState(true);
   const [jornada, setJornada] = useState<JornadaInstance | null>(null);
   const [nicheName, setNicheName] = useState<string | null>(null);
+  const [nicheEstrutura, setNicheEstrutura] = useState<NicheEstruturaInfo | null>(null);
   const [etapas, setEtapas] = useState<JornadaEtapa[]>([]);
   const [maryDismissed, setMaryDismissed] = useState(false);
+  // null = acompanhando a fase_atual real; um valor = revisando uma fase já
+  // visitada (SDD-40 — Estrutura precisa ficar sempre editável, mesmo depois
+  // de já ter avançado pra Marketing, então a trilha lateral virou navegação
+  // pra qualquer fase já semeada, não só a atual).
+  const [viewFase, setViewFase] = useState<JornadaFase | null>(null);
 
   // Recarrega etapas E a própria instância — campos como
   // `nome_empresa_escolhido`/`logo_path` (SDD-34/35) vivem em
@@ -82,8 +95,13 @@ export function JornadaScreen() {
       const instance = await getMyJornada(session.user.id);
       setJornada(instance);
       if (instance?.niche_id) {
-        const { data } = await supabase.from("niches").select("nome").eq("id", instance.niche_id).maybeSingle();
+        const { data } = await supabase
+          .from("niches")
+          .select("nome, categoria, dependencia_ponto_fisico")
+          .eq("id", instance.niche_id)
+          .maybeSingle();
         setNicheName(data?.nome ?? null);
+        setNicheEstrutura(data ? { categoria: data.categoria, dependencia_ponto_fisico: data.dependencia_ponto_fisico } : null);
       }
       if (instance) await refreshJornada(instance.id);
       setLoading(false);
@@ -114,24 +132,42 @@ export function JornadaScreen() {
   // total de "16 etapas".
   const TOTAL_FASES = FASES.length + 1;
   const fasesConcluidasAntesDaAtual = 1 + FASES.indexOf(jornada.fase_atual as JornadaFase);
-  // `etapas` carrega o histórico de TODAS as fases já visitadas (SDD-36) —
-  // aqui só interessa o subconjunto da fase atual, tanto pro cálculo de
-  // progresso quanto pra passar adiante aos componentes de detalhe.
+
+  // `etapas` carrega o histórico de TODAS as fases já visitadas (SDD-36).
   // Formalização (SDD-38) bifurca por regime dentro da própria fase — sem
   // esse filtro extra, trocar de regime (MEI ↔ formal) faria etapas do
   // caminho abandonado continuarem contando no progresso e na trilha.
-  const etapasFaseAtual = etapas.filter((e) => {
-    if (e.template.fase !== jornada.fase_atual) return false;
-    if (jornada.fase_atual === "formalizacao" && jornada.regime_formalizacao && e.template.aplica_se) {
-      return e.template.aplica_se === jornada.regime_formalizacao;
-    }
-    return true;
-  });
+  const regimeFormalizacao = jornada.regime_formalizacao;
+  function etapasDaFase(fase: JornadaFase): JornadaEtapa[] {
+    return etapas.filter((e) => {
+      if (e.template.fase !== fase) return false;
+      if (fase === "formalizacao" && regimeFormalizacao && e.template.aplica_se) {
+        return e.template.aplica_se === regimeFormalizacao;
+      }
+      return true;
+    });
+  }
+
+  const etapasFaseAtual = etapasDaFase(jornada.fase_atual as JornadaFase);
+  // Estrutura (SDD-40) filtra por relevância de nicho só pro cálculo de
+  // progresso e pra trilha lateral — a tela de detalhe (`EstruturaScreen`)
+  // recebe a fase completa, sem esse filtro, porque ela própria mostra os
+  // itens não essenciais numa seção separada e recolhível.
+  const etapasFaseAtualRelevantes =
+    jornada.fase_atual === "estrutura"
+      ? etapasFaseAtual.filter((e) => isEtapaEstruturaRelevante(e.template, nicheEstrutura))
+      : etapasFaseAtual;
   const fracaoFaseAtual =
-    etapasFaseAtual.length > 0 ? etapasFaseAtual.filter((e) => e.status === "concluida").length / etapasFaseAtual.length : 0;
+    etapasFaseAtualRelevantes.length > 0
+      ? etapasFaseAtualRelevantes.filter((e) => e.status === "concluida").length / etapasFaseAtualRelevantes.length
+      : 0;
   const progresso = Math.round(((fasesConcluidasAntesDaAtual + fracaoFaseAtual) / TOTAL_FASES) * 100);
 
-  const primeiraPendenteIdx = etapasFaseAtual.findIndex((e) => e.status !== "concluida");
+  // Fase sendo mostrada na tela de detalhe agora: a fase_atual real, a menos
+  // que o usuário tenha clicado numa fase anterior na trilha pra revisar
+  // (SDD-40 — nenhum checklist fica travado depois que você avança).
+  const faseExibida = viewFase ?? (jornada.fase_atual as JornadaFase);
+  const etapasFaseExibida = etapasDaFase(faseExibida);
 
   const railFases: RailFaseData[] = [
     {
@@ -142,30 +178,42 @@ export function JornadaScreen() {
       steps: DESCOBERTA_STEPS.map((titulo, i) => ({ key: `descoberta-${i}`, titulo, status: "concluida", isCurrent: false })),
     },
     ...FASES.map((fase) => {
-      const isCurrentFase = jornada.fase_atual === fase;
+      const etapasDessaFase = etapasDaFase(fase);
+      const etapasRelevantesDessaFase =
+        fase === "estrutura" ? etapasDessaFase.filter((e) => isEtapaEstruturaRelevante(e.template, nicheEstrutura)) : etapasDessaFase;
+      const primeiraPendenteDessaFase = etapasRelevantesDessaFase.findIndex((e) => e.status !== "concluida");
+      const isBeingViewed = faseExibida === fase;
       const steps =
-        isCurrentFase && etapasFaseAtual.length > 0
-          ? etapasFaseAtual.map((e, i) => ({
+        etapasRelevantesDessaFase.length > 0
+          ? etapasRelevantesDessaFase.map((e, i) => ({
               key: e.id,
               titulo: e.template.titulo,
               status: e.status as JornadaEtapaStatus,
-              isCurrent: i === primeiraPendenteIdx,
+              isCurrent: isBeingViewed && i === primeiraPendenteDessaFase,
             }))
           : null;
       const legenda = steps ? `${steps.filter((s) => s.status === "concluida").length}/${steps.length}` : undefined;
-      return { key: fase, nome: FASE_LABEL[fase], legenda, isCurrentFase, steps };
+      // Só dá pra clicar em fase já semeada (tem jornada_etapas) — clicar na
+      // própria fase_atual volta a "seguir a fase atual" (viewFase = null).
+      const onPress =
+        etapasDessaFase.length > 0 ? () => setViewFase(fase === jornada.fase_atual ? null : fase) : undefined;
+      return { key: fase, nome: FASE_LABEL[fase], legenda, isCurrentFase: isBeingViewed, steps, onPress };
     }),
   ];
 
+  const revisandoFasePassada = faseExibida !== jornada.fase_atual;
+
   const detail =
-    jornada.fase_atual === "validacao_ideia" ? (
-      <ValidacaoIdeiaScreen jornada={jornada} etapas={etapasFaseAtual} onEtapasChanged={() => refreshJornada(jornada.id)} />
-    ) : jornada.fase_atual === "planejamento" ? (
-      <PlanejamentoScreen jornada={jornada} etapas={etapasFaseAtual} onEtapasChanged={() => refreshJornada(jornada.id)} />
-    ) : jornada.fase_atual === "formalizacao" ? (
-      <FormalizacaoScreen jornada={jornada} etapas={etapasFaseAtual} onEtapasChanged={() => refreshJornada(jornada.id)} />
-    ) : jornada.fase_atual === "financeiro" ? (
-      <FinanceiroScreen jornada={jornada} etapas={etapasFaseAtual} onEtapasChanged={() => refreshJornada(jornada.id)} />
+    faseExibida === "validacao_ideia" ? (
+      <ValidacaoIdeiaScreen jornada={jornada} etapas={etapasFaseExibida} onEtapasChanged={() => refreshJornada(jornada.id)} />
+    ) : faseExibida === "planejamento" ? (
+      <PlanejamentoScreen jornada={jornada} etapas={etapasFaseExibida} onEtapasChanged={() => refreshJornada(jornada.id)} />
+    ) : faseExibida === "formalizacao" ? (
+      <FormalizacaoScreen jornada={jornada} etapas={etapasFaseExibida} onEtapasChanged={() => refreshJornada(jornada.id)} />
+    ) : faseExibida === "financeiro" ? (
+      <FinanceiroScreen jornada={jornada} etapas={etapasFaseExibida} onEtapasChanged={() => refreshJornada(jornada.id)} />
+    ) : faseExibida === "estrutura" ? (
+      <EstruturaScreen jornada={jornada} etapas={etapasFaseExibida} onEtapasChanged={() => refreshJornada(jornada.id)} />
     ) : (
       <Card variant="default" padding={6}>
         <Text style={{ ...type.body, color: color.text.secondary }}>A próxima etapa chega em breve.</Text>
@@ -227,7 +275,19 @@ export function JornadaScreen() {
         ) : null}
         <View style={{ flexDirection: compact ? "column" : "row", gap: space[5], alignItems: "flex-start" }}>
           <StepRail fases={railFases} compact={compact} />
-          <View style={{ flex: 1, width: "100%" }}>{detail}</View>
+          <View style={{ flex: 1, width: "100%", gap: space[4] }}>
+            {revisandoFasePassada ? (
+              <Card variant="outline" padding={4}>
+                <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: space[3] }}>
+                  <Text style={{ ...type.body, color: color.text.secondary, flex: 1 }}>
+                    Revisando {FASE_LABEL[faseExibida]} — você está em {FASE_LABEL[jornada.fase_atual as JornadaFase]}.
+                  </Text>
+                  <Button label="Voltar" variant="ghost" size="sm" onPress={() => setViewFase(null)} />
+                </View>
+              </Card>
+            ) : null}
+            {detail}
+          </View>
         </View>
       </ScrollView>
     </View>

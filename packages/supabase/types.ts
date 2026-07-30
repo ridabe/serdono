@@ -1,10 +1,3 @@
-/**
- * Tipos do schema Supabase — SPEC.md §4.4: gerados a partir do banco real via
- * `supabase gen types typescript --linked` (equivalente a
- * `supabase gen types typescript --project-id klvmbytlqnvydjsauigy`).
- * Nunca editar à mão — regerar sempre que uma migration alterar o schema.
- */
-
 export type Json =
   | string
   | number
@@ -165,6 +158,8 @@ export type Database = {
           depende_de: string[]
           descricao: string | null
           dica: string | null
+          dispensavel_categorias: string[]
+          dispensavel_sem_ponto_fisico: boolean
           documentos: Json
           fase: string
           id: string
@@ -181,6 +176,8 @@ export type Database = {
           depende_de?: string[]
           descricao?: string | null
           dica?: string | null
+          dispensavel_categorias?: string[]
+          dispensavel_sem_ponto_fisico?: boolean
           documentos?: Json
           fase: string
           id?: string
@@ -197,6 +194,8 @@ export type Database = {
           depende_de?: string[]
           descricao?: string | null
           dica?: string | null
+          dispensavel_categorias?: string[]
+          dispensavel_sem_ponto_fisico?: boolean
           documentos?: Json
           fase?: string
           id?: string

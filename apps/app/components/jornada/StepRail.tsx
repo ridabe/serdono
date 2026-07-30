@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from "react-native";
+import { Pressable, ScrollView, Text, View } from "react-native";
 import { color, radius, space, type } from "@serdono/ui";
 import type { JornadaEtapaStatus } from "@serdono/supabase";
 
@@ -14,7 +14,9 @@ export interface RailFaseData {
   nome: string;
   legenda?: string;
   steps: RailStepData[] | null; // null = fase sem etapas desenhadas ainda
-  isCurrentFase: boolean;
+  isCurrentFase: boolean; // na prática, "é a fase sendo exibida agora" (pode não ser a fase_atual real, ver SDD-40)
+  /** Presente só em fases já visitadas (têm `jornada_etapas` semeada) — permite voltar e revisar/editar um checklist anterior, mesmo depois de já ter avançado (SDD-40). */
+  onPress?: () => void;
 }
 
 interface StepRailProps {
@@ -39,10 +41,15 @@ function WideRail({ fases }: { fases: RailFaseData[] }) {
     <View style={{ width: 300, flexShrink: 0 }}>
       {fases.map((fase) => (
         <View key={fase.key} style={{ marginBottom: space[2] }}>
-          <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: space[1], marginBottom: space[2] }}>
+          <Pressable
+            onPress={fase.onPress}
+            disabled={!fase.onPress}
+            accessibilityRole={fase.onPress ? "button" : undefined}
+            style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: space[1], marginBottom: space[2], minHeight: 28 }}
+          >
             <Text style={{ ...type.overline, color: fase.isCurrentFase ? color.bg.brand : color.text.muted }}>{fase.nome}</Text>
             {fase.legenda ? <FaseBadge legenda={fase.legenda} isCurrentFase={fase.isCurrentFase} /> : null}
-          </View>
+          </Pressable>
           {fase.steps ? (
             <StepList steps={fase.steps} />
           ) : (
@@ -86,7 +93,13 @@ function CompactRail({ fases }: { fases: RailFaseData[] }) {
     <View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: space[4], gap: space[3], paddingVertical: space[3] }}>
         {fases.map((fase) => (
-          <View key={fase.key} style={{ alignItems: "center", minWidth: 84 }}>
+          <Pressable
+            key={fase.key}
+            onPress={fase.onPress}
+            disabled={!fase.onPress}
+            accessibilityRole={fase.onPress ? "button" : undefined}
+            style={{ alignItems: "center", minWidth: 84 }}
+          >
             <FasePill fase={fase} />
             <Text
               numberOfLines={1}
@@ -102,7 +115,7 @@ function CompactRail({ fases }: { fases: RailFaseData[] }) {
             >
               {fase.nome}
             </Text>
-          </View>
+          </Pressable>
         ))}
       </ScrollView>
 

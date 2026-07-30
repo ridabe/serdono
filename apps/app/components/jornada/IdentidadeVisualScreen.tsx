@@ -105,6 +105,12 @@ export function IdentidadeVisualScreen({ jornada, etapas, onEtapasChanged }: Ide
       {v.candidatos.length > 0 ? (
         <View style={{ gap: space[3] }}>
           <Text style={{ ...type.bodyStrong, color: color.text.primary }}>Escolha seu logo</Text>
+          {/* Repetido aqui (não só no card do formulário lá em cima) porque
+              o erro de "Escolher" acontece nesta seção — sem isso, o
+              feedback de falha ficava fora da vista de quem clica aqui e
+              parecia que o botão não tinha feito nada (bug real de
+              produção, 30/07/2026). */}
+          {v.error ? <Text style={{ ...type.caption, color: color.state.danger }}>{v.error}</Text> : null}
           <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3] }}>
             {v.candidatos.map((c) => (
               <Card key={c.estilo} variant="outline" padding={4} style={{ width: 200 }}>

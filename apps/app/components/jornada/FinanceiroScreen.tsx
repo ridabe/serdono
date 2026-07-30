@@ -61,7 +61,7 @@ export function FinanceiroScreen({ jornada, etapas, onEtapasChanged }: Financeir
 
   async function handleAdvance() {
     try {
-      await advanceFase(jornada.id, "marketing");
+      await advanceFase(jornada.id, "estrutura");
       router.replace("/jornada");
     } catch {
       // erro já fica visível via v.error na próxima ação; avançar de fase raramente falha sozinho
@@ -291,7 +291,7 @@ export function FinanceiroScreen({ jornada, etapas, onEtapasChanged }: Financeir
           style={{ marginTop: space[4] }}
         />
         {concluida ? (
-          <Button label="Avançar para Marketing" variant="secondary" fullWidth onPress={handleAdvance} style={{ marginTop: space[3] }} />
+          <Button label="Avançar para Estrutura" variant="secondary" fullWidth onPress={handleAdvance} style={{ marginTop: space[3] }} />
         ) : null}
       </Card>
     </View>

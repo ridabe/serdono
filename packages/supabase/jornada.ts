@@ -10,6 +10,7 @@ export type JornadaFase =
   | "formalizacao"
   | "marketing"
   | "financeiro"
+  | "estrutura"
   | "clientes"
   | "retencao"
   | "escala";
@@ -210,10 +211,20 @@ export async function generateDeliverables(instanceId: string): Promise<JornadaD
   return getDeliverables(instanceId);
 }
 
+/**
+ * Semeia ANTES de trocar `fase_atual` (ordem importa, bug real de produção
+ * 30/07/2026): se `seedEtapasForFase` falhasse depois de `fase_atual` já
+ * atualizado, a instância ficava "avançada mas sem etapas" — toda etapa
+ * seguinte que depende de `jornada_etapas` existir (ex.: salvar respostas do
+ * questionário de Identidade Visual) passava a falhar silenciosamente, sem
+ * jeito de destravar pela própria tela. Com a semeadura primeiro, uma falha
+ * aqui mantém `fase_atual` no valor antigo — o usuário só vê o erro e tenta
+ * de novo, nunca fica com estado inconsistente no banco.
+ */
 export async function advanceFase(instanceId: string, fase: JornadaFase): Promise<void> {
+  await seedEtapasForFase(instanceId, fase);
   const { error } = await supabase.from("jornada_instances").update({ fase_atual: fase }).eq("id", instanceId);
   if (error) throw error;
-  await seedEtapasForFase(instanceId, fase);
 }
 
 // ---- Fase 3 — Planejamento: Nome da Empresa (SDD-34) ----
@@ -374,4 +385,36 @@ export async function saveFinanceiroDados(instanceId: string, dados: FinanceiroD
     .eq("jornada_instance_id", instanceId)
     .eq("etapa_template_id", template.id);
   if (error) throw error;
+}
+
+// ---- Fase 7 — Estrutura (SDD-40) ----
+
+export interface NicheEstruturaInfo {
+  categoria: string | null;
+  dependencia_ponto_fisico: boolean | null;
+}
+
+/** Só os 2 campos de `niches` usados pra calcular relevância do checklist de Estrutura. */
+export async function getNicheEstruturaInfo(nicheId: string): Promise<NicheEstruturaInfo | null> {
+  const { data, error } = await supabase
+    .from("niches")
+    .select("categoria, dependencia_ponto_fisico")
+    .eq("id", nicheId)
+    .maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
+/**
+ * Um item do checklist de Estrutura é essencial pro nicho, a menos que um
+ * dos critérios de dispensa (dado de configuração na própria
+ * `jornada_etapa_templates`, curado por quem edita o conteúdo — não uma
+ * regra fixa no código) bata com o nicho escolhido. Sem dado de nicho
+ * (`niche` null), mostra tudo — comportamento seguro.
+ */
+export function isEtapaEstruturaRelevante(template: JornadaEtapaTemplate, niche: NicheEstruturaInfo | null): boolean {
+  if (!niche) return true;
+  if (template.dispensavel_sem_ponto_fisico && niche.dependencia_ponto_fisico === false) return false;
+  if (niche.categoria && template.dispensavel_categorias.includes(niche.categoria)) return false;
+  return true;
 }
