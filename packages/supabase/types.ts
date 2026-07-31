@@ -208,6 +208,24 @@ export type Database = {
           },
         ]
       }
+      jornada_conclusao_config: {
+        Row: {
+          atualizado_em: string
+          id: string
+          video_url: string | null
+        }
+        Insert: {
+          atualizado_em?: string
+          id?: string
+          video_url?: string | null
+        }
+        Update: {
+          atualizado_em?: string
+          id?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
       jornada_deliverables: {
         Row: {
           conteudo: Json

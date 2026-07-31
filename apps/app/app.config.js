@@ -44,6 +44,7 @@ module.exports = {
       "expo-router",
       "expo-font",
       "expo-web-browser",
+      "expo-video",
       [
         "expo-image-picker",
         {

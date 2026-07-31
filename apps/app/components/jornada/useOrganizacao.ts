@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { calcularMaturidadeOrganizacional, PERGUNTAS_DIAGNOSTICO, type MaturidadeResultado } from "@serdono/core";
 import {
-  advanceFase,
   CATALOGO_INDICADORES,
+  concludeJornada,
   generateRoteiroFerramentas,
   getRoteiroFerramentas,
   saveOrganizacaoChecklistFinal,
@@ -169,13 +169,18 @@ export function useOrganizacao(jornada: JornadaInstance, etapas: JornadaEtapa[],
     }
   }
 
-  /** Diferente do padrão "nada trava" das fases mais recentes — precisa do diagnóstico e da confirmação final (mesmo espírito de RN-27, Primeira Venda). */
+  /**
+   * Diferente do padrão "nada trava" das fases mais recentes — precisa do
+   * diagnóstico e da confirmação final (mesmo espírito de RN-27, Primeira
+   * Venda). Organização é a última fase real do motor (SDD-49) — concluir
+   * aqui fecha a jornada inteira, não avança pra outra fase.
+   */
   async function advance() {
     if (!diagnosticoConcluido || !checklistFinalConcluido) return false;
     setAdvancing(true);
     setError(null);
     try {
-      await advanceFase(jornada.id, "retencao");
+      await concludeJornada(jornada.id);
       return true;
     } catch (e) {
       setError((e as Error).message);

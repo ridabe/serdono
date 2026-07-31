@@ -318,12 +318,12 @@ export function OrganizacaoScreen({ jornada, etapas, onEtapasChanged }: Organiza
             Agora você tem uma rotina mínima de gestão — continue registrando, analisando e melhorando conforme o
             negócio crescer.
           </Text>
-          <Button label="Avançar para Retenção" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
+          <Button label="Concluir minha Jornada" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
         </Card>
       ) : (
         <Card variant="default" padding={5}>
           <Text style={{ ...type.body, color: color.text.muted }}>
-            O avanço pra Retenção libera quando o diagnóstico e a confirmação do plano estiverem feitos.
+            A conclusão da Jornada libera quando o diagnóstico e a confirmação do plano estiverem feitos.
           </Text>
         </Card>
       )}

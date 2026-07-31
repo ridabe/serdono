@@ -447,7 +447,7 @@ Detalhamento técnico (schema de `jornada_clientes_contatos`, Edge Function, cá
 
 ### 9.11 Fase "Primeira Venda" (desenhada em 31/07/2026)
 
-Entra logo depois de Clientes, antes de Organização — ordem atual: ... → Marketing → Clientes → **Primeira Venda** → Organização → Retenção → Escala. É o grande marco simbólico: o momento em que o empreendedor deixa de "estar pronto pra vender" e passa a "ter vendido de verdade".
+Entra logo depois de Clientes, antes de Organização — ordem atual: ... → Marketing → Clientes → **Primeira Venda** → Organização (última fase do workflow, ver §9.13). É o grande marco simbólico: o momento em que o empreendedor deixa de "estar pronto pra vender" e passa a "ter vendido de verdade".
 
 **O sistema nunca pode saber, por conta própria, que uma venda aconteceu** (mesmo princípio de honestidade do §4 — nunca fabricar um dado que não tem de verdade) — mas em vez de um botão genérico "já vendi" seguido de uma mensagem de parabéns solta, esta fase **reaproveita o que a Fase Clientes já capturou**, evitando pedir de novo algo que o empreendedor já informou:
 
@@ -462,7 +462,7 @@ Detalhamento técnico (schema, reaproveitamento de dados entre fases): ver SPEC.
 
 ### 9.12 Fase "Organização do Negócio" (desenhada em 31/07/2026)
 
-Entra logo depois de Primeira Venda, antes de Retenção — ordem atual: ... → Clientes → Primeira Venda → **Organização** → Retenção → Escala. Pergunta central: *"Agora que meu negócio começou a funcionar, como posso organizar minha rotina, meu dinheiro, meus documentos e minhas operações pra crescer sem perder o controle?"*
+Entra logo depois de Primeira Venda — ordem atual: ... → Clientes → Primeira Venda → **Organização**, a última fase do workflow (ver §9.13: a partir daqui a Jornada está concluída, 100%). Pergunta central: *"Agora que meu negócio começou a funcionar, como posso organizar minha rotina, meu dinheiro, meus documentos e minhas operações pra crescer sem perder o controle?"*
 
 **Posicionamento deliberado: guia de organização, não ERP.** O sistema não controla vendas, estoque, contas a pagar/receber ou pedidos individuais de verdade — ensina como organizar cada um desses pontos, gera diagnóstico, modelos pra baixar e um plano de implantação, e recomenda categoria de ferramenta externa pra quem quiser ir além da planilha. Mesmo espírito de honestidade do §4: o sistema nunca finge controlar uma operação que só existe fora dele.
 
@@ -481,9 +481,25 @@ Entra logo depois de Primeira Venda, antes de Retenção — ordem atual: ... �
 9. **Indicadores básicos** — catálogo fixo (não gerado por IA) de ~18 indicadores em 4 grupos (financeiro/comercial/operacional/clientes); o empreendedor escolhe de 3 a 5, deliberadamente pouco pra não sobrecarregar.
 10. **Plano de organização + checklist final** — plano de 30 dias (4 semanas, conteúdo fixo) personalizado só pelas prioridades reais do diagnóstico, exportável em PDF (Kit de Organização), e a confirmação final que libera o avanço.
 
-**RN-28 (nova): igual ao padrão de Primeira Venda (RN-27), o avanço para Retenção fica bloqueado até o diagnóstico e a confirmação final estarem feitos** — mas **não exige que nenhum controle esteja "funcionando perfeitamente"**: a barra de conclusão é propositalmente baixa (só responder o diagnóstico e confirmar que revisou o plano), porque o objetivo desta fase é o empreendedor compreender o processo e começar, não provar que já organizou tudo.
+**RN-28 (nova): igual ao padrão de Primeira Venda (RN-27), a conclusão da Jornada fica bloqueada até o diagnóstico e a confirmação final estarem feitos** — mas **não exige que nenhum controle esteja "funcionando perfeitamente"**: a barra de conclusão é propositalmente baixa (só responder o diagnóstico e confirmar que revisou o plano), porque o objetivo desta fase é o empreendedor compreender o processo e começar, não provar que já organizou tudo.
 
 Detalhamento técnico (schema, edge function do roteiro de ferramentas, kit de modelos): ver SPEC.md SDD-48.
+
+### 9.13 Conclusão da Jornada (decisão do dono do produto, 31/07/2026)
+
+**A Jornada Empreendedora termina em Organização — 100%.** As fases `retencao`/`escala`, reservadas desde o desenho inicial do motor (§5.4), **saem do workflow guiado**: manter o empreendedor no produto depois de o negócio estar de pé é uma estratégia de retenção de assinatura, não uma continuação natural do checklist de abertura — por isso esse "e agora?" passa a ser tratado como **módulo independente** do catálogo já existente (§12.1), com liberação própria, igual Marketing/Financeiro/Hub B2B (§12).
+
+**Ao confirmar o plano de Organização, o empreendedor vê uma tela de conclusão, no espírito de um diploma:**
+
+1. **Celebração** — reconhece explicitamente o tanto que foi percorrido (não é só mais uma etapa concluída, é o workflow inteiro).
+2. **Resumo da jornada** — todas as fases percorridas, da Descoberta (diagnóstico + escolha do nicho) até Organização.
+3. **Certificado de conclusão**, para baixar.
+4. **Espaço reservado para um vídeo da equipe** parabenizando o empreendedor — carregado futuramente pelo painel administrativo; até lá, a tela simplesmente não mostra essa seção (nunca um "em breve" fingindo que existe algo pra ver).
+5. **Convite honesto pros próximos módulos** — nunca promete um módulo específico ou plano que ainda não foi decidido (RN-2, RN-29): só menciona o que já estiver de fato liberado pro usuário; sem isso, um texto genérico prepara a expectativa de que módulos futuros (retenção de clientes, crescimento, escala, outros a definir) podem exigir um plano diferente do atual — sem inventar preço ou nome de plano, já que planos pagos ainda não existem no produto (§17, pendente).
+
+**RN-29 (nova): a Jornada Empreendedora é um workflow com fim — nenhum módulo de pós-abertura é fase do motor de etapas nem é anunciado como certo/pronto antes de existir de fato** (reforça RN-2). O empreendedor pode revisar qualquer fase já percorrida a qualquer momento, mesmo com a Jornada concluída.
+
+Detalhamento técnico (schema do estado terminal, tela de conclusão, slot de vídeo): ver SPEC.md SDD-49.
 
 ### 9.2 Trilha A — Validação
 Etapas: estudo de mercado local, mapeamento de concorrentes, pesquisa com clientes potenciais, teste de demanda, estudo de viabilidade econômica.
@@ -533,7 +549,7 @@ Não detalhar fluxo de tela agora. Ao chegar a esta fase, abrir PRD específico 
 
 ## 12. Módulos Fase 3 (Ecossistema pós-abertura) — esqueleto
 
-Marketing, Financeiro, Hub B2B — ver Documento de Conceito §8. Mesma regra da seção 11: PRD próprio no momento da priorização.
+Marketing, Financeiro, Hub B2B — ver Documento de Conceito §8. **Retenção e Escala se juntam a essa lista a partir de 31/07/2026** (§9.13): eram fases reservadas no motor da Jornada desde o desenho inicial, mas viraram módulos independentes daqui pra frente — mesma razão de existir de Marketing/Financeiro/Hub B2B (reter o empreendedor depois da abertura), mesma regra de "PRD próprio no momento da priorização". Mesma regra da seção 11: PRD próprio no momento da priorização.
 
 ### 12.1 Framework de módulos (exceção à RN-2, ver §3) — construído em 29/07/2026
 

@@ -15,9 +15,10 @@ export type JornadaFase =
   | "produto"
   | "clientes"
   | "primeira_venda"
-  | "organizacao"
-  | "retencao"
-  | "escala";
+  | "organizacao";
+
+/** Estado terminal de `fase_atual` — jornada concluída (SDD-49). Não é uma `JornadaFase` (não tem `jornada_etapas` própria nem entra em `FASES`/`seedEtapasForFase`), só marca que a última fase real (`organizacao`) foi fechada. */
+export type JornadaStatus = JornadaFase | "concluida";
 
 export type JornadaEtapaTemplate = Tables<"jornada_etapa_templates">;
 export type JornadaEtapaRow = Tables<"jornada_etapas">;
@@ -229,6 +230,30 @@ export async function advanceFase(instanceId: string, fase: JornadaFase): Promis
   await seedEtapasForFase(instanceId, fase);
   const { error } = await supabase.from("jornada_instances").update({ fase_atual: fase }).eq("id", instanceId);
   if (error) throw error;
+}
+
+// ---- Conclusão da Jornada (SDD-49) ----
+
+/** Fecha a jornada (fase terminal `concluida`) — chamado ao confirmar o plano de Organização, última fase real do motor. Sem `seedEtapasForFase`: `concluida` não tem `jornada_etapa_templates` própria. */
+export async function concludeJornada(instanceId: string): Promise<void> {
+  const { error } = await supabase.from("jornada_instances").update({ fase_atual: "concluida" }).eq("id", instanceId);
+  if (error) throw error;
+}
+
+export interface JornadaConclusaoConfig {
+  videoUrl: string | null;
+}
+
+/** Config global (não por instância) da tela de conclusão — hoje só o vídeo da equipe, ainda não carregado (SDD-49: preparado pro painel admin usar no futuro, sem tela de admin própria por ora). */
+export async function getJornadaConclusaoConfig(): Promise<JornadaConclusaoConfig> {
+  const { data, error } = await supabase
+    .from("jornada_conclusao_config")
+    .select("video_url")
+    .order("atualizado_em", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (error) throw error;
+  return { videoUrl: data?.video_url ?? null };
 }
 
 // ---- Fase 3 — Planejamento: Nome da Empresa (SDD-34) ----
