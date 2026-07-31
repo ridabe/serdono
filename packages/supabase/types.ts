@@ -50,6 +50,95 @@ export type Database = {
         }
         Relationships: []
       }
+      biblioteca_aulas: {
+        Row: {
+          conteudo_id: string
+          created_at: string
+          duracao_min: number | null
+          id: string
+          ordem: number
+          titulo: string
+          video_url: string | null
+        }
+        Insert: {
+          conteudo_id: string
+          created_at?: string
+          duracao_min?: number | null
+          id?: string
+          ordem?: number
+          titulo: string
+          video_url?: string | null
+        }
+        Update: {
+          conteudo_id?: string
+          created_at?: string
+          duracao_min?: number | null
+          id?: string
+          ordem?: number
+          titulo?: string
+          video_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "biblioteca_aulas_conteudo_id_fkey"
+            columns: ["conteudo_id"]
+            isOneToOne: false
+            referencedRelation: "biblioteca_conteudos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      biblioteca_conteudos: {
+        Row: {
+          arquivo_url: string | null
+          ativo: boolean
+          conteudo_md: string | null
+          created_at: string
+          descricao: string | null
+          duracao_min: number | null
+          id: string
+          nivel: string | null
+          ordem: number
+          thumbnail_url: string | null
+          tipo: string
+          titulo: string
+          updated_at: string
+          video_url: string | null
+        }
+        Insert: {
+          arquivo_url?: string | null
+          ativo?: boolean
+          conteudo_md?: string | null
+          created_at?: string
+          descricao?: string | null
+          duracao_min?: number | null
+          id?: string
+          nivel?: string | null
+          ordem?: number
+          thumbnail_url?: string | null
+          tipo: string
+          titulo: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Update: {
+          arquivo_url?: string | null
+          ativo?: boolean
+          conteudo_md?: string | null
+          created_at?: string
+          descricao?: string | null
+          duracao_min?: number | null
+          id?: string
+          nivel?: string | null
+          ordem?: number
+          thumbnail_url?: string | null
+          tipo?: string
+          titulo?: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
       diagnostic_responses: {
         Row: {
           apetite_risco: number | null

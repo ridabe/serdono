@@ -37,6 +37,57 @@ interface KnowledgeMatch {
   category_slug: string;
 }
 
+/**
+ * Contexto do negócio do próprio usuário (SDD-50, RN-11) — o que permite a
+ * Mary conversar sobre "o seu processo", não só sobre empreendedorismo em
+ * geral. Sempre opcional: sessão anônima ou usuário sem a Jornada liberada
+ * continua usando a função exatamente como antes.
+ */
+interface BusinessContext {
+  nomeUsuario: string | null;
+  nomeEmpresa: string | null;
+  nicho: string | null;
+  faseAtual: string;
+  jornadaConcluida: boolean;
+  regime: string | null;
+  publicoAlvo: string | null;
+  diferenciais: string | null;
+  etapasConcluidas: number;
+  etapasTotais: number;
+}
+
+// deno-lint-ignore no-explicit-any
+async function loadBusinessContext(client: any, userId: string): Promise<BusinessContext | null> {
+  const { data: instance } = await client
+    .from("jornada_instances")
+    .select("id, fase_atual, nome_empresa_escolhido, regime_formalizacao, publico_alvo, diferenciais, niche_id")
+    .eq("user_id", userId)
+    .maybeSingle();
+  if (!instance) return null;
+
+  const [{ data: perfil }, { data: niche }, { data: etapas }] = await Promise.all([
+    client.from("users").select("nome").eq("id", userId).maybeSingle(),
+    instance.niche_id
+      ? client.from("niches").select("nome").eq("id", instance.niche_id).maybeSingle()
+      : Promise.resolve({ data: null }),
+    client.from("jornada_etapas").select("status").eq("jornada_instance_id", instance.id),
+  ]);
+
+  const lista = (etapas ?? []) as { status: string }[];
+  return {
+    nomeUsuario: perfil?.nome ?? null,
+    nomeEmpresa: instance.nome_empresa_escolhido,
+    nicho: niche?.nome ?? null,
+    faseAtual: instance.fase_atual,
+    jornadaConcluida: instance.fase_atual === "concluida",
+    regime: instance.regime_formalizacao,
+    publicoAlvo: instance.publico_alvo,
+    diferenciais: instance.diferenciais,
+    etapasConcluidas: lista.filter((e) => e.status === "concluida").length,
+    etapasTotais: lista.length,
+  };
+}
+
 async function embedQuestion(question: string): Promise<number[]> {
   const response = await fetch("https://api.openai.com/v1/embeddings", {
     method: "POST",
@@ -53,15 +104,29 @@ async function embedQuestion(question: string): Promise<number[]> {
   return data.data[0].embedding;
 }
 
-async function synthesizeAnswer(question: string, matches: KnowledgeMatch[]): Promise<string> {
+async function synthesizeAnswer(
+  question: string,
+  matches: KnowledgeMatch[],
+  negocio: BusinessContext | null
+): Promise<string> {
+  // Prefixo FIXO — é o que o cache de prompt guarda (RN-12). O contexto do
+  // negócio varia por usuário, então vai na mensagem, nunca aqui: colocá-lo
+  // no bloco cacheado invalidaria o cache a cada pessoa diferente.
   const system = [
-    "Você é o copiloto do Ser Dono, respondendo dúvidas de empreendedores sobre MEI, finanças",
-    "pessoais e investimentos. Responda SOMENTE com base nos trechos fornecidos abaixo — nunca",
-    "invente informação, regra, valor ou norma que não esteja neles. Se os trechos não derem conta",
-    "da pergunta, diga honestamente que não tem essa informação na base ainda, em vez de arriscar",
-    "uma resposta genérica.",
-    "Responda em português simples, 2 a 4 frases, texto plano (sem markdown). Ao final, cite a fonte",
-    "no formato 'Fonte: <nome>, <data>' — se mais de um trecho de fonte diferente foi usado, cite todas.",
+    "Você é a Mary, a mentora do Ser Dono que acompanha o empreendedor. Fale sempre em primeira",
+    "pessoa, como a Mary — nunca se refira a si mesma como 'a IA', 'assistente virtual' ou 'modelo'.",
+    "Você responde dúvidas sobre empreendedorismo, MEI, finanças pessoais e investimentos, e também",
+    "sobre o negócio específico da pessoa quando o contexto dele for fornecido.",
+    "Regras de veracidade, nesta ordem:",
+    "(1) Fato geral, regra, norma, prazo ou valor SÓ pode sair dos trechos da base de conhecimento —",
+    "nunca invente nenhum. Ao usar um trecho, cite ao final no formato 'Fonte: <nome>, <data>'.",
+    "(2) Fato sobre o negócio da pessoa (nome, nicho, fase, público) só pode sair do bloco de contexto",
+    "do negócio — não deduza nem preencha lacuna com suposição.",
+    "(3) Se não houver trecho nem contexto que sustente a resposta, diga honestamente que ainda não",
+    "tem essa informação, em vez de arriscar uma resposta genérica. Nunca invente 'Fonte:' para algo",
+    "que veio do contexto do negócio — contexto do negócio não é fonte bibliográfica.",
+    "Se a pergunta fugir de empreendedorismo e do negócio da pessoa, redirecione com gentileza.",
+    "Responda em português simples, 2 a 5 frases, texto plano (sem markdown).",
   ].join(" ");
 
   const contexto = matches.map((m) => ({
@@ -70,6 +135,14 @@ async function synthesizeAnswer(question: string, matches: KnowledgeMatch[]): Pr
     fonte: m.fonte,
     fonte_data: m.fonte_data,
   }));
+
+  const partes = [`Pergunta: ${question}`];
+  if (negocio) partes.push(`Contexto do negócio desta pessoa:\n${JSON.stringify(negocio, null, 2)}`);
+  partes.push(
+    contexto.length > 0
+      ? `Trechos da base de conhecimento:\n${JSON.stringify(contexto, null, 2)}`
+      : "Nenhum trecho relevante foi encontrado na base de conhecimento para esta pergunta."
+  );
 
   const response = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
@@ -80,14 +153,9 @@ async function synthesizeAnswer(question: string, matches: KnowledgeMatch[]): Pr
     },
     body: JSON.stringify({
       model: ANTHROPIC_MODEL,
-      max_tokens: 300,
+      max_tokens: 400,
       system: [{ type: "text", text: system, cache_control: { type: "ephemeral" } }],
-      messages: [
-        {
-          role: "user",
-          content: `Pergunta: ${question}\n\nTrechos da base de conhecimento:\n${JSON.stringify(contexto, null, 2)}`,
-        },
-      ],
+      messages: [{ role: "user", content: partes.join("\n\n") }],
     }),
   });
 
@@ -141,16 +209,26 @@ Deno.serve(async (req) => {
     const embedding = await embedQuestion(question);
     const vectorLiteral = `[${embedding.join(",")}]`;
 
-    const { data: matches, error: matchError } = await supabase.rpc("match_knowledge_chunks", {
-      query_embedding: vectorLiteral,
-      match_count: MATCH_COUNT,
-      filter_category_slug: category ?? null,
-    });
+    // O contexto do negócio é best-effort: qualquer falha aqui (usuário sem
+    // Jornada, sessão anônima, RLS) degrada pro comportamento antigo — a
+    // pergunta ainda é respondida pela base, só sem personalização.
+    const [{ data: matches, error: matchError }, negocio] = await Promise.all([
+      supabase.rpc("match_knowledge_chunks", {
+        query_embedding: vectorLiteral,
+        match_count: MATCH_COUNT,
+        filter_category_slug: category ?? null,
+      }),
+      loadBusinessContext(supabase, user.id).catch(() => null),
+    ]);
     if (matchError) throw matchError;
 
     const relevant = ((matches as KnowledgeMatch[]) ?? []).filter((m) => m.similarity >= MIN_SIMILARITY);
 
-    if (relevant.length === 0) {
+    // Sem trecho relevante E sem contexto do negócio, não há o que sustentar
+    // uma resposta — mantemos a recusa honesta. Com contexto, a Mary ainda
+    // pode falar sobre o processo da própria pessoa (SDD-50), que por
+    // definição não está na base de conhecimento.
+    if (relevant.length === 0 && !negocio) {
       return new Response(
         JSON.stringify({
           answer: "Ainda não tenho informação suficiente sobre isso na nossa base de conhecimento.",
@@ -160,7 +238,7 @@ Deno.serve(async (req) => {
       );
     }
 
-    const answer = await synthesizeAnswer(question, relevant);
+    const answer = await synthesizeAnswer(question, relevant, negocio);
 
     const sources = relevant.map((m) => ({
       titulo: m.article_titulo,

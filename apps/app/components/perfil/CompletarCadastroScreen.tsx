@@ -1,12 +1,20 @@
 import { useRouter } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
 import { Button, Logo, color, radius, space, type } from "@serdono/ui";
-import { getCurrentSession, getUserRole } from "@serdono/supabase";
+import { getCurrentSession, getUserRole, hasModuleAccess } from "@serdono/supabase";
 import { PerfilFields } from "./PerfilFields";
 import { usePerfilForm } from "./usePerfilForm";
 
-function destinationFor(role: "user" | "admin"): "/admin" | "/assistente" {
-  return role === "admin" ? "/admin" : "/assistente";
+type Session = Awaited<ReturnType<typeof getCurrentSession>>;
+
+// Mesmo destino do login (SDD-50) — sem isso, quem acabou de completar o
+// cadastro caía sempre no assistente e nunca via o painel, mesmo já tendo a
+// Jornada liberada.
+async function destinationFor(session: Session): Promise<"/admin" | "/inicio" | "/assistente"> {
+  if (getUserRole(session) === "admin") return "/admin";
+  if (!session) return "/assistente";
+  const hasJornada = await hasModuleAccess(session.user.id, "jornada-empreendedora");
+  return hasJornada ? "/inicio" : "/assistente";
 }
 
 export function CompletarCadastroScreen() {
@@ -17,7 +25,7 @@ export function CompletarCadastroScreen() {
     const ok = await form.save();
     if (!ok) return;
     const session = await getCurrentSession();
-    router.replace(destinationFor(getUserRole(session)));
+    router.replace(await destinationFor(session));
   }
 
   return (

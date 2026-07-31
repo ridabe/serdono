@@ -19,13 +19,14 @@ const BACKGROUND_PHOTO = pickEntrepreneurPhoto("cadastro");
 
 type AuthSession = NonNullable<Awaited<ReturnType<typeof getCurrentSession>>>;
 
-// Usuário comum com a Jornada Empreendedora liberada (SDD-31) continua de
-// onde parou — a jornada começa antes do login, no diagnóstico. Sem o
-// módulo, cai no assistente (comportamento anterior, inalterado).
-async function destinationFor(session: AuthSession): Promise<"/admin" | "/jornada" | "/assistente"> {
+// Desde a SDD-50, usuário com a Jornada liberada cai no PAINEL (`/inicio`),
+// não mais direto na Jornada: o painel é a casa dele (negócio, marcos,
+// módulos, biblioteca, Mary) e leva pra Jornada em um clique. Sem o módulo,
+// segue no assistente — comportamento anterior, inalterado.
+async function destinationFor(session: AuthSession): Promise<"/admin" | "/inicio" | "/assistente"> {
   if (getUserRole(session) === "admin") return "/admin";
   const hasJornada = await hasModuleAccess(session.user.id, "jornada-empreendedora");
-  return hasJornada ? "/jornada" : "/assistente";
+  return hasJornada ? "/inicio" : "/assistente";
 }
 
 export function LoginScreen() {

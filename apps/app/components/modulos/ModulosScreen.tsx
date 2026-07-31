@@ -37,8 +37,8 @@ export function ModulosScreen() {
         }}
       >
         <Logo size={28} />
-        <Pressable onPress={() => router.push("/assistente")} accessibilityRole="link" style={{ minHeight: 44, justifyContent: "center" }}>
-          <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>← Voltar</Text>
+        <Pressable onPress={() => router.push("/inicio")} accessibilityRole="link" style={{ minHeight: 44, justifyContent: "center" }}>
+          <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>← Voltar ao painel</Text>
         </Pressable>
       </View>
 

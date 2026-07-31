@@ -18,7 +18,9 @@ export function AssistenteScreen() {
     {
       id: "boas-vindas",
       role: "assistente",
-      texto: "Pode perguntar sobre MEI, abertura de negócio, finanças pessoais ou investimentos — respondo com base na nossa base de conhecimento.",
+      // Voz da Mary em 1ª pessoa (DS-15) — nunca "a IA"/"assistente virtual".
+      texto:
+        "Oi! Sou a Mary. Pode me perguntar sobre o seu negócio e sobre o caminho que você já percorreu na Jornada, ou tirar dúvidas de MEI, abertura de empresa, finanças e investimentos.",
     },
   ]);
   const [loading, setLoading] = useState(false);
@@ -75,6 +77,9 @@ export function AssistenteScreen() {
       >
         <Logo size={28} />
         <View style={{ flexDirection: "row", alignItems: "center", gap: space[3] }}>
+          <Pressable onPress={() => router.push("/inicio")} accessibilityRole="button" style={{ minHeight: 44, justifyContent: "center" }}>
+            <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>Painel</Text>
+          </Pressable>
           <Pressable onPress={() => router.push("/modulos")} accessibilityRole="button" style={{ minHeight: 44, justifyContent: "center" }}>
             <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>Módulos</Text>
           </Pressable>

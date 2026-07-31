@@ -2,6 +2,7 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Pressable, ScrollView, Text, useWindowDimensions, View } from "react-native";
 import { breakpoint, Button, Card, color, Logo, MaryAvatar, space, type } from "@serdono/ui";
+import { calcularProgressoJornada, DESCOBERTA_STEPS, FASE_JORNADA_LABEL, FASES_JORNADA } from "@serdono/core";
 import {
   getCurrentSession,
   getJornadaEtapas,
@@ -40,42 +41,13 @@ import { ValidacaoIdeiaScreen } from "./ValidacaoIdeiaScreen";
 // depois de ter CNPJ/conta PJ. Produto (SDD-42) vem logo depois de
 // Fornecedores, ainda antes de Marketing — só faz sentido divulgar depois
 // de saber o que vai vender e por quanto.
-// Retenção/Escala saíram do motor da Jornada em 31/07/2026 (SDD-49, decisão
-// do dono do produto): a Jornada termina em Organização (100%) — o que
-// continuar depois disso vira módulo independente no catálogo (SDD-30), não
-// mais fase deste array. Ver `JornadaConclusaoScreen`.
-const FASES: JornadaFase[] = [
-  "validacao_ideia",
-  "planejamento",
-  "formalizacao",
-  "financeiro",
-  "estrutura",
-  "fornecedores",
-  "produto",
-  "marketing",
-  "clientes",
-  "primeira_venda",
-  "organizacao",
-];
-
-const FASE_LABEL: Record<JornadaFase, string> = {
-  validacao_ideia: "Validação da Ideia",
-  planejamento: "Planejamento",
-  formalizacao: "Formalização",
-  marketing: "Marketing",
-  financeiro: "Financeiro",
-  estrutura: "Estrutura",
-  fornecedores: "Fornecedores",
-  produto: "Produto",
-  clientes: "Clientes",
-  primeira_venda: "Primeira Venda",
-  organizacao: "Organização",
-};
-
-// Descoberta acontece inteira antes do login (diagnóstico + escolha do
-// nicho) — não tem jornada_etapas própria (SDD-31), então esses 2 itens são
-// só apresentação, sempre concluídos.
-const DESCOBERTA_STEPS = ["Diagnóstico de perfil", "Escolha do nicho"];
+// A ordem das fases, os rótulos e o cálculo de progresso moram em
+// `packages/core/jornadaProgresso.ts` desde a SDD-50 — o painel do
+// empreendedor mostra o MESMO percentual, e duas contas separadas
+// divergiriam. Retenção/Escala saíram do motor em 31/07/2026 (SDD-49):
+// viraram módulos independentes do catálogo (SDD-30), não fases.
+const FASES = FASES_JORNADA as JornadaFase[];
+const FASE_LABEL = FASE_JORNADA_LABEL as Record<JornadaFase, string>;
 
 export function JornadaScreen() {
   const router = useRouter();
@@ -144,22 +116,12 @@ export function JornadaScreen() {
     return <EscolherNichoScreen />;
   }
 
-  // Descoberta já concluída por definição (acontece antes do login) — conta
-  // como 1 fase completa fixa no numerador. TOTAL_FASES = Descoberta + as
-  // fases de FASES. % honesta: só "validacao_ideia" tem etapas desenhadas
-  // hoje; fases sem template contam 0 de fração própria, sem fabricar um
-  // total de "16 etapas".
-  const TOTAL_FASES = FASES.length + 1;
-
   // `fase_atual === "concluida"` (SDD-49) é estado terminal, não está em
-  // `FASES` — usamos "organizacao" (última fase real) como base pro cálculo
-  // de progresso e pra trilha, e mostramos a tela de celebração por cima
-  // enquanto o usuário não clicar numa fase passada pra revisar.
+  // `FASES` — o cálculo (em `packages/core`, SDD-50) resolve isso devolvendo
+  // "organizacao" como fase efetiva, e mostramos a tela de celebração por
+  // cima enquanto o usuário não clicar numa fase passada pra revisar.
   const jornadaConcluida = jornada.fase_atual === "concluida";
-  const faseAtualEfetiva = (jornadaConcluida ? "organizacao" : (jornada.fase_atual as JornadaFase)) as JornadaFase;
   const mostrandoConclusao = jornadaConcluida && viewFase === null;
-
-  const fasesConcluidasAntesDaAtual = 1 + FASES.indexOf(faseAtualEfetiva);
 
   // `etapas` carrega o histórico de TODAS as fases já visitadas (SDD-36).
   // Formalização (SDD-38) bifurca por regime dentro da própria fase — sem
@@ -176,21 +138,20 @@ export function JornadaScreen() {
     });
   }
 
-  const etapasFaseAtual = etapasDaFase(faseAtualEfetiva);
   // Estrutura (SDD-40) filtra por relevância de nicho só pro cálculo de
   // progresso e pra trilha lateral — a tela de detalhe (`EstruturaScreen`)
   // recebe a fase completa, sem esse filtro, porque ela própria mostra os
   // itens não essenciais numa seção separada e recolhível.
-  const etapasFaseAtualRelevantes =
-    faseAtualEfetiva === "estrutura"
-      ? etapasFaseAtual.filter((e) => isEtapaEstruturaRelevante(e.template, nicheEstrutura))
-      : etapasFaseAtual;
-  const fracaoFaseAtual = jornadaConcluida
-    ? 1
-    : etapasFaseAtualRelevantes.length > 0
-      ? etapasFaseAtualRelevantes.filter((e) => e.status === "concluida").length / etapasFaseAtualRelevantes.length
-      : 0;
-  const progresso = jornadaConcluida ? 100 : Math.round(((fasesConcluidasAntesDaAtual + fracaoFaseAtual) / TOTAL_FASES) * 100);
+  function etapasRelevantesDaFase(fase: JornadaFase): JornadaEtapa[] {
+    const daFase = etapasDaFase(fase);
+    return fase === "estrutura" ? daFase.filter((e) => isEtapaEstruturaRelevante(e.template, nicheEstrutura)) : daFase;
+  }
+
+  const { percentual: progresso, faseEfetiva } = calcularProgressoJornada(
+    jornada.fase_atual,
+    FASES.flatMap((fase) => etapasRelevantesDaFase(fase).map((e) => ({ fase, concluida: e.status === "concluida" })))
+  );
+  const faseAtualEfetiva = faseEfetiva as JornadaFase;
 
   // Resumo pra `JornadaConclusaoScreen` — mesma filtragem de relevância de
   // Estrutura usada acima, sem exigir 100% em cada fase (fases "nada trava",
@@ -199,8 +160,7 @@ export function JornadaScreen() {
   const resumoFases: ResumoFase[] = [
     { label: "Descoberta", total: DESCOBERTA_STEPS.length, concluidas: DESCOBERTA_STEPS.length },
     ...FASES.map((fase) => {
-      const etapasDessaFase = etapasDaFase(fase);
-      const relevantes = fase === "estrutura" ? etapasDessaFase.filter((e) => isEtapaEstruturaRelevante(e.template, nicheEstrutura)) : etapasDessaFase;
+      const relevantes = etapasRelevantesDaFase(fase);
       return { label: FASE_LABEL[fase], total: relevantes.length, concluidas: relevantes.filter((e) => e.status === "concluida").length };
     }),
   ];
@@ -223,8 +183,7 @@ export function JornadaScreen() {
     },
     ...FASES.map((fase) => {
       const etapasDessaFase = etapasDaFase(fase);
-      const etapasRelevantesDessaFase =
-        fase === "estrutura" ? etapasDessaFase.filter((e) => isEtapaEstruturaRelevante(e.template, nicheEstrutura)) : etapasDessaFase;
+      const etapasRelevantesDessaFase = etapasRelevantesDaFase(fase);
       const primeiraPendenteDessaFase = etapasRelevantesDessaFase.findIndex((e) => e.status !== "concluida");
       const isBeingViewed = !mostrandoConclusao && faseExibida === fase;
       const steps =

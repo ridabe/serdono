@@ -123,6 +123,30 @@ export const layout = { gutterCompact: space[4], gutterMedium: space[6] } as con
 // ---- §7 Iconografia ----
 export const icon = { sm: 16, md: 20, lg: 24, xl: 32, strokeWidth: 1.75 } as const;
 
+// ---- §12 Cores de dado — gráficos (DS-19, registradas em 31/07/2026) ----
+// Rampa ORDINAL de uma matiz só (o teal da marca), não uma paleta
+// categórica: os gráficos do produto comparam magnitude e progresso, não
+// identidade de séries. Escolha deliberada — paleta categórica é o que gera
+// problema de daltonismo, e aqui não há série pra distinguir por cor.
+//
+// Validada com o script do método de dataviz contra a superfície real
+// (`bg.surface`, #FFFFFF): monotonia de luminosidade, degrau mínimo entre
+// passos, ponta clara acima de 2:1 de contraste e matiz única (spread 9°) —
+// todos PASS. Não trocar um passo isolado sem revalidar o conjunto.
+export const chart = {
+  ramp: ["#7FA9BC", "#5E93A8", "#3C7791", "#1E5B76", "#0E3A4F"],
+  /** Passo padrão para série única (linha/área/barra sem gradação). */
+  series: "#1E5B76",
+  /** Preenchimento da área sob a linha — mesma matiz, transparência baixa. */
+  seriesFill: "rgba(30,91,118,0.16)",
+  /** Ênfase: marca o ponto/estado que é o assunto do gráfico. Sempre com rótulo junto — sozinho não passa 3:1 (DS-2). */
+  accent: primitive.gold500,
+  /** Trilho de medidor e de barra de progresso. */
+  track: primitive.ink200,
+  grid: primitive.ink200,
+  axis: primitive.ink400,
+} as const;
+
 // ---- §10 Acessibilidade ----
 export const a11y = { minTouchTarget: 44 } as const;
 
