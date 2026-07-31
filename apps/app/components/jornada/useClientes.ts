@@ -166,7 +166,7 @@ export function useClientes(jornada: JornadaInstance, etapas: JornadaEtapa[], on
     setAdvancing(true);
     setError(null);
     try {
-      await advanceFase(jornada.id, "retencao");
+      await advanceFase(jornada.id, "primeira_venda");
       return true;
     } catch (e) {
       setError((e as Error).message);

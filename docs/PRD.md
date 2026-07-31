@@ -445,6 +445,21 @@ Entra logo depois de Marketing — ordem atual: ... → Produto → Marketing �
 
 Detalhamento técnico (schema de `jornada_clientes_contatos`, Edge Function, cálculo de critérios de conclusão): ver SPEC.md SDD-45.
 
+### 9.11 Fase "Primeira Venda" (desenhada em 31/07/2026)
+
+Entra logo depois de Clientes, antes de Retenção — ordem atual: ... → Marketing → Clientes → **Primeira Venda** → Retenção → Escala. É o grande marco simbólico: o momento em que o empreendedor deixa de "estar pronto pra vender" e passa a "ter vendido de verdade".
+
+**O sistema nunca pode saber, por conta própria, que uma venda aconteceu** (mesmo princípio de honestidade do §4 — nunca fabricar um dado que não tem de verdade) — mas em vez de um botão genérico "já vendi" seguido de uma mensagem de parabéns solta, esta fase **reaproveita o que a Fase Clientes já capturou**, evitando pedir de novo algo que o empreendedor já informou:
+
+1. **Recap dos clientes já conquistados** — a Fase Clientes só libera avanço com pelo menos 1 contato marcado com status `cliente` (critério de conclusão daquela fase, §9.10). Esta fase mostra esses contatos de volta, como ponto de partida — nunca pede pra cadastrar um cliente do zero.
+2. **Registro da primeira venda** — o empreendedor escolhe qual desses contatos (ou nenhum, se preferir não vincular) foi a primeira venda de verdade, e opcionalmente informa o valor. Preencher o valor é incentivado, nunca obrigatório — baixa fricção (RN-1).
+3. **Comparação com a meta, só quando o valor é informado** — se o empreendedor já tinha estimado um ticket médio na Fase Clientes, o sistema mostra a comparação ("você estimou R$ 250, vendeu R$ 300") — dado real contra dado real, nunca uma estimativa nova inventada.
+4. **Celebração** — ao registrar, a tela mostra "🎉 Parabéns! Sua empresa realizou a primeira venda." e libera o avanço para Retenção.
+
+**RN-27 (nova): diferente do padrão "nada trava" (RN-24) das fases mais recentes, o avanço para Retenção só libera depois de registrar a primeira venda** — mesmo espírito de Financeiro (SDD-39) e do critério de conclusão de Clientes (§9.10): o objetivo inteiro desta fase é esse único marco, então não faz sentido deixar passar batido. Pode editar/registrar de novo a qualquer momento depois (nada é travado permanentemente).
+
+Detalhamento técnico (schema, reaproveitamento de dados entre fases): ver SPEC.md SDD-47.
+
 ### 9.2 Trilha A — Validação
 Etapas: estudo de mercado local, mapeamento de concorrentes, pesquisa com clientes potenciais, teste de demanda, estudo de viabilidade econômica.
 **RN-18:** A etapa "estudo de viabilidade econômica" é bloqueante para a trilha C (Formalização) — não faz sentido abrir CNPJ sem viabilidade minimamente validada. É a única dependência cross-trilha do MVP; todas as demais dependências são internas à própria trilha.

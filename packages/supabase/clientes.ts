@@ -48,6 +48,18 @@ export async function removeJornadaClienteContato(id: string): Promise<void> {
   if (error) throw error;
 }
 
+/**
+ * Contatos já marcados como `cliente` — usado pela Fase Primeira Venda
+ * (SDD-47) pra deixar o empreendedor escolher qual deles foi a venda de
+ * verdade, em vez de pedir pra cadastrar um cliente do zero. Sempre
+ * não-vazio nessa fase: a Fase Clientes já exige pelo menos 1 contato
+ * `cliente` pra liberar o próprio avanço (SDD-45).
+ */
+export async function getContatosCliente(instanceId: string): Promise<JornadaClienteContato[]> {
+  const contatos = await listJornadaClientesContatos(instanceId);
+  return contatos.filter((c) => c.status === "cliente");
+}
+
 // ---- Critérios de conclusão (PRD §9.10) — calculados sobre dado real, nunca um checklist manual ----
 
 export interface CriteriosConclusaoClientes {

@@ -23,6 +23,7 @@ import { FormalizacaoScreen } from "./FormalizacaoScreen";
 import { FornecedoresScreen } from "./FornecedoresScreen";
 import { MarketingScreen } from "./MarketingScreen";
 import { PlanejamentoScreen } from "./PlanejamentoScreen";
+import { PrimeiraVendaScreen } from "./PrimeiraVendaScreen";
 import { ProdutoScreen } from "./ProdutoScreen";
 import { StepRail, type RailFaseData } from "./StepRail";
 import { ValidacaoIdeiaScreen } from "./ValidacaoIdeiaScreen";
@@ -47,6 +48,7 @@ const FASES: JornadaFase[] = [
   "produto",
   "marketing",
   "clientes",
+  "primeira_venda",
   "retencao",
   "escala",
 ];
@@ -61,6 +63,7 @@ const FASE_LABEL: Record<JornadaFase, string> = {
   fornecedores: "Fornecedores",
   produto: "Produto",
   clientes: "Clientes",
+  primeira_venda: "Primeira Venda",
   retencao: "Retenção",
   escala: "Escala",
 };
@@ -234,6 +237,8 @@ export function JornadaScreen() {
       <MarketingScreen jornada={jornada} etapas={etapasFaseExibida} onEtapasChanged={() => refreshJornada(jornada.id)} />
     ) : faseExibida === "clientes" ? (
       <ClientesScreen jornada={jornada} etapas={etapasFaseExibida} onEtapasChanged={() => refreshJornada(jornada.id)} />
+    ) : faseExibida === "primeira_venda" ? (
+      <PrimeiraVendaScreen jornada={jornada} etapas={etapasFaseExibida} onEtapasChanged={() => refreshJornada(jornada.id)} />
     ) : (
       <Card variant="default" padding={6}>
         <Text style={{ ...type.body, color: color.text.secondary }}>A próxima etapa chega em breve.</Text>

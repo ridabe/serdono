@@ -279,14 +279,14 @@ export function ClientesScreen({ jornada, etapas, onEtapasChanged }: ClientesScr
       {v.criterios.todosAtendidos ? (
         <Card variant="brand" padding={5}>
           <Text style={{ ...type.bodyStrong, color: color.text.onBrand, marginBottom: space[4] }}>
-            Todos os critérios atendidos — pode seguir para Retenção quando quiser.
+            Todos os critérios atendidos — pode seguir para Primeira Venda quando quiser.
           </Text>
-          <Button label="Avançar para Retenção" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
+          <Button label="Avançar para Primeira Venda" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
         </Card>
       ) : (
         <Card variant="default" padding={5}>
           <Text style={{ ...type.body, color: color.text.muted }}>
-            O avanço pra Retenção libera automaticamente quando todos os critérios de conclusão acima forem atendidos.
+            O avanço pra Primeira Venda libera automaticamente quando todos os critérios de conclusão acima forem atendidos.
           </Text>
         </Card>
       )}

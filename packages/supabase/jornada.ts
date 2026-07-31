@@ -14,6 +14,7 @@ export type JornadaFase =
   | "fornecedores"
   | "produto"
   | "clientes"
+  | "primeira_venda"
   | "retencao"
   | "escala";
 
@@ -418,6 +419,62 @@ export async function saveMetaCaptacao(instanceId: string, dados: MetaCaptacaoDa
   if (error) throw error;
 
   await markEtapaDone(instanceId, SLUG_CLIENTES_META);
+}
+
+/**
+ * Lê a meta de captação já salva na Fase Clientes — usado pela Fase Primeira
+ * Venda pra comparar o valor real da venda com o ticket médio estimado
+ * (dado real contra dado real, nunca uma estimativa nova inventada). `null`
+ * se o empreendedor nunca chegou a salvar uma meta.
+ */
+export async function getMetaCaptacaoSalva(instanceId: string): Promise<MetaCaptacaoDados | null> {
+  const { data: template, error: templateError } = await supabase
+    .from("jornada_etapa_templates")
+    .select("id")
+    .eq("slug", SLUG_CLIENTES_META)
+    .single();
+  if (templateError) throw templateError;
+
+  const { data, error } = await supabase
+    .from("jornada_etapas")
+    .select("dados_usuario")
+    .eq("jornada_instance_id", instanceId)
+    .eq("etapa_template_id", template.id)
+    .maybeSingle();
+  if (error) throw error;
+
+  const dados = data?.dados_usuario as unknown as Partial<MetaCaptacaoDados> | undefined;
+  return dados && dados.metaClientes != null ? (dados as MetaCaptacaoDados) : null;
+}
+
+// ---- Fase Primeira Venda (SDD-47) ----
+
+export const SLUG_PRIMEIRA_VENDA_REGISTRO = "primeira_venda_registro";
+
+export interface PrimeiraVendaDados {
+  /** Qual contato da lista pessoal (`jornada_clientes_contatos`, status `cliente`) foi a primeira venda — `null` se o empreendedor preferir não vincular. */
+  contatoId: string | null;
+  /** Valor da venda, em R$ — opcional, nunca obrigatório (RN-1, baixa fricção). */
+  valor: number | null;
+}
+
+/** Salva o registro e já marca a etapa como concluída — preencher o registro É a conclusão, mesmo espírito de `saveMetaCaptacao`. */
+export async function savePrimeiraVenda(instanceId: string, dados: PrimeiraVendaDados): Promise<void> {
+  const { data: template, error: templateError } = await supabase
+    .from("jornada_etapa_templates")
+    .select("id")
+    .eq("slug", SLUG_PRIMEIRA_VENDA_REGISTRO)
+    .single();
+  if (templateError) throw templateError;
+
+  const { error } = await supabase
+    .from("jornada_etapas")
+    .update({ dados_usuario: dados as unknown as Json })
+    .eq("jornada_instance_id", instanceId)
+    .eq("etapa_template_id", template.id);
+  if (error) throw error;
+
+  await markEtapaDone(instanceId, SLUG_PRIMEIRA_VENDA_REGISTRO);
 }
 
 // ---- Fase 7 — Estrutura (SDD-40) ----
