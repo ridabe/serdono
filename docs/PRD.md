@@ -447,18 +447,43 @@ Detalhamento técnico (schema de `jornada_clientes_contatos`, Edge Function, cá
 
 ### 9.11 Fase "Primeira Venda" (desenhada em 31/07/2026)
 
-Entra logo depois de Clientes, antes de Retenção — ordem atual: ... → Marketing → Clientes → **Primeira Venda** → Retenção → Escala. É o grande marco simbólico: o momento em que o empreendedor deixa de "estar pronto pra vender" e passa a "ter vendido de verdade".
+Entra logo depois de Clientes, antes de Organização — ordem atual: ... → Marketing → Clientes → **Primeira Venda** → Organização → Retenção → Escala. É o grande marco simbólico: o momento em que o empreendedor deixa de "estar pronto pra vender" e passa a "ter vendido de verdade".
 
 **O sistema nunca pode saber, por conta própria, que uma venda aconteceu** (mesmo princípio de honestidade do §4 — nunca fabricar um dado que não tem de verdade) — mas em vez de um botão genérico "já vendi" seguido de uma mensagem de parabéns solta, esta fase **reaproveita o que a Fase Clientes já capturou**, evitando pedir de novo algo que o empreendedor já informou:
 
 1. **Recap dos clientes já conquistados** — a Fase Clientes só libera avanço com pelo menos 1 contato marcado com status `cliente` (critério de conclusão daquela fase, §9.10). Esta fase mostra esses contatos de volta, como ponto de partida — nunca pede pra cadastrar um cliente do zero.
 2. **Registro da primeira venda** — o empreendedor escolhe qual desses contatos (ou nenhum, se preferir não vincular) foi a primeira venda de verdade, e opcionalmente informa o valor. Preencher o valor é incentivado, nunca obrigatório — baixa fricção (RN-1).
 3. **Comparação com a meta, só quando o valor é informado** — se o empreendedor já tinha estimado um ticket médio na Fase Clientes, o sistema mostra a comparação ("você estimou R$ 250, vendeu R$ 300") — dado real contra dado real, nunca uma estimativa nova inventada.
-4. **Celebração** — ao registrar, a tela mostra "🎉 Parabéns! Sua empresa realizou a primeira venda." e libera o avanço para Retenção.
+4. **Celebração** — ao registrar, a tela mostra "🎉 Parabéns! Sua empresa realizou a primeira venda." e libera o avanço para Organização.
 
-**RN-27 (nova): diferente do padrão "nada trava" (RN-24) das fases mais recentes, o avanço para Retenção só libera depois de registrar a primeira venda** — mesmo espírito de Financeiro (SDD-39) e do critério de conclusão de Clientes (§9.10): o objetivo inteiro desta fase é esse único marco, então não faz sentido deixar passar batido. Pode editar/registrar de novo a qualquer momento depois (nada é travado permanentemente).
+**RN-27 (nova): diferente do padrão "nada trava" (RN-24) das fases mais recentes, o avanço para Organização só libera depois de registrar a primeira venda** — mesmo espírito de Financeiro (SDD-39) e do critério de conclusão de Clientes (§9.10): o objetivo inteiro desta fase é esse único marco, então não faz sentido deixar passar batido. Pode editar/registrar de novo a qualquer momento depois (nada é travado permanentemente).
 
 Detalhamento técnico (schema, reaproveitamento de dados entre fases): ver SPEC.md SDD-47.
+
+### 9.12 Fase "Organização do Negócio" (desenhada em 31/07/2026)
+
+Entra logo depois de Primeira Venda, antes de Retenção — ordem atual: ... → Clientes → Primeira Venda → **Organização** → Retenção → Escala. Pergunta central: *"Agora que meu negócio começou a funcionar, como posso organizar minha rotina, meu dinheiro, meus documentos e minhas operações pra crescer sem perder o controle?"*
+
+**Posicionamento deliberado: guia de organização, não ERP.** O sistema não controla vendas, estoque, contas a pagar/receber ou pedidos individuais de verdade — ensina como organizar cada um desses pontos, gera diagnóstico, modelos pra baixar e um plano de implantação, e recomenda categoria de ferramenta externa pra quem quiser ir além da planilha. Mesmo espírito de honestidade do §4: o sistema nunca finge controlar uma operação que só existe fora dele.
+
+**MVP definido com o dono do produto (opção "os 14 itens da seção 21 do documento de concepção"):** todos os guias entram nesta rodada — a única redução real em relação ao documento de concepção original é de **granularidade de tela** (10 "etapas" do documento viram blocos de conteúdo dentro de uma única fase, não 10 etapas separadas no motor) e de **dado armazenado** (nenhuma tabela de operação real — só diagnóstico, escolhas e plano).
+
+**Os 10 blocos da tela, nesta ordem:**
+
+1. **Diagnóstico de organização** — ~15 perguntas sim/não sobre a rotina atual (separa dinheiro pessoal? registra vendas? guarda notas fiscais?). Gera um **nível de maturidade calculado** (1 a 4, nunca por IA — mesmo princípio do Fit Score, §5.3): Nível 1 "Organização inicial" até Nível 4 "Organização preparada para crescer", com pontos fortes, riscos e até 3 prioridades.
+2. **Separação entre pessoa física e empresa** — conteúdo curado sobre por que não misturar dinheiro pessoal e da empresa (a orientação mais importante da fase) + plano de 5 passos.
+3. **Organização financeira** — guia de entradas/saídas e contas a pagar/receber, com **link conceitual de volta pra Fase Financeiro** (não recalcula o que já foi calculado lá) + modelos de fluxo de caixa, contas a pagar e contas a receber pra baixar.
+4. **Organização de documentos** — estrutura de pastas recomendada + boas práticas (nomes padronizados, backup em nuvem). Sem cofre de arquivo real — é orientação, o armazenamento continua sendo do empreendedor.
+5. **Organização de estoque/materiais** — conceitos (estoque mínimo, ponto de reposição, itens críticos) + modelo pra baixar.
+6. **Organização de pedidos e serviços** — vocabulário de status sugerido + modelo pra baixar.
+7. **Rotina administrativa** — checklist de referência por frequência (diária/semanal/mensal/anual), conteúdo curado.
+8. **Ferramentas de gestão** — a IA sugere categorias de ferramenta (nunca marca específica, mesma honestidade do roteiro de Fornecedores, §9.7) adequadas ao nicho e ao nível de maturidade do diagnóstico.
+9. **Indicadores básicos** — catálogo fixo (não gerado por IA) de ~18 indicadores em 4 grupos (financeiro/comercial/operacional/clientes); o empreendedor escolhe de 3 a 5, deliberadamente pouco pra não sobrecarregar.
+10. **Plano de organização + checklist final** — plano de 30 dias (4 semanas, conteúdo fixo) personalizado só pelas prioridades reais do diagnóstico, exportável em PDF (Kit de Organização), e a confirmação final que libera o avanço.
+
+**RN-28 (nova): igual ao padrão de Primeira Venda (RN-27), o avanço para Retenção fica bloqueado até o diagnóstico e a confirmação final estarem feitos** — mas **não exige que nenhum controle esteja "funcionando perfeitamente"**: a barra de conclusão é propositalmente baixa (só responder o diagnóstico e confirmar que revisou o plano), porque o objetivo desta fase é o empreendedor compreender o processo e começar, não provar que já organizou tudo.
+
+Detalhamento técnico (schema, edge function do roteiro de ferramentas, kit de modelos): ver SPEC.md SDD-48.
 
 ### 9.2 Trilha A — Validação
 Etapas: estudo de mercado local, mapeamento de concorrentes, pesquisa com clientes potenciais, teste de demanda, estudo de viabilidade econômica.

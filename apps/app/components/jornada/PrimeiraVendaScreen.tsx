@@ -116,12 +116,12 @@ export function PrimeiraVendaScreen({ jornada, etapas, onEtapasChanged }: Primei
               Esse é só o primeiro passo — a partir de agora, siga captando e registrando cada nova venda.
             </Text>
           )}
-          <Button label="Avançar para Retenção" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
+          <Button label="Avançar para Organização" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
         </Card>
       ) : (
         <Card variant="default" padding={5}>
           <Text style={{ ...type.body, color: color.text.muted }}>
-            O avanço pra Retenção libera assim que você registrar sua primeira venda acima.
+            O avanço pra Organização libera assim que você registrar sua primeira venda acima.
           </Text>
         </Card>
       )}

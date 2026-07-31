@@ -15,6 +15,7 @@ export type JornadaFase =
   | "produto"
   | "clientes"
   | "primeira_venda"
+  | "organizacao"
   | "retencao"
   | "escala";
 
@@ -475,6 +476,63 @@ export async function savePrimeiraVenda(instanceId: string, dados: PrimeiraVenda
   if (error) throw error;
 
   await markEtapaDone(instanceId, SLUG_PRIMEIRA_VENDA_REGISTRO);
+}
+
+// ---- Fase Organização do Negócio (SDD-48) ----
+
+export const SLUG_ORGANIZACAO_DIAGNOSTICO = "organizacao_diagnostico";
+export const SLUG_ORGANIZACAO_CHECKLIST_FINAL = "organizacao_checklist_final";
+
+export interface OrganizacaoDiagnosticoResposta {
+  id: string;
+  resposta: boolean;
+}
+
+export interface OrganizacaoDiagnosticoDados {
+  respostas: OrganizacaoDiagnosticoResposta[];
+}
+
+/** Salva as respostas do diagnóstico e já marca a etapa como concluída — responder É a conclusão, mesmo espírito de `saveMetaCaptacao`. */
+export async function saveOrganizacaoDiagnostico(instanceId: string, dados: OrganizacaoDiagnosticoDados): Promise<void> {
+  const { data: template, error: templateError } = await supabase
+    .from("jornada_etapa_templates")
+    .select("id")
+    .eq("slug", SLUG_ORGANIZACAO_DIAGNOSTICO)
+    .single();
+  if (templateError) throw templateError;
+
+  const { error } = await supabase
+    .from("jornada_etapas")
+    .update({ dados_usuario: dados as unknown as Json })
+    .eq("jornada_instance_id", instanceId)
+    .eq("etapa_template_id", template.id);
+  if (error) throw error;
+
+  await markEtapaDone(instanceId, SLUG_ORGANIZACAO_DIAGNOSTICO);
+}
+
+export interface OrganizacaoChecklistFinalDados {
+  /** IDs do catálogo fixo de indicadores (`packages/supabase/organizacao.ts`) — o empreendedor escolhe de 3 a 5. */
+  indicadoresSelecionados: string[];
+}
+
+/** Confirmar o checklist final É a conclusão da fase — mesmo espírito das demais etapas de conclusão única. */
+export async function saveOrganizacaoChecklistFinal(instanceId: string, dados: OrganizacaoChecklistFinalDados): Promise<void> {
+  const { data: template, error: templateError } = await supabase
+    .from("jornada_etapa_templates")
+    .select("id")
+    .eq("slug", SLUG_ORGANIZACAO_CHECKLIST_FINAL)
+    .single();
+  if (templateError) throw templateError;
+
+  const { error } = await supabase
+    .from("jornada_etapas")
+    .update({ dados_usuario: dados as unknown as Json })
+    .eq("jornada_instance_id", instanceId)
+    .eq("etapa_template_id", template.id);
+  if (error) throw error;
+
+  await markEtapaDone(instanceId, SLUG_ORGANIZACAO_CHECKLIST_FINAL);
 }
 
 // ---- Fase 7 — Estrutura (SDD-40) ----

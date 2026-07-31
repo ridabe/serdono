@@ -86,7 +86,7 @@ export function usePrimeiraVenda(jornada: JornadaInstance, etapas: JornadaEtapa[
     setAdvancing(true);
     setError(null);
     try {
-      await advanceFase(jornada.id, "retencao");
+      await advanceFase(jornada.id, "organizacao");
       return true;
     } catch (e) {
       setError((e as Error).message);
