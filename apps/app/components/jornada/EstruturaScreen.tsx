@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, View } from "react-native";
-import { Button, Card, MaryAvatar, color, radius, space, type } from "@serdono/ui";
+import { Button, Card, CollapsibleSection, MaryAvatar, color, radius, space, type } from "@serdono/ui";
 import type { JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { useEstrutura } from "./useEstrutura";
 
@@ -118,28 +118,24 @@ export function EstruturaScreen({ jornada, etapas, onEtapasChanged }: EstruturaS
 
       {v.error ? <Text style={{ ...type.caption, color: color.state.danger }}>{v.error}</Text> : null}
 
-      <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-        <Text style={{ ...type.bodyStrong, color: color.text.primary }}>
-          Itens essenciais para o seu negócio ({v.concluidos}/{v.itensEssenciais.length})
+      <CollapsibleSection title="Itens essenciais para o seu negócio" accent="brand" rightLabel={`${v.concluidos}/${v.itensEssenciais.length}`}>
+        <Text style={{ ...type.caption, color: color.text.muted, marginBottom: space[3] }}>
+          Nenhum item bloqueia o avanço para a próxima fase — marque quando resolver, mesmo depois de já estar em
+          Fornecedores.
         </Text>
-      </View>
 
-      <Text style={{ ...type.caption, color: color.text.muted }}>
-        Nenhum item bloqueia o avanço para a próxima fase — marque quando resolver, mesmo depois de já estar em
-        Fornecedores.
-      </Text>
-
-      <View style={{ gap: space[3] }}>
-        {v.itensEssenciais.map((etapa) => (
-          <ChecklistItemCard
-            key={etapa.id}
-            etapa={etapa}
-            opcional={false}
-            toggling={v.togglingSlug === etapa.template.slug}
-            onToggle={() => v.toggleEtapa(etapa)}
-          />
-        ))}
-      </View>
+        <View style={{ gap: space[3] }}>
+          {v.itensEssenciais.map((etapa) => (
+            <ChecklistItemCard
+              key={etapa.id}
+              etapa={etapa}
+              opcional={false}
+              toggling={v.togglingSlug === etapa.template.slug}
+              onToggle={() => v.toggleEtapa(etapa)}
+            />
+          ))}
+        </View>
+      </CollapsibleSection>
 
       {v.itensOpcionais.length > 0 ? (
         <View style={{ gap: space[3] }}>

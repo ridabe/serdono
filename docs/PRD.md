@@ -433,10 +433,10 @@ Entra logo depois de Marketing — ordem atual: ... → Produto → Marketing �
 4. **Critérios de conclusão** — **diferente de toda fase anterior desde Financeiro (RN-24 — nada trava)**, o avanço para Retenção só libera quando todos os critérios reais abaixo forem verdadeiros, calculados sobre dado de verdade, nunca sobre um checklist de "criei uma conta":
    - Meta de captação definida;
    - Oferta comercial criada;
-   - Pelo menos 20 contatos cadastrados;
-   - Pelo menos 10 abordagens realizadas (status diferente de `novo`);
-   - Pelo menos 3 respostas recebidas (status `respondeu` ou além);
-   - Pelo menos 1 orçamento enviado (status `orcamento_enviado` ou além);
+   - Pelo menos N contatos cadastrados, onde N é o número de "contatos necessários" calculado a partir da própria meta de captação do bloco 1 (nunca um número fixo desconectado do que o empreendedor pediu — uma meta de 1 cliente não pode exigir o mesmo tanto de contato que uma meta de 50);
+   - Pelo menos N abordagens realizadas (status diferente de `novo`) — o mesmo N acima: "contatos necessários" já significa "contatos que você precisa abordar", então esse piso nunca pode passar do piso de contatos cadastrados;
+   - Pelo menos K respostas recebidas (status `respondeu` ou além), onde K é a própria meta de clientes do bloco 1 — pra fechar K clientes, o mínimo matematicamente possível é K respostas;
+   - Pelo menos K orçamentos enviados (status `orcamento_enviado` ou além) — mesmo K acima, mesmo raciocínio;
    - Primeiro cliente conquistado (pelo menos 1 contato com status `cliente`).
 
    Esse comportamento bloqueante é uma reintrodução deliberada do padrão de Formalização (RN-23/SDD-38) — a única outra fase que já bloqueia o avanço — e não do padrão "nada trava" (RN-24) usado por Estrutura/Fornecedores/Produto/Marketing: aqui o próprio objetivo da fase (captar cliente de verdade) só é atingido com ação real, então deixar avançar sem nenhuma abordagem feita mascararia isso.

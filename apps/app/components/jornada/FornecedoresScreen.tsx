@@ -2,7 +2,7 @@ import * as Linking from "expo-linking";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, View } from "react-native";
-import { Button, Card, Input, MaryAvatar, color, radius, space, type } from "@serdono/ui";
+import { Button, Card, CollapsibleSection, Input, MaryAvatar, color, radius, space, type } from "@serdono/ui";
 import type { FornecedorParceiro, JornadaEtapa, JornadaFornecedor, JornadaInstance } from "@serdono/supabase";
 import { useFornecedores } from "./useFornecedores";
 
@@ -99,8 +99,7 @@ export function FornecedoresScreen({ jornada, etapas, onEtapasChanged }: Fornece
 
       {v.error ? <Text style={{ ...type.caption, color: color.state.danger }}>{v.error}</Text> : null}
 
-      <Card variant="outline" padding={5}>
-        <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[1] }}>Roteiro de busca</Text>
+      <CollapsibleSection title="Roteiro de busca" accent="brand">
         <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[3] }}>
           Eu te aponto quais categorias de fornecedor o seu tipo de negócio costuma precisar, e o que avaliar em cada
           uma — não invento nome de empresa nenhuma, isso você pesquisa e confirma.
@@ -138,21 +137,19 @@ export function FornecedoresScreen({ jornada, etapas, onEtapasChanged }: Fornece
             />
           </View>
         ) : null}
-      </Card>
+      </CollapsibleSection>
 
       {v.parceiros.length > 0 ? (
-        <View style={{ gap: space[3] }}>
-          <Text style={{ ...type.bodyStrong, color: color.text.primary }}>Parceiros indicados pro seu nicho</Text>
+        <CollapsibleSection title="Parceiros indicados pro seu nicho" accent="gold">
           <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3] }}>
             {v.parceiros.map((p) => (
               <ParceiroCard key={p.id} parceiro={p} adding={v.addingFornecedor} onAdicionar={() => v.adicionarParceiro(p)} />
             ))}
           </View>
-        </View>
+        </CollapsibleSection>
       ) : null}
 
-      <Card variant="default" padding={5}>
-        <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[3] }}>Adicionar fornecedor à minha lista</Text>
+      <CollapsibleSection title="Adicionar fornecedor à minha lista" accent="info">
         <Input label="Categoria" value={categoria} onChangeText={setCategoria} placeholder="Ex.: Embalagens" />
         <Input label="Fornecedor" value={nomeFornecedor} onChangeText={setNomeFornecedor} placeholder="Nome do fornecedor" />
         <Input label="Avaliação (opcional)" value={avaliacao} onChangeText={setAvaliacao} placeholder="Ex.: 4.5 no Google" />
@@ -166,10 +163,9 @@ export function FornecedoresScreen({ jornada, etapas, onEtapasChanged }: Fornece
           disabled={!categoria.trim() || !nomeFornecedor.trim()}
           onPress={handleAdicionar}
         />
-      </Card>
+      </CollapsibleSection>
 
-      <View style={{ gap: space[3] }}>
-        <Text style={{ ...type.bodyStrong, color: color.text.primary }}>Minha lista de fornecedores ({v.lista.length})</Text>
+      <CollapsibleSection title="Minha lista de fornecedores" accent="success" rightLabel={String(v.lista.length)}>
         {v.lista.length === 0 ? (
           <Text style={{ ...type.body, color: color.text.muted }}>Nenhum fornecedor adicionado ainda.</Text>
         ) : (
@@ -179,7 +175,7 @@ export function FornecedoresScreen({ jornada, etapas, onEtapasChanged }: Fornece
             ))}
           </View>
         )}
-      </View>
+      </CollapsibleSection>
 
       <Card variant="outline" padding={5}>
         <View style={{ flexDirection: "row", gap: space[3], alignItems: "center" }}>

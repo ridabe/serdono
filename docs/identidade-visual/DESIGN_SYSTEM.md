@@ -372,6 +372,16 @@ Telas de fundo branco/canvas puro no funil de diagnóstico e cadastro ganham uma
 - **Curadoria:** preferir fotos com bastante espaço negativo, tom quente, pessoa real em contexto de pequeno negócio (loja, bancada, atendimento, notebook) — evitar fotos muito cheias/ruidosas, que não ficam sutis nem com o véu por cima.
 - **DS-14:** toda foto nova desse banco entra primeiro em `entrepreneurPhotos.ts` com URL, crédito do fotógrafo e link do perfil (mesmo a licença não exigindo atribuição, é a forma de manter rastreável de onde veio cada imagem) — nunca uma URL solta direto num componente de tela.
 
+### 9.10 Card colapsável (sanfona) de subcategoria de etapa (DS-18, registrada em 31/07/2026)
+
+Pedido do dono do produto: toda tela de etapa da Jornada Empreendedora tende a acumular vários blocos de subcategoria (ex.: na Fase Clientes — Meta de captação, Oferta comercial, Adicionar contato, Meus contatos, Critérios de conclusão) e a tela fica muito longa quando todos ficam sempre abertos ao mesmo tempo. Todo card de **subcategoria de etapa** (um bloco de conteúdo com identidade própria dentro da tela) usa o componente `CollapsibleSection` (`packages/ui/components/CollapsibleSection.tsx`), nunca um `Card` simples direto — **padrão obrigatório em toda tela nova de etapa daqui pra frente**, não só nas telas já existentes.
+
+- **Não se aplica a cards de item de lista** (uma linha de contato, um item de checklist, um resultado de calculadora dentro de uma subcategoria) — só ao container da subcategoria em si. Um card de item continua um `Card` comum.
+- **Cabeçalho:** faixa colorida à esquerda (4px) + fundo levemente tingido na cor da seção + título (`type.bodyStrong`) + contador opcional à direita (ex.: "5/5") + indicador `▾`/`▸` de expandido/retraído. Tocar em qualquer parte do cabeçalho alterna o estado — cada seção expande/retrai de forma independente, não é acordeão exclusivo (abrir uma não fecha as outras).
+- **Cor por seção — ciclo fixo de 6, `SECTION_ACCENT_CYCLE`:** `brand` → `gold` → `info` → `success` → `warning` → `danger`, reaproveitando exatamente os tokens já existentes (nenhum hex novo criado pra isso) — os 4 últimos são os mesmos pares `color.state.X`/`color.state.XBg` já usados pelo Badge de status (§9.4), o que já garante contraste aprovado. Cada tela nova atribui as cores em ordem de aparição dos cards (primeiro card = `brand`, segundo = `gold`, etc.), sem repetir uma cor adjacente quando a tela tiver 6 ou menos seções.
+- **Estado padrão:** `defaultExpanded = true` — não muda o comportamento de telas já existentes na primeira visita; o ganho de "página mais curta" vem do usuário retrair o que já resolveu, não de esconder tudo por padrão.
+- **DS-0 aplicada:** nenhuma cor nova criada — o componente só recombina tokens de `color.bg.brand`/`color.action.primary*`/`color.state.*` já existentes.
+
 ---
 
 ## 10. Acessibilidade

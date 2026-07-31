@@ -53,9 +53,17 @@ export async function removeJornadaClienteContato(id: string): Promise<void> {
 export interface CriteriosConclusaoClientes {
   metaDefinida: boolean;
   ofertaCriada: boolean;
+  /** Piso de contatos cadastrados — dinâmico, igual a `contatosNecessarios` calculado a partir da própria meta do usuário (nunca um número fixo desconectado do que ele pediu). */
+  contatosMinimos: number;
   contatosCadastrados: number;
+  /** Igual a `contatosMinimos` — não faz sentido exigir mais abordagens do que o próprio piso de contatos calculado pela meta. */
+  abordagensMinimas: number;
   abordagensRealizadas: number;
+  /** Piso derivado de `metaClientes`: pra fechar K clientes, no mínimo K pessoas precisam ter respondido — nunca mais que `abordagensMinimas`. */
+  respostasMinimas: number;
   respostasRecebidas: number;
+  /** Mesmo piso de `respostasMinimas` — pra fechar K clientes, no mínimo K orçamentos precisam ter sido enviados. */
+  orcamentosMinimos: number;
   orcamentosEnviados: number;
   primeiroClienteConquistado: boolean;
   todosAtendidos: boolean;
@@ -65,16 +73,31 @@ const STATUS_APOS_ABORDAGEM: ClienteContatoStatus[] = ["contatado", "respondeu",
 const STATUS_APOS_RESPOSTA: ClienteContatoStatus[] = ["respondeu", "orcamento_enviado", "cliente"];
 const STATUS_APOS_ORCAMENTO: ClienteContatoStatus[] = ["orcamento_enviado", "cliente"];
 
-const CONTATOS_MINIMOS = 20;
-const ABORDAGENS_MINIMAS = 10;
-const RESPOSTAS_MINIMAS = 3;
-const ORCAMENTOS_MINIMOS = 1;
-
+/**
+ * Todos os pisos derivam da própria meta do usuário — nada fixo desconectado
+ * do que ele pediu (correção de 31/07/2026, ver SPEC.md SDD-45). A cadeia é
+ * logicamente encaixada, cada piso menor ou igual ao piso anterior do funil:
+ *
+ * `contatosNecessarios` (de `calcularMetaCaptacao`) já significa "quantos
+ * contatos você precisa ABORDAR pra bater a meta" (PRD §9.10) — por isso
+ * `contatosMinimos` e `abordagensMinimas` são o MESMO número, nunca um maior
+ * que o outro. `respostasMinimas`/`orcamentosMinimos` vêm de `metaClientes`
+ * direto: pra fechar K clientes, o mínimo matematicamente possível é K
+ * respostas e K orçamentos (melhor caso, 100% de conversão em cada etapa
+ * seguinte) — nunca mais que isso, e nunca mais que `abordagensMinimas`.
+ */
 export function calcularCriteriosConclusao(
   metaDefinida: boolean,
   ofertaCriada: boolean,
-  contatos: JornadaClienteContato[]
+  contatos: JornadaClienteContato[],
+  contatosNecessarios: number,
+  metaClientes: number
 ): CriteriosConclusaoClientes {
+  const contatosMinimos = Math.max(Math.round(contatosNecessarios), 1);
+  const abordagensMinimas = contatosMinimos;
+  const respostasMinimas = Math.min(Math.max(Math.round(metaClientes), 1), abordagensMinimas);
+  const orcamentosMinimos = respostasMinimas;
+
   const contatosCadastrados = contatos.length;
   const abordagensRealizadas = contatos.filter((c) => STATUS_APOS_ABORDAGEM.includes(c.status as ClienteContatoStatus)).length;
   const respostasRecebidas = contatos.filter((c) => STATUS_APOS_RESPOSTA.includes(c.status as ClienteContatoStatus)).length;
@@ -84,25 +107,27 @@ export function calcularCriteriosConclusao(
   const todosAtendidos =
     metaDefinida &&
     ofertaCriada &&
-    contatosCadastrados >= CONTATOS_MINIMOS &&
-    abordagensRealizadas >= ABORDAGENS_MINIMAS &&
-    respostasRecebidas >= RESPOSTAS_MINIMAS &&
-    orcamentosEnviados >= ORCAMENTOS_MINIMOS &&
+    contatosCadastrados >= contatosMinimos &&
+    abordagensRealizadas >= abordagensMinimas &&
+    respostasRecebidas >= respostasMinimas &&
+    orcamentosEnviados >= orcamentosMinimos &&
     primeiroClienteConquistado;
 
   return {
     metaDefinida,
     ofertaCriada,
+    contatosMinimos,
     contatosCadastrados,
+    abordagensMinimas,
     abordagensRealizadas,
+    respostasMinimas,
     respostasRecebidas,
+    orcamentosMinimos,
     orcamentosEnviados,
     primeiroClienteConquistado,
     todosAtendidos,
   };
 }
-
-export { CONTATOS_MINIMOS, ABORDAGENS_MINIMAS, RESPOSTAS_MINIMAS, ORCAMENTOS_MINIMOS };
 
 // ---- Oferta comercial gerada por IA ----
 

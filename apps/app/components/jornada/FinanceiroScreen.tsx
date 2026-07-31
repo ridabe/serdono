@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { Text, View } from "react-native";
 import type { JornadaEtapa, JornadaInstance } from "@serdono/supabase";
-import { Button, Card, Input, MaryAvatar, color, radius, space, type } from "@serdono/ui";
+import { Button, Card, CollapsibleSection, Input, MaryAvatar, color, radius, space, type } from "@serdono/ui";
 import { formatMoney } from "../diagnostico/labels";
 import { useFinanceiro } from "./useFinanceiro";
 
@@ -102,9 +102,7 @@ export function FinanceiroScreen({ jornada, etapas, onEtapasChanged }: Financeir
 
       {v.error ? <Text style={{ ...type.caption, color: color.state.danger }}>{v.error}</Text> : null}
 
-      <Card variant="default" padding={5}>
-        <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[3] }}>Seus valores</Text>
-
+      <CollapsibleSection title="Seus valores" accent="gold">
         <Input
           label="Quanto você tem disponível hoje?"
           keyboardType="numeric"
@@ -149,8 +147,9 @@ export function FinanceiroScreen({ jornada, etapas, onEtapasChanged }: Financeir
         />
 
         <Button label="Salvar meus números" variant="outline" loading={v.saving} onPress={v.salvar} />
-      </Card>
+      </CollapsibleSection>
 
+      <CollapsibleSection title="Resultados calculados" accent="success">
       <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3] }}>
         <View style={{ flexBasis: "100%" }}>
           <ResultBlock
@@ -200,71 +199,67 @@ export function FinanceiroScreen({ jornada, etapas, onEtapasChanged }: Financeir
             destaque={resultado.lucroEsperadoMensal < 0 ? "danger" : "success"}
           />
         </View>
+      </View>
+      </CollapsibleSection>
 
-        <View style={{ flexBasis: "100%" }}>
-          <Card variant="outline" padding={5}>
-            <Text style={{ ...type.overline, color: color.text.muted, marginBottom: space[1] }}>
-              FLUXO DE CAIXA — PRÓXIMOS 12 MESES
+      <CollapsibleSection title="Fluxo de caixa — próximos 12 meses" accent="info">
+        <View style={{ backgroundColor: color.bg.surfaceAlt, borderRadius: radius.sm, padding: space[3], marginBottom: space[3] }}>
+          <Text style={{ ...type.mono, color: color.text.secondary }}>
+            Saldo do mês = Saldo do mês anterior + Lucro esperado mensal (saldo inicial = capital disponível −
+            investimento inicial)
+          </Text>
+        </View>
+
+        {resultado.mesEmQueSaldoFicaNegativo !== null ? (
+          <View
+            style={{
+              backgroundColor: color.state.dangerBg,
+              borderRadius: radius.sm,
+              padding: space[3],
+              marginBottom: space[3],
+            }}
+          >
+            <Text style={{ ...type.bodyStrong, color: color.state.danger }}>
+              {resultado.mesEmQueSaldoFicaNegativo === 0
+                ? "Seu saldo já começa negativo — o investimento inicial sozinho passa do que você tem disponível."
+                : `Nos valores atuais, seu saldo fica negativo no mês ${resultado.mesEmQueSaldoFicaNegativo}. Ajuste a receita, os custos ou o investimento pra ver o que muda.`}
             </Text>
-            <View style={{ backgroundColor: color.bg.surfaceAlt, borderRadius: radius.sm, padding: space[3], marginBottom: space[3] }}>
-              <Text style={{ ...type.mono, color: color.text.secondary }}>
-                Saldo do mês = Saldo do mês anterior + Lucro esperado mensal (saldo inicial = capital disponível −
-                investimento inicial)
-              </Text>
-            </View>
+          </View>
+        ) : (
+          <View style={{ backgroundColor: color.state.successBg, borderRadius: radius.sm, padding: space[3], marginBottom: space[3] }}>
+            <Text style={{ ...type.bodyStrong, color: color.state.success }}>
+              Nos valores atuais, seu saldo se mantém positivo nos 12 meses projetados.
+            </Text>
+          </View>
+        )}
 
-            {resultado.mesEmQueSaldoFicaNegativo !== null ? (
-              <View
+        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[2] }}>
+          {resultado.fluxoCaixa12Meses.map((m) => (
+            <View
+              key={m.mes}
+              style={{
+                flexBasis: "22%",
+                minWidth: 90,
+                backgroundColor: m.saldo < 0 ? color.state.dangerBg : color.bg.surface,
+                borderRadius: radius.sm,
+                padding: space[2],
+                borderWidth: 1,
+                borderColor: color.border.default,
+              }}
+            >
+              <Text style={{ ...type.caption, color: color.text.muted }}>Mês {m.mes}</Text>
+              <Text
                 style={{
-                  backgroundColor: color.state.dangerBg,
-                  borderRadius: radius.sm,
-                  padding: space[3],
-                  marginBottom: space[3],
+                  ...type.bodyStrong,
+                  color: m.saldo < 0 ? color.state.danger : color.text.primary,
                 }}
               >
-                <Text style={{ ...type.bodyStrong, color: color.state.danger }}>
-                  {resultado.mesEmQueSaldoFicaNegativo === 0
-                    ? "Seu saldo já começa negativo — o investimento inicial sozinho passa do que você tem disponível."
-                    : `Nos valores atuais, seu saldo fica negativo no mês ${resultado.mesEmQueSaldoFicaNegativo}. Ajuste a receita, os custos ou o investimento pra ver o que muda.`}
-                </Text>
-              </View>
-            ) : (
-              <View style={{ backgroundColor: color.state.successBg, borderRadius: radius.sm, padding: space[3], marginBottom: space[3] }}>
-                <Text style={{ ...type.bodyStrong, color: color.state.success }}>
-                  Nos valores atuais, seu saldo se mantém positivo nos 12 meses projetados.
-                </Text>
-              </View>
-            )}
-
-            <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[2] }}>
-              {resultado.fluxoCaixa12Meses.map((m) => (
-                <View
-                  key={m.mes}
-                  style={{
-                    flexBasis: "22%",
-                    minWidth: 90,
-                    backgroundColor: m.saldo < 0 ? color.state.dangerBg : color.bg.surface,
-                    borderRadius: radius.sm,
-                    padding: space[2],
-                    borderWidth: 1,
-                    borderColor: color.border.default,
-                  }}
-                >
-                  <Text style={{ ...type.caption, color: color.text.muted }}>Mês {m.mes}</Text>
-                  <Text
-                    style={{
-                      ...type.bodyStrong,
-                      color: m.saldo < 0 ? color.state.danger : color.text.primary,
-                    }}
-                  >
-                    {formatMoney(m.saldo)}
-                  </Text>
-                </View>
-              ))}
+                {formatMoney(m.saldo)}
+              </Text>
             </View>
-          </Card>
+          ))}
         </View>
-      </View>
+      </CollapsibleSection>
 
       <Card variant="outline" padding={5}>
         <View style={{ flexDirection: "row", gap: space[3], alignItems: "center" }}>

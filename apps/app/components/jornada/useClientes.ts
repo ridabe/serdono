@@ -152,7 +152,13 @@ export function useClientes(jornada: JornadaInstance, etapas: JornadaEtapa[], on
     }
   }
 
-  const criterios = calcularCriteriosConclusao(metaDefinida, oferta !== null, contatos);
+  const criterios = calcularCriteriosConclusao(
+    metaDefinida,
+    oferta !== null,
+    contatos,
+    resultado.contatosNecessarios,
+    metaInputs.metaClientes
+  );
 
   /** Diferente de toda fase desde Financeiro: só disponível quando `criterios.todosAtendidos`. */
   async function advance() {

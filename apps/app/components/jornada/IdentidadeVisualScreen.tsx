@@ -1,6 +1,6 @@
 import * as Linking from "expo-linking";
 import { Image, Text, View } from "react-native";
-import { Button, Card, Input, MaryAvatar, color, space, type } from "@serdono/ui";
+import { Button, Card, CollapsibleSection, Input, MaryAvatar, color, space, type } from "@serdono/ui";
 import type { JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { useIdentidadeVisual } from "./useIdentidadeVisual";
 
@@ -40,7 +40,7 @@ export function IdentidadeVisualScreen({ jornada, etapas, onEtapasChanged }: Ide
         </Text>
       </View>
 
-      <Card variant="default" padding={5}>
+      <CollapsibleSection title="Sobre a sua marca" accent="brand">
         <Input
           label="Valores da marca"
           value={v.valoresInput}
@@ -93,7 +93,7 @@ export function IdentidadeVisualScreen({ jornada, etapas, onEtapasChanged }: Ide
           disabled={!v.canGenerate}
           onPress={v.generate}
         />
-      </Card>
+      </CollapsibleSection>
 
       {v.loading ? null : v.slogan ? (
         <Card variant="brand" padding={5}>
@@ -103,14 +103,13 @@ export function IdentidadeVisualScreen({ jornada, etapas, onEtapasChanged }: Ide
       ) : null}
 
       {v.candidatos.length > 0 ? (
-        <View style={{ gap: space[3] }}>
-          <Text style={{ ...type.bodyStrong, color: color.text.primary }}>Escolha seu logo</Text>
+        <CollapsibleSection title="Escolha seu logo" accent="gold">
           {/* Repetido aqui (não só no card do formulário lá em cima) porque
               o erro de "Escolher" acontece nesta seção — sem isso, o
               feedback de falha ficava fora da vista de quem clica aqui e
               parecia que o botão não tinha feito nada (bug real de
               produção, 30/07/2026). */}
-          {v.error ? <Text style={{ ...type.caption, color: color.state.danger }}>{v.error}</Text> : null}
+          {v.error ? <Text style={{ ...type.caption, color: color.state.danger, marginBottom: space[3] }}>{v.error}</Text> : null}
           <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3] }}>
             {v.candidatos.map((c) => (
               <Card key={c.estilo} variant="outline" padding={4} style={{ width: 200 }}>
@@ -133,7 +132,7 @@ export function IdentidadeVisualScreen({ jornada, etapas, onEtapasChanged }: Ide
               </Card>
             ))}
           </View>
-        </View>
+        </CollapsibleSection>
       ) : null}
 
       {v.logoPath ? (

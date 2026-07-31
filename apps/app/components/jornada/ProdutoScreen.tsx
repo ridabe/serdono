@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import * as Linking from "expo-linking";
 import { Text, View } from "react-native";
-import { Button, Card, Input, MaryAvatar, color, radius, space, type } from "@serdono/ui";
+import { Button, Card, CollapsibleSection, Input, MaryAvatar, color, radius, space, type } from "@serdono/ui";
 import type { JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { useProduto } from "./useProduto";
 
@@ -59,10 +59,7 @@ export function ProdutoScreen({ jornada, etapas, onEtapasChanged }: ProdutoScree
 
       {v.error ? <Text style={{ ...type.caption, color: color.state.danger }}>{v.error}</Text> : null}
 
-      <Card variant="default" padding={5}>
-        <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[2] }}>
-          Como cadastrar o que você vende
-        </Text>
+      <CollapsibleSection title="Como cadastrar o que você vende" accent="brand">
         <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[3] }}>
           Existem dois caminhos: uma planilha ou um sistema (ERP/PDV). Pra maioria de quem tá começando, minha
           recomendação é simples: comece pela planilha. Ela é grátis, rápida de ajustar, e já te ensina os campos
@@ -74,21 +71,17 @@ export function ProdutoScreen({ jornada, etapas, onEtapasChanged }: ProdutoScree
           estoque ao mesmo tempo, ou vende em mais de um canal (loja física + online, por exemplo) — nesses casos a
           planilha começa a ficar difícil de manter sozinha.
         </Text>
-      </Card>
+      </CollapsibleSection>
 
-      <Card variant="outline" padding={5}>
-        <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[1] }}>Planilha-modelo</Text>
+      <CollapsibleSection title="Planilha-modelo" accent="gold">
         <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[3] }}>
           Já vem com os campos certos e 2 exemplos preenchidos (um produto físico, um serviço) — é só duplicar as
           linhas e trocar pelos seus dados.
         </Text>
         <Button label="Baixar planilha-modelo" variant="primary" loading={v.baixando} onPress={v.baixarModelo} />
-      </Card>
+      </CollapsibleSection>
 
-      <Card variant="default" padding={5}>
-        <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[3] }}>
-          Aula rápida: como funciona o preço
-        </Text>
+      <CollapsibleSection title="Aula rápida: como funciona o preço" accent="info">
         <View style={{ gap: space[3] }}>
           <View>
             <Text style={{ ...type.bodyStrong, color: color.text.primary }}>Custo</Text>
@@ -125,13 +118,9 @@ export function ProdutoScreen({ jornada, etapas, onEtapasChanged }: ProdutoScree
             certo.
           </Text>
         </View>
-      </Card>
+      </CollapsibleSection>
 
-      <Card variant="default" padding={5}>
-        <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[3] }}>
-          Calculadora de precificação
-        </Text>
-
+      <CollapsibleSection title="Calculadora de precificação" accent="success">
         <Input
           label="Custo unitário (R$)"
           value={String(v.inputs.custo)}
@@ -195,13 +184,10 @@ export function ProdutoScreen({ jornada, etapas, onEtapasChanged }: ProdutoScree
             </Text>
           </Card>
         )}
-      </Card>
+      </CollapsibleSection>
 
       {v.parceirosDev.length > 0 ? (
-        <Card variant="outline" padding={5}>
-          <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[1] }}>
-            Quer um sistema exclusivo pro seu negócio?
-          </Text>
+        <CollapsibleSection title="Quer um sistema exclusivo pro seu negócio?" accent="warning">
           <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[3] }}>
             Se em algum momento a planilha não bastar mais, tenho um parceiro que desenvolve sistema sob medida:
           </Text>
@@ -215,7 +201,7 @@ export function ProdutoScreen({ jornada, etapas, onEtapasChanged }: ProdutoScree
               ) : null}
             </Card>
           ))}
-        </Card>
+        </CollapsibleSection>
       ) : null}
 
       <Card variant="outline" padding={5}>

@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, View } from "react-native";
-import { Button, Card, MaryAvatar, color, radius, space, type } from "@serdono/ui";
+import { Button, Card, CollapsibleSection, MaryAvatar, color, radius, space, type } from "@serdono/ui";
 import type { JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { exportChecklistPdf, exportEtapaPdf } from "./formalizacaoPdf";
 import { useFormalizacao } from "./useFormalizacao";
@@ -152,37 +152,37 @@ export function FormalizacaoScreen({ jornada, etapas, onEtapasChanged }: Formali
 
       {v.error ? <Text style={{ ...type.caption, color: color.state.danger }}>{v.error}</Text> : null}
 
-      {!v.regime || changingRegime ? (
-        <Card variant="default" padding={5}>
-          <Text style={{ ...type.h3, color: color.text.primary, marginBottom: space[1] }}>
-            Qual o formato da sua empresa?
-          </Text>
-          <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[4] }}>
-            {v.etapaRegime?.template.dica}
-          </Text>
-          <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3] }}>
-            <Button
-              label="Sim, até R$ 81 mil por ano"
-              variant="primary"
-              loading={v.choosingRegime === "mei"}
-              onPress={async () => {
-                await v.chooseRegime("mei");
-                setChangingRegime(false);
-              }}
-            />
-            <Button
-              label="Não, pretendo faturar mais"
-              variant="outline"
-              loading={v.choosingRegime === "formal"}
-              onPress={async () => {
-                await v.chooseRegime("formal");
-                setChangingRegime(false);
-              }}
-            />
-          </View>
-        </Card>
-      ) : (
-        <Card variant="outline" padding={5}>
+      <CollapsibleSection title="Formato da empresa" accent="brand">
+        {!v.regime || changingRegime ? (
+          <>
+            <Text style={{ ...type.h3, color: color.text.primary, marginBottom: space[1] }}>
+              Qual o formato da sua empresa?
+            </Text>
+            <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[4] }}>
+              {v.etapaRegime?.template.dica}
+            </Text>
+            <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3] }}>
+              <Button
+                label="Sim, até R$ 81 mil por ano"
+                variant="primary"
+                loading={v.choosingRegime === "mei"}
+                onPress={async () => {
+                  await v.chooseRegime("mei");
+                  setChangingRegime(false);
+                }}
+              />
+              <Button
+                label="Não, pretendo faturar mais"
+                variant="outline"
+                loading={v.choosingRegime === "formal"}
+                onPress={async () => {
+                  await v.chooseRegime("formal");
+                  setChangingRegime(false);
+                }}
+              />
+            </View>
+          </>
+        ) : (
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: space[3] }}>
             <View style={{ flex: 1 }}>
               <Text style={{ ...type.caption, color: color.text.muted }}>FORMATO ESCOLHIDO</Text>
@@ -192,19 +192,20 @@ export function FormalizacaoScreen({ jornada, etapas, onEtapasChanged }: Formali
             </View>
             <Button label="Mudar" variant="ghost" size="sm" onPress={() => setChangingRegime(true)} />
           </View>
-        </Card>
-      )}
+        )}
+      </CollapsibleSection>
 
       {v.regime && !changingRegime && v.etapasCaminho.length > 0 ? (
-        <>
-          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-            <Text style={{ ...type.bodyStrong, color: color.text.primary }}>
-              Etapas ({v.etapasCaminho.filter((e) => e.status === "concluida").length}/{v.etapasCaminho.length})
-            </Text>
+        <CollapsibleSection
+          title="Etapas do caminho escolhido"
+          accent="gold"
+          rightLabel={`${v.etapasCaminho.filter((e) => e.status === "concluida").length}/${v.etapasCaminho.length}`}
+        >
+          <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
             <Button label="Baixar checklist completo" variant="ghost" size="sm" loading={exportingAll} onPress={handleExportAll} />
           </View>
 
-          <Text style={{ ...type.caption, color: color.text.muted }}>
+          <Text style={{ ...type.caption, color: color.text.muted, marginBottom: space[3] }}>
             Nenhuma etapa trava outra — pode concluir na ordem que preferir, e desmarcar pra refazer sempre que
             precisar.
           </Text>
@@ -219,7 +220,7 @@ export function FormalizacaoScreen({ jornada, etapas, onEtapasChanged }: Formali
               />
             ))}
           </View>
-        </>
+        </CollapsibleSection>
       ) : null}
 
       {v.checklistComplete ? (

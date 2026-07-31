@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, View } from "react-native";
-import { Button, Card, Input, MaryAvatar, color, radius, space, type } from "@serdono/ui";
+import { Button, Card, CollapsibleSection, Input, MaryAvatar, color, radius, space, type } from "@serdono/ui";
 import type { ClienteContatoStatus, JornadaClienteContato, JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { formatMoney } from "../diagnostico/labels";
 import { useClientes } from "./useClientes";
@@ -140,8 +140,7 @@ export function ClientesScreen({ jornada, etapas, onEtapasChanged }: ClientesScr
 
       {v.error ? <Text style={{ ...type.caption, color: color.state.danger }}>{v.error}</Text> : null}
 
-      <Card variant="default" padding={5}>
-        <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[3] }}>Sua meta de captação</Text>
+      <CollapsibleSection title="Sua meta de captação" accent="brand">
         <Input
           label="Quantos clientes você quer conquistar?"
           keyboardType="numeric"
@@ -178,10 +177,9 @@ export function ClientesScreen({ jornada, etapas, onEtapasChanged }: ClientesScr
             <Text style={{ ...type.h3, color: color.bg.brand }}>{v.resultado.contatosNecessarios}</Text>
           </View>
         </View>
-      </Card>
+      </CollapsibleSection>
 
-      <Card variant="outline" padding={5}>
-        <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[1] }}>Oferta comercial</Text>
+      <CollapsibleSection title="Oferta comercial" accent="gold">
         <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[3] }}>
           Uso o que já sei do seu negócio (nome, slogan, nicho, persona) pra montar isso — sem inventar preço ou
           desconto, essa parte você completa com a condição real.
@@ -220,20 +218,18 @@ export function ClientesScreen({ jornada, etapas, onEtapasChanged }: ClientesScr
             />
           </View>
         ) : null}
-      </Card>
+      </CollapsibleSection>
 
-      <Card variant="default" padding={5}>
-        <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[3] }}>Adicionar contato</Text>
+      <CollapsibleSection title="Adicionar contato" accent="info">
         <Input label="Nome" value={nome} onChangeText={setNome} placeholder="Nome do contato" />
         <Input label="Telefone (opcional)" value={telefone} onChangeText={setTelefone} placeholder="Ex.: (11) 99999-9999" />
         <Input label="E-mail (opcional)" value={email} onChangeText={setEmail} placeholder="Ex.: contato@email.com" />
         <Input label="Empresa (opcional)" value={empresa} onChangeText={setEmpresa} placeholder="Ex.: Buffet Alegria" />
         <Input label="Notas (opcional)" value={notas} onChangeText={setNotas} placeholder="Como chegou até você, interesse, etc." />
         <Button label="Adicionar" variant="primary" loading={v.addingContato} disabled={!nome.trim()} onPress={handleAdicionar} />
-      </Card>
+      </CollapsibleSection>
 
-      <View style={{ gap: space[3] }}>
-        <Text style={{ ...type.bodyStrong, color: color.text.primary }}>Meus contatos ({v.contatos.length})</Text>
+      <CollapsibleSection title="Meus contatos" accent="success" rightLabel={String(v.contatos.length)}>
         {v.contatos.length === 0 ? (
           <Text style={{ ...type.body, color: color.text.muted }}>Nenhum contato cadastrado ainda.</Text>
         ) : (
@@ -250,10 +246,9 @@ export function ClientesScreen({ jornada, etapas, onEtapasChanged }: ClientesScr
             ))}
           </View>
         )}
-      </View>
+      </CollapsibleSection>
 
-      <Card variant="outline" padding={5}>
-        <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[3] }}>Critérios de conclusão</Text>
+      <CollapsibleSection title="Critérios de conclusão" accent="warning">
         <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[4] }}>
           Diferente das fases anteriores, aqui o avanço só libera com ação real — captar Instagram não é o mesmo que
           captar cliente.
@@ -261,13 +256,25 @@ export function ClientesScreen({ jornada, etapas, onEtapasChanged }: ClientesScr
         <View style={{ gap: space[3] }}>
           <CriterioRow atendido={v.criterios.metaDefinida} label="Meta de captação definida" />
           <CriterioRow atendido={v.criterios.ofertaCriada} label="Oferta comercial criada" />
-          <CriterioRow atendido={v.criterios.contatosCadastrados >= 20} label={`Pelo menos 20 contatos cadastrados (${v.criterios.contatosCadastrados}/20)`} />
-          <CriterioRow atendido={v.criterios.abordagensRealizadas >= 10} label={`Pelo menos 10 abordagens realizadas (${v.criterios.abordagensRealizadas}/10)`} />
-          <CriterioRow atendido={v.criterios.respostasRecebidas >= 3} label={`Pelo menos 3 respostas recebidas (${v.criterios.respostasRecebidas}/3)`} />
-          <CriterioRow atendido={v.criterios.orcamentosEnviados >= 1} label={`Pelo menos 1 orçamento enviado (${v.criterios.orcamentosEnviados}/1)`} />
+          <CriterioRow
+            atendido={v.criterios.contatosCadastrados >= v.criterios.contatosMinimos}
+            label={`Pelo menos ${v.criterios.contatosMinimos} contatos cadastrados — baseado na sua meta (${v.criterios.contatosCadastrados}/${v.criterios.contatosMinimos})`}
+          />
+          <CriterioRow
+            atendido={v.criterios.abordagensRealizadas >= v.criterios.abordagensMinimas}
+            label={`Pelo menos ${v.criterios.abordagensMinimas} abordagens realizadas — baseado na sua meta (${v.criterios.abordagensRealizadas}/${v.criterios.abordagensMinimas})`}
+          />
+          <CriterioRow
+            atendido={v.criterios.respostasRecebidas >= v.criterios.respostasMinimas}
+            label={`Pelo menos ${v.criterios.respostasMinimas} respostas recebidas — baseado na sua meta (${v.criterios.respostasRecebidas}/${v.criterios.respostasMinimas})`}
+          />
+          <CriterioRow
+            atendido={v.criterios.orcamentosEnviados >= v.criterios.orcamentosMinimos}
+            label={`Pelo menos ${v.criterios.orcamentosMinimos} orçamentos enviados — baseado na sua meta (${v.criterios.orcamentosEnviados}/${v.criterios.orcamentosMinimos})`}
+          />
           <CriterioRow atendido={v.criterios.primeiroClienteConquistado} label="Primeiro cliente conquistado" />
         </View>
-      </Card>
+      </CollapsibleSection>
 
       {v.criterios.todosAtendidos ? (
         <Card variant="brand" padding={5}>

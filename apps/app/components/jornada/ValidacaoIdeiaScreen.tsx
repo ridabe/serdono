@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, View } from "react-native";
-import { Button, Card, Input, color, radius, space, type } from "@serdono/ui";
+import { Button, Card, CollapsibleSection, Input, color, radius, space, type } from "@serdono/ui";
 import type { JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { useValidacaoIdeia } from "./useValidacaoIdeia";
 
@@ -69,8 +69,7 @@ export function ValidacaoIdeiaScreen({ jornada, etapas, onEtapasChanged }: Valid
         </Text>
       </View>
 
-      <Card variant="outline" padding={5}>
-        <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[3] }}>Checklist</Text>
+      <CollapsibleSection title="Checklist" accent="brand" rightLabel={`${v.checklist.filter((i) => i.done).length}/${v.checklist.length}`}>
         <View style={{ gap: space[2] }}>
           {v.checklist.map((item) => (
             <View key={item.slug} style={{ flexDirection: "row", alignItems: "center", gap: space[2] }}>
@@ -79,9 +78,9 @@ export function ValidacaoIdeiaScreen({ jornada, etapas, onEtapasChanged }: Valid
             </View>
           ))}
         </View>
-      </Card>
+      </CollapsibleSection>
 
-      <Card variant="default" padding={5}>
+      <CollapsibleSection title="Seus dados" accent="gold">
         <Input label="Público-alvo" value={v.publicoAlvo} onChangeText={v.setPublicoAlvo} placeholder="Quem é o cliente ideal?" />
         <Input label="Concorrentes" value={v.concorrentes} onChangeText={v.setConcorrentes} placeholder="Quem já faz algo parecido?" />
         <Input label="Diferenciais" value={v.diferenciais} onChangeText={v.setDiferenciais} placeholder="O que te diferencia deles?" />
@@ -96,7 +95,7 @@ export function ValidacaoIdeiaScreen({ jornada, etapas, onEtapasChanged }: Valid
           disabled={!v.canGenerate}
           onPress={v.generate}
         />
-      </Card>
+      </CollapsibleSection>
 
       {v.etapaClientesReais ? (
         <Card variant={v.etapaClientesReais.status === "concluida" ? "outline" : "default"} padding={5}>
@@ -144,20 +143,18 @@ export function ValidacaoIdeiaScreen({ jornada, etapas, onEtapasChanged }: Valid
       ) : null}
 
       {persona ? (
-        <Card variant="default" padding={5}>
-          <Text style={{ ...type.h3, color: color.bg.brand, marginBottom: space[2] }}>Persona</Text>
+        <CollapsibleSection title="Persona" accent="info">
           <Text style={{ ...type.bodyStrong, color: color.text.primary }}>
             {persona.nome}, {persona.idade} anos — {persona.ocupacao}
           </Text>
           <ListSection title="Dores" items={persona.dores} />
           <ListSection title="Desejos" items={persona.desejos} />
           <Text style={{ ...type.body, color: color.text.secondary, marginTop: space[2] }}>{persona.comportamento}</Text>
-        </Card>
+        </CollapsibleSection>
       ) : null}
 
       {swot ? (
-        <Card variant="default" padding={5}>
-          <Text style={{ ...type.h3, color: color.bg.brand, marginBottom: space[3] }}>SWOT</Text>
+        <CollapsibleSection title="SWOT" accent="success">
           <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3] }}>
             <View style={{ flexGrow: 1, minWidth: 200 }}>
               <ListSection title="Forças" items={swot.forcas} />
@@ -168,12 +165,11 @@ export function ValidacaoIdeiaScreen({ jornada, etapas, onEtapasChanged }: Valid
               <ListSection title="Ameaças" items={swot.ameacas} />
             </View>
           </View>
-        </Card>
+        </CollapsibleSection>
       ) : null}
 
       {canvas ? (
-        <Card variant="default" padding={5}>
-          <Text style={{ ...type.h3, color: color.bg.brand, marginBottom: space[3] }}>Business Model Canvas</Text>
+        <CollapsibleSection title="Business Model Canvas" accent="warning">
           <View style={{ gap: space[3] }}>
             <TextBlock title="Segmentos de clientes" text={canvas.segmentos_clientes} />
             <TextBlock title="Proposta de valor" text={canvas.proposta_valor} />
@@ -185,17 +181,16 @@ export function ValidacaoIdeiaScreen({ jornada, etapas, onEtapasChanged }: Valid
             <TextBlock title="Parcerias-chave" text={canvas.parcerias_chave} />
             <TextBlock title="Estrutura de custos" text={canvas.estrutura_custos} />
           </View>
-        </Card>
+        </CollapsibleSection>
       ) : null}
 
       {propostaValor ? (
-        <Card variant="default" padding={5}>
-          <Text style={{ ...type.h3, color: color.bg.brand, marginBottom: space[2] }}>Proposta de Valor</Text>
+        <CollapsibleSection title="Proposta de Valor" accent="danger">
           <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[2] }}>{propostaValor.headline}</Text>
           <ListSection title="Dores resolvidas" items={propostaValor.dores_resolvidas} />
           <ListSection title="Ganhos entregues" items={propostaValor.ganhos_entregues} />
           <ListSection title="Diferenciais" items={propostaValor.diferenciais} />
-        </Card>
+        </CollapsibleSection>
       ) : null}
 
       <Button

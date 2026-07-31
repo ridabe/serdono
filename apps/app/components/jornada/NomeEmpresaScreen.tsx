@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import { Button, Card, Input, MaryAvatar, color, radius, space, type } from "@serdono/ui";
+import { Button, Card, CollapsibleSection, Input, MaryAvatar, color, radius, space, type } from "@serdono/ui";
 import type { JornadaInstance } from "@serdono/supabase";
 import { useNomeEmpresa } from "./useNomeEmpresa";
 
@@ -35,7 +35,7 @@ export function NomeEmpresaScreen({ jornada, onEtapasChanged }: NomeEmpresaScree
         </Text>
       </View>
 
-      <Card variant="default" padding={5}>
+      <CollapsibleSection title="Gerar nomes" accent="brand">
         <Input
           label="Palavras-chave"
           value={v.palavrasChaveInput}
@@ -56,35 +56,37 @@ export function NomeEmpresaScreen({ jornada, onEtapasChanged }: NomeEmpresaScree
           disabled={v.palavrasChaveInput.trim().length === 0}
           onPress={v.generate}
         />
-      </Card>
+      </CollapsibleSection>
 
       {v.loading ? null : v.candidatos.length > 0 ? (
-        <View style={{ gap: space[3] }}>
-          {v.candidatos.map((c) => {
-            const escolhido = v.nomeEscolhido === c.nome;
-            return (
-              <Card key={c.nome} variant={escolhido ? "brand" : "outline"} padding={5}>
-                <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: space[3] }}>
-                  <Text style={{ ...type.h3, color: escolhido ? color.text.onBrand : color.text.primary, flex: 1 }}>
-                    {c.nome}
-                  </Text>
-                  <Button
-                    label={escolhido ? "Escolhido ✓" : "Escolher"}
-                    variant={escolhido ? "secondary" : "outline"}
-                    size="sm"
-                    loading={v.choosing === c.nome}
-                    onPress={() => v.choose(c.nome)}
-                  />
-                </View>
-                <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[2], marginTop: space[3] }}>
-                  <Disponibilidade label={`${c.slug}.com.br`} disponivel={c.dominio_com_br.disponivel} />
-                  <Disponibilidade label={`${c.slug}.com`} disponivel={c.dominio_com.disponivel} />
-                  <Disponibilidade label={`@${c.slug}`} disponivel={c.instagram.disponivel} />
-                </View>
-              </Card>
-            );
-          })}
-        </View>
+        <CollapsibleSection title="Sugestões de nome" accent="gold" rightLabel={String(v.candidatos.length)}>
+          <View style={{ gap: space[3] }}>
+            {v.candidatos.map((c) => {
+              const escolhido = v.nomeEscolhido === c.nome;
+              return (
+                <Card key={c.nome} variant={escolhido ? "brand" : "outline"} padding={5}>
+                  <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: space[3] }}>
+                    <Text style={{ ...type.h3, color: escolhido ? color.text.onBrand : color.text.primary, flex: 1 }}>
+                      {c.nome}
+                    </Text>
+                    <Button
+                      label={escolhido ? "Escolhido ✓" : "Escolher"}
+                      variant={escolhido ? "secondary" : "outline"}
+                      size="sm"
+                      loading={v.choosing === c.nome}
+                      onPress={() => v.choose(c.nome)}
+                    />
+                  </View>
+                  <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[2], marginTop: space[3] }}>
+                    <Disponibilidade label={`${c.slug}.com.br`} disponivel={c.dominio_com_br.disponivel} />
+                    <Disponibilidade label={`${c.slug}.com`} disponivel={c.dominio_com.disponivel} />
+                    <Disponibilidade label={`@${c.slug}`} disponivel={c.instagram.disponivel} />
+                  </View>
+                </Card>
+              );
+            })}
+          </View>
+        </CollapsibleSection>
       ) : null}
 
       {v.nomeEscolhido ? (

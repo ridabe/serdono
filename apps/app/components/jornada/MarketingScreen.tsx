@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, View } from "react-native";
-import { Button, Card, MaryAvatar, color, radius, space, type } from "@serdono/ui";
+import { Button, Card, CollapsibleSection, MaryAvatar, color, radius, space, type } from "@serdono/ui";
 import type { JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { useMarketing } from "./useMarketing";
 
@@ -98,30 +98,24 @@ export function MarketingScreen({ jornada, etapas, onEtapasChanged }: MarketingS
 
       {v.error ? <Text style={{ ...type.caption, color: color.state.danger }}>{v.error}</Text> : null}
 
-      <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-        <Text style={{ ...type.bodyStrong, color: color.text.primary }}>
-          Contas do negócio ({v.concluidos}/{v.etapasOrdenadas.length})
+      <CollapsibleSection title="Contas do negócio" accent="brand" rightLabel={`${v.concluidos}/${v.etapasOrdenadas.length}`}>
+        <Text style={{ ...type.caption, color: color.text.muted, marginBottom: space[3] }}>
+          Nenhum item bloqueia o avanço — marque quando resolver, na ordem que preferir.
         </Text>
-      </View>
-      <Text style={{ ...type.caption, color: color.text.muted }}>
-        Nenhum item bloqueia o avanço — marque quando resolver, na ordem que preferir.
-      </Text>
 
-      <View style={{ gap: space[3] }}>
-        {v.etapasOrdenadas.map((etapa) => (
-          <ChecklistItemCard
-            key={etapa.id}
-            etapa={etapa}
-            toggling={v.togglingSlug === etapa.template.slug}
-            onToggle={() => v.toggleEtapa(etapa)}
-          />
-        ))}
-      </View>
+        <View style={{ gap: space[3] }}>
+          {v.etapasOrdenadas.map((etapa) => (
+            <ChecklistItemCard
+              key={etapa.id}
+              etapa={etapa}
+              toggling={v.togglingSlug === etapa.template.slug}
+              onToggle={() => v.toggleEtapa(etapa)}
+            />
+          ))}
+        </View>
+      </CollapsibleSection>
 
-      <Card variant="outline" padding={5}>
-        <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[1] }}>
-          Bio, posts e anúncios
-        </Text>
+      <CollapsibleSection title="Bio, posts e anúncios" accent="gold">
         <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[3] }}>
           Uso o que já sei do seu negócio (nome, slogan, nicho, persona) pra montar isso — sem inventar promoção ou
           preço, essa parte você completa com a oferta real.
@@ -177,7 +171,7 @@ export function MarketingScreen({ jornada, etapas, onEtapasChanged }: MarketingS
             />
           </View>
         ) : null}
-      </Card>
+      </CollapsibleSection>
 
       <Card variant="brand" padding={5}>
         <Text style={{ ...type.bodyStrong, color: color.text.onBrand, marginBottom: space[4] }}>
