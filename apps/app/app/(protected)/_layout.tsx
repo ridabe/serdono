@@ -2,10 +2,17 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "expo-router";
 import { ActivityIndicator, View } from "react-native";
 import { Slot } from "expo-router";
-import { color } from "@serdono/ui";
+import { color, isNativeApp } from "@serdono/ui";
 import { getCurrentSession, isAnonymousSession, supabase } from "@serdono/supabase";
+import { MobileTabBar } from "../../components/shell/MobileTabBar";
 
 const PROFILE_ROUTE = "/completar-cadastro";
+
+// Onde a barra de abas NÃO aparece no app instalado (SDD-53): o cadastro
+// incompleto é um fluxo obrigatório (dar saída por aba só faria o próprio
+// layout redirecionar de volta), e o painel administrativo é web — não tem
+// aba, e quem chegar nele por link direto navega pelo cabeçalho da tela.
+const ROTAS_SEM_TAB_BAR = [PROFILE_ROUTE, "/admin"];
 
 // Guarda de rota: exige uma sessão real (não anônima) antes de renderizar
 // qualquer tela do grupo (protected). Isso é UX, não a fronteira de
@@ -79,5 +86,15 @@ export default function ProtectedLayout() {
     );
   }
 
-  return <Slot />;
+  const mostrarTabBar =
+    isNativeApp && !ROTAS_SEM_TAB_BAR.some((rota) => pathname === rota || pathname.startsWith(`${rota}/`));
+
+  return (
+    <View style={{ flex: 1, backgroundColor: color.bg.canvas }}>
+      <View style={{ flex: 1 }}>
+        <Slot />
+      </View>
+      {mostrarTabBar ? <MobileTabBar /> : null}
+    </View>
+  );
 }

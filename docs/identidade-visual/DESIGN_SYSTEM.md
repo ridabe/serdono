@@ -399,6 +399,17 @@ Pedido do dono do produto: toda tela de etapa da Jornada Empreendedora tende a a
 - **Estado padrão:** `defaultExpanded = true` — não muda o comportamento de telas já existentes na primeira visita; o ganho de "página mais curta" vem do usuário retrair o que já resolveu, não de esconder tudo por padrão.
 - **DS-0 aplicada:** nenhuma cor nova criada — o componente só recombina tokens de `color.bg.brand`/`color.action.primary*`/`color.state.*` já existentes.
 
+### 9.11 Shell do app instalado — barra de abas e cabeçalho (DS-20, registrada em 02/08/2026)
+
+Pedido do dono do produto (02/08/2026): o app baixado da Play Store não pode ser a página web dentro de uma moldura. A **aparência de cada tela continua idêntica nas três plataformas** — o que muda é só o *shell*, ou seja, a moldura de navegação em volta do conteúdo. Ver `SPEC.md` SDD-53 para o lado técnico.
+
+- **Fronteira única:** `isNativeApp` (`packages/ui/platform.ts`), derivada de `Platform.OS !== "web"`. **Nunca usar `useWindowDimensions`/`breakpoint` pra decidir se é app** — largura estreita é web mobile, que continua tendo landing e cabeçalho de site. Largura decide layout; plataforma decide shell. São eixos diferentes.
+- **Barra de abas** (`MobileTabBar`, só nativo): fixa no rodapé, fundo `color.bg.surface`, borda superior `color.border.default`, `paddingBottom` = inset de gestos do aparelho (piso `space[2]`). Cada aba tem 44dp de alvo de toque (DS-8), ícone de 20dp (`icon.md`) + rótulo em `type.caption`.
+- **Estado ativo nunca é só cor (DS-2):** a aba ativa muda de cor (`color.action.secondary` contra `color.text.muted`), **e** engrossa o rótulo (peso 700), **e** ganha um traço de 2dp em `color.action.primary` no topo. Três sinais, porque cor sozinha não carrega estado.
+- **Cabeçalho** (`ScreenHeader`, as duas plataformas): logo à esquerda; à direita, links de navegação **só na web** (`webLinks`) e ações que valem em qualquer plataforma (`links`, ex.: "Sair" no Perfil). No app instalado o cabeçalho fica só com a marca — repetir no topo o que já é aba embaixo é exatamente o defeito que motivou esta regra.
+- **Recorte do aparelho:** `ScreenHeader` é o único ponto que soma `useSafeAreaInsets().top`; sem inset (web) mantém o `space[6]` histórico, pra a migração das telas não mexer no espaçamento da web.
+- **Ícones:** desenhados em `react-native-svg` (`apps/app/components/shell/TabIcon.tsx`) porque Lucide (§7) ainda não está instalada — traço e tamanho saem de `icon.strokeWidth`/`icon.md`, e o arquivo inteiro sai quando Lucide entrar.
+
 ---
 
 ## 10. Acessibilidade

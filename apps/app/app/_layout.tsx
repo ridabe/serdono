@@ -9,6 +9,7 @@ import {
   Inter_600SemiBold,
   Inter_700Bold,
 } from "@expo-google-fonts/inter";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { color } from "@serdono/ui";
 import { AppUpdateAlert } from "../components/AppUpdateAlert";
 
@@ -37,8 +38,11 @@ export default function RootLayout() {
     return null;
   }
 
+  // SafeAreaProvider explícito (SDD-53): as telas do app instalado leem
+  // `useSafeAreaInsets` pra respeitar status bar/notch e a barra de gestos do
+  // Android. Na web os insets são sempre 0, então o provider é inócuo lá.
   return (
-    <>
+    <SafeAreaProvider>
       <Stack
         screenOptions={{
           headerShown: false,
@@ -46,6 +50,6 @@ export default function RootLayout() {
         }}
       />
       <AppUpdateAlert />
-    </>
+    </SafeAreaProvider>
   );
 }

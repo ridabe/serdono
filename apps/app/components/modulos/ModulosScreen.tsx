@@ -1,8 +1,9 @@
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, Pressable, ScrollView, Text, View } from "react-native";
-import { Card, Logo, color, space, type } from "@serdono/ui";
+import { ActivityIndicator, ScrollView, Text, View } from "react-native";
+import { Card, color, space, type } from "@serdono/ui";
 import { getCurrentSession, listMyModules, type MyModule } from "@serdono/supabase";
+import { ScreenHeader } from "../shell/ScreenHeader";
 
 export function ModulosScreen() {
   const router = useRouter();
@@ -23,24 +24,7 @@ export function ModulosScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: color.bg.canvas }}>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          paddingHorizontal: space[5],
-          paddingTop: space[6],
-          paddingBottom: space[3],
-          borderBottomWidth: 1,
-          borderBottomColor: color.border.default,
-          backgroundColor: color.bg.surface,
-        }}
-      >
-        <Logo size={28} />
-        <Pressable onPress={() => router.push("/inicio")} accessibilityRole="link" style={{ minHeight: 44, justifyContent: "center" }}>
-          <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>← Voltar ao painel</Text>
-        </Pressable>
-      </View>
+      <ScreenHeader webLinks={[{ label: "← Voltar ao painel", onPress: () => router.push("/inicio") }]} />
 
       <ScrollView contentContainerStyle={{ padding: space[5] }}>
         <Text style={{ ...type.h1, color: color.text.primary, marginBottom: space[1] }}>Módulos</Text>

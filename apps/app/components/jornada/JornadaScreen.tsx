@@ -1,7 +1,8 @@
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, Pressable, ScrollView, Text, useWindowDimensions, View } from "react-native";
-import { breakpoint, Button, Card, color, Logo, MaryAvatar, space, type } from "@serdono/ui";
+import { ActivityIndicator, ScrollView, Text, useWindowDimensions, View } from "react-native";
+import { breakpoint, Button, Card, color, MaryAvatar, space, type } from "@serdono/ui";
+import { ScreenHeader } from "../shell/ScreenHeader";
 import { calcularProgressoJornada, DESCOBERTA_STEPS, FASE_JORNADA_LABEL, FASES_JORNADA } from "@serdono/core";
 import {
   getCurrentSession,
@@ -243,32 +244,13 @@ export function JornadaScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: color.bg.canvas }}>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          paddingHorizontal: space[5],
-          paddingTop: space[6],
-          paddingBottom: space[3],
-          borderBottomWidth: 1,
-          borderBottomColor: color.border.default,
-          backgroundColor: color.bg.surface,
-        }}
-      >
-        <Logo size={28} />
-        <View style={{ flexDirection: "row", alignItems: "center", gap: space[3] }}>
-          <Pressable onPress={() => router.push("/inicio")} accessibilityRole="button" style={{ minHeight: 44, justifyContent: "center" }}>
-            <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>← Painel</Text>
-          </Pressable>
-          <Pressable onPress={() => router.push("/perfil")} accessibilityRole="button" style={{ minHeight: 44, justifyContent: "center" }}>
-            <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>Meu perfil</Text>
-          </Pressable>
-          <Pressable onPress={handleSignOut} accessibilityRole="button" style={{ minHeight: 44, justifyContent: "center" }}>
-            <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>Sair</Text>
-          </Pressable>
-        </View>
-      </View>
+      <ScreenHeader
+        webLinks={[
+          { label: "← Painel", onPress: () => router.push("/inicio") },
+          { label: "Meu perfil", onPress: () => router.push("/perfil") },
+          { label: "Sair", onPress: handleSignOut },
+        ]}
+      />
 
       <View style={{ padding: space[5], paddingBottom: space[4], backgroundColor: color.bg.brand }}>
         <Text style={{ ...type.overline, color: color.action.primary, marginBottom: space[1] }}>SEU NEGÓCIO</Text>

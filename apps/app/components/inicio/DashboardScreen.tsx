@@ -1,8 +1,9 @@
 import { useRouter } from "expo-router";
-import { ActivityIndicator, Image, Pressable, ScrollView, Text, useWindowDimensions, View } from "react-native";
+import { ActivityIndicator, Image, ScrollView, Text, useWindowDimensions, View } from "react-native";
 import Svg, { Circle } from "react-native-svg";
-import { breakpoint, Button, Card, chart, color, Logo, MaryAvatar, radius, space, type } from "@serdono/ui";
+import { breakpoint, Button, Card, chart, color, MaryAvatar, radius, space, type } from "@serdono/ui";
 import { CONTEUDO_TIPO_LABEL, signOut, type BibliotecaConteudo, type ConteudoTipo } from "@serdono/supabase";
+import { ScreenHeader } from "../shell/ScreenHeader";
 import { formatMoney } from "../diagnostico/labels";
 import { useDashboard, type FaseResumo, type Marco } from "./useDashboard";
 
@@ -36,26 +37,15 @@ export function DashboardScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: color.bg.canvas }}>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          paddingHorizontal: space[5],
-          paddingTop: space[6],
-          paddingBottom: space[3],
-          borderBottomWidth: 1,
-          borderBottomColor: color.border.default,
-          backgroundColor: color.bg.surface,
-        }}
-      >
-        <Logo size={28} />
-        <View style={{ flexDirection: "row", alignItems: "center", gap: space[3] }}>
-          <HeaderLink label="Minha Jornada" onPress={() => router.push("/jornada")} />
-          <HeaderLink label="Meu perfil" onPress={() => router.push("/perfil")} />
-          <HeaderLink label="Sair" onPress={handleSignOut} />
-        </View>
-      </View>
+      {/* No app instalado esses três destinos são abas (SDD-53) — o cabeçalho
+          fica só com a marca. */}
+      <ScreenHeader
+        webLinks={[
+          { label: "Minha Jornada", onPress: () => router.push("/jornada") },
+          { label: "Meu perfil", onPress: () => router.push("/perfil") },
+          { label: "Sair", onPress: handleSignOut },
+        ]}
+      />
 
       <ScrollView contentContainerStyle={{ padding: space[5], gap: space[5] }}>
         {v.error ? <Text style={{ ...type.caption, color: color.state.danger }}>{v.error}</Text> : null}
@@ -122,14 +112,6 @@ export function DashboardScreen() {
         <CardBiblioteca conteudos={v.conteudos} />
       </ScrollView>
     </View>
-  );
-}
-
-function HeaderLink({ label, onPress }: { label: string; onPress: () => void }) {
-  return (
-    <Pressable onPress={onPress} accessibilityRole="button" style={{ minHeight: 44, justifyContent: "center" }}>
-      <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>{label}</Text>
-    </Pressable>
   );
 }
 

@@ -1,8 +1,9 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Pressable, ScrollView, Text, View } from "react-native";
-import { Button, Logo, color, radius, space, type } from "@serdono/ui";
+import { ScrollView, Text, View } from "react-native";
+import { Button, color, radius, space, type } from "@serdono/ui";
 import { signOut } from "@serdono/supabase";
+import { ScreenHeader } from "../shell/ScreenHeader";
 import { PerfilFields } from "./PerfilFields";
 import { usePerfilForm } from "./usePerfilForm";
 
@@ -27,33 +28,14 @@ export function PerfilScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: color.bg.canvas }}>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          paddingHorizontal: space[5],
-          paddingTop: space[6],
-          paddingBottom: space[3],
-          borderBottomWidth: 1,
-          borderBottomColor: color.border.default,
-          backgroundColor: color.bg.surface,
-        }}
-      >
-        <Logo size={28} />
-        <View style={{ flexDirection: "row", alignItems: "center", gap: space[4] }}>
-          <Pressable
-            onPress={() => (router.canGoBack() ? router.back() : router.replace("/assistente"))}
-            accessibilityRole="button"
-            style={{ minHeight: 44, justifyContent: "center" }}
-          >
-            <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>← Voltar</Text>
-          </Pressable>
-          <Pressable onPress={handleSignOut} accessibilityRole="button" style={{ minHeight: 44, justifyContent: "center" }}>
-            <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>Sair</Text>
-          </Pressable>
-        </View>
-      </View>
+      {/* "Sair" fica nas duas plataformas: no app é a única saída da conta,
+          já que Perfil é uma aba e não tem "voltar" pra lugar nenhum. */}
+      <ScreenHeader
+        webLinks={[
+          { label: "← Voltar", onPress: () => (router.canGoBack() ? router.back() : router.replace("/assistente")) },
+        ]}
+        links={[{ label: "Sair", onPress: handleSignOut }]}
+      />
 
       <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: "center", padding: space[5] }}>
         <View style={{ width: "100%", maxWidth: 420, paddingTop: space[6] }}>

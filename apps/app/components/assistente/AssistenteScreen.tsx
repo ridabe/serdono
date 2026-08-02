@@ -1,8 +1,9 @@
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Image, Pressable, ScrollView, Text, TextInput, View } from "react-native";
-import { Logo, color, radius, space, type } from "@serdono/ui";
+import { color, radius, space, type } from "@serdono/ui";
 import { askKnowledgeBase, getCurrentSession, signOut, supabase, type KnowledgeSource } from "@serdono/supabase";
+import { ScreenHeader } from "../shell/ScreenHeader";
 
 interface Message {
   id: string;
@@ -62,27 +63,13 @@ export function AssistenteScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: color.bg.canvas }}>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          paddingHorizontal: space[5],
-          paddingTop: space[6],
-          paddingBottom: space[3],
-          borderBottomWidth: 1,
-          borderBottomColor: color.border.default,
-          backgroundColor: color.bg.surface,
-        }}
-      >
-        <Logo size={28} />
-        <View style={{ flexDirection: "row", alignItems: "center", gap: space[3] }}>
-          <Pressable onPress={() => router.push("/inicio")} accessibilityRole="button" style={{ minHeight: 44, justifyContent: "center" }}>
-            <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>Painel</Text>
-          </Pressable>
-          <Pressable onPress={() => router.push("/modulos")} accessibilityRole="button" style={{ minHeight: 44, justifyContent: "center" }}>
-            <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>Módulos</Text>
-          </Pressable>
+      <ScreenHeader
+        webLinks={[
+          { label: "Painel", onPress: () => router.push("/inicio") },
+          { label: "Módulos", onPress: () => router.push("/modulos") },
+          { label: "Sair", onPress: handleSignOut },
+        ]}
+        webRight={
           <Pressable
             onPress={() => router.push("/perfil")}
             accessibilityRole="button"
@@ -108,11 +95,8 @@ export function AssistenteScreen() {
               </View>
             ) : null}
           </Pressable>
-          <Pressable onPress={handleSignOut} accessibilityRole="button" style={{ minHeight: 44, justifyContent: "center" }}>
-            <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>Sair</Text>
-          </Pressable>
-        </View>
-      </View>
+        }
+      />
 
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: space[5], gap: space[4] }}>
         {messages.map((m) => (
