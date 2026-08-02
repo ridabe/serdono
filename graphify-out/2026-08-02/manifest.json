@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1785683349.0790932,
-    "ast_hash": "a1e5dde6ed2c3b2b713ec928b585e4e9",
+    "mtime": 1785690395.674513,
+    "ast_hash": "e4d7b1bd48cd63fa96179ea4c2f8ccb3",
     "semantic_hash": ""
   },
   ".mcp.json": {
@@ -25,8 +25,8 @@
     "semantic_hash": ""
   },
   "apps/app/app/_layout.tsx": {
-    "mtime": 1785331031.7788188,
-    "ast_hash": "12d449e24858cd216b5cdb0b2b4b7e63",
+    "mtime": 1785687435.8566625,
+    "ast_hash": "0fd3b7aae66aeafe324f77854c634c99",
     "semantic_hash": ""
   },
   "apps/app/app/cadastro/bem-vindo.tsx": {
@@ -50,8 +50,8 @@
     "semantic_hash": ""
   },
   "apps/app/app/index.tsx": {
-    "mtime": 1785250087.904413,
-    "ast_hash": "f6d9aa371d0f3b52c1583f2cba40dd74",
+    "mtime": 1785688437.1926641,
+    "ast_hash": "d1f3a8cf9a9f9dc968bd621c175e0ae4",
     "semantic_hash": ""
   },
   "apps/app/babel.config.js": {
@@ -220,8 +220,8 @@
     "semantic_hash": ""
   },
   "packages/ui/index.ts": {
-    "mtime": 1785501208.7670624,
-    "ast_hash": "d03453accd992d2084be3d489fd7f686",
+    "mtime": 1785687274.1130779,
+    "ast_hash": "e45e35b4b6bd5a79d23a4bd4a9ed9673",
     "semantic_hash": ""
   },
   "packages/ui/package.json": {
@@ -270,13 +270,13 @@
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1785686005.4986093,
-    "ast_hash": "2850267d028bad2b8c1d4cc03a856206",
+    "mtime": 1785688780.7970653,
+    "ast_hash": "62598cde91faba79b3eda05be418ff18",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
-    "mtime": 1785682721.958304,
-    "ast_hash": "9598c707f823b797e0f56eec113003b1",
+    "mtime": 1785688708.342007,
+    "ast_hash": "fa6f8cf1e579d7c9eaf7917cc5b1b1ec",
     "semantic_hash": ""
   },
   "docs/identidade-visual/Ser Dono - Painel de Conceitos de Marca.html": {
@@ -365,8 +365,8 @@
     "semantic_hash": ""
   },
   "apps/app/app/(protected)/_layout.tsx": {
-    "mtime": 1785288336.2275984,
-    "ast_hash": "f8c6c452bfa44ff6bf0331eba507ef7b",
+    "mtime": 1785687336.1808686,
+    "ast_hash": "a7e6048c3cfbfc6726fcabce9e376f3b",
     "semantic_hash": ""
   },
   "apps/app/app/(protected)/admin/_layout.tsx": {
@@ -400,8 +400,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/assistente/AssistenteScreen.tsx": {
-    "mtime": 1785514025.2116833,
-    "ast_hash": "eb16863c4fbdd96614a0c9440b1e2967",
+    "mtime": 1785687635.4789305,
+    "ast_hash": "45eacb89c87bb9fddbe27c22cd9de4f1",
     "semantic_hash": ""
   },
   "apps/app/components/login/LoginScreen.tsx": {
@@ -435,8 +435,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/perfil/PerfilScreen.tsx": {
-    "mtime": 1785288981.2998548,
-    "ast_hash": "dc23064538982a8dffb0aedfcb4d3ae9",
+    "mtime": 1785687675.8794775,
+    "ast_hash": "5de4b978052982e987e0d3968e744e5f",
     "semantic_hash": ""
   },
   "apps/app/components/perfil/usePerfilForm.ts": {
@@ -520,8 +520,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/modulos/ModulosScreen.tsx": {
-    "mtime": 1785514029.784563,
-    "ast_hash": "50c293950a5079b2fdbe16d3e72e59da",
+    "mtime": 1785687653.6529334,
+    "ast_hash": "0a618f23bba19dff674366fd7097c712",
     "semantic_hash": ""
   },
   "apps/app/eas.json": {
@@ -580,8 +580,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/jornada/JornadaScreen.tsx": {
-    "mtime": 1785684027.4897044,
-    "ast_hash": "d9da8fef4d82af4f2f148b5aafbbb49f",
+    "mtime": 1785687513.1752403,
+    "ast_hash": "03ec3b18da941be804840a314c57c919",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/ValidacaoIdeiaScreen.tsx": {
@@ -1025,8 +1025,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/inicio/DashboardScreen.tsx": {
-    "mtime": 1785513961.0985732,
-    "ast_hash": "e86f876186c62e83adc7ae072c879ac9",
+    "mtime": 1785687473.2147372,
+    "ast_hash": "13006c43ad34eb34dae07164bce8f719",
     "semantic_hash": ""
   },
   "apps/app/components/inicio/useDashboard.ts": {
@@ -1157,6 +1157,31 @@
   "supabase/migrations/20260731200000_expandir_nichos.sql": {
     "mtime": 1785685478.5763776,
     "ast_hash": "86eb0f5e442c52de682714f94c0e95d7",
+    "semantic_hash": ""
+  },
+  "apps/app/components/boasVindas/AppWelcomeScreen.tsx": {
+    "mtime": 1785688408.6607926,
+    "ast_hash": "fb5cff2b8dbf8e6407cb770a53fa9f09",
+    "semantic_hash": ""
+  },
+  "apps/app/components/shell/MobileTabBar.tsx": {
+    "mtime": 1785687316.9750612,
+    "ast_hash": "ab3ebce3f00f79125becf48d7862f679",
+    "semantic_hash": ""
+  },
+  "apps/app/components/shell/ScreenHeader.tsx": {
+    "mtime": 1785688175.5251415,
+    "ast_hash": "0482e5656c2ecd004c96adf3cc9cd71b",
+    "semantic_hash": ""
+  },
+  "apps/app/components/shell/TabIcon.tsx": {
+    "mtime": 1785687290.9380107,
+    "ast_hash": "2e932d28154cc3b52c01401bc58142f2",
+    "semantic_hash": ""
+  },
+  "packages/ui/platform.ts": {
+    "mtime": 1785688608.3515446,
+    "ast_hash": "6ae35b30593d9146f1423322acf4ebd6",
     "semantic_hash": ""
   }
 }

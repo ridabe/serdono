@@ -4,10 +4,13 @@ import { HoverLift, Reveal, color, content, motion, radius, space, type } from "
 
 /**
  * Catálogo de módulos mostrado na landing. `disponivel` reflete o que existe
- * de verdade hoje: a Jornada Empreendedora (PRD §9) e a base de conhecimento
- * com 30 artigos + assistente (SPEC SDD-21). Tutoriais e Calculadora de
- * Precificação são compromisso de roadmap declarado pelo dono do produto
- * (PRD §12.2) — rotulados "em breve", nunca como prontos (PRD §4).
+ * de verdade hoje (PRD §4/§12.2): Jornada Empreendedora (PRD §9), base de
+ * conhecimento com 30 artigos + assistente (SDD-21), Retenção de Clientes
+ * (PRD §12.5, SDD-54) e a calculadora de precificação — que **não é módulo
+ * separado**: ela já está em produção dentro da fase Produto da Jornada
+ * (§9.9, SDD-42), e ficou rotulada "em breve" aqui por descuido até
+ * 02/08/2026, anunciando como futuro algo já entregue. Tutoriais segue sendo
+ * o único compromisso de roadmap ainda não construído.
  */
 const modulos = [
   {
@@ -23,6 +26,12 @@ const modulos = [
     disponivel: true,
   },
   {
+    nome: "Retenção de Clientes",
+    tagline: "Cliente que volta custa menos que cliente novo",
+    body: "Sua carteira num lugar só: quem está em dia, quem está esfriando e quem sumiu — calculado pelo ritmo do seu negócio. A Mary escreve a mensagem pra você trazer a pessoa de volta.",
+    disponivel: true,
+  },
+  {
     nome: "Tutoriais",
     tagline: "Ver alguém fazendo antes de fazer",
     body: "Passo a passo prático das tarefas que travam todo mundo: emitir nota, abrir conta PJ, usar cada ferramenta do produto sem medo de errar.",
@@ -30,9 +39,9 @@ const modulos = [
   },
   {
     nome: "Calculadora de Precificação",
-    tagline: "O erro que fecha mais negócio no Brasil",
+    tagline: "Dentro da Jornada, na fase Produto",
     body: "Aprenda a dar preço de verdade: some seus custos, escolha sua margem e descubra o que sobra no fim do mês — antes de cobrar barato demais e descobrir tarde.",
-    disponivel: false,
+    disponivel: true,
   },
 ];
 

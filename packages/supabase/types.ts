@@ -847,6 +847,147 @@ export type Database = {
         }
         Relationships: []
       }
+      retencao_clientes: {
+        Row: {
+          created_at: string
+          email: string | null
+          empresa: string | null
+          id: string
+          nome: string
+          notas: string | null
+          origem: string
+          origem_contato_id: string | null
+          telefone: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          empresa?: string | null
+          id?: string
+          nome: string
+          notas?: string | null
+          origem?: string
+          origem_contato_id?: string | null
+          telefone?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          empresa?: string | null
+          id?: string
+          nome?: string
+          notas?: string | null
+          origem?: string
+          origem_contato_id?: string | null
+          telefone?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "retencao_clientes_origem_contato_id_fkey"
+            columns: ["origem_contato_id"]
+            isOneToOne: false
+            referencedRelation: "jornada_clientes_contatos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      retencao_config: {
+        Row: {
+          ciclo_recompra_dias: number
+          created_at: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          ciclo_recompra_dias: number
+          created_at?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          ciclo_recompra_dias?: number
+          created_at?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      retencao_interacoes: {
+        Row: {
+          cliente_id: string
+          created_at: string
+          id: string
+          notas: string | null
+          ocorrida_em: string
+          tipo: string
+          valor: number | null
+        }
+        Insert: {
+          cliente_id: string
+          created_at?: string
+          id?: string
+          notas?: string | null
+          ocorrida_em?: string
+          tipo: string
+          valor?: number | null
+        }
+        Update: {
+          cliente_id?: string
+          created_at?: string
+          id?: string
+          notas?: string | null
+          ocorrida_em?: string
+          tipo?: string
+          valor?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "retencao_interacoes_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "retencao_clientes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      retencao_roteiros: {
+        Row: {
+          cliente_id: string
+          conteudo: Json
+          created_at: string
+          updated_at: string
+          versao: number
+        }
+        Insert: {
+          cliente_id: string
+          conteudo: Json
+          created_at?: string
+          updated_at?: string
+          versao?: number
+        }
+        Update: {
+          cliente_id?: string
+          conteudo?: Json
+          created_at?: string
+          updated_at?: string
+          versao?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "retencao_roteiros_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: true
+            referencedRelation: "retencao_clientes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_modules: {
         Row: {
           habilitado: boolean

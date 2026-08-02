@@ -12,4 +12,5 @@ export * from "./marketing";
 export * from "./clientes";
 export * from "./organizacao";
 export * from "./biblioteca";
+export * from "./retencao";
 export type { Database } from "./types";

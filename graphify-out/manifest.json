@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1785690395.674513,
-    "ast_hash": "e4d7b1bd48cd63fa96179ea4c2f8ccb3",
+    "mtime": 1785703035.0563717,
+    "ast_hash": "d160591de27c508b6ac54cc8e71bc0e5",
     "semantic_hash": ""
   },
   ".mcp.json": {
@@ -160,8 +160,8 @@
     "semantic_hash": ""
   },
   "packages/core/index.ts": {
-    "mtime": 1785513514.9203992,
-    "ast_hash": "587725cde42b191cc94eea50ff5bf481",
+    "mtime": 1785701890.1874304,
+    "ast_hash": "f3429351d0a025245215c8d53983ca7f",
     "semantic_hash": ""
   },
   "packages/core/package.json": {
@@ -180,8 +180,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/index.ts": {
-    "mtime": 1785513380.449427,
-    "ast_hash": "4c68144ca6f437caca356ca781642423",
+    "mtime": 1785702080.940334,
+    "ast_hash": "94b9b18814685b768d09229a237d3fc8",
     "semantic_hash": ""
   },
   "packages/supabase/package.json": {
@@ -200,8 +200,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/types.ts": {
-    "mtime": 1785685356.580148,
-    "ast_hash": "c861b0f94b66ac83b109cbfa010839e8",
+    "mtime": 1785701816.9298244,
+    "ast_hash": "0ed15fc7a17981ccd6a036df5d6f750a",
     "semantic_hash": ""
   },
   "packages/ui/components/Button.tsx": {
@@ -265,13 +265,13 @@
     "semantic_hash": ""
   },
   "docs/PRD.md": {
-    "mtime": 1785686033.8715534,
-    "ast_hash": "4b8546588f4c0af4c8b3c5c42f816fea",
+    "mtime": 1785702797.9601626,
+    "ast_hash": "3b0060e7c808d7c1d01289653715e5a1",
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1785688780.7970653,
-    "ast_hash": "62598cde91faba79b3eda05be418ff18",
+    "mtime": 1785702881.9905503,
+    "ast_hash": "61b972437bf0015bb7fafb96972a022b",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
@@ -520,8 +520,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/modulos/ModulosScreen.tsx": {
-    "mtime": 1785687653.6529334,
-    "ast_hash": "0a618f23bba19dff674366fd7097c712",
+    "mtime": 1785702381.5376425,
+    "ast_hash": "3407d991e8dc203ec36e33ef8882e5cd",
     "semantic_hash": ""
   },
   "apps/app/eas.json": {
@@ -670,7 +670,7 @@
     "semantic_hash": ""
   },
   "supabase/.temp/linked-project.json": {
-    "mtime": 1785509821.100618,
+    "mtime": 1785701746.7998264,
     "ast_hash": "0b40e53eb48cdaef30bbaa973a8d3f88",
     "semantic_hash": ""
   },
@@ -785,8 +785,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/home/ModulesSection.tsx": {
-    "mtime": 1785374845.5731232,
-    "ast_hash": "0a6ef833d51606fd9c7a835b499b3af9",
+    "mtime": 1785702838.9727402,
+    "ast_hash": "5ed0b179030447cb48aece81f63aa646",
     "semantic_hash": ""
   },
   "apps/app/components/home/PromiseSection.tsx": {
@@ -1182,6 +1182,46 @@
   "packages/ui/platform.ts": {
     "mtime": 1785688608.3515446,
     "ast_hash": "6ae35b30593d9146f1423322acf4ebd6",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/retencao/index.tsx": {
+    "mtime": 1785702349.3386688,
+    "ast_hash": "04ae1255193811de2e5186552c40e126",
+    "semantic_hash": ""
+  },
+  "apps/app/components/retencao/RetencaoScreen.tsx": {
+    "mtime": 1785702546.3973298,
+    "ast_hash": "d9f0497243cbd5c8b28a77204185ff0e",
+    "semantic_hash": ""
+  },
+  "apps/app/components/retencao/useRetencao.ts": {
+    "mtime": 1785702261.0712037,
+    "ast_hash": "3ad63af625342d81f46cfc0d5b392a6d",
+    "semantic_hash": ""
+  },
+  "packages/core/retencao.test.ts": {
+    "mtime": 1785701882.6319969,
+    "ast_hash": "bf888adc87ae03db1b2ce97804ca467a",
+    "semantic_hash": ""
+  },
+  "packages/core/retencao.ts": {
+    "mtime": 1785701851.3161945,
+    "ast_hash": "69aa0f9c7120af263ba729c101f34afe",
+    "semantic_hash": ""
+  },
+  "packages/supabase/retencao.ts": {
+    "mtime": 1785702072.2430713,
+    "ast_hash": "76586479d7e662557be421d4b79d7efa",
+    "semantic_hash": ""
+  },
+  "supabase/functions/retencao-gerar-roteiro/index.ts": {
+    "mtime": 1785702127.049331,
+    "ast_hash": "a001fce63fa8338219561d70e7e6ea11",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20260802120000_modulo_retencao.sql": {
+    "mtime": 1785701704.7224464,
+    "ast_hash": "29c591a70a642d9602421d3dc3335c60",
     "semantic_hash": ""
   }
 }

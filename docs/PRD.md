@@ -578,7 +578,7 @@ A home passou a apresentar o catálogo de módulos do produto, para que o visita
 | **Jornada Empreendedora** | Disponível | §9, SPEC.md SDD-31 a SDD-36 |
 | **Materiais sobre empreendedorismo** | Disponível | Base de 30 artigos curados com fonte/data + assistente sobre ela (SPEC.md SDD-21) |
 | **Tutoriais** | Em breve | Passo a passo prático das tarefas operacionais que travam o empreendedor (emitir nota, abrir conta PJ, usar cada ferramenta) — sem PRD próprio ainda |
-| **Calculadora de Precificação** | Em breve | Ensinar a formar preço: custo, margem e resultado. Tem sobreposição conceitual com a fase "Financeiro" da Jornada (§9) — **decidir na priorização se é módulo separado ou etapa daquela fase**, para não construir a mesma conta em dois lugares |
+| **Calculadora de Precificação** | ~~Em breve~~ → **é etapa da Jornada, não módulo** (decidido em 02/08/2026) | A dúvida registrada aqui ("módulo separado ou etapa?") foi resolvida pelos fatos: a calculadora **já existe e está em produção** dentro da fase Produto (§9.9, `packages/core/precificacao.ts`, SDD-42). Manter o rótulo "Em breve" na landing anunciava como futuro algo já entregue — corrigido no mesmo turno. Não haverá módulo separado: seria a mesma conta em dois lugares |
 
 **Regra:** enquanto um módulo estiver "em breve", ele aparece na landing com o rótulo visível e **sem link** para uma tela que não existe. Nenhum módulo sai de "em breve" na landing antes de estar utilizável em produção.
 
@@ -602,6 +602,29 @@ A home passou a apresentar o catálogo de módulos do produto, para que o visita
 7. **Conversar com a Mary** — atalho para o assistente (`/assistente`), que a partir desta mesma data passa a receber o **contexto do negócio da pessoa** quando ela tiver uma Jornada em andamento (nome da empresa, nicho, fase atual, público-alvo, diferenciais) — ver RN-11 e SPEC.md SDD-50. Sem esse contexto, a pergunta continua sendo respondida só pela base de conhecimento geral, comportamento inalterado.
 
 **Decisão de forma deliberada:** o painel NÃO é um dashboard analítico denso (várias grades de gráfico) — o produto é orientador, não ERP (§9.12), e não há dado operacional real (vendas, estoque, contas) pra sustentar aquilo sem ficar vazio pra maioria dos usuários. O conceito escolhido investe em identidade do negócio + narrativa de evolução, que é honesto com o dado que o produto realmente tem.
+
+### 12.5 Módulo: Retenção de Clientes (priorizado pelo dono do produto em 02/08/2026)
+
+**Segundo módulo de conteúdo do catálogo**, depois da Jornada Empreendedora. Previsto desde §9.13/RN-29, quando Retenção deixou de ser fase do motor de etapas: a Jornada termina em Organização (100%) e o que vem depois é assinatura, não workflow.
+
+**Por que este foi o escolhido:** era o único buraco já causando dano. Quem terminava a Jornada batia 100% e encontrava "novos módulos a caminho" — o produto acabava exatamente quando o empreendedor tinha mais motivo pra continuar. Some-se a isso que o módulo não começa vazio: a Fase Clientes (§9.10) e a Primeira Venda (§9.11) já coletaram quem comprou.
+
+**Pergunta central:** *"Quem já comprou de mim e está prestes a me esquecer — e o que eu digo pra essa pessoa?"*
+
+**O ciclo de recompra é do empreendedor, não nosso.** Na primeira abertura o módulo faz uma única pergunta: de quanto em quanto tempo um cliente costuma voltar. Salão (~30 dias) e consultoria (~180) não podem compartilhar o mesmo corte de "sumiu" — um alerta calibrado errado é pior que nenhum alerta, porque ensina o empreendedor a ignorar o aviso. Todas as faixas derivam desse número: até o ciclo, **em dia**; entre o ciclo e 1,5× dele, **esfriando**; acima disso, **sumido**. A faixa intermediária existe pra avisar enquanto ainda dá tempo.
+
+**O módulo mostra:**
+1. **Carteira de clientes** — importada dos contatos que fecharam na Jornada (a pedido, nunca automaticamente) ou cadastrada direto aqui, inclusive por quem nunca fez a Jornada.
+2. **Situação de cada cliente**, ordenada por urgência: quem sumiu primeiro, mais abandonado no topo.
+3. **Registro do que aconteceu** — compra (valor sempre opcional, RN-1) ou contato, com data real. É o que alimenta tudo o mais.
+4. **Clientes que voltaram** — % de quem comprou mais de uma vez. Única métrica de resultado do módulo.
+5. **Roteiro de reaproximação da Mary** — só para quem está esfriando ou sumido: uma mensagem pronta pra enviar, escrita com o contexto do negócio e o histórico real daquele cliente.
+
+**RN-31 (nova): o módulo nunca afirma que um cliente sumiu sem data real que sustente isso.** Cliente sem nenhuma interação registrada aparece como **"sem histórico"**, nunca como "sumido" — o produto não sabe se a pessoa sumiu, sabe apenas que ninguém anotou nada. Pelo mesmo motivo, a taxa de retorno é nula (não "0%") enquanto ninguém tiver comprado: sem base, não existe percentual. Aplicação direta do princípio de honestidade do §4, na mesma linha da RN-30.
+
+**RN-32 (nova): roteiro de reaproximação nunca inventa fato sobre o relacionamento.** Nada de desconto, preço, promoção, novidade ou opinião do cliente sobre a compra anterior que não esteja no histórico registrado — o empreendedor vai mandar esse texto pra uma pessoa real que sabe o que de fato aconteceu, e uma frase inventada destrói a confiança na hora. Histórico pobre gera mensagem mais simples, nunca mensagem preenchida com invenção. Estende a mesma disciplina já aplicada à oferta comercial (§9.10) e ao roteiro de fornecedores.
+
+**Deliberadamente fora desta versão:** disparo automático de mensagem (o empreendedor copia e envia pelo canal dele — automação de envio é outro produto), segmentação por valor/curva ABC, campanhas em massa e integração com WhatsApp Business API. Detalhamento técnico em SPEC.md SDD-54.
 
 ---
 
@@ -635,6 +658,12 @@ A home passou a apresentar o catálogo de módulos do produto, para que o visita
 | RN-24 | Checklist da fase Estrutura nunca bloqueia o avanço para a próxima fase; sempre editável, mesmo em fases seguintes |
 | RN-25 | Checklist da fase Estrutura é filtrado por relevância ao tipo de negócio escolhido (nicho) |
 | RN-26 | Entregável de Marketing (bio/posts/anúncios) pode ser regenerado quantas vezes o empreendedor quiser |
+| RN-27 | Avanço para Organização só libera depois da primeira venda registrada (exceção ao "nada trava" da RN-24) — §9.11 |
+| RN-28 | Conclusão da Jornada exige diagnóstico + confirmação final, mas nunca que os controles estejam "funcionando" — §9.12 |
+| RN-29 | A Jornada é workflow com fim; módulo de pós-abertura não é fase do motor nem é anunciado antes de existir — §9.13 |
+| RN-30 | Nenhum KPI do painel é estimado — só aparece com o dado real de origem preenchido — §12.4 |
+| RN-31 | Retenção nunca afirma que um cliente sumiu sem data real; sem histórico é "sem histórico", e taxa sem base é nula — §12.5 |
+| RN-32 | Roteiro de reaproximação nunca inventa desconto, promoção ou fato do relacionamento fora do histórico registrado — §12.5 |
 
 ---
 
