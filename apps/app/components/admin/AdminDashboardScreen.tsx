@@ -101,6 +101,11 @@ export function AdminDashboardScreen() {
             description="Base de parceiros sugerida ao empreendedor na Fase 8 da Jornada, filtrada por nicho."
             onPress={() => router.push("/admin/fornecedores")}
           />
+          <NavCard
+            title="Biblioteca"
+            description="Cursos, vídeos, apostilas e dicas exibidos no painel do empreendedor."
+            onPress={() => router.push("/admin/biblioteca")}
+          />
         </View>
       </ScrollView>
     </View>

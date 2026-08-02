@@ -570,6 +570,27 @@ A home passou a apresentar o catálogo de módulos do produto, para que o visita
 
 **Regra:** enquanto um módulo estiver "em breve", ele aparece na landing com o rótulo visível e **sem link** para uma tela que não existe. Nenhum módulo sai de "em breve" na landing antes de estar utilizável em produção.
 
+### 12.3 Biblioteca de Conteúdos (construída em 31/07/2026)
+
+Área de **cursos, vídeos, apostilas e dicas** disponível a todo usuário autenticado (mesmo espírito de acesso livre da base de conhecimento do assistente, SPEC.md SDD-21 — sem gate de assinatura, é material de aquisição/confiança). Publicação é **manual pelo admin** (catálogo `biblioteca_conteudos` + `biblioteca_aulas` para cursos com múltiplas aulas); um conteúdo só aparece pro empreendedor depois de marcado "Publicado" — rascunho fica visível só no admin, mesmo princípio de honestidade das seções anteriores (nada anunciado antes de existir de fato).
+
+**Deliberadamente separada de `knowledge_articles`:** aquela tabela alimenta o RAG do assistente (texto curado, fatiado e embeddado para busca por similaridade) — não é o mesmo modelo de dado que um vídeo ou PDF. Ver SPEC.md SDD-50.
+
+### 12.4 Painel do Empreendedor (decisão do dono do produto, 31/07/2026)
+
+**A partir de agora, o destino pós-login de quem tem a Jornada Empreendedora liberada deixa de ser a própria Jornada e passa a ser um Painel** (`/inicio`) — a "casa" do usuário no produto. Motivo: nem toda visita ao sistema é pra avançar uma etapa; a pessoa também quer ver o negócio dela, revisitar o que já fez, e descobrir o que mais o Ser Dono oferece (módulos, biblioteca, conversa com a Mary) sem precisar entrar dentro do fluxo guiado.
+
+**O painel mostra:**
+1. **Identidade do negócio** — nome da empresa, nicho, regime (MEI/formal), logo (quando já gerado na fase Planejamento) e o percentual de progresso da Jornada — o **mesmo cálculo** usado dentro da Jornada (extraído para `packages/core/jornadaProgresso.ts` justamente para as duas telas nunca mostrarem números diferentes).
+2. **KPIs reais** — valor da primeira venda, ponto de equilíbrio mensal e clientes conquistados vs. meta. **Nunca um número estimado**: cada KPI só aparece se o empreendedor já preencheu o dado de origem (calculadora do Financeiro, registro da venda, meta de captação); sem isso, o card convida a preencher, em vez de mostrar um valor de exemplo (princípio de honestidade do §4).
+3. **Linha do tempo** — os marcos mais recentes, com a data real de conclusão de cada etapa (`jornada_etapas.concluido_em`) — não é uma narrativa fabricada, é o histórico real do motor de etapas.
+4. **Onde você chegou** — resumo de conclusão por fase da Jornada, mesma fonte de dado da trilha lateral.
+5. **Seus módulos** — outros módulos já liberados pra conta (catálogo do §12.1); sem nenhum além da Jornada, mensagem honesta de "em preparação" (RN-29), nunca promessa de módulo ou plano ainda não definido.
+6. **Biblioteca** — prévia dos conteúdos publicados (§12.3).
+7. **Conversar com a Mary** — atalho para o assistente (`/assistente`), que a partir desta mesma data passa a receber o **contexto do negócio da pessoa** quando ela tiver uma Jornada em andamento (nome da empresa, nicho, fase atual, público-alvo, diferenciais) — ver RN-11 e SPEC.md SDD-50. Sem esse contexto, a pergunta continua sendo respondida só pela base de conhecimento geral, comportamento inalterado.
+
+**Decisão de forma deliberada:** o painel NÃO é um dashboard analítico denso (várias grades de gráfico) — o produto é orientador, não ERP (§9.12), e não há dado operacional real (vendas, estoque, contas) pra sustentar aquilo sem ficar vazio pra maioria dos usuários. O conceito escolhido investe em identidade do negócio + narrativa de evolução, que é honesto com o dado que o produto realmente tem.
+
 ---
 
 ## 13. Regras de Negócio Transversais (numeração consolidada)

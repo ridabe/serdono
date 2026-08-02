@@ -47,44 +47,56 @@ interface BusinessContext {
   nomeUsuario: string | null;
   nomeEmpresa: string | null;
   nicho: string | null;
-  faseAtual: string;
+  /** Rótulo já pronto pra citar ("Organização", "Formalização"...) — nunca "concluida" cru, que não é nome de fase nenhuma. */
+  faseAtualLabel: string;
   jornadaConcluida: boolean;
   regime: string | null;
   publicoAlvo: string | null;
   diferenciais: string | null;
-  etapasConcluidas: number;
-  etapasTotais: number;
 }
+
+// Rótulos das fases reais do motor (mesma lista de `packages/core/jornadaProgresso.ts`,
+// duplicada aqui de propósito — Edge Function Deno não importa o monorepo TS).
+const FASE_LABEL: Record<string, string> = {
+  validacao_ideia: "Validação da Ideia",
+  planejamento: "Planejamento",
+  formalizacao: "Formalização",
+  financeiro: "Financeiro",
+  estrutura: "Estrutura",
+  fornecedores: "Fornecedores",
+  produto: "Produto",
+  marketing: "Marketing",
+  clientes: "Clientes",
+  primeira_venda: "Primeira Venda",
+  organizacao: "Organização",
+};
 
 // deno-lint-ignore no-explicit-any
 async function loadBusinessContext(client: any, userId: string): Promise<BusinessContext | null> {
   const { data: instance } = await client
     .from("jornada_instances")
-    .select("id, fase_atual, nome_empresa_escolhido, regime_formalizacao, publico_alvo, diferenciais, niche_id")
+    .select("fase_atual, nome_empresa_escolhido, regime_formalizacao, publico_alvo, diferenciais, niche_id")
     .eq("user_id", userId)
     .maybeSingle();
   if (!instance) return null;
 
-  const [{ data: perfil }, { data: niche }, { data: etapas }] = await Promise.all([
+  const [{ data: perfil }, { data: niche }] = await Promise.all([
     client.from("users").select("nome").eq("id", userId).maybeSingle(),
     instance.niche_id
       ? client.from("niches").select("nome").eq("id", instance.niche_id).maybeSingle()
       : Promise.resolve({ data: null }),
-    client.from("jornada_etapas").select("status").eq("jornada_instance_id", instance.id),
   ]);
 
-  const lista = (etapas ?? []) as { status: string }[];
+  const jornadaConcluida = instance.fase_atual === "concluida";
   return {
     nomeUsuario: perfil?.nome ?? null,
     nomeEmpresa: instance.nome_empresa_escolhido,
     nicho: niche?.nome ?? null,
-    faseAtual: instance.fase_atual,
-    jornadaConcluida: instance.fase_atual === "concluida",
+    faseAtualLabel: jornadaConcluida ? "Concluída (100%)" : (FASE_LABEL[instance.fase_atual] ?? instance.fase_atual),
+    jornadaConcluida,
     regime: instance.regime_formalizacao,
     publicoAlvo: instance.publico_alvo,
     diferenciais: instance.diferenciais,
-    etapasConcluidas: lista.filter((e) => e.status === "concluida").length,
-    etapasTotais: lista.length,
   };
 }
 
@@ -121,7 +133,11 @@ async function synthesizeAnswer(
     "(1) Fato geral, regra, norma, prazo ou valor SÓ pode sair dos trechos da base de conhecimento —",
     "nunca invente nenhum. Ao usar um trecho, cite ao final no formato 'Fonte: <nome>, <data>'.",
     "(2) Fato sobre o negócio da pessoa (nome, nicho, fase, público) só pode sair do bloco de contexto",
-    "do negócio — não deduza nem preencha lacuna com suposição.",
+    "do negócio — não deduza, não preencha lacuna com suposição, e NUNCA calcule ou estime número",
+    "(quantidade de etapas, percentual, prazo) que não esteja literalmente ali. 'faseAtualLabel' e",
+    "'jornadaConcluida' são o status real e têm sempre a palavra final: se 'jornadaConcluida' for true,",
+    "a jornada terminou — nunca diga que a pessoa está 'na metade do caminho', tem 'etapas restantes' ou",
+    "algo parecido, mesmo que outro dado do contexto pareça sugerir isso.",
     "(3) Se não houver trecho nem contexto que sustente a resposta, diga honestamente que ainda não",
     "tem essa informação, em vez de arriscar uma resposta genérica. Nunca invente 'Fonte:' para algo",
     "que veio do contexto do negócio — contexto do negócio não é fonte bibliográfica.",

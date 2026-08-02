@@ -104,6 +104,23 @@ Componentes referenciam **sempre** estes nomes semânticos, nunca `brand.900` di
 | `color.state.danger` / `.dangerBg` | `danger.600` / `danger.100` | Erro, validação de RF-5, cancelamento |
 | `color.state.info` / `.infoBg` | `info.600` / `info.100` | Dica, aviso não bloqueante do copiloto |
 
+### 2.2-bis Cores de dado — gráficos (`chart`, registradas em 31/07/2026)
+
+**DS-19:** o produto ganhou seu primeiro gráfico de dado real (Painel do Empreendedor, PRD §12.4, SPEC.md SDD-50) — token novo `packages/ui/tokens.ts` → `chart`, seguindo o mesmo método de dataviz aplicado a qualquer design system (escolher a forma pelo trabalho do dado, cor por último, validar com script, nunca no olho).
+
+| Token | Valor | Papel |
+|---|---|---|
+| `chart.ramp` | `["#7FA9BC","#5E93A8","#3C7791","#1E5B76","#0E3A4F"]` | Rampa ORDINAL de uma matiz só (teal da marca) — magnitude/progresso, nunca identidade de série |
+| `chart.series` | `#1E5B76` | Passo padrão pra série única (linha/área/barra sem gradação) |
+| `chart.seriesFill` | `rgba(30,91,118,0.16)` | Preenchimento de área sob linha |
+| `chart.accent` | `gold.500` | Ênfase (o ponto/estado que é o assunto do gráfico) — sempre com rótulo numérico junto, nunca só a cor (DS-2) |
+| `chart.track` | `ink.200` | Trilho de medidor/barra de progresso |
+| `chart.grid` / `chart.axis` | `ink.200` / `ink.400` | Linhas de grade e eixo, recessivas |
+
+**Por que rampa ordinal e não paleta categórica:** os gráficos do produto (progresso, conclusão por fase, ponto de equilíbrio) comparam **magnitude**, não distinguem séries diferentes — uma paleta categórica traria risco de daltonismo sem necessidade nenhuma (nada precisa "ter identidade própria"). Se o produto algum dia precisar comparar séries de verdade lado a lado (ex.: comparar dois negócios), aí sim entra uma paleta categórica nova — validada e registrada aqui, nunca improvisada num componente.
+
+**Validação (não no olho):** rodado o script de validação do método de dataviz contra a superfície real do app (`color.bg.surface`, `#FFFFFF`) — monotonia de luminosidade, degrau mínimo entre passos, ponta clara acima de 2:1 de contraste e matiz única (spread 9°): todos PASS. Qualquer novo passo na rampa precisa passar pelo mesmo script antes de entrar aqui.
+
 ### 2.3 Regra de contraste (obrigatória)
 
 **DS-2:** todo par texto/fundo deste sistema deve atingir **WCAG AA** (contraste ≥ 4.5:1 para texto normal, ≥ 3:1 para texto grande ≥18px/24px bold). Combinações já verificadas e aprovadas:
