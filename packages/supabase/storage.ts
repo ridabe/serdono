@@ -1,6 +1,7 @@
 import { supabase } from "./client";
 
 const AVATARS_BUCKET = "avatars";
+const PARCEIROS_LOGOS_BUCKET = "parceiros-logos";
 
 /**
  * Sobe a foto de perfil já padronizada (redimensionada/comprimida pelo
@@ -21,5 +22,26 @@ export async function uploadAvatar(userId: string, uri: string): Promise<string>
   if (error) throw error;
 
   const { data } = supabase.storage.from(AVATARS_BUCKET).getPublicUrl(path);
+  return data.publicUrl;
+}
+
+/**
+ * Sobe o logo de um parceiro/fornecedor (Painel Admin, base curada em
+ * `fornecedores_parceiros`) — mesmo padrão de `uploadAvatar` (bucket
+ * público, upsert por caminho fixo). `parceiroId` é gerado no client antes
+ * do parceiro existir na tabela (o cadastro sobe a imagem e insere a linha
+ * na mesma ação), então o caminho não depende de um id já persistido.
+ */
+export async function uploadParceiroLogo(parceiroId: string, uri: string): Promise<string> {
+  const arrayBuffer = await fetch(uri).then((res) => res.arrayBuffer());
+  const path = `${parceiroId}/logo.jpg`;
+
+  const { error } = await supabase.storage.from(PARCEIROS_LOGOS_BUCKET).upload(path, arrayBuffer, {
+    contentType: "image/jpeg",
+    upsert: true,
+  });
+  if (error) throw error;
+
+  const { data } = supabase.storage.from(PARCEIROS_LOGOS_BUCKET).getPublicUrl(path);
   return data.publicUrl;
 }

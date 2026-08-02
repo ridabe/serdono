@@ -212,6 +212,7 @@ export type Database = {
           embedding: string | null
           id: string
           indicado_desenvolvimento: boolean
+          logo_url: string | null
           niches_aplicaveis: string[]
           nome: string
           regiao: string | null
@@ -227,6 +228,7 @@ export type Database = {
           embedding?: string | null
           id?: string
           indicado_desenvolvimento?: boolean
+          logo_url?: string | null
           niches_aplicaveis?: string[]
           nome: string
           regiao?: string | null
@@ -242,6 +244,7 @@ export type Database = {
           embedding?: string | null
           id?: string
           indicado_desenvolvimento?: boolean
+          logo_url?: string | null
           niches_aplicaveis?: string[]
           nome?: string
           regiao?: string | null

@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import * as Linking from "expo-linking";
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { Button, Card, CollapsibleSection, Input, MaryAvatar, color, radius, space, type } from "@serdono/ui";
 import type { JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { useProduto } from "./useProduto";
@@ -193,7 +193,16 @@ export function ProdutoScreen({ jornada, etapas, onEtapasChanged }: ProdutoScree
           </Text>
           {v.parceirosDev.map((p) => (
             <Card key={p.id} variant="default" padding={4} style={{ marginBottom: space[2] }}>
-              <Text style={{ ...type.bodyStrong, color: color.text.primary }}>{p.nome}</Text>
+              <View style={{ flexDirection: "row", alignItems: "center", gap: space[3] }}>
+                {p.logo_url ? (
+                  <Image
+                    source={{ uri: p.logo_url }}
+                    style={{ width: 40, height: 40, borderRadius: radius.sm }}
+                    accessibilityLabel={`Logo de ${p.nome}`}
+                  />
+                ) : null}
+                <Text style={{ ...type.bodyStrong, color: color.text.primary }}>{p.nome}</Text>
+              </View>
               {p.descricao ? <Text style={{ ...type.caption, color: color.text.secondary, marginTop: 2 }}>{p.descricao}</Text> : null}
               {p.contato ? <Text style={{ ...type.caption, color: color.text.muted, marginTop: 2 }}>Contato: {p.contato}</Text> : null}
               {p.site ? (

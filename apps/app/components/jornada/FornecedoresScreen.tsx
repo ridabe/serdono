@@ -1,7 +1,7 @@
 import * as Linking from "expo-linking";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { Button, Card, CollapsibleSection, Input, MaryAvatar, color, radius, space, type } from "@serdono/ui";
 import type { FornecedorParceiro, JornadaEtapa, JornadaFornecedor, JornadaInstance } from "@serdono/supabase";
 import { useFornecedores } from "./useFornecedores";
@@ -15,6 +15,13 @@ interface FornecedoresScreenProps {
 function ParceiroCard({ parceiro, adding, onAdicionar }: { parceiro: FornecedorParceiro; adding: boolean; onAdicionar: () => void }) {
   return (
     <Card variant="outline" padding={4} style={{ width: 240 }}>
+      {parceiro.logo_url ? (
+        <Image
+          source={{ uri: parceiro.logo_url }}
+          style={{ width: 40, height: 40, borderRadius: radius.sm, marginBottom: space[2] }}
+          accessibilityLabel={`Logo de ${parceiro.nome}`}
+        />
+      ) : null}
       <Text style={{ ...type.overline, color: color.text.muted, marginBottom: space[1] }}>{parceiro.categoria.toUpperCase()}</Text>
       <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[1] }}>{parceiro.nome}</Text>
       {parceiro.descricao ? (

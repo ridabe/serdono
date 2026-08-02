@@ -1,8 +1,16 @@
+import * as ImageManipulator from "expo-image-manipulator";
+import * as ImagePicker from "expo-image-picker";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { ActivityIndicator, Pressable, ScrollView, Text, View } from "react-native";
-import { Button, Card, Input, Logo, color, space, type } from "@serdono/ui";
+import { ActivityIndicator, Image, Pressable, ScrollView, Text, View } from "react-native";
+import { Button, Card, Input, Logo, color, radius, space, type } from "@serdono/ui";
+import { uploadParceiroLogo } from "@serdono/supabase";
 import { useAdminFornecedores } from "./useAdminFornecedores";
+
+/** Não precisa ser criptograficamente forte — só desacopla o caminho no bucket do id (ainda inexistente) do parceiro que vai ser criado. */
+function randomId(): string {
+  return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+}
 
 export function AdminFornecedoresScreen() {
   const router = useRouter();
@@ -16,13 +24,56 @@ export function AdminFornecedoresScreen() {
   const [site, setSite] = useState("");
   const [nichesSelecionados, setNichesSelecionados] = useState<string[]>([]);
   const [indicadoDesenvolvimento, setIndicadoDesenvolvimento] = useState(false);
+  const [logoUri, setLogoUri] = useState<string | null>(null);
+  const [uploadingLogo, setUploadingLogo] = useState(false);
+  const [logoError, setLogoError] = useState<string | null>(null);
 
   function toggleNiche(id: string) {
     setNichesSelecionados((prev) => (prev.includes(id) ? prev.filter((n) => n !== id) : [...prev, id]));
   }
 
+  async function handlePickLogo() {
+    setLogoError(null);
+    const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!permission.granted) {
+      setLogoError("Precisamos de permissão para acessar suas fotos.");
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ["images"],
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+    if (result.canceled || !result.assets[0]) return;
+
+    // Mesmo padrão de foto de perfil (usePerfilForm) — quadrado, JPEG,
+    // compressão leve, mas menor (logo é exibido pequeno nos cards).
+    const manipulated = await ImageManipulator.manipulateAsync(
+      result.assets[0].uri,
+      [{ resize: { width: 256, height: 256 } }],
+      { compress: 0.7, format: ImageManipulator.SaveFormat.JPEG }
+    );
+    setLogoUri(manipulated.uri);
+  }
+
   async function handleCreate() {
     if (!nome.trim() || !categoria.trim()) return;
+
+    let logo_url: string | undefined;
+    if (logoUri) {
+      setUploadingLogo(true);
+      try {
+        logo_url = await uploadParceiroLogo(randomId(), logoUri);
+      } catch (e) {
+        setLogoError((e as Error).message);
+        setUploadingLogo(false);
+        return;
+      }
+      setUploadingLogo(false);
+    }
+
     const ok = await create({
       nome: nome.trim(),
       categoria: categoria.trim(),
@@ -32,6 +83,7 @@ export function AdminFornecedoresScreen() {
       site: site.trim() || undefined,
       niches_aplicaveis: nichesSelecionados,
       indicado_desenvolvimento: indicadoDesenvolvimento,
+      logo_url,
     });
     if (ok) {
       setNome("");
@@ -42,6 +94,7 @@ export function AdminFornecedoresScreen() {
       setSite("");
       setNichesSelecionados([]);
       setIndicadoDesenvolvimento(false);
+      setLogoUri(null);
       setShowForm(false);
     }
   }
@@ -79,6 +132,34 @@ export function AdminFornecedoresScreen() {
         ) : (
           <Card variant="outline" padding={5} style={{ marginBottom: space[5] }}>
             <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[3] }}>Novo parceiro</Text>
+
+            <View style={{ flexDirection: "row", alignItems: "center", gap: space[3], marginBottom: space[4] }}>
+              <Pressable onPress={handlePickLogo} accessibilityRole="button" accessibilityLabel="Escolher logo do parceiro">
+                {logoUri ? (
+                  <Image source={{ uri: logoUri }} style={{ width: 64, height: 64, borderRadius: radius.md }} />
+                ) : (
+                  <View
+                    style={{
+                      width: 64,
+                      height: 64,
+                      borderRadius: radius.md,
+                      backgroundColor: color.bg.surfaceAlt,
+                      borderWidth: 1,
+                      borderColor: color.border.default,
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Text style={{ ...type.caption, color: color.text.muted, textAlign: "center" }}>Sem logo</Text>
+                  </View>
+                )}
+              </Pressable>
+              <Pressable onPress={handlePickLogo} style={{ minHeight: 44, justifyContent: "center" }}>
+                <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>{logoUri ? "Trocar logo" : "Adicionar logo (opcional)"}</Text>
+              </Pressable>
+            </View>
+            {logoError ? <Text style={{ ...type.caption, color: color.state.danger, marginBottom: space[3] }}>{logoError}</Text> : null}
+
             <Input label="Nome" value={nome} onChangeText={setNome} placeholder="Ex.: Distribuidora Bom Preço" />
             <Input label="Categoria" value={categoria} onChangeText={setCategoria} placeholder="Ex.: Embalagens" />
             <Input label="Descrição (opcional)" value={descricao} onChangeText={setDescricao} placeholder="O que oferece" />
@@ -111,7 +192,7 @@ export function AdminFornecedoresScreen() {
 
             <View style={{ flexDirection: "row", gap: space[3] }}>
               <Button label="Cancelar" variant="ghost" onPress={() => setShowForm(false)} />
-              <Button label="Cadastrar" variant="primary" loading={saving} onPress={handleCreate} />
+              <Button label="Cadastrar" variant="primary" loading={saving || uploadingLogo} onPress={handleCreate} />
             </View>
           </Card>
         )}
@@ -126,7 +207,10 @@ export function AdminFornecedoresScreen() {
           <View style={{ gap: space[3] }}>
             {parceiros.map((p) => (
               <Card key={p.id} variant="default" padding={4}>
-                <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+                <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: space[3] }}>
+                  {p.logo_url ? (
+                    <Image source={{ uri: p.logo_url }} style={{ width: 44, height: 44, borderRadius: radius.sm }} />
+                  ) : null}
                   <View style={{ flex: 1 }}>
                     <Text style={{ ...type.caption, color: color.text.muted }}>{p.categoria.toUpperCase()}</Text>
                     <Text style={{ ...type.bodyStrong, color: color.text.primary }}>{p.nome}</Text>

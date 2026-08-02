@@ -31,6 +31,8 @@ export interface ParceiroInput {
   niches_aplicaveis?: string[];
   /** Indicado ao empreendedor na Fase 9 (Produto) pra quem quer sistema próprio, não só planilha. */
   indicado_desenvolvimento?: boolean;
+  /** URL pública do bucket `parceiros-logos` — opcional, nem todo parceiro tem logo (SDD-51). */
+  logo_url?: string | null;
 }
 
 export async function createParceiro(params: ParceiroInput): Promise<void> {

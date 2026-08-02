@@ -258,6 +258,9 @@ export function JornadaScreen() {
       >
         <Logo size={28} />
         <View style={{ flexDirection: "row", alignItems: "center", gap: space[3] }}>
+          <Pressable onPress={() => router.push("/inicio")} accessibilityRole="button" style={{ minHeight: 44, justifyContent: "center" }}>
+            <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>← Painel</Text>
+          </Pressable>
           <Pressable onPress={() => router.push("/perfil")} accessibilityRole="button" style={{ minHeight: 44, justifyContent: "center" }}>
             <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>Meu perfil</Text>
           </Pressable>
