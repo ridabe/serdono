@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-  advanceFase,
+  avancarParaProximaFasePendente,
   chooseRegimeFormalizacao,
   markEtapaDone,
   unmarkEtapaDone,
@@ -66,7 +66,7 @@ export function useFormalizacao(jornada: JornadaInstance, etapas: JornadaEtapa[]
     setAdvancing(true);
     setError(null);
     try {
-      await advanceFase(jornada.id, "financeiro");
+      await avancarParaProximaFasePendente(jornada.id);
       return true;
     } catch (e) {
       setError((e as Error).message);

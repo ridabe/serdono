@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   addJornadaFornecedor,
-  advanceFase,
+  avancarParaProximaFasePendente,
   generateRoteiroFornecedores,
   getParceirosSugeridos,
   getRoteiroFornecedores,
@@ -144,7 +144,7 @@ export function useFornecedores(jornada: JornadaInstance, etapas: JornadaEtapa[]
     setAdvancing(true);
     setError(null);
     try {
-      await advanceFase(jornada.id, "produto");
+      await avancarParaProximaFasePendente(jornada.id);
       return true;
     } catch (e) {
       setError((e as Error).message);

@@ -36,7 +36,7 @@ Identidade visual final (aguardando escolha do logo), contratos jurídicos com p
 **Implicação de produto:** linguagem simples em todo o produto (RN-1), onboarding no celular tem que funcionar tão bem quanto na web, todo termo técnico (CNAE, Simples Nacional, MEI) precisa de explicação em uma frase ao lado.
 
 ### 2.2 Persona secundária — "Juliana, já tem o CNPJ"
-Já abriu um MEI ou pequena empresa nos últimos 24 meses, mas está no escuro sobre como crescer. Entra pela porta "já tenho negócio" (ver 8.6). Mais orientada a números que Marcos.
+Já abriu um MEI ou pequena empresa nos últimos 24 meses, mas está no escuro sobre como crescer. Entra pela porta "já tenho negócio" (ver §8.3, construída em 31/07/2026). Mais orientada a números que Marcos.
 
 ### 2.3 Persona de calda — "Sr. Aparecido, indicado pelo SEBRAE/prefeitura"
 Chega por canal institucional (ver Documento de Conceito, seção 9.2). Mais velho, menos digital, precisa de UI ainda mais simples e de suporte humano acessível.
@@ -299,8 +299,20 @@ Esqueleto de tabelas a prever desde já para não quebrar migrações depois: `m
 - **RN-16:** Downgrade de Multi para Essencial mantém o nicho mais avançado no workflow (maior nº de `workflow_steps` concluídas), nunca o escolhido por último.
 - **RN-17:** Cobrança preferencialmente pela web (fora da loja de app) para evitar a comissão de 15% — o app mobile deve linkar para checkout web quando a política da loja permitir (verificar guideline vigente da Apple/Google antes de implementar; ver RNF-8).
 
-### 8.3 Módulo "já tenho negócio" `[Fase 3, esqueleto de dados já em 5.6]`
-Porta de entrada alternativa citada no Documento de Conceito §8. Fluxo: diagnóstico de saúde do negócio existente → recomendação direta de módulos de operação, pulando o workflow de abertura.
+### 8.3 Porta de entrada "já tenho negócio" (construída em 31/07/2026 — SDD-52)
+
+**Substitui o esboço original desta seção** (citado desde a v0.1 do PRD, nunca implementado): em vez de pular o workflow de abertura inteiro e cair num módulo de operação separado, a pessoa que já tem negócio entra na MESMA Jornada Empreendedora (§9) — só que mais adiantada. Motivo da mudança: quando este parágrafo foi escrito, a Jornada Empreendedora ainda não existia de verdade; hoje ela é o motor mais maduro do produto, e reaproveitá-lo é mais simples e mais consistente do que construir um caminho paralelo.
+
+**Fluxo** (rota `/negocio-existente`, acessível pela home — CTA secundário no Hero e o card "JÁ TEM CNPJ" do §2.2/persona Juliana):
+1. Escolhe o próprio nicho num catálogo de 31 opções (expandido de 5 nesta mesma rodada — ver nota de dado abaixo) ou descreve em texto livre se não encontrar.
+2. Responde, marco a marco, uma pergunta objetiva por fase da Jornada ("já tem nome e identidade definidos?", "já tem CNPJ?", "já tem fornecedor definido?"...) — nunca uma única pergunta de "quão avançado você está", porque quem já empreende raramente avança de forma linear (pode ter CNPJ e ainda não ter fornecedor, por exemplo). Planejamento e Formalização, quando confirmadas, pedem um dado extra (nome da empresa; regime MEI ou formal) — etapas seguintes do motor dependem desses dados de verdade.
+3. Cria a conta (mesma tela/lógica do cadastro padrão).
+4. O sistema semeia toda a Jornada de uma vez, marca como concluídas as fases confirmadas — reaproveitando exatamente as mesmas funções que cada tela usaria pra se concluir, nunca fabricando um entregável (persona, SWOT, plano) que nunca foi gerado de verdade — e entra direto na primeira fase ainda pendente, na ordem canônica.
+5. Toda fase marcada continua 100% editável depois (mesmo princípio "nada trava" já aplicado a Estrutura/Formalização) — a pessoa está atestando o que já viveu na prática, não perdendo a chance de gerar o entregável real depois se quiser.
+
+**Nichos — de 5 pra 31:** os 5 originais continuam com dossiê completo e são os únicos usados no Fit Score do diagnóstico de novo empreendedor. Os 26 novos entram num nível mais leve (sem dossiê de mercado completo — evolução futura, não bloqueia este lançamento), suficiente pra esta tela de identificação.
+
+Detalhamento técnico completo: SPEC.md SDD-52.
 
 ### 8.4 Critérios de aceite
 - **CA-4:** Usuário sem assinatura não consegue, por nenhuma rota de URL direta, ler o conteúdo completo de um `niches.playbook_md` de nicho não destravado (checar RLS, não só UI).

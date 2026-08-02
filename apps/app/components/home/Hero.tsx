@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "expo-router";
-import { Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { Button, MaryAvatar, Reveal, color, content, motion, radius, space, type } from "@serdono/ui";
 
 export function Hero({ compact, onSeeHowItWorks }: { compact: boolean; onSeeHowItWorks: () => void }) {
@@ -46,13 +46,16 @@ export function Hero({ compact, onSeeHowItWorks }: { compact: boolean; onSeeHowI
             Eu te acompanho do "não sei o que abrir" até o primeiro cliente pagando: descobrimos seu nicho, validamos a
             ideia, criamos o nome, a marca e o preço. Uma etapa por vez — sem jargão e sem achismo.
           </Text>
-          <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3], marginBottom: space[5] }}>
+          <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3], marginBottom: space[3] }}>
             <Button label="Começar minha jornada" variant="primary" onPress={() => router.push("/diagnostico")} />
             <Button label="Ver como funciona" variant="ghost" onDark onPress={onSeeHowItWorks} />
           </View>
-          <Text style={{ ...type.caption, color: "#8FA3BC" }}>
+          <Text style={{ ...type.caption, color: "#8FA3BC", marginBottom: space[3] }}>
             Grátis para começar · Sem cartão de crédito · Resultado na hora
           </Text>
+          <Pressable onPress={() => router.push("/negocio-existente")} accessibilityRole="link" style={{ minHeight: 44, justifyContent: "center" }}>
+            <Text style={{ ...type.bodyStrong, color: color.action.primary }}>Já tenho um negócio →</Text>
+          </Pressable>
         </Reveal>
 
         <Reveal

@@ -235,7 +235,7 @@ export function FormalizacaoScreen({ jornada, etapas, onEtapasChanged }: Formali
             </View>
           </View>
           <Button
-            label="Avançar para Financeiro"
+            label="Avançar"
             variant="primary"
             fullWidth
             loading={v.advancing}

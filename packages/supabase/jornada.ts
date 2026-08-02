@@ -70,7 +70,7 @@ export async function startJornada(userId: string, nicheId: string): Promise<Jor
  * `aplica_se is null` (a própria pergunta do regime); passando o regime
  * escolhido, semeia também os templates daquele caminho.
  */
-async function seedEtapasForFase(instanceId: string, fase: JornadaFase, aplicaSe?: string): Promise<void> {
+export async function seedEtapasForFase(instanceId: string, fase: JornadaFase, aplicaSe?: string): Promise<void> {
   let query = supabase.from("jornada_etapa_templates").select("*").eq("fase", fase);
   query = aplicaSe ? query.or(`aplica_se.is.null,aplica_se.eq.${aplicaSe}`) : query.is("aplica_se", null);
   const { data: templates, error: templatesError } = await query;
@@ -238,6 +238,76 @@ export async function advanceFase(instanceId: string, fase: JornadaFase): Promis
 export async function concludeJornada(instanceId: string): Promise<void> {
   const { error } = await supabase.from("jornada_instances").update({ fase_atual: "concluida" }).eq("id", instanceId);
   if (error) throw error;
+}
+
+// ---- Motor de avanço não-linear (SDD-52, fluxo de negócio existente) ----
+
+/**
+ * Mesma ordem de `FASES_JORNADA` em `packages/core/jornadaProgresso.ts` —
+ * duplicada aqui de propósito (mesmo motivo de `FinanceiroDados` etc. neste
+ * arquivo: `packages/supabase` não depende de `packages/core`, só
+ * `apps/app` depende dos dois).
+ */
+const FASES_ORDEM: JornadaFase[] = [
+  "validacao_ideia",
+  "planejamento",
+  "formalizacao",
+  "financeiro",
+  "estrutura",
+  "fornecedores",
+  "produto",
+  "marketing",
+  "clientes",
+  "primeira_venda",
+  "organizacao",
+];
+
+/**
+ * Avança pra próxima fase ainda PENDENTE na ordem canônica — nunca assume
+ * que "tudo antes de `fase_atual`" está pronto (diferença chave do antigo
+ * `advanceFase(instanceId, "próxima fixa")`, que cada tela de fase chamava
+ * sabendo de cor qual era a seguinte). Existe pro fluxo de negócio existente
+ * (SDD-52), onde o questionário de intake pode marcar Formalização
+ * concluída antes de Estrutura — o motor não pode simplesmente ir pra
+ * "a próxima da lista", precisa achar a primeira que ainda falta.
+ *
+ * Mesmo algoritmo testado em `proximaFasePendente`
+ * (`packages/core/jornadaProgresso.ts`) — ver ali pra versão pura/testável;
+ * aqui só a parte de buscar do banco e aplicar o mesmo filtro de
+ * relevância (regime de Formalização, relevância de nicho de Estrutura)
+ * que `JornadaScreen.tsx` já usa pra trilha e progresso.
+ */
+export async function avancarParaProximaFasePendente(instanceId: string): Promise<void> {
+  const { data: instance, error: instanceError } = await supabase
+    .from("jornada_instances")
+    .select("regime_formalizacao, niche_id")
+    .eq("id", instanceId)
+    .single();
+  if (instanceError) throw instanceError;
+
+  const [etapas, nicheEstrutura] = await Promise.all([
+    getJornadaEtapas(instanceId),
+    instance.niche_id ? getNicheEstruturaInfo(instance.niche_id) : Promise.resolve(null),
+  ]);
+
+  for (const fase of FASES_ORDEM) {
+    const daFase = etapas.filter((e) => {
+      if (e.template.fase !== fase) return false;
+      if (fase === "formalizacao" && instance.regime_formalizacao && e.template.aplica_se) {
+        return e.template.aplica_se === instance.regime_formalizacao;
+      }
+      return true;
+    });
+    const relevantes = fase === "estrutura" ? daFase.filter((e) => isEtapaEstruturaRelevante(e.template, nicheEstrutura)) : daFase;
+
+    const semeada = daFase.length > 0;
+    if (!semeada || relevantes.some((e) => e.status !== "concluida")) {
+      await advanceFase(instanceId, fase);
+      return;
+    }
+  }
+
+  await concludeJornada(instanceId);
 }
 
 export interface JornadaConclusaoConfig {
@@ -619,4 +689,84 @@ export async function saveProdutoDados(instanceId: string, dados: ProdutoPrecifi
     .eq("jornada_instance_id", instanceId)
     .eq("etapa_template_id", template.id);
   if (error) throw error;
+}
+
+// ---- Fluxo "já tenho negócio" (SDD-52) ----
+
+export interface StartJornadaExistenteInput {
+  userId: string;
+  /** `null` quando a pessoa não encontrou o próprio negócio no catálogo e descreveu em texto livre. */
+  nicheId: string | null;
+  /** Só quando `nicheId` é `null` — texto livre, aparece só no perfil da própria pessoa (nunca vira nicho curado). */
+  nichoPersonalizado: string | null;
+  /** Fases que a pessoa confirmou já ter concluído na prática, no questionário de intake (checklist, SDD-52 — lacunas permitidas). */
+  fasesConcluidas: JornadaFase[];
+  /** Obrigatório só se `"planejamento"` estiver em `fasesConcluidas`. */
+  nomeEmpresa?: string;
+  /** Obrigatório só se `"formalizacao"` estiver em `fasesConcluidas`. */
+  regimeFormalizacao?: RegimeFormalizacao;
+}
+
+/**
+ * Cria a jornada do fluxo de negócio existente (SDD-52) — diferente de
+ * `startJornada` (que semeia só a primeira fase), semeia TODAS as fases de
+ * uma vez e marca como concluídas as que o questionário de intake
+ * confirmou, reaproveitando exatamente as mesmas funções que cada tela usa
+ * pra se concluir (`chooseNomeEmpresa`, `chooseRegimeFormalizacao`,
+ * `markEtapaDone`) — nunca um atalho paralelo que pudesse divergir da fonte
+ * de verdade de cada fase.
+ *
+ * Fase marcada concluída continua 100% editável depois (nada trava, mesmo
+ * princípio das fases "nada trava" já existentes): a pessoa está atestando
+ * que já viveu aquilo na prática, o sistema nunca fabrica um entregável
+ * (persona, SWOT, plano) que nunca foi gerado de verdade — se ela quiser o
+ * entregável real, revisita a fase e gera.
+ */
+export async function startJornadaComProgresso(input: StartJornadaExistenteInput): Promise<JornadaInstance> {
+  const { data: instance, error } = await supabase
+    .from("jornada_instances")
+    .insert({
+      user_id: input.userId,
+      niche_id: input.nicheId,
+      nicho_personalizado: input.nichoPersonalizado,
+      origem_intake: "negocio_existente",
+    })
+    .select("*")
+    .single();
+  if (error) throw error;
+
+  const concluidas = new Set(input.fasesConcluidas);
+
+  for (const fase of FASES_ORDEM) {
+    if (fase === "formalizacao" && concluidas.has("formalizacao") && input.regimeFormalizacao) {
+      await chooseRegimeFormalizacao(instance.id, input.regimeFormalizacao);
+    } else {
+      await seedEtapasForFase(instance.id, fase);
+    }
+
+    if (!concluidas.has(fase)) continue;
+
+    if (fase === "planejamento" && input.nomeEmpresa) {
+      await chooseNomeEmpresa(instance.id, input.nomeEmpresa);
+    }
+
+    const { data: templates, error: templatesError } = await supabase
+      .from("jornada_etapa_templates")
+      .select("slug")
+      .eq("fase", fase);
+    if (templatesError) throw templatesError;
+    for (const t of templates ?? []) {
+      await markEtapaDone(instance.id, t.slug);
+    }
+  }
+
+  await avancarParaProximaFasePendente(instance.id);
+
+  const { data: atualizada, error: refreshError } = await supabase
+    .from("jornada_instances")
+    .select("*")
+    .eq("id", instance.id)
+    .single();
+  if (refreshError) throw refreshError;
+  return atualizada;
 }

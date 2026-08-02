@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, View } from "react-native";
-import { advanceFase, type JornadaEtapa, type JornadaInstance } from "@serdono/supabase";
+import { avancarParaProximaFasePendente, type JornadaEtapa, type JornadaInstance } from "@serdono/supabase";
 import { Button, Card, MaryAvatar, color, space, type } from "@serdono/ui";
 import { IdentidadeVisualScreen } from "./IdentidadeVisualScreen";
 import { NomeEmpresaScreen } from "./NomeEmpresaScreen";
@@ -24,7 +24,7 @@ export function PlanejamentoScreen({ jornada, etapas, onEtapasChanged }: Planeja
     setAdvancing(true);
     setError(null);
     try {
-      await advanceFase(jornada.id, "formalizacao");
+      await avancarParaProximaFasePendente(jornada.id);
       router.replace("/jornada");
     } catch (e) {
       setError((e as Error).message);
@@ -51,7 +51,7 @@ export function PlanejamentoScreen({ jornada, etapas, onEtapasChanged }: Planeja
       {checklistComplete ? (
         <Card variant="outline" padding={5}>
           {error ? <Text style={{ ...type.caption, color: color.state.danger, marginBottom: space[3] }}>{error}</Text> : null}
-          <Button label="Avançar para Formalização" variant="primary" fullWidth loading={advancing} onPress={handleAdvance} />
+          <Button label="Avançar" variant="primary" fullWidth loading={advancing} onPress={handleAdvance} />
         </Card>
       ) : null}
     </View>

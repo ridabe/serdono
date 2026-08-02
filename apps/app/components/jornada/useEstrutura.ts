@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {
-  advanceFase,
+  avancarParaProximaFasePendente,
   getNicheEstruturaInfo,
   isEtapaEstruturaRelevante,
   markEtapaDone,
@@ -70,7 +70,7 @@ export function useEstrutura(jornada: JornadaInstance, etapas: JornadaEtapa[], o
     setAdvancing(true);
     setError(null);
     try {
-      await advanceFase(jornada.id, "fornecedores");
+      await avancarParaProximaFasePendente(jornada.id);
       return true;
     } catch (e) {
       setError((e as Error).message);

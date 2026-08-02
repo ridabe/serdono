@@ -80,24 +80,64 @@ export interface ProgressoJornada {
 }
 
 /**
- * Mesma conta de sempre: fases inteiras já passadas + a fração da fase atual,
- * sobre Descoberta + as fases de `FASES_JORNADA`. Fase sem etapa semeada
- * conta 0 de fração própria, sem fabricar um total inflado.
+ * Soma a fração de conclusão de CADA fase (Descoberta sempre 1.0 + a fração
+ * real de cada fase de `FASES_JORNADA`), não mais "fases antes = 1.0 por
+ * suposição". Generalizado na SDD-52 pro fluxo de negócio existente, onde
+ * lacunas são permitidas (uma fase depois de `fase_atual` pode já estar
+ * concluída enquanto uma anterior ainda não está) — mas o resultado é
+ * idêntico ao formato antigo no caso linear comum, com uma correção honesta:
+ * fases "nada trava" (Estrutura, Formalização...) que o usuário atravessou
+ * sem terminar todos os itens agora contam a fração real, não 100% por
+ * suposição — mais fiel ao princípio de nunca inflar progresso (PRD §4).
+ * Fase sem etapa semeada conta 0 de fração própria, sem fabricar um total
+ * inflado.
  */
 export function calcularProgressoJornada(faseAtual: string, etapas: EtapaParaProgresso[]): ProgressoJornada {
   const concluida = faseAtual === "concluida";
   if (concluida) return { percentual: 100, concluida: true, faseEfetiva: "organizacao" };
 
   const faseEfetiva = (FASES_JORNADA.includes(faseAtual as JornadaFaseCore) ? faseAtual : FASES_JORNADA[0]) as JornadaFaseCore;
-  const totalFases = FASES_JORNADA.length + 1;
-  const fasesAntes = 1 + FASES_JORNADA.indexOf(faseEfetiva);
+  const totalFases = FASES_JORNADA.length + 1; // +1 = Descoberta, sempre concluída (SDD-31)
 
-  const daFase = etapas.filter((e) => e.fase === faseEfetiva);
-  const fracao = daFase.length > 0 ? daFase.filter((e) => e.concluida).length / daFase.length : 0;
+  const somaFracoes = FASES_JORNADA.reduce((soma, fase) => {
+    const daFase = etapas.filter((e) => e.fase === fase);
+    const fracao = daFase.length > 0 ? daFase.filter((e) => e.concluida).length / daFase.length : 0;
+    return soma + fracao;
+  }, 0);
 
   return {
-    percentual: Math.round(((fasesAntes + fracao) / totalFases) * 100),
+    percentual: Math.round(((1 + somaFracoes) / totalFases) * 100),
     concluida: false,
     faseEfetiva,
   };
+}
+
+/** Uma fase e o quanto dela já está concluído, na ordem canônica de `FASES_JORNADA` — entrada de `proximaFasePendente`. */
+export interface FaseComEtapas {
+  fase: JornadaFaseCore;
+  /** `false` = fase ainda não semeada (nenhuma `jornada_etapas` criada) — sempre pendente, mesmo sem saber a fração. */
+  semeada: boolean;
+  /** Uma entrada por etapa RELEVANTE da fase (já filtrada por regime/relevância de nicho pelo chamador) — vazio = nada exigido, fase trivialmente completa se já semeada. */
+  concluidas: boolean[];
+}
+
+/**
+ * Motor de avanço não-linear (SDD-52, fluxo de negócio existente): a próxima
+ * fase é a primeira, na ordem canônica, que ainda não está 100% concluída —
+ * nunca assume que "tudo antes de X" está pronto só porque `fase_atual`
+ * avançou. Isso é o que permite lacuna (ex.: Formalização concluída, mas
+ * Estrutura, que vem antes na ordem, ainda pendente): o motor não pula
+ * Estrutura, mas também não trava Formalização de ter sido marcada primeiro
+ * pelo questionário de intake.
+ *
+ * Função pura — quem chama monta a lista já filtrada (etapas relevantes por
+ * nicho/regime) e na ordem certa; ver `avancarParaProximaFasePendente` em
+ * `packages/supabase/jornada.ts` pra versão que busca do banco.
+ */
+export function proximaFasePendente(fases: FaseComEtapas[]): JornadaFaseCore | "concluida" {
+  for (const f of fases) {
+    if (!f.semeada) return f.fase;
+    if (f.concluidas.some((c) => !c)) return f.fase;
+  }
+  return "concluida";
 }

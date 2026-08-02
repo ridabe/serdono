@@ -281,7 +281,7 @@ export function ClientesScreen({ jornada, etapas, onEtapasChanged }: ClientesScr
           <Text style={{ ...type.bodyStrong, color: color.text.onBrand, marginBottom: space[4] }}>
             Todos os critérios atendidos — pode seguir para Primeira Venda quando quiser.
           </Text>
-          <Button label="Avançar para Primeira Venda" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
+          <Button label="Avançar" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
         </Card>
       ) : (
         <Card variant="default" padding={5}>

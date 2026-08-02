@@ -239,7 +239,7 @@ export function ProdutoScreen({ jornada, etapas, onEtapasChanged }: ProdutoScree
         <Text style={{ ...type.bodyStrong, color: color.text.onBrand, marginBottom: space[4] }}>
           Pode seguir para Marketing quando quiser — essa calculadora continua aqui, esperando você voltar.
         </Text>
-        <Button label="Avançar para Marketing" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
+        <Button label="Avançar" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
       </Card>
     </View>
   );

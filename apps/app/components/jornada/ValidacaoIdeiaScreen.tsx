@@ -194,7 +194,7 @@ export function ValidacaoIdeiaScreen({ jornada, etapas, onEtapasChanged }: Valid
       ) : null}
 
       <Button
-        label={v.advancing ? "Avançando..." : "Avançar para Planejamento"}
+        label={v.advancing ? "Avançando..." : "Avançar"}
         variant="primary"
         fullWidth
         loading={v.advancing}

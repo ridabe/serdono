@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { calcularMetaCaptacao, metaCaptacaoPadrao, type MetaCaptacaoInputs } from "@serdono/core";
 import {
   addJornadaClienteContato,
-  advanceFase,
+  avancarParaProximaFasePendente,
   calcularCriteriosConclusao,
   generateOfertaComercial,
   getOfertaComercial,
@@ -166,7 +166,7 @@ export function useClientes(jornada: JornadaInstance, etapas: JornadaEtapa[], on
     setAdvancing(true);
     setError(null);
     try {
-      await advanceFase(jornada.id, "primeira_venda");
+      await avancarParaProximaFasePendente(jornada.id);
       return true;
     } catch (e) {
       setError((e as Error).message);

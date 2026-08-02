@@ -530,8 +530,10 @@ export type Database = {
           id: string
           logo_path: string | null
           niche_id: string | null
+          nicho_personalizado: string | null
           nome_empresa_escolhido: string | null
           nome_negocio: string | null
+          origem_intake: string
           publico_alvo: string | null
           regime_formalizacao: string | null
           slogan_escolhido: string | null
@@ -547,8 +549,10 @@ export type Database = {
           id?: string
           logo_path?: string | null
           niche_id?: string | null
+          nicho_personalizado?: string | null
           nome_empresa_escolhido?: string | null
           nome_negocio?: string | null
+          origem_intake?: string
           publico_alvo?: string | null
           regime_formalizacao?: string | null
           slogan_escolhido?: string | null
@@ -564,8 +568,10 @@ export type Database = {
           id?: string
           logo_path?: string | null
           niche_id?: string | null
+          nicho_personalizado?: string | null
           nome_empresa_escolhido?: string | null
           nome_negocio?: string | null
+          origem_intake?: string
           publico_alvo?: string | null
           regime_formalizacao?: string | null
           slogan_escolhido?: string | null

@@ -210,7 +210,7 @@ export function FornecedoresScreen({ jornada, etapas, onEtapasChanged }: Fornece
         <Text style={{ ...type.bodyStrong, color: color.text.onBrand, marginBottom: space[4] }}>
           Pode seguir para Produto quando quiser — a lista continua aqui, esperando você voltar.
         </Text>
-        <Button label="Avançar para Produto" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
+        <Button label="Avançar" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
       </Card>
     </View>
   );

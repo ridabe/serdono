@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {
-  advanceFase,
+  avancarParaProximaFasePendente,
   getContatosCliente,
   getMetaCaptacaoSalva,
   savePrimeiraVenda,
@@ -86,7 +86,7 @@ export function usePrimeiraVenda(jornada: JornadaInstance, etapas: JornadaEtapa[
     setAdvancing(true);
     setError(null);
     try {
-      await advanceFase(jornada.id, "organizacao");
+      await avancarParaProximaFasePendente(jornada.id);
       return true;
     } catch (e) {
       setError((e as Error).message);

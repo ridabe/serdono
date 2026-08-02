@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { calcularPrecificacao, type PrecificacaoInputs, type PrecificacaoResultado } from "@serdono/core";
 import {
-  advanceFase,
+  avancarParaProximaFasePendente,
   getParceirosDesenvolvimento,
   markEtapaDone,
   saveProdutoDados,
@@ -117,7 +117,7 @@ export function useProduto(jornada: JornadaInstance, etapas: JornadaEtapa[], onE
     setAdvancing(true);
     setError(null);
     try {
-      await advanceFase(jornada.id, "marketing");
+      await avancarParaProximaFasePendente(jornada.id);
       return true;
     } catch (e) {
       setError((e as Error).message);

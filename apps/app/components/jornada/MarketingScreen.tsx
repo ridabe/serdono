@@ -177,7 +177,7 @@ export function MarketingScreen({ jornada, etapas, onEtapasChanged }: MarketingS
         <Text style={{ ...type.bodyStrong, color: color.text.onBrand, marginBottom: space[4] }}>
           Pode seguir para Clientes quando quiser — tudo isso continua aqui, esperando você voltar.
         </Text>
-        <Button label="Avançar para Clientes" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
+        <Button label="Avançar" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
       </Card>
     </View>
   );

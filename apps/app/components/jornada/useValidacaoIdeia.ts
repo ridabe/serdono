@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {
-  advanceFase,
+  avancarParaProximaFasePendente,
   generateDeliverables,
   getDeliverables,
   markEtapaDone,
@@ -102,7 +102,7 @@ export function useValidacaoIdeia(
     setAdvancing(true);
     setError(null);
     try {
-      await advanceFase(jornada.id, "planejamento");
+      await avancarParaProximaFasePendente(jornada.id);
       return true;
     } catch (e) {
       setError((e as Error).message);

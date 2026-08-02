@@ -116,7 +116,7 @@ export function PrimeiraVendaScreen({ jornada, etapas, onEtapasChanged }: Primei
               Esse é só o primeiro passo — a partir de agora, siga captando e registrando cada nova venda.
             </Text>
           )}
-          <Button label="Avançar para Organização" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
+          <Button label="Avançar" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
         </Card>
       ) : (
         <Card variant="default" padding={5}>

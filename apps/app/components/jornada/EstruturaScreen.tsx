@@ -182,7 +182,7 @@ export function EstruturaScreen({ jornada, etapas, onEtapasChanged }: EstruturaS
             Pode seguir para Fornecedores quando quiser — o checklist continua aqui, esperando você voltar.
           </Text>
         )}
-        <Button label="Avançar para Fornecedores" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
+        <Button label="Avançar" variant="primary" fullWidth loading={v.advancing} onPress={handleAdvance} />
       </Card>
     </View>
   );

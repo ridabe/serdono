@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {
-  advanceFase,
+  avancarParaProximaFasePendente,
   generateMarketingConteudo,
   getMarketingConteudo,
   markEtapaDone,
@@ -80,7 +80,7 @@ export function useMarketing(jornada: JornadaInstance, etapas: JornadaEtapa[], o
     setAdvancing(true);
     setError(null);
     try {
-      await advanceFase(jornada.id, "clientes");
+      await avancarParaProximaFasePendente(jornada.id);
       return true;
     } catch (e) {
       setError((e as Error).message);

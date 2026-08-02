@@ -7,7 +7,7 @@ import {
   type FinanceiroResultado,
 } from "@serdono/core";
 import {
-  advanceFase,
+  avancarParaProximaFasePendente,
   markEtapaDone,
   saveFinanceiroDados,
   supabase,
@@ -140,7 +140,7 @@ export function useFinanceiro(jornada: JornadaInstance, etapas: JornadaEtapa[], 
     setAdvancing(true);
     setError(null);
     try {
-      await advanceFase(jornada.id, "estrutura");
+      await avancarParaProximaFasePendente(jornada.id);
       return true;
     } catch (e) {
       setError((e as Error).message);

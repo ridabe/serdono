@@ -291,7 +291,7 @@ export function FinanceiroScreen({ jornada, etapas, onEtapasChanged }: Financeir
               <Text style={{ ...type.caption, color: color.state.danger, marginTop: space[3] }}>{v.error}</Text>
             ) : null}
             <Button
-              label="Avançar para Estrutura"
+              label="Avançar"
               variant="secondary"
               fullWidth
               loading={v.advancing}
