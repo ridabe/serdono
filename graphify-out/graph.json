@@ -232,7 +232,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_protected_admin_layout",
-      "community": 269,
+      "community": 230,
       "norm_label": "_layout.tsx"
     },
     {
@@ -242,7 +242,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_app_app_protected_admin_layout_adminlayout",
-      "community": 269,
+      "community": 230,
       "norm_label": "adminlayout()"
     },
     {
@@ -332,7 +332,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_protected_admin_modulos_index",
-      "community": 279,
+      "community": 217,
       "norm_label": "index.tsx"
     },
     {
@@ -342,7 +342,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_protected_admin_modulos_index_adminmodulos",
-      "community": 279,
+      "community": 217,
       "norm_label": "adminmodulos()"
     },
     {
@@ -392,7 +392,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_protected_assistente_index",
-      "community": 225,
+      "community": 230,
       "norm_label": "index.tsx"
     },
     {
@@ -402,7 +402,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_protected_assistente_index_assistente",
-      "community": 225,
+      "community": 230,
       "norm_label": "assistente()"
     },
     {
@@ -512,7 +512,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_protected_jornada_layout",
-      "community": 269,
+      "community": 230,
       "norm_label": "_layout.tsx"
     },
     {
@@ -522,7 +522,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_app_app_protected_jornada_layout_jornadalayout",
-      "community": 269,
+      "community": 230,
       "norm_label": "jornadalayout()"
     },
     {
@@ -564,6 +564,26 @@
       "id": "apps_app_app_protected_modulos_index_modulos",
       "community": 230,
       "norm_label": "modulos()"
+    },
+    {
+      "label": "index.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/app/(protected)/obrigacoes/index.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_app_protected_obrigacoes_index",
+      "community": 224,
+      "norm_label": "index.tsx"
+    },
+    {
+      "label": "Obrigacoes()",
+      "file_type": "code",
+      "source_file": "apps/app/app/(protected)/obrigacoes/index.tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "apps_app_app_protected_obrigacoes_index_obrigacoes",
+      "community": 224,
+      "norm_label": "obrigacoes()"
     },
     {
       "label": "index.tsx",
@@ -612,7 +632,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_layout",
-      "community": 230,
+      "community": 269,
       "norm_label": "_layout.tsx"
     },
     {
@@ -622,7 +642,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "apps_app_app_layout_rootlayout",
-      "community": 230,
+      "community": 269,
       "norm_label": "rootlayout()"
     },
     {
@@ -632,7 +652,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_cadastro_bem_vindo",
-      "community": 281,
+      "community": 276,
       "norm_label": "bem-vindo.tsx"
     },
     {
@@ -642,7 +662,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "apps_app_app_cadastro_bem_vindo_bemvindo",
-      "community": 281,
+      "community": 276,
       "norm_label": "bemvindo()"
     },
     {
@@ -672,7 +692,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_diagnostico_index",
-      "community": 81,
+      "community": 271,
       "norm_label": "index.tsx"
     },
     {
@@ -682,7 +702,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_diagnostico_index_diagnostico",
-      "community": 81,
+      "community": 271,
       "norm_label": "diagnostico()"
     },
     {
@@ -812,7 +832,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_app_negocio_existente_index",
-      "community": 224,
+      "community": 238,
       "norm_label": "index.tsx"
     },
     {
@@ -822,7 +842,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_app_app_negocio_existente_index_negocioexistente",
-      "community": 224,
+      "community": 238,
       "norm_label": "negocioexistente()"
     },
     {
@@ -882,7 +902,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_appupdatealert",
-      "community": 230,
+      "community": 269,
       "norm_label": "appupdatealert.tsx"
     },
     {
@@ -892,7 +912,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_app_components_appupdatealert_appupdatealert",
-      "community": 230,
+      "community": 269,
       "norm_label": "appupdatealert()"
     },
     {
@@ -1082,7 +1102,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_admin_adminmodulesscreen",
-      "community": 279,
+      "community": 217,
       "norm_label": "adminmodulesscreen.tsx"
     },
     {
@@ -1092,7 +1112,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_app_components_admin_adminmodulesscreen_diacritics_regex",
-      "community": 279,
+      "community": 217,
       "norm_label": "diacritics_regex"
     },
     {
@@ -1102,7 +1122,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "apps_app_components_admin_adminmodulesscreen_slugify",
-      "community": 279,
+      "community": 217,
       "norm_label": "slugify()"
     },
     {
@@ -1112,7 +1132,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "apps_app_components_admin_adminmodulesscreen_adminmodulesscreen",
-      "community": 279,
+      "community": 217,
       "norm_label": "adminmodulesscreen()"
     },
     {
@@ -1262,7 +1282,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "apps_app_components_admin_useadminmodules_useadminmodules",
-      "community": 279,
+      "community": 217,
       "norm_label": "useadminmodules()"
     },
     {
@@ -1292,7 +1312,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_assistente_assistentescreen",
-      "community": 225,
+      "community": 230,
       "norm_label": "assistentescreen.tsx"
     },
     {
@@ -1302,7 +1322,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "apps_app_components_assistente_assistentescreen_message",
-      "community": 225,
+      "community": 230,
       "norm_label": "message"
     },
     {
@@ -1312,7 +1332,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "apps_app_components_assistente_assistentescreen_assistentescreen",
-      "community": 225,
+      "community": 230,
       "norm_label": "assistentescreen()"
     },
     {
@@ -1402,7 +1422,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen",
-      "community": 81,
+      "community": 271,
       "norm_label": "diagnosticoscreen.tsx"
     },
     {
@@ -1412,7 +1432,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_background_photo",
-      "community": 81,
+      "community": 271,
       "norm_label": "background_photo"
     },
     {
@@ -1422,7 +1442,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_answers",
-      "community": 81,
+      "community": 271,
       "norm_label": "answers"
     },
     {
@@ -1432,7 +1452,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_empty_answers",
-      "community": 81,
+      "community": 271,
       "norm_label": "empty_answers"
     },
     {
@@ -1442,7 +1462,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_isblockanswered",
-      "community": 81,
+      "community": 271,
       "norm_label": "isblockanswered()"
     },
     {
@@ -1452,7 +1472,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_diagnosticoscreen",
-      "community": 81,
+      "community": 271,
       "norm_label": "diagnosticoscreen()"
     },
     {
@@ -1462,7 +1482,7 @@
       "source_location": "L337",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_singlechoice",
-      "community": 81,
+      "community": 271,
       "norm_label": "singlechoice()"
     },
     {
@@ -1472,7 +1492,7 @@
       "source_location": "L389",
       "_origin": "ast",
       "id": "apps_app_components_diagnostico_diagnosticoscreen_multichoice",
-      "community": 81,
+      "community": 271,
       "norm_label": "multichoice()"
     },
     {
@@ -2102,7 +2122,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_home_journeysection",
-      "community": 283,
+      "community": 258,
       "norm_label": "journeysection.tsx"
     },
     {
@@ -2112,7 +2132,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "apps_app_components_home_journeysection_fases",
-      "community": 283,
+      "community": 258,
       "norm_label": "fases"
     },
     {
@@ -2122,7 +2142,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "apps_app_components_home_journeysection_journeysection",
-      "community": 283,
+      "community": 258,
       "norm_label": "journeysection()"
     },
     {
@@ -2132,7 +2152,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_home_mentorsection",
-      "community": 258,
+      "community": 285,
       "norm_label": "mentorsection.tsx"
     },
     {
@@ -2142,7 +2162,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_app_components_home_mentorsection_pillars",
-      "community": 258,
+      "community": 285,
       "norm_label": "pillars"
     },
     {
@@ -2152,7 +2172,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "apps_app_components_home_mentorsection_mentorsection",
-      "community": 258,
+      "community": 285,
       "norm_label": "mentorsection()"
     },
     {
@@ -2162,7 +2182,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_home_modulessection",
-      "community": 258,
+      "community": 289,
       "norm_label": "modulessection.tsx"
     },
     {
@@ -2172,7 +2192,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "apps_app_components_home_modulessection_modulos",
-      "community": 258,
+      "community": 289,
       "norm_label": "modulos"
     },
     {
@@ -2182,7 +2202,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "apps_app_components_home_modulessection_modulessection",
-      "community": 258,
+      "community": 289,
       "norm_label": "modulessection()"
     },
     {
@@ -2232,7 +2252,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_home_promisesection",
-      "community": 294,
+      "community": 283,
       "norm_label": "promisesection.tsx"
     },
     {
@@ -2242,7 +2262,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "apps_app_components_home_promisesection_prometo",
-      "community": 294,
+      "community": 283,
       "norm_label": "prometo"
     },
     {
@@ -2252,7 +2272,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "apps_app_components_home_promisesection_naoprometo",
-      "community": 294,
+      "community": 283,
       "norm_label": "naoprometo"
     },
     {
@@ -2262,7 +2282,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "apps_app_components_home_promisesection_promisesection",
-      "community": 294,
+      "community": 283,
       "norm_label": "promisesection()"
     },
     {
@@ -2462,7 +2482,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_investimentos_comparadorchart",
-      "community": 271,
+      "community": 252,
       "norm_label": "comparadorchart.tsx"
     },
     {
@@ -2472,7 +2492,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "apps_app_components_investimentos_comparadorchart_series",
-      "community": 271,
+      "community": 252,
       "norm_label": "series"
     },
     {
@@ -2482,7 +2502,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "apps_app_components_investimentos_comparadorchart_formatarcompacto",
-      "community": 271,
+      "community": 252,
       "norm_label": "formatarcompacto()"
     },
     {
@@ -2492,7 +2512,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "apps_app_components_investimentos_comparadorchart_comparadorchart",
-      "community": 271,
+      "community": 252,
       "norm_label": "comparadorchart()"
     },
     {
@@ -2582,7 +2602,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_investimentos_useinvestimentos",
-      "community": 285,
+      "community": 252,
       "norm_label": "useinvestimentos.ts"
     },
     {
@@ -2592,7 +2612,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "apps_app_components_investimentos_useinvestimentos_campos_financeiro",
-      "community": 285,
+      "community": 252,
       "norm_label": "campos_financeiro"
     },
     {
@@ -2872,7 +2892,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_jornada_fornecedoresscreen",
-      "community": 289,
+      "community": 236,
       "norm_label": "fornecedoresscreen.tsx"
     },
     {
@@ -2882,7 +2902,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "apps_app_components_jornada_fornecedoresscreen_fornecedoresscreenprops",
-      "community": 289,
+      "community": 236,
       "norm_label": "fornecedoresscreenprops"
     },
     {
@@ -2892,7 +2912,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "apps_app_components_jornada_fornecedoresscreen_parceirocard",
-      "community": 289,
+      "community": 236,
       "norm_label": "parceirocard()"
     },
     {
@@ -2902,7 +2922,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "apps_app_components_jornada_fornecedoresscreen_fornecedorrow",
-      "community": 289,
+      "community": 236,
       "norm_label": "fornecedorrow()"
     },
     {
@@ -2912,7 +2932,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "apps_app_components_jornada_fornecedoresscreen_fornecedoresscreen",
-      "community": 289,
+      "community": 236,
       "norm_label": "fornecedoresscreen()"
     },
     {
@@ -2932,7 +2952,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_app_components_jornada_identidadevisualscreen_identidadevisualscreenprops",
-      "community": 236,
+      "community": 231,
       "norm_label": "identidadevisualscreenprops"
     },
     {
@@ -3022,7 +3042,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_jornada_jornadascreen",
-      "community": 274,
+      "community": 278,
       "norm_label": "jornadascreen.tsx"
     },
     {
@@ -3032,7 +3052,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "apps_app_components_jornada_jornadascreen_fases",
-      "community": 274,
+      "community": 278,
       "norm_label": "fases"
     },
     {
@@ -3042,7 +3062,7 @@
       "source_location": "L51",
       "_origin": "ast",
       "id": "apps_app_components_jornada_jornadascreen_fase_label",
-      "community": 274,
+      "community": 278,
       "norm_label": "fase_label"
     },
     {
@@ -3062,7 +3082,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_jornada_marketingscreen",
-      "community": 274,
+      "community": 231,
       "norm_label": "marketingscreen.tsx"
     },
     {
@@ -3072,7 +3092,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "apps_app_components_jornada_marketingscreen_marketingscreenprops",
-      "community": 274,
+      "community": 231,
       "norm_label": "marketingscreenprops"
     },
     {
@@ -3082,7 +3102,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "apps_app_components_jornada_marketingscreen_checklistitemcard",
-      "community": 274,
+      "community": 231,
       "norm_label": "checklistitemcard()"
     },
     {
@@ -3092,7 +3112,7 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "apps_app_components_jornada_marketingscreen_marketingscreen",
-      "community": 274,
+      "community": 231,
       "norm_label": "marketingscreen()"
     },
     {
@@ -3112,7 +3132,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "apps_app_components_jornada_nomeempresascreen_nomeempresascreenprops",
-      "community": 236,
+      "community": 231,
       "norm_label": "nomeempresascreenprops"
     },
     {
@@ -3242,7 +3262,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "apps_app_components_jornada_planejamentoscreen_planejamentoscreenprops",
-      "community": 236,
+      "community": 231,
       "norm_label": "planejamentoscreenprops"
     },
     {
@@ -3252,7 +3272,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "apps_app_components_jornada_planejamentoscreen_planejamentoscreen",
-      "community": 236,
+      "community": 278,
       "norm_label": "planejamentoscreen()"
     },
     {
@@ -3912,7 +3932,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_jornada_usefinanceiro",
-      "community": 277,
+      "community": 252,
       "norm_label": "usefinanceiro.ts"
     },
     {
@@ -3962,7 +3982,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "apps_app_components_jornada_usefornecedores_usefornecedores",
-      "community": 289,
+      "community": 236,
       "norm_label": "usefornecedores()"
     },
     {
@@ -4012,7 +4032,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_jornada_usemarketing",
-      "community": 278,
+      "community": 277,
       "norm_label": "usemarketing.ts"
     },
     {
@@ -4022,7 +4042,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "apps_app_components_jornada_usemarketing_usemarketing",
-      "community": 274,
+      "community": 231,
       "norm_label": "usemarketing()"
     },
     {
@@ -4032,7 +4052,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_jornada_usenomeempresa",
-      "community": 295,
+      "community": 284,
       "norm_label": "usenomeempresa.ts"
     },
     {
@@ -4122,7 +4142,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_jornada_usevalidacaoideia",
-      "community": 278,
+      "community": 243,
       "norm_label": "usevalidacaoideia.ts"
     },
     {
@@ -4349,7 +4369,7 @@
       "label": "rotaDoModulo()",
       "file_type": "code",
       "source_file": "apps/app/components/modulos/rotas.ts",
-      "source_location": "L23",
+      "source_location": "L24",
       "_origin": "ast",
       "id": "apps_app_components_modulos_rotas_rotadomodulo",
       "community": 230,
@@ -4362,7 +4382,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_components_negocioexistente_negocioexistentescreen",
-      "community": 224,
+      "community": 238,
       "norm_label": "negocioexistentescreen.tsx"
     },
     {
@@ -4372,7 +4392,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "apps_app_components_negocioexistente_negocioexistentescreen_background_photo",
-      "community": 224,
+      "community": 238,
       "norm_label": "background_photo"
     },
     {
@@ -4382,7 +4402,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "apps_app_components_negocioexistente_negocioexistentescreen_nicheoption",
-      "community": 224,
+      "community": 238,
       "norm_label": "nicheoption"
     },
     {
@@ -4392,7 +4412,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "apps_app_components_negocioexistente_negocioexistentescreen_pergunta_marco",
-      "community": 224,
+      "community": 238,
       "norm_label": "pergunta_marco"
     },
     {
@@ -4402,7 +4422,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "apps_app_components_negocioexistente_negocioexistentescreen_regime_label",
-      "community": 224,
+      "community": 238,
       "norm_label": "regime_label"
     },
     {
@@ -4412,7 +4432,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "apps_app_components_negocioexistente_negocioexistentescreen_etapa",
-      "community": 224,
+      "community": 238,
       "norm_label": "etapa"
     },
     {
@@ -4422,7 +4442,7 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "apps_app_components_negocioexistente_negocioexistentescreen_etapas",
-      "community": 224,
+      "community": 238,
       "norm_label": "etapas"
     },
     {
@@ -4432,7 +4452,7 @@
       "source_location": "L51",
       "_origin": "ast",
       "id": "apps_app_components_negocioexistente_negocioexistentescreen_isvalidemail",
-      "community": 224,
+      "community": 238,
       "norm_label": "isvalidemail()"
     },
     {
@@ -4442,7 +4462,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "apps_app_components_negocioexistente_negocioexistentescreen_inputstyle",
-      "community": 224,
+      "community": 238,
       "norm_label": "inputstyle()"
     },
     {
@@ -4452,7 +4472,7 @@
       "source_location": "L79",
       "_origin": "ast",
       "id": "apps_app_components_negocioexistente_negocioexistentescreen_negocioexistentescreen",
-      "community": 224,
+      "community": 238,
       "norm_label": "negocioexistentescreen()"
     },
     {
@@ -4462,7 +4482,7 @@
       "source_location": "L307",
       "_origin": "ast",
       "id": "apps_app_components_negocioexistente_negocioexistentescreen_nichostep",
-      "community": 224,
+      "community": 238,
       "norm_label": "nichostep()"
     },
     {
@@ -4472,7 +4492,7 @@
       "source_location": "L385",
       "_origin": "ast",
       "id": "apps_app_components_negocioexistente_negocioexistentescreen_marcostep",
-      "community": 224,
+      "community": 238,
       "norm_label": "marcostep()"
     },
     {
@@ -4482,8 +4502,238 @@
       "source_location": "L447",
       "_origin": "ast",
       "id": "apps_app_components_negocioexistente_negocioexistentescreen_cadastrostep",
-      "community": 224,
+      "community": 238,
       "norm_label": "cadastrostep()"
+    },
+    {
+      "label": "ObrigacoesScreen.tsx",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "community": 224,
+      "norm_label": "obrigacoesscreen.tsx"
+    },
+    {
+      "label": "STATUS_COR",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_obrigacoesscreen_status_cor",
+      "community": 224,
+      "norm_label": "status_cor"
+    },
+    {
+      "label": "STATUS_FUNDO",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_obrigacoesscreen_status_fundo",
+      "community": 224,
+      "norm_label": "status_fundo"
+    },
+    {
+      "label": "REGIMES",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_obrigacoesscreen_regimes",
+      "community": 224,
+      "norm_label": "regimes"
+    },
+    {
+      "label": "ObrigacoesScreen()",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_obrigacoesscreen_obrigacoesscreen",
+      "community": 224,
+      "norm_label": "obrigacoesscreen()"
+    },
+    {
+      "label": "DefinirConfig()",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L107",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_obrigacoesscreen_definirconfig",
+      "community": 224,
+      "norm_label": "definirconfig()"
+    },
+    {
+      "label": "ConfigAtual()",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L164",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_obrigacoesscreen_configatual",
+      "community": 224,
+      "norm_label": "configatual()"
+    },
+    {
+      "label": "formatarData()",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L221",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_obrigacoesscreen_formatardata",
+      "community": 224,
+      "norm_label": "formatardata()"
+    },
+    {
+      "label": "ObrigacaoCard()",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L227",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_obrigacoesscreen_obrigacaocard",
+      "community": 224,
+      "norm_label": "obrigacaocard()"
+    },
+    {
+      "label": "Etiqueta()",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L288",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_obrigacoesscreen_etiqueta",
+      "community": 224,
+      "norm_label": "etiqueta()"
+    },
+    {
+      "label": "obrigacoesPdf.ts",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_obrigacoespdf",
+      "community": 224,
+      "norm_label": "obrigacoespdf.ts"
+    },
+    {
+      "label": "escapeHtml()",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_obrigacoespdf_escapehtml",
+      "community": 224,
+      "norm_label": "escapehtml()"
+    },
+    {
+      "label": "formatarData()",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_obrigacoespdf_formatardata",
+      "community": 224,
+      "norm_label": "formatardata()"
+    },
+    {
+      "label": "obrigacaoHtml()",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_obrigacoespdf_obrigacaohtml",
+      "community": 224,
+      "norm_label": "obrigacaohtml()"
+    },
+    {
+      "label": "buildDocumentHtml()",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_obrigacoespdf_builddocumenthtml",
+      "community": 224,
+      "norm_label": "builddocumenthtml()"
+    },
+    {
+      "label": "shareOrDownload()",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L67",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_obrigacoespdf_shareordownload",
+      "community": 224,
+      "norm_label": "shareordownload()"
+    },
+    {
+      "label": "printHtmlOnWeb()",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L74",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_obrigacoespdf_printhtmlonweb",
+      "community": 224,
+      "norm_label": "printhtmlonweb()"
+    },
+    {
+      "label": "exportObrigacoesPdf()",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L106",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_obrigacoespdf_exportobrigacoespdf",
+      "community": 224,
+      "norm_label": "exportobrigacoespdf()"
+    },
+    {
+      "label": "useObrigacoes.ts",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_useobrigacoes",
+      "community": 224,
+      "norm_label": "useobrigacoes.ts"
+    },
+    {
+      "label": "ObrigacaoNaTela",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_useobrigacoes_obrigacaonatela",
+      "community": 224,
+      "norm_label": "obrigacaonatela"
+    },
+    {
+      "label": "ObrigacoesConfigNaTela",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L31",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_useobrigacoes_obrigacoesconfignatela",
+      "community": 224,
+      "norm_label": "obrigacoesconfignatela"
+    },
+    {
+      "label": "toObrigacaoCatalogo()",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L37",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_useobrigacoes_toobrigacaocatalogo",
+      "community": 224,
+      "norm_label": "toobrigacaocatalogo()"
+    },
+    {
+      "label": "useObrigacoes()",
+      "file_type": "code",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L60",
+      "_origin": "ast",
+      "id": "apps_app_components_obrigacoes_useobrigacoes_useobrigacoes",
+      "community": 224,
+      "norm_label": "useobrigacoes()"
     },
     {
       "label": "CompletarCadastroScreen.tsx",
@@ -4512,7 +4762,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "apps_app_components_perfil_completarcadastroscreen_destinationfor",
-      "community": 220,
+      "community": 265,
       "norm_label": "destinationfor()"
     },
     {
@@ -4702,7 +4952,7 @@
       "source_location": "L317",
       "_origin": "ast",
       "id": "apps_app_components_retencao_retencaoscreen_clientecard",
-      "community": 252,
+      "community": 227,
       "norm_label": "clientecard()"
     },
     {
@@ -4852,7 +5102,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "apps_app_components_shell_drawercontext_drawerprovider",
-      "community": 230,
+      "community": 269,
       "norm_label": "drawerprovider()"
     },
     {
@@ -5032,7 +5282,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_constants_entrepreneurphotos",
-      "community": 241,
+      "community": 281,
       "norm_label": "entrepreneurphotos.ts"
     },
     {
@@ -5042,7 +5292,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "apps_app_constants_entrepreneurphotos_entrepreneurphoto",
-      "community": 241,
+      "community": 281,
       "norm_label": "entrepreneurphoto"
     },
     {
@@ -5052,7 +5302,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "apps_app_constants_entrepreneurphotos_entrepreneur_photos",
-      "community": 241,
+      "community": 281,
       "norm_label": "entrepreneur_photos"
     },
     {
@@ -5062,7 +5312,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "apps_app_constants_entrepreneurphotos_pickentrepreneurphoto",
-      "community": 241,
+      "community": 281,
       "norm_label": "pickentrepreneurphoto()"
     },
     {
@@ -5072,7 +5322,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_app_hooks_useappversion",
-      "community": 230,
+      "community": 269,
       "norm_label": "useappversion.ts"
     },
     {
@@ -5082,7 +5332,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "apps_app_hooks_useappversion_updatestatus",
-      "community": 230,
+      "community": 269,
       "norm_label": "updatestatus"
     },
     {
@@ -5092,7 +5342,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "apps_app_hooks_useappversion_useappversionresult",
-      "community": 230,
+      "community": 269,
       "norm_label": "useappversionresult"
     },
     {
@@ -5102,7 +5352,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "apps_app_hooks_useappversion_up_to_date",
-      "community": 230,
+      "community": 269,
       "norm_label": "up_to_date"
     },
     {
@@ -5112,7 +5362,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "apps_app_hooks_useappversion_useappversion",
-      "community": 230,
+      "community": 269,
       "norm_label": "useappversion()"
     },
     {
@@ -6042,7 +6292,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_core_ai_routemodel",
-      "community": 271,
+      "community": 252,
       "norm_label": "routemodel.ts"
     },
     {
@@ -6052,7 +6302,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "packages_core_ai_routemodel_modelkind",
-      "community": 271,
+      "community": 252,
       "norm_label": "modelkind"
     },
     {
@@ -6062,7 +6312,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_core_ai_routemodel_routemodel",
-      "community": 271,
+      "community": 252,
       "norm_label": "routemodel()"
     },
     {
@@ -6072,7 +6322,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_core_financeiro_test",
-      "community": 277,
+      "community": 252,
       "norm_label": "financeiro.test.ts"
     },
     {
@@ -6082,7 +6332,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_core_financeiro",
-      "community": 277,
+      "community": 252,
       "norm_label": "financeiro.ts"
     },
     {
@@ -6092,7 +6342,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "packages_core_financeiro_financeiroinputs",
-      "community": 277,
+      "community": 252,
       "norm_label": "financeiroinputs"
     },
     {
@@ -6102,7 +6352,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "packages_core_financeiro_fluxocaixames",
-      "community": 277,
+      "community": 252,
       "norm_label": "fluxocaixames"
     },
     {
@@ -6112,7 +6362,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "packages_core_financeiro_financeiroresultado",
-      "community": 277,
+      "community": 252,
       "norm_label": "financeiroresultado"
     },
     {
@@ -6122,7 +6372,7 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "packages_core_financeiro_capital_faixa_para_estimativa",
-      "community": 277,
+      "community": 252,
       "norm_label": "capital_faixa_para_estimativa"
     },
     {
@@ -6132,7 +6382,7 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "packages_core_financeiro_estimarcapitaldafaixa",
-      "community": 277,
+      "community": 252,
       "norm_label": "estimarcapitaldafaixa()"
     },
     {
@@ -6142,7 +6392,7 @@
       "source_location": "L82",
       "_origin": "ast",
       "id": "packages_core_financeiro_sugestaonicho",
-      "community": 277,
+      "community": 252,
       "norm_label": "sugestaonicho"
     },
     {
@@ -6152,7 +6402,7 @@
       "source_location": "L100",
       "_origin": "ast",
       "id": "packages_core_financeiro_sugerirplanejamentofinanceiro",
-      "community": 277,
+      "community": 252,
       "norm_label": "sugerirplanejamentofinanceiro()"
     },
     {
@@ -6162,7 +6412,7 @@
       "source_location": "L128",
       "_origin": "ast",
       "id": "packages_core_financeiro_calcularplanejamentofinanceiro",
-      "community": 277,
+      "community": 252,
       "norm_label": "calcularplanejamentofinanceiro()"
     },
     {
@@ -6362,7 +6612,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_core_index",
-      "community": 271,
+      "community": 252,
       "norm_label": "index.ts"
     },
     {
@@ -6372,7 +6622,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_core_investimentos_test",
-      "community": 280,
+      "community": 252,
       "norm_label": "investimentos.test.ts"
     },
     {
@@ -6382,7 +6632,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "packages_core_investimentos_test_taxas",
-      "community": 280,
+      "community": 252,
       "norm_label": "taxas"
     },
     {
@@ -6392,7 +6642,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "packages_core_investimentos_test_inputs",
-      "community": 280,
+      "community": 252,
       "norm_label": "inputs()"
     },
     {
@@ -6402,7 +6652,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_core_investimentos",
-      "community": 280,
+      "community": 252,
       "norm_label": "investimentos.ts"
     },
     {
@@ -6412,7 +6662,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "packages_core_investimentos_tipoaplicacao",
-      "community": 271,
+      "community": 252,
       "norm_label": "tipoaplicacao"
     },
     {
@@ -6422,7 +6672,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "packages_core_investimentos_taxasmercado",
-      "community": 280,
+      "community": 252,
       "norm_label": "taxasmercado"
     },
     {
@@ -6432,7 +6682,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "packages_core_investimentos_simulacaoinputs",
-      "community": 280,
+      "community": 252,
       "norm_label": "simulacaoinputs"
     },
     {
@@ -6442,7 +6692,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "packages_core_investimentos_pontoprojecao",
-      "community": 271,
+      "community": 252,
       "norm_label": "pontoprojecao"
     },
     {
@@ -6472,7 +6722,7 @@
       "source_location": "L78",
       "_origin": "ast",
       "id": "packages_core_investimentos_aliquotairpormeses",
-      "community": 280,
+      "community": 252,
       "norm_label": "aliquotairpormeses()"
     },
     {
@@ -6482,7 +6732,7 @@
       "source_location": "L87",
       "_origin": "ast",
       "id": "packages_core_investimentos_taxamensaldeanual",
-      "community": 280,
+      "community": 252,
       "norm_label": "taxamensaldeanual()"
     },
     {
@@ -6492,7 +6742,7 @@
       "source_location": "L96",
       "_origin": "ast",
       "id": "packages_core_investimentos_taxamensalpoupanca",
-      "community": 280,
+      "community": 252,
       "norm_label": "taxamensalpoupanca()"
     },
     {
@@ -6502,7 +6752,7 @@
       "source_location": "L100",
       "_origin": "ast",
       "id": "packages_core_investimentos_montar",
-      "community": 280,
+      "community": 252,
       "norm_label": "montar()"
     },
     {
@@ -6512,7 +6762,7 @@
       "source_location": "L122",
       "_origin": "ast",
       "id": "packages_core_investimentos_simularaplicacoes",
-      "community": 280,
+      "community": 252,
       "norm_label": "simularaplicacoes()"
     },
     {
@@ -6522,7 +6772,7 @@
       "source_location": "L164",
       "_origin": "ast",
       "id": "packages_core_investimentos_aplicacao_label",
-      "community": 271,
+      "community": 252,
       "norm_label": "aplicacao_label"
     },
     {
@@ -6726,6 +6976,196 @@
       "norm_label": "calcularmetacaptacao()"
     },
     {
+      "label": "obrigacoes.test.ts",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes_test",
+      "community": 224,
+      "norm_label": "obrigacoes.test.ts"
+    },
+    {
+      "label": "obrigacao()",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.test.ts",
+      "source_location": "L105",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes_test_obrigacao",
+      "community": 224,
+      "norm_label": "obrigacao()"
+    },
+    {
+      "label": "obrigacoes.ts",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes",
+      "community": 224,
+      "norm_label": "obrigacoes.ts"
+    },
+    {
+      "label": "RegimeEmpresa",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes_regimeempresa",
+      "community": 224,
+      "norm_label": "regimeempresa"
+    },
+    {
+      "label": "RegraVencimento",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes_regravencimento",
+      "community": 224,
+      "norm_label": "regravencimento"
+    },
+    {
+      "label": "ObrigacaoCatalogo",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes_obrigacaocatalogo",
+      "community": 224,
+      "norm_label": "obrigacaocatalogo"
+    },
+    {
+      "label": "StatusObrigacao",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L33",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes_statusobrigacao",
+      "community": 224,
+      "norm_label": "statusobrigacao"
+    },
+    {
+      "label": "proximaOcorrencia",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L77",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes_proximaocorrencia",
+      "community": 224,
+      "norm_label": "proximaocorrencia"
+    },
+    {
+      "label": "pad2()",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L45",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes_pad2",
+      "community": 224,
+      "norm_label": "pad2()"
+    },
+    {
+      "label": "partesISO()",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L49",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes_partesiso",
+      "community": 224,
+      "norm_label": "partesiso()"
+    },
+    {
+      "label": "ultimoDiaDoMes()",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L55",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes_ultimodiadomes",
+      "community": 224,
+      "norm_label": "ultimodiadomes()"
+    },
+    {
+      "label": "diasEntre()",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L59",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes_diasentre",
+      "community": 224,
+      "norm_label": "diasentre()"
+    },
+    {
+      "label": "classificarStatusObrigacao()",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L133",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes_classificarstatusobrigacao",
+      "community": 224,
+      "norm_label": "classificarstatusobrigacao()"
+    },
+    {
+      "label": "filtrarObrigacoesAplicaveis()",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L148",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes_filtrarobrigacoesaplicaveis",
+      "community": 224,
+      "norm_label": "filtrarobrigacoesaplicaveis()"
+    },
+    {
+      "label": "ObrigacaoParaOrdenar",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L159",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes_obrigacaoparaordenar",
+      "community": 224,
+      "norm_label": "obrigacaoparaordenar"
+    },
+    {
+      "label": "PESO_STATUS",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L164",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes_peso_status",
+      "community": 224,
+      "norm_label": "peso_status"
+    },
+    {
+      "label": "ordenarPorUrgencia()",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L173",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes_ordenarporurgencia",
+      "community": 224,
+      "norm_label": "ordenarporurgencia()"
+    },
+    {
+      "label": "STATUS_LABEL",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L182",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes_status_label",
+      "community": 224,
+      "norm_label": "status_label"
+    },
+    {
+      "label": "REGIME_LABEL",
+      "file_type": "code",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L190",
+      "_origin": "ast",
+      "id": "packages_core_obrigacoes_regime_label",
+      "community": 224,
+      "norm_label": "regime_label"
+    },
+    {
       "label": "organizacaoMaturidade.test.ts",
       "file_type": "code",
       "source_file": "packages/core/organizacaoMaturidade.test.ts",
@@ -6802,7 +7242,7 @@
       "source_location": "L75",
       "_origin": "ast",
       "id": "packages_core_organizacaomaturidade_maturidaderesultado",
-      "community": 259,
+      "community": 232,
       "norm_label": "maturidaderesultado"
     },
     {
@@ -7282,7 +7722,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_appversion",
-      "community": 230,
+      "community": 269,
       "norm_label": "appversion.ts"
     },
     {
@@ -7292,7 +7732,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "packages_supabase_appversion_appversioninfo",
-      "community": 230,
+      "community": 269,
       "norm_label": "appversioninfo"
     },
     {
@@ -7302,7 +7742,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "packages_supabase_appversion_getappversioninfo",
-      "community": 230,
+      "community": 269,
       "norm_label": "getappversioninfo()"
     },
     {
@@ -7312,7 +7752,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_auth",
-      "community": 265,
+      "community": 270,
       "norm_label": "auth.ts"
     },
     {
@@ -7322,7 +7762,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "packages_supabase_auth_signinwithemail",
-      "community": 265,
+      "community": 270,
       "norm_label": "signinwithemail()"
     },
     {
@@ -7332,7 +7772,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_supabase_auth_signinwithgoogle",
-      "community": 265,
+      "community": 270,
       "norm_label": "signinwithgoogle()"
     },
     {
@@ -7352,7 +7792,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "packages_supabase_auth_requestpasswordreset",
-      "community": 281,
+      "community": 270,
       "norm_label": "requestpasswordreset()"
     },
     {
@@ -7372,7 +7812,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "packages_supabase_auth_updatepassword",
-      "community": 265,
+      "community": 270,
       "norm_label": "updatepassword()"
     },
     {
@@ -7932,7 +8372,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_index",
-      "community": 278,
+      "community": 277,
       "norm_label": "index.ts"
     },
     {
@@ -7942,7 +8382,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_investimentos",
-      "community": 285,
+      "community": 252,
       "norm_label": "investimentos.ts"
     },
     {
@@ -7952,7 +8392,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "packages_supabase_investimentos_unidadeindicador",
-      "community": 285,
+      "community": 252,
       "norm_label": "unidadeindicador"
     },
     {
@@ -7962,7 +8402,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "packages_supabase_investimentos_indicadormercado",
-      "community": 285,
+      "community": 252,
       "norm_label": "indicadormercado"
     },
     {
@@ -7972,7 +8412,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "packages_supabase_investimentos_pontoserie",
-      "community": 285,
+      "community": 252,
       "norm_label": "pontoserie"
     },
     {
@@ -7982,7 +8422,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "packages_supabase_investimentos_cotacoes",
-      "community": 285,
+      "community": 252,
       "norm_label": "cotacoes"
     },
     {
@@ -7992,7 +8432,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "packages_supabase_investimentos_getcotacoes",
-      "community": 285,
+      "community": 252,
       "norm_label": "getcotacoes()"
     },
     {
@@ -8012,7 +8452,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "packages_supabase_jornada_jornadainstance",
-      "community": 239,
+      "community": 231,
       "norm_label": "jornadainstance"
     },
     {
@@ -8152,7 +8592,7 @@
       "source_location": "L124",
       "_origin": "ast",
       "id": "packages_supabase_jornada_getjornadaetapas",
-      "community": 291,
+      "community": 278,
       "norm_label": "getjornadaetapas()"
     },
     {
@@ -8182,7 +8622,7 @@
       "source_location": "L166",
       "_origin": "ast",
       "id": "packages_supabase_jornada_marketapadone",
-      "community": 284,
+      "community": 291,
       "norm_label": "marketapadone()"
     },
     {
@@ -8192,7 +8632,7 @@
       "source_location": "L171",
       "_origin": "ast",
       "id": "packages_supabase_jornada_unmarketapadone",
-      "community": 278,
+      "community": 239,
       "norm_label": "unmarketapadone()"
     },
     {
@@ -8302,7 +8742,7 @@
       "source_location": "L331",
       "_origin": "ast",
       "id": "packages_supabase_jornada_candidatonomeempresa",
-      "community": 295,
+      "community": 284,
       "norm_label": "candidatonomeempresa"
     },
     {
@@ -8312,7 +8752,7 @@
       "source_location": "L340",
       "_origin": "ast",
       "id": "packages_supabase_jornada_generatenomesempresa",
-      "community": 295,
+      "community": 284,
       "norm_label": "generatenomesempresa()"
     },
     {
@@ -8322,7 +8762,7 @@
       "source_location": "L348",
       "_origin": "ast",
       "id": "packages_supabase_jornada_getnomesempresa",
-      "community": 295,
+      "community": 284,
       "norm_label": "getnomesempresa()"
     },
     {
@@ -8412,7 +8852,7 @@
       "source_location": "L434",
       "_origin": "ast",
       "id": "packages_supabase_jornada_regimeformalizacao",
-      "community": 224,
+      "community": 238,
       "norm_label": "regimeformalizacao"
     },
     {
@@ -8472,7 +8912,7 @@
       "source_location": "L502",
       "_origin": "ast",
       "id": "packages_supabase_jornada_savemetacaptacao",
-      "community": 284,
+      "community": 291,
       "norm_label": "savemetacaptacao()"
     },
     {
@@ -8502,7 +8942,7 @@
       "source_location": "L558",
       "_origin": "ast",
       "id": "packages_supabase_jornada_saveprimeiravenda",
-      "community": 284,
+      "community": 291,
       "norm_label": "saveprimeiravenda()"
     },
     {
@@ -8532,7 +8972,7 @@
       "source_location": "L591",
       "_origin": "ast",
       "id": "packages_supabase_jornada_saveorganizacaodiagnostico",
-      "community": 232,
+      "community": 291,
       "norm_label": "saveorganizacaodiagnostico()"
     },
     {
@@ -8552,7 +8992,7 @@
       "source_location": "L615",
       "_origin": "ast",
       "id": "packages_supabase_jornada_saveorganizacaochecklistfinal",
-      "community": 232,
+      "community": 291,
       "norm_label": "saveorganizacaochecklistfinal()"
     },
     {
@@ -8652,7 +9092,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase_knowledgesource",
-      "community": 225,
+      "community": 230,
       "norm_label": "knowledgesource"
     },
     {
@@ -8672,7 +9112,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "packages_supabase_knowledgebase_askknowledgebase",
-      "community": 225,
+      "community": 230,
       "norm_label": "askknowledgebase()"
     },
     {
@@ -8682,7 +9122,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_marketing",
-      "community": 278,
+      "community": 277,
       "norm_label": "marketing.ts"
     },
     {
@@ -8692,7 +9132,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "packages_supabase_marketing_marketingpost",
-      "community": 278,
+      "community": 277,
       "norm_label": "marketingpost"
     },
     {
@@ -8702,7 +9142,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_supabase_marketing_marketinganuncio",
-      "community": 278,
+      "community": 277,
       "norm_label": "marketinganuncio"
     },
     {
@@ -8712,7 +9152,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "packages_supabase_marketing_marketingconteudo",
-      "community": 278,
+      "community": 277,
       "norm_label": "marketingconteudo"
     },
     {
@@ -8722,7 +9162,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "packages_supabase_marketing_generatemarketingconteudo",
-      "community": 278,
+      "community": 277,
       "norm_label": "generatemarketingconteudo()"
     },
     {
@@ -8732,7 +9172,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "packages_supabase_marketing_getmarketingconteudo",
-      "community": 278,
+      "community": 277,
       "norm_label": "getmarketingconteudo()"
     },
     {
@@ -8842,8 +9282,118 @@
       "source_location": "L82",
       "_origin": "ast",
       "id": "packages_supabase_modules_hasmoduleaccess",
-      "community": 220,
+      "community": 265,
       "norm_label": "hasmoduleaccess()"
+    },
+    {
+      "label": "obrigacoes.ts",
+      "file_type": "code",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "packages_supabase_obrigacoes",
+      "community": 224,
+      "norm_label": "obrigacoes.ts"
+    },
+    {
+      "label": "ObrigacoesConfigRow",
+      "file_type": "code",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "packages_supabase_obrigacoes_obrigacoesconfigrow",
+      "community": 224,
+      "norm_label": "obrigacoesconfigrow"
+    },
+    {
+      "label": "ObrigacaoCatalogoRow",
+      "file_type": "code",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "packages_supabase_obrigacoes_obrigacaocatalogorow",
+      "community": 224,
+      "norm_label": "obrigacaocatalogorow"
+    },
+    {
+      "label": "ObrigacoesConfig",
+      "file_type": "code",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "packages_supabase_obrigacoes_obrigacoesconfig",
+      "community": 224,
+      "norm_label": "obrigacoesconfig"
+    },
+    {
+      "label": "getObrigacoesConfig()",
+      "file_type": "code",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "packages_supabase_obrigacoes_getobrigacoesconfig",
+      "community": 224,
+      "norm_label": "getobrigacoesconfig()"
+    },
+    {
+      "label": "saveObrigacoesConfig()",
+      "file_type": "code",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L38",
+      "_origin": "ast",
+      "id": "packages_supabase_obrigacoes_saveobrigacoesconfig",
+      "community": 224,
+      "norm_label": "saveobrigacoesconfig()"
+    },
+    {
+      "label": "listObrigacoesCatalogo()",
+      "file_type": "code",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L50",
+      "_origin": "ast",
+      "id": "packages_supabase_obrigacoes_listobrigacoescatalogo",
+      "community": 224,
+      "norm_label": "listobrigacoescatalogo()"
+    },
+    {
+      "label": "ObrigacaoStatusRow",
+      "file_type": "code",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L58",
+      "_origin": "ast",
+      "id": "packages_supabase_obrigacoes_obrigacaostatusrow",
+      "community": 224,
+      "norm_label": "obrigacaostatusrow"
+    },
+    {
+      "label": "listStatusDoUsuario()",
+      "file_type": "code",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L64",
+      "_origin": "ast",
+      "id": "packages_supabase_obrigacoes_liststatusdousuario",
+      "community": 224,
+      "norm_label": "liststatusdousuario()"
+    },
+    {
+      "label": "marcarConcluido()",
+      "file_type": "code",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L73",
+      "_origin": "ast",
+      "id": "packages_supabase_obrigacoes_marcarconcluido",
+      "community": 224,
+      "norm_label": "marcarconcluido()"
+    },
+    {
+      "label": "desmarcarConcluido()",
+      "file_type": "code",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L83",
+      "_origin": "ast",
+      "id": "packages_supabase_obrigacoes_desmarcarconcluido",
+      "community": 224,
+      "norm_label": "desmarcarconcluido()"
     },
     {
       "label": "organizacao.ts",
@@ -8892,7 +9442,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "packages_supabase_organizacao_categoriaindicador",
-      "community": 234,
+      "community": 232,
       "norm_label": "categoriaindicador"
     },
     {
@@ -8922,7 +9472,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "packages_supabase_organizacao_categoria_indicador_label",
-      "community": 234,
+      "community": 232,
       "norm_label": "categoria_indicador_label"
     },
     {
@@ -9292,7 +9842,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_supabase_session",
-      "community": 269,
+      "community": 265,
       "norm_label": "session.ts"
     },
     {
@@ -9302,7 +9852,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "packages_supabase_session_ensuresession",
-      "community": 269,
+      "community": 265,
       "norm_label": "ensuresession()"
     },
     {
@@ -9312,7 +9862,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "packages_supabase_session_getcurrentsession",
-      "community": 269,
+      "community": 230,
       "norm_label": "getcurrentsession()"
     },
     {
@@ -9342,7 +9892,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "packages_supabase_session_decodebase64url",
-      "community": 269,
+      "community": 265,
       "norm_label": "decodebase64url()"
     },
     {
@@ -9352,7 +9902,7 @@
       "source_location": "L76",
       "_origin": "ast",
       "id": "packages_supabase_session_getuserrole",
-      "community": 269,
+      "community": 265,
       "norm_label": "getuserrole()"
     },
     {
@@ -9489,7 +10039,7 @@
       "label": "DatabaseWithoutInternals",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L1145",
+      "source_location": "L1249",
       "_origin": "ast",
       "id": "packages_supabase_types_databasewithoutinternals",
       "community": 217,
@@ -9499,7 +10049,7 @@
       "label": "DefaultSchema",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L1147",
+      "source_location": "L1251",
       "_origin": "ast",
       "id": "packages_supabase_types_defaultschema",
       "community": 217,
@@ -9509,7 +10059,7 @@
       "label": "Tables",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L1149",
+      "source_location": "L1253",
       "_origin": "ast",
       "id": "packages_supabase_types_tables",
       "community": 217,
@@ -9519,7 +10069,7 @@
       "label": "TablesInsert",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L1178",
+      "source_location": "L1282",
       "_origin": "ast",
       "id": "packages_supabase_types_tablesinsert",
       "community": 217,
@@ -9529,7 +10079,7 @@
       "label": "TablesUpdate",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L1203",
+      "source_location": "L1307",
       "_origin": "ast",
       "id": "packages_supabase_types_tablesupdate",
       "community": 217,
@@ -9539,7 +10089,7 @@
       "label": "Enums",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L1228",
+      "source_location": "L1332",
       "_origin": "ast",
       "id": "packages_supabase_types_enums",
       "community": 217,
@@ -9549,7 +10099,7 @@
       "label": "CompositeTypes",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L1245",
+      "source_location": "L1349",
       "_origin": "ast",
       "id": "packages_supabase_types_compositetypes",
       "community": 217,
@@ -9559,7 +10109,7 @@
       "label": "Constants",
       "file_type": "code",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L1262",
+      "source_location": "L1366",
       "_origin": "ast",
       "id": "packages_supabase_types_constants",
       "community": 217,
@@ -9632,7 +10182,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "packages_ui_components_button_button",
-      "community": 274,
+      "community": 236,
       "norm_label": "button()"
     },
     {
@@ -9652,7 +10202,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_components_card",
-      "community": 267,
+      "community": 280,
       "norm_label": "card.tsx"
     },
     {
@@ -9662,7 +10212,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_ui_components_card_cardvariant",
-      "community": 267,
+      "community": 280,
       "norm_label": "cardvariant"
     },
     {
@@ -9672,7 +10222,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "packages_ui_components_card_cardprops",
-      "community": 267,
+      "community": 280,
       "norm_label": "cardprops"
     },
     {
@@ -9682,7 +10232,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_ui_components_card_card",
-      "community": 279,
+      "community": 236,
       "norm_label": "card()"
     },
     {
@@ -9692,7 +10242,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "packages_ui_components_card_styles",
-      "community": 267,
+      "community": 280,
       "norm_label": "styles"
     },
     {
@@ -9752,7 +10302,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "packages_ui_components_collapsiblesection_collapsiblesection",
-      "community": 236,
+      "community": 239,
       "norm_label": "collapsiblesection()"
     },
     {
@@ -9762,7 +10312,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "packages_ui_components_entrepreneurbackground",
-      "community": 270,
+      "community": 241,
       "norm_label": "entrepreneurbackground.tsx"
     },
     {
@@ -9772,7 +10322,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "packages_ui_components_entrepreneurbackground_entrepreneurbackgroundprops",
-      "community": 270,
+      "community": 241,
       "norm_label": "entrepreneurbackgroundprops"
     },
     {
@@ -9782,7 +10332,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "packages_ui_components_entrepreneurbackground_entrepreneurbackground",
-      "community": 270,
+      "community": 241,
       "norm_label": "entrepreneurbackground()"
     },
     {
@@ -9842,7 +10392,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_ui_components_input_input",
-      "community": 279,
+      "community": 236,
       "norm_label": "input()"
     },
     {
@@ -9892,7 +10442,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "packages_ui_components_logo_logo",
-      "community": 281,
+      "community": 276,
       "norm_label": "logo()"
     },
     {
@@ -11786,10 +12336,20 @@
       "norm_label": "12.7 dicas da mary (pedido do dono do produto em 03/08/2026)"
     },
     {
+      "label": "12.8 Meu Neg\u00f3cio em Dia (pedido do dono do produto em 03/08/2026)",
+      "file_type": "document",
+      "source_file": "docs/PRD.md",
+      "source_location": "L679",
+      "_origin": "ast",
+      "id": "docs_prd_12_8_meu_neg\u00f3cio_em_dia_pedido_do_dono_do_produto_em_03_08_2026",
+      "community": 249,
+      "norm_label": "12.8 meu negocio em dia (pedido do dono do produto em 03/08/2026)"
+    },
+    {
       "label": "13. Regras de Neg\u00f3cio Transversais (numera\u00e7\u00e3o consolidada)",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L681",
+      "source_location": "L703",
       "_origin": "ast",
       "id": "docs_prd_13_regras_de_neg\u00f3cio_transversais_numera\u00e7\u00e3o_consolidada",
       "community": 3,
@@ -11799,7 +12359,7 @@
       "label": "14. Requisitos N\u00e3o Funcionais",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L722",
+      "source_location": "L746",
       "_origin": "ast",
       "id": "docs_prd_14_requisitos_n\u00e3o_funcionais",
       "community": 3,
@@ -11809,7 +12369,7 @@
       "label": "15. M\u00e9tricas a Instrumentar desde o Dia 1",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L738",
+      "source_location": "L762",
       "_origin": "ast",
       "id": "docs_prd_15_m\u00e9tricas_a_instrumentar_desde_o_dia_1",
       "community": 3,
@@ -11819,7 +12379,7 @@
       "label": "16. Gloss\u00e1rio r\u00e1pido",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L747",
+      "source_location": "L771",
       "_origin": "ast",
       "id": "docs_prd_16_gloss\u00e1rio_r\u00e1pido",
       "community": 3,
@@ -11829,7 +12389,7 @@
       "label": "17. Decis\u00f5es em aberto (bloqueiam in\u00edcio de c\u00f3digo)",
       "file_type": "document",
       "source_file": "docs/PRD.md",
-      "source_location": "L756",
+      "source_location": "L780",
       "_origin": "ast",
       "id": "docs_prd_17_decis\u00f5es_em_aberto_bloqueiam_in\u00edcio_de_c\u00f3digo",
       "community": 3,
@@ -17278,6 +17838,38 @@
       "weight": 1.0,
       "source": "apps_app_app_protected_modulos_index",
       "target": "apps_app_components_modulos_modulosscreen_modulosscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/obrigacoes/index.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_obrigacoes_index",
+      "target": "apps_app_app_protected_obrigacoes_index_obrigacoes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/obrigacoes/index.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_obrigacoes_index",
+      "target": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/app/(protected)/obrigacoes/index.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_app_app_protected_obrigacoes_index",
+      "target": "apps_app_components_obrigacoes_obrigacoesscreen_obrigacoesscreen",
       "confidence_score": 1.0
     },
     {
@@ -29934,7 +30526,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/app/components/modulos/rotas.ts",
-      "source_location": "L23",
+      "source_location": "L24",
       "weight": 1.0,
       "source": "apps_app_components_modulos_rotas",
       "target": "apps_app_components_modulos_rotas_rotadomodulo",
@@ -30289,6 +30881,778 @@
       "weight": 1.0,
       "source": "apps_app_components_negocioexistente_negocioexistentescreen_nichostep",
       "target": "apps_app_components_negocioexistente_negocioexistentescreen_inputstyle",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "apps_app_components_obrigacoes_obrigacoespdf",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "apps_app_components_obrigacoes_obrigacoespdf_exportobrigacoespdf",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L164",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "apps_app_components_obrigacoes_obrigacoesscreen_configatual",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L107",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "apps_app_components_obrigacoes_obrigacoesscreen_definirconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L288",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "apps_app_components_obrigacoes_obrigacoesscreen_etiqueta",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L221",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "apps_app_components_obrigacoes_obrigacoesscreen_formatardata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L227",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "apps_app_components_obrigacoes_obrigacoesscreen_obrigacaocard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "apps_app_components_obrigacoes_obrigacoesscreen_obrigacoesscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "apps_app_components_obrigacoes_obrigacoesscreen_regimes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "apps_app_components_obrigacoes_obrigacoesscreen_status_cor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "apps_app_components_obrigacoes_obrigacoesscreen_status_fundo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "apps_app_components_obrigacoes_useobrigacoes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "apps_app_components_obrigacoes_useobrigacoes_obrigacaonatela",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "apps_app_components_obrigacoes_useobrigacoes_useobrigacoes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "apps_app_components_shell_screenheader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "apps_app_components_shell_screenheader_screenheader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "packages_core_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "packages_core_obrigacoes_regime_label",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "packages_core_obrigacoes_regimeempresa",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "packages_core_obrigacoes_status_label",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "packages_core_obrigacoes_statusobrigacao",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "packages_ui_components_button_button",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "packages_ui_components_card_card",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen",
+      "target": "packages_ui_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen_obrigacoesscreen",
+      "target": "apps_app_components_obrigacoes_useobrigacoes_useobrigacoes"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/ObrigacoesScreen.tsx",
+      "source_location": "L248",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoesscreen_obrigacaocard",
+      "target": "apps_app_components_obrigacoes_obrigacoesscreen_formatardata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf",
+      "target": "apps_app_components_obrigacoes_obrigacoespdf_builddocumenthtml",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf",
+      "target": "apps_app_components_obrigacoes_obrigacoespdf_escapehtml",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L106",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf",
+      "target": "apps_app_components_obrigacoes_obrigacoespdf_exportobrigacoespdf",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf",
+      "target": "apps_app_components_obrigacoes_obrigacoespdf_formatardata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf",
+      "target": "apps_app_components_obrigacoes_obrigacoespdf_obrigacaohtml",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L74",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf",
+      "target": "apps_app_components_obrigacoes_obrigacoespdf_printhtmlonweb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L67",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf",
+      "target": "apps_app_components_obrigacoes_obrigacoespdf_shareordownload",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf",
+      "target": "apps_app_components_obrigacoes_useobrigacoes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf",
+      "target": "apps_app_components_obrigacoes_useobrigacoes_obrigacaonatela",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf",
+      "target": "packages_core_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf",
+      "target": "packages_core_obrigacoes_regime_label",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf",
+      "target": "packages_core_obrigacoes_regimeempresa",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf",
+      "target": "packages_ui_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L55",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf_builddocumenthtml",
+      "target": "apps_app_components_obrigacoes_obrigacoespdf_escapehtml",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf_obrigacaohtml",
+      "target": "apps_app_components_obrigacoes_obrigacoespdf_escapehtml",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L29",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf_obrigacaohtml",
+      "target": "apps_app_components_obrigacoes_obrigacoespdf_formatardata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L107",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf_exportobrigacoespdf",
+      "target": "apps_app_components_obrigacoes_obrigacoespdf_builddocumenthtml",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L113",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf_exportobrigacoespdf",
+      "target": "apps_app_components_obrigacoes_obrigacoespdf_shareordownload",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/obrigacoesPdf.ts",
+      "source_location": "L109",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_obrigacoespdf_exportobrigacoespdf",
+      "target": "apps_app_components_obrigacoes_obrigacoespdf_printhtmlonweb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "apps_app_components_obrigacoes_useobrigacoes_obrigacaonatela",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "apps_app_components_obrigacoes_useobrigacoes_obrigacoesconfignatela",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "apps_app_components_obrigacoes_useobrigacoes_toobrigacaocatalogo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "apps_app_components_obrigacoes_useobrigacoes_useobrigacoes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_core_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_core_obrigacoes_classificarstatusobrigacao",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_core_obrigacoes_filtrarobrigacoesaplicaveis",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_core_obrigacoes_obrigacaocatalogo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_core_obrigacoes_ordenarporurgencia",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_core_obrigacoes_proximaocorrencia",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_core_obrigacoes_regimeempresa",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_core_obrigacoes_regravencimento",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_core_obrigacoes_statusobrigacao",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_core_retencao_hojeiso",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_supabase_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_supabase_jornada_getmyjornada",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_supabase_obrigacoes_desmarcarconcluido",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_supabase_obrigacoes_getobrigacoesconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_supabase_obrigacoes_listobrigacoescatalogo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_supabase_obrigacoes_liststatusdousuario",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_supabase_obrigacoes_marcarconcluido",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_supabase_obrigacoes_obrigacaocatalogorow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_supabase_obrigacoes_saveobrigacoesconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes",
+      "target": "packages_supabase_session_getcurrentsession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes_obrigacaonatela",
+      "target": "packages_core_obrigacoes_obrigacaocatalogo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes_obrigacaonatela",
+      "target": "packages_core_obrigacoes_statusobrigacao",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/app/components/obrigacoes/useObrigacoes.ts",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "apps_app_components_obrigacoes_useobrigacoes_obrigacoesconfignatela",
+      "target": "packages_core_obrigacoes_regimeempresa",
       "confidence_score": 1.0
     },
     {
@@ -32833,7 +34197,7 @@
       "context": "export",
       "confidence": "EXTRACTED",
       "source_file": "packages/core/index.ts",
-      "source_location": "L9",
+      "source_location": "L10",
       "weight": 1.0,
       "source": "packages_core_index",
       "target": "packages_core_ai_routemodel",
@@ -33435,6 +34799,17 @@
       "context": "export",
       "confidence": "EXTRACTED",
       "source_file": "packages/core/index.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "packages_core_index",
+      "target": "packages_core_obrigacoes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/index.ts",
       "source_location": "L5",
       "weight": 1.0,
       "source": "packages_core_index",
@@ -33959,6 +35334,297 @@
       "weight": 1.0,
       "source": "packages_core_metacaptacao",
       "target": "packages_core_metacaptacao_metacaptacaoresultado",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes_test",
+      "target": "packages_core_obrigacoes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes_test",
+      "target": "packages_core_obrigacoes_classificarstatusobrigacao",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes_test",
+      "target": "packages_core_obrigacoes_filtrarobrigacoesaplicaveis",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes_test",
+      "target": "packages_core_obrigacoes_obrigacaocatalogo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes_test",
+      "target": "packages_core_obrigacoes_ordenarporurgencia",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes_test",
+      "target": "packages_core_obrigacoes_proximaocorrencia",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes_test",
+      "target": "packages_core_obrigacoes_regravencimento",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.test.ts",
+      "source_location": "L105",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes_test",
+      "target": "packages_core_obrigacoes_test_obrigacao",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L133",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes",
+      "target": "packages_core_obrigacoes_classificarstatusobrigacao",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L59",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes",
+      "target": "packages_core_obrigacoes_diasentre",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L148",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes",
+      "target": "packages_core_obrigacoes_filtrarobrigacoesaplicaveis",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes",
+      "target": "packages_core_obrigacoes_obrigacaocatalogo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L159",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes",
+      "target": "packages_core_obrigacoes_obrigacaoparaordenar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L173",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes",
+      "target": "packages_core_obrigacoes_ordenarporurgencia",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes",
+      "target": "packages_core_obrigacoes_pad2",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes",
+      "target": "packages_core_obrigacoes_partesiso",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L164",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes",
+      "target": "packages_core_obrigacoes_peso_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L77",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes",
+      "target": "packages_core_obrigacoes_proximaocorrencia",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L190",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes",
+      "target": "packages_core_obrigacoes_regime_label",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes",
+      "target": "packages_core_obrigacoes_regimeempresa",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes",
+      "target": "packages_core_obrigacoes_regravencimento",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L182",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes",
+      "target": "packages_core_obrigacoes_status_label",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes",
+      "target": "packages_core_obrigacoes_statusobrigacao",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L55",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes",
+      "target": "packages_core_obrigacoes_ultimodiadomes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L86",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes_proximaocorrencia",
+      "target": "packages_core_obrigacoes_pad2",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L78",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes_proximaocorrencia",
+      "target": "packages_core_obrigacoes_partesiso",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L85",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes_proximaocorrencia",
+      "target": "packages_core_obrigacoes_ultimodiadomes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/core/obrigacoes.ts",
+      "source_location": "L141",
+      "weight": 1.0,
+      "source": "packages_core_obrigacoes_classificarstatusobrigacao",
+      "target": "packages_core_obrigacoes_diasentre",
       "confidence_score": 1.0
     },
     {
@@ -34944,6 +36610,17 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "packages_supabase_obrigacoes",
+      "target": "packages_supabase_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "packages/supabase/organizacao.ts",
       "source_location": "L1",
       "weight": 1.0,
@@ -35069,6 +36746,17 @@
       "source_location": "L1",
       "weight": 1.0,
       "source": "packages_supabase_modules",
+      "target": "packages_supabase_client_supabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "packages_supabase_obrigacoes",
       "target": "packages_supabase_client_supabase",
       "confidence_score": 1.0
     },
@@ -35797,6 +37485,17 @@
       "context": "export",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/index.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "packages_supabase_index",
+      "target": "packages_supabase_obrigacoes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/index.ts",
       "source_location": "L13",
       "weight": 1.0,
       "source": "packages_supabase_index",
@@ -35841,7 +37540,7 @@
       "context": "export",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/index.ts",
-      "source_location": "L17",
+      "source_location": "L18",
       "weight": 1.0,
       "source": "packages_supabase_index",
       "target": "packages_supabase_types",
@@ -35852,7 +37551,7 @@
       "context": "re-export",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/index.ts",
-      "source_location": "L17",
+      "source_location": "L18",
       "weight": 1.0,
       "source": "packages_supabase_index",
       "target": "packages_supabase_types_database",
@@ -37117,6 +38816,128 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L83",
+      "weight": 1.0,
+      "source": "packages_supabase_obrigacoes",
+      "target": "packages_supabase_obrigacoes_desmarcarconcluido",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "packages_supabase_obrigacoes",
+      "target": "packages_supabase_obrigacoes_getobrigacoesconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "packages_supabase_obrigacoes",
+      "target": "packages_supabase_obrigacoes_listobrigacoescatalogo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L64",
+      "weight": 1.0,
+      "source": "packages_supabase_obrigacoes",
+      "target": "packages_supabase_obrigacoes_liststatusdousuario",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L73",
+      "weight": 1.0,
+      "source": "packages_supabase_obrigacoes",
+      "target": "packages_supabase_obrigacoes_marcarconcluido",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "packages_supabase_obrigacoes",
+      "target": "packages_supabase_obrigacoes_obrigacaocatalogorow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "packages_supabase_obrigacoes",
+      "target": "packages_supabase_obrigacoes_obrigacaostatusrow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "packages_supabase_obrigacoes",
+      "target": "packages_supabase_obrigacoes_obrigacoesconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "packages_supabase_obrigacoes",
+      "target": "packages_supabase_obrigacoes_obrigacoesconfigrow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "packages_supabase_obrigacoes",
+      "target": "packages_supabase_obrigacoes_saveobrigacoesconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "packages_supabase_obrigacoes",
+      "target": "packages_supabase_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/supabase/obrigacoes.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "packages_supabase_obrigacoes",
+      "target": "packages_supabase_types_tables",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "packages/supabase/organizacao.ts",
       "source_location": "L50",
       "weight": 1.0,
@@ -37712,7 +39533,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L1245",
+      "source_location": "L1349",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_compositetypes",
@@ -37722,7 +39543,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L1262",
+      "source_location": "L1366",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_constants",
@@ -37742,7 +39563,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L1145",
+      "source_location": "L1249",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_databasewithoutinternals",
@@ -37752,7 +39573,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L1147",
+      "source_location": "L1251",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_defaultschema",
@@ -37762,7 +39583,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L1228",
+      "source_location": "L1332",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_enums",
@@ -37782,7 +39603,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L1149",
+      "source_location": "L1253",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_tables",
@@ -37792,7 +39613,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L1178",
+      "source_location": "L1282",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_tablesinsert",
@@ -37802,7 +39623,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "packages/supabase/types.ts",
-      "source_location": "L1203",
+      "source_location": "L1307",
       "weight": 1.0,
       "source": "packages_supabase_types",
       "target": "packages_supabase_types_tablesupdate",
@@ -39477,7 +41298,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L681",
+      "source_location": "L703",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_13_regras_de_neg\u00f3cio_transversais_numera\u00e7\u00e3o_consolidada",
@@ -39487,7 +41308,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L722",
+      "source_location": "L746",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_14_requisitos_n\u00e3o_funcionais",
@@ -39497,7 +41318,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L738",
+      "source_location": "L762",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_15_m\u00e9tricas_a_instrumentar_desde_o_dia_1",
@@ -39507,7 +41328,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L747",
+      "source_location": "L771",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_16_gloss\u00e1rio_r\u00e1pido",
@@ -39517,7 +41338,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/PRD.md",
-      "source_location": "L756",
+      "source_location": "L780",
       "weight": 1.0,
       "source": "docs_prd_ser_dono_prd_product_requirements_document",
       "target": "docs_prd_17_decis\u00f5es_em_aberto_bloqueiam_in\u00edcio_de_c\u00f3digo",
@@ -40081,6 +41902,16 @@
       "weight": 1.0,
       "source": "docs_prd_12_m\u00f3dulos_fase_3_ecossistema_p\u00f3s_abertura_esqueleto",
       "target": "docs_prd_12_7_dicas_da_mary_pedido_do_dono_do_produto_em_03_08_2026",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/PRD.md",
+      "source_location": "L679",
+      "weight": 1.0,
+      "source": "docs_prd_12_m\u00f3dulos_fase_3_ecossistema_p\u00f3s_abertura_esqueleto",
+      "target": "docs_prd_12_8_meu_neg\u00f3cio_em_dia_pedido_do_dono_do_produto_em_03_08_2026",
       "confidence_score": 1.0
     },
     {
@@ -42129,5 +43960,5 @@
       "confidence": "EXTRACTED"
     }
   ],
-  "built_at_commit": "8e69c7486c1ce5255e130a1aeea4156b90911ae1"
+  "built_at_commit": "fa306029f7c8aa24d212a9d50187b614e7fe12d5"
 }

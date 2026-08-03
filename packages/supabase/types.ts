@@ -868,6 +868,110 @@ export type Database = {
         }
         Relationships: []
       }
+      obrigacoes_catalogo: {
+        Row: {
+          ativo: boolean
+          como_fazer: string
+          created_at: string
+          descricao: string
+          fonte_data: string
+          fonte_url: string
+          id: string
+          nome: string
+          ordem: number
+          regime: string[]
+          regra_vencimento: Json
+          requer_funcionarios: boolean
+          slug: string
+        }
+        Insert: {
+          ativo?: boolean
+          como_fazer: string
+          created_at?: string
+          descricao: string
+          fonte_data: string
+          fonte_url: string
+          id?: string
+          nome: string
+          ordem?: number
+          regime: string[]
+          regra_vencimento: Json
+          requer_funcionarios?: boolean
+          slug: string
+        }
+        Update: {
+          ativo?: boolean
+          como_fazer?: string
+          created_at?: string
+          descricao?: string
+          fonte_data?: string
+          fonte_url?: string
+          id?: string
+          nome?: string
+          ordem?: number
+          regime?: string[]
+          regra_vencimento?: Json
+          requer_funcionarios?: boolean
+          slug?: string
+        }
+        Relationships: []
+      }
+      obrigacoes_config: {
+        Row: {
+          created_at: string
+          regime: string
+          tem_funcionarios: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          regime: string
+          tem_funcionarios?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          regime?: string
+          tem_funcionarios?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      obrigacoes_status: {
+        Row: {
+          concluido_em: string
+          id: string
+          obrigacao_id: string
+          periodo_referencia: string
+          user_id: string
+        }
+        Insert: {
+          concluido_em?: string
+          id?: string
+          obrigacao_id: string
+          periodo_referencia: string
+          user_id: string
+        }
+        Update: {
+          concluido_em?: string
+          id?: string
+          obrigacao_id?: string
+          periodo_referencia?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "obrigacoes_status_obrigacao_id_fkey"
+            columns: ["obrigacao_id"]
+            isOneToOne: false
+            referencedRelation: "obrigacoes_catalogo"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       retencao_clientes: {
         Row: {
           created_at: string

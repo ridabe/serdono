@@ -676,6 +676,28 @@ Nenhum desses três é obrigatório nem exclusivo dos outros — diferente da Bi
 
 Detalhamento técnico (schema, split de plataforma do player de vídeo, mudança de navegação) em SPEC.md SDD-59/SDD-60.
 
+### 12.8 Meu Negócio em Dia (pedido do dono do produto em 03/08/2026)
+
+**Quarto módulo do catálogo.** Pergunta central: *"o que eu tenho que pagar, declarar ou renovar este mês pra não perder o meu CNPJ?"* A lacuna era a mesma que motivou Retenção de Clientes (§12.5): a Jornada termina em Organização (100%, RN-29) e larga o empreendedor exatamente onde a obrigação recorrente começa. Diferente de Retenção, a lacuna aqui é o item "Tutoriais" que a landing (§12.2) anunciava desde 29/07/2026 sem nunca ter sido construído — este módulo entrega essa promessa, com o valor agregado de já vir contextualizado por regime.
+
+**Pedido explícito do dono do produto nesta sessão: não cobrir só MEI.** O módulo atende três regimes — MEI, ME/EPP no Simples Nacional e Lucro Presumido/Real — porque a única granularidade que o produto já guardava (`jornada_instances.regime_formalizacao`, fase Formalização, §9.4) distingue apenas MEI de "empresa formal", insuficiente para as obrigações reais de cada regime.
+
+**O módulo mostra, por regime (e se a empresa tem funcionários):**
+1. **Próximos prazos**, ordenados por urgência (atrasado → vence em breve → no prazo → sem prazo fixo → concluído) — cada um com nome, frase explicativa (RN-1), data de vencimento real ou, quando a regra varia por estado/cidade (ICMS, ISS, alvará), a orientação de consultar o órgão responsável, nunca uma data inventada.
+2. **Como fazer** — passo a passo prático de cada obrigação, com fonte e data de consulta visíveis (RN-20).
+3. **Marcação manual de "resolvido neste período"** — o produto não sabe se o empreendedor pagou ou declarou; só sabe que uma data passou.
+4. **Export do checklist em PDF**, mesmo mecanismo já usado na fase Formalização.
+
+**RN-35 (nova): o produto nunca afirma que uma obrigação foi paga/declarada, nem que está "atrasada" como fato definitivo — só que a data de vencimento passou.** O status "concluído" só existe quando o próprio empreendedor marcar aquele período; sem marcação, a tela mostra que o prazo passou e convida a marcar quando resolver, nunca "não pago". Mesma disciplina de RN-30/RN-31.
+
+**RN-36 (nova): o módulo não calcula valor de imposto devido nem dá orientação fiscal personalizada.** Informa prazo e procedimento oficial, com fonte e data, e sinaliza quando é caso de contador (irmã da RN-33, que faz o mesmo para investimentos). Itens de regra municipal/estadual nunca fingem uma regra única nacional — mesmo tratamento que RN-19 já dá a alvará na fase Formalização.
+
+**Conteúdo curado por migration, não por CRUD de admin** — decisão deliberada: é conteúdo fiscal/legal que muda por lei, não por curadoria editorial; atualizar um prazo exige nova migration, com a mesma disciplina de citar fonte e data que valeu para semear o catálogo inicial. Mesmo raciocínio já aplicado ao conteúdo estático da fase Formalização (§9.4).
+
+**Fora de escopo desta versão** (registrado para não virar dívida invisível): cálculo de valor de imposto devido, integração com sistemas da Receita Federal/eSocial/PGDAS, geração de guia de pagamento, lembrete por notificação push/e-mail (fica para quando o produto tiver esse canal).
+
+Detalhamento técnico (schema, fontes reais consultadas, verificação) em SPEC.md SDD-61.
+
 ---
 
 ## 13. Regras de Negócio Transversais (numeração consolidada)
@@ -716,6 +738,8 @@ Detalhamento técnico (schema, split de plataforma do player de vídeo, mudança
 | RN-32 | Roteiro de reaproximação nunca inventa desconto, promoção ou fato do relacionamento fora do histórico registrado — §12.5 |
 | RN-33 | O produto não recomenda investimento; nenhuma peça de venda sugere que recomenda, nem promete dado de mercado ao vivo — §12.6 |
 | RN-34 | Dicas da Mary é liberado a todo usuário autenticado, sem gate de módulo/plano — §12.7 |
+| RN-35 | Meu Negócio em Dia nunca afirma pagamento/atraso como fato — só que a data passou; "concluído" exige marcação do usuário — §12.8 |
+| RN-36 | Meu Negócio em Dia não calcula imposto devido nem dá orientação fiscal personalizada; regra municipal/estadual nunca é fingida como única — §12.8 |
 
 ---
 

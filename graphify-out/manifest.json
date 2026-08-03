@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1785727566.69672,
-    "ast_hash": "8ad44497b900a8adcf97c1076ba1a104",
+    "mtime": 1785787497.4337938,
+    "ast_hash": "4ff21933b7e71ff8d0ce294155743bec",
     "semantic_hash": ""
   },
   ".mcp.json": {
@@ -160,8 +160,8 @@
     "semantic_hash": ""
   },
   "packages/core/index.ts": {
-    "mtime": 1785725277.9037125,
-    "ast_hash": "90e7a1d86d287894f10e90bc49ecd848",
+    "mtime": 1785788339.88319,
+    "ast_hash": "2572804abf815d3f0c412b49d43125a9",
     "semantic_hash": ""
   },
   "packages/core/package.json": {
@@ -180,8 +180,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/index.ts": {
-    "mtime": 1785763925.7291756,
-    "ast_hash": "bbd93cc3ee05dbb6ab33d7c59580e3f1",
+    "mtime": 1785788339.8844965,
+    "ast_hash": "f833e8712b9fd0cff9e617b564f3f898",
     "semantic_hash": ""
   },
   "packages/supabase/package.json": {
@@ -200,8 +200,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/types.ts": {
-    "mtime": 1785763876.0915794,
-    "ast_hash": "eeffd60e8d6930df5c80c1e8b95d6e4a",
+    "mtime": 1785788339.886167,
+    "ast_hash": "2222d821f3857d72c037563e73f960b3",
     "semantic_hash": ""
   },
   "packages/ui/components/Button.tsx": {
@@ -265,13 +265,13 @@
     "semantic_hash": ""
   },
   "docs/PRD.md": {
-    "mtime": 1785786095.1548083,
-    "ast_hash": "9ebe6e034a10c3352cf46465669756cb",
+    "mtime": 1785788508.6956048,
+    "ast_hash": "0ef304e045c18bf0e0a59fbc3bf51995",
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1785786065.971003,
-    "ast_hash": "273733c320c43a60558bbafed6d1738c",
+    "mtime": 1785788568.4412444,
+    "ast_hash": "b75bb373bb9dbb960d33970d0541bb2a",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
@@ -1260,8 +1260,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/modulos/rotas.ts": {
-    "mtime": 1785727355.9097278,
-    "ast_hash": "619559db6c3f28ad5f29693c96c8e3b2",
+    "mtime": 1785788339.882147,
+    "ast_hash": "0431a98ee0fa66b0ba9a828048e22319",
     "semantic_hash": ""
   },
   "apps/app/app/(protected)/admin/dicas/[id].tsx": {
@@ -1387,6 +1387,51 @@
   "apps/app/components/dicas/useDicasCategoria.ts": {
     "mtime": 1785785212.9312732,
     "ast_hash": "4e61a8a856f998bf8b4c9a70797d717e",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/obrigacoes/index.tsx": {
+    "mtime": 1785788234.7561085,
+    "ast_hash": "19f45fe04b88e0fabb980ad0bb1c87d2",
+    "semantic_hash": ""
+  },
+  "apps/app/components/obrigacoes/ObrigacoesScreen.tsx": {
+    "mtime": 1785788225.8027985,
+    "ast_hash": "0997748a203fe53ea5112540c3d71d14",
+    "semantic_hash": ""
+  },
+  "apps/app/components/obrigacoes/obrigacoesPdf.ts": {
+    "mtime": 1785788191.5886424,
+    "ast_hash": "0fe9f61a302040140b7a4ef72b328fd6",
+    "semantic_hash": ""
+  },
+  "apps/app/components/obrigacoes/useObrigacoes.ts": {
+    "mtime": 1785788441.1823041,
+    "ast_hash": "25c7dc653f767bcc4f5cf925d0dea5fc",
+    "semantic_hash": ""
+  },
+  "packages/core/obrigacoes.test.ts": {
+    "mtime": 1785787988.9287896,
+    "ast_hash": "f933a1a383e76ccd56f84256b6ffb8e5",
+    "semantic_hash": ""
+  },
+  "packages/core/obrigacoes.ts": {
+    "mtime": 1785788294.9669127,
+    "ast_hash": "d5130fc3c4ea612a24f05434d874e4e7",
+    "semantic_hash": ""
+  },
+  "packages/supabase/obrigacoes.ts": {
+    "mtime": 1785788415.9716337,
+    "ast_hash": "452814c8613703bb66d7ca9639816976",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20260803220000_modulo_obrigacoes.sql": {
+    "mtime": 1785788050.471792,
+    "ast_hash": "338b784b9592825e3a1c5f49071cd9d3",
+    "semantic_hash": ""
+  },
+  "material-de-apoio/como-conseguir-investimento-para-seu-negocio/como-conseguir-investimento-para-seu-negocio.pdf": {
+    "mtime": 1785786810.96292,
+    "ast_hash": "66e0d711a5d4fd22bfc08878f75dca08",
     "semantic_hash": ""
   }
 }

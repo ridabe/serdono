@@ -14,4 +14,5 @@ export * from "./organizacao";
 export * from "./dicas";
 export * from "./retencao";
 export * from "./investimentos";
+export * from "./obrigacoes";
 export type { Database } from "./types";

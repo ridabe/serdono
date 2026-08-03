@@ -265,13 +265,13 @@
     "semantic_hash": ""
   },
   "docs/PRD.md": {
-    "mtime": 1785765179.2115703,
-    "ast_hash": "7cf2d7e543c7d401013e3d5b8caa9c28",
+    "mtime": 1785786095.1548083,
+    "ast_hash": "9ebe6e034a10c3352cf46465669756cb",
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1785783039.7337854,
-    "ast_hash": "9af77f3cf251e1856024d6d5e512ba1b",
+    "mtime": 1785786065.971003,
+    "ast_hash": "273733c320c43a60558bbafed6d1738c",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
@@ -1010,8 +1010,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/inicio/DashboardScreen.tsx": {
-    "mtime": 1785764581.9627337,
-    "ast_hash": "796d7560f0fd4952b5b8f8ef81ed8f60",
+    "mtime": 1785785351.4100978,
+    "ast_hash": "98649f728e35595e05ba524bc8a64bfd",
     "semantic_hash": ""
   },
   "apps/app/components/inicio/useDashboard.ts": {
@@ -1300,8 +1300,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/dicas/DicasDaMaryScreen.tsx": {
-    "mtime": 1785764340.869275,
-    "ast_hash": "a332035c3c94c175b0293788f1459781",
+    "mtime": 1785785254.487483,
+    "ast_hash": "8066cd0d5e08fb588774a7ff90cc7ed3",
     "semantic_hash": ""
   },
   "apps/app/components/dicas/YoutubeEmbed.native.tsx": {
@@ -1350,8 +1350,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/dicas.ts": {
-    "mtime": 1785763911.6013236,
-    "ast_hash": "8b32c7be384a993bcb8ea2a7e7702c51",
+    "mtime": 1785785799.0672865,
+    "ast_hash": "f13daf5b39923bdb325ad69de8a52e5d",
     "semantic_hash": ""
   },
   "supabase/migrations/20260803190000_dicas_da_mary.sql": {
@@ -1367,6 +1367,26 @@
   "dicas_da_mary/10 Passos Essenciais Antes de Investir.pdf": {
     "mtime": 1785766392.6379843,
     "ast_hash": "df13db671e71f2df6cadfcd5e67cd795",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/dicas-da-mary/[id].tsx": {
+    "mtime": 1785785311.30964,
+    "ast_hash": "39e9b89cc135c6a3f625c43e4e6d525f",
+    "semantic_hash": ""
+  },
+  "apps/app/components/dicas/DicasCategoriaScreen.tsx": {
+    "mtime": 1785785303.195195,
+    "ast_hash": "8dfb554e789acc816124453a59e40ca2",
+    "semantic_hash": ""
+  },
+  "apps/app/components/dicas/DicasIcons.tsx": {
+    "mtime": 1785785202.130533,
+    "ast_hash": "3ab28a313dbb998d2bc014285e38fe5c",
+    "semantic_hash": ""
+  },
+  "apps/app/components/dicas/useDicasCategoria.ts": {
+    "mtime": 1785785212.9312732,
+    "ast_hash": "4e61a8a856f998bf8b4c9a70797d717e",
     "semantic_hash": ""
   }
 }

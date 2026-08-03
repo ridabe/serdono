@@ -6,4 +6,5 @@ export * from "./organizacaoMaturidade";
 export * from "./jornadaProgresso";
 export * from "./retencao";
 export * from "./investimentos";
+export * from "./obrigacoes";
 export * from "./ai/routeModel";
