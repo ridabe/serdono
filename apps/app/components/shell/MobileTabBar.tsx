@@ -30,12 +30,21 @@ const MODULOS_TAB: Tab = { href: "/modulos", label: "Módulos", icon: "modulos",
  * Barra de abas do app instalado (DS-20, SDD-53) — só monta quando
  * `isNativeApp`; na web a navegação continua sendo o cabeçalho de cada tela.
  *
- * A aba "Módulos" é condicional de propósito: enquanto a Jornada for o único
- * módulo liberado pra pessoa, uma aba fixa levaria sempre a uma tela vazia —
- * anunciar função que não existe é exatamente o que RN-2 proíbe. Assim que o
- * admin liberar qualquer outro módulo (SDD-30), a aba aparece sozinha, sem
- * release novo do app. Admin não tem aba: o painel administrativo é web
- * (decisão do dono do produto, 02/08/2026).
+ * **INVARIANTE: no máximo 5 abas, e o catálogo de módulos NUNCA acrescenta
+ * uma sexta.** Preocupação levantada pelo dono do produto em 03/08/2026 e que
+ * este arquivo tem a obrigação de garantir: um módulo novo no catálogo não
+ * pode virar um ícone novo aqui embaixo, senão a barra vira uma gaveta
+ * ilegível em tela de celular. Por isso a quinta aba é **agregadora** — uma
+ * porta única ("Módulos" → `/modulos`) que serve para 1 módulo extra ou para
+ * 20. Quem for adicionar módulo no futuro: acrescente a rota em
+ * `ROTA_POR_SLUG` (`ModulosScreen.tsx`) e pare por aí; não venha aqui.
+ *
+ * A aba agregadora também é condicional: enquanto a Jornada for o único
+ * módulo liberado pra pessoa, ela levaria a uma lista vazia — anunciar função
+ * que não existe é o que a RN-2 proíbe. Assim que o admin liberar qualquer
+ * outro módulo (SDD-30), a aba aparece sozinha, sem release novo do app.
+ * Admin não tem aba: o painel administrativo é web (decisão do dono do
+ * produto, 02/08/2026).
  */
 export function MobileTabBar() {
   const router = useRouter();
@@ -62,6 +71,8 @@ export function MobileTabBar() {
     };
   }, [pathname]);
 
+  // 4 abas fixas + no máximo a agregadora. Esta linha é o ponto onde o teto
+  // de 5 é garantido — ver INVARIANTE no comentário do componente.
   const tabs = temOutrosModulos ? [...BASE_TABS.slice(0, 3), MODULOS_TAB, BASE_TABS[3]] : BASE_TABS;
 
   return (

@@ -14,6 +14,7 @@ import { ScreenHeader } from "../shell/ScreenHeader";
 const ROTA_POR_SLUG: Record<string, string> = {
   "jornada-empreendedora": "/jornada",
   "retencao-clientes": "/retencao",
+  "mentoria-investimentos": "/investimentos",
 };
 
 export function ModulosScreen() {

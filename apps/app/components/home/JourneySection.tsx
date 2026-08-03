@@ -4,22 +4,33 @@ import { Text, View } from "react-native";
 import { Button, HoverLift, Reveal, color, content, motion, radius, space, type } from "@serdono/ui";
 
 /**
- * Referência visual das 9 fases reais da Jornada Empreendedora (mesma lista de
- * `JornadaScreen.tsx`). É só apresentação — o passo a passo interativo vive
- * dentro do produto, pós-login. `pronta` reflete o que existe hoje de verdade:
- * anunciar fase não construída como pronta violaria o princípio de honestidade
- * do PRD §4 e a RN-2.
+ * Referência visual das fases reais da Jornada Empreendedora — a mesma ordem
+ * de `FASES_JORNADA` (`packages/core/jornadaProgresso.ts`), com Descoberta na
+ * frente (acontece pré-login e não tem `jornada_etapas` própria, SDD-31).
+ *
+ * **Reescrita em 02/08/2026 (SDD-55).** A lista anterior tinha 9 fases, 6
+ * delas rotuladas "EM BREVE", e trazia Retenção/Escala como fases do
+ * workflow. Estava desatualizada em três frentes ao mesmo tempo: Formalização,
+ * Financeiro, Marketing e Clientes já estavam em produção (SDD-38 a SDD-45);
+ * Estrutura, Fornecedores, Produto, Primeira Venda e Organização nem
+ * apareciam (SDD-40 a SDD-48); e Retenção/Escala deixaram de ser fases na
+ * SDD-49 (viraram módulos do catálogo — Retenção construída na SDD-54).
+ * Nenhuma fase aqui é promessa: as 12 existem e estão no ar, por isso o
+ * componente não tem mais o conceito de `pronta`.
  */
 const fases = [
-  { nome: "Descoberta", body: "Diagnóstico do seu perfil e os nichos que combinam com você.", pronta: true },
-  { nome: "Validação da Ideia", body: "Persona, SWOT, Canvas e a conversa com clientes de verdade.", pronta: true },
-  { nome: "Planejamento", body: "Nome da empresa, domínio, logo e slogan da sua marca.", pronta: true },
-  { nome: "Formalização", body: "CNPJ, CNAE, alvarás e as exigências da sua cidade.", pronta: false },
-  { nome: "Marketing", body: "Onde seu cliente está e como falar com ele.", pronta: false },
-  { nome: "Financeiro", body: "Preço, margem, capital de giro e o que sobra no fim do mês.", pronta: false },
-  { nome: "Clientes", body: "Do primeiro contato à primeira venda fechada.", pronta: false },
-  { nome: "Retenção", body: "Fazer o cliente voltar custa menos que achar um novo.", pronta: false },
-  { nome: "Escala", body: "Crescer sem que tudo dependa de você.", pronta: false },
+  { nome: "Descoberta", body: "Diagnóstico do seu perfil e os nichos que combinam com você." },
+  { nome: "Validação da Ideia", body: "Persona, SWOT, Canvas e a conversa com clientes de verdade." },
+  { nome: "Planejamento", body: "Nome da empresa, domínio, logo e slogan da sua marca." },
+  { nome: "Formalização", body: "CNPJ, CNAE, alvarás e as exigências da sua cidade." },
+  { nome: "Financeiro", body: "Preço, margem, capital de giro e o que sobra no fim do mês." },
+  { nome: "Estrutura", body: "Local, conta PJ, equipamentos — só o que o seu tipo de negócio exige." },
+  { nome: "Fornecedores", body: "Quem te abastece, o que perguntar e como negociar sem pagar de novato." },
+  { nome: "Produto", body: "O que você vende, por quanto, e a conta que garante que sobra dinheiro." },
+  { nome: "Marketing", body: "Onde seu cliente está e como falar com ele." },
+  { nome: "Clientes", body: "Do primeiro contato à primeira venda fechada." },
+  { nome: "Primeira Venda", body: "O marco: deixar de estar pronto pra vender e ter vendido de verdade." },
+  { nome: "Organização", body: "Rotina, dinheiro e documentos em ordem pra crescer sem perder o controle." },
 ];
 
 export function JourneySection({ compact }: { compact: boolean }) {
@@ -47,11 +58,11 @@ export function JourneySection({ compact }: { compact: boolean }) {
               marginBottom: space[3],
             }}
           >
-            9 fases. Uma por vez. Nenhuma no escuro.
+            12 fases. Uma por vez. Nenhuma no escuro.
           </Text>
           <Text style={{ ...type.bodyLg, color: "#C7D3E3", maxWidth: 620, marginBottom: space[10] }}>
-            Este é o caminho completo, do zero ao negócio girando. Você nunca vê tudo de uma vez: a Mary abre a próxima
-            etapa quando a anterior está de pé.
+            Este é o caminho completo, do zero ao negócio girando — inteiro, no ar, pronto pra você percorrer hoje.
+            Você nunca vê tudo de uma vez: a Mary abre a próxima etapa quando a anterior está de pé.
           </Text>
         </Reveal>
 
@@ -64,9 +75,9 @@ export function JourneySection({ compact }: { compact: boolean }) {
             >
               <HoverLift
                 style={{
-                  backgroundColor: fase.pronta ? "rgba(242,176,61,0.12)" : "rgba(255,255,255,0.06)",
+                  backgroundColor: "rgba(242,176,61,0.12)",
                   borderWidth: 1,
-                  borderColor: fase.pronta ? color.action.primary : "rgba(255,255,255,0.12)",
+                  borderColor: color.action.primary,
                   borderRadius: radius.lg,
                   padding: space[5],
                   height: "100%",
@@ -78,7 +89,7 @@ export function JourneySection({ compact }: { compact: boolean }) {
                       width: 30,
                       height: 30,
                       borderRadius: radius.full,
-                      backgroundColor: fase.pronta ? color.action.primary : "rgba(255,255,255,0.14)",
+                      backgroundColor: color.action.primary,
                       alignItems: "center",
                       justifyContent: "center",
                     }}
@@ -87,7 +98,7 @@ export function JourneySection({ compact }: { compact: boolean }) {
                       style={{
                         fontFamily: type.h2.fontFamily,
                         fontSize: 14,
-                        color: fase.pronta ? color.text.onAction : "#C7D3E3",
+                        color: color.text.onAction,
                       }}
                     >
                       {i + 1}
@@ -98,14 +109,8 @@ export function JourneySection({ compact }: { compact: boolean }) {
 
                 <Text style={{ ...type.body, color: "#C7D3E3", marginBottom: space[3] }}>{fase.body}</Text>
 
-                <Text
-                  style={{
-                    ...type.overline,
-                    color: fase.pronta ? color.action.primary : "#8FA3BC",
-                    marginTop: "auto",
-                  }}
-                >
-                  {fase.pronta ? "JÁ DISPONÍVEL" : "EM BREVE"}
+                <Text style={{ ...type.overline, color: color.action.primary, marginTop: "auto" }}>
+                  JÁ DISPONÍVEL
                 </Text>
               </HoverLift>
             </Reveal>
@@ -115,8 +120,7 @@ export function JourneySection({ compact }: { compact: boolean }) {
         <Reveal delay={motion.revealStagger * 2} style={{ alignItems: "center", marginTop: space[12] }}>
           <Button label="Começar pela Descoberta" variant="primary" onPress={() => router.push("/diagnostico")} />
           <Text style={{ ...type.caption, color: "#8FA3BC", marginTop: space[3], textAlign: "center" }}>
-            As 3 primeiras fases já estão no ar. As demais entram em sequência, sempre com profundidade antes de
-            amplitude.
+            As 12 fases estão no ar. Você começa hoje e vai até o fim — no seu ritmo, sem pular etapa.
           </Text>
         </Reveal>
       </View>

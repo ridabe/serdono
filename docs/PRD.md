@@ -582,6 +582,21 @@ A home passou a apresentar o catálogo de módulos do produto, para que o visita
 
 **Regra:** enquanto um módulo estiver "em breve", ele aparece na landing com o rótulo visível e **sem link** para uma tela que não existe. Nenhum módulo sai de "em breve" na landing antes de estar utilizável em produção.
 
+**Atualização de 02/08/2026 (decisão do dono do produto — a landing não exibe mais nenhum "em breve"):** o pedido foi apresentar o produto como o sistema completo que ele de fato virou. Como isso foi executado, e por que não conflita com a regra acima:
+
+- **A lista de fases estava desatualizada para MENOS, e esse era o problema real.** A home mostrava 9 fases com 6 rotuladas "EM BREVE" — mas Formalização, Financeiro, Marketing e Clientes já estavam em produção; Estrutura, Fornecedores, Produto, Primeira Venda e Organização nem apareciam; e Retenção/Escala continuavam listadas como fases depois de terem virado módulos (§9.13). Hoje a home mostra **as 12 fases reais, todas disponíveis** — nenhuma promessa, só correção de informação defasada.
+- **"Tutoriais" saiu da lista em vez de virar "disponível".** É o único item deste catálogo ainda não construído. Deixar de anunciar o que não existe é edição; anunciar como pronto seria falsidade — a regra acima continua valendo integralmente para qualquer módulo futuro.
+- **Catálogo atual da home**, todos com código em produção: Jornada Empreendedora (§9), A Mary responde (SDD-21/SDD-50), Retenção de Clientes (§12.5), Calculadora de Precificação (dentro da fase Produto, §9.9), Biblioteca de Conteúdos (§12.3) e Painel do Empreendedor (§12.4).
+- **Seção nova de mentoria em investimentos** (§12.6).
+
+### 12.6 Mentoria em investimentos na landing (decisão do dono do produto, 02/08/2026)
+
+O dono do produto pediu uma seção mostrando que o Ser Dono também ajuda o empreendedor com investimentos. **O que a seção afirma foi ajustado para descrever o que existe:** a Mary responde sobre finanças e investimentos a partir da base curada (SDD-21), citando fonte e data em toda afirmação (RN-20) — ela **ensina a decidir** (quanto manter de reserva, liquidez vs. rentabilidade, separar dinheiro do negócio do pessoal, o que cada sigla significa).
+
+**RN-33 (nova): o produto não recomenda investimento, e nenhuma peça de venda pode sugerir que recomenda.** Indicar carteira, ativo ou alocação personalizada é atividade regulada (CVM, analista/consultor credenciado) — o Ser Dono não é isso e não se anuncia como isso. A seção traz, no próprio texto visível, a ressalva de que a Mary não indica onde pôr o dinheiro nem substitui profissional certificado (aplicação direta da RN-21 em material de aquisição, não só dentro do produto). Também não se anuncia dado de mercado "ao vivo" ou "atualizado a todo momento": não existe integração de cotação no produto.
+
+**Mockup da tela de carteira:** decisão explícita do dono do produto por uma ilustração realista, com números e ativos, pelo impacto visual. Três salvaguardas aplicadas: (a) os ativos são **categorias reais de investimento** (Tesouro Selic, CDB, LCI, Fundo DI), nunca fundos ou instituições nomeadas — usar marca de terceiro em peça de venda é problema à parte; (b) o card exibe **"Exemplo ilustrativo — valores e proporções fictícios"** de forma visível; (c) nenhum número do mockup é apresentado como leitura de mercado ou como carteira sugerida. Detalhamento técnico em SPEC.md SDD-55.
+
 ### 12.3 Biblioteca de Conteúdos (construída em 31/07/2026)
 
 Área de **cursos, vídeos, apostilas e dicas** disponível a todo usuário autenticado (mesmo espírito de acesso livre da base de conhecimento do assistente, SPEC.md SDD-21 — sem gate de assinatura, é material de aquisição/confiança). Publicação é **manual pelo admin** (catálogo `biblioteca_conteudos` + `biblioteca_aulas` para cursos com múltiplas aulas); um conteúdo só aparece pro empreendedor depois de marcado "Publicado" — rascunho fica visível só no admin, mesmo princípio de honestidade das seções anteriores (nada anunciado antes de existir de fato).
@@ -664,6 +679,7 @@ A home passou a apresentar o catálogo de módulos do produto, para que o visita
 | RN-30 | Nenhum KPI do painel é estimado — só aparece com o dado real de origem preenchido — §12.4 |
 | RN-31 | Retenção nunca afirma que um cliente sumiu sem data real; sem histórico é "sem histórico", e taxa sem base é nula — §12.5 |
 | RN-32 | Roteiro de reaproximação nunca inventa desconto, promoção ou fato do relacionamento fora do histórico registrado — §12.5 |
+| RN-33 | O produto não recomenda investimento; nenhuma peça de venda sugere que recomenda, nem promete dado de mercado ao vivo — §12.6 |
 
 ---
 

@@ -409,6 +409,17 @@ Pedido do dono do produto (02/08/2026): o app baixado da Play Store não pode se
 - **Cabeçalho** (`ScreenHeader`, as duas plataformas): logo à esquerda; à direita, links de navegação **só na web** (`webLinks`) e ações que valem em qualquer plataforma (`links`, ex.: "Sair" no Perfil). No app instalado o cabeçalho fica só com a marca — repetir no topo o que já é aba embaixo é exatamente o defeito que motivou esta regra.
 - **Recorte do aparelho:** `ScreenHeader` é o único ponto que soma `useSafeAreaInsets().top`; sem inset (web) mantém o `space[6]` histórico, pra a migração das telas não mexer no espaçamento da web.
 - **Ícones:** desenhados em `react-native-svg` (`apps/app/components/shell/TabIcon.tsx`) porque Lucide (§7) ainda não está instalada — traço e tamanho saem de `icon.strokeWidth`/`icon.md`, e o arquivo inteiro sai quando Lucide entrar.
+- **DS-20.1 — teto de 5 abas, e o catálogo de módulos nunca acrescenta a sexta (03/08/2026).** Preocupação levantada pelo dono do produto: se cada módulo novo virasse um ícone, a barra viraria uma gaveta ilegível em tela de celular. A quinta aba é **agregadora** (“Módulos” → `/modulos`) e serve para 1 módulo extra ou para 20 — ela aparece quando existe qualquer módulo liberado além da Jornada e some quando o admin bloqueia todos. **Módulo novo se registra em `ROTA_POR_SLUG` (`ModulosScreen.tsx`), nunca em `MobileTabBar.tsx`.**
+
+### 9.12 Paleta categórica de gráfico (DS-21, registrada em 03/08/2026)
+
+A §12 estabeleceu a rampa **ordinal** como padrão de dado (DS-19) — matiz única, porque os gráficos do produto comparavam magnitude e progresso. O comparador de aplicações do módulo de Investimentos é o primeiro caso em que as séries têm **identidade**, não ordem: CDB, Tesouro Selic, Poupança e o cenário do usuário são alternativas, não graus da mesma coisa. Usar a rampa ali seria dizer visualmente que uma é "mais" que a outra.
+
+- **Token:** `chart.categorical` (`packages/ui/tokens.ts`) — `cdb` `#2E6FD4`, `selic` `#12876A`, `poupanca` `#C77A0A`, `cenario` `#8B4FD6`.
+- **Validada por script, não no olho** (método de dataviz): faixa de luminosidade, piso de croma, separação sob daltonismo (pior par ΔE 9,4 protan), piso de visão normal (ΔE 19,8) e contraste ≥ 3:1 contra a superfície — **todos PASS**. A primeira tentativa reaproveitava `chart.series` + `color.state.info` e **falhou** em dois checks (croma baixo e ΔE 9,5 de visão normal entre os dois azuis) — registrado porque a combinação parecia perfeitamente legível a olho nu.
+- **Ordem é fixa.** Nunca cicle cores, nunca recolora uma série porque outra saiu do gráfico. Trocar um valor isolado exige revalidar o conjunto (mesma regra da rampa ordinal).
+- **A rampa ordinal continua sendo o padrão.** Esta paleta é a exceção para séries com identidade — não uma segunda opção de estilo para gráfico de magnitude.
+- **Identidade nunca só por cor (DS-2):** cada linha tem rótulo direto na ponta, a legenda está sempre presente, e a série que representa **hipótese do usuário** é tracejada — o traço carrega a diferença mesmo em preto e branco ou para quem não distingue as cores.
 
 ---
 

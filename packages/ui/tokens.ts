@@ -145,6 +145,26 @@ export const chart = {
   track: primitive.ink200,
   grid: primitive.ink200,
   axis: primitive.ink400,
+  /**
+   * §12.1 Paleta CATEGÓRICA (DS-21, registrada em 03/08/2026) — para o único
+   * caso do produto em que séries têm **identidade**, não magnitude: o
+   * comparador de aplicações do módulo de Investimentos (CDB × Tesouro Selic ×
+   * Poupança × cenário do usuário). A rampa ordinal acima continua sendo o
+   * padrão de todo o resto; isto é a exceção, não uma segunda opção de estilo.
+   *
+   * Validada pelo script do método de dataviz contra a superfície do produto:
+   * faixa de luminosidade, piso de croma, separação sob daltonismo
+   * (pior par ΔE 9,4 protan), piso de visão normal (ΔE 19,8) e contraste
+   * ≥ 3:1 — todos PASS. **Ordem fixa: nunca cicle, nunca recolora uma série
+   * porque outra saiu do gráfico.** Trocar um valor isolado exige revalidar o
+   * conjunto inteiro (mesma regra da rampa).
+   */
+  categorical: {
+    cdb: "#2E6FD4",
+    selic: "#12876A",
+    poupanca: "#C77A0A",
+    cenario: "#8B4FD6",
+  },
 } as const;
 
 // ---- §10 Acessibilidade ----

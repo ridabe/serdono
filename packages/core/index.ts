@@ -5,4 +5,5 @@ export * from "./metaCaptacao";
 export * from "./organizacaoMaturidade";
 export * from "./jornadaProgresso";
 export * from "./retencao";
+export * from "./investimentos";
 export * from "./ai/routeModel";
