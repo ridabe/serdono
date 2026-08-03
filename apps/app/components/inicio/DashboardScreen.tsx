@@ -1,9 +1,10 @@
 import { useRouter } from "expo-router";
-import { ActivityIndicator, Image, ScrollView, Text, useWindowDimensions, View } from "react-native";
+import { ActivityIndicator, Image, Pressable, ScrollView, Text, useWindowDimensions, View } from "react-native";
 import Svg, { Circle } from "react-native-svg";
 import { breakpoint, Button, Card, chart, color, MaryAvatar, radius, space, type } from "@serdono/ui";
 import { CONTEUDO_TIPO_LABEL, signOut, type BibliotecaConteudo, type ConteudoTipo } from "@serdono/supabase";
 import { ScreenHeader } from "../shell/ScreenHeader";
+import { rotaDoModulo } from "../modulos/rotas";
 import { formatMoney } from "../diagnostico/labels";
 import { useDashboard, type FaseResumo, type Marco } from "./useDashboard";
 
@@ -42,6 +43,13 @@ export function DashboardScreen() {
       <ScreenHeader
         webLinks={[
           { label: "Minha Jornada", onPress: () => router.push("/jornada") },
+          // "Módulos" faltava aqui desde que o catálogo existe (SDD-30): na web
+          // o único caminho até ele era rolar a página até o card "Seus
+          // módulos". Quem liberava um módulo novo e procurava no menu do topo
+          // não achava nada — foi exatamente o que o dono do produto relatou em
+          // 03/08/2026. No app instalado este link não aparece: lá Módulos é
+          // aba (DS-20.1).
+          { label: "Módulos", onPress: () => router.push("/modulos") },
           { label: "Meu perfil", onPress: () => router.push("/perfil") },
           { label: "Sair", onPress: handleSignOut },
         ]}
@@ -105,7 +113,14 @@ export function DashboardScreen() {
 
           <View style={{ flex: compact ? undefined : 1, width: "100%", gap: space[4] }}>
             <CardMary onPress={() => router.push("/assistente")} />
-            <CardModulos modulos={v.modulos} onPress={() => router.push("/modulos")} />
+            <CardModulos
+              modulos={v.modulos}
+              onPress={() => router.push("/modulos")}
+              onAbrirModulo={(slug) => {
+                const rota = rotaDoModulo(slug);
+                if (rota) router.push(rota as never);
+              }}
+            />
           </View>
         </View>
 
@@ -334,18 +349,50 @@ function CardMary({ onPress }: { onPress: () => void }) {
   );
 }
 
-function CardModulos({ modulos, onPress }: { modulos: { id: string; nome: string; descricao: string | null }[]; onPress: () => void }) {
+function CardModulos({
+  modulos,
+  onPress,
+  onAbrirModulo,
+}: {
+  modulos: { id: string; slug: string; nome: string; descricao: string | null }[];
+  onPress: () => void;
+  onAbrirModulo: (slug: string) => void;
+}) {
   return (
     <Card variant="default" padding={5}>
       <Text style={{ ...type.h3, color: color.text.primary, marginBottom: space[3] }}>Seus módulos</Text>
       {modulos.length > 0 ? (
         <View style={{ gap: space[3] }}>
-          {modulos.map((m) => (
-            <View key={m.id}>
-              <Text style={{ ...type.bodyStrong, color: color.text.primary }}>{m.nome}</Text>
-              {m.descricao ? <Text style={{ ...type.caption, color: color.text.muted, marginTop: 2 }}>{m.descricao}</Text> : null}
-            </View>
-          ))}
+          {/* Cada módulo abre direto — antes o card só listava nomes e o
+              usuário tinha que passar pelo catálogo pra chegar em qualquer um. */}
+          {modulos.map((m) => {
+            const rota = rotaDoModulo(m.slug);
+            const conteudo = (
+              <>
+                <Text style={{ ...type.bodyStrong, color: rota ? color.action.secondary : color.text.primary }}>
+                  {m.nome}
+                  {rota ? " →" : ""}
+                </Text>
+                {m.descricao ? (
+                  <Text style={{ ...type.caption, color: color.text.muted, marginTop: 2 }}>{m.descricao}</Text>
+                ) : null}
+              </>
+            );
+
+            return rota ? (
+              <Pressable
+                key={m.id}
+                onPress={() => onAbrirModulo(m.slug)}
+                accessibilityRole="link"
+                accessibilityLabel={`Abrir ${m.nome}`}
+                style={{ minHeight: 44, justifyContent: "center" }}
+              >
+                {conteudo}
+              </Pressable>
+            ) : (
+              <View key={m.id}>{conteudo}</View>
+            );
+          })}
           <Button label="Ver todos" variant="ghost" size="sm" onPress={onPress} style={{ alignSelf: "flex-start" }} />
         </View>
       ) : (

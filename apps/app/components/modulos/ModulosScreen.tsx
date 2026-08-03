@@ -4,18 +4,7 @@ import { ActivityIndicator, Pressable, ScrollView, Text, View } from "react-nati
 import { Card, color, space, type } from "@serdono/ui";
 import { getCurrentSession, listMyModules, type MyModule } from "@serdono/supabase";
 import { ScreenHeader } from "../shell/ScreenHeader";
-
-/**
- * Onde cada módulo do catálogo abre (SDD-54). Um módulo liberado que ainda
- * não tem tela própria simplesmente não entra aqui — o card dele continua
- * aparecendo, sem virar link pra lugar nenhum (RN-2, mesma regra dos módulos
- * "em breve" da landing).
- */
-const ROTA_POR_SLUG: Record<string, string> = {
-  "jornada-empreendedora": "/jornada",
-  "retencao-clientes": "/retencao",
-  "mentoria-investimentos": "/investimentos",
-};
+import { ROTA_POR_SLUG } from "./rotas";
 
 export function ModulosScreen() {
   const router = useRouter();
