@@ -1,17 +1,17 @@
 import { useRouter } from "expo-router";
-import * as WebBrowser from "expo-web-browser";
-import { ActivityIndicator, Linking, Platform, ScrollView, Text, View } from "react-native";
-import { Button, Card, CollapsibleSection, SECTION_ACCENT_CYCLE, color, radius, space, type } from "@serdono/ui";
-import { MATERIAL_NIVEL_LABEL, type DicasMaterial, type MaterialNivel } from "@serdono/supabase";
+import { ActivityIndicator, Pressable, ScrollView, Text, View } from "react-native";
+import { Card, SECTION_ACCENT_CYCLE, color, radius, space, type } from "@serdono/ui";
+import type { CategoriaComMateriais } from "@serdono/supabase";
 import { ScreenHeader } from "../shell/ScreenHeader";
-import { YoutubeEmbed } from "./YoutubeEmbed";
+import { ChevronRightIcon } from "./DicasIcons";
 import { useDicasDaMary } from "./useDicasDaMary";
 
 /**
- * Hub "Dicas da Mary" (PRD §12.7, SPEC.md SDD-59) — livre a todo usuário
- * autenticado, sem gate de módulo/plano (RN-34). Navegação por categoria,
- * não feed cronológico (pedido explícito do dono do produto: "não deverá
- * ser em formato de blog").
+ * Hub "Dicas da Mary" — nível 1 (PRD §12.7, SPEC.md SDD-59/SDD-60): lista de
+ * categorias. Navegação em duas telas (categoria → assuntos dela), não tudo
+ * espremido numa sanfona só — pedido do dono do produto em 03/08/2026 pra
+ * dar mais respiro visual e permitir várias categorias sem a tela virar uma
+ * pilha infinita de acordeões abertos.
  */
 export function DicasDaMaryScreen() {
   const router = useRouter();
@@ -33,8 +33,7 @@ export function DicasDaMaryScreen() {
         <View>
           <Text style={{ ...type.h1, color: color.text.primary }}>Dicas da Mary</Text>
           <Text style={{ ...type.body, color: color.text.secondary, marginTop: space[1] }}>
-            Separei material por tema pra você estudar no seu ritmo — vídeo, PDF pra baixar e links que valem a pena,
-            tudo num lugar só.
+            Separei material por tema pra você estudar no seu ritmo — escolha uma categoria pra ver os assuntos dela.
           </Text>
         </View>
 
@@ -49,81 +48,86 @@ export function DicasDaMaryScreen() {
             </Text>
           </Card>
         ) : (
-          v.categorias.map((categoria, i) => (
-            <CollapsibleSection
-              key={categoria.id}
-              title={categoria.titulo}
-              accent={SECTION_ACCENT_CYCLE[i % SECTION_ACCENT_CYCLE.length]}
-              rightLabel={`${categoria.materiais.length}`}
-              defaultExpanded={i === 0}
-            >
-              <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[4] }}>
-                {categoria.descricao}
-              </Text>
-              {categoria.materiais.length === 0 ? (
-                <Text style={{ ...type.caption, color: color.text.muted }}>Nenhum material publicado ainda nesta categoria.</Text>
-              ) : (
-                <View style={{ gap: space[4] }}>
-                  {categoria.materiais.map((material) => (
-                    <MaterialCard key={material.id} material={material} />
-                  ))}
-                </View>
-              )}
-            </CollapsibleSection>
-          ))
+          <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[4] }}>
+            {v.categorias.map((categoria, i) => (
+              <CategoriaCard
+                key={categoria.id}
+                categoria={categoria}
+                accent={SECTION_ACCENT_CYCLE[i % SECTION_ACCENT_CYCLE.length]}
+                onPress={() => router.push(`/dicas-da-mary/${categoria.id}`)}
+              />
+            ))}
+          </View>
         )}
       </ScrollView>
     </View>
   );
 }
 
-function abrirPdf(url: string) {
-  if (Platform.OS === "web") {
-    window.open(url, "_blank");
-  } else {
-    Linking.openURL(url);
-  }
-}
+const ACCENT_HEX: Record<string, string> = {
+  brand: color.bg.brand,
+  gold: color.action.primaryHover,
+  info: color.state.info,
+  success: color.state.success,
+  warning: color.state.warning,
+  danger: color.state.danger,
+};
 
-function MaterialCard({ material }: { material: DicasMaterial }) {
+function CategoriaCard({
+  categoria,
+  accent,
+  onPress,
+}: {
+  categoria: CategoriaComMateriais;
+  accent: string;
+  onPress: () => void;
+}) {
+  const cor = ACCENT_HEX[accent] ?? color.bg.brand;
+  const qtd = categoria.materiais.length;
+
   return (
-    <View style={{ backgroundColor: color.bg.surfaceAlt, borderRadius: radius.md, padding: space[4] }}>
-      <Text style={{ ...type.bodyStrong, color: color.text.primary }}>{material.titulo}</Text>
-      {material.descricao ? (
-        <Text style={{ ...type.body, color: color.text.secondary, marginTop: 2 }}>{material.descricao}</Text>
-      ) : null}
-      {material.nivel ? (
-        <Text style={{ ...type.caption, color: color.text.muted, marginTop: space[1] }}>
-          {MATERIAL_NIVEL_LABEL[material.nivel as MaterialNivel]}
-        </Text>
-      ) : null}
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={`Abrir categoria ${categoria.titulo}`}
+      style={{ flexGrow: 1, flexBasis: 280, minWidth: 260, maxWidth: 420 }}
+    >
+      <Card variant="default" padding={0} style={{ overflow: "hidden" }}>
+        <View style={{ flexDirection: "row" }}>
+          <View style={{ width: 6, backgroundColor: cor }} />
+          <View style={{ flex: 1, padding: space[5] }}>
+            <Text style={{ ...type.h3, color: color.text.primary }} numberOfLines={1}>
+              {categoria.titulo}
+            </Text>
+            <Text style={{ ...type.body, color: color.text.secondary, marginTop: space[1] }} numberOfLines={2}>
+              {categoria.descricao}
+            </Text>
 
-      {material.video_url ? (
-        <View style={{ marginTop: space[3] }}>
-          <YoutubeEmbed url={material.video_url} />
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginTop: space[4],
+              }}
+            >
+              <View
+                style={{
+                  backgroundColor: color.bg.surfaceAlt,
+                  borderRadius: radius.full,
+                  paddingHorizontal: space[3],
+                  paddingVertical: 4,
+                }}
+              >
+                <Text style={{ ...type.caption, color: color.text.secondary, fontWeight: "700" }}>
+                  {qtd} {qtd === 1 ? "assunto" : "assuntos"}
+                </Text>
+              </View>
+              <ChevronRightIcon color={color.text.muted} />
+            </View>
+          </View>
         </View>
-      ) : null}
-
-      {material.arquivo_url || material.link_externo_url ? (
-        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[2], marginTop: space[3] }}>
-          {material.arquivo_url ? (
-            <Button
-              label={material.arquivo_nome ? `Baixar ${material.arquivo_nome}` : "Baixar PDF"}
-              variant="outline"
-              size="sm"
-              onPress={() => abrirPdf(material.arquivo_url!)}
-            />
-          ) : null}
-          {material.link_externo_url ? (
-            <Button
-              label={material.link_externo_label || "Ver link"}
-              variant="ghost"
-              size="sm"
-              onPress={() => WebBrowser.openBrowserAsync(material.link_externo_url!)}
-            />
-          ) : null}
-        </View>
-      ) : null}
-    </View>
+      </Card>
+    </Pressable>
   );
 }

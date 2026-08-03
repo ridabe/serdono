@@ -37,6 +37,34 @@ export async function listCategoriasComMateriais(): Promise<CategoriaComMateriai
   }));
 }
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+/**
+ * Uma categoria com seus materiais, pra tela de drill-down
+ * (`/dicas-da-mary/[id]`) — evita buscar todo o catálogo só pra abrir uma
+ * categoria. `null` quando o id não existe, não é um UUID válido (ex.: URL
+ * digitada errada) ou (por RLS) não está publicado.
+ *
+ * A checagem de formato é feita aqui, antes da query: `.eq("id", ...)` com
+ * um valor que não é UUID faz o Postgres devolver um erro de sintaxe cru
+ * ("invalid input syntax for type uuid") em vez de simplesmente não achar a
+ * linha — sem essa guarda, esse erro de banco vazava direto pra tela do
+ * usuário (achado testando `/dicas-da-mary/id-que-nao-existe`).
+ */
+export async function getCategoriaComMateriais(categoriaId: string): Promise<CategoriaComMateriais | null> {
+  if (!UUID_RE.test(categoriaId)) return null;
+
+  const { data, error } = await supabase
+    .from("dicas_categorias")
+    .select("*, materiais:dicas_materiais(*)")
+    .eq("id", categoriaId)
+    .maybeSingle();
+  if (error) throw error;
+  if (!data) return null;
+  const categoria = data as unknown as CategoriaComMateriais;
+  return { ...categoria, materiais: [...categoria.materiais].sort((a, b) => a.ordem - b.ordem) };
+}
+
 // ---- Admin: categorias ----
 
 export async function listCategoriasAdmin(): Promise<DicasCategoria[]> {

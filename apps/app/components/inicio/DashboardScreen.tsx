@@ -127,7 +127,11 @@ export function DashboardScreen() {
           </View>
         </View>
 
-        <CardDicasDaMary categorias={v.categoriasDicas} onPress={() => router.push("/dicas-da-mary")} />
+        <CardDicasDaMary
+          categorias={v.categoriasDicas}
+          onPress={() => router.push("/dicas-da-mary")}
+          onAbrirCategoria={(categoriaId) => router.push(`/dicas-da-mary/${categoriaId}`)}
+        />
       </ScrollView>
     </View>
   );
@@ -410,7 +414,15 @@ function CardModulos({
   );
 }
 
-function CardDicasDaMary({ categorias, onPress }: { categorias: CategoriaComMateriais[]; onPress: () => void }) {
+function CardDicasDaMary({
+  categorias,
+  onPress,
+  onAbrirCategoria,
+}: {
+  categorias: CategoriaComMateriais[];
+  onPress: () => void;
+  onAbrirCategoria: (categoriaId: string) => void;
+}) {
   return (
     <Card variant="default" padding={5}>
       <Text style={{ ...type.h3, color: color.text.primary, marginBottom: space[1] }}>Dicas da Mary</Text>
@@ -425,7 +437,12 @@ function CardDicasDaMary({ categorias, onPress }: { categorias: CategoriaComMate
       ) : (
         <View style={{ gap: space[3] }}>
           {categorias.map((cat) => (
-            <Pressable key={cat.id} onPress={onPress} accessibilityRole="link" accessibilityLabel={`Abrir ${cat.titulo}`}>
+            <Pressable
+              key={cat.id}
+              onPress={() => onAbrirCategoria(cat.id)}
+              accessibilityRole="link"
+              accessibilityLabel={`Abrir ${cat.titulo}`}
+            >
               <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>{cat.titulo}</Text>
               <Text style={{ ...type.caption, color: color.text.muted, marginTop: 2 }} numberOfLines={1}>
                 {cat.materiais.length} material{cat.materiais.length === 1 ? "" : "is"}

@@ -25,8 +25,8 @@
     "semantic_hash": ""
   },
   "apps/app/app/_layout.tsx": {
-    "mtime": 1785687435.8566625,
-    "ast_hash": "0fd3b7aae66aeafe324f77854c634c99",
+    "mtime": 1785764063.9728317,
+    "ast_hash": "a8657830413475294c7c92fba6a9eabd",
     "semantic_hash": ""
   },
   "apps/app/app/cadastro/bem-vindo.tsx": {
@@ -125,12 +125,12 @@
     "semantic_hash": ""
   },
   "apps/app/package.json": {
-    "mtime": 1785510120.817628,
-    "ast_hash": "fbbd50fbc8b16c0bb81bbf52f8694882",
+    "mtime": 1785763896.0274656,
+    "ast_hash": "f9fc3752e2ff81614b07913e8cfaa522",
     "semantic_hash": ""
   },
   "apps/app/tsconfig.json": {
-    "mtime": 1785253106.5401924,
+    "mtime": 1785764677.395167,
     "ast_hash": "70ae5b7763e0f990f5714771f5f0ec92",
     "semantic_hash": ""
   },
@@ -180,8 +180,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/index.ts": {
-    "mtime": 1785725922.3676932,
-    "ast_hash": "316dc7a1ab8b3f5c8609c3499c7bc040",
+    "mtime": 1785763925.7291756,
+    "ast_hash": "bbd93cc3ee05dbb6ab33d7c59580e3f1",
     "semantic_hash": ""
   },
   "packages/supabase/package.json": {
@@ -200,8 +200,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/types.ts": {
-    "mtime": 1785701816.9298244,
-    "ast_hash": "0ed15fc7a17981ccd6a036df5d6f750a",
+    "mtime": 1785763876.0915794,
+    "ast_hash": "eeffd60e8d6930df5c80c1e8b95d6e4a",
     "semantic_hash": ""
   },
   "packages/ui/components/Button.tsx": {
@@ -265,18 +265,18 @@
     "semantic_hash": ""
   },
   "docs/PRD.md": {
-    "mtime": 1785726996.8031259,
-    "ast_hash": "645700d7acf81c740631b02aba170955",
+    "mtime": 1785765179.2115703,
+    "ast_hash": "7cf2d7e543c7d401013e3d5b8caa9c28",
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1785727547.907267,
-    "ast_hash": "673811f32fc5831b7f4c2053cd7f5a47",
+    "mtime": 1785783039.7337854,
+    "ast_hash": "9af77f3cf251e1856024d6d5e512ba1b",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
-    "mtime": 1785726933.760708,
-    "ast_hash": "7186629e865a0744f5cb81c641a8d7f8",
+    "mtime": 1785765262.2178304,
+    "ast_hash": "10c4bb965493af2eaf4b4a67ba5d2c7a",
     "semantic_hash": ""
   },
   "docs/identidade-visual/Ser Dono - Painel de Conceitos de Marca.html": {
@@ -365,8 +365,8 @@
     "semantic_hash": ""
   },
   "apps/app/app/(protected)/_layout.tsx": {
-    "mtime": 1785687336.1808686,
-    "ast_hash": "a7e6048c3cfbfc6726fcabce9e376f3b",
+    "mtime": 1785764094.1040218,
+    "ast_hash": "1f60dec58a993ba9031fa9c7548260b6",
     "semantic_hash": ""
   },
   "apps/app/app/(protected)/admin/_layout.tsx": {
@@ -395,8 +395,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/admin/AdminDashboardScreen.tsx": {
-    "mtime": 1785682556.8178382,
-    "ast_hash": "285bae26d038f29414fa9f2cb6cca1c2",
+    "mtime": 1785764370.0143225,
+    "ast_hash": "18936b75d977f6254165d1ca465fc1bd",
     "semantic_hash": ""
   },
   "apps/app/components/assistente/AssistenteScreen.tsx": {
@@ -420,8 +420,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/storage.ts": {
-    "mtime": 1785683664.0838153,
-    "ast_hash": "51e3b87df7a7d713abe2f633a0f0f03a",
+    "mtime": 1785763942.3126612,
+    "ast_hash": "806a1511eb7a38d67bb72b2b447f2757",
     "semantic_hash": ""
   },
   "apps/app/app/(protected)/perfil/index.tsx": {
@@ -1004,34 +1004,19 @@
     "ast_hash": "edd669bfbf091f5e8a04f0212939781a",
     "semantic_hash": ""
   },
-  "apps/app/app/(protected)/admin/biblioteca/index.tsx": {
-    "mtime": 1785682551.9890969,
-    "ast_hash": "48092e13469baefa7b713bcd4e4f32ee",
-    "semantic_hash": ""
-  },
   "apps/app/app/(protected)/inicio/index.tsx": {
     "mtime": 1785513964.1575198,
     "ast_hash": "1659ef998f395f9f220c175549f2fb7b",
     "semantic_hash": ""
   },
-  "apps/app/components/admin/AdminBibliotecaScreen.tsx": {
-    "mtime": 1785682548.5044253,
-    "ast_hash": "aed58a047c796bad6303153160c9abda",
-    "semantic_hash": ""
-  },
-  "apps/app/components/admin/useAdminBiblioteca.ts": {
-    "mtime": 1785682514.6474495,
-    "ast_hash": "d66a7ea4e57ea6ecff2c028ab6f29c78",
-    "semantic_hash": ""
-  },
   "apps/app/components/inicio/DashboardScreen.tsx": {
-    "mtime": 1785727419.6824913,
-    "ast_hash": "f45be1b1a978ea9f22508d21265aba65",
+    "mtime": 1785764581.9627337,
+    "ast_hash": "796d7560f0fd4952b5b8f8ef81ed8f60",
     "semantic_hash": ""
   },
   "apps/app/components/inicio/useDashboard.ts": {
-    "mtime": 1785513838.7581978,
-    "ast_hash": "29367579ecfc4a32870651122c19a471",
+    "mtime": 1785764518.6499522,
+    "ast_hash": "a8dada524015975d133ba3c32b386c7c",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/JornadaConclusaoScreen.tsx": {
@@ -1099,11 +1084,6 @@
     "ast_hash": "237bd07e6ff602bf034b4f5ca4cfc26c",
     "semantic_hash": ""
   },
-  "packages/supabase/biblioteca.ts": {
-    "mtime": 1785513377.0130072,
-    "ast_hash": "ffdab714dcc3b0d4f36fdfcfc17bbacf",
-    "semantic_hash": ""
-  },
   "packages/supabase/organizacao.ts": {
     "mtime": 1785504766.6572175,
     "ast_hash": "c16e675662811a3f639aa1c50cf206f1",
@@ -1165,13 +1145,13 @@
     "semantic_hash": ""
   },
   "apps/app/components/shell/MobileTabBar.tsx": {
-    "mtime": 1785726249.8014011,
-    "ast_hash": "9382065fa06a895ae19d179f8c126082",
+    "mtime": 1785764027.6925726,
+    "ast_hash": "067989245dde7d7055c3371a9577fe81",
     "semantic_hash": ""
   },
   "apps/app/components/shell/ScreenHeader.tsx": {
-    "mtime": 1785688175.5251415,
-    "ast_hash": "0482e5656c2ecd004c96adf3cc9cd71b",
+    "mtime": 1785764079.58163,
+    "ast_hash": "a0cd8f3d6a8651792dd83eae82839400",
     "semantic_hash": ""
   },
   "apps/app/components/shell/TabIcon.tsx": {
@@ -1180,7 +1160,7 @@
     "semantic_hash": ""
   },
   "packages/ui/platform.ts": {
-    "mtime": 1785726905.965927,
+    "mtime": 1785765085.2136886,
     "ast_hash": "6ae35b30593d9146f1423322acf4ebd6",
     "semantic_hash": ""
   },
@@ -1282,6 +1262,111 @@
   "apps/app/components/modulos/rotas.ts": {
     "mtime": 1785727355.9097278,
     "ast_hash": "619559db6c3f28ad5f29693c96c8e3b2",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/admin/dicas/[id].tsx": {
+    "mtime": 1785764470.1371317,
+    "ast_hash": "0a45ecc2612b136a6b64cfba69a11f08",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/admin/dicas/index.tsx": {
+    "mtime": 1785764466.7250252,
+    "ast_hash": "688c80f5f40c03c0134633d4db67baa7",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/dicas-da-mary/index.tsx": {
+    "mtime": 1785764344.9346044,
+    "ast_hash": "ad9a08abc9047b8ce4ac69ad97143d44",
+    "semantic_hash": ""
+  },
+  "apps/app/components/admin/AdminDicasCategoriasScreen.tsx": {
+    "mtime": 1785764426.8659432,
+    "ast_hash": "725fd65329a11b0ca025f947ffce5eba",
+    "semantic_hash": ""
+  },
+  "apps/app/components/admin/AdminDicasMateriaisScreen.tsx": {
+    "mtime": 1785764462.4559753,
+    "ast_hash": "223da2e44650e1b0bcd43052d8a61e50",
+    "semantic_hash": ""
+  },
+  "apps/app/components/admin/useAdminDicasCategorias.ts": {
+    "mtime": 1785764389.7564993,
+    "ast_hash": "7947895bfac7de90beb4e843e59a8fc3",
+    "semantic_hash": ""
+  },
+  "apps/app/components/admin/useAdminDicasMateriais.ts": {
+    "mtime": 1785764403.4901848,
+    "ast_hash": "e85d1b9e7b4539cb8676868d6fcfabd3",
+    "semantic_hash": ""
+  },
+  "apps/app/components/dicas/DicasDaMaryScreen.tsx": {
+    "mtime": 1785764340.869275,
+    "ast_hash": "a332035c3c94c175b0293788f1459781",
+    "semantic_hash": ""
+  },
+  "apps/app/components/dicas/YoutubeEmbed.native.tsx": {
+    "mtime": 1785764125.6689553,
+    "ast_hash": "9121f06dc1d5a257e42ab5ac956badcb",
+    "semantic_hash": ""
+  },
+  "apps/app/components/dicas/YoutubeEmbed.tsx": {
+    "mtime": 1785764684.8322952,
+    "ast_hash": "2edbf1e233b3202068faa6b862d0d286",
+    "semantic_hash": ""
+  },
+  "apps/app/components/dicas/YoutubeEmbed.web.tsx": {
+    "mtime": 1785764693.4084134,
+    "ast_hash": "9573e8a4067f06be0103780351d9b03e",
+    "semantic_hash": ""
+  },
+  "apps/app/components/dicas/useDicasDaMary.ts": {
+    "mtime": 1785764309.7058208,
+    "ast_hash": "0b3ab52cb0d3a70b2e1e3c881a811327",
+    "semantic_hash": ""
+  },
+  "apps/app/components/dicas/youtubeId.ts": {
+    "mtime": 1785764113.7872236,
+    "ast_hash": "4e8f2475832b72b19eee554bd38f2666",
+    "semantic_hash": ""
+  },
+  "apps/app/components/shell/AppDrawer.tsx": {
+    "mtime": 1785764003.424881,
+    "ast_hash": "bccb30c1aa3496b56f13759eadd28be4",
+    "semantic_hash": ""
+  },
+  "apps/app/components/shell/DrawerContext.tsx": {
+    "mtime": 1785763961.229481,
+    "ast_hash": "99818c50d58242502943bcb545071338",
+    "semantic_hash": ""
+  },
+  "apps/app/components/shell/MenuIcon.tsx": {
+    "mtime": 1785763977.6599545,
+    "ast_hash": "17eea5e1b6b3c5cd9b7f0163354b2358",
+    "semantic_hash": ""
+  },
+  "apps/app/components/shell/useModulosExtras.ts": {
+    "mtime": 1785763951.9093192,
+    "ast_hash": "783257a73e9e71e979676c122636a4e9",
+    "semantic_hash": ""
+  },
+  "packages/supabase/dicas.ts": {
+    "mtime": 1785763911.6013236,
+    "ast_hash": "8b32c7be384a993bcb8ea2a7e7702c51",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20260803190000_dicas_da_mary.sql": {
+    "mtime": 1785763826.2436786,
+    "ast_hash": "7cfbf25164c8c945d7a791d994cf00fb",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20260803210000_dicas_materiais_storage_select.sql": {
+    "mtime": 1785782985.531987,
+    "ast_hash": "577280df1e5e261368d733993a161026",
+    "semantic_hash": ""
+  },
+  "dicas_da_mary/10 Passos Essenciais Antes de Investir.pdf": {
+    "mtime": 1785766392.6379843,
+    "ast_hash": "df13db671e71f2df6cadfcd5e67cd795",
     "semantic_hash": ""
   }
 }

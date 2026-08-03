@@ -663,9 +663,9 @@ O dono do produto pediu uma seção mostrando que o Ser Dono também ajuda o emp
 
 **Área de estudo livre a todo usuário autenticado, sem gate de módulo/plano (RN-34) e fora do catálogo de módulos** — não é uma tela dentro do menu "Módulos", é uma entrada própria e sempre visível (no app instalado, um link fixo no menu lateral, ver §7.x/SPEC.md SDD-59; na web, um link no cabeçalho do Painel). Substitui a Biblioteca de Conteúdos (§12.3), que tinha a mesma proposta de valor mas nunca ganhou tela pro lado cliente.
 
-**Organizada por categoria, nunca em formato de blog** (pedido explícito do dono do produto): cada categoria tem um **texto explicativo** dizendo do que ela trata, e dentro dela uma lista de materiais. Um material pode combinar livremente:
+**Organizada por categoria, nunca em formato de blog** (pedido explícito do dono do produto): cada categoria tem um **texto explicativo** dizendo do que ela trata, e dentro dela uma lista de materiais — sempre tratada como lista (uma categoria pode ter vários assuntos), nunca um único item assumido. Navegação em **duas telas** (categorias → assuntos da categoria escolhida, SPEC.md SDD-60), não tudo espremido numa página só. Um material pode combinar livremente:
 - **PDF** — upload real feito pelo admin, disponível pra download.
-- **Vídeo do YouTube** — toca **embutido** na própria tela, sem sair do app ou abrir navegador.
+- **Vídeo do YouTube** — toca **embutido** na própria tela, num player compacto (não do tamanho de um embed cru) — com opção de abrir o vídeo completo no YouTube numa aba/navegador in-app, sem sair do produto.
 - **Link externo** — abre num navegador in-app, nunca fecha o produto.
 
 Nenhum desses três é obrigatório nem exclusivo dos outros — diferente da Biblioteca antiga (que tinha um `tipo` único por conteúdo), um material de "Dicas da Mary" pode ter os três ao mesmo tempo.
@@ -674,7 +674,7 @@ Nenhum desses três é obrigatório nem exclusivo dos outros — diferente da Bi
 
 **RN-34 (nova): Dicas da Mary é liberado a todo usuário autenticado, sem gate de módulo/plano.** Ao contrário de Retenção (§12.5) e Investimentos (§12.6), não existe aqui nenhuma checagem de `user_modules` — é material de aquisição/confiança, mesmo espírito já aplicado à base de conhecimento do assistente (SDD-21) e à Biblioteca original.
 
-Detalhamento técnico (schema, split de plataforma do player de vídeo, mudança de navegação) em SPEC.md SDD-59.
+Detalhamento técnico (schema, split de plataforma do player de vídeo, mudança de navegação) em SPEC.md SDD-59/SDD-60.
 
 ---
 
