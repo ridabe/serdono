@@ -6,12 +6,15 @@ import { useAdminUsers } from "./useAdminUsers";
 
 export function AdminUsersScreen() {
   const router = useRouter();
-  const { users, query, setQuery, loading, actingOn, error, feedback, invite, toggleBlocked, toggleAdmin, resendPassword } =
+  const { users, query, setQuery, loading, actingOn, error, feedback, invite, toggleBlocked, toggleAdmin, resendPassword, remove } =
     useAdminUsers();
   const [showInvite, setShowInvite] = useState(false);
   const [inviteEmail, setInviteEmail] = useState("");
   const [inviteNome, setInviteNome] = useState("");
   const [inviteAsAdmin, setInviteAsAdmin] = useState(false);
+  // Confirmação em duas etapas antes de excluir (irreversível) — nenhum
+  // clique isolado apaga um usuário de verdade.
+  const [confirmandoExclusaoId, setConfirmandoExclusaoId] = useState<string | null>(null);
 
   async function handleInvite() {
     if (!inviteEmail.trim()) return;
@@ -46,7 +49,7 @@ export function AdminUsersScreen() {
       <ScrollView contentContainerStyle={{ padding: space[5] }}>
         <Text style={{ ...type.h1, color: color.text.primary, marginBottom: space[1] }}>Usuários</Text>
         <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[4] }}>
-          Adicionar, bloquear, reenviar senha e promover administradores.
+          Adicionar, bloquear, reenviar senha, promover administradores e excluir contas.
         </Text>
 
         <Input label="Buscar" value={query} onChangeText={setQuery} placeholder="Nome ou e-mail" autoCapitalize="none" />
@@ -119,7 +122,40 @@ export function AdminUsersScreen() {
                     onPress={() => toggleAdmin(user)}
                   />
                   <Button label="Módulos" variant="ghost" size="sm" onPress={() => router.push(`/admin/usuarios/${user.id}`)} />
+                  {confirmandoExclusaoId !== user.id ? (
+                    <Button label="Excluir" variant="danger" size="sm" onPress={() => setConfirmandoExclusaoId(user.id)} />
+                  ) : null}
                 </View>
+
+                {confirmandoExclusaoId === user.id ? (
+                  <View
+                    style={{
+                      marginTop: space[3],
+                      backgroundColor: color.state.dangerBg,
+                      borderRadius: 8,
+                      padding: space[3],
+                      gap: space[2],
+                    }}
+                  >
+                    <Text style={{ ...type.caption, color: color.text.primary }}>
+                      Excluir {user.nome || user.email || "este usuário"} apaga a conta e todo o dado dele (diagnóstico,
+                      jornada, módulos liberados) para sempre. Não dá pra desfazer.
+                    </Text>
+                    <View style={{ flexDirection: "row", gap: space[2] }}>
+                      <Button
+                        label="Sim, excluir definitivamente"
+                        variant="danger"
+                        size="sm"
+                        loading={actingOn === user.id}
+                        onPress={async () => {
+                          await remove(user);
+                          setConfirmandoExclusaoId(null);
+                        }}
+                      />
+                      <Button label="Cancelar" variant="ghost" size="sm" onPress={() => setConfirmandoExclusaoId(null)} />
+                    </View>
+                  </View>
+                ) : null}
               </Card>
             ))}
           </View>

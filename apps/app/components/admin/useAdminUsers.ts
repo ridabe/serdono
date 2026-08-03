@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import {
   type AdminUser,
   type UserRole,
+  deleteUser,
   inviteUser,
   listUsers,
   requestPasswordReset,
@@ -88,5 +89,6 @@ export function useAdminUsers() {
         },
         "Link de redefinição enviado."
       ),
+    remove: (user: AdminUser) => runAction(user.id, () => deleteUser(user.id), "Usuário excluído."),
   };
 }

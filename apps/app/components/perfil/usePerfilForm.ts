@@ -97,6 +97,13 @@ export function usePerfilForm() {
         .eq("id", userId);
       if (updateError) throw updateError;
 
+      // Espelha em `user_metadata.full_name` (SDD-64) — sem isso, a aba
+      // Authentication do Supabase mostra "Display Name" vazio pra qualquer
+      // conta que não veio de login social, e fica impossível correlacionar
+      // visualmente quem é quem entre as duas telas.
+      const { error: metaError } = await supabase.auth.updateUser({ data: { full_name: nome.trim() } });
+      if (metaError) throw metaError;
+
       return true;
     } catch (e) {
       setError((e as Error).message);

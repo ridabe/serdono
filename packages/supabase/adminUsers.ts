@@ -39,3 +39,16 @@ export async function setUserBlocked(userId: string, blocked: boolean): Promise<
   });
   if (error) throw error;
 }
+
+/**
+ * Exclusão definitiva (SDD-62) — via Admin API do Auth, cascateia (ON DELETE
+ * CASCADE) pra `public.users` e todo dado do usuário (diagnóstico, jornada,
+ * módulos liberados). Irreversível: a confirmação em duas etapas fica na
+ * tela (`AdminUsersScreen.tsx`), não aqui.
+ */
+export async function deleteUser(userId: string): Promise<void> {
+  const { error } = await supabase.functions.invoke("admin-manage-user", {
+    body: { action: "delete", user_id: userId },
+  });
+  if (error) throw error;
+}
