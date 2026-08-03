@@ -595,6 +595,15 @@ O dono do produto pediu uma seção mostrando que o Ser Dono também ajuda o emp
 
 **RN-33 (nova): o produto não recomenda investimento, e nenhuma peça de venda pode sugerir que recomenda.** Indicar carteira, ativo ou alocação personalizada é atividade regulada (CVM, analista/consultor credenciado) — o Ser Dono não é isso e não se anuncia como isso. A seção traz, no próprio texto visível, a ressalva de que a Mary não indica onde pôr o dinheiro nem substitui profissional certificado (aplicação direta da RN-21 em material de aquisição, não só dentro do produto). Também não se anuncia dado de mercado "ao vivo" ou "atualizado a todo momento": não existe integração de cotação no produto.
 
+**Construído em 03/08/2026 como módulo do catálogo** (`mentoria-investimentos`, SPEC.md SDD-56/SDD-57), com liberação/bloqueio por usuário pelo admin (§12.1) como qualquer outro. O que a tela entrega:
+
+1. **Mercado hoje** — CDI, Selic, dólar, euro, Ibovespa, IFIX e Bitcoin, com **fonte e horário visíveis** (RN-20). Dados reais da HG Brasil Finance.
+2. **Quanto o seu negócio precisa ter guardado** — reserva de emergência e capital de giro, calculados com os números que a pessoa preencheu na fase Financeiro (§9.5). Sem esse preenchimento, não mostra estimativa nenhuma (RN-30).
+3. **Comparador de aplicações** — CDB (a % do CDI que o banco dela paga), Tesouro Selic e Poupança, com IR já descontado, num gráfico de uma linha por aplicação. A renda variável entra **apenas** como um cenário que o próprio empreendedor digita — inclusive negativo, porque enxergar o prejuízo possível é metade da decisão.
+4. **Onde deixar cada parte do dinheiro** — três "bolsos" por prazo (o que pode precisar amanhã, o que não vai precisar por meses, o que dá pra deixar anos), com as características que importam em cada um.
+
+**Limite honesto do plano atual da fonte:** não há cotação de ação individual nem histórico de série longa (ambos exigem plano superior na HG Brasil). O produto não finge ter: o histórico do gráfico é a série que o próprio sistema acumula desde que o módulo entrou no ar.
+
 **Mockup da tela de carteira:** decisão explícita do dono do produto por uma ilustração realista, com números e ativos, pelo impacto visual. Três salvaguardas aplicadas: (a) os ativos são **categorias reais de investimento** (Tesouro Selic, CDB, LCI, Fundo DI), nunca fundos ou instituições nomeadas — usar marca de terceiro em peça de venda é problema à parte; (b) o card exibe **"Exemplo ilustrativo — valores e proporções fictícios"** de forma visível; (c) nenhum número do mockup é apresentado como leitura de mercado ou como carteira sugerida. Detalhamento técnico em SPEC.md SDD-55.
 
 ### 12.3 Biblioteca de Conteúdos (construída em 31/07/2026)
