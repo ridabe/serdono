@@ -50,92 +50,24 @@ export type Database = {
         }
         Relationships: []
       }
-      biblioteca_aulas: {
+      cotacoes_snapshots: {
         Row: {
-          conteudo_id: string
-          created_at: string
-          duracao_min: number | null
+          capturado_em: string
+          dados: Json
+          fonte: string
           id: string
-          ordem: number
-          titulo: string
-          video_url: string | null
         }
         Insert: {
-          conteudo_id: string
-          created_at?: string
-          duracao_min?: number | null
+          capturado_em?: string
+          dados: Json
+          fonte?: string
           id?: string
-          ordem?: number
-          titulo: string
-          video_url?: string | null
         }
         Update: {
-          conteudo_id?: string
-          created_at?: string
-          duracao_min?: number | null
+          capturado_em?: string
+          dados?: Json
+          fonte?: string
           id?: string
-          ordem?: number
-          titulo?: string
-          video_url?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "biblioteca_aulas_conteudo_id_fkey"
-            columns: ["conteudo_id"]
-            isOneToOne: false
-            referencedRelation: "biblioteca_conteudos"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      biblioteca_conteudos: {
-        Row: {
-          arquivo_url: string | null
-          ativo: boolean
-          conteudo_md: string | null
-          created_at: string
-          descricao: string | null
-          duracao_min: number | null
-          id: string
-          nivel: string | null
-          ordem: number
-          thumbnail_url: string | null
-          tipo: string
-          titulo: string
-          updated_at: string
-          video_url: string | null
-        }
-        Insert: {
-          arquivo_url?: string | null
-          ativo?: boolean
-          conteudo_md?: string | null
-          created_at?: string
-          descricao?: string | null
-          duracao_min?: number | null
-          id?: string
-          nivel?: string | null
-          ordem?: number
-          thumbnail_url?: string | null
-          tipo: string
-          titulo: string
-          updated_at?: string
-          video_url?: string | null
-        }
-        Update: {
-          arquivo_url?: string | null
-          ativo?: boolean
-          conteudo_md?: string | null
-          created_at?: string
-          descricao?: string | null
-          duracao_min?: number | null
-          id?: string
-          nivel?: string | null
-          ordem?: number
-          thumbnail_url?: string | null
-          tipo?: string
-          titulo?: string
-          updated_at?: string
-          video_url?: string | null
         }
         Relationships: []
       }
@@ -201,6 +133,95 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      dicas_categorias: {
+        Row: {
+          ativo: boolean
+          created_at: string
+          descricao: string
+          id: string
+          ordem: number
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          ativo?: boolean
+          created_at?: string
+          descricao: string
+          id?: string
+          ordem?: number
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          ativo?: boolean
+          created_at?: string
+          descricao?: string
+          id?: string
+          ordem?: number
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      dicas_materiais: {
+        Row: {
+          arquivo_nome: string | null
+          arquivo_url: string | null
+          ativo: boolean
+          categoria_id: string
+          created_at: string
+          descricao: string | null
+          id: string
+          link_externo_label: string | null
+          link_externo_url: string | null
+          nivel: string | null
+          ordem: number
+          titulo: string
+          updated_at: string
+          video_url: string | null
+        }
+        Insert: {
+          arquivo_nome?: string | null
+          arquivo_url?: string | null
+          ativo?: boolean
+          categoria_id: string
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          link_externo_label?: string | null
+          link_externo_url?: string | null
+          nivel?: string | null
+          ordem?: number
+          titulo: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Update: {
+          arquivo_nome?: string | null
+          arquivo_url?: string | null
+          ativo?: boolean
+          categoria_id?: string
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          link_externo_label?: string | null
+          link_externo_url?: string | null
+          nivel?: string | null
+          ordem?: number
+          titulo?: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dicas_materiais_categoria_id_fkey"
+            columns: ["categoria_id"]
+            isOneToOne: false
+            referencedRelation: "dicas_categorias"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       fornecedores_parceiros: {
         Row: {

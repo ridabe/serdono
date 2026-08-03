@@ -2,6 +2,7 @@ import { supabase } from "./client";
 
 const AVATARS_BUCKET = "avatars";
 const PARCEIROS_LOGOS_BUCKET = "parceiros-logos";
+const DICAS_MATERIAIS_BUCKET = "dicas-materiais";
 
 /**
  * Sobe a foto de perfil já padronizada (redimensionada/comprimida pelo
@@ -43,5 +44,25 @@ export async function uploadParceiroLogo(parceiroId: string, uri: string): Promi
   if (error) throw error;
 
   const { data } = supabase.storage.from(PARCEIROS_LOGOS_BUCKET).getPublicUrl(path);
+  return data.publicUrl;
+}
+
+/**
+ * Sobe o PDF de um material de "Dicas da Mary" (Painel Admin) — mesmo padrão
+ * de `uploadParceiroLogo` (bucket público, upsert por caminho fixo, id
+ * gerado no client antes do material existir na tabela), trocando só o
+ * content-type pra PDF.
+ */
+export async function uploadDicaMaterialPdf(materialId: string, uri: string): Promise<string> {
+  const arrayBuffer = await fetch(uri).then((res) => res.arrayBuffer());
+  const path = `${materialId}/arquivo.pdf`;
+
+  const { error } = await supabase.storage.from(DICAS_MATERIAIS_BUCKET).upload(path, arrayBuffer, {
+    contentType: "application/pdf",
+    upsert: true,
+  });
+  if (error) throw error;
+
+  const { data } = supabase.storage.from(DICAS_MATERIAIS_BUCKET).getPublicUrl(path);
   return data.publicUrl;
 }

@@ -608,9 +608,18 @@ O dono do produto pediu uma seção mostrando que o Ser Dono também ajuda o emp
 
 ### 12.3 Biblioteca de Conteúdos (construída em 31/07/2026)
 
+**Substituída por §12.7 "Dicas da Mary" em 03/08/2026 — ver SPEC.md SDD-59.** Esta seção existia com o mesmo espírito (cursos/vídeos/apostilas/dicas, acesso livre a todo autenticado), mas nunca ganhou tela do lado cliente e tinha zero conteúdo cadastrado em produção — substituída, não migrada, sem perda de dado real. Texto original preservado abaixo por histórico.
+
+<details>
+<summary>Texto original (histórico)</summary>
+
 Área de **cursos, vídeos, apostilas e dicas** disponível a todo usuário autenticado (mesmo espírito de acesso livre da base de conhecimento do assistente, SPEC.md SDD-21 — sem gate de assinatura, é material de aquisição/confiança). Publicação é **manual pelo admin** (catálogo `biblioteca_conteudos` + `biblioteca_aulas` para cursos com múltiplas aulas); um conteúdo só aparece pro empreendedor depois de marcado "Publicado" — rascunho fica visível só no admin, mesmo princípio de honestidade das seções anteriores (nada anunciado antes de existir de fato).
 
 **Deliberadamente separada de `knowledge_articles`:** aquela tabela alimenta o RAG do assistente (texto curado, fatiado e embeddado para busca por similaridade) — não é o mesmo modelo de dado que um vídeo ou PDF. Ver SPEC.md SDD-50.
+
+</details>
+
+### 12.4 Painel do Empreendedor (decisão do dono do produto, 31/07/2026)
 
 ### 12.4 Painel do Empreendedor (decisão do dono do produto, 31/07/2026)
 
@@ -622,7 +631,7 @@ O dono do produto pediu uma seção mostrando que o Ser Dono também ajuda o emp
 3. **Linha do tempo** — os marcos mais recentes, com a data real de conclusão de cada etapa (`jornada_etapas.concluido_em`) — não é uma narrativa fabricada, é o histórico real do motor de etapas.
 4. **Onde você chegou** — resumo de conclusão por fase da Jornada, mesma fonte de dado da trilha lateral.
 5. **Seus módulos** — outros módulos já liberados pra conta (catálogo do §12.1); sem nenhum além da Jornada, mensagem honesta de "em preparação" (RN-29), nunca promessa de módulo ou plano ainda não definido.
-6. **Biblioteca** — prévia dos conteúdos publicados (§12.3).
+6. **Dicas da Mary** — prévia das categorias publicadas (§12.7).
 7. **Conversar com a Mary** — atalho para o assistente (`/assistente`), que a partir desta mesma data passa a receber o **contexto do negócio da pessoa** quando ela tiver uma Jornada em andamento (nome da empresa, nicho, fase atual, público-alvo, diferenciais) — ver RN-11 e SPEC.md SDD-50. Sem esse contexto, a pergunta continua sendo respondida só pela base de conhecimento geral, comportamento inalterado.
 
 **Decisão de forma deliberada:** o painel NÃO é um dashboard analítico denso (várias grades de gráfico) — o produto é orientador, não ERP (§9.12), e não há dado operacional real (vendas, estoque, contas) pra sustentar aquilo sem ficar vazio pra maioria dos usuários. O conceito escolhido investe em identidade do negócio + narrativa de evolução, que é honesto com o dado que o produto realmente tem.
@@ -649,6 +658,23 @@ O dono do produto pediu uma seção mostrando que o Ser Dono também ajuda o emp
 **RN-32 (nova): roteiro de reaproximação nunca inventa fato sobre o relacionamento.** Nada de desconto, preço, promoção, novidade ou opinião do cliente sobre a compra anterior que não esteja no histórico registrado — o empreendedor vai mandar esse texto pra uma pessoa real que sabe o que de fato aconteceu, e uma frase inventada destrói a confiança na hora. Histórico pobre gera mensagem mais simples, nunca mensagem preenchida com invenção. Estende a mesma disciplina já aplicada à oferta comercial (§9.10) e ao roteiro de fornecedores.
 
 **Deliberadamente fora desta versão:** disparo automático de mensagem (o empreendedor copia e envia pelo canal dele — automação de envio é outro produto), segmentação por valor/curva ABC, campanhas em massa e integração com WhatsApp Business API. Detalhamento técnico em SPEC.md SDD-54.
+
+### 12.7 Dicas da Mary (pedido do dono do produto em 03/08/2026)
+
+**Área de estudo livre a todo usuário autenticado, sem gate de módulo/plano (RN-34) e fora do catálogo de módulos** — não é uma tela dentro do menu "Módulos", é uma entrada própria e sempre visível (no app instalado, um link fixo no menu lateral, ver §7.x/SPEC.md SDD-59; na web, um link no cabeçalho do Painel). Substitui a Biblioteca de Conteúdos (§12.3), que tinha a mesma proposta de valor mas nunca ganhou tela pro lado cliente.
+
+**Organizada por categoria, nunca em formato de blog** (pedido explícito do dono do produto): cada categoria tem um **texto explicativo** dizendo do que ela trata, e dentro dela uma lista de materiais. Um material pode combinar livremente:
+- **PDF** — upload real feito pelo admin, disponível pra download.
+- **Vídeo do YouTube** — toca **embutido** na própria tela, sem sair do app ou abrir navegador.
+- **Link externo** — abre num navegador in-app, nunca fecha o produto.
+
+Nenhum desses três é obrigatório nem exclusivo dos outros — diferente da Biblioteca antiga (que tinha um `tipo` único por conteúdo), um material de "Dicas da Mary" pode ter os três ao mesmo tempo.
+
+**Publicação é manual pelo admin**, mesmo princípio de honestidade das seções anteriores: categoria e material só aparecem pro empreendedor depois de marcados "Publicado"; rascunho fica visível só no admin.
+
+**RN-34 (nova): Dicas da Mary é liberado a todo usuário autenticado, sem gate de módulo/plano.** Ao contrário de Retenção (§12.5) e Investimentos (§12.6), não existe aqui nenhuma checagem de `user_modules` — é material de aquisição/confiança, mesmo espírito já aplicado à base de conhecimento do assistente (SDD-21) e à Biblioteca original.
+
+Detalhamento técnico (schema, split de plataforma do player de vídeo, mudança de navegação) em SPEC.md SDD-59.
 
 ---
 
@@ -689,6 +715,7 @@ O dono do produto pediu uma seção mostrando que o Ser Dono também ajuda o emp
 | RN-31 | Retenção nunca afirma que um cliente sumiu sem data real; sem histórico é "sem histórico", e taxa sem base é nula — §12.5 |
 | RN-32 | Roteiro de reaproximação nunca inventa desconto, promoção ou fato do relacionamento fora do histórico registrado — §12.5 |
 | RN-33 | O produto não recomenda investimento; nenhuma peça de venda sugere que recomenda, nem promete dado de mercado ao vivo — §12.6 |
+| RN-34 | Dicas da Mary é liberado a todo usuário autenticado, sem gate de módulo/plano — §12.7 |
 
 ---
 

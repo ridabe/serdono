@@ -5,6 +5,7 @@ import { Slot } from "expo-router";
 import { color, isNativeApp } from "@serdono/ui";
 import { getCurrentSession, isAnonymousSession, supabase } from "@serdono/supabase";
 import { MobileTabBar } from "../../components/shell/MobileTabBar";
+import { AppDrawer } from "../../components/shell/AppDrawer";
 
 const PROFILE_ROUTE = "/completar-cadastro";
 
@@ -95,6 +96,7 @@ export default function ProtectedLayout() {
         <Slot />
       </View>
       {mostrarTabBar ? <MobileTabBar /> : null}
+      {isNativeApp ? <AppDrawer /> : null}
     </View>
   );
 }

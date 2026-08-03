@@ -1,0 +1,23 @@
+-- Correção da SDD-59: upload de PDF em "Dicas da Mary" falhava com "new row
+-- violates row-level security policy", mesmo a policy de INSERT sendo
+-- correta e o usuário sendo admin de fato.
+--
+-- Causa raiz: o Storage do Supabase faz o upload como um
+-- `INSERT ... RETURNING` (pra confirmar o objeto gravado). O Postgres exige
+-- que a linha inserida também satisfaça uma policy de SELECT pra poder
+-- devolvê-la em RETURNING — não basta a policy de INSERT aceitar a escrita.
+-- A migration original só criou INSERT/UPDATE/DELETE pro admin, replicando
+-- (por engano) o padrão do bucket `parceiros-logos`, que não tem policy de
+-- SELECT nenhuma — lá isso nunca foi notado porque nenhum upload real para
+-- esse bucket jamais foi testado em produção (confirmado: 0 objetos).
+--
+-- Reproduzido com SQL puro simulando o JWT do admin: o mesmo INSERT falha
+-- com `RETURNING` e funciona sem — confirma que o bug é exatamente este.
+--
+-- Correção: liberar SELECT do bucket a qualquer autenticado, não só admin —
+-- consistente com RN-34 ("Dicas da Mary é livre a todo usuário") e com o
+-- comentário original da migration ("material didático não é dado
+-- sensível"). Resolve o RETURNING do admin de propósito (efeito colateral
+-- correto, já que qualquer autenticado deveria mesmo conseguir ler o objeto).
+create policy "dicas_materiais_storage_read_authenticated" on storage.objects
+  for select using (bucket_id = 'dicas-materiais' and auth.role() = 'authenticated');

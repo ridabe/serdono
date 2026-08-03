@@ -2,6 +2,8 @@ import React from "react";
 import { Pressable, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { a11y, color, isNativeApp, Logo, space, type } from "@serdono/ui";
+import { useDrawer } from "./DrawerContext";
+import { MenuIcon } from "./MenuIcon";
 
 export interface ScreenHeaderLink {
   label: string;
@@ -32,6 +34,7 @@ export interface ScreenHeaderProps {
  */
 export function ScreenHeader({ webLinks = [], links = [], webRight }: ScreenHeaderProps) {
   const insets = useSafeAreaInsets();
+  const { openDrawer } = useDrawer();
   const soWeb = isNativeApp ? [] : webLinks;
   const extra = isNativeApp ? null : webRight;
   const temAlgo = soWeb.length > 0 || links.length > 0 || extra != null;
@@ -54,7 +57,21 @@ export function ScreenHeader({ webLinks = [], links = [], webRight }: ScreenHead
         backgroundColor: color.bg.surface,
       }}
     >
-      <Logo size={28} />
+      <View style={{ flexDirection: "row", alignItems: "center", gap: space[3] }}>
+        {/* Gatilho do menu lateral (DS-22, SDD-59) — só no app instalado; na
+            web a navegação continua sendo os `webLinks` deste mesmo cabeçalho. */}
+        {isNativeApp ? (
+          <Pressable
+            onPress={openDrawer}
+            accessibilityRole="button"
+            accessibilityLabel="Abrir menu"
+            style={{ minWidth: a11y.minTouchTarget, minHeight: a11y.minTouchTarget, alignItems: "center", justifyContent: "center" }}
+          >
+            <MenuIcon color={color.text.primary} />
+          </Pressable>
+        ) : null}
+        <Logo size={28} />
+      </View>
       {temAlgo ? (
         <View style={{ flexDirection: "row", alignItems: "center", gap: space[4] }}>
           {soWeb.map((link) => (

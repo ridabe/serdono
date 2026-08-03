@@ -102,9 +102,9 @@ export function AdminDashboardScreen() {
             onPress={() => router.push("/admin/fornecedores")}
           />
           <NavCard
-            title="Biblioteca"
-            description="Cursos, vídeos, apostilas e dicas exibidos no painel do empreendedor."
-            onPress={() => router.push("/admin/biblioteca")}
+            title="Dicas da Mary"
+            description="Categorias de estudo com PDF, vídeo e links — liberado a todo usuário, sem gate de módulo."
+            onPress={() => router.push("/admin/dicas")}
           />
         </View>
       </ScrollView>

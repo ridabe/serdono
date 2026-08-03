@@ -15,12 +15,12 @@ import {
   getMetaCaptacaoSalva,
   getMyJornada,
   isEtapaEstruturaRelevante,
-  listConteudos,
+  listCategoriasComMateriais,
   listJornadaClientesContatos,
   listMyModules,
   SLUG_PRIMEIRA_VENDA_REGISTRO,
   supabase,
-  type BibliotecaConteudo,
+  type CategoriaComMateriais,
   type JornadaEtapa,
   type JornadaInstance,
   type MyModule,
@@ -30,7 +30,7 @@ import {
 const SLUG_FINANCEIRO_PLANEJAMENTO = "financeiro_planejamento";
 const SLUG_JORNADA_EMPREENDEDORA = "jornada-empreendedora";
 const MAX_MARCOS = 6;
-const MAX_CONTEUDOS = 4;
+const MAX_CATEGORIAS_DICAS = 3;
 
 export interface Marco {
   id: string;
@@ -49,7 +49,7 @@ export interface FaseResumo {
 /**
  * Painel do empreendedor (SDD-50). Agrega, numa leitura só, o que a pessoa
  * precisa ver ao entrar sem querer abrir a Jornada: identidade do negócio,
- * o quanto andou, marcos reais datados, módulos, biblioteca e a Mary.
+ * o quanto andou, marcos reais datados, módulos, Dicas da Mary e a própria Mary.
  *
  * Regra que vale pra toda a tela: **nenhum número é estimado aqui**. Todo KPI
  * só aparece se o dado real existir (a pessoa preencheu a calculadora,
@@ -67,7 +67,7 @@ export function useDashboard() {
   const [etapas, setEtapas] = useState<JornadaEtapa[]>([]);
   const [nicheEstrutura, setNicheEstrutura] = useState<NicheEstruturaInfo | null>(null);
   const [modulos, setModulos] = useState<MyModule[]>([]);
-  const [conteudos, setConteudos] = useState<BibliotecaConteudo[]>([]);
+  const [categoriasDicas, setCategoriasDicas] = useState<CategoriaComMateriais[]>([]);
   const [clientesConquistados, setClientesConquistados] = useState(0);
   const [metaClientes, setMetaClientes] = useState<number | null>(null);
 
@@ -78,18 +78,18 @@ export function useDashboard() {
         const session = await getCurrentSession();
         if (!session) return;
 
-        const [{ data: perfil }, instance, modulosLiberados, conteudosPublicados] = await Promise.all([
+        const [{ data: perfil }, instance, modulosLiberados, categoriasPublicadas] = await Promise.all([
           supabase.from("users").select("nome").eq("id", session.user.id).maybeSingle(),
           getMyJornada(session.user.id),
           listMyModules(session.user.id),
-          listConteudos(MAX_CONTEUDOS).catch(() => []),
+          listCategoriasComMateriais().catch(() => []),
         ]);
         if (cancelado) return;
 
         setNomeUsuario(perfil?.nome ?? null);
         setJornada(instance);
         setModulos(modulosLiberados.filter((m) => m.slug !== SLUG_JORNADA_EMPREENDEDORA));
-        setConteudos(conteudosPublicados);
+        setCategoriasDicas(categoriasPublicadas.slice(0, MAX_CATEGORIAS_DICAS));
 
         if (!instance) return;
 
@@ -213,6 +213,6 @@ export function useDashboard() {
     clientesConquistados,
     metaClientes,
     modulos,
-    conteudos,
+    categoriasDicas,
   };
 }

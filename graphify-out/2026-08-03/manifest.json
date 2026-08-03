@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1785726333.8464906,
-    "ast_hash": "729e256c2297de8ea86dd4837e9d0648",
+    "mtime": 1785727566.69672,
+    "ast_hash": "8ad44497b900a8adcf97c1076ba1a104",
     "semantic_hash": ""
   },
   ".mcp.json": {
@@ -265,13 +265,13 @@
     "semantic_hash": ""
   },
   "docs/PRD.md": {
-    "mtime": 1785705383.6750877,
-    "ast_hash": "4c0bbc61a55c5d2a83845c97b3d8330e",
+    "mtime": 1785726996.8031259,
+    "ast_hash": "645700d7acf81c740631b02aba170955",
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1785705410.3350644,
-    "ast_hash": "e099d7b573808c5fffcff256228c0a65",
+    "mtime": 1785727547.907267,
+    "ast_hash": "673811f32fc5831b7f4c2053cd7f5a47",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
@@ -520,8 +520,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/modulos/ModulosScreen.tsx": {
-    "mtime": 1785726218.6646366,
-    "ast_hash": "5c31fd835b99a0ceb17f19de2d22b24d",
+    "mtime": 1785727378.9659624,
+    "ast_hash": "d4dbc9572e16c81ec4c6ef94c95a03e1",
     "semantic_hash": ""
   },
   "apps/app/eas.json": {
@@ -1025,8 +1025,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/inicio/DashboardScreen.tsx": {
-    "mtime": 1785687473.2147372,
-    "ast_hash": "13006c43ad34eb34dae07164bce8f719",
+    "mtime": 1785727419.6824913,
+    "ast_hash": "f45be1b1a978ea9f22508d21265aba65",
     "semantic_hash": ""
   },
   "apps/app/components/inicio/useDashboard.ts": {
@@ -1277,6 +1277,11 @@
   "supabase/migrations/20260802180000_cotacoes_snapshots.sql": {
     "mtime": 1785725639.5762107,
     "ast_hash": "f3cc9d206c858e84e8169e4bc1dfbce6",
+    "semantic_hash": ""
+  },
+  "apps/app/components/modulos/rotas.ts": {
+    "mtime": 1785727355.9097278,
+    "ast_hash": "619559db6c3f28ad5f29693c96c8e3b2",
     "semantic_hash": ""
   }
 }

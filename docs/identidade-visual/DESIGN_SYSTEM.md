@@ -409,7 +409,7 @@ Pedido do dono do produto (02/08/2026): o app baixado da Play Store não pode se
 - **Cabeçalho** (`ScreenHeader`, as duas plataformas): logo à esquerda; à direita, links de navegação **só na web** (`webLinks`) e ações que valem em qualquer plataforma (`links`, ex.: "Sair" no Perfil). No app instalado o cabeçalho fica só com a marca — repetir no topo o que já é aba embaixo é exatamente o defeito que motivou esta regra.
 - **Recorte do aparelho:** `ScreenHeader` é o único ponto que soma `useSafeAreaInsets().top`; sem inset (web) mantém o `space[6]` histórico, pra a migração das telas não mexer no espaçamento da web.
 - **Ícones:** desenhados em `react-native-svg` (`apps/app/components/shell/TabIcon.tsx`) porque Lucide (§7) ainda não está instalada — traço e tamanho saem de `icon.strokeWidth`/`icon.md`, e o arquivo inteiro sai quando Lucide entrar.
-- **DS-20.1 — teto de 5 abas, e o catálogo de módulos nunca acrescenta a sexta (03/08/2026).** Preocupação levantada pelo dono do produto: se cada módulo novo virasse um ícone, a barra viraria uma gaveta ilegível em tela de celular. A quinta aba é **agregadora** (“Módulos” → `/modulos`) e serve para 1 módulo extra ou para 20 — ela aparece quando existe qualquer módulo liberado além da Jornada e some quando o admin bloqueia todos. **Módulo novo se registra em `ROTA_POR_SLUG` (`ModulosScreen.tsx`), nunca em `MobileTabBar.tsx`.**
+- **DS-20.1 — teto de 5 abas, e o catálogo de módulos nunca acrescenta a sexta (03/08/2026).** Preocupação levantada pelo dono do produto: se cada módulo novo virasse um ícone, a barra viraria uma gaveta ilegível em tela de celular. A quinta aba era **agregadora** (“Módulos” → `/modulos`) e servia para 1 módulo extra ou para 20 — ela aparecia quando existia qualquer módulo liberado além da Jornada e sumia quando o admin bloqueava todos. **Superada por DS-22 no mesmo dia**, ainda no mesmo turno de trabalho: o dono do produto pediu pra ir além do teto fixo e mover tudo que cresce pro menu lateral — a barra de abas hoje é só 4 fixas, para sempre (ver DS-22). Registro mantido por histórico: o raciocínio de "rodapé não pode virar gaveta" é o mesmo, só a solução evoluiu de "agregar numa aba" pra "menu lateral que cresce à vontade".
 
 ### 9.12 Paleta categórica de gráfico (DS-21, registrada em 03/08/2026)
 
@@ -420,6 +420,17 @@ A §12 estabeleceu a rampa **ordinal** como padrão de dado (DS-19) — matiz ú
 - **Ordem é fixa.** Nunca cicle cores, nunca recolora uma série porque outra saiu do gráfico. Trocar um valor isolado exige revalidar o conjunto (mesma regra da rampa ordinal).
 - **A rampa ordinal continua sendo o padrão.** Esta paleta é a exceção para séries com identidade — não uma segunda opção de estilo para gráfico de magnitude.
 - **Identidade nunca só por cor (DS-2):** cada linha tem rótulo direto na ponta, a legenda está sempre presente, e a série que representa **hipótese do usuário** é tracejada — o traço carrega a diferença mesmo em preto e branco ou para quem não distingue as cores.
+
+### 9.13 Menu lateral / drawer (DS-22, registrada em 03/08/2026)
+
+Pedido do dono do produto, no mesmo turno em que fixou o DS-20.1: em vez de um teto rígido de abas, mover tudo que cresce (catálogo de módulos, áreas livres novas como "Dicas da Mary") pra um menu lateral colapsável. **Regra que resulta disso: a barra de abas nativa (`MobileTabBar`) tem exatamente 4 itens fixos, para sempre — Início, Jornada, Mary, Perfil. Nenhuma aba nova nunca mais.**
+
+- **Componente:** `AppDrawer.tsx` (`apps/app/components/shell/`), montado só quando `isNativeApp`. Reaproveita o padrão de overlay já estabelecido em `AppUpdateAlert.tsx` — `Modal transparent` com backdrop escuro (`rgba(17,24,39,0.5)`) — em vez de inventar um segundo mecanismo de overlay no projeto.
+- **Gatilho:** ícone de hamburguer (`MenuIcon.tsx`, mesmo estilo SVG de `TabIcon.tsx`) integrado ao `ScreenHeader`, à esquerda da logo, visível só no app instalado. Único ponto de entrada — nenhuma tela precisa montar o gatilho por conta própria.
+- **Animação:** painel desliza da esquerda via `Animated.Value`/`translateX`, timing `motion.base` (200ms, DS-16) — mesma técnica de transform já usada em `Button.tsx`/`HoverLift.tsx`, não uma lib de animação nova.
+- **Conteúdo, organizado em seções com rótulo (`overline`, maiúsculo, `color.text.muted`):** "Módulos" — só aparece se houver algum liberado além da Jornada (mesma honestidade da RN-2: nunca listar destino vazio), e lista **cada módulo diretamente**, sem passar pelo catálogo `/modulos` intermediário. "Aprender" — link fixo pra "Dicas da Mary", sempre visível, sem gate nenhum (é área livre, não módulo).
+- **Fechamento:** tocar um item fecha o drawer e navega; tocar o backdrop fecha sem navegar; no Android, o botão físico "voltar" fecha o drawer em vez de sair da tela (mesmo padrão de interceptação de `AppUpdateAlert.tsx`, mas aqui desviando, não bloqueando).
+- **Web não ganha drawer.** `isNativeApp` continua sendo a única fronteira (§9.11) — na web, os mesmos destinos entram como `webLinks` do `ScreenHeader`.
 
 ---
 

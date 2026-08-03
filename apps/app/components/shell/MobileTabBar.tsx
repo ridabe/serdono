@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { usePathname, useRouter } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { a11y, color, space, type } from "@serdono/ui";
-import { getCurrentSession, listMyModules } from "@serdono/supabase";
 import { TabIcon, type TabIconName } from "./TabIcon";
-
-/** Slug do módulo que É a Jornada — ele já tem aba própria, não repete em "Módulos". */
-const JORNADA_SLUG = "jornada-empreendedora";
 
 interface Tab {
   href: string;
@@ -24,56 +20,26 @@ const BASE_TABS: Tab[] = [
   { href: "/perfil", label: "Perfil", icon: "perfil", matches: ["/perfil", "/completar-cadastro"] },
 ];
 
-const MODULOS_TAB: Tab = { href: "/modulos", label: "Módulos", icon: "modulos", matches: ["/modulos"] };
-
 /**
- * Barra de abas do app instalado (DS-20, SDD-53) — só monta quando
- * `isNativeApp`; na web a navegação continua sendo o cabeçalho de cada tela.
+ * Barra de abas do app instalado (DS-20/DS-22, SDD-53/SDD-59) — só monta
+ * quando `isNativeApp`; na web a navegação continua sendo o cabeçalho de
+ * cada tela.
  *
- * **INVARIANTE: no máximo 5 abas, e o catálogo de módulos NUNCA acrescenta
- * uma sexta.** Preocupação levantada pelo dono do produto em 03/08/2026 e que
- * este arquivo tem a obrigação de garantir: um módulo novo no catálogo não
- * pode virar um ícone novo aqui embaixo, senão a barra vira uma gaveta
- * ilegível em tela de celular. Por isso a quinta aba é **agregadora** — uma
- * porta única ("Módulos" → `/modulos`) que serve para 1 módulo extra ou para
- * 20. Quem for adicionar módulo no futuro: acrescente a rota em
- * `ROTA_POR_SLUG` (`ModulosScreen.tsx`) e pare por aí; não venha aqui.
- *
- * A aba agregadora também é condicional: enquanto a Jornada for o único
- * módulo liberado pra pessoa, ela levaria a uma lista vazia — anunciar função
- * que não existe é o que a RN-2 proíbe. Assim que o admin liberar qualquer
- * outro módulo (SDD-30), a aba aparece sozinha, sem release novo do app.
- * Admin não tem aba: o painel administrativo é web (decisão do dono do
- * produto, 02/08/2026).
+ * **INVARIANTE ATUAL: 4 abas fixas, para sempre — nada aqui cresce.** Até a
+ * SDD-59 este arquivo tinha uma 5ª aba agregadora condicional ("Módulos"),
+ * teto que a SDD-53 fixou em 5. O dono do produto pediu, em 03/08/2026, pra
+ * ir além: em vez de uma aba que absorve o catálogo inteiro, o catálogo (e
+ * qualquer área nova que não seja módulo, como "Dicas da Mary") passou a
+ * viver no `AppDrawer.tsx` — menu lateral que cresce à vontade, sem disputar
+ * espaço com a navegação principal. Quem for adicionar módulo: mexa em
+ * `ROTA_POR_SLUG` (`rotas.ts`) e no `AppDrawer`; este arquivo nunca precisa
+ * mudar de novo por causa de catálogo.
  */
 export function MobileTabBar() {
   const router = useRouter();
   const pathname = usePathname();
   const insets = useSafeAreaInsets();
-  const [temOutrosModulos, setTemOutrosModulos] = useState(false);
-
-  useEffect(() => {
-    let active = true;
-    (async () => {
-      try {
-        const session = await getCurrentSession();
-        if (!session || !active) return;
-        const modulos = await listMyModules(session.user.id);
-        if (!active) return;
-        setTemOutrosModulos(modulos.some((m) => m.slug !== JORNADA_SLUG));
-      } catch {
-        // Falha de rede aqui só esconde uma aba opcional — não vale derrubar
-        // a navegação inteira do app por isso.
-      }
-    })();
-    return () => {
-      active = false;
-    };
-  }, [pathname]);
-
-  // 4 abas fixas + no máximo a agregadora. Esta linha é o ponto onde o teto
-  // de 5 é garantido — ver INVARIANTE no comentário do componente.
-  const tabs = temOutrosModulos ? [...BASE_TABS.slice(0, 3), MODULOS_TAB, BASE_TABS[3]] : BASE_TABS;
+  const tabs = BASE_TABS;
 
   return (
     <View

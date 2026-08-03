@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import { ActivityIndicator, Image, Pressable, ScrollView, Text, useWindowDimensions, View } from "react-native";
 import Svg, { Circle } from "react-native-svg";
 import { breakpoint, Button, Card, chart, color, MaryAvatar, radius, space, type } from "@serdono/ui";
-import { CONTEUDO_TIPO_LABEL, signOut, type BibliotecaConteudo, type ConteudoTipo } from "@serdono/supabase";
+import { signOut, type CategoriaComMateriais } from "@serdono/supabase";
 import { ScreenHeader } from "../shell/ScreenHeader";
 import { rotaDoModulo } from "../modulos/rotas";
 import { formatMoney } from "../diagnostico/labels";
@@ -50,6 +50,9 @@ export function DashboardScreen() {
           // 03/08/2026. No app instalado este link não aparece: lá Módulos é
           // aba (DS-20.1).
           { label: "Módulos", onPress: () => router.push("/modulos") },
+          // "Dicas da Mary" (SDD-59) segue o mesmo padrão — nunca deixar a
+          // única entrada de uma área livre presa dentro de um card.
+          { label: "Dicas da Mary", onPress: () => router.push("/dicas-da-mary") },
           { label: "Meu perfil", onPress: () => router.push("/perfil") },
           { label: "Sair", onPress: handleSignOut },
         ]}
@@ -124,7 +127,7 @@ export function DashboardScreen() {
           </View>
         </View>
 
-        <CardBiblioteca conteudos={v.conteudos} />
+        <CardDicasDaMary categorias={v.categoriasDicas} onPress={() => router.push("/dicas-da-mary")} />
       </ScrollView>
     </View>
   );
@@ -407,44 +410,29 @@ function CardModulos({
   );
 }
 
-const TIPO_ACENTO: Record<ConteudoTipo, string> = {
-  curso: chart.ramp[4],
-  video: chart.ramp[3],
-  apostila: chart.ramp[2],
-  dica: chart.ramp[1],
-};
-
-function CardBiblioteca({ conteudos }: { conteudos: BibliotecaConteudo[] }) {
+function CardDicasDaMary({ categorias, onPress }: { categorias: CategoriaComMateriais[]; onPress: () => void }) {
   return (
     <Card variant="default" padding={5}>
-      <Text style={{ ...type.h3, color: color.text.primary, marginBottom: space[1] }}>Biblioteca</Text>
+      <Text style={{ ...type.h3, color: color.text.primary, marginBottom: space[1] }}>Dicas da Mary</Text>
       <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[4] }}>
-        Cursos, vídeos, apostilas e dicas para você continuar aprendendo.
+        Material por tema — PDF, vídeo e links — livre pra qualquer um, sem depender de módulo liberado.
       </Text>
 
-      {conteudos.length === 0 ? (
+      {categorias.length === 0 ? (
         <Text style={{ ...type.body, color: color.text.muted }}>
-          Ainda não publicamos nenhum material aqui. Assim que o primeiro conteúdo entrar no ar, ele aparece nesta
-          área.
+          Ainda não publiquei nenhuma categoria aqui. Assim que a primeira entrar no ar, ela aparece nesta área.
         </Text>
       ) : (
-        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[4] }}>
-          {conteudos.map((c) => (
-            <View key={c.id} style={{ minWidth: 180, flexGrow: 1, flexBasis: 180 }}>
-              <View style={{ height: 76, borderRadius: radius.md, backgroundColor: TIPO_ACENTO[c.tipo as ConteudoTipo] ?? chart.ramp[2], overflow: "hidden" }}>
-                {c.thumbnail_url ? (
-                  <Image source={{ uri: c.thumbnail_url }} style={{ width: "100%", height: "100%" }} resizeMode="cover" accessibilityLabel={c.titulo} />
-                ) : null}
-              </View>
-              <Text style={{ ...type.bodyStrong, color: color.text.primary, marginTop: space[2] }} numberOfLines={2}>
-                {c.titulo}
+        <View style={{ gap: space[3] }}>
+          {categorias.map((cat) => (
+            <Pressable key={cat.id} onPress={onPress} accessibilityRole="link" accessibilityLabel={`Abrir ${cat.titulo}`}>
+              <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>{cat.titulo}</Text>
+              <Text style={{ ...type.caption, color: color.text.muted, marginTop: 2 }} numberOfLines={1}>
+                {cat.materiais.length} material{cat.materiais.length === 1 ? "" : "is"}
               </Text>
-              <Text style={{ ...type.caption, color: color.text.muted, marginTop: 2 }}>
-                {CONTEUDO_TIPO_LABEL[c.tipo as ConteudoTipo] ?? c.tipo}
-                {c.duracao_min ? ` · ${c.duracao_min} min` : ""}
-              </Text>
-            </View>
+            </Pressable>
           ))}
+          <Button label="Ver todas" variant="ghost" size="sm" onPress={onPress} style={{ alignSelf: "flex-start" }} />
         </View>
       )}
     </Card>
