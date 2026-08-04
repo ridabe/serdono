@@ -550,6 +550,7 @@ export type Database = {
       }
       jornada_instances: {
         Row: {
+          cnpj: string | null
           concorrentes: string | null
           created_at: string
           diferenciais: string | null
@@ -570,6 +571,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          cnpj?: string | null
           concorrentes?: string | null
           created_at?: string
           diferenciais?: string | null
@@ -590,6 +592,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          cnpj?: string | null
           concorrentes?: string | null
           created_at?: string
           diferenciais?: string | null

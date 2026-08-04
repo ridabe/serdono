@@ -2,6 +2,7 @@ import { useRouter } from "expo-router";
 import { ActivityIndicator, Image, Pressable, ScrollView, Text, useWindowDimensions, View } from "react-native";
 import Svg, { Circle } from "react-native-svg";
 import { breakpoint, Button, Card, chart, color, MaryAvatar, radius, space, type } from "@serdono/ui";
+import { maskCnpj } from "@serdono/core";
 import { signOut, type CategoriaComMateriais } from "@serdono/supabase";
 import { ScreenHeader } from "../shell/ScreenHeader";
 import { rotaDoModulo } from "../modulos/rotas";
@@ -66,6 +67,7 @@ export function DashboardScreen() {
             nomeEmpresa={v.jornada.nome_empresa_escolhido}
             nicheName={v.nicheName}
             regime={v.jornada.regime_formalizacao}
+            cnpj={v.jornada.cnpj}
             logoUrl={v.logoUrl}
             percentual={v.progresso?.percentual ?? 0}
             concluida={v.progresso?.concluida ?? false}
@@ -143,6 +145,7 @@ function HeroNegocio({
   nomeEmpresa,
   nicheName,
   regime,
+  cnpj,
   logoUrl,
   percentual,
   concluida,
@@ -152,6 +155,7 @@ function HeroNegocio({
   nomeEmpresa: string | null;
   nicheName: string | null;
   regime: string | null;
+  cnpj: string | null;
   logoUrl: string | null;
   percentual: number;
   concluida: boolean;
@@ -164,7 +168,7 @@ function HeroNegocio({
     .slice(0, 2)
     .map((p) => p[0]?.toUpperCase() ?? "")
     .join("");
-  const detalhes = [nicheName, regime ? REGIME_LABEL[regime] : null].filter(Boolean).join(" · ");
+  const detalhes = [nicheName, regime ? REGIME_LABEL[regime] : null, cnpj ? maskCnpj(cnpj) : null].filter(Boolean).join(" · ");
 
   return (
     <Card variant="brand" padding={6}>

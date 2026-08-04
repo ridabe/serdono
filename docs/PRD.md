@@ -306,16 +306,26 @@ Esqueleto de tabelas a prever desde já para não quebrar migrações depois: `m
 
 **Substitui o esboço original desta seção** (citado desde a v0.1 do PRD, nunca implementado): em vez de pular o workflow de abertura inteiro e cair num módulo de operação separado, a pessoa que já tem negócio entra na MESMA Jornada Empreendedora (§9) — só que mais adiantada. Motivo da mudança: quando este parágrafo foi escrito, a Jornada Empreendedora ainda não existia de verdade; hoje ela é o motor mais maduro do produto, e reaproveitá-lo é mais simples e mais consistente do que construir um caminho paralelo.
 
-**Fluxo** (rota `/negocio-existente`, acessível pela home — CTA secundário no Hero e o card "JÁ TEM CNPJ" do §2.2/persona Juliana):
+**Fluxo** (rota `/negocio-existente`, acessível pela home — CTA secundário no Hero e o card "JÁ TEM CNPJ" do §2.2/persona Juliana — **e agora também de dentro do app, ver §8.6**):
 1. Escolhe o próprio nicho num catálogo de 31 opções (expandido de 5 nesta mesma rodada — ver nota de dado abaixo) ou descreve em texto livre se não encontrar.
-2. Responde, marco a marco, uma pergunta objetiva por fase da Jornada ("já tem nome e identidade definidos?", "já tem CNPJ?", "já tem fornecedor definido?"...) — nunca uma única pergunta de "quão avançado você está", porque quem já empreende raramente avança de forma linear (pode ter CNPJ e ainda não ter fornecedor, por exemplo). Planejamento e Formalização, quando confirmadas, pedem um dado extra (nome da empresa; regime MEI ou formal) — etapas seguintes do motor dependem desses dados de verdade.
-3. Cria a conta (mesma tela/lógica do cadastro padrão).
+2. Responde, marco a marco, uma pergunta objetiva por fase da Jornada ("já tem nome e identidade definidos?", "já tem CNPJ?", "já tem fornecedor definido?"...) — nunca uma única pergunta de "quão avançado você está", porque quem já empreende raramente avança de forma linear (pode ter CNPJ e ainda não ter fornecedor, por exemplo). Planejamento e Formalização, quando confirmadas, pedem os dados reais do negócio dela pra usar no resto da Jornada, nunca fabricados: nome da empresa (obrigatório); se já tem logo pronto, sobe o arquivo (opcional — se ainda não tem, a tela avisa que a fase Planejamento ajuda a criar um do zero, §9.3); regime MEI ou formal (obrigatório); e o número do CNPJ (opcional, validado por dígito verificador quando preenchido, nunca consultado numa API externa — mesmo princípio "sem falsa certeza jurídica" do §9.4).
+3. **Cria a conta — só quando ainda não existe uma.** Quem chega aqui já autenticado (ver §8.6) pula esta etapa por inteiro: a tela detecta a sessão real e não pede e-mail/senha de novo.
 4. O sistema semeia toda a Jornada de uma vez, marca como concluídas as fases confirmadas — reaproveitando exatamente as mesmas funções que cada tela usaria pra se concluir, nunca fabricando um entregável (persona, SWOT, plano) que nunca foi gerado de verdade — e entra direto na primeira fase ainda pendente, na ordem canônica.
 5. Toda fase marcada continua 100% editável depois (mesmo princípio "nada trava" já aplicado a Estrutura/Formalização) — a pessoa está atestando o que já viveu na prática, não perdendo a chance de gerar o entregável real depois se quiser.
 
 **Nichos — de 5 pra 31:** ~~os 5 originais continuam com dossiê completo e são os únicos usados no Fit Score do diagnóstico de novo empreendedor.~~ **Superado em 04/08/2026 — os 31 entram no Fit Score (ver §8.5).** Os 26 novos entram num nível mais leve (sem dossiê de mercado completo — evolução futura, não bloqueia este lançamento).
 
-Detalhamento técnico completo: SPEC.md SDD-52.
+Detalhamento técnico completo: SPEC.md SDD-52. Captura de CNPJ e logo próprio: SPEC.md SDD-68.
+
+### 8.6 Bifurcação dentro do app pra quem já está logado (pedido do dono do produto em 04/08/2026)
+
+**Problema relatado:** o dono do produto cadastrou um cliente que já tem negócio. A pessoa logou — e como nunca tinha passado pela home (nem pelo diagnóstico, nem pelo "já tenho negócio"), o único caminho que o app oferecia de dentro dele era "Fazer o diagnóstico", como se fosse começar do zero.
+
+**Causa:** a bifurcação "quero começar do zero" vs. "já tenho um negócio" só existia nas telas de **antes** do login (home/Hero na web, `AppWelcomeScreen` no app nativo). Quem chegava a `/jornada` já autenticado e sem nenhuma jornada em andamento — inclusive conta criada pelo admin — caía direto no estado vazio da tela de escolha de nicho, que só oferecia iniciar o diagnóstico.
+
+**Correção:** o mesmo estado vazio (`EscolherNichoScreen`, quando não existe `niche_matches`) agora oferece as duas opções, igual à home: "Quero começar do zero" (segue pro diagnóstico) e "Já tenho um negócio" (segue pro fluxo do §8.3). Ajuste companheiro: o fluxo do §8.3 precisou reconhecer sessão já autenticada e pular a etapa 3 (criar conta) — sem isso, um usuário já logado seria levado a tentar criar uma conta nova por cima da que já tem.
+
+Detalhamento técnico: SPEC.md SDD-67.
 
 ### 8.5 Catálogo completo no Fit Score e sub-negócios (pedido do dono do produto em 04/08/2026)
 
@@ -648,7 +658,7 @@ O dono do produto pediu uma seção mostrando que o Ser Dono também ajuda o emp
 **A partir de agora, o destino pós-login de quem tem a Jornada Empreendedora liberada deixa de ser a própria Jornada e passa a ser um Painel** (`/inicio`) — a "casa" do usuário no produto. Motivo: nem toda visita ao sistema é pra avançar uma etapa; a pessoa também quer ver o negócio dela, revisitar o que já fez, e descobrir o que mais o Ser Dono oferece (módulos, biblioteca, conversa com a Mary) sem precisar entrar dentro do fluxo guiado.
 
 **O painel mostra:**
-1. **Identidade do negócio** — nome da empresa, nicho, regime (MEI/formal), logo (quando já gerado na fase Planejamento) e o percentual de progresso da Jornada — o **mesmo cálculo** usado dentro da Jornada (extraído para `packages/core/jornadaProgresso.ts` justamente para as duas telas nunca mostrarem números diferentes).
+1. **Identidade do negócio** — nome da empresa, nicho, regime (MEI/formal), CNPJ (quando informado — pelo intake "já tenho negócio" ou concluído de verdade na Formalização), logo (gerado na fase Planejamento ou subido pela pessoa no intake, §8.3) e o percentual de progresso da Jornada — o **mesmo cálculo** usado dentro da Jornada (extraído para `packages/core/jornadaProgresso.ts` justamente para as duas telas nunca mostrarem números diferentes).
 2. **KPIs reais** — valor da primeira venda, ponto de equilíbrio mensal e clientes conquistados vs. meta. **Nunca um número estimado**: cada KPI só aparece se o empreendedor já preencheu o dado de origem (calculadora do Financeiro, registro da venda, meta de captação); sem isso, o card convida a preencher, em vez de mostrar um valor de exemplo (princípio de honestidade do §4).
 3. **Linha do tempo** — os marcos mais recentes, com a data real de conclusão de cada etapa (`jornada_etapas.concluido_em`) — não é uma narrativa fabricada, é o histórico real do motor de etapas.
 4. **Onde você chegou** — resumo de conclusão por fase da Jornada, mesma fonte de dado da trilha lateral.

@@ -439,6 +439,28 @@ export async function getLogoDownloadUrl(logoPath: string): Promise<string> {
   return data.signedUrl;
 }
 
+/**
+ * Sobe o logo que a pessoa já tem (fluxo "já tenho negócio", SDD-52/§8.3) —
+ * mesmo bucket privado e mesma convenção de path "{user_id}/logo.{ext}" da
+ * geração por IA (`jornada-gerar-logo-final`), então o Painel (`useDashboard`)
+ * e qualquer outra tela que já sabem ler `jornada_instances.logo_path`
+ * funcionam sem alteração, seja o logo gerado ou trazido de fora.
+ */
+export async function uploadLogoExistente(userId: string, instanceId: string, uri: string): Promise<string> {
+  const arrayBuffer = await fetch(uri).then((res) => res.arrayBuffer());
+  const path = `${userId}/logo.jpg`;
+
+  const { error: uploadError } = await supabase.storage.from(IDENTIDADE_VISUAL_BUCKET).upload(path, arrayBuffer, {
+    contentType: "image/jpeg",
+    upsert: true,
+  });
+  if (uploadError) throw uploadError;
+
+  const { error } = await supabase.from("jornada_instances").update({ logo_path: path }).eq("id", instanceId);
+  if (error) throw error;
+  return path;
+}
+
 // ---- Fase 5 — Formalização (SDD-38) ----
 
 export type RegimeFormalizacao = "mei" | "formal";
@@ -457,8 +479,11 @@ const SLUG_FORMALIZACAO_REGIME = "formalizacao_regime";
  * outra, SDD-38) — reescolher não apaga etapas já semeadas do caminho
  * anterior, só passa a exibir/contar o caminho atual (ver `JornadaScreen`).
  */
-export async function chooseRegimeFormalizacao(instanceId: string, regime: RegimeFormalizacao): Promise<void> {
-  const { error } = await supabase.from("jornada_instances").update({ regime_formalizacao: regime }).eq("id", instanceId);
+export async function chooseRegimeFormalizacao(instanceId: string, regime: RegimeFormalizacao, cnpj?: string): Promise<void> {
+  const { error } = await supabase
+    .from("jornada_instances")
+    .update({ regime_formalizacao: regime, ...(cnpj ? { cnpj } : {}) })
+    .eq("id", instanceId);
   if (error) throw error;
   await seedEtapasForFase(instanceId, "formalizacao", regime);
   await markEtapaDone(instanceId, SLUG_FORMALIZACAO_REGIME);
@@ -713,8 +738,12 @@ export interface StartJornadaExistenteInput {
   fasesConcluidas: JornadaFase[];
   /** Obrigatório só se `"planejamento"` estiver em `fasesConcluidas`. */
   nomeEmpresa?: string;
+  /** URI local da imagem do logo que a pessoa já tem (opcional mesmo com planejamento concluído — ela pode ainda não ter um). */
+  logoUri?: string;
   /** Obrigatório só se `"formalizacao"` estiver em `fasesConcluidas`. */
   regimeFormalizacao?: RegimeFormalizacao;
+  /** Opcional mesmo com formalização concluída — a pessoa confirma "sim" mas pode preferir não digitar agora. */
+  cnpj?: string;
 }
 
 /**
@@ -749,7 +778,7 @@ export async function startJornadaComProgresso(input: StartJornadaExistenteInput
 
   for (const fase of FASES_ORDEM) {
     if (fase === "formalizacao" && concluidas.has("formalizacao") && input.regimeFormalizacao) {
-      await chooseRegimeFormalizacao(instance.id, input.regimeFormalizacao);
+      await chooseRegimeFormalizacao(instance.id, input.regimeFormalizacao, input.cnpj);
     } else {
       await seedEtapasForFase(instance.id, fase);
     }
@@ -758,6 +787,9 @@ export async function startJornadaComProgresso(input: StartJornadaExistenteInput
 
     if (fase === "planejamento" && input.nomeEmpresa) {
       await chooseNomeEmpresa(instance.id, input.nomeEmpresa);
+    }
+    if (fase === "planejamento" && input.logoUri) {
+      await uploadLogoExistente(input.userId, instance.id, input.logoUri);
     }
 
     const { data: templates, error: templatesError } = await supabase

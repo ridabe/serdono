@@ -1,10 +1,15 @@
 import { useRouter } from "expo-router";
 import { useEffect, useMemo, useState } from "react";
-import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { Image, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import * as ImageManipulator from "expo-image-manipulator";
+import * as ImagePicker from "expo-image-picker";
 import { Button, EntrepreneurBackground, Logo, color, radius, space, type } from "@serdono/ui";
 import {
   FASES_JORNADA,
   FASE_JORNADA_LABEL,
+  isValidCnpj,
+  maskCnpj,
+  unmaskCnpj,
   type JornadaFaseCore,
 } from "@serdono/core";
 import {
@@ -89,7 +94,10 @@ export function NegocioExistenteScreen() {
 
   const [marcos, setMarcos] = useState<Partial<Record<JornadaFaseCore, boolean>>>({});
   const [nomeEmpresa, setNomeEmpresa] = useState("");
+  const [temLogo, setTemLogo] = useState<boolean | null>(null);
+  const [logoUri, setLogoUri] = useState<string | null>(null);
   const [regime, setRegime] = useState<RegimeFormalizacao | null>(null);
+  const [cnpj, setCnpj] = useState("");
 
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
@@ -174,16 +182,52 @@ export function NegocioExistenteScreen() {
     avancarOuFinalizar(fase);
   }
 
+  async function handlePickLogo() {
+    setError(null);
+    const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!permission.granted) {
+      setError("Precisamos de permissão para acessar suas fotos.");
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({ mediaTypes: ["images"], allowsEditing: true, aspect: [1, 1], quality: 1 });
+    if (result.canceled || !result.assets[0]) return;
+
+    // Mesmo padrão do avatar de perfil: padroniza pra quadrado antes de subir.
+    const manipulated = await ImageManipulator.manipulateAsync(
+      result.assets[0].uri,
+      [{ resize: { width: 512, height: 512 } }],
+      { compress: 0.85, format: ImageManipulator.SaveFormat.JPEG }
+    );
+    setLogoUri(manipulated.uri);
+  }
+
   function confirmarSubcampoMarco() {
     setError(null);
     if (etapa.tipo !== "marco") return;
-    if (etapa.fase === "planejamento" && !nomeEmpresa.trim()) {
-      setError("Qual o nome da sua empresa?");
-      return;
+    if (etapa.fase === "planejamento") {
+      if (!nomeEmpresa.trim()) {
+        setError("Qual o nome da sua empresa?");
+        return;
+      }
+      if (temLogo === null) {
+        setError("Você já tem um logo pronto?");
+        return;
+      }
+      if (temLogo && !logoUri) {
+        setError("Selecione o arquivo do seu logo.");
+        return;
+      }
     }
-    if (etapa.fase === "formalizacao" && !regime) {
-      setError("Selecione o regime da sua empresa.");
-      return;
+    if (etapa.fase === "formalizacao") {
+      if (!regime) {
+        setError("Selecione o regime da sua empresa.");
+        return;
+      }
+      if (cnpj.trim() && !isValidCnpj(cnpj)) {
+        setError("Esse CNPJ não parece válido — confira os números digitados.");
+        return;
+      }
     }
     avancarOuFinalizar(etapa.fase);
   }
@@ -197,7 +241,9 @@ export function NegocioExistenteScreen() {
       nichoPersonalizado: semNicho ? nichoTexto.trim() : null,
       fasesConcluidas,
       nomeEmpresa: marcos.planejamento ? nomeEmpresa.trim() : undefined,
+      logoUri: marcos.planejamento && temLogo && logoUri ? logoUri : undefined,
       regimeFormalizacao: marcos.formalizacao && regime ? regime : undefined,
+      cnpj: marcos.formalizacao && cnpj.trim() ? unmaskCnpj(cnpj) : undefined,
     });
     router.replace("/inicio");
   }
@@ -320,8 +366,14 @@ export function NegocioExistenteScreen() {
                   saving={saving}
                   nomeEmpresa={nomeEmpresa}
                   onChangeNomeEmpresa={setNomeEmpresa}
+                  temLogo={temLogo}
+                  onChangeTemLogo={setTemLogo}
+                  logoUri={logoUri}
+                  onPickLogo={handlePickLogo}
                   regime={regime}
                   onChangeRegime={setRegime}
+                  cnpj={cnpj}
+                  onChangeCnpj={(v) => setCnpj(maskCnpj(v))}
                   onContinuarSubcampo={confirmarSubcampoMarco}
                   onVoltar={voltar}
                   error={error}
@@ -437,8 +489,14 @@ function MarcoStep({
   saving,
   nomeEmpresa,
   onChangeNomeEmpresa,
+  temLogo,
+  onChangeTemLogo,
+  logoUri,
+  onPickLogo,
   regime,
   onChangeRegime,
+  cnpj,
+  onChangeCnpj,
   onContinuarSubcampo,
   onVoltar,
   error,
@@ -449,8 +507,14 @@ function MarcoStep({
   saving: boolean;
   nomeEmpresa: string;
   onChangeNomeEmpresa: (v: string) => void;
+  temLogo: boolean | null;
+  onChangeTemLogo: (v: boolean) => void;
+  logoUri: string | null;
+  onPickLogo: () => void;
   regime: RegimeFormalizacao | null;
   onChangeRegime: (v: RegimeFormalizacao) => void;
+  cnpj: string;
+  onChangeCnpj: (v: string) => void;
   onContinuarSubcampo: () => void;
   onVoltar: () => void;
   error: string | null;
@@ -482,20 +546,52 @@ function MarcoStep({
       </View>
 
       {precisaSubcampo && fase === "planejamento" ? (
-        <TextInput
-          value={nomeEmpresa}
-          onChangeText={onChangeNomeEmpresa}
-          placeholder="Nome da sua empresa"
-          style={{ ...inputStyle(), marginBottom: space[4] }}
-        />
+        <>
+          <TextInput
+            value={nomeEmpresa}
+            onChangeText={onChangeNomeEmpresa}
+            placeholder="Nome da sua empresa"
+            style={{ ...inputStyle(), marginBottom: space[4] }}
+          />
+
+          <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[2] }}>Você já tem um logo pronto?</Text>
+          <View style={{ flexDirection: "row", gap: space[3], marginBottom: space[3] }}>
+            <Button label="Sim" variant={temLogo === true ? "primary" : "outline"} onPress={() => onChangeTemLogo(true)} style={{ flex: 1 }} />
+            <Button label="Ainda não" variant={temLogo === false ? "primary" : "outline"} onPress={() => onChangeTemLogo(false)} style={{ flex: 1 }} />
+          </View>
+
+          {temLogo === true ? (
+            <View style={{ flexDirection: "row", alignItems: "center", gap: space[3], marginBottom: space[4] }}>
+              {logoUri ? (
+                <Image source={{ uri: logoUri }} style={{ width: 56, height: 56, borderRadius: radius.md }} accessibilityLabel="Logo escolhido" />
+              ) : null}
+              <Button label={logoUri ? "Trocar arquivo" : "Escolher arquivo do logo"} variant="outline" onPress={onPickLogo} style={{ flex: 1 }} />
+            </View>
+          ) : null}
+
+          {temLogo === false ? (
+            <Text style={{ ...type.caption, color: color.text.muted, marginBottom: space[4] }}>
+              Sem problema — mais adiante, na fase Planejamento da sua Jornada, eu te ajudo a criar um logo do zero.
+            </Text>
+          ) : null}
+        </>
       ) : null}
 
       {precisaSubcampo && fase === "formalizacao" ? (
-        <View style={{ flexDirection: "row", gap: space[3], marginBottom: space[4] }}>
-          {(["mei", "formal"] as RegimeFormalizacao[]).map((r) => (
-            <Button key={r} label={REGIME_LABEL[r]} variant={regime === r ? "primary" : "outline"} onPress={() => onChangeRegime(r)} style={{ flex: 1 }} />
-          ))}
-        </View>
+        <>
+          <View style={{ flexDirection: "row", gap: space[3], marginBottom: space[4] }}>
+            {(["mei", "formal"] as RegimeFormalizacao[]).map((r) => (
+              <Button key={r} label={REGIME_LABEL[r]} variant={regime === r ? "primary" : "outline"} onPress={() => onChangeRegime(r)} style={{ flex: 1 }} />
+            ))}
+          </View>
+          <TextInput
+            value={cnpj}
+            onChangeText={onChangeCnpj}
+            placeholder="CNPJ (opcional agora)"
+            keyboardType="numeric"
+            style={{ ...inputStyle(), marginBottom: space[4] }}
+          />
+        </>
       ) : null}
 
       {error ? <Text style={{ ...type.caption, color: color.state.danger, marginBottom: space[3] }}>{error}</Text> : null}
