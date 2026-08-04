@@ -74,12 +74,14 @@ export type Database = {
       diagnostic_responses: {
         Row: {
           apetite_risco: number | null
+          areas_inferidas: string[]
           capital_disponivel: string | null
           created_at: string
           estilo_vida: Json
           experiencia: string[]
           formacao: string[]
           id: string
+          interesses_texto: string | null
           localizacao_cidade: string | null
           localizacao_estado: string | null
           meses_de_folego: number | null
@@ -94,12 +96,14 @@ export type Database = {
         }
         Insert: {
           apetite_risco?: number | null
+          areas_inferidas?: string[]
           capital_disponivel?: string | null
           created_at?: string
           estilo_vida?: Json
           experiencia?: string[]
           formacao?: string[]
           id?: string
+          interesses_texto?: string | null
           localizacao_cidade?: string | null
           localizacao_estado?: string | null
           meses_de_folego?: number | null
@@ -114,12 +118,14 @@ export type Database = {
         }
         Update: {
           apetite_risco?: number | null
+          areas_inferidas?: string[]
           capital_disponivel?: string | null
           created_at?: string
           estilo_vida?: Json
           experiencia?: string[]
           formacao?: string[]
           id?: string
+          interesses_texto?: string | null
           localizacao_cidade?: string | null
           localizacao_estado?: string | null
           meses_de_folego?: number | null
@@ -559,6 +565,7 @@ export type Database = {
           regime_formalizacao: string | null
           slogan_escolhido: string | null
           status: string
+          sub_negocio_id: string | null
           updated_at: string
           user_id: string
         }
@@ -578,6 +585,7 @@ export type Database = {
           regime_formalizacao?: string | null
           slogan_escolhido?: string | null
           status?: string
+          sub_negocio_id?: string | null
           updated_at?: string
           user_id: string
         }
@@ -597,6 +605,7 @@ export type Database = {
           regime_formalizacao?: string | null
           slogan_escolhido?: string | null
           status?: string
+          sub_negocio_id?: string | null
           updated_at?: string
           user_id?: string
         }
@@ -606,6 +615,13 @@ export type Database = {
             columns: ["niche_id"]
             isOneToOne: false
             referencedRelation: "niches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "jornada_instances_sub_negocio_id_fkey"
+            columns: ["sub_negocio_id"]
+            isOneToOne: false
+            referencedRelation: "niche_sub_negocios"
             referencedColumns: ["id"]
           },
         ]
@@ -763,6 +779,7 @@ export type Database = {
           score_financeiro: number
           score_perfil: number
           score_tempo: number
+          sub_negocios_destaque: Json
           user_id: string
         }
         Insert: {
@@ -775,6 +792,7 @@ export type Database = {
           score_financeiro: number
           score_perfil: number
           score_tempo: number
+          sub_negocios_destaque?: Json
           user_id: string
         }
         Update: {
@@ -787,6 +805,7 @@ export type Database = {
           score_financeiro?: number
           score_perfil?: number
           score_tempo?: number
+          sub_negocios_destaque?: Json
           user_id?: string
         }
         Relationships: [
@@ -799,8 +818,50 @@ export type Database = {
           },
         ]
       }
+      niche_sub_negocios: {
+        Row: {
+          ativo: boolean
+          created_at: string
+          descricao: string
+          exige_equipe: boolean
+          id: string
+          niche_id: string
+          nome: string
+          ordem: number
+        }
+        Insert: {
+          ativo?: boolean
+          created_at?: string
+          descricao: string
+          exige_equipe?: boolean
+          id?: string
+          niche_id: string
+          nome: string
+          ordem?: number
+        }
+        Update: {
+          ativo?: boolean
+          created_at?: string
+          descricao?: string
+          exige_equipe?: boolean
+          id?: string
+          niche_id?: string
+          nome?: string
+          ordem?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "niche_sub_negocios_niche_id_fkey"
+            columns: ["niche_id"]
+            isOneToOne: false
+            referencedRelation: "niches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       niches: {
         Row: {
+          areas_afinidade: string[]
           ativo_no_mvp: boolean
           categoria: string
           complexidade_regulatoria: number
@@ -823,6 +884,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          areas_afinidade?: string[]
           ativo_no_mvp?: boolean
           categoria: string
           complexidade_regulatoria: number
@@ -845,6 +907,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          areas_afinidade?: string[]
           ativo_no_mvp?: boolean
           categoria?: string
           complexidade_regulatoria?: number

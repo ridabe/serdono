@@ -3,5 +3,6 @@
   "framework": null,
   "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm --filter @serdono/app run build:web",
-  "outputDirectory": "apps/app/dist"
+  "outputDirectory": "apps/app/dist",
+  "cleanUrls": true
 }

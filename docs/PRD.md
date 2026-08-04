@@ -274,11 +274,14 @@ Esqueleto de tabelas a prever desde já para não quebrar migrações depois: `m
 2. **Questionário em blocos** — um bloco por dimensão (capital, perfil, formação, tempo, estilo de vida, localização, rede, objetivo), nunca mais de 4 perguntas por tela (Princípio 1).
 3. **Tela de processamento** — enquanto o Fit Score calcula, mostra progresso (não pode ser instantâneo demais nem lento sem feedback — RNF-4: resposta em até 4s ou skeleton animado).
 4. **Resultado — Perfil Empreendedor** — resumo do que o sistema entendeu sobre o usuário, com opção de editar qualquer resposta.
-5. **Resultado — Prévia de 3 nichos** — nome, Fit Score, uma linha de justificativa, faixa de investimento. CTA para assinatura.
+5. **Resultado — Prévia de 3 nichos** — nome, Fit Score, uma linha de justificativa, faixa de investimento, **e os caminhos concretos dentro do nicho** (§8.5). CTA para assinatura.
+
+**Bloco aberto "Sobre você" (adicionado em 04/08/2026 — o questionário passou de 7 para 8 blocos):** uma pergunta de texto livre e **opcional** ("me conta com as suas palavras: o que você gosta de fazer?"), entre Experiência e Localização. Motivo: os 5 checkboxes de área eram um sinal pobre demais para descrever alguém — e é justamente texto livre que uma IA interpreta melhor que qualquer fórmula. Opcional de propósito: obrigar redação num funil de conversão afugenta a persona primária (§2.1); pular não muda nada no resto do fluxo. O bloco 5 (Experiência) também ganhou as áreas que faltavam para cobrir o catálogo: Educação, Saúde e bem-estar, Moda.
 
 ### 7.2 Regras de negócio
 - **RN-13:** Progresso do questionário é salvo a cada bloco — usuário pode sair e voltar sem perder resposta (abandono é o inimigo nº 1, Documento de Conceito §6.4).
 - **RN-5** (repetida aqui por relevância): capital em faixas, nunca valor livre.
+- **RN-37 (nova, 04/08/2026): a IA amplia o sinal de perfil e explica o resultado — nunca decide, ranqueia ou recalcula o Fit Score.** Ela traduz o texto livre do bloco 6 num **vocabulário fechado de áreas** (as mesmas do bloco 5 e de `niches.areas_afinidade`); qualquer área fora dessa lista é descartada antes de influenciar qualquer nota. O que a IA inferiu é **persistido e mostrado ao usuário** na tela de resultado ("pelo que você escreveu, entendi afinidade com: …") — não existe sinal invisível mexendo na ordem das sugestões. Se a chamada de IA falhar, o diagnóstico segue com o sinal dos checkboxes, sem travar.
 
 ### 7.3 Critérios de aceite
 - **CA-1:** Usuário completa o questionário e recebe 3 nichos com Fit Score calculado (não hardcoded) em até 4 segundos de processamento percebido.
@@ -310,9 +313,28 @@ Esqueleto de tabelas a prever desde já para não quebrar migrações depois: `m
 4. O sistema semeia toda a Jornada de uma vez, marca como concluídas as fases confirmadas — reaproveitando exatamente as mesmas funções que cada tela usaria pra se concluir, nunca fabricando um entregável (persona, SWOT, plano) que nunca foi gerado de verdade — e entra direto na primeira fase ainda pendente, na ordem canônica.
 5. Toda fase marcada continua 100% editável depois (mesmo princípio "nada trava" já aplicado a Estrutura/Formalização) — a pessoa está atestando o que já viveu na prática, não perdendo a chance de gerar o entregável real depois se quiser.
 
-**Nichos — de 5 pra 31:** os 5 originais continuam com dossiê completo e são os únicos usados no Fit Score do diagnóstico de novo empreendedor. Os 26 novos entram num nível mais leve (sem dossiê de mercado completo — evolução futura, não bloqueia este lançamento), suficiente pra esta tela de identificação.
+**Nichos — de 5 pra 31:** ~~os 5 originais continuam com dossiê completo e são os únicos usados no Fit Score do diagnóstico de novo empreendedor.~~ **Superado em 04/08/2026 — os 31 entram no Fit Score (ver §8.5).** Os 26 novos entram num nível mais leve (sem dossiê de mercado completo — evolução futura, não bloqueia este lançamento).
 
 Detalhamento técnico completo: SPEC.md SDD-52.
+
+### 8.5 Catálogo completo no Fit Score e sub-negócios (pedido do dono do produto em 04/08/2026)
+
+**Origem:** testando o funil, o dono do produto marcou só "Tecnologia / digital" e recebeu 3 sugestões das quais só 1 tinha a ver com o perfil dele — e apontou, com razão, que "Serviço digital" não diz nada pra quem nunca empreendeu. Ele perguntou se valeria colocar IA no cálculo. A investigação mostrou que **a causa era estrutural, não de inteligência**, em três camadas:
+
+1. **O motor só via 5 nichos, e só 1 era de tecnologia.** Como a tela mostra os 3 melhores, 2 tinham que vir de outra área — matemática, não falta de IA. Nenhum modelo escolhendo entre as mesmas 5 opções devolveria coisa diferente.
+2. **Ter capital de sobra era tratado como incompatibilidade.** O componente financeiro media a *sobreposição* entre a faixa de capital e a de investimento: quem tinha mais de R$ 40 mil tirava **zero** num nicho de R$ 300–5.000, porque as faixas não se cruzavam. Com 5 nichos ficava mascarado; com o catálogo inteiro passou a mandar no resultado e empurrava perfis de tecnologia pra lavanderia e escola infantil. A pergunta certa é "você consegue bancar?", nunca "suas faixas coincidem?".
+3. **Nicho tinha uma categoria só.** Vários negócios digitais estavam sob "serviços"/"varejo", invisíveis pra quem marcava tecnologia.
+
+**O que mudou:**
+- **Os 31 nichos entram no Fit Score** (revoga a restrição do §8.3). A razão original era o dossiê completo (`playbook_md`), mas ele **não é lido por nenhuma tela** — a diferença era invisível pro usuário, então ativar não promete nada que não exista (§4/RN-2).
+- **`niches.areas_afinidade`**: um nicho pode atender mais de uma área ("Agência de marketing digital" é tecnologia *e* serviços), coisa que a categoria única não expressava.
+- **Catálogo de sub-negócios** (~130 itens, 4 a 6 por nicho): os caminhos concretos dentro de cada nicho — "Serviço digital" vira criação de sites, gestão de redes, tráfego pago, design, edição de vídeo, assessoria remota. Aparecem junto com a sugestão do nicho, e na tela de escolha da Jornada a pessoa pode fixar um deles (fica em `jornada_instances.sub_negocio_id`, e a Mary passa a saber que o negócio é "agência de tráfego pago", não só "serviço digital").
+
+**RN-38 (nova): sub-negócio sugerido sai sempre do catálogo curado — a IA escolhe, ordena e explica, nunca inventa.** O nome devolvido pela IA é conferido contra a tabela antes de ir pra tela; o que não existir é descartado, e se a escolha falhar o produto mostra os primeiros da ordem curada. Mesma disciplina de RN-32 (roteiro de reaproximação). A justificativa também **não pode atribuir ao usuário uma afinidade que ele não declarou** — as áreas do nicho descrevem o nicho, não a pessoa.
+
+**Deliberadamente fora desta versão:** investimento e margem por sub-negócio. A descrição do que cada negócio faz é conhecimento geral e não exige fonte; número de mercado exige, e as faixas com fonte real (Sebrae + data) são as do nicho-pai. Inventar "Fonte: Sebrae" para dado não consultado é exatamente o que a RN-20 previne.
+
+Detalhamento técnico: SPEC.md SDD-66.
 
 ### 8.4 Critérios de aceite
 - **CA-4:** Usuário sem assinatura não consegue, por nenhuma rota de URL direta, ler o conteúdo completo de um `niches.playbook_md` de nicho não destravado (checar RLS, não só UI).
@@ -740,6 +762,8 @@ Detalhamento técnico (schema, fontes reais consultadas, verificação) em SPEC.
 | RN-34 | Dicas da Mary é liberado a todo usuário autenticado, sem gate de módulo/plano — §12.7 |
 | RN-35 | Meu Negócio em Dia nunca afirma pagamento/atraso como fato — só que a data passou; "concluído" exige marcação do usuário — §12.8 |
 | RN-36 | Meu Negócio em Dia não calcula imposto devido nem dá orientação fiscal personalizada; regra municipal/estadual nunca é fingida como única — §12.8 |
+| RN-37 | A IA amplia o sinal de perfil (texto livre → vocabulário fechado de áreas) e explica o resultado; nunca decide, ranqueia ou recalcula o Fit Score. O que ela inferiu é persistido e mostrado ao usuário — §7.2 |
+| RN-38 | Sub-negócio sugerido sai sempre do catálogo curado — a IA escolhe, ordena e explica, nunca inventa; e não atribui ao usuário afinidade que ele não declarou — §8.5 |
 
 ---
 

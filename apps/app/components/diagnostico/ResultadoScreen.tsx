@@ -8,10 +8,17 @@ import { CAPITAL_LABEL, OBJETIVO_LABEL, TEMPO_LABEL, formatMoney, stripMarkdown 
 
 const BACKGROUND_PHOTO = pickEntrepreneurPhoto("resultado");
 
+/** Caminho concreto dentro do nicho, escolhido pela IA a partir do catálogo curado (RN-38, SDD-66). */
+interface SubNegocioDestaque {
+  nome: string;
+  por_que: string;
+}
+
 interface MatchRow {
   niche_id: string;
   fit_score: number;
   justificativa_ia: string | null;
+  sub_negocios_destaque: SubNegocioDestaque[] | null;
   niches: {
     nome: string;
     slug: string;
@@ -26,7 +33,11 @@ interface Perfil {
   objetivo: string | null;
   localizacao_cidade: string | null;
   localizacao_estado: string | null;
+  areas_inferidas: string[] | null;
 }
+
+const MATCH_SELECT =
+  "niche_id, fit_score, justificativa_ia, sub_negocios_destaque, niches(nome, slug, investimento_min, investimento_max)";
 
 export function ResultadoScreen() {
   const router = useRouter();
@@ -45,7 +56,7 @@ export function ResultadoScreen() {
 
         const { data: diag, error: diagError } = await supabase
           .from("diagnostic_responses")
-          .select("capital_disponivel, tempo_disponivel, objetivo, localizacao_cidade, localizacao_estado")
+          .select("capital_disponivel, tempo_disponivel, objetivo, localizacao_cidade, localizacao_estado, areas_inferidas")
           .eq("user_id", session.user.id)
           .maybeSingle();
         if (diagError) throw diagError;
@@ -53,7 +64,7 @@ export function ResultadoScreen() {
 
         let { data: matchRows, error: matchError } = await supabase
           .from("niche_matches")
-          .select("niche_id, fit_score, justificativa_ia, niches(nome, slug, investimento_min, investimento_max)")
+          .select(MATCH_SELECT)
           .eq("user_id", session.user.id)
           .order("fit_score", { ascending: false })
           .limit(3);
@@ -64,12 +75,21 @@ export function ResultadoScreen() {
           if (fnError) throw fnError;
           const retry = await supabase
             .from("niche_matches")
-            .select("niche_id, fit_score, justificativa_ia, niches(nome, slug, investimento_min, investimento_max)")
+            .select(MATCH_SELECT)
             .eq("user_id", session.user.id)
             .order("fit_score", { ascending: false })
             .limit(3);
           if (retry.error) throw retry.error;
           matchRows = retry.data;
+
+          // A function pode ter inferido áreas do texto livre agora — recarrega
+          // pra linha "entendi afinidade com…" aparecer já nesta renderização.
+          const { data: diagAtualizado } = await supabase
+            .from("diagnostic_responses")
+            .select("capital_disponivel, tempo_disponivel, objetivo, localizacao_cidade, localizacao_estado, areas_inferidas")
+            .eq("user_id", session.user.id)
+            .maybeSingle();
+          if (diagAtualizado) setPerfil(diagAtualizado as Perfil);
         }
 
         setMatches((matchRows as unknown as MatchRow[]) ?? []);
@@ -145,9 +165,28 @@ export function ResultadoScreen() {
           <Text style={{ ...type.h2, color: color.bg.brand, marginBottom: space[1] }}>
             Os 3 negócios que mais combinam com você
           </Text>
-          <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[5] }}>
+          <Text style={{ ...type.body, color: color.text.secondary, marginBottom: perfil?.areas_inferidas?.length ? space[3] : space[5] }}>
             Calculado a partir das suas respostas — não é sugestão genérica.
           </Text>
+
+          {/* RN-37: o que a IA entendeu do texto livre fica visível, nunca é caixa-preta. */}
+          {perfil?.areas_inferidas?.length ? (
+            <View
+              style={{
+                backgroundColor: color.state.infoBg,
+                borderRadius: radius.md,
+                paddingHorizontal: space[4],
+                paddingVertical: space[3],
+                marginBottom: space[5],
+              }}
+            >
+              <Text style={{ ...type.caption, color: color.text.primary }}>
+                Pelo que você escreveu sobre si, entendi afinidade com:{" "}
+                <Text style={{ fontWeight: "700" }}>{perfil.areas_inferidas.join(", ")}</Text>. Isso pesou nas
+                sugestões abaixo.
+              </Text>
+            </View>
+          ) : null}
 
           <View style={{ gap: space[4], marginBottom: space[8] }}>
             {matches.map((match, i) => (
@@ -183,6 +222,34 @@ export function ResultadoScreen() {
                 <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[3] }}>
                   {match.justificativa_ia ? stripMarkdown(match.justificativa_ia) : ""}
                 </Text>
+
+                {/* Os caminhos concretos dentro do nicho — resolve o "Serviço
+                    digital não me diz nada". Sempre do catálogo curado (RN-38). */}
+                {match.sub_negocios_destaque?.length ? (
+                  <View
+                    style={{
+                      backgroundColor: color.bg.surfaceAlt,
+                      borderRadius: radius.md,
+                      padding: space[4],
+                      marginBottom: space[3],
+                      gap: space[3],
+                    }}
+                  >
+                    <Text style={{ ...type.overline, color: color.text.muted }}>
+                      DENTRO DESSE CAMINHO, VOCÊ PODE ABRIR
+                    </Text>
+                    {match.sub_negocios_destaque.map((sub) => (
+                      <View key={sub.nome}>
+                        <Text style={{ ...type.bodyStrong, color: color.text.primary }}>{sub.nome}</Text>
+                        {sub.por_que ? (
+                          <Text style={{ ...type.caption, color: color.text.secondary, marginTop: 2 }}>
+                            {stripMarkdown(sub.por_que)}
+                          </Text>
+                        ) : null}
+                      </View>
+                    ))}
+                  </View>
+                ) : null}
 
                 {match.niches ? (
                   <Text style={{ ...type.caption }}>

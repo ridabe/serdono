@@ -46,10 +46,20 @@ export async function getMyJornada(userId: string): Promise<JornadaInstance | nu
  * `aguardando_usuario` conforme o tipo); as que dependem de outra nascem
  * `bloqueada`.
  */
-export async function startJornada(userId: string, nicheId: string): Promise<JornadaInstance> {
+export async function startJornada(
+  userId: string,
+  nicheId: string,
+  /**
+   * Caminho concreto dentro do nicho (SDD-66) — opcional: quem não escolher
+   * segue com o nicho genérico, como antes. Quando existe, a Mary passa a
+   * saber que o negócio é "agência de tráfego pago", não só "serviço digital"
+   * (`loadBusinessContext` da knowledge-search já lê esta tabela).
+   */
+  subNegocioId?: string | null
+): Promise<JornadaInstance> {
   const { data: instance, error } = await supabase
     .from("jornada_instances")
-    .insert({ user_id: userId, niche_id: nicheId })
+    .insert({ user_id: userId, niche_id: nicheId, sub_negocio_id: subNegocioId ?? null })
     .select("*")
     .single();
   if (error) throw error;

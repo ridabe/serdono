@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import { Button, EntrepreneurBackground, Logo, color, radius, space, type } from "@serdono/ui";
 import {
@@ -9,6 +9,7 @@ import {
 } from "@serdono/core";
 import {
   ensureSession,
+  getCurrentSession,
   isAnonymousSession,
   startJornadaComProgresso,
   supabase,
@@ -46,7 +47,8 @@ type Etapa =
   | { tipo: "marco"; fase: JornadaFaseCore }
   | { tipo: "cadastro" };
 
-const ETAPAS: Etapa[] = [{ tipo: "nicho" }, ...FASES_JORNADA.map((fase) => ({ tipo: "marco" as const, fase })), { tipo: "cadastro" }];
+const ETAPA_NICHO_E_MARCOS: Etapa[] = [{ tipo: "nicho" }, ...FASES_JORNADA.map((fase) => ({ tipo: "marco" as const, fase }))];
+const ULTIMA_FASE = FASES_JORNADA[FASES_JORNADA.length - 1];
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -95,6 +97,10 @@ export function NegocioExistenteScreen() {
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Quem chega aqui já autenticado de verdade (ex.: conta criada pelo admin,
+  // ou veio da bifurcação nova dentro do app, ver JornadaScreen/EscolherNichoScreen)
+  // não passa pela etapa de criar conta — ela já existe. `null` = ainda não sabemos.
+  const [isLoggedInUser, setIsLoggedInUser] = useState<boolean | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -107,12 +113,20 @@ export function NegocioExistenteScreen() {
         setLoadingNiches(false);
         return;
       }
+      setIsLoggedInUser(!isAnonymousSession(session));
       const { data, error: nichesError } = await supabase.from("niches").select("id, nome, categoria").order("categoria").order("nome");
       if (nichesError) setError(nichesError.message);
       setNiches(data ?? []);
       setLoadingNiches(false);
     })();
   }, []);
+
+  // Sessão anônima (ou ainda desconhecida) mantém a etapa de cadastro no
+  // final; sessão já real pula direto pra semear a Jornada.
+  const ETAPAS: Etapa[] = useMemo(
+    () => (isLoggedInUser ? ETAPA_NICHO_E_MARCOS : [...ETAPA_NICHO_E_MARCOS, { tipo: "cadastro" as const }]),
+    [isLoggedInUser]
+  );
 
   const etapa = ETAPAS[passo];
   const totalEtapas = ETAPAS.length;
@@ -140,14 +154,24 @@ export function NegocioExistenteScreen() {
     avancar();
   }
 
+  // Última fase e sem etapa de cadastro depois (usuário já logado): não tem
+  // pra onde `avancar()` ir — precisa finalizar direto.
+  function avancarOuFinalizar(fase: JornadaFaseCore) {
+    if (isLoggedInUser && fase === ULTIMA_FASE) {
+      handleFinalizarLogado();
+      return;
+    }
+    avancar();
+  }
+
   function confirmarMarco(fase: JornadaFaseCore, confirmado: boolean) {
     setMarcos((m) => ({ ...m, [fase]: confirmado }));
     if (!confirmado) {
-      avancar();
+      avancarOuFinalizar(fase);
       return;
     }
     if (fase === "planejamento" || fase === "formalizacao") return; // aguarda o campo obrigatório antes de avançar
-    avancar();
+    avancarOuFinalizar(fase);
   }
 
   function confirmarSubcampoMarco() {
@@ -161,7 +185,21 @@ export function NegocioExistenteScreen() {
       setError("Selecione o regime da sua empresa.");
       return;
     }
-    avancar();
+    avancarOuFinalizar(etapa.fase);
+  }
+
+  /** Compartilhado pelos dois finais possíveis (conta nova vs. usuário já logado). */
+  async function semearJornadaESeguir(userId: string) {
+    const fasesConcluidas = FASES_JORNADA.filter((fase) => marcos[fase]);
+    await startJornadaComProgresso({
+      userId,
+      nicheId: semNicho ? null : nicheId,
+      nichoPersonalizado: semNicho ? nichoTexto.trim() : null,
+      fasesConcluidas,
+      nomeEmpresa: marcos.planejamento ? nomeEmpresa.trim() : undefined,
+      regimeFormalizacao: marcos.formalizacao && regime ? regime : undefined,
+    });
+    router.replace("/inicio");
   }
 
   async function handleFinalizar() {
@@ -193,18 +231,27 @@ export function NegocioExistenteScreen() {
         .eq("id", currentSession.user.id);
       if (userUpdateError) throw userUpdateError;
 
-      const fasesConcluidas = FASES_JORNADA.filter((fase) => marcos[fase]);
+      await semearJornadaESeguir(currentSession.user.id);
+    } catch (e) {
+      setError((e as Error).message);
+    } finally {
+      setSaving(false);
+    }
+  }
 
-      await startJornadaComProgresso({
-        userId: currentSession.user.id,
-        nicheId: semNicho ? null : nicheId,
-        nichoPersonalizado: semNicho ? nichoTexto.trim() : null,
-        fasesConcluidas,
-        nomeEmpresa: marcos.planejamento ? nomeEmpresa.trim() : undefined,
-        regimeFormalizacao: marcos.formalizacao && regime ? regime : undefined,
-      });
-
-      router.replace("/inicio");
+  /**
+   * Fim do caminho pra quem já tem conta de verdade (SDD-67) — a etapa de
+   * cadastro nem existe em `ETAPAS` pra este caso. Sem criar/alterar
+   * credencial nenhuma: a conta já existe, só falta semear a Jornada com o
+   * progresso confirmado marco a marco.
+   */
+  async function handleFinalizarLogado() {
+    setError(null);
+    setSaving(true);
+    try {
+      const session = await getCurrentSession();
+      if (!session) throw new Error("Sessão perdida — faça login de novo.");
+      await semearJornadaESeguir(session.user.id);
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -270,6 +317,7 @@ export function NegocioExistenteScreen() {
                   fase={etapa.fase}
                   respondido={marcos[etapa.fase]}
                   onResponder={(v) => confirmarMarco(etapa.fase, v)}
+                  saving={saving}
                   nomeEmpresa={nomeEmpresa}
                   onChangeNomeEmpresa={setNomeEmpresa}
                   regime={regime}
@@ -386,6 +434,7 @@ function MarcoStep({
   fase,
   respondido,
   onResponder,
+  saving,
   nomeEmpresa,
   onChangeNomeEmpresa,
   regime,
@@ -397,6 +446,7 @@ function MarcoStep({
   fase: JornadaFaseCore;
   respondido: boolean | undefined;
   onResponder: (v: boolean) => void;
+  saving: boolean;
   nomeEmpresa: string;
   onChangeNomeEmpresa: (v: string) => void;
   regime: RegimeFormalizacao | null;
@@ -413,8 +463,22 @@ function MarcoStep({
       <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[5] }}>{PERGUNTA_MARCO[fase]}</Text>
 
       <View style={{ flexDirection: "row", gap: space[3], marginBottom: space[5] }}>
-        <Button label="Sim" variant={respondido === true ? "primary" : "outline"} onPress={() => onResponder(true)} style={{ flex: 1 }} />
-        <Button label="Não" variant={respondido === false ? "primary" : "outline"} onPress={() => onResponder(false)} style={{ flex: 1 }} />
+        <Button
+          label="Sim"
+          variant={respondido === true ? "primary" : "outline"}
+          loading={saving && respondido === true}
+          disabled={saving}
+          onPress={() => onResponder(true)}
+          style={{ flex: 1 }}
+        />
+        <Button
+          label="Não"
+          variant={respondido === false ? "primary" : "outline"}
+          loading={saving && respondido === false}
+          disabled={saving}
+          onPress={() => onResponder(false)}
+          style={{ flex: 1 }}
+        />
       </View>
 
       {precisaSubcampo && fase === "planejamento" ? (
@@ -437,8 +501,10 @@ function MarcoStep({
       {error ? <Text style={{ ...type.caption, color: color.state.danger, marginBottom: space[3] }}>{error}</Text> : null}
 
       <View style={{ flexDirection: "row", gap: space[3] }}>
-        <Button label="Voltar" variant="ghost" onPress={onVoltar} />
-        {precisaSubcampo ? <Button label="Continuar" variant="secondary" onPress={onContinuarSubcampo} style={{ flex: 1 }} /> : null}
+        <Button label="Voltar" variant="ghost" onPress={onVoltar} disabled={saving} />
+        {precisaSubcampo ? (
+          <Button label={saving ? "Salvando..." : "Continuar"} variant="secondary" loading={saving} onPress={onContinuarSubcampo} style={{ flex: 1 }} />
+        ) : null}
       </View>
     </View>
   );

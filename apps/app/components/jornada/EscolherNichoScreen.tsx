@@ -16,11 +16,21 @@ interface MatchRow {
   } | null;
 }
 
+/** Caminho concreto dentro do nicho, vindo do catálogo curado (SDD-66). */
+interface SubNegocio {
+  id: string;
+  niche_id: string;
+  nome: string;
+  descricao: string;
+}
+
 export function EscolherNichoScreen() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [matches, setMatches] = useState<MatchRow[]>([]);
+  const [subNegocios, setSubNegocios] = useState<SubNegocio[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
+  const [subSelecionado, setSubSelecionado] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -35,10 +45,28 @@ export function EscolherNichoScreen() {
         .order("fit_score", { ascending: false })
         .limit(3);
       if (error) setError(error.message);
-      setMatches((data as unknown as MatchRow[]) ?? []);
+      const rows = (data as unknown as MatchRow[]) ?? [];
+      setMatches(rows);
+
+      if (rows.length > 0) {
+        const { data: subs, error: subError } = await supabase
+          .from("niche_sub_negocios")
+          .select("id, niche_id, nome, descricao")
+          .in("niche_id", rows.map((m) => m.niche_id))
+          .eq("ativo", true)
+          .order("ordem");
+        if (subError) setError(subError.message);
+        setSubNegocios((subs as SubNegocio[]) ?? []);
+      }
       setLoading(false);
     })();
   }, []);
+
+  /** Trocar de nicho limpa o sub-negócio — ele pertence a um nicho só. */
+  function selecionarNicho(nicheId: string) {
+    setSelected(nicheId);
+    setSubSelecionado(null);
+  }
 
   async function handleContinue() {
     if (!selected) return;
@@ -47,7 +75,7 @@ export function EscolherNichoScreen() {
     try {
       const session = await getCurrentSession();
       if (!session) throw new Error("Sessão perdida — faça login de novo.");
-      await startJornada(session.user.id, selected);
+      await startJornada(session.user.id, selected, subSelecionado);
       router.replace("/jornada");
     } catch (e) {
       setError((e as Error).message);
@@ -98,19 +126,33 @@ export function EscolherNichoScreen() {
         {loading ? (
           <ActivityIndicator color={color.bg.brand} />
         ) : matches.length === 0 ? (
+          // Bifurcação pedida pelo dono do produto (04/08/2026): quem chega
+          // aqui já logado (ex.: conta criada pelo admin) e nunca fez o
+          // diagnóstico não pode ser jogado direto pra "descoberta de nicho"
+          // — pode já ter um negócio de verdade. Mesma escolha que a home
+          // oferece antes do cadastro (AppWelcomeScreen/Hero), só que agora
+          // pra dentro do app, pra quem entrou sem passar por nenhuma delas.
           <Card variant="outline" padding={6} style={{ marginBottom: space[5] }}>
             <Text style={{ ...type.body, color: color.text.secondary, textAlign: "center", marginBottom: space[4] }}>
-              Você ainda não tem um diagnóstico salvo pra continuar daqui.
+              Você ainda não tem um diagnóstico salvo pra continuar daqui. Como você quer começar?
             </Text>
-            <Button label="Fazer o diagnóstico" variant="primary" onPress={() => router.push("/diagnostico")} />
+            <View style={{ gap: space[3] }}>
+              <Button label="Quero começar do zero" variant="primary" onPress={() => router.push("/diagnostico")} />
+              <Button
+                label="Já tenho um negócio"
+                variant="outline"
+                onPress={() => router.push("/negocio-existente")}
+              />
+            </View>
           </Card>
         ) : (
           <>
             <View style={{ gap: space[3], marginBottom: space[5] }}>
               {matches.map((match) => {
                 const isSelected = selected === match.niche_id;
+                const subsDoNicho = subNegocios.filter((s) => s.niche_id === match.niche_id);
                 return (
-                  <Pressable key={match.niche_id} onPress={() => setSelected(match.niche_id)} accessibilityRole="radio" accessibilityState={{ checked: isSelected }}>
+                  <Pressable key={match.niche_id} onPress={() => selecionarNicho(match.niche_id)} accessibilityRole="radio" accessibilityState={{ checked: isSelected }}>
                     <Card variant={isSelected ? "default" : "outline"} padding={5} style={isSelected ? { borderWidth: 2, borderColor: color.action.primary } : undefined}>
                       <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: space[2] }}>
                         <Text style={{ ...type.h3, color: color.text.primary, flex: 1 }}>{match.niches?.nome ?? "Nicho"}</Text>
@@ -128,6 +170,40 @@ export function EscolherNichoScreen() {
                         <Text style={{ ...type.caption, color: color.text.muted }}>
                           Investimento: {formatMoney(match.niches.investimento_min)} a {formatMoney(match.niches.investimento_max)}
                         </Text>
+                      ) : null}
+
+                      {/* Só depois de escolher o nicho a pessoa afunila no caminho
+                          concreto — é opcional, dá pra seguir com o nicho genérico. */}
+                      {isSelected && subsDoNicho.length > 0 ? (
+                        <View style={{ marginTop: space[4], gap: space[2] }}>
+                          <Text style={{ ...type.overline, color: color.text.muted }}>
+                            QUAL DESSES CAMINHOS COMBINA MAIS? (OPCIONAL)
+                          </Text>
+                          {subsDoNicho.map((sub) => {
+                            const subAtivo = subSelecionado === sub.id;
+                            return (
+                              <Pressable
+                                key={sub.id}
+                                onPress={() => setSubSelecionado(subAtivo ? null : sub.id)}
+                                accessibilityRole="radio"
+                                accessibilityState={{ checked: subAtivo }}
+                                style={{
+                                  borderWidth: subAtivo ? 2 : 1,
+                                  borderColor: subAtivo ? color.action.primary : color.border.default,
+                                  backgroundColor: subAtivo ? color.action.primarySubtle : color.bg.surface,
+                                  borderRadius: 8,
+                                  padding: space[3],
+                                  minHeight: 44,
+                                }}
+                              >
+                                <Text style={{ ...type.bodyStrong, color: color.text.primary }}>{sub.nome}</Text>
+                                <Text style={{ ...type.caption, color: color.text.secondary, marginTop: 2 }}>
+                                  {sub.descricao}
+                                </Text>
+                              </Pressable>
+                            );
+                          })}
+                        </View>
                       ) : null}
                     </Card>
                   </Pressable>

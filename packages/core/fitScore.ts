@@ -21,10 +21,25 @@ export interface DiagnosticoParaScore {
   tempo_disponivel: TempoDisponivel | null;
   formacao: string[];
   experiencia: string[];
+  /**
+   * Áreas que a IA extraiu do texto livre do diagnóstico (SDD-66, RN-37).
+   * Entram no cálculo de interesse com o MESMO peso das áreas marcadas no
+   * checkbox — a IA amplia o sinal de perfil, nunca decide ou recalcula a
+   * nota. Quem chama a IA é a Edge Function; esta função continua pura.
+   */
+  areas_inferidas?: string[];
 }
 
 export interface NichoParaScore {
   categoria: string;
+  /**
+   * Áreas do diagnóstico que este nicho atende (SDD-66). Um nicho pode
+   * pertencer a mais de uma ("Agência de marketing digital" é tecnologia E
+   * serviços), coisa que a `categoria` única não conseguia expressar — e que
+   * fazia nicho digital ficar escondido sob 'serviços' (defeito corrigido
+   * pontualmente na SDD-65, resolvido de vez aqui). Vazio = usa `categoria`.
+   */
+  areas_afinidade?: string[];
   investimento_min: number;
   investimento_max: number;
   tempo_ate_equilibrio_meses: number | null;
@@ -56,39 +71,91 @@ function clamp(value: number, min = 0, max = 100): number {
   return Math.min(max, Math.max(min, value));
 }
 
-/** Sobreposição entre a faixa de capital do usuário e a faixa de investimento do nicho. */
-function overlapScore(userMin: number, userMax: number, nicheMin: number, nicheMax: number): number {
-  const overlapStart = Math.max(userMin, nicheMin);
-  const overlapEnd = Math.min(userMax, nicheMax);
-  const overlap = Math.max(0, overlapEnd - overlapStart);
-  const nicheSpan = nicheMax - nicheMin || 1;
-  return clamp((overlap / nicheSpan) * 100);
+/** Piso do score de capital para quem consegue começar, mas sem folga nenhuma. */
+const CAPITAL_SO_DA_PRA_COMECAR = 70;
+
+/**
+ * Quanto o capital do usuário dá conta do investimento do nicho.
+ *
+ * A pergunta é "você consegue bancar este negócio?", nunca "suas faixas
+ * coincidem?". A versão anterior media a SOBREPOSIÇÃO entre a faixa de
+ * capital e a faixa de investimento — o que fazia sobrar dinheiro virar
+ * penalidade: quem tinha mais de R$ 40 mil tirava ZERO em "Serviço digital"
+ * (R$ 300 a R$ 5.000), porque as faixas não se cruzavam. Com 5 nichos isso
+ * ficava mascarado; com o catálogo inteiro ativo (SDD-66), passou a mandar no
+ * resultado e empurrava perfis de tecnologia pra lavanderia e escola infantil.
+ * Ter capital de sobra nunca é desencaixe.
+ */
+function scoreCapital(capitalMax: number, n: NichoParaScore): number {
+  // Banca até o teto do nicho — cabe no bolso com folga.
+  if (capitalMax >= n.investimento_max) return 100;
+
+  // Banca pelo menos o piso: dá pra começar. Quanto mais da faixa o dinheiro
+  // cobre, mais confortável — mas começar já vale a maior parte da nota.
+  if (capitalMax >= n.investimento_min) {
+    const faixa = n.investimento_max - n.investimento_min || 1;
+    const cobertura = (capitalMax - n.investimento_min) / faixa;
+    return clamp(CAPITAL_SO_DA_PRA_COMECAR + cobertura * (100 - CAPITAL_SO_DA_PRA_COMECAR));
+  }
+
+  // Não alcança nem o investimento mínimo — aí sim é desencaixe real,
+  // proporcional ao quanto falta.
+  return clamp((capitalMax / n.investimento_min) * CAPITAL_SO_DA_PRA_COMECAR);
 }
 
 function scoreFinanceiro(d: DiagnosticoParaScore, n: NichoParaScore): number {
   if (!d.capital_disponivel) return 0;
   const capital = CAPITAL_RANGES[d.capital_disponivel];
-  const capitalOverlap = overlapScore(capital.min, capital.max, n.investimento_min, n.investimento_max);
+  const capitalScore = scoreCapital(capital.max, n);
 
   if (d.meses_de_folego == null || !n.tempo_ate_equilibrio_meses) {
-    return capitalOverlap;
+    return capitalScore;
   }
   const folegoScore = clamp((d.meses_de_folego / n.tempo_ate_equilibrio_meses) * 100);
-  return clamp(capitalOverlap * 0.7 + folegoScore * 0.3);
+  return clamp(capitalScore * 0.7 + folegoScore * 0.3);
+}
+
+/** Nenhum dado de área de interesse informado — nem penaliza nem favorece nicho nenhum. */
+const AREA_SEM_DADO = 50;
+/** Área de formação/experiência do usuário bate com a categoria do nicho. */
+const AREA_COM_MATCH = 100;
+/** Usuário informou área(s) de interesse, mas nenhuma bate com este nicho — sinal fraco, não elimina o nicho (RN de sensibilidade sem exclusividade, ver PRD §8). */
+const AREA_SEM_MATCH = 25;
+
+/**
+ * Aderência entre a(s) área(s) que o usuário demonstrou interesse — marcadas
+ * no bloco "Experiência" do diagnóstico, mais as que a IA inferiu do texto
+ * livre (SDD-66) — e as áreas que o nicho atende.
+ *
+ * Antes disso vivia como um bônus fixo de +15 dentro de `scorePerfil`,
+ * dependente de `apetite_risco` estar preenchido e diluído por um peso de
+ * 30% no fit_score final — na prática, irrelevante pro resultado (o
+ * empreendedor que só marcou "Tecnologia / digital" via nicho de comércio de
+ * bairro no topo da lista). Virou o próprio eixo, ponderado 50/50 com o
+ * ajuste de risco dentro de `scorePerfil`.
+ */
+function scoreInteresse(d: DiagnosticoParaScore, n: NichoParaScore): number {
+  const tags = [...d.formacao, ...d.experiencia, ...(d.areas_inferidas ?? [])]
+    .map((t) => t.toLowerCase().trim())
+    .filter(Boolean);
+  if (tags.length === 0) return AREA_SEM_DADO;
+
+  // `areas_afinidade` é a fonte de verdade quando existe; `categoria` fica
+  // como fallback pra nicho que ainda não foi mapeado (nenhum fica pior que antes).
+  const areasDoNicho = (n.areas_afinidade?.length ? n.areas_afinidade : [n.categoria])
+    .map((a) => a.toLowerCase().trim())
+    .filter(Boolean);
+
+  const match = tags.some((t) => areasDoNicho.some((a) => t === a || t.includes(a) || a.includes(t)));
+  return match ? AREA_COM_MATCH : AREA_SEM_MATCH;
 }
 
 function scorePerfil(d: DiagnosticoParaScore, n: NichoParaScore): number {
-  if (!d.apetite_risco) return 50;
   // Proxy de "risco" do nicho: média entre complexidade regulatória e nível de concorrência.
   const riscoNicho = (n.complexidade_regulatoria + n.nivel_concorrencia) / 2;
-  const distancia = Math.abs(d.apetite_risco - riscoNicho);
-  const riscoFit = clamp(100 - distancia * 25);
+  const riscoFit = d.apetite_risco ? clamp(100 - Math.abs(d.apetite_risco - riscoNicho) * 25) : 50;
 
-  const tags = [...d.formacao, ...d.experiencia].map((t) => t.toLowerCase());
-  const categoria = n.categoria.toLowerCase();
-  const bonusExperiencia = tags.some((t) => t.includes(categoria) || categoria.includes(t)) ? 15 : 0;
-
-  return clamp(riscoFit + bonusExperiencia);
+  return clamp(riscoFit * 0.5 + scoreInteresse(d, n) * 0.5);
 }
 
 function scoreContexto(n: NichoParaScore): number {

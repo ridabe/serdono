@@ -6,6 +6,7 @@ export type DiagnosticoField =
   | "apetite_risco"
   | "tempo_disponivel"
   | "formacao"
+  | "interesses_texto"
   | "localizacao"
   | "objetivo";
 
@@ -40,7 +41,35 @@ export interface LocationBlock {
   subtitle?: string;
 }
 
-export type DiagnosticoBlock = SingleChoiceBlock | MultiChoiceBlock | LocationBlock;
+/** Pergunta aberta e OPCIONAL — a IA interpreta o texto e amplia o sinal de perfil (SDD-66, RN-37). */
+export interface TextBlock {
+  type: "text";
+  field: "interesses_texto";
+  overline: string;
+  title: string;
+  subtitle?: string;
+  placeholder: string;
+}
+
+export type DiagnosticoBlock = SingleChoiceBlock | MultiChoiceBlock | LocationBlock | TextBlock;
+
+/**
+ * Vocabulário fechado de áreas — a MESMA lista que alimenta
+ * `niches.areas_afinidade` (SDD-66) e que a IA usa como opções permitidas ao
+ * interpretar o texto livre. Manter os dois lados sincronizados é o que
+ * impede um nicho de ficar invisível por não ter área correspondente no
+ * questionário (defeito que a SDD-65 corrigiu numa linha só).
+ */
+export const AREAS_DIAGNOSTICO = [
+  "serviços",
+  "alimentação",
+  "beleza",
+  "varejo",
+  "tecnologia",
+  "educação",
+  "saúde",
+  "moda",
+] as const;
 
 // PRD §7.1/§5.2: um bloco por dimensão, nunca mais de uma decisão principal por tela.
 // Versão condensada para o MVP (RN-2) — estilo de vida e rede de ativos ficam para
@@ -49,7 +78,7 @@ export const DIAGNOSTICO_BLOCKS: DiagnosticoBlock[] = [
   {
     type: "single",
     field: "capital_disponivel",
-    overline: "BLOCO 1 DE 7 · CAPITAL",
+    overline: "BLOCO 1 DE 8 · CAPITAL",
     title: "Quanto você tem guardado para começar?",
     subtitle: "Não precisa ser exato — é só pra entender seu ponto de partida.",
     options: [
@@ -62,7 +91,7 @@ export const DIAGNOSTICO_BLOCKS: DiagnosticoBlock[] = [
   {
     type: "single",
     field: "meses_de_folego",
-    overline: "BLOCO 2 DE 7 · FÔLEGO",
+    overline: "BLOCO 2 DE 8 · FÔLEGO",
     title: "Por quantos meses você viveria sem tirar dinheiro do negócio?",
     subtitle: "Pensando nas suas outras fontes de renda ou reservas.",
     options: [
@@ -75,7 +104,7 @@ export const DIAGNOSTICO_BLOCKS: DiagnosticoBlock[] = [
   {
     type: "single",
     field: "apetite_risco",
-    overline: "BLOCO 3 DE 7 · PERFIL",
+    overline: "BLOCO 3 DE 8 · PERFIL",
     title: "Como você lida com incerteza?",
     subtitle: "Não existe resposta certa — é só pra calibrar o tipo de negócio.",
     options: [
@@ -89,7 +118,7 @@ export const DIAGNOSTICO_BLOCKS: DiagnosticoBlock[] = [
   {
     type: "single",
     field: "tempo_disponivel",
-    overline: "BLOCO 4 DE 7 · TEMPO",
+    overline: "BLOCO 4 DE 8 · TEMPO",
     title: "Quanto tempo você vai dedicar ao negócio?",
     options: [
       { label: "Dedicação integral", value: "integral" satisfies TempoDisponivel },
@@ -100,28 +129,41 @@ export const DIAGNOSTICO_BLOCKS: DiagnosticoBlock[] = [
   {
     type: "multi",
     field: "formacao",
-    overline: "BLOCO 5 DE 7 · EXPERIÊNCIA",
+    overline: "BLOCO 5 DE 8 · EXPERIÊNCIA",
     title: "Em quais dessas áreas você já tem experiência ou formação?",
     subtitle: "Pode marcar mais de uma — ou nenhuma, se estiver começando do zero.",
+    // Os valores são exatamente os de AREAS_DIAGNOSTICO / `niches.areas_afinidade`.
     options: [
       { label: "Serviços", value: "serviços" },
       { label: "Alimentação", value: "alimentação" },
       { label: "Beleza", value: "beleza" },
-      { label: "Varejo", value: "varejo" },
+      { label: "Comércio / varejo", value: "varejo" },
       { label: "Tecnologia / digital", value: "tecnologia" },
+      { label: "Educação", value: "educação" },
+      { label: "Saúde e bem-estar", value: "saúde" },
+      { label: "Moda", value: "moda" },
     ],
+  },
+  {
+    type: "text",
+    field: "interesses_texto",
+    overline: "BLOCO 6 DE 8 · SOBRE VOCÊ",
+    title: "Me conta com as suas palavras: o que você gosta de fazer?",
+    subtitle:
+      "Pode escrever solto — o que você já fez, no que tem jeito, o que sempre quis tentar. É opcional, mas é o que me deixa entender você além das caixinhas acima.",
+    placeholder: "Ex.: sempre mexi com computador, montei uns sites pra amigos e gosto de resolver problema técnico.",
   },
   {
     type: "location",
     field: "localizacao",
-    overline: "BLOCO 6 DE 7 · LOCALIZAÇÃO",
+    overline: "BLOCO 7 DE 8 · LOCALIZAÇÃO",
     title: "Em que cidade você pretende empreender?",
     subtitle: "Isso ajuda a entender demanda e concorrência da sua região.",
   },
   {
     type: "single",
     field: "objetivo",
-    overline: "BLOCO 7 DE 7 · OBJETIVO",
+    overline: "BLOCO 8 DE 8 · OBJETIVO",
     title: "O que esse negócio representa pra você?",
     options: [
       { label: "Uma renda extra, sem trocar de emprego", value: "renda_extra" },

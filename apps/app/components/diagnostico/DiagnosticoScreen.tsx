@@ -14,6 +14,7 @@ interface Answers {
   apetite_risco: number | null;
   tempo_disponivel: string | null;
   formacao: string[];
+  interesses_texto: string | null;
   localizacao_cidade: string | null;
   localizacao_estado: string | null;
   objetivo: string | null;
@@ -25,6 +26,7 @@ const EMPTY_ANSWERS: Answers = {
   apetite_risco: null,
   tempo_disponivel: null,
   formacao: [],
+  interesses_texto: null,
   localizacao_cidade: null,
   localizacao_estado: null,
   objetivo: null,
@@ -36,6 +38,9 @@ function isBlockAnswered(block: DiagnosticoBlock, answers: Answers): boolean {
   }
   if (block.type === "multi") {
     return true; // bloco de experiência pode ficar vazio ("começando do zero")
+  }
+  if (block.type === "text") {
+    return true; // pergunta aberta é opcional (SDD-66) — pular não trava a retomada
   }
   const value = answers[block.field as keyof Answers];
   return value !== null && value !== undefined && value !== "";
@@ -50,6 +55,7 @@ export function DiagnosticoScreen() {
   const [blockIndex, setBlockIndex] = useState(0);
   const [cidadeInput, setCidadeInput] = useState("");
   const [estadoInput, setEstadoInput] = useState("");
+  const [interessesInput, setInteressesInput] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -75,6 +81,8 @@ export function DiagnosticoScreen() {
               apetite_risco: null,
               tempo_disponivel: null,
               formacao: [],
+              interesses_texto: null,
+              areas_inferidas: [],
               localizacao_cidade: null,
               localizacao_estado: null,
               objetivo: null,
@@ -87,6 +95,7 @@ export function DiagnosticoScreen() {
           setAnswers(EMPTY_ANSWERS);
           setCidadeInput("");
           setEstadoInput("");
+          setInteressesInput("");
           setBlockIndex(0);
         } else if (data) {
           const loaded: Answers = {
@@ -95,6 +104,7 @@ export function DiagnosticoScreen() {
             apetite_risco: data.apetite_risco,
             tempo_disponivel: data.tempo_disponivel,
             formacao: data.formacao ?? [],
+            interesses_texto: data.interesses_texto,
             localizacao_cidade: data.localizacao_cidade,
             localizacao_estado: data.localizacao_estado,
             objetivo: data.objetivo,
@@ -102,6 +112,7 @@ export function DiagnosticoScreen() {
           setAnswers(loaded);
           setCidadeInput(loaded.localizacao_cidade ?? "");
           setEstadoInput(loaded.localizacao_estado ?? "");
+          setInteressesInput(loaded.interesses_texto ?? "");
           const resumeIndex = DIAGNOSTICO_BLOCKS.findIndex((b) => !isBlockAnswered(b, loaded));
           setBlockIndex(resumeIndex === -1 ? DIAGNOSTICO_BLOCKS.length - 1 : resumeIndex);
         } else {
@@ -253,6 +264,27 @@ export function DiagnosticoScreen() {
               />
             ) : null}
 
+            {block.type === "text" ? (
+              <TextInput
+                value={interessesInput}
+                onChangeText={setInteressesInput}
+                placeholder={block.placeholder}
+                multiline
+                numberOfLines={5}
+                textAlignVertical="top"
+                style={{
+                  minHeight: 120,
+                  borderWidth: 1,
+                  borderColor: color.border.default,
+                  borderRadius: radius.md,
+                  paddingHorizontal: space[4],
+                  paddingVertical: space[3],
+                  fontSize: 14,
+                  lineHeight: 20,
+                }}
+              />
+            ) : null}
+
             {block.type === "location" ? (
               <View style={{ gap: space[3] }}>
                 <View>
@@ -296,9 +328,17 @@ export function DiagnosticoScreen() {
               <Text style={{ ...type.caption, color: color.state.danger, marginTop: space[4] }}>{error}</Text>
             ) : null}
 
-            {block.type === "multi" || block.type === "location" ? (
+            {block.type === "multi" || block.type === "location" || block.type === "text" ? (
               <Button
-                label={saving ? "Salvando..." : isLastBlock ? "Concluir diagnóstico" : "Continuar"}
+                label={
+                  saving
+                    ? "Salvando..."
+                    : isLastBlock
+                      ? "Concluir diagnóstico"
+                      : block.type === "text" && !interessesInput.trim()
+                        ? "Pular esta pergunta"
+                        : "Continuar"
+                }
                 variant="secondary"
                 fullWidth
                 loading={saving}
@@ -314,6 +354,11 @@ export function DiagnosticoScreen() {
                       localizacao_cidade: cidadeInput.trim(),
                       localizacao_estado: estadoInput.trim().toUpperCase(),
                     });
+                  } else if (block.type === "text") {
+                    // Opcional: vazio grava null e segue — nunca bloqueia o funil.
+                    const texto = interessesInput.trim() || null;
+                    setAnswers((a) => ({ ...a, interesses_texto: texto }));
+                    persistAndAdvance({ interesses_texto: texto });
                   } else {
                     persistAndAdvance({ formacao: answers.formacao });
                   }
