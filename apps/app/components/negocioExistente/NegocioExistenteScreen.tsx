@@ -18,6 +18,7 @@ import {
   isAnonymousSession,
   startJornadaComProgresso,
   supabase,
+  uploadLogoParaUsuario,
   type RegimeFormalizacao,
 } from "@serdono/supabase";
 import { pickEntrepreneurPhoto } from "../../constants/entrepreneurPhotos";
@@ -95,7 +96,13 @@ export function NegocioExistenteScreen() {
   const [marcos, setMarcos] = useState<Partial<Record<JornadaFaseCore, boolean>>>({});
   const [nomeEmpresa, setNomeEmpresa] = useState("");
   const [temLogo, setTemLogo] = useState<boolean | null>(null);
-  const [logoUri, setLogoUri] = useState<string | null>(null);
+  const [logoPreviewUri, setLogoPreviewUri] = useState<string | null>(null);
+  // Path já salvo no Storage (SDD-68) — subimos assim que a pessoa escolhe o
+  // arquivo, não no fim do intake: são 10+ passos entre a escolha do logo e o
+  // "Não" final, tempo suficiente pro browser descartar o blob local e o
+  // upload lá na frente falhar com "Failed to fetch" sem explicação nenhuma.
+  const [logoPath, setLogoPath] = useState<string | null>(null);
+  const [uploadingLogo, setUploadingLogo] = useState(false);
   const [regime, setRegime] = useState<RegimeFormalizacao | null>(null);
   const [cnpj, setCnpj] = useState("");
 
@@ -109,6 +116,9 @@ export function NegocioExistenteScreen() {
   // ou veio da bifurcação nova dentro do app, ver JornadaScreen/EscolherNichoScreen)
   // não passa pela etapa de criar conta — ela já existe. `null` = ainda não sabemos.
   const [isLoggedInUser, setIsLoggedInUser] = useState<boolean | null>(null);
+  // Precisamos do id cedo (não só no fim) pra poder subir o logo assim que a
+  // pessoa escolhe o arquivo, ainda na etapa "planejamento".
+  const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -122,6 +132,7 @@ export function NegocioExistenteScreen() {
         return;
       }
       setIsLoggedInUser(!isAnonymousSession(session));
+      setUserId(session.user.id);
       const { data, error: nichesError } = await supabase.from("niches").select("id, nome, categoria").order("categoria").order("nome");
       if (nichesError) setError(nichesError.message);
       setNiches(data ?? []);
@@ -184,6 +195,10 @@ export function NegocioExistenteScreen() {
 
   async function handlePickLogo() {
     setError(null);
+    if (!userId) {
+      setError("Sua sessão ainda está carregando — tente de novo em instantes.");
+      return;
+    }
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!permission.granted) {
       setError("Precisamos de permissão para acessar suas fotos.");
@@ -199,7 +214,20 @@ export function NegocioExistenteScreen() {
       [{ resize: { width: 512, height: 512 } }],
       { compress: 0.85, format: ImageManipulator.SaveFormat.JPEG }
     );
-    setLogoUri(manipulated.uri);
+    setLogoPreviewUri(manipulated.uri);
+
+    // Sobe na hora (SDD-68) — não espera o fim do intake, que ainda tem
+    // vários passos pela frente e arrisca o blob local não existir mais.
+    setUploadingLogo(true);
+    try {
+      const path = await uploadLogoParaUsuario(userId, manipulated.uri);
+      setLogoPath(path);
+    } catch (e) {
+      setError(`Não conseguimos subir o logo agora (${(e as Error).message}). Tente escolher o arquivo de novo.`);
+      setLogoPath(null);
+    } finally {
+      setUploadingLogo(false);
+    }
   }
 
   function confirmarSubcampoMarco() {
@@ -214,7 +242,11 @@ export function NegocioExistenteScreen() {
         setError("Você já tem um logo pronto?");
         return;
       }
-      if (temLogo && !logoUri) {
+      if (temLogo && uploadingLogo) {
+        setError("Aguarde o logo terminar de subir.");
+        return;
+      }
+      if (temLogo && !logoPath) {
         setError("Selecione o arquivo do seu logo.");
         return;
       }
@@ -232,6 +264,22 @@ export function NegocioExistenteScreen() {
     avancarOuFinalizar(etapa.fase);
   }
 
+  /**
+   * `startJornadaComProgresso` faz dezenas de chamadas sequenciais (uma por
+   * fase/etapa) — uma falha de rede no meio do caminho chega aqui como
+   * `TypeError: Failed to fetch`, mensagem crua do browser que não diz nada
+   * pro usuário. Traduzimos pro que de fato aconteceu e o que fazer.
+   * `startJornadaComProgresso` é idempotente por usuário (SDD-68), então
+   * clicar de novo é seguro — não duplica a Jornada.
+   */
+  function mensagemErroSemear(e: unknown): string {
+    const msg = (e as Error).message ?? "";
+    if (msg.toLowerCase().includes("failed to fetch")) {
+      return "Perdemos a conexão no meio do processo. Sua resposta não foi perdida — toque de novo pra tentar salvar.";
+    }
+    return msg || "Não conseguimos salvar agora. Tente de novo.";
+  }
+
   /** Compartilhado pelos dois finais possíveis (conta nova vs. usuário já logado). */
   async function semearJornadaESeguir(userId: string) {
     const fasesConcluidas = FASES_JORNADA.filter((fase) => marcos[fase]);
@@ -241,7 +289,7 @@ export function NegocioExistenteScreen() {
       nichoPersonalizado: semNicho ? nichoTexto.trim() : null,
       fasesConcluidas,
       nomeEmpresa: marcos.planejamento ? nomeEmpresa.trim() : undefined,
-      logoUri: marcos.planejamento && temLogo && logoUri ? logoUri : undefined,
+      logoPath: marcos.planejamento && temLogo && logoPath ? logoPath : undefined,
       regimeFormalizacao: marcos.formalizacao && regime ? regime : undefined,
       cnpj: marcos.formalizacao && cnpj.trim() ? unmaskCnpj(cnpj) : undefined,
     });
@@ -279,7 +327,7 @@ export function NegocioExistenteScreen() {
 
       await semearJornadaESeguir(currentSession.user.id);
     } catch (e) {
-      setError((e as Error).message);
+      setError(mensagemErroSemear(e));
     } finally {
       setSaving(false);
     }
@@ -299,7 +347,7 @@ export function NegocioExistenteScreen() {
       if (!session) throw new Error("Sessão perdida — faça login de novo.");
       await semearJornadaESeguir(session.user.id);
     } catch (e) {
-      setError((e as Error).message);
+      setError(mensagemErroSemear(e));
     } finally {
       setSaving(false);
     }
@@ -368,7 +416,8 @@ export function NegocioExistenteScreen() {
                   onChangeNomeEmpresa={setNomeEmpresa}
                   temLogo={temLogo}
                   onChangeTemLogo={setTemLogo}
-                  logoUri={logoUri}
+                  logoPreviewUri={logoPreviewUri}
+                  uploadingLogo={uploadingLogo}
                   onPickLogo={handlePickLogo}
                   regime={regime}
                   onChangeRegime={setRegime}
@@ -491,7 +540,8 @@ function MarcoStep({
   onChangeNomeEmpresa,
   temLogo,
   onChangeTemLogo,
-  logoUri,
+  logoPreviewUri,
+  uploadingLogo,
   onPickLogo,
   regime,
   onChangeRegime,
@@ -509,7 +559,8 @@ function MarcoStep({
   onChangeNomeEmpresa: (v: string) => void;
   temLogo: boolean | null;
   onChangeTemLogo: (v: boolean) => void;
-  logoUri: string | null;
+  logoPreviewUri: string | null;
+  uploadingLogo: boolean;
   onPickLogo: () => void;
   regime: RegimeFormalizacao | null;
   onChangeRegime: (v: RegimeFormalizacao) => void;
@@ -562,10 +613,17 @@ function MarcoStep({
 
           {temLogo === true ? (
             <View style={{ flexDirection: "row", alignItems: "center", gap: space[3], marginBottom: space[4] }}>
-              {logoUri ? (
-                <Image source={{ uri: logoUri }} style={{ width: 56, height: 56, borderRadius: radius.md }} accessibilityLabel="Logo escolhido" />
+              {logoPreviewUri ? (
+                <Image source={{ uri: logoPreviewUri }} style={{ width: 56, height: 56, borderRadius: radius.md }} accessibilityLabel="Logo escolhido" />
               ) : null}
-              <Button label={logoUri ? "Trocar arquivo" : "Escolher arquivo do logo"} variant="outline" onPress={onPickLogo} style={{ flex: 1 }} />
+              <Button
+                label={uploadingLogo ? "Enviando..." : logoPreviewUri ? "Trocar arquivo" : "Escolher arquivo do logo"}
+                variant="outline"
+                loading={uploadingLogo}
+                disabled={uploadingLogo}
+                onPress={onPickLogo}
+                style={{ flex: 1 }}
+              />
             </View>
           ) : null}
 
@@ -592,6 +650,12 @@ function MarcoStep({
             style={{ ...inputStyle(), marginBottom: space[4] }}
           />
         </>
+      ) : null}
+
+      {saving ? (
+        <Text style={{ ...type.caption, color: color.text.muted, marginBottom: space[3] }}>
+          Estamos organizando sua Jornada com tudo que você já contou — isso pode levar alguns segundos, não feche esta tela.
+        </Text>
       ) : null}
 
       {error ? <Text style={{ ...type.caption, color: color.state.danger, marginBottom: space[3] }}>{error}</Text> : null}
@@ -656,6 +720,12 @@ function CadastroStep({
         <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[1] }}>Confirmar senha</Text>
         <TextInput value={confirmarSenha} onChangeText={onChangeConfirmarSenha} placeholder="Repita a senha" secureTextEntry style={inputStyle()} />
       </View>
+
+      {saving ? (
+        <Text style={{ ...type.caption, color: color.text.muted, marginBottom: space[3] }}>
+          Estamos criando sua conta e organizando sua Jornada com tudo que você já contou — isso pode levar alguns segundos, não feche esta tela.
+        </Text>
+      ) : null}
 
       {error ? <Text style={{ ...type.caption, color: color.state.danger, marginBottom: space[3] }}>{error}</Text> : null}
 

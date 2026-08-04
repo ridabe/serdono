@@ -440,13 +440,22 @@ export async function getLogoDownloadUrl(logoPath: string): Promise<string> {
 }
 
 /**
- * Sobe o logo que a pessoa já tem (fluxo "já tenho negócio", SDD-52/§8.3) —
+ * Sobe o logo que a pessoa já tem (fluxo "já tenho negócio", SDD-52/8.3/68) —
  * mesmo bucket privado e mesma convenção de path "{user_id}/logo.{ext}" da
  * geração por IA (`jornada-gerar-logo-final`), então o Painel (`useDashboard`)
  * e qualquer outra tela que já sabem ler `jornada_instances.logo_path`
  * funcionam sem alteração, seja o logo gerado ou trazido de fora.
+ *
+ * **Chamada logo depois de escolher o arquivo, não no final do intake**
+ * (SDD-68, correção de bug): `uri` costuma ser um `blob:`/`file:` local, e o
+ * intake de "já tenho negócio" pode ter mais de 10 passos depois da escolha
+ * do logo — esperar até o fim pra dar `fetch(uri)` arrisca o browser já ter
+ * descartado o blob, resultando em `TypeError: Failed to fetch` sem
+ * explicação nenhuma pro usuário, exatamente no último clique do fluxo
+ * inteiro. Subir na hora elimina esse risco e devolve erro (se houver) ainda
+ * na etapa onde a pessoa pode simplesmente tentar escolher o arquivo de novo.
  */
-export async function uploadLogoExistente(userId: string, instanceId: string, uri: string): Promise<string> {
+export async function uploadLogoParaUsuario(userId: string, uri: string): Promise<string> {
   const arrayBuffer = await fetch(uri).then((res) => res.arrayBuffer());
   const path = `${userId}/logo.jpg`;
 
@@ -455,9 +464,6 @@ export async function uploadLogoExistente(userId: string, instanceId: string, ur
     upsert: true,
   });
   if (uploadError) throw uploadError;
-
-  const { error } = await supabase.from("jornada_instances").update({ logo_path: path }).eq("id", instanceId);
-  if (error) throw error;
   return path;
 }
 
@@ -738,8 +744,8 @@ export interface StartJornadaExistenteInput {
   fasesConcluidas: JornadaFase[];
   /** Obrigatório só se `"planejamento"` estiver em `fasesConcluidas`. */
   nomeEmpresa?: string;
-  /** URI local da imagem do logo que a pessoa já tem (opcional mesmo com planejamento concluído — ela pode ainda não ter um). */
-  logoUri?: string;
+  /** Path no Storage do logo (já subido por `uploadLogoParaUsuario` no momento da escolha, SDD-68 — nunca uma URI local aqui, ver nota em `uploadLogoParaUsuario`). Opcional mesmo com planejamento concluído — a pessoa pode ainda não ter um. */
+  logoPath?: string;
   /** Obrigatório só se `"formalizacao"` estiver em `fasesConcluidas`. */
   regimeFormalizacao?: RegimeFormalizacao;
   /** Opcional mesmo com formalização concluída — a pessoa confirma "sim" mas pode preferir não digitar agora. */
@@ -760,19 +766,34 @@ export interface StartJornadaExistenteInput {
  * que já viveu aquilo na prática, o sistema nunca fabrica um entregável
  * (persona, SWOT, plano) que nunca foi gerado de verdade — se ela quiser o
  * entregável real, revisita a fase e gera.
+ *
+ * **Idempotente por usuário (SDD-68, correção de bug):** esta função faz
+ * dezenas de chamadas sequenciais (uma por fase/etapa) — se qualquer uma
+ * falhar (rede instável) no meio do caminho, a pessoa só pode tentar de novo
+ * clicando no mesmo botão. Sem checar se já existe uma instância, o retry
+ * criava uma **segunda** `jornada_instances` para o mesmo usuário (nada
+ * impede duas linhas). Agora reaproveita a instância existente quando há
+ * uma — todo passo do loop abaixo já era idempotente por si só
+ * (`seedEtapasForFase`/`markEtapaDone`/updates), só faltava não duplicar a
+ * instância em si.
  */
 export async function startJornadaComProgresso(input: StartJornadaExistenteInput): Promise<JornadaInstance> {
-  const { data: instance, error } = await supabase
-    .from("jornada_instances")
-    .insert({
-      user_id: input.userId,
-      niche_id: input.nicheId,
-      nicho_personalizado: input.nichoPersonalizado,
-      origem_intake: "negocio_existente",
-    })
-    .select("*")
-    .single();
-  if (error) throw error;
+  const existente = await getMyJornada(input.userId);
+  let instance = existente;
+  if (!instance) {
+    const { data, error } = await supabase
+      .from("jornada_instances")
+      .insert({
+        user_id: input.userId,
+        niche_id: input.nicheId,
+        nicho_personalizado: input.nichoPersonalizado,
+        origem_intake: "negocio_existente",
+      })
+      .select("*")
+      .single();
+    if (error) throw error;
+    instance = data;
+  }
 
   const concluidas = new Set(input.fasesConcluidas);
 
@@ -788,8 +809,9 @@ export async function startJornadaComProgresso(input: StartJornadaExistenteInput
     if (fase === "planejamento" && input.nomeEmpresa) {
       await chooseNomeEmpresa(instance.id, input.nomeEmpresa);
     }
-    if (fase === "planejamento" && input.logoUri) {
-      await uploadLogoExistente(input.userId, instance.id, input.logoUri);
+    if (fase === "planejamento" && input.logoPath) {
+      const { error: logoError } = await supabase.from("jornada_instances").update({ logo_path: input.logoPath }).eq("id", instance.id);
+      if (logoError) throw logoError;
     }
 
     const { data: templates, error: templatesError } = await supabase
