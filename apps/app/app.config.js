@@ -14,7 +14,7 @@ module.exports = {
     name: "Ser Dono",
     slug: "serdono",
     scheme: "serdono",
-    version: "0.1.0",
+    version: "0.1.2",
     orientation: "portrait",
     icon: "../../img/app-icon/ios-icon-1024.png",
     userInterfaceStyle: "light",
@@ -26,7 +26,7 @@ module.exports = {
     },
     android: {
       package: "br.com.serdono.app",
-      versionCode: 1,
+      versionCode: 2,
       adaptiveIcon: {
         backgroundColor: "#0E3A4F",
         foregroundImage: "../../img/app-icon/android-adaptive-foreground-432.png",
