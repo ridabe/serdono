@@ -8,6 +8,11 @@ export type ModuleRow = Tables<"modules">;
  * por usuário (`user_modules`), independente de plano pago. Todas as
  * operações aqui passam por RLS direto (sem Edge Function): admin tem
  * policy `for all` via claim JWT, cliente só lê a própria liberação.
+ *
+ * Toda conta nova já nasce com todos os módulos do catálogo habilitados
+ * (SDD-73, trigger em `auth.users` — não faz parte deste arquivo). As
+ * funções abaixo continuam sendo o único jeito de alterar isso depois:
+ * o admin liga/desliga por conta a qualquer momento, sem limite nenhum.
  */
 
 // ---- Catálogo (admin) ----

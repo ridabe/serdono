@@ -56,7 +56,7 @@ export function ModulesSection({ compact }: { compact: boolean }) {
     <View
       style={{
         backgroundColor: color.bg.canvas,
-        paddingVertical: space[16],
+        paddingVertical: compact ? space[10] : space[16],
         paddingHorizontal: compact ? space[4] : space[10],
       }}
     >
@@ -74,12 +74,19 @@ export function ModulesSection({ compact }: { compact: boolean }) {
           </Text>
         </Reveal>
 
-        <View style={{ flexDirection: compact ? "column" : "row", flexWrap: "wrap", gap: space[4] }}>
+        {/* `flexWrap: "wrap"` com `flexDirection: "column"` faz cada item
+            virar uma coluna nova (sobrepostos na mesma altura, a maioria
+            fora da tela) em vez de empilhar — só serve junto de "row". */}
+        <View style={{ flexDirection: compact ? "column" : "row", flexWrap: compact ? "nowrap" : "wrap", gap: space[4] }}>
           {modulos.map((modulo, i) => (
             <Reveal
               key={modulo.nome}
               delay={motion.revealStagger * (i + 1)}
-              style={{ flexBasis: compact ? "100%" : "46%", flexGrow: 1, minWidth: compact ? undefined : 260 }}
+              // `flexBasis` segue o eixo principal — em "column" (compact) isso
+              // é ALTURA, não largura: "100%" fazia cada card tentar ocupar a
+              // altura inteira da pilha. Em coluna, largura total é `width`,
+              // sem flexGrow/flexBasis.
+              style={compact ? { width: "100%" } : { flexBasis: "46%", flexGrow: 1, minWidth: 260 }}
             >
               <HoverLift
                 style={{

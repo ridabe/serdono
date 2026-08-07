@@ -11,7 +11,7 @@ const stats = [
 
 export function StatsSection({ compact }: { compact: boolean }) {
   return (
-    <View style={{ backgroundColor: color.bg.canvas, paddingVertical: space[12], paddingHorizontal: space[4] }}>
+    <View style={{ backgroundColor: color.bg.canvas, paddingVertical: compact ? space[8] : space[12], paddingHorizontal: space[4] }}>
       <View
         style={{
           maxWidth: content.maxWidthWide,

@@ -13,6 +13,7 @@ import {
   type JornadaFaseCore,
 } from "@serdono/core";
 import {
+  enviarEmailBoasVindas,
   ensureSession,
   getCurrentSession,
   isAnonymousSession,
@@ -324,6 +325,11 @@ export function NegocioExistenteScreen() {
         .update({ nome: nome.trim(), onboarding_status: "diagnostico_concluido" })
         .eq("id", currentSession.user.id);
       if (userUpdateError) throw userUpdateError;
+
+      // Mesma regra do cadastro pelo diagnóstico (SDD-70): quem entra por
+      // "já tenho negócio" também acabou de criar conta e precisa receber as
+      // boas-vindas. Sem `await` — e-mail não segura o fluxo.
+      void enviarEmailBoasVindas();
 
       await semearJornadaESeguir(currentSession.user.id);
     } catch (e) {

@@ -40,7 +40,7 @@ export function JourneySection({ compact }: { compact: boolean }) {
     <View
       style={{
         backgroundColor: color.bg.brand,
-        paddingVertical: space[16],
+        paddingVertical: compact ? space[10] : space[16],
         paddingHorizontal: compact ? space[4] : space[10],
       }}
     >
@@ -66,12 +66,21 @@ export function JourneySection({ compact }: { compact: boolean }) {
           </Text>
         </Reveal>
 
-        <View style={{ flexDirection: compact ? "column" : "row", flexWrap: "wrap", gap: space[4] }}>
+        {/* `flexWrap: "wrap"` com `flexDirection: "column"` faz o Yoga tratar
+            cada item como uma coluna nova (todas nasceriam sobrepostas na
+            mesma altura, a maioria fora da tela) em vez de empilhar — só faz
+            sentido junto de "row" (grid responsivo no desktop). */}
+        <View style={{ flexDirection: compact ? "column" : "row", flexWrap: compact ? "nowrap" : "wrap", gap: space[4] }}>
           {fases.map((fase, i) => (
             <Reveal
               key={fase.nome}
               delay={motion.revealStagger * Math.min(i, 5)}
-              style={{ flexBasis: compact ? "100%" : "30%", flexGrow: 1, minWidth: compact ? undefined : 240 }}
+              // `flexBasis` segue o eixo principal — em "column" (compact) isso
+              // é ALTURA, não largura: "100%" fazia cada card tentar ocupar a
+              // altura inteira da pilha (bug real por trás do espaçamento
+              // gigante no mobile). Em coluna, largura total é `width`, sem
+              // flexGrow/flexBasis nenhum — cada card só tem sua altura natural.
+              style={compact ? { width: "100%" } : { flexBasis: "30%", flexGrow: 1, minWidth: 240 }}
             >
               <HoverLift
                 style={{

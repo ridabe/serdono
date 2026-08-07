@@ -25,7 +25,7 @@ const pillars = [
 
 export function MentorSection({ compact }: { compact: boolean }) {
   return (
-    <View style={{ backgroundColor: color.bg.surface, paddingVertical: space[16], paddingHorizontal: space[4] }}>
+    <View style={{ backgroundColor: color.bg.surface, paddingVertical: compact ? space[10] : space[16], paddingHorizontal: space[4] }}>
       <View
         style={{
           maxWidth: content.maxWidthWide,
@@ -57,16 +57,19 @@ export function MentorSection({ compact }: { compact: boolean }) {
             </Text>
           </Reveal>
 
-          <View style={{ flexDirection: compact ? "column" : "row", flexWrap: "wrap", gap: space[4] }}>
+          {/* `flexWrap: "wrap"` com `flexDirection: "column"` faz cada item
+              virar uma coluna nova (sobrepostos na mesma altura, a maioria
+              fora da tela) em vez de empilhar — só serve junto de "row". */}
+          <View style={{ flexDirection: compact ? "column" : "row", flexWrap: compact ? "nowrap" : "wrap", gap: space[4] }}>
             {pillars.map((pillar, i) => (
               <Reveal
                 key={pillar.title}
                 delay={motion.revealStagger * (i + 1)}
-                style={{
-                  flexBasis: compact ? "100%" : "46%",
-                  flexGrow: 1,
-                  minWidth: compact ? undefined : 240,
-                }}
+                // `flexBasis` segue o eixo principal — em "column" (compact)
+                // isso é ALTURA, não largura: "100%" fazia cada card tentar
+                // ocupar a altura inteira da pilha. Em coluna, largura total é
+                // `width`, sem flexGrow/flexBasis.
+                style={compact ? { width: "100%" } : { flexBasis: "46%", flexGrow: 1, minWidth: 240 }}
               >
                 <HoverLift
                   style={{

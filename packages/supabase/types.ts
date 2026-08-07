@@ -1226,6 +1226,7 @@ export type Database = {
           role: string
           telefone: string | null
           updated_at: string
+          welcome_email_enviado_em: string | null
         }
         Insert: {
           avatar_url?: string | null
@@ -1241,6 +1242,7 @@ export type Database = {
           role?: string
           telefone?: string | null
           updated_at?: string
+          welcome_email_enviado_em?: string | null
         }
         Update: {
           avatar_url?: string | null
@@ -1256,6 +1258,7 @@ export type Database = {
           role?: string
           telefone?: string | null
           updated_at?: string
+          welcome_email_enviado_em?: string | null
         }
         Relationships: []
       }

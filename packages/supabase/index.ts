@@ -5,6 +5,7 @@ export * from "./storage";
 export * from "./knowledgeBase";
 export * from "./appVersion";
 export * from "./adminUsers";
+export * from "./emailBoasVindas";
 export * from "./modules";
 export * from "./jornada";
 export * from "./fornecedores";

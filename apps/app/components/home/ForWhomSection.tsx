@@ -31,7 +31,7 @@ const scenarios = [
 export function ForWhomSection({ compact }: { compact: boolean }) {
   const router = useRouter();
   return (
-    <View style={{ backgroundColor: color.bg.surface, paddingVertical: space[16], paddingHorizontal: space[4] }}>
+    <View style={{ backgroundColor: color.bg.surface, paddingVertical: compact ? space[10] : space[16], paddingHorizontal: space[4] }}>
       <View style={{ maxWidth: content.maxWidthWide, width: "100%", alignSelf: "center" }}>
         <Reveal>
           <Text style={{ ...type.overline, color: color.text.muted, marginBottom: space[2] }}>PARA QUEM É</Text>

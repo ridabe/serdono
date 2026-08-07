@@ -1,0 +1,895 @@
+{
+  "communities": {
+    "0": [
+      "apps_app_app_index",
+      "apps_app_app_index_index",
+      "apps_app_app_layout",
+      "apps_app_app_layout_rootlayout",
+      "apps_app_components_home_finalcta",
+      "apps_app_components_home_finalcta_finalcta",
+      "apps_app_components_home_footer",
+      "apps_app_components_home_footer_footer",
+      "apps_app_components_home_forwhomsection",
+      "apps_app_components_home_forwhomsection_forwhomsection",
+      "apps_app_components_home_forwhomsection_scenarios",
+      "apps_app_components_home_hero",
+      "apps_app_components_home_hero_hero",
+      "apps_app_components_home_homescreen",
+      "apps_app_components_home_homescreen_homescreen",
+      "apps_app_components_home_howitworks",
+      "apps_app_components_home_howitworks_howitworks",
+      "apps_app_components_home_howitworks_steps",
+      "apps_app_components_home_navbar",
+      "apps_app_components_home_navbar_links",
+      "apps_app_components_home_navbar_navbar",
+      "apps_app_components_home_quizpreviewcard",
+      "apps_app_components_home_quizpreviewcard_options",
+      "apps_app_components_home_quizpreviewcard_quizpreviewcard",
+      "apps_app_components_home_statssection",
+      "apps_app_components_home_statssection_stats",
+      "apps_app_components_home_statssection_statssection",
+      "apps_app_components_home_testimonialsection",
+      "apps_app_components_home_testimonialsection_testimonialsection",
+      "packages_ui_components_button",
+      "packages_ui_components_button_button",
+      "packages_ui_components_button_buttonprops",
+      "packages_ui_components_button_buttonsize",
+      "packages_ui_components_button_buttonvariant",
+      "packages_ui_components_button_styles",
+      "packages_ui_components_button_variantstyles",
+      "packages_ui_components_logo",
+      "packages_ui_components_logo_logo",
+      "packages_ui_components_logo_logoprops",
+      "packages_ui_components_logo_symbolcolor",
+      "packages_ui_components_logo_symbolwhite",
+      "packages_ui_index"
+    ],
+    "1": [
+      "apps_app_package",
+      "apps_app_package_dependencies",
+      "apps_app_package_dependencies_expo",
+      "apps_app_package_dependencies_expo_constants",
+      "apps_app_package_dependencies_expo_font",
+      "apps_app_package_dependencies_expo_google_fonts_inter",
+      "apps_app_package_dependencies_expo_google_fonts_sora",
+      "apps_app_package_dependencies_expo_linking",
+      "apps_app_package_dependencies_expo_router",
+      "apps_app_package_dependencies_expo_splash_screen",
+      "apps_app_package_dependencies_expo_status_bar",
+      "apps_app_package_dependencies_react",
+      "apps_app_package_dependencies_react_dom",
+      "apps_app_package_dependencies_react_native",
+      "apps_app_package_dependencies_react_native_safe_area_context",
+      "apps_app_package_dependencies_react_native_screens",
+      "apps_app_package_dependencies_react_native_svg",
+      "apps_app_package_dependencies_react_native_web",
+      "apps_app_package_dependencies_serdono_supabase",
+      "apps_app_package_dependencies_serdono_ui",
+      "apps_app_package_devdependencies",
+      "apps_app_package_devdependencies_babel_core",
+      "apps_app_package_devdependencies_types_react",
+      "apps_app_package_devdependencies_typescript",
+      "apps_app_package_main",
+      "apps_app_package_name",
+      "apps_app_package_private",
+      "apps_app_package_scripts",
+      "apps_app_package_scripts_android",
+      "apps_app_package_scripts_ios",
+      "apps_app_package_scripts_start",
+      "apps_app_package_scripts_typecheck",
+      "apps_app_package_scripts_web",
+      "apps_app_package_version"
+    ],
+    "2": [
+      "doc:copilot-layers",
+      "doc:idea-alt-entry",
+      "doc:idea-alternative-report",
+      "doc:journey-stages",
+      "doc:mvp-scope-recommendation",
+      "doc:pending-decisions",
+      "doc:plan-essencial",
+      "doc:plan-free",
+      "doc:plan-multi",
+      "doc:recommendation-engine",
+      "doc:risk-low-willingness-pay",
+      "doc:system-block-contas",
+      "doc:system-block-niches",
+      "docs_prd_ca_4",
+      "docs_prd_ca_5",
+      "docs_prd_module_ja_tenho_negocio",
+      "docs_prd_module_match_paywall",
+      "docs_prd_niches",
+      "docs_prd_open_decision_mvp_niches",
+      "docs_prd_open_decision_payment_gateway",
+      "docs_prd_rn_15",
+      "docs_prd_rn_16",
+      "docs_prd_rn_17",
+      "docs_prd_rn_3",
+      "docs_prd_rn_7",
+      "docs_prd_rnf_8",
+      "docs_prd_subscriptions",
+      "docs_prd_users",
+      "docs_spec_open_decision_payment_gateway",
+      "docs_spec_sdd_6",
+      "mockweb:plan-essencial",
+      "mockweb:plan-multi",
+      "mockweb:screen-resultado-paywall"
+    ],
+    "3": [
+      "apps_app_app",
+      "apps_app_app_adaptiveicon_backgroundcolor",
+      "apps_app_app_adaptiveicon_backgroundimage",
+      "apps_app_app_adaptiveicon_foregroundimage",
+      "apps_app_app_adaptiveicon_monochromeimage",
+      "apps_app_app_android_adaptiveicon",
+      "apps_app_app_android_package",
+      "apps_app_app_android_predictivebackgestureenabled",
+      "apps_app_app_android_versioncode",
+      "apps_app_app_experiments_typedroutes",
+      "apps_app_app_expo",
+      "apps_app_app_expo_android",
+      "apps_app_app_expo_backgroundcolor",
+      "apps_app_app_expo_experiments",
+      "apps_app_app_expo_icon",
+      "apps_app_app_expo_ios",
+      "apps_app_app_expo_name",
+      "apps_app_app_expo_newarchenabled",
+      "apps_app_app_expo_orientation",
+      "apps_app_app_expo_plugins",
+      "apps_app_app_expo_scheme",
+      "apps_app_app_expo_slug",
+      "apps_app_app_expo_userinterfacestyle",
+      "apps_app_app_expo_version",
+      "apps_app_app_expo_web",
+      "apps_app_app_ios_bundleidentifier",
+      "apps_app_app_ios_supportstablet",
+      "apps_app_app_web_bundler",
+      "apps_app_app_web_favicon",
+      "apps_app_app_web_output"
+    ],
+    "4": [
+      "claude:rule-rls-mandatory",
+      "design:component-badge",
+      "doc:parallelism",
+      "doc:system-block-ai",
+      "doc:system-block-dossie",
+      "doc:system-block-workflow",
+      "doc:ui-dossie",
+      "doc:ui-painel-negocio",
+      "doc:ui-timeline",
+      "docs_prd_ai_conversations",
+      "docs_prd_business_memory",
+      "docs_prd_business_memory_concept",
+      "docs_prd_ca_8",
+      "docs_prd_deliverables",
+      "docs_prd_dossie_concept",
+      "docs_prd_rn_11",
+      "docs_prd_rn_14",
+      "docs_prd_rn_8",
+      "docs_prd_rn_9",
+      "docs_prd_rnf_2",
+      "docs_prd_step_templates",
+      "docs_prd_workflow_instances",
+      "docs_prd_workflow_steps",
+      "docs_spec_admin_role_claim",
+      "docs_spec_migrations_convention",
+      "docs_spec_sdd_4",
+      "docs_spec_sdd_5",
+      "mockapp:screen-painel",
+      "mockweb:screen-painel"
+    ],
+    "5": [
+      "design:asset-governance",
+      "design:ds-10",
+      "design:ds-12",
+      "docs_prd_rnf_6",
+      "docs_spec_android_native_notversioned",
+      "docs_spec_android_pipeline",
+      "docs_spec_android_secrets",
+      "docs_spec_android_trigger",
+      "docs_spec_ci_pipeline",
+      "docs_spec_ios_out_of_scope",
+      "docs_spec_playstore_publish",
+      "docs_spec_roadmap_ios_pipeline",
+      "docs_spec_roadmap_playstore_auto",
+      "docs_spec_sdd_10",
+      "docs_spec_sdd_7",
+      "docs_spec_sdd_9",
+      "imgreadme:brand-colors",
+      "imgreadme:folder-appicon",
+      "imgreadme:folder-favicon",
+      "imgreadme:folder-horizontal",
+      "imgreadme:folder-simbolo",
+      "imgreadme:folder-social",
+      "imgreadme:folder-splash",
+      "imgreadme:folder-vertical",
+      "imgreadme:root",
+      "imgreadme:usage-rules"
+    ],
+    "6": [
+      "claude:reading-order",
+      "claude:root",
+      "design:accessibility",
+      "design:component-button",
+      "design:component-input",
+      "design:ds-11",
+      "design:ds-2",
+      "design:ds-8",
+      "design:root",
+      "doc:design-principle-1decision",
+      "docs_prd_principle_1",
+      "docs_prd_rn_5",
+      "docs_prd_root",
+      "docs_prd_vision",
+      "docs_spec_roadmap_solito",
+      "docs_spec_root",
+      "docs_spec_sdd_2",
+      "mockapp:root",
+      "mockapp:screen-diagnostico",
+      "mockapp:screen-login",
+      "mockweb:root",
+      "mockweb:screen-landing",
+      "mockweb:screen-login",
+      "readme:root"
+    ],
+    "7": [
+      "design:component-chat-bubble",
+      "design:component-progress",
+      "doc:copilot-guardrails",
+      "doc:idea-personality-modes",
+      "doc:risk-ai-cost",
+      "doc:step-anatomy",
+      "doc:ui-copiloto-presente",
+      "docs_prd_ai_messages",
+      "docs_prd_ca_10",
+      "docs_prd_ca_9",
+      "docs_prd_module_copiloto",
+      "docs_prd_rf_3",
+      "docs_prd_rf_4",
+      "docs_prd_rf_5",
+      "docs_prd_rn_10",
+      "docs_prd_rn_12",
+      "docs_prd_rn_20",
+      "docs_prd_rn_21",
+      "docs_prd_rnf_1",
+      "docs_prd_step_anatomy",
+      "docs_spec_ai_layer",
+      "mockapp:screen-copiloto",
+      "mockapp:screen-etapa",
+      "mockweb:screen-etapa-copiloto"
+    ],
+    "8": [
+      "doc:risk-outdated-info",
+      "doc:roadmap-fase1",
+      "doc:roadmap-fase2",
+      "doc:tracks-table",
+      "docs_prd_ca_6",
+      "docs_prd_ca_7",
+      "docs_prd_module_fase2",
+      "docs_prd_module_workflow",
+      "docs_prd_phase_1",
+      "docs_prd_phase_2",
+      "docs_prd_rf_2",
+      "docs_prd_rn_18",
+      "docs_prd_rn_19",
+      "docs_prd_trilha_a",
+      "docs_prd_trilha_b",
+      "docs_prd_trilha_c",
+      "docs_prd_trilha_d",
+      "docs_prd_trilha_e",
+      "docs_prd_trilha_f",
+      "readme:phase-1",
+      "readme:phase-2"
+    ],
+    "9": [
+      "claude:rule-core-logic",
+      "claude:rule-tokens-only",
+      "design:dark-mode-future",
+      "design:ds-3",
+      "design:ds-4",
+      "design:ds-5",
+      "design:ds-7",
+      "design:palette-primitive",
+      "design:tokens-code",
+      "design:tokens-semantic-color",
+      "design:type-scale",
+      "design:typography-families",
+      "docs_prd_rnf_3",
+      "docs_spec_monorepo_structure",
+      "docs_spec_sdd_3",
+      "imgreadme:brand-fonts",
+      "mockapp:screen-splash",
+      "pnpm:root",
+      "readme:monorepo-structure"
+    ],
+    "10": [
+      "doc:module-comunidade",
+      "doc:module-credito",
+      "doc:module-escola",
+      "doc:module-financeiro",
+      "doc:module-hub-b2b",
+      "doc:module-investimentos",
+      "doc:module-marketing",
+      "doc:plan-operacao",
+      "doc:revenue-complementary",
+      "doc:risk-subscription-ends",
+      "doc:roadmap-fase3",
+      "doc:roadmap-fase4",
+      "doc:system-block-operacao",
+      "docs_prd_future_tables",
+      "docs_prd_module_fase3",
+      "docs_prd_phase_3",
+      "docs_prd_rn_2",
+      "mockweb:plan-operacao"
+    ],
+    "11": [
+      "doc:engagement-rhythm",
+      "doc:fit-score-composition",
+      "doc:questionnaire-dimensions",
+      "doc:risk-abandonment",
+      "doc:system-block-diagnostico",
+      "docs_prd_ca_1",
+      "docs_prd_ca_2",
+      "docs_prd_ca_3",
+      "docs_prd_diagnostic_responses",
+      "docs_prd_fit_score",
+      "docs_prd_module_diagnostico",
+      "docs_prd_niche_matches",
+      "docs_prd_rf_1",
+      "docs_prd_rn_13",
+      "docs_prd_rn_4",
+      "docs_prd_rn_6",
+      "docs_prd_rnf_4"
+    ],
+    "12": [
+      "doc:competition-table",
+      "doc:economic-logic",
+      "doc:executive-summary",
+      "doc:market-mortality",
+      "doc:market-volume-table",
+      "doc:name-ser-dono",
+      "doc:name-socio-zero",
+      "doc:positioning",
+      "doc:problem-choice-blind",
+      "doc:problem-info-overload",
+      "doc:problem-loneliness",
+      "doc:problem-no-followup",
+      "doc:root",
+      "doc:sources",
+      "doc:tam-sam-som",
+      "readme:domain"
+    ],
+    "13": [
+      "brandpanel:concept-01-marco",
+      "brandpanel:concept-02-depe",
+      "brandpanel:concept-03-selo",
+      "brandpanel:concept-04-chave",
+      "brandpanel:concept-05-porta",
+      "brandpanel:market-research",
+      "brandpanel:next-steps",
+      "brandpanel:root",
+      "claude:rule-brand-identity",
+      "design:clear-space",
+      "design:concept-marco",
+      "design:ds-1",
+      "design:logo-variants",
+      "design:min-size",
+      "readme:logo-concept"
+    ],
+    "14": [
+      "packages_config_tsconfig_base",
+      "packages_config_tsconfig_base_compileroptions",
+      "packages_config_tsconfig_base_compileroptions_esmoduleinterop",
+      "packages_config_tsconfig_base_compileroptions_forceconsistentcasinginfilenames",
+      "packages_config_tsconfig_base_compileroptions_isolatedmodules",
+      "packages_config_tsconfig_base_compileroptions_lib",
+      "packages_config_tsconfig_base_compileroptions_module",
+      "packages_config_tsconfig_base_compileroptions_moduleresolution",
+      "packages_config_tsconfig_base_compileroptions_nouncheckedindexedaccess",
+      "packages_config_tsconfig_base_compileroptions_resolvejsonmodule",
+      "packages_config_tsconfig_base_compileroptions_skiplibcheck",
+      "packages_config_tsconfig_base_compileroptions_strict",
+      "packages_config_tsconfig_base_compileroptions_target"
+    ],
+    "15": [
+      "package",
+      "package_name",
+      "package_packagemanager",
+      "package_private",
+      "package_scripts",
+      "package_scripts_lint",
+      "package_scripts_start",
+      "package_scripts_typecheck",
+      "package_scripts_web"
+    ],
+    "16": [
+      "packages_ui_package",
+      "packages_ui_package_main",
+      "packages_ui_package_name",
+      "packages_ui_package_peerdependencies",
+      "packages_ui_package_peerdependencies_react",
+      "packages_ui_package_peerdependencies_react_native",
+      "packages_ui_package_private",
+      "packages_ui_package_types",
+      "packages_ui_package_version"
+    ],
+    "17": [
+      "packages_supabase_package",
+      "packages_supabase_package_dependencies",
+      "packages_supabase_package_dependencies_supabase_supabase_js",
+      "packages_supabase_package_main",
+      "packages_supabase_package_name",
+      "packages_supabase_package_private",
+      "packages_supabase_package_types",
+      "packages_supabase_package_version"
+    ],
+    "18": [
+      "apps_app_tsconfig",
+      "apps_app_tsconfig_compileroptions",
+      "apps_app_tsconfig_compileroptions_paths",
+      "apps_app_tsconfig_compileroptions_strict",
+      "apps_app_tsconfig_extends",
+      "apps_app_tsconfig_include",
+      "apps_app_tsconfig_paths"
+    ],
+    "19": [
+      "packages_core_package",
+      "packages_core_package_description",
+      "packages_core_package_main",
+      "packages_core_package_name",
+      "packages_core_package_private",
+      "packages_core_package_types",
+      "packages_core_package_version"
+    ],
+    "20": [
+      "packages_config_package",
+      "packages_config_package_files",
+      "packages_config_package_main",
+      "packages_config_package_name",
+      "packages_config_package_private",
+      "packages_config_package_version"
+    ],
+    "21": [
+      "packages_ui_tsconfig",
+      "packages_ui_tsconfig_compileroptions",
+      "packages_ui_tsconfig_compileroptions_jsx",
+      "packages_ui_tsconfig_compileroptions_outdir",
+      "packages_ui_tsconfig_extends",
+      "packages_ui_tsconfig_include"
+    ],
+    "22": [
+      "apps_app_metro_config",
+      "apps_app_metro_config_config",
+      "apps_app_metro_config_getdefaultconfig",
+      "apps_app_metro_config_path",
+      "apps_app_metro_config_workspaceroot"
+    ],
+    "23": [
+      "packages_ui_components_card",
+      "packages_ui_components_card_card",
+      "packages_ui_components_card_cardprops",
+      "packages_ui_components_card_cardvariant",
+      "packages_ui_components_card_styles"
+    ],
+    "24": [
+      "claude:rule-single-codebase",
+      "doc:ux-notes",
+      "docs_spec_stack_table",
+      "readme:stack-table"
+    ],
+    "25": [
+      "doc:funnel-metrics",
+      "doc:north-star-metric",
+      "docs_prd_metrics_events",
+      "docs_prd_rf_6"
+    ],
+    "26": [
+      "docs_prd_persona_marcos",
+      "docs_prd_principle_5",
+      "docs_prd_rn_1",
+      "readme:persona-marcos"
+    ],
+    "27": [
+      "packages_supabase_client",
+      "packages_supabase_client_supabase",
+      "packages_supabase_index"
+    ],
+    "28": [
+      "design:breakpoints",
+      "design:component-nav"
+    ],
+    "29": [
+      "design:ds-6",
+      "design:radius-elevation"
+    ],
+    "30": [
+      "design:ds-9",
+      "design:motion-tokens"
+    ],
+    "31": [
+      "doc:defensible-assets",
+      "doc:risk-generic-recommendation"
+    ],
+    "32": [
+      "doc:design-principle-explainwhy",
+      "docs_prd_principle_3"
+    ],
+    "33": [
+      "doc:design-principle-honesty",
+      "docs_prd_principle_4"
+    ],
+    "34": [
+      "doc:design-principle-nothingblocks",
+      "docs_prd_principle_2"
+    ],
+    "35": [
+      "doc:risk-lgpd",
+      "docs_prd_rnf_5"
+    ],
+    "36": [
+      "doc:roadmap-fase0",
+      "docs_prd_phase_0"
+    ],
+    "37": [
+      "docs_prd_persona_aparecido",
+      "readme:persona-aparecido"
+    ],
+    "38": [
+      "docs_prd_persona_juliana",
+      "readme:persona-juliana"
+    ],
+    "39": [
+      "docs_spec_environments",
+      "docs_spec_sdd_11"
+    ],
+    "40": [
+      "docs_spec_roadmap_new_arch",
+      "docs_spec_sdd_1"
+    ],
+    "41": [
+      "apps_app_babel_config"
+    ],
+    "42": [
+      "claude:rule-living-docs"
+    ],
+    "43": [
+      "claude:rule-no-contradict"
+    ],
+    "44": [
+      "claude:rule-spec-same-pr"
+    ],
+    "45": [
+      "claude:sdd-project"
+    ],
+    "46": [
+      "design:checklist"
+    ],
+    "47": [
+      "design:component-card"
+    ],
+    "48": [
+      "design:component-empty-states"
+    ],
+    "49": [
+      "design:ds-0"
+    ],
+    "50": [
+      "design:iconography"
+    ],
+    "51": [
+      "design:spacing-scale"
+    ],
+    "52": [
+      "doc:design-principle-deliverable"
+    ],
+    "53": [
+      "doc:differentiators"
+    ],
+    "54": [
+      "doc:idea-demand-test"
+    ],
+    "55": [
+      "doc:idea-export-bank"
+    ],
+    "56": [
+      "doc:idea-radar"
+    ],
+    "57": [
+      "doc:idea-scenario-simulator"
+    ],
+    "58": [
+      "doc:idea-selo"
+    ],
+    "59": [
+      "doc:idea-socios-mode"
+    ],
+    "60": [
+      "doc:plan-whitelabel"
+    ],
+    "61": [
+      "doc:risk-competitors"
+    ],
+    "62": [
+      "docs_prd_open_decision_pilot_cities"
+    ],
+    "63": [
+      "docs_prd_open_decision_rn_flutter"
+    ],
+    "64": [
+      "docs_prd_rnf_7"
+    ],
+    "65": [
+      "docs_prd_rnf_9"
+    ],
+    "66": [
+      "docs_prd_trilha_concept"
+    ],
+    "67": [
+      "docs_spec_open_decision_keystore"
+    ],
+    "68": [
+      "docs_spec_open_decision_public_routes"
+    ],
+    "69": [
+      "docs_spec_sdd_0"
+    ],
+    "70": [
+      "docs_spec_sdd_8"
+    ],
+    "71": [
+      "docs_spec_web_vercel"
+    ],
+    "72": [
+      "readme:phase-0"
+    ],
+    "73": [
+      "readme:phase-3"
+    ],
+    "74": [
+      "readme:principle-1"
+    ],
+    "75": [
+      "readme:principle-2"
+    ],
+    "76": [
+      "readme:principle-3"
+    ],
+    "77": [
+      "readme:principle-4"
+    ],
+    "78": [
+      "readme:principle-5"
+    ],
+    "79": [
+      "readme:product-summary"
+    ]
+  },
+  "cohesion": {
+    "0": 0.07549361207897794,
+    "1": 0.058823529411764705,
+    "2": 0.07196969696969698,
+    "3": 0.06666666666666667,
+    "4": 0.09113300492610837,
+    "5": 0.07692307692307693,
+    "6": 0.12681159420289856,
+    "7": 0.11594202898550725,
+    "8": 0.15714285714285714,
+    "9": 0.10526315789473684,
+    "10": 0.12418300653594772,
+    "11": 0.125,
+    "12": 0.13333333333333333,
+    "13": 0.14285714285714285,
+    "14": 0.15384615384615385,
+    "15": 0.2222222222222222,
+    "16": 0.2222222222222222,
+    "17": 0.25,
+    "18": 0.2857142857142857,
+    "19": 0.2857142857142857,
+    "20": 0.3333333333333333,
+    "21": 0.3333333333333333,
+    "22": 0.5,
+    "23": 0.4,
+    "24": 0.5,
+    "25": 0.5,
+    "26": 0.5,
+    "27": 0.6666666666666666,
+    "28": 1.0,
+    "29": 1.0,
+    "30": 1.0,
+    "31": 1.0,
+    "32": 1.0,
+    "33": 1.0,
+    "34": 1.0,
+    "35": 1.0,
+    "36": 1.0,
+    "37": 1.0,
+    "38": 1.0,
+    "39": 1.0,
+    "40": 1.0,
+    "41": 1.0,
+    "42": 1.0,
+    "43": 1.0,
+    "44": 1.0,
+    "45": 1.0,
+    "46": 1.0,
+    "47": 1.0,
+    "48": 1.0,
+    "49": 1.0,
+    "50": 1.0,
+    "51": 1.0,
+    "52": 1.0,
+    "53": 1.0,
+    "54": 1.0,
+    "55": 1.0,
+    "56": 1.0,
+    "57": 1.0,
+    "58": 1.0,
+    "59": 1.0,
+    "60": 1.0,
+    "61": 1.0,
+    "62": 1.0,
+    "63": 1.0,
+    "64": 1.0,
+    "65": 1.0,
+    "66": 1.0,
+    "67": 1.0,
+    "68": 1.0,
+    "69": 1.0,
+    "70": 1.0,
+    "71": 1.0,
+    "72": 1.0,
+    "73": 1.0,
+    "74": 1.0,
+    "75": 1.0,
+    "76": 1.0,
+    "77": 1.0,
+    "78": 1.0,
+    "79": 1.0
+  },
+  "gods": [
+    {
+      "id": "apps_app_app_expo",
+      "label": "expo",
+      "degree": 15
+    },
+    {
+      "id": "imgreadme:root",
+      "label": "img/README.md — catálogo de assets de marca",
+      "degree": 13
+    },
+    {
+      "id": "packages_config_tsconfig_base_compileroptions",
+      "label": "compilerOptions",
+      "degree": 12
+    },
+    {
+      "id": "docs_prd_module_diagnostico",
+      "label": "Módulo: Diagnóstico (Fase 0/1, grátis)",
+      "degree": 11
+    },
+    {
+      "id": "docs_prd_module_copiloto",
+      "label": "Módulo: Copiloto de IA",
+      "degree": 11
+    },
+    {
+      "id": "doc:root",
+      "label": "Documento de Conceito v0.1 — EMPREENDER+ (nome provisório de Ser Dono)",
+      "degree": 11
+    },
+    {
+      "id": "docs_prd_module_workflow",
+      "label": "Módulo: Workflow de Construção (trilhas A,B,C — MVP)",
+      "degree": 10
+    },
+    {
+      "id": "mockapp:root",
+      "label": "Mockup App Mobile — 6 telas de conceito",
+      "degree": 10
+    },
+    {
+      "id": "docs_prd_workflow_steps",
+      "label": "Tabela workflow_steps",
+      "degree": 9
+    },
+    {
+      "id": "docs_prd_module_match_paywall",
+      "label": "Módulo: Match de Nichos e Paywall",
+      "degree": 9
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Ritmo e engajamento: marcos visíveis, ritmo negociado, retomada inteligente",
+      "target": "Tabela workflow_instances",
+      "source_files": [
+        "Documento de Conceito v0.1.pdf",
+        "docs/PRD.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "REFERENCES",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (doc ↔ paper); connects across different repos/directories; bridges separate communities; peripheral node `Ritmo e engajamento: marcos visíveis, ritmo negociado, retomada inteligente` unexpectedly reaches hub `Tabela workflow_instances`"
+    },
+    {
+      "source": "Risco: informação regulatória desatualizada/incorreta",
+      "target": "RN-20: todo dado de mercado citado tem fonte e data visíveis",
+      "source_files": [
+        "Documento de Conceito v0.1.pdf",
+        "docs/PRD.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "REFERENCES",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (doc ↔ paper); connects across different repos/directories; bridges separate communities; peripheral node `Risco: informação regulatória desatualizada/incorreta` unexpectedly reaches hub `RN-20: todo dado de mercado citado tem fonte e data visíveis`"
+    },
+    {
+      "source": "Fase 4 — Distribuição: white label, crédito/investimentos, app móvel completo",
+      "target": "Fase 3 — Ecossistema (§12)",
+      "source_files": [
+        "Documento de Conceito v0.1.pdf",
+        "docs/PRD.md"
+      ],
+      "confidence": "AMBIGUOUS",
+      "relation": "REFERENCES",
+      "why": "ambiguous connection - not explicitly stated in source; crosses file types (doc ↔ paper); connects across different repos/directories"
+    },
+    {
+      "source": "Bloco funcional: Contas e assinatura",
+      "target": "Tabela subscriptions",
+      "source_files": [
+        "Documento de Conceito v0.1.pdf",
+        "docs/PRD.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "IMPLEMENTS",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (doc ↔ paper); connects across different repos/directories; peripheral node `Bloco funcional: Contas e assinatura` unexpectedly reaches hub `Tabela subscriptions`"
+    },
+    {
+      "source": "Dimensões do questionário: capital/fôlego, perfil/risco, formação, tempo, estilo de vida, localização, rede, objetivo",
+      "target": "Tabela diagnostic_responses",
+      "source_files": [
+        "Documento de Conceito v0.1.pdf",
+        "docs/PRD.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "REFERENCES",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (doc ↔ paper); connects across different repos/directories; peripheral node `Dimensões do questionário: capital/fôlego, perfil/risco, formação, tempo, estilo de vida, localização, rede, objetivo` unexpectedly reaches hub `Tabela diagnostic_responses`"
+    }
+  ],
+  "questions": [
+    {
+      "type": "ambiguous_edge",
+      "question": "What is the exact relationship between `Fase 3 — Ecossistema (§12)` and `Fase 4 — Distribuição: white label, crédito/investimentos, app móvel completo`?",
+      "why": "Edge tagged AMBIGUOUS (relation: REFERENCES) - confidence is low."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `DESIGN_SYSTEM.md — Ser Dono Design System v1.0` connect `Community 6` to `Community 5`, `Community 13`?",
+      "why": "High betweenness centrality (0.095) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Mockup Portal Web — 5 telas de conceito` connect `Community 6` to `Community 2`, `Community 4`, `Community 7`?",
+      "why": "High betweenness centrality (0.076) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `img/README.md — catálogo de assets de marca` connect `Community 5` to `Community 9`, `Community 13`, `Community 6`?",
+      "why": "High betweenness centrality (0.048) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `name`, `slug`, `scheme` to the rest of the system?",
+      "why": "298 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 0` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.07549361207897794 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 1` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.058823529411764705 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

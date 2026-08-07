@@ -29,7 +29,7 @@ export function PromiseSection({ compact }: { compact: boolean }) {
     <View
       style={{
         backgroundColor: color.bg.brand,
-        paddingVertical: space[16],
+        paddingVertical: compact ? space[10] : space[16],
         paddingHorizontal: compact ? space[4] : space[10],
       }}
     >

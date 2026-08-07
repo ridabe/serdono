@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import { Button, EntrepreneurBackground, Logo, color, radius, space, type } from "@serdono/ui";
-import { ensureSession, isAnonymousSession, supabase } from "@serdono/supabase";
+import { enviarEmailBoasVindas, ensureSession, isAnonymousSession, supabase } from "@serdono/supabase";
 import { pickEntrepreneurPhoto } from "../../constants/entrepreneurPhotos";
 
 const BACKGROUND_PHOTO = pickEntrepreneurPhoto("cadastro");
@@ -49,6 +49,11 @@ export function CadastroScreen() {
         .update({ nome: nome.trim(), onboarding_status: "diagnostico_concluido" })
         .eq("id", currentSession!.user.id);
       if (userUpdateError) throw userUpdateError;
+
+      // E-mail de boas-vindas (SDD-70). Sem `await`: a conta já está criada e
+      // a pessoa não pode esperar o provedor de e-mail para entrar no produto.
+      // Falha aqui não interrompe nada — ver enviarEmailBoasVindas().
+      void enviarEmailBoasVindas();
 
       router.replace("/cadastro/bem-vindo");
     } catch (e) {

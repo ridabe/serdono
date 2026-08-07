@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1786109092.4651542,
-    "ast_hash": "94d2654d063861116a96fc8d3ad1d93d",
+    "mtime": 1785787497.4337938,
+    "ast_hash": "4ff21933b7e71ff8d0ce294155743bec",
     "semantic_hash": ""
   },
   ".mcp.json": {
@@ -60,23 +60,23 @@
     "semantic_hash": ""
   },
   "apps/app/components/cadastro/CadastroScreen.tsx": {
-    "mtime": 1786106347.0094726,
-    "ast_hash": "abdfc84fc5f2b9dc3e6a557f0d40cbc0",
+    "mtime": 1785261026.241116,
+    "ast_hash": "23bf308d6b5a18c238b6b6792adf825a",
     "semantic_hash": ""
   },
   "apps/app/components/diagnostico/DiagnosticoScreen.tsx": {
-    "mtime": 1785851102.2910597,
-    "ast_hash": "6d6d3e33459f6a4111a82065c6ada81f",
+    "mtime": 1785260950.1470401,
+    "ast_hash": "c7c92ef5c6bbe3400b31248b1a626e7f",
     "semantic_hash": ""
   },
   "apps/app/components/diagnostico/ResultadoScreen.tsx": {
-    "mtime": 1785851393.5743418,
-    "ast_hash": "cfb317cbc59894ccf98c8bcc82c9b7b6",
+    "mtime": 1785338997.9403014,
+    "ast_hash": "1d29b33341ef905c4f7f2368d36defb7",
     "semantic_hash": ""
   },
   "apps/app/components/diagnostico/blocks.ts": {
-    "mtime": 1785851049.6025212,
-    "ast_hash": "74ecf0de051a3293778a81631624a7a3",
+    "mtime": 1785252570.5637493,
+    "ast_hash": "897424ec6a91ffcba04f4696866f8244",
     "semantic_hash": ""
   },
   "apps/app/components/diagnostico/labels.ts": {
@@ -85,8 +85,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/home/FinalCta.tsx": {
-    "mtime": 1786109901.5528255,
-    "ast_hash": "9ddb3edcba4f5a5c49b9b2b90f00b8b9",
+    "mtime": 1785374936.1830804,
+    "ast_hash": "8fee64a2459fc55f29919eede467861e",
     "semantic_hash": ""
   },
   "apps/app/components/home/Footer.tsx": {
@@ -95,8 +95,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/home/ForWhomSection.tsx": {
-    "mtime": 1786109883.5584972,
-    "ast_hash": "92e1cbc0b3806728b22bbdb651e3981d",
+    "mtime": 1785685871.9379501,
+    "ast_hash": "b438d43d1f7dee2ee6c204883e80b492",
     "semantic_hash": ""
   },
   "apps/app/components/home/Hero.tsx": {
@@ -110,13 +110,13 @@
     "semantic_hash": ""
   },
   "apps/app/components/home/NavBar.tsx": {
-    "mtime": 1786109844.7915714,
-    "ast_hash": "112924f8d02a7ea862bcd05b10b126d5",
+    "mtime": 1785374960.4411168,
+    "ast_hash": "7decdac530ea44eca64782e14f018ff4",
     "semantic_hash": ""
   },
   "apps/app/components/home/StatsSection.tsx": {
-    "mtime": 1786109858.5731728,
-    "ast_hash": "46bd25f8bca02f4687558f448e95b6f5",
+    "mtime": 1785374911.778939,
+    "ast_hash": "4161f781c417cb918d8b4794c6d05d6e",
     "semantic_hash": ""
   },
   "apps/app/metro.config.js": {
@@ -150,18 +150,18 @@
     "semantic_hash": ""
   },
   "packages/core/fitScore.test.ts": {
-    "mtime": 1785851690.3433034,
-    "ast_hash": "a6a9b8d6f3a749be95f2ffac5bf0d92f",
+    "mtime": 1785251933.5208573,
+    "ast_hash": "d53afcf985a70fdc668442903c4b35e3",
     "semantic_hash": ""
   },
   "packages/core/fitScore.ts": {
-    "mtime": 1785851674.271982,
-    "ast_hash": "6a9b29257e32fa024ba6ce6753814303",
+    "mtime": 1785251917.7516813,
+    "ast_hash": "38af47220edc38a6eb09a4e9031df6db",
     "semantic_hash": ""
   },
   "packages/core/index.ts": {
-    "mtime": 1785853665.1678476,
-    "ast_hash": "3ae06b5d90cf9c3cef576a941aaff55d",
+    "mtime": 1785788339.88319,
+    "ast_hash": "2572804abf815d3f0c412b49d43125a9",
     "semantic_hash": ""
   },
   "packages/core/package.json": {
@@ -180,8 +180,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/index.ts": {
-    "mtime": 1786106332.3656113,
-    "ast_hash": "f9fbf601f0e2310147f0bd364cb9c9dd",
+    "mtime": 1785788339.8844965,
+    "ast_hash": "f833e8712b9fd0cff9e617b564f3f898",
     "semantic_hash": ""
   },
   "packages/supabase/package.json": {
@@ -200,8 +200,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/types.ts": {
-    "mtime": 1786108378.6480691,
-    "ast_hash": "5e6a1773aab9d3dfb85b2185a90ab26f",
+    "mtime": 1785788339.886167,
+    "ast_hash": "2222d821f3857d72c037563e73f960b3",
     "semantic_hash": ""
   },
   "packages/ui/components/Button.tsx": {
@@ -245,13 +245,13 @@
     "semantic_hash": ""
   },
   "supabase/functions/diagnostic-match/index.ts": {
-    "mtime": 1785851935.9746351,
-    "ast_hash": "665af4c457c4b1af6a2738bb997e8540",
+    "mtime": 1785258424.6904318,
+    "ast_hash": "9b8e04c9a7cad71dceecee9278c25e17",
     "semantic_hash": ""
   },
   "vercel.json": {
-    "mtime": 1785851380.6508193,
-    "ast_hash": "f62ac46755e91d11a9aa002682b4c740",
+    "mtime": 1785253604.4080176,
+    "ast_hash": "d51a6fa1882820187507490a96710f07",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
@@ -265,13 +265,13 @@
     "semantic_hash": ""
   },
   "docs/PRD.md": {
-    "mtime": 1786109737.802834,
-    "ast_hash": "f8e9bb8b86fb876b5f4373a3922979e7",
+    "mtime": 1785788508.6956048,
+    "ast_hash": "0ef304e045c18bf0e0a59fbc3bf51995",
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1786109715.828007,
-    "ast_hash": "3ac9add4bf8167078ec5965d0034c0bb",
+    "mtime": 1785788568.4412444,
+    "ast_hash": "b75bb373bb9dbb960d33970d0541bb2a",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
@@ -440,8 +440,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/perfil/usePerfilForm.ts": {
-    "mtime": 1785793520.613657,
-    "ast_hash": "657b3a9ae1752da805ef537a3508e2bf",
+    "mtime": 1785288945.8785515,
+    "ast_hash": "171d24205a1d71d94bac433c89587abf",
     "semantic_hash": ""
   },
   "apps/app/app/login/esqueci-senha.tsx": {
@@ -505,8 +505,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/admin/AdminUsersScreen.tsx": {
-    "mtime": 1785792914.5517955,
-    "ast_hash": "d366299c490b341468596fdc76196418",
+    "mtime": 1785335374.134008,
+    "ast_hash": "a8efb9bd30c64a078efdc34f78f9f014",
     "semantic_hash": ""
   },
   "apps/app/components/admin/useAdminModules.ts": {
@@ -515,8 +515,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/admin/useAdminUsers.ts": {
-    "mtime": 1785792884.7316825,
-    "ast_hash": "d33516c287052c51091e2ee627620032",
+    "mtime": 1785335246.4014645,
+    "ast_hash": "a6463ca885fe12d0681c116d3a5b4e2f",
     "semantic_hash": ""
   },
   "apps/app/components/modulos/ModulosScreen.tsx": {
@@ -535,8 +535,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/adminUsers.ts": {
-    "mtime": 1785792876.0567274,
-    "ast_hash": "dc03bb624bcdc321c29daa5a25c0ebb4",
+    "mtime": 1785335158.7258885,
+    "ast_hash": "84bf5e18549d853d1972def260d6caea",
     "semantic_hash": ""
   },
   "packages/supabase/appVersion.ts": {
@@ -545,8 +545,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/modules.ts": {
-    "mtime": 1786109745.5024426,
-    "ast_hash": "3efe63727154f36df7cfafb011b5a799",
+    "mtime": 1785338874.5897267,
+    "ast_hash": "99e287944b2c031b2505b8bfcb8275a2",
     "semantic_hash": ""
   },
   "packages/ui/components/Input.tsx": {
@@ -575,8 +575,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/jornada/EscolherNichoScreen.tsx": {
-    "mtime": 1785852383.6508944,
-    "ast_hash": "ea2d9edf1d77a6f26327e56fdbe95301",
+    "mtime": 1785338944.583137,
+    "ast_hash": "5c9ebe1dc76a78e7c5ba9bd1841b0973",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/JornadaScreen.tsx": {
@@ -600,8 +600,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/jornada.ts": {
-    "mtime": 1785874675.340925,
-    "ast_hash": "98cecf870f405b747db3637ec307ad85",
+    "mtime": 1785685625.1770823,
+    "ast_hash": "ac3749601161611a8a65135d32978bd9",
     "semantic_hash": ""
   },
   "supabase/functions/jornada-gerar-documentos/index.ts": {
@@ -670,7 +670,7 @@
     "semantic_hash": ""
   },
   "supabase/.temp/linked-project.json": {
-    "mtime": 1785853810.514959,
+    "mtime": 1785701746.7998264,
     "ast_hash": "0b40e53eb48cdaef30bbaa973a8d3f88",
     "semantic_hash": ""
   },
@@ -775,23 +775,23 @@
     "semantic_hash": ""
   },
   "apps/app/components/home/JourneySection.tsx": {
-    "mtime": 1786110666.8125527,
-    "ast_hash": "7653060fc3820ea8570bb95f898046cd",
+    "mtime": 1785703381.841849,
+    "ast_hash": "fa6694c69309282b79c10726c126dcdc",
     "semantic_hash": ""
   },
   "apps/app/components/home/MentorSection.tsx": {
-    "mtime": 1786110680.050505,
-    "ast_hash": "81389e4c17d0ec20d91e4f49b92997e3",
+    "mtime": 1785374764.183635,
+    "ast_hash": "687de62da82e54649b69100f60cc1486",
     "semantic_hash": ""
   },
   "apps/app/components/home/ModulesSection.tsx": {
-    "mtime": 1786110693.2256343,
-    "ast_hash": "c62432042291ccba5d1df21b32eec5c5",
+    "mtime": 1785703432.2004414,
+    "ast_hash": "0bbdb9db8b44568a4335f8b923ed1985",
     "semantic_hash": ""
   },
   "apps/app/components/home/PromiseSection.tsx": {
-    "mtime": 1786109893.885669,
-    "ast_hash": "5d2c66ff59027864c9c6497e2a03b985",
+    "mtime": 1785374887.8636262,
+    "ast_hash": "c9cbb5a5fa73f4a52d60f0660a575077",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/FinanceiroScreen.tsx": {
@@ -1010,8 +1010,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/inicio/DashboardScreen.tsx": {
-    "mtime": 1785854015.6686513,
-    "ast_hash": "7b87ca0c07900d8f227deaaaff8d6ae7",
+    "mtime": 1785785351.4100978,
+    "ast_hash": "98649f728e35595e05ba524bc8a64bfd",
     "semantic_hash": ""
   },
   "apps/app/components/inicio/useDashboard.ts": {
@@ -1125,8 +1125,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/negocioExistente/NegocioExistenteScreen.tsx": {
-    "mtime": 1786106640.5776703,
-    "ast_hash": "d8f94fbab4f75d0b0e90aa71e746fb7c",
+    "mtime": 1785686396.4495974,
+    "ast_hash": "a7d1be52b814f5ee38b41d90fccc8efa",
     "semantic_hash": ""
   },
   "supabase/migrations/20260731190000_jornada_negocio_existente.sql": {
@@ -1205,8 +1205,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/home/InvestimentosSection.tsx": {
-    "mtime": 1786109879.4084105,
-    "ast_hash": "23b96d8a55205d6143348aea8a74c1bd",
+    "mtime": 1785704134.381104,
+    "ast_hash": "46ec7df5f903e4e9e6cd1b6eb651c1ad",
     "semantic_hash": ""
   },
   "apps/app/app/(protected)/investimentos/index.tsx": {
@@ -1432,76 +1432,6 @@
   "material-de-apoio/como-conseguir-investimento-para-seu-negocio/como-conseguir-investimento-para-seu-negocio.pdf": {
     "mtime": 1785786810.96292,
     "ast_hash": "66e0d711a5d4fd22bfc08878f75dca08",
-    "semantic_hash": ""
-  },
-  "packages/core/cnpj.test.ts": {
-    "mtime": 1785853660.8518934,
-    "ast_hash": "683711e22639f53ff4cedc601a14a40b",
-    "semantic_hash": ""
-  },
-  "packages/core/cnpj.ts": {
-    "mtime": 1785853649.7113023,
-    "ast_hash": "3f0fc731df40a6efda2321c5cc561d2d",
-    "semantic_hash": ""
-  },
-  "packages/supabase/emailBoasVindas.ts": {
-    "mtime": 1786106327.5772302,
-    "ast_hash": "ddea79c8809af582000d945955395cd9",
-    "semantic_hash": ""
-  },
-  "supabase/functions/enviar-email-boas-vindas/index.ts": {
-    "mtime": 1786106278.8328497,
-    "ast_hash": "3ab7928e1b4dfc696d5b61e1d214f846",
-    "semantic_hash": ""
-  },
-  "supabase/functions/enviar-email-boas-vindas/template.ts": {
-    "mtime": 1786106732.485873,
-    "ast_hash": "0ea18246bf2236fe3067591d080da1da",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260803230000_sincronizar_email_auth_users.sql": {
-    "mtime": 1785793316.281842,
-    "ast_hash": "4b3556f0475fb50fb5cbf6febd8af236",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260804130000_corrigir_categoria_servico_digital.sql": {
-    "mtime": 1785848345.0607235,
-    "ast_hash": "d1a2f91390090b09e94a366d19f1e29a",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260804140000_sub_negocios_e_areas_afinidade.sql": {
-    "mtime": 1785850850.822119,
-    "ast_hash": "09f874e7a1d122c6bd21502d5128c047",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260804150000_niche_matches_sub_negocios.sql": {
-    "mtime": 1785851131.73356,
-    "ast_hash": "b3180194ef8a4d95e54c41a1a2b08957",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260804160000_negocio_existente_cnpj.sql": {
-    "mtime": 1785853696.579206,
-    "ast_hash": "34c1af76c35d27600de8d86968b82cd8",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260807130000_welcome_email_enviado_em.sql": {
-    "mtime": 1786106302.0961187,
-    "ast_hash": "589f6f007b754d02765747e04873d5e4",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260807140000_auto_liberar_modulos_no_cadastro.sql": {
-    "mtime": 1786109408.0808337,
-    "ast_hash": "d7ff4c90611dc29cbb270398be94bab3",
-    "semantic_hash": ""
-  },
-  "apps/app/public/email/logo-serdono-branco.png": {
-    "mtime": 1786106186.3395407,
-    "ast_hash": "21b6c13d2fe82b54acff86da1bc36acf",
-    "semantic_hash": ""
-  },
-  "apps/app/public/email/mary-boas-vindas.png": {
-    "mtime": 1786106187.0053353,
-    "ast_hash": "8441aa36e618f40ae0e7bce8a8c88931",
     "semantic_hash": ""
   }
 }

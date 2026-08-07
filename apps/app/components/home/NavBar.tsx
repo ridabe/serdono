@@ -72,7 +72,10 @@ export function NavBar({ compact, onNavigate }: { compact: boolean; onNavigate: 
       ) : null}
 
       <View style={{ flexDirection: "row", gap: space[2], alignItems: "center" }}>
-        {!compact ? <Button label="Entrar" variant="ghost" size="sm" onPress={() => router.push("/login")} /> : null}
+        {/* "Entrar" sumia inteiro no mobile — só existia mais embaixo, no
+            FinalCta ("Já tenho conta"), obrigando quem já tem conta a rolar
+            a página inteira pra achar como logar. Sempre visível agora. */}
+        <Button label="Entrar" variant="ghost" size="sm" onPress={() => router.push("/login")} />
         <Button label="Começar grátis" variant="primary" size="sm" onPress={() => router.push("/diagnostico")} />
       </View>
     </View>
