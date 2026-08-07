@@ -69,6 +69,7 @@ function inputStyle() {
     borderRadius: radius.md,
     paddingHorizontal: space[4],
     fontSize: 14,
+    color: color.text.primary,
   };
 }
 

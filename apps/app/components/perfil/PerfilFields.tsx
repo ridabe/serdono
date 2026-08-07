@@ -63,6 +63,7 @@ function Field(props: {
         onChangeText={props.onChangeText}
         placeholder={props.placeholder}
         keyboardType={props.keyboardType}
+        placeholderTextColor={color.text.muted}
         style={{
           height: 48,
           borderWidth: 1,
@@ -70,6 +71,7 @@ function Field(props: {
           borderRadius: radius.md,
           paddingHorizontal: space[4],
           fontSize: 14,
+          color: color.text.primary,
         }}
       />
     </View>

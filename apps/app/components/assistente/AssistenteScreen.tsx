@@ -142,6 +142,7 @@ export function AssistenteScreen() {
           onChangeText={setPergunta}
           placeholder="Digite sua pergunta..."
           onSubmitEditing={handleSend}
+          placeholderTextColor={color.text.muted}
           style={{
             flex: 1,
             height: 48,
@@ -150,6 +151,7 @@ export function AssistenteScreen() {
             borderRadius: radius.md,
             paddingHorizontal: space[4],
             fontSize: 14,
+            color: color.text.primary,
           }}
         />
         <Pressable

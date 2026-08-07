@@ -141,6 +141,7 @@ function Field(props: {
         secureTextEntry={props.secureTextEntry}
         keyboardType={props.keyboardType}
         autoCapitalize={props.autoCapitalize ?? "sentences"}
+        placeholderTextColor={color.text.muted}
         style={{
           height: 48,
           borderWidth: 1,
@@ -148,6 +149,7 @@ function Field(props: {
           borderRadius: radius.md,
           paddingHorizontal: space[4],
           fontSize: 14,
+          color: color.text.primary,
         }}
       />
     </View>

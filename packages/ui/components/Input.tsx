@@ -31,6 +31,7 @@ export function Input(props: InputProps) {
           autoCapitalize={props.autoCapitalize ?? "sentences"}
           autoCorrect={false}
           textContentType={isPasswordField ? "password" : undefined}
+          placeholderTextColor={color.text.muted}
           style={{
             height: 48,
             borderWidth: 1,
@@ -39,6 +40,7 @@ export function Input(props: InputProps) {
             paddingHorizontal: space[4],
             paddingRight: isPasswordField ? space[8] : space[4],
             fontSize: 14,
+            color: color.text.primary,
           }}
         />
         {isPasswordField ? (

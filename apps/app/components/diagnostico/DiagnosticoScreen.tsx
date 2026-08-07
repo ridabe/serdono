@@ -272,6 +272,7 @@ export function DiagnosticoScreen() {
                 multiline
                 numberOfLines={5}
                 textAlignVertical="top"
+                placeholderTextColor={color.text.muted}
                 style={{
                   minHeight: 120,
                   borderWidth: 1,
@@ -281,6 +282,7 @@ export function DiagnosticoScreen() {
                   paddingVertical: space[3],
                   fontSize: 14,
                   lineHeight: 20,
+                  color: color.text.primary,
                 }}
               />
             ) : null}
@@ -293,6 +295,7 @@ export function DiagnosticoScreen() {
                     value={cidadeInput}
                     onChangeText={setCidadeInput}
                     placeholder="Ex.: Campinas"
+                    placeholderTextColor={color.text.muted}
                     style={{
                       height: 48,
                       borderWidth: 1,
@@ -300,6 +303,7 @@ export function DiagnosticoScreen() {
                       borderRadius: radius.md,
                       paddingHorizontal: space[4],
                       fontSize: 14,
+                      color: color.text.primary,
                     }}
                   />
                 </View>
@@ -311,6 +315,7 @@ export function DiagnosticoScreen() {
                     placeholder="Ex.: SP"
                     autoCapitalize="characters"
                     maxLength={2}
+                    placeholderTextColor={color.text.muted}
                     style={{
                       height: 48,
                       borderWidth: 1,
@@ -318,6 +323,7 @@ export function DiagnosticoScreen() {
                       borderRadius: radius.md,
                       paddingHorizontal: space[4],
                       fontSize: 14,
+                      color: color.text.primary,
                     }}
                   />
                 </View>
