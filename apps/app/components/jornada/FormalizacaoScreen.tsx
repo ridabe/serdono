@@ -2,6 +2,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, View } from "react-native";
 import { Button, Card, CollapsibleSection, MaryAvatar, color, radius, space, type } from "@serdono/ui";
+import { numeroFase } from "@serdono/core";
 import type { JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { exportChecklistPdf, exportEtapaPdf } from "./formalizacaoPdf";
 import { useFormalizacao } from "./useFormalizacao";
@@ -133,7 +134,7 @@ export function FormalizacaoScreen({ jornada, etapas, onEtapasChanged }: Formali
       <View style={{ flexDirection: "row", gap: space[4], alignItems: "flex-start" }}>
         <MaryAvatar pose="jornada" size={72} />
         <View style={{ flex: 1 }}>
-          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>Fase 5 — Formalização</Text>
+          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>Fase {numeroFase("formalizacao")} — Formalização</Text>
           <Text style={{ ...type.body, color: color.text.secondary }}>
             Aqui começa a abertura de verdade. Vamos documento por documento, sem pular etapa.
           </Text>

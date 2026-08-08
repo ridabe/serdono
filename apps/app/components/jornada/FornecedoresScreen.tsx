@@ -3,6 +3,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Image, Text, View } from "react-native";
 import { Button, Card, CollapsibleSection, Input, MaryAvatar, color, radius, space, type } from "@serdono/ui";
+import { numeroFase } from "@serdono/core";
 import type { FornecedorParceiro, JornadaEtapa, JornadaFornecedor, JornadaInstance } from "@serdono/supabase";
 import { useFornecedores } from "./useFornecedores";
 
@@ -96,7 +97,7 @@ export function FornecedoresScreen({ jornada, etapas, onEtapasChanged }: Fornece
       <View style={{ flexDirection: "row", gap: space[4], alignItems: "flex-start" }}>
         <MaryAvatar pose="jornada" size={72} />
         <View style={{ flex: 1 }}>
-          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>Fase 8 — Fornecedores</Text>
+          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>Fase {numeroFase("fornecedores")} — Fornecedores</Text>
           <Text style={{ ...type.body, color: color.text.secondary }}>
             Quem vai te ajudar a operar: matéria-prima, equipamento, embalagem, serviço terceirizado. Monte sua lista no
             seu ritmo — nada aqui trava a Jornada.

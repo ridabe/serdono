@@ -17,18 +17,15 @@ import {
   isEtapaEstruturaRelevante,
   listCategoriasComMateriais,
   listJornadaClientesContatos,
-  listMyModules,
   SLUG_PRIMEIRA_VENDA_REGISTRO,
   supabase,
   type CategoriaComMateriais,
   type JornadaEtapa,
   type JornadaInstance,
-  type MyModule,
   type NicheEstruturaInfo,
 } from "@serdono/supabase";
 
 const SLUG_FINANCEIRO_PLANEJAMENTO = "financeiro_planejamento";
-const SLUG_JORNADA_EMPREENDEDORA = "jornada-empreendedora";
 const MAX_MARCOS = 6;
 const MAX_CATEGORIAS_DICAS = 3;
 
@@ -66,7 +63,6 @@ export function useDashboard() {
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [etapas, setEtapas] = useState<JornadaEtapa[]>([]);
   const [nicheEstrutura, setNicheEstrutura] = useState<NicheEstruturaInfo | null>(null);
-  const [modulos, setModulos] = useState<MyModule[]>([]);
   const [categoriasDicas, setCategoriasDicas] = useState<CategoriaComMateriais[]>([]);
   const [clientesConquistados, setClientesConquistados] = useState(0);
   const [metaClientes, setMetaClientes] = useState<number | null>(null);
@@ -78,17 +74,15 @@ export function useDashboard() {
         const session = await getCurrentSession();
         if (!session) return;
 
-        const [{ data: perfil }, instance, modulosLiberados, categoriasPublicadas] = await Promise.all([
+        const [{ data: perfil }, instance, categoriasPublicadas] = await Promise.all([
           supabase.from("users").select("nome").eq("id", session.user.id).maybeSingle(),
           getMyJornada(session.user.id),
-          listMyModules(session.user.id),
           listCategoriasComMateriais().catch(() => []),
         ]);
         if (cancelado) return;
 
         setNomeUsuario(perfil?.nome ?? null);
         setJornada(instance);
-        setModulos(modulosLiberados.filter((m) => m.slug !== SLUG_JORNADA_EMPREENDEDORA));
         setCategoriasDicas(categoriasPublicadas.slice(0, MAX_CATEGORIAS_DICAS));
 
         if (!instance) return;
@@ -212,7 +206,6 @@ export function useDashboard() {
     pontoEquilibrio: financeiro?.pontoEquilibrioMensal ?? null,
     clientesConquistados,
     metaClientes,
-    modulos,
     categoriasDicas,
   };
 }

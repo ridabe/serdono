@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Text, View } from "react-native";
 import { avancarParaProximaFasePendente, type JornadaEtapa, type JornadaInstance } from "@serdono/supabase";
 import { Button, Card, MaryAvatar, color, space, type } from "@serdono/ui";
+import { numeroFase } from "@serdono/core";
 import { IdentidadeVisualScreen } from "./IdentidadeVisualScreen";
 import { NomeEmpresaScreen } from "./NomeEmpresaScreen";
 
@@ -38,7 +39,7 @@ export function PlanejamentoScreen({ jornada, etapas, onEtapasChanged }: Planeja
       <View style={{ flexDirection: "row", gap: space[4], alignItems: "flex-start" }}>
         <MaryAvatar pose="jornada" size={72} />
         <View style={{ flex: 1 }}>
-          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>Fase 3 — Planejamento</Text>
+          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>Fase {numeroFase("planejamento")} — Planejamento</Text>
           <Text style={{ ...type.body, color: color.text.secondary }}>
             Vamos dar nome e identidade visual ao seu negócio, um passo de cada vez.
           </Text>

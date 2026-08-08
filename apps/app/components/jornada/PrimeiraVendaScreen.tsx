@@ -1,6 +1,7 @@
 import { useRouter } from "expo-router";
 import { Text, View } from "react-native";
 import { Button, Card, CollapsibleSection, Input, MaryAvatar, color, space, type } from "@serdono/ui";
+import { numeroFase } from "@serdono/core";
 import type { JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { formatMoney } from "../diagnostico/labels";
 import { usePrimeiraVenda } from "./usePrimeiraVenda";
@@ -30,7 +31,7 @@ export function PrimeiraVendaScreen({ jornada, etapas, onEtapasChanged }: Primei
       <View style={{ flexDirection: "row", gap: space[4], alignItems: "flex-start" }}>
         <MaryAvatar pose="positivo" size={72} />
         <View style={{ flex: 1 }}>
-          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>Fase Primeira Venda</Text>
+          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>{`Fase ${numeroFase("primeira_venda")} — Primeira Venda`}</Text>
           <Text style={{ ...type.body, color: color.text.secondary }}>
             Parabéns por chegar até aqui — se você seguiu os passos da Fase Clientes, já está pronto pra vender de
             verdade. Continue trabalhando seus contatos e volte aqui assim que fechar a primeira.

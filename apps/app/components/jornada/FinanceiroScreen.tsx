@@ -2,6 +2,7 @@ import { useRouter } from "expo-router";
 import { Text, View } from "react-native";
 import type { JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { Button, Card, CollapsibleSection, Input, MaryAvatar, color, radius, space, type } from "@serdono/ui";
+import { numeroFase } from "@serdono/core";
 import { formatMoney } from "../diagnostico/labels";
 import { useFinanceiro } from "./useFinanceiro";
 
@@ -67,7 +68,7 @@ export function FinanceiroScreen({ jornada, etapas, onEtapasChanged }: Financeir
   if (v.loading || !v.inputs || !v.resultado) {
     return (
       <View style={{ gap: space[5] }}>
-        <Text style={{ ...type.h2, color: color.text.primary }}>Fase Financeiro — Planejamento Financeiro</Text>
+        <Text style={{ ...type.h2, color: color.text.primary }}>{`Fase ${numeroFase("financeiro")} — Planejamento Financeiro`}</Text>
         <Text style={{ ...type.body, color: color.text.secondary }}>Calculando sugestão inicial...</Text>
       </View>
     );
@@ -82,7 +83,7 @@ export function FinanceiroScreen({ jornada, etapas, onEtapasChanged }: Financeir
         <MaryAvatar pose="jornada" size={72} />
         <View style={{ flex: 1 }}>
           <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>
-            Fase Financeiro — Planejamento Financeiro
+            {`Fase ${numeroFase("financeiro")} — Planejamento Financeiro`}
           </Text>
           <Text style={{ ...type.body, color: color.text.secondary }}>
             Ajuste os valores abaixo e veja os 6 números mudarem na hora — a ideia não é só te dar a resposta, é te
@@ -149,9 +150,14 @@ export function FinanceiroScreen({ jornada, etapas, onEtapasChanged }: Financeir
         <Button label="Salvar meus números" variant="outline" loading={v.saving} onPress={v.salvar} />
       </CollapsibleSection>
 
+      {/* Largura cheia, não grade (DS-24, exceção): cada resultado carrega
+          fórmula + explicação em parágrafo, de tamanho bem desigual — meia
+          largura deixaria o texto espremido e o card mais curto esticado
+          pra acompanhar o mais alto. O `flexWrap` antigo aqui não fazia
+          grade nenhuma de verdade (todo item já era `flexBasis:"100%"`, um
+          por linha) — só complexidade sem efeito, removida. */}
       <CollapsibleSection title="Resultados calculados" accent="success">
-      <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3] }}>
-        <View style={{ flexBasis: "100%" }}>
+        <View style={{ gap: space[3] }}>
           <ResultBlock
             titulo="Investimento inicial"
             valor={formatMoney(resultado.investimentoInicial)}
@@ -161,36 +167,24 @@ export function FinanceiroScreen({ jornada, etapas, onEtapasChanged }: Financeir
             )} logo depois de investir — é esse valor que vai bancar o capital de giro e a reserva a seguir.`}
             destaque={resultado.saldoAposInvestimento < 0 ? "danger" : undefined}
           />
-        </View>
-
-        <View style={{ flexBasis: "100%" }}>
           <ResultBlock
             titulo="Capital de giro"
             valor={formatMoney(resultado.capitalGiro)}
             formula="Capital de giro = Custos fixos mensais × Meses de capital de giro"
             explicacao="Dinheiro separado pra pagar as contas nos meses em que a receita ainda não cobre tudo sozinha — sem ele, um mês fraco pode travar o negócio mesmo ele sendo viável no longo prazo."
           />
-        </View>
-
-        <View style={{ flexBasis: "100%" }}>
           <ResultBlock
             titulo="Reserva de emergência"
             valor={formatMoney(resultado.reservaEmergencia)}
             formula="Reserva = Custos fixos mensais × Meses de reserva"
             explicacao="Diferente do capital de giro (que é o plano esperado), essa reserva é pra imprevisto — conserto, equipamento que quebra, mês de demanda muito baixa. Não conte com ela pro dia a dia."
           />
-        </View>
-
-        <View style={{ flexBasis: "100%" }}>
           <ResultBlock
             titulo="Ponto de equilíbrio mensal"
             valor={formatMoney(resultado.pontoEquilibrioMensal)}
             formula="Ponto de equilíbrio = Custos fixos mensais ÷ (Margem de contribuição ÷ 100)"
             explicacao="Quanto você precisa faturar por mês só pra não ter prejuízo — abaixo disso, cada mês fecha no vermelho; acima, começa a sobrar."
           />
-        </View>
-
-        <View style={{ flexBasis: "100%" }}>
           <ResultBlock
             titulo="Lucro esperado mensal"
             valor={formatMoney(resultado.lucroEsperadoMensal)}
@@ -199,7 +193,6 @@ export function FinanceiroScreen({ jornada, etapas, onEtapasChanged }: Financeir
             destaque={resultado.lucroEsperadoMensal < 0 ? "danger" : "success"}
           />
         </View>
-      </View>
       </CollapsibleSection>
 
       <CollapsibleSection title="Fluxo de caixa — próximos 12 meses" accent="info">
@@ -233,13 +226,18 @@ export function FinanceiroScreen({ jornada, etapas, onEtapasChanged }: Financeir
           </View>
         )}
 
+        {/* `minWidth: 84` (não 90): a 375px de tela isso já rendia 3 por
+            linha, mas com só 9px de folga — num Android mais estreito
+            (~360px, comum) isso estoura por fração de pixel e colapsa pra 2
+            (mesmo mecanismo do DS-24/§9.15, achado ao testar num aparelho
+            real, ver SPEC.md SDD-83). */}
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[2] }}>
           {resultado.fluxoCaixa12Meses.map((m) => (
             <View
               key={m.mes}
               style={{
                 flexBasis: "22%",
-                minWidth: 90,
+                minWidth: 84,
                 backgroundColor: m.saldo < 0 ? color.state.dangerBg : color.bg.surface,
                 borderRadius: radius.sm,
                 padding: space[2],

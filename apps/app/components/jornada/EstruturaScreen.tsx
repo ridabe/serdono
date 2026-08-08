@@ -2,6 +2,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, View } from "react-native";
 import { Button, Card, CollapsibleSection, MaryAvatar, color, radius, space, type } from "@serdono/ui";
+import { numeroFase } from "@serdono/core";
 import type { JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { useEstrutura } from "./useEstrutura";
 
@@ -108,7 +109,7 @@ export function EstruturaScreen({ jornada, etapas, onEtapasChanged }: EstruturaS
       <View style={{ flexDirection: "row", gap: space[4], alignItems: "flex-start" }}>
         <MaryAvatar pose="checklist" size={72} />
         <View style={{ flex: 1 }}>
-          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>Fase 7 — Estrutura</Text>
+          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>Fase {numeroFase("estrutura")} — Estrutura</Text>
           <Text style={{ ...type.body, color: color.text.secondary }}>
             A base que seu negócio vai precisar pra funcionar no dia a dia. Marque o que já tem e volte aqui sempre que
             resolver mais um item — nada aqui trava sua Jornada.

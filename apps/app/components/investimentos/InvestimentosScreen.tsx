@@ -122,7 +122,7 @@ export function InvestimentosScreen() {
           </CollapsibleSection>
         ) : null}
 
-        <CollapsibleSection title="Onde deixar cada parte do dinheiro" accent={SECTION_ACCENT_CYCLE[2]} defaultExpanded={false}>
+        <CollapsibleSection title="Onde deixar cada parte do dinheiro" accent={SECTION_ACCENT_CYCLE[2]}>
           <View style={{ gap: space[4] }}>
             <Bolso
               titulo="O que pode precisar amanhã"

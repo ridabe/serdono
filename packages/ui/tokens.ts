@@ -27,6 +27,13 @@ const primitive = {
   danger100: "#F9DEDB",
   info600: "#2464B0",
   info100: "#DCE8F7",
+  // DS-23 (08/08/2026) — só estas 2 são hex genuinamente novos da paleta de
+  // ícone de módulo/fase (§9.14); os outros 4 slots do ciclo reaproveitam
+  // tons semânticos já existentes. `violet600` é o mesmo hex já usado (e
+  // validado, DS-21) em `chart.categorical.cenario` — reaproveitado aqui como
+  // primitivo de uso geral, sem alterar a paleta categórica do gráfico.
+  violet600: "#8B4FD6",
+  orange600: "#D9631E",
 } as const;
 
 // ---- §2.2 Tokens semânticos ----
@@ -63,6 +70,24 @@ export const color = {
     info: primitive.info600,
     infoBg: primitive.info100,
   },
+} as const;
+
+// ---- §9.14 Paleta de ícone de módulo/fase (DS-23, registrada em 08/08/2026) ----
+// Ciclo de 6 cores pra dar identidade visual própria a cada card de
+// módulo/fase (grade colorida no Início, pedido do dono do produto em
+// 08/08/2026) — mais rico que reaproveitar só o ciclo de acento da sanfona
+// (§9.10/DS-18), que já é usado com outro propósito (faixa lateral de card
+// colapsável) na mesma tela em alguns fluxos.
+export type ModuleAccent = "teal" | "gold" | "blue" | "green" | "purple" | "orange";
+export const MODULE_ACCENT_CYCLE: ModuleAccent[] = ["teal", "gold", "blue", "green", "purple", "orange"];
+/** `fg` sempre valida contraste AA contra `bg` (DS-2/§2.3) — ver §9.14 pros números. */
+export const moduleAccent: Record<ModuleAccent, { bg: string; fg: string }> = {
+  teal: { bg: color.bg.brand, fg: color.text.onBrand },
+  gold: { bg: color.action.primaryHover, fg: color.text.onAction },
+  blue: { bg: color.state.info, fg: color.text.onBrand },
+  green: { bg: color.state.success, fg: color.text.onBrand },
+  purple: { bg: primitive.violet600, fg: color.text.onBrand },
+  orange: { bg: primitive.orange600, fg: color.text.onBrand },
 } as const;
 
 // ---- §4 Espaçamento (grid de 4px) ----

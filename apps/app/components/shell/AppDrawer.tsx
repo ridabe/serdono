@@ -5,7 +5,7 @@ import { a11y, color, Logo, motion, radius, space, type } from "@serdono/ui";
 import { rotaDoModulo } from "../modulos/rotas";
 import { useDrawer } from "./DrawerContext";
 import { MenuIcon } from "./MenuIcon";
-import { TabIcon } from "./TabIcon";
+import { TabIcon, type TabIconName } from "./TabIcon";
 import { useModulosExtras } from "./useModulosExtras";
 
 const LARGURA_DRAWER = Math.min(300, Dimensions.get("window").width * 0.82);
@@ -107,11 +107,19 @@ export function AppDrawer() {
               </View>
             ) : null}
 
-            <View>
+            <View style={{ marginBottom: space[4] }}>
               <DrawerSectionLabel texto="Aprender" />
               {/* Sempre visível, sem gate de módulo/plano (RN-34) — não é
                   módulo, é área livre a todo mundo. */}
-              <DrawerItem label="Dicas da Mary" onPress={() => ir("/dicas-da-mary")} />
+              <DrawerItem label="Dicas da Mary" icon="mary" onPress={() => ir("/dicas-da-mary")} />
+            </View>
+
+            <View>
+              <DrawerSectionLabel texto="Sistema" />
+              {/* Versão do app, dados do desenvolvedor e atalho pro perfil
+                  (SDD-84) — Perfil continua aba própria (SDD-53), este é só
+                  um complemento pra quem quer essa informação. */}
+              <DrawerItem label="Sobre" icon="sobre" onPress={() => ir("/sobre")} />
             </View>
           </ScrollView>
         </Animated.View>
@@ -135,7 +143,7 @@ function DrawerSectionLabel({ texto }: { texto: string }) {
   );
 }
 
-function DrawerItem({ label, onPress }: { label: string; onPress: () => void }) {
+function DrawerItem({ label, icon = "modulos", onPress }: { label: string; icon?: TabIconName; onPress: () => void }) {
   return (
     <Pressable
       onPress={onPress}
@@ -148,7 +156,7 @@ function DrawerItem({ label, onPress }: { label: string; onPress: () => void }) 
         paddingHorizontal: space[5],
       }}
     >
-      <TabIcon name="modulos" color={color.text.secondary} size={18} />
+      <TabIcon name={icon} color={color.text.secondary} size={18} />
       <Text style={{ ...type.body, color: color.text.primary, flex: 1 }}>{label}</Text>
       <Text style={{ ...type.body, color: color.text.muted }}>›</Text>
     </Pressable>

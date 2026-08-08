@@ -65,6 +65,23 @@ export const FASE_JORNADA_LABEL: Record<JornadaFaseCore, string> = {
  */
 export const DESCOBERTA_STEPS = ["Diagnóstico de perfil", "Escolha do nicho"];
 
+/**
+ * Número de exibição de uma fase ("Fase N") — Descoberta é a 1, implícita
+ * (não entra em `FASES_JORNADA`), daí o `+ 2`.
+ *
+ * Existe pra nunca mais hardcodar "Fase 5 — Formalização" direto no texto de
+ * uma tela (SDD-39 reordenou Financeiro pra logo depois de Formalização e
+ * empurrou os números de Estrutura em diante — os textos hardcoded em cada
+ * `*Screen.tsx` NUNCA foram atualizados junto, causando uma inconsistência
+ * real de produção: o Início mostrava "Etapa 4: Formalização" (calculado)
+ * enquanto `FormalizacaoScreen.tsx` mostrava "Fase 5 — Formalização"
+ * hardcoded — achado e corrigido em 08/08/2026, ver SPEC.md SDD-82). Toda
+ * tela de fase deve chamar esta função, nunca escrever o número à mão.
+ */
+export function numeroFase(fase: JornadaFaseCore): number {
+  return FASES_JORNADA.indexOf(fase) + 2;
+}
+
 /** Só o que o cálculo precisa saber de uma etapa — ver nota de tipo estrutural acima. */
 export interface EtapaParaProgresso {
   fase: string;

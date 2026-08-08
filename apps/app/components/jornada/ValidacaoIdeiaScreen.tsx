@@ -2,6 +2,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, View } from "react-native";
 import { Button, Card, CollapsibleSection, Input, color, radius, space, type } from "@serdono/ui";
+import { numeroFase } from "@serdono/core";
 import type { JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { useValidacaoIdeia } from "./useValidacaoIdeia";
 
@@ -63,18 +64,24 @@ export function ValidacaoIdeiaScreen({ jornada, etapas, onEtapasChanged }: Valid
   return (
     <View style={{ gap: space[5] }}>
       <View>
-        <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>Fase 2 — Validação da Ideia</Text>
+        <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>Fase {numeroFase("validacao_ideia")} — Validação da Ideia</Text>
         <Text style={{ ...type.body, color: color.text.secondary }}>
           Preencha os campos abaixo e eu gero os documentos que ajudam a validar sua ideia.
         </Text>
       </View>
 
+      {/* Grade de 2 colunas em vez de lista empilhada (DS-24) — cada item é
+          curto (glyph + 1 linha), cabe bem em meia largura mesmo no celular.
+          `minWidth` baixo (120) de propósito: dentro de uma
+          `CollapsibleSection` a largura disponível é menor que num `Card`
+          direto — valor alto demais estoura a linha por frações de pixel e
+          quebra a grade pra 1 coluna só (mesmo bug do Início, SDD-78.1). */}
       <CollapsibleSection title="Checklist" accent="brand" rightLabel={`${v.checklist.filter((i) => i.done).length}/${v.checklist.length}`}>
-        <View style={{ gap: space[2] }}>
+        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3], alignItems: "flex-start" }}>
           {v.checklist.map((item) => (
-            <View key={item.slug} style={{ flexDirection: "row", alignItems: "center", gap: space[2] }}>
+            <View key={item.slug} style={{ flexBasis: "47%", flexGrow: 1, minWidth: 120, flexDirection: "row", alignItems: "center", gap: space[2] }}>
               <Text style={{ color: item.done ? color.state.success : color.text.muted }}>{item.done ? "✓" : "○"}</Text>
-              <Text style={{ ...type.body, color: item.done ? color.text.primary : color.text.muted }}>{item.label}</Text>
+              <Text style={{ ...type.body, color: item.done ? color.text.primary : color.text.muted, flex: 1 }}>{item.label}</Text>
             </View>
           ))}
         </View>

@@ -61,6 +61,9 @@ export function AdminDashboardScreen() {
           <Pressable onPress={() => router.push("/perfil")} accessibilityRole="button" style={{ minHeight: 44, justifyContent: "center" }}>
             <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>Meu perfil</Text>
           </Pressable>
+          <Pressable onPress={() => router.push("/sobre")} accessibilityRole="button" style={{ minHeight: 44, justifyContent: "center" }}>
+            <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>Sobre</Text>
+          </Pressable>
           <Pressable onPress={handleSignOut} accessibilityRole="button" style={{ minHeight: 44, justifyContent: "center" }}>
             <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>Sair</Text>
           </Pressable>
@@ -105,6 +108,11 @@ export function AdminDashboardScreen() {
             title="Dicas da Mary"
             description="Categorias de estudo com PDF, vídeo e links — liberado a todo usuário, sem gate de módulo."
             onPress={() => router.push("/admin/dicas")}
+          />
+          <NavCard
+            title="Versão do App"
+            description="Versão publicada, versão mínima suportada, atualização obrigatória e link da Play Store."
+            onPress={() => router.push("/admin/versao")}
           />
         </View>
       </ScrollView>

@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { color, radius, space, type } from "@serdono/ui";
 import type { JornadaEtapaStatus } from "@serdono/supabase";
 
@@ -22,17 +22,21 @@ export interface RailFaseData {
 interface StepRailProps {
   fases: RailFaseData[];
   compact: boolean;
+  /** Só usado no modo compacto — rola a tela até o conteúdo editável da fase (ver SDD-76: no celular a trilha fica empilhada acima do formulário/checklist de verdade, e sem esse aviso visual o usuário acha que a etapa não é clicável). */
+  onStepPress?: () => void;
 }
 
 /**
- * Trilha visual da Jornada (Conceito A aprovado — SDD-33). Larga (tablet/web,
- * ≥768px): rail vertical fixo com linha conectora. Estreita (celular):
- * tiras de fase horizontais roláveis + lista vertical só da fase atual —
- * não é decisão de gosto, é o mesmo shell tendo que caber em telas de ~360px
- * de largura sem virar ilegível (código único, SPEC §2).
+ * Trilha visual da Jornada (Conceito A aprovado — SDD-33, layout compacto
+ * revisto na SDD-76). Larga (tablet/web, ≥768px): rail vertical fixo com
+ * linha conectora. Estreita (celular): mesma ideia de rail vertical, um
+ * pouco mais compacto — a versão anterior usava tiras de fase horizontais
+ * roláveis, mas isso escondia a fase atual fora da viewport inicial e
+ * deixava a navegação entre fases dependente de arrastar lateralmente
+ * (RN gotcha real, não só preferência — ver SDD-76).
  */
-export function StepRail({ fases, compact }: StepRailProps) {
-  if (compact) return <CompactRail fases={fases} />;
+export function StepRail({ fases, compact, onStepPress }: StepRailProps) {
+  if (compact) return <CompactRail fases={fases} onStepPress={onStepPress} />;
   return <WideRail fases={fases} />;
 }
 
@@ -63,67 +67,86 @@ function WideRail({ fases }: { fases: RailFaseData[] }) {
   );
 }
 
-function StepList({ steps }: { steps: RailStepData[] }) {
+function StepList({ steps, onStepPress }: { steps: RailStepData[]; onStepPress?: () => void }) {
   return (
     <View style={{ position: "relative" }}>
       <View style={{ position: "absolute", left: 12, top: 13, bottom: 13, width: 2, backgroundColor: color.border.default }} />
-      {steps.map((step) => (
-        <View key={step.key} style={{ flexDirection: "row", alignItems: "center", gap: space[2], paddingVertical: 6 }}>
-          <StepDot status={step.status} isCurrent={step.isCurrent} size={26} />
-          <Text
-            style={{
-              ...type.body,
-              fontSize: 13.5,
-              color: step.status === "bloqueada" ? color.text.muted : color.text.primary,
-              fontWeight: step.isCurrent ? "700" : "400",
-              flex: 1,
-            }}
+      {steps.map((step) => {
+        const Row = onStepPress ? Pressable : View;
+        return (
+          <Row
+            key={step.key}
+            {...(onStepPress ? { onPress: onStepPress, accessibilityRole: "button" as const } : {})}
+            style={{ flexDirection: "row", alignItems: "center", gap: space[2], paddingVertical: 6 }}
           >
-            {step.titulo}
-          </Text>
-        </View>
-      ))}
+            <StepDot status={step.status} isCurrent={step.isCurrent} size={26} />
+            <Text
+              style={{
+                ...type.body,
+                fontSize: 13.5,
+                color: step.status === "bloqueada" ? color.text.muted : color.text.primary,
+                fontWeight: step.isCurrent ? "700" : "400",
+                flex: 1,
+              }}
+            >
+              {step.titulo}
+            </Text>
+            {onStepPress ? <Text style={{ color: color.text.muted, fontSize: 16 }}>›</Text> : null}
+          </Row>
+        );
+      })}
     </View>
   );
 }
 
-function CompactRail({ fases }: { fases: RailFaseData[] }) {
-  const atual = fases.find((f) => f.isCurrentFase);
+function CompactRail({ fases, onStepPress }: { fases: RailFaseData[]; onStepPress?: () => void }) {
   return (
-    <View>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: space[4], gap: space[3], paddingVertical: space[3] }}>
-        {fases.map((fase) => (
-          <Pressable
-            key={fase.key}
-            onPress={fase.onPress}
-            disabled={!fase.onPress}
-            accessibilityRole={fase.onPress ? "button" : undefined}
-            style={{ alignItems: "center", minWidth: 84 }}
-          >
-            <FasePill fase={fase} />
-            <Text
-              numberOfLines={1}
+    <View style={{ width: "100%", paddingHorizontal: space[2] }}>
+      {fases.map((fase) => {
+        // Tocar numa fase clicável só troca `viewFase` — o conteúdo de
+        // verdade (formulário/checklist editável) fica abaixo da trilha, fora
+        // da viewport inicial no celular. Sem rolar até lá, o toque na fase
+        // atual em particular não move nada visível e parece clique morto
+        // (motivo original desta mudança, SDD-76).
+        const handlePress = fase.onPress ? () => { fase.onPress?.(); onStepPress?.(); } : undefined;
+        return (
+          <View key={fase.key} style={{ marginBottom: space[1] }}>
+            <Pressable
+              onPress={handlePress}
+              disabled={!handlePress}
+              accessibilityRole={handlePress ? "button" : undefined}
               style={{
-                ...type.caption,
-                fontSize: 11,
-                marginTop: space[1],
-                color: fase.isCurrentFase ? color.bg.brand : color.text.muted,
-                fontWeight: fase.isCurrentFase ? "700" : "500",
-                maxWidth: 84,
-                textAlign: "center",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: space[3],
+                paddingVertical: space[3],
+                paddingHorizontal: space[2],
+                borderRadius: radius.md,
+                backgroundColor: fase.isCurrentFase ? color.action.primarySubtle : "transparent",
               }}
             >
-              {fase.nome}
-            </Text>
-          </Pressable>
-        ))}
-      </ScrollView>
-
-      {atual?.steps ? (
-        <View style={{ paddingHorizontal: space[4], paddingBottom: space[3] }}>
-          <StepList steps={atual.steps} />
-        </View>
-      ) : null}
+              <FasePill fase={fase} />
+              <Text
+                style={{
+                  ...type.body,
+                  flex: 1,
+                  color: fase.isCurrentFase ? color.bg.brand : color.text.primary,
+                  fontWeight: fase.isCurrentFase ? "700" : "500",
+                }}
+              >
+                {fase.nome}
+              </Text>
+              {fase.legenda ? <FaseBadge legenda={fase.legenda} isCurrentFase={fase.isCurrentFase} /> : null}
+              {handlePress ? <Text style={{ color: fase.isCurrentFase ? color.bg.brand : color.text.muted, fontSize: 16 }}>›</Text> : null}
+            </Pressable>
+            {fase.isCurrentFase && fase.steps ? (
+              <View style={{ paddingLeft: 34 + space[3] + space[2], paddingRight: space[2], paddingBottom: space[2] }}>
+                <StepList steps={fase.steps} onStepPress={fase.isCurrentFase ? onStepPress : undefined} />
+              </View>
+            ) : null}
+          </View>
+        );
+      })}
     </View>
   );
 }

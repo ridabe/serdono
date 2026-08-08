@@ -2,7 +2,7 @@ import React from "react";
 import Svg, { Circle, Path } from "react-native-svg";
 import { icon } from "@serdono/ui";
 
-export type TabIconName = "inicio" | "jornada" | "mary" | "modulos" | "perfil";
+export type TabIconName = "inicio" | "jornada" | "mary" | "modulos" | "perfil" | "sobre";
 
 /**
  * Ícones da barra de abas nativa (DS-20).
@@ -60,6 +60,14 @@ export function TabIcon({ name, color, size = icon.md }: { name: TabIconName; co
         <>
           <Circle cx={12} cy={8.5} r={3.5} {...common} />
           <Path d="M4.5 20c0-3.6 3.4-5.5 7.5-5.5s7.5 1.9 7.5 5.5" {...common} />
+        </>
+      ) : null}
+
+      {name === "sobre" ? (
+        <>
+          <Circle cx={12} cy={12} r={9} {...common} />
+          <Path d="M12 11v6" {...common} />
+          <Circle cx={12} cy={7.75} r={0.75} fill={color} stroke="none" />
         </>
       ) : null}
     </Svg>

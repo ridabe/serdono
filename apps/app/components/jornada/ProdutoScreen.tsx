@@ -1,9 +1,43 @@
 import { useRouter } from "expo-router";
 import * as Linking from "expo-linking";
 import { Image, Text, View } from "react-native";
-import { Button, Card, CollapsibleSection, Input, MaryAvatar, color, radius, space, type } from "@serdono/ui";
+import Svg, { Path } from "react-native-svg";
+import { Button, Card, CollapsibleSection, IconBadge, Input, MaryAvatar, color, icon, MODULE_ACCENT_CYCLE, moduleAccent, radius, space, type } from "@serdono/ui";
+import { numeroFase } from "@serdono/core";
 import type { JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { useProduto } from "./useProduto";
+
+// Ícones locais da "Aula rápida" — só usados aqui, não viram um conjunto
+// compartilhado tipo `FaseIcon` (§9.14) porque são conceitos de precificação,
+// não fases da Jornada. Mesmo padrão de desenho (viewBox 24×24, stroke-only).
+type ConceitoIconName = "custo" | "despesas" | "impostos" | "margem";
+function ConceitoIcon({ name, color: cor, size = icon.md }: { name: ConceitoIconName; color: string; size?: number }) {
+  const common = { stroke: cor, strokeWidth: icon.strokeWidth, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, fill: "none" };
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24">
+      {name === "custo" ? <Path d="M12 3.5v17M16.5 7c0-1.7-1.7-2.5-4.5-2.5S7.5 5.4 7.5 7.5c0 4 9 2 9 6 0 2.1-2.2 3-4.5 3S7.5 15.8 7.5 14" {...common} /> : null}
+      {name === "despesas" ? (
+        <>
+          <Path d="M5 19 19 5" {...common} />
+          <Path d="M7.5 8.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM16.5 19.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" {...common} />
+        </>
+      ) : null}
+      {name === "impostos" ? (
+        <>
+          <Path d="M3.5 10 12 4l8.5 6" {...common} />
+          <Path d="M5 10v9M9.3 10v9M14.7 10v9M19 10v9M3.5 19h17" {...common} />
+        </>
+      ) : null}
+      {name === "margem" ? (
+        <>
+          <Path d="M4 17l5-5 4 3 7-8" {...common} />
+          <Path d="M20 7h-4.5M20 7v4.5" {...common} />
+        </>
+      ) : null}
+    </Svg>
+  );
+}
+const CONCEITOS_ICON: ConceitoIconName[] = ["custo", "despesas", "impostos", "margem"];
 
 interface ProdutoScreenProps {
   jornada: JornadaInstance;
@@ -49,7 +83,7 @@ export function ProdutoScreen({ jornada, etapas, onEtapasChanged }: ProdutoScree
       <View style={{ flexDirection: "row", gap: space[4], alignItems: "flex-start" }}>
         <MaryAvatar pose="jornada" size={72} />
         <View style={{ flex: 1 }}>
-          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>Fase 9 — Produto</Text>
+          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>Fase {numeroFase("produto")} — Produto</Text>
           <Text style={{ ...type.body, color: color.text.secondary }}>
             Como organizar o que você vende e chegar num preço que cobre tudo e ainda deixa lucro. Vamos com calma,
             passo a passo.
@@ -82,33 +116,33 @@ export function ProdutoScreen({ jornada, etapas, onEtapasChanged }: ProdutoScree
       </CollapsibleSection>
 
       <CollapsibleSection title="Aula rápida: como funciona o preço" accent="info">
-        <View style={{ gap: space[3] }}>
-          <View>
-            <Text style={{ ...type.bodyStrong, color: color.text.primary }}>Custo</Text>
-            <Text style={{ ...type.body, color: color.text.secondary }}>
-              Quanto você gasta pra ter aquele produto/serviço pronto — matéria-prima, insumo, sua hora de trabalho.
-            </Text>
-          </View>
-          <View>
-            <Text style={{ ...type.bodyStrong, color: color.text.primary }}>Despesas variáveis</Text>
-            <Text style={{ ...type.body, color: color.text.secondary }}>
-              O que some do preço de venda antes de sobrar qualquer coisa pra você — taxa de maquininha, comissão de
-              marketplace, frete não repassado.
-            </Text>
-          </View>
-          <View>
-            <Text style={{ ...type.bodyStrong, color: color.text.primary }}>Impostos</Text>
-            <Text style={{ ...type.body, color: color.text.secondary }}>
-              A parte que vai pro governo sobre aquela venda — no MEI/Simples, geralmente uma % fixa sobre o
-              faturamento.
-            </Text>
-          </View>
-          <View>
-            <Text style={{ ...type.bodyStrong, color: color.text.primary }}>Margem de lucro</Text>
-            <Text style={{ ...type.body, color: color.text.secondary }}>
-              O que sobra de verdade pra você, depois de tudo isso — o motivo de o negócio existir.
-            </Text>
-          </View>
+        {/* Grade de 2 colunas com ícone desenhado (DS-24) — 4 conceitos
+            curtos, cabem bem em meia largura mesmo no celular. `minWidth`
+            baixo (120) de propósito: dentro de uma `CollapsibleSection` (que
+            já tem seu próprio padding) a largura disponível é menor que num
+            `Card` direto — `minWidth` alto demais aqui estoura a linha por
+            frações de pixel e quebra a grade pra 1 coluna só (mesmo bug já
+            visto no Início, SPEC.md SDD-78.1). */}
+        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3], alignItems: "flex-start" }}>
+          {(
+            [
+              ["custo", "Custo", "Quanto você gasta pra ter aquele produto/serviço pronto — matéria-prima, insumo, sua hora de trabalho."],
+              ["despesas", "Despesas variáveis", "O que some do preço de venda antes de sobrar qualquer coisa pra você — taxa de maquininha, comissão de marketplace, frete não repassado."],
+              ["impostos", "Impostos", "A parte que vai pro governo sobre aquela venda — no MEI/Simples, geralmente uma % fixa sobre o faturamento."],
+              ["margem", "Margem de lucro", "O que sobra de verdade pra você, depois de tudo isso — o motivo de o negócio existir."],
+            ] as [ConceitoIconName, string, string][]
+          ).map(([nome, titulo, texto], i) => {
+            const accent = MODULE_ACCENT_CYCLE[i % MODULE_ACCENT_CYCLE.length];
+            return (
+              <View key={nome} style={{ flexBasis: "47%", flexGrow: 1, minWidth: 120, gap: space[2] }}>
+                <IconBadge accent={accent} size={36}>
+                  <ConceitoIcon name={nome} color={moduleAccent[accent].fg} size={18} />
+                </IconBadge>
+                <Text style={{ ...type.bodyStrong, color: color.text.primary }}>{titulo}</Text>
+                <Text style={{ ...type.body, color: color.text.secondary }}>{texto}</Text>
+              </View>
+            );
+          })}
         </View>
         <View style={{ backgroundColor: color.bg.surfaceAlt, borderRadius: radius.md, padding: space[3], marginTop: space[4] }}>
           <Text style={{ ...type.caption, color: color.text.muted, marginBottom: 2 }}>ERRO MAIS COMUM</Text>

@@ -79,7 +79,7 @@ export function RetencaoScreen() {
               )}
             </CollapsibleSection>
 
-            <CollapsibleSection title="Adicionar cliente" accent={SECTION_ACCENT_CYCLE[1]} defaultExpanded={false}>
+            <CollapsibleSection title="Adicionar cliente" accent={SECTION_ACCENT_CYCLE[1]}>
               <NovoCliente salvando={v.salvando} onSalvar={v.cadastrarCliente} />
               {v.podeImportar ? (
                 <ImportarDaJornada onImportar={v.importarDaJornada} salvando={v.salvando} />

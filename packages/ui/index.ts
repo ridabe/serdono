@@ -5,6 +5,7 @@ export * from "./components/Card";
 export * from "./components/CollapsibleSection";
 export * from "./components/Input";
 export * from "./components/HoverLift";
+export * from "./components/IconBadge";
 export * from "./components/Logo";
 export * from "./components/MaryAvatar";
 export * from "./components/Reveal";

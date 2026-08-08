@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, ScrollView, Text, useWindowDimensions, View } from "react-native";
 import { breakpoint, Button, Card, color, MaryAvatar, space, type } from "@serdono/ui";
 import { ScreenHeader } from "../shell/ScreenHeader";
@@ -31,6 +31,7 @@ import { PrimeiraVendaScreen } from "./PrimeiraVendaScreen";
 import { ProdutoScreen } from "./ProdutoScreen";
 import { StepRail, type RailFaseData } from "./StepRail";
 import { ValidacaoIdeiaScreen } from "./ValidacaoIdeiaScreen";
+import { dismissMaryIntro, isMaryIntroDismissed } from "./maryIntroSession";
 
 // Ordem reorganizada em 30/07/2026 (decisão do dono do produto, SDD-39):
 // Financeiro passou a vir logo após Formalização, antes de Marketing — faz
@@ -55,12 +56,40 @@ export function JornadaScreen() {
   const { width } = useWindowDimensions();
   const compact = width < breakpoint.medium;
 
+  // No celular, a trilha vem empilhada ACIMA do conteúdo editável da fase
+  // (SDD-76) — sem isso, quem toca numa etapa da trilha não vê nada
+  // acontecer e acha que não dá pra clicar, porque o formulário/checklist
+  // de verdade está fora da tela, mais abaixo. `scrollToDetail` rola até lá.
+  const scrollRef = useRef<ScrollView>(null);
+  const detailRef = useRef<View>(null);
+  function scrollToDetail() {
+    if (!compact) return;
+    const scrollView = scrollRef.current;
+    // No New Architecture (padrão no Expo SDK 54/RN 0.81), `measureLayout`
+    // não aceita mais o node handle numérico de `findNodeHandle` como
+    // segundo argumento — precisa da ref do componente nativo em si, senão
+    // dispara "ref.measureLayout must be called with a ref to a native
+    // component." `getNativeScrollRef()` é o jeito documentado de obter essa
+    // ref nativa a partir do `ScrollView` (que por si só é um componente
+    // composto, não um host component).
+    const nativeScrollNode = scrollView?.getNativeScrollRef?.();
+    if (!scrollView || !nativeScrollNode || !detailRef.current) return;
+    detailRef.current.measureLayout(
+      nativeScrollNode,
+      (_x, y) => scrollView.scrollTo({ y: Math.max(y - space[4], 0), animated: true }),
+      () => {}
+    );
+  }
+
   const [loading, setLoading] = useState(true);
   const [jornada, setJornada] = useState<JornadaInstance | null>(null);
   const [nicheName, setNicheName] = useState<string | null>(null);
   const [nicheEstrutura, setNicheEstrutura] = useState<NicheEstruturaInfo | null>(null);
   const [etapas, setEtapas] = useState<JornadaEtapa[]>([]);
-  const [maryDismissed, setMaryDismissed] = useState(false);
+  // Mostra só na primeira tela da Jornada aberta na sessão do app — o
+  // fechamento (`dismissMaryIntro`) fica numa flag em memória, não em
+  // estado local, porque essa tela remonta a cada navegação pra /jornada.
+  const [maryDismissed, setMaryDismissed] = useState(isMaryIntroDismissed());
   // null = acompanhando a fase_atual real; um valor = revisando uma fase já
   // visitada (SDD-40 — Estrutura precisa ficar sempre editável, mesmo depois
   // de já ter avançado pra Marketing, então a trilha lateral virou navegação
@@ -248,6 +277,7 @@ export function JornadaScreen() {
         webLinks={[
           { label: "← Painel", onPress: () => router.push("/inicio") },
           { label: "Meu perfil", onPress: () => router.push("/perfil") },
+          { label: "Sobre", onPress: () => router.push("/sobre") },
           { label: "Sair", onPress: handleSignOut },
         ]}
       />
@@ -263,7 +293,7 @@ export function JornadaScreen() {
         </View>
       </View>
 
-      <ScrollView contentContainerStyle={{ padding: space[5] }}>
+      <ScrollView ref={scrollRef} contentContainerStyle={{ padding: space[5] }}>
         {!maryDismissed ? (
           <Card variant="outline" padding={5} style={{ marginBottom: space[5] }}>
             <View style={{ flexDirection: "row", gap: space[4], alignItems: "flex-start" }}>
@@ -274,14 +304,27 @@ export function JornadaScreen() {
                   Vou te acompanhar em cada etapa da sua Jornada Empreendedora — do primeiro passo até o seu negócio
                   estar de pé. Sempre que precisar de uma explicação, é só continuar por aqui.
                 </Text>
-                <Button label="Entendi" variant="ghost" size="sm" onPress={() => setMaryDismissed(true)} style={{ alignSelf: "flex-start", marginTop: space[1] }} />
+                <Button
+                  label="Fechar"
+                  variant="ghost"
+                  size="sm"
+                  onPress={() => {
+                    dismissMaryIntro();
+                    setMaryDismissed(true);
+                  }}
+                  style={{ alignSelf: "flex-start", marginTop: space[1] }}
+                />
               </View>
             </View>
           </Card>
         ) : null}
         <View style={{ flexDirection: compact ? "column" : "row", gap: space[5], alignItems: "flex-start" }}>
-          <StepRail fases={railFases} compact={compact} />
-          <View style={{ flex: 1, width: "100%", gap: space[4] }}>
+          <StepRail fases={railFases} compact={compact} onStepPress={scrollToDetail} />
+          {/* `flex: 1` só funciona com altura disponível pra distribuir — dentro do
+              ScrollView (altura intrínseca), em modo compacto/coluna ele colapsa pra 0px
+              no nativo (Android/iOS), deixando o conteúdo da fase invisível mesmo
+              renderizado (mesmo problema já resolvido em DashboardScreen.tsx:114). */}
+          <View ref={detailRef} style={{ flex: compact ? undefined : 1, width: "100%", gap: space[4] }}>
             {revisandoFasePassada ? (
               <Card variant="outline" padding={4}>
                 <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: space[3] }}>

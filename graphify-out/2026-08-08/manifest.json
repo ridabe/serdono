@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1786214066.7316272,
-    "ast_hash": "eea6d8b4bf12bce27e82af216563d423",
+    "mtime": 1786109092.4651542,
+    "ast_hash": "94d2654d063861116a96fc8d3ad1d93d",
     "semantic_hash": ""
   },
   ".mcp.json": {
@@ -20,8 +20,8 @@
     "semantic_hash": ""
   },
   "apps/app/app.config.js": {
-    "mtime": 1786141327.566685,
-    "ast_hash": "3742b85e77d10951b902bed8d661b25a",
+    "mtime": 1785510138.1219003,
+    "ast_hash": "e2c1a750e39f63047448260b9bfce450",
     "semantic_hash": ""
   },
   "apps/app/app/_layout.tsx": {
@@ -60,13 +60,13 @@
     "semantic_hash": ""
   },
   "apps/app/components/cadastro/CadastroScreen.tsx": {
-    "mtime": 1786141167.0123432,
-    "ast_hash": "082bd36396b5deca72db8420005c0eca",
+    "mtime": 1786106347.0094726,
+    "ast_hash": "abdfc84fc5f2b9dc3e6a557f0d40cbc0",
     "semantic_hash": ""
   },
   "apps/app/components/diagnostico/DiagnosticoScreen.tsx": {
-    "mtime": 1786141176.1720216,
-    "ast_hash": "fde74e2e445bd9700cd5333a9e89bd46",
+    "mtime": 1785851102.2910597,
+    "ast_hash": "6d6d3e33459f6a4111a82065c6ada81f",
     "semantic_hash": ""
   },
   "apps/app/components/diagnostico/ResultadoScreen.tsx": {
@@ -175,8 +175,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/client.ts": {
-    "mtime": 1786193721.8208055,
-    "ast_hash": "a13c2dde1f26cae53fc57c25af355fa5",
+    "mtime": 1785254559.4370544,
+    "ast_hash": "44812683c2583cb88d47d4a9b2028fa5",
     "semantic_hash": ""
   },
   "packages/supabase/index.ts": {
@@ -220,8 +220,8 @@
     "semantic_hash": ""
   },
   "packages/ui/index.ts": {
-    "mtime": 1786194931.5671608,
-    "ast_hash": "724d0a31fc9f0d66ee19e214e9ab58ca",
+    "mtime": 1785687274.1130779,
+    "ast_hash": "e45e35b4b6bd5a79d23a4bd4a9ed9673",
     "semantic_hash": ""
   },
   "packages/ui/package.json": {
@@ -270,13 +270,13 @@
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1786215441.0537012,
-    "ast_hash": "66e7a42442eaa6bf256ad2b27fad9e78",
+    "mtime": 1786109715.828007,
+    "ast_hash": "3ac9add4bf8167078ec5965d0034c0bb",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
-    "mtime": 1786215455.2140937,
-    "ast_hash": "70777f031d58262280ad7bd21f4b5fd4",
+    "mtime": 1785765262.2178304,
+    "ast_hash": "10c4bb965493af2eaf4b4a67ba5d2c7a",
     "semantic_hash": ""
   },
   "docs/identidade-visual/Ser Dono - Painel de Conceitos de Marca.html": {
@@ -400,8 +400,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/assistente/AssistenteScreen.tsx": {
-    "mtime": 1786141162.6081607,
-    "ast_hash": "2b063d6994f11c4685f54af83734840f",
+    "mtime": 1785687635.4789305,
+    "ast_hash": "45eacb89c87bb9fddbe27c22cd9de4f1",
     "semantic_hash": ""
   },
   "apps/app/components/login/LoginScreen.tsx": {
@@ -430,8 +430,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/perfil/PerfilFields.tsx": {
-    "mtime": 1786141164.7980795,
-    "ast_hash": "1f2a328c425ba22ad3ed7dedda52aeee",
+    "mtime": 1785288958.4701858,
+    "ast_hash": "583d816d2322838351ea35894c72c95e",
     "semantic_hash": ""
   },
   "apps/app/components/perfil/PerfilScreen.tsx": {
@@ -550,8 +550,8 @@
     "semantic_hash": ""
   },
   "packages/ui/components/Input.tsx": {
-    "mtime": 1786141160.056468,
-    "ast_hash": "e237d531b263c9497dd1e902a7a8c01d",
+    "mtime": 1785419163.5473013,
+    "ast_hash": "c4c000a12092311cf39d2100438fffa1",
     "semantic_hash": ""
   },
   "supabase/functions/admin-manage-user/index.ts": {
@@ -580,13 +580,13 @@
     "semantic_hash": ""
   },
   "apps/app/components/jornada/JornadaScreen.tsx": {
-    "mtime": 1786193486.9080887,
-    "ast_hash": "f13511c24ec46ee78b2601da4a7e4d89",
+    "mtime": 1785687513.1752403,
+    "ast_hash": "03ec3b18da941be804840a314c57c919",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/ValidacaoIdeiaScreen.tsx": {
-    "mtime": 1786214691.1268635,
-    "ast_hash": "78cc46e0c0e7ea95736ac87a25972a53",
+    "mtime": 1785685289.3298109,
+    "ast_hash": "3c885182d7ef70ef5529a9d649b56676",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/useValidacaoIdeia.ts": {
@@ -610,13 +610,13 @@
     "semantic_hash": ""
   },
   "apps/app/components/jornada/NomeEmpresaScreen.tsx": {
-    "mtime": 1786197017.5053272,
-    "ast_hash": "950f1f6da16bfe28c105668a317d9ecd",
+    "mtime": 1785501409.715107,
+    "ast_hash": "beed6762766007bcdc34603749393377",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/StepRail.tsx": {
-    "mtime": 1786193065.2716122,
-    "ast_hash": "bce24f64a1350692d4306cd088840d9b",
+    "mtime": 1785422262.3460364,
+    "ast_hash": "44595836ebfe4928b88417b0cf0d5360",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/useNomeEmpresa.ts": {
@@ -660,8 +660,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/jornada/PlanejamentoScreen.tsx": {
-    "mtime": 1786214705.3348346,
-    "ast_hash": "e4019a9725544d653ac88e331e4fed2b",
+    "mtime": 1785685286.8165429,
+    "ast_hash": "206dda7939a8d58a5525f66d74798ae6",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/useIdentidadeVisual.ts": {
@@ -795,13 +795,13 @@
     "semantic_hash": ""
   },
   "apps/app/components/jornada/FinanceiroScreen.tsx": {
-    "mtime": 1786215112.9376702,
-    "ast_hash": "db0c10179e9909dce81a84bdc92818e3",
+    "mtime": 1785685276.4068503,
+    "ast_hash": "2192dd81b7b25cd94e1c23b17b436d0b",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/FormalizacaoScreen.tsx": {
-    "mtime": 1786214720.1194987,
-    "ast_hash": "8b80d7c2a5ee949834cab314a98c4839",
+    "mtime": 1785685282.8064451,
+    "ast_hash": "c1b1a77ee6afb8496a98d1185dc5b315",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/formalizacaoPdf.ts": {
@@ -865,13 +865,13 @@
     "semantic_hash": ""
   },
   "apps/app/components/jornada/EstruturaScreen.tsx": {
-    "mtime": 1786214756.249011,
-    "ast_hash": "885b6a2ba0da6073a18f3d1b9cbe927d",
+    "mtime": 1785685269.542465,
+    "ast_hash": "d6606be06023b2571ceda03d661cab95",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/FornecedoresScreen.tsx": {
-    "mtime": 1786214768.172418,
-    "ast_hash": "3620cbbdd7461c03481855cd014a9502",
+    "mtime": 1785685277.859296,
+    "ast_hash": "404e544cc140cffe3189bba73e62a850",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/useEstrutura.ts": {
@@ -910,8 +910,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/jornada/ProdutoScreen.tsx": {
-    "mtime": 1786214782.667793,
-    "ast_hash": "29e9196f46f911b8dc40df95670d63d0",
+    "mtime": 1785685288.2725081,
+    "ast_hash": "ede945829b4941c07776a0149e3751ae",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/produtoTemplateCsv.ts": {
@@ -940,13 +940,13 @@
     "semantic_hash": ""
   },
   "apps/app/components/jornada/ClientesScreen.tsx": {
-    "mtime": 1786215281.6354465,
-    "ast_hash": "1ba33fec644283765786737183d03259",
+    "mtime": 1785685271.0281088,
+    "ast_hash": "e1324987c4e5f733f71c437cf6d96257",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/MarketingScreen.tsx": {
-    "mtime": 1786214794.5233805,
-    "ast_hash": "d727dbb3f2ec7db9cbaa1c009c8da106",
+    "mtime": 1785685284.2627158,
+    "ast_hash": "d200043b596f86cceab79029201ee886",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/useClientes.ts": {
@@ -980,8 +980,8 @@
     "semantic_hash": ""
   },
   "packages/ui/components/CollapsibleSection.tsx": {
-    "mtime": 1786194126.259859,
-    "ast_hash": "294c71affc5bee5c945aafb6915aa314",
+    "mtime": 1785501288.373381,
+    "ast_hash": "bab564d34fa7bd71902a1d7158d05e3b",
     "semantic_hash": ""
   },
   "supabase/functions/jornada-gerar-marketing/index.ts": {
@@ -1010,13 +1010,13 @@
     "semantic_hash": ""
   },
   "apps/app/components/inicio/DashboardScreen.tsx": {
-    "mtime": 1786214674.498579,
-    "ast_hash": "c52779ff19a0b36c7e73506507d3266c",
+    "mtime": 1785854015.6686513,
+    "ast_hash": "7b87ca0c07900d8f227deaaaff8d6ae7",
     "semantic_hash": ""
   },
   "apps/app/components/inicio/useDashboard.ts": {
-    "mtime": 1786197886.3446383,
-    "ast_hash": "29c5bc0d62cf56f5d9884e5ef4f17bd2",
+    "mtime": 1785764518.6499522,
+    "ast_hash": "a8dada524015975d133ba3c32b386c7c",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/JornadaConclusaoScreen.tsx": {
@@ -1025,13 +1025,13 @@
     "semantic_hash": ""
   },
   "apps/app/components/jornada/OrganizacaoScreen.tsx": {
-    "mtime": 1786214832.2284315,
-    "ast_hash": "2d9ccac173dafe6576a386ecbf82c98d",
+    "mtime": 1785510432.118448,
+    "ast_hash": "bfa7af134366a1bdd11433fd9be8ee61",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/PrimeiraVendaScreen.tsx": {
-    "mtime": 1786214820.5486329,
-    "ast_hash": "e9a72e7e94bb4e8cf00b8a82d4a136d8",
+    "mtime": 1785685285.372842,
+    "ast_hash": "72dff6ccc90c22555c0cc938f223fe4d",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/jornadaConclusaoCertificadoPdf.ts": {
@@ -1070,8 +1070,8 @@
     "semantic_hash": ""
   },
   "packages/core/jornadaProgresso.ts": {
-    "mtime": 1786214632.99727,
-    "ast_hash": "7827e37ac71167812410344caca99f43",
+    "mtime": 1785685103.1156614,
+    "ast_hash": "78d3094f24c29de8b6e77e9370bdc6c2",
     "semantic_hash": ""
   },
   "packages/core/organizacaoMaturidade.test.ts": {
@@ -1125,8 +1125,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/negocioExistente/NegocioExistenteScreen.tsx": {
-    "mtime": 1786141169.2309737,
-    "ast_hash": "db035b5f11d48fd1f1d0271fd7751497",
+    "mtime": 1786106640.5776703,
+    "ast_hash": "d8f94fbab4f75d0b0e90aa71e746fb7c",
     "semantic_hash": ""
   },
   "supabase/migrations/20260731190000_jornada_negocio_existente.sql": {
@@ -1150,8 +1150,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/shell/ScreenHeader.tsx": {
-    "mtime": 1786111718.525246,
-    "ast_hash": "0d1ebc7938433fffb7323596e640bed8",
+    "mtime": 1785764079.58163,
+    "ast_hash": "a0cd8f3d6a8651792dd83eae82839400",
     "semantic_hash": ""
   },
   "apps/app/components/shell/TabIcon.tsx": {
@@ -1170,8 +1170,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/retencao/RetencaoScreen.tsx": {
-    "mtime": 1786194168.6808448,
-    "ast_hash": "94b7030785e6396408eedb9580a098f0",
+    "mtime": 1785702546.3973298,
+    "ast_hash": "d9f0497243cbd5c8b28a77204185ff0e",
     "semantic_hash": ""
   },
   "apps/app/components/retencao/useRetencao.ts": {
@@ -1220,8 +1220,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/investimentos/InvestimentosScreen.tsx": {
-    "mtime": 1786194167.7112298,
-    "ast_hash": "ade550d1ce952c8243493ca9df2316dd",
+    "mtime": 1785726450.6324873,
+    "ast_hash": "364675a4bcef02ad9666051e598f90ee",
     "semantic_hash": ""
   },
   "apps/app/components/investimentos/useInvestimentos.ts": {
@@ -1502,16 +1502,6 @@
   "apps/app/public/email/mary-boas-vindas.png": {
     "mtime": 1786106187.0053353,
     "ast_hash": "8441aa36e618f40ae0e7bce8a8c88931",
-    "semantic_hash": ""
-  },
-  "apps/app/components/inicio/FaseIcon.tsx": {
-    "mtime": 1786196340.3842957,
-    "ast_hash": "ffccc2bbd72bfa7202acdac8310e5a01",
-    "semantic_hash": ""
-  },
-  "packages/ui/components/IconBadge.tsx": {
-    "mtime": 1786196309.7868912,
-    "ast_hash": "24fc73960812c681eee543d267118f7b",
     "semantic_hash": ""
   }
 }

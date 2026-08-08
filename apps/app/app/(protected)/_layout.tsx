@@ -6,6 +6,7 @@ import { color, isNativeApp } from "@serdono/ui";
 import { getCurrentSession, isAnonymousSession, supabase } from "@serdono/supabase";
 import { MobileTabBar } from "../../components/shell/MobileTabBar";
 import { AppDrawer } from "../../components/shell/AppDrawer";
+import { resetMaryIntro } from "../../components/jornada/maryIntroSession";
 
 const PROFILE_ROUTE = "/completar-cadastro";
 
@@ -46,6 +47,10 @@ export default function ProtectedLayout() {
     check();
     const { data: subscription } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_OUT" || !session || isAnonymousSession(session)) {
+        // Logout também "esquece" o fechamento da mensagem da Mary — ela
+        // deve reaparecer na próxima vez que a Jornada abrir, tanto num
+        // relogin dentro do mesmo app quanto num app fechado e reaberto.
+        resetMaryIntro();
         router.replace("/login");
       }
     });

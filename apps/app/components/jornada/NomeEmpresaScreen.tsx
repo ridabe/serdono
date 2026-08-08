@@ -60,6 +60,10 @@ export function NomeEmpresaScreen({ jornada, onEtapasChanged }: NomeEmpresaScree
 
       {v.loading ? null : v.candidatos.length > 0 ? (
         <CollapsibleSection title="Sugestões de nome" accent="gold" rightLabel={String(v.candidatos.length)}>
+          {/* Largura cheia, não grade (DS-24, exceção): nome do negócio +
+              botão + 3 badges de disponibilidade é denso demais pra ficar
+              legível em meia-largura no celular — decisão que precisa de
+              espaço pra comparar, não é um resumo curto tipo KPI. */}
           <View style={{ gap: space[3] }}>
             {v.candidatos.map((c) => {
               const escolhido = v.nomeEscolhido === c.nome;

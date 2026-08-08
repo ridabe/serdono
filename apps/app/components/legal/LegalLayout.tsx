@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import { Pressable, ScrollView, Text, View } from "react-native";
-import { Logo, color, content, radius, space, type } from "@serdono/ui";
+import { Logo, color, content, space, type } from "@serdono/ui";
 
 export interface LegalSection {
   heading: string;
@@ -43,23 +43,6 @@ export function LegalLayout({ title, updatedAt, intro, sections }: LegalLayoutPr
 
       <View style={{ alignItems: "center", paddingHorizontal: space[4], paddingVertical: space[10] }}>
         <View style={{ width: "100%", maxWidth: content.maxWidth }}>
-          <View
-            style={{
-              backgroundColor: color.state.infoBg,
-              borderLeftWidth: 3,
-              borderLeftColor: color.state.info,
-              borderRadius: radius.sm,
-              padding: space[4],
-              marginBottom: space[8],
-            }}
-          >
-            <Text style={{ ...type.caption, color: "#1C3F6B", lineHeight: 18 }}>
-              Documento em elaboração, para o estágio atual do produto (diagnóstico gratuito, sem cobrança). Antes de
-              qualquer lançamento em produção com cobrança, este texto precisa ser revisado por um advogado — não é
-              aconselhamento jurídico.
-            </Text>
-          </View>
-
           <Text style={{ ...type.display, fontSize: 28, lineHeight: 34, color: color.bg.brand, marginBottom: space[2] }}>
             {title}
           </Text>

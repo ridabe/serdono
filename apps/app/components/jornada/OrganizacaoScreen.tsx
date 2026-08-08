@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import { Text, View } from "react-native";
-import { PERGUNTAS_DIAGNOSTICO } from "@serdono/core";
+import { numeroFase, PERGUNTAS_DIAGNOSTICO } from "@serdono/core";
 import { Button, Card, CollapsibleSection, MaryAvatar, color, radius, space, type } from "@serdono/ui";
 import type { CategoriaIndicador, JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { CATEGORIA_INDICADOR_LABEL } from "@serdono/supabase";
@@ -60,7 +60,7 @@ export function OrganizacaoScreen({ jornada, etapas, onEtapasChanged }: Organiza
       <View style={{ flexDirection: "row", gap: space[4], alignItems: "flex-start" }}>
         <MaryAvatar pose="jornada" size={72} />
         <View style={{ flex: 1 }}>
-          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>Fase Organização do Negócio</Text>
+          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>{`Fase ${numeroFase("organizacao")} — Organização do Negócio`}</Text>
           <Text style={{ ...type.body, color: color.text.secondary }}>
             Seu negócio começou a funcionar. Agora vamos organizar as informações, o dinheiro e a rotina pra você
             crescer sem perder o controle — sem virar um sistema complicado, só o essencial pra decidir com segurança.

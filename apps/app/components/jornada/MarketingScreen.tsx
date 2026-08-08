@@ -2,6 +2,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, View } from "react-native";
 import { Button, Card, CollapsibleSection, MaryAvatar, color, radius, space, type } from "@serdono/ui";
+import { numeroFase } from "@serdono/core";
 import type { JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { useMarketing } from "./useMarketing";
 
@@ -88,7 +89,7 @@ export function MarketingScreen({ jornada, etapas, onEtapasChanged }: MarketingS
       <View style={{ flexDirection: "row", gap: space[4], alignItems: "flex-start" }}>
         <MaryAvatar pose="jornada" size={72} />
         <View style={{ flex: 1 }}>
-          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>Fase 10 — Marketing</Text>
+          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>Fase {numeroFase("marketing")} — Marketing</Text>
           <Text style={{ ...type.body, color: color.text.secondary }}>
             Vou te mostrar como abrir e configurar as contas certas, e já deixo pronta a bio, sugestões de post e de
             anúncio pra você usar.

@@ -2,6 +2,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, View } from "react-native";
 import { Button, Card, CollapsibleSection, Input, MaryAvatar, color, radius, space, type } from "@serdono/ui";
+import { numeroFase } from "@serdono/core";
 import type { ClienteContatoStatus, JornadaClienteContato, JornadaEtapa, JornadaInstance } from "@serdono/supabase";
 import { formatMoney } from "../diagnostico/labels";
 import { useClientes } from "./useClientes";
@@ -130,7 +131,7 @@ export function ClientesScreen({ jornada, etapas, onEtapasChanged }: ClientesScr
       <View style={{ flexDirection: "row", gap: space[4], alignItems: "flex-start" }}>
         <MaryAvatar pose="jornada" size={72} />
         <View style={{ flex: 1 }}>
-          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>Fase Clientes — Captação de Clientes</Text>
+          <Text style={{ ...type.h2, color: color.text.primary, marginBottom: space[1] }}>{`Fase ${numeroFase("clientes")} — Captação de Clientes`}</Text>
           <Text style={{ ...type.body, color: color.text.secondary }}>
             Agora é buscar receita de forma organizada: uma meta concreta, uma oferta pronta pra usar, e o registro de
             cada contato até virar cliente de verdade.
@@ -167,12 +168,18 @@ export function ClientesScreen({ jornada, etapas, onEtapasChanged }: ClientesScr
         />
         <Button label="Salvar minha meta" variant="primary" loading={v.savingMeta} onPress={v.salvarMeta} />
 
+        {/* `flexBasis: "45%"` (não 48%): sem `minWidth`, uma soma de 2×48%
+            do container + o `gap` entre eles ultrapassava a largura
+            disponível por frações de pixel em telas Android mais estreitas
+            (achado testando a 360px — mesmo mecanismo do DS-24/§9.15, ver
+            SPEC.md SDD-83). 45% deixa folga suficiente pra qualquer largura
+            de tela razoável, não só as testadas aqui. */}
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3], marginTop: space[4] }}>
-          <View style={{ flexBasis: "48%", flexGrow: 1, backgroundColor: color.bg.surfaceAlt, borderRadius: radius.md, padding: space[4] }}>
+          <View style={{ flexBasis: "45%", flexGrow: 1, backgroundColor: color.bg.surfaceAlt, borderRadius: radius.md, padding: space[4] }}>
             <Text style={{ ...type.overline, color: color.text.muted, marginBottom: space[1] }}>FATURAMENTO ESTIMADO</Text>
             <Text style={{ ...type.h3, color: color.bg.brand }}>{formatMoney(v.resultado.faturamentoEstimado)}</Text>
           </View>
-          <View style={{ flexBasis: "48%", flexGrow: 1, backgroundColor: color.bg.surfaceAlt, borderRadius: radius.md, padding: space[4] }}>
+          <View style={{ flexBasis: "45%", flexGrow: 1, backgroundColor: color.bg.surfaceAlt, borderRadius: radius.md, padding: space[4] }}>
             <Text style={{ ...type.overline, color: color.text.muted, marginBottom: space[1] }}>CONTATOS NECESSÁRIOS</Text>
             <Text style={{ ...type.h3, color: color.bg.brand }}>{v.resultado.contatosNecessarios}</Text>
           </View>
@@ -253,9 +260,22 @@ export function ClientesScreen({ jornada, etapas, onEtapasChanged }: ClientesScr
           Diferente das fases anteriores, aqui o avanço só libera com ação real — captar Instagram não é o mesmo que
           captar cliente.
         </Text>
+        {/* Os 2 primeiros critérios são curtos (grade de 2 colunas, DS-24); os
+            4 seguintes trazem número/meta no texto e ficam melhor em linha
+            inteira, senão o texto quebra em várias linhas estreitas.
+            `minWidth` baixo (120) de propósito: dentro de uma
+            `CollapsibleSection` a largura disponível é menor que num `Card`
+            direto — valor alto demais estoura a linha por frações de pixel e
+            quebra a grade pra 1 coluna só (mesmo bug do Início, SDD-78.1). */}
+        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3], alignItems: "flex-start", marginBottom: space[3] }}>
+          <View style={{ flexBasis: "47%", flexGrow: 1, minWidth: 120 }}>
+            <CriterioRow atendido={v.criterios.metaDefinida} label="Meta de captação definida" />
+          </View>
+          <View style={{ flexBasis: "47%", flexGrow: 1, minWidth: 120 }}>
+            <CriterioRow atendido={v.criterios.ofertaCriada} label="Oferta comercial criada" />
+          </View>
+        </View>
         <View style={{ gap: space[3] }}>
-          <CriterioRow atendido={v.criterios.metaDefinida} label="Meta de captação definida" />
-          <CriterioRow atendido={v.criterios.ofertaCriada} label="Oferta comercial criada" />
           <CriterioRow
             atendido={v.criterios.contatosCadastrados >= v.criterios.contatosMinimos}
             label={`Pelo menos ${v.criterios.contatosMinimos} contatos cadastrados — baseado na sua meta (${v.criterios.contatosCadastrados}/${v.criterios.contatosMinimos})`}

@@ -67,6 +67,7 @@ export function AssistenteScreen() {
         webLinks={[
           { label: "Painel", onPress: () => router.push("/inicio") },
           { label: "Módulos", onPress: () => router.push("/modulos") },
+          { label: "Sobre", onPress: () => router.push("/sobre") },
           { label: "Sair", onPress: handleSignOut },
         ]}
         webRight={
