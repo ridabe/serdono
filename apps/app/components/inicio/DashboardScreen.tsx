@@ -9,6 +9,7 @@ import { formatMoney } from "../diagnostico/labels";
 import { FaseIcon } from "./FaseIcon";
 import { NovidadeModuloPopup } from "./NovidadeModuloPopup";
 import { PlanoAcaoResumoCard } from "./PlanoAcaoResumoCard";
+import { RaioXResumoCard } from "./RaioXResumoCard";
 import { useDashboard, type FaseResumo, type Marco } from "./useDashboard";
 
 /**
@@ -93,17 +94,46 @@ export function DashboardScreen() {
         )}
 
         {v.jornada ? (
+          // Sanfona (pedido do dono do produto, 09/08/2026): "Ponto de
+          // equilíbrio" saiu do lugar de "Clientes conquistados" (que agora é
+          // a 2ª coluna, no lugar dela) — o número já vive nos KPIs da tela do
+          // módulo Financeiro/Raio-X, repetir aqui virou redundante. O bloco
+          // inteiro (antes solto na tela) ganhou sanfona própria, fechada por
+          // padrão, mesmo espírito de "ganhar espaço" já aplicado em "Dicas da
+          // Mary"/"Seus módulos" — e fica ACIMA de "Etapas da Jornada", não
+          // mais abaixo dela.
+          <CollapsibleSection title="Seus números" accent="gold">
+            <View style={{ flexDirection: "row", flexWrap: compact ? "wrap" : "nowrap", gap: space[4] }}>
+              <KpiCard
+                titulo="Sua primeira venda"
+                valor={v.valorPrimeiraVenda != null ? formatMoney(v.valorPrimeiraVenda) : null}
+                vazio="Ainda não registrada"
+                apoio={v.valorPrimeiraVenda != null ? "registrada na Jornada" : "registre quando fechar a primeira"}
+                compact={compact}
+              />
+              <KpiCard
+                titulo="Clientes conquistados"
+                valor={String(v.clientesConquistados)}
+                apoio={v.metaClientes != null ? `de uma meta de ${v.metaClientes}` : "defina sua meta na fase Clientes"}
+                progresso={v.metaClientes ? Math.min(1, v.clientesConquistados / v.metaClientes) : undefined}
+                compact={compact}
+              />
+            </View>
+          </CollapsibleSection>
+        ) : null}
+
+        {v.jornada ? (
           // Sanfona (pedido do dono do produto, 08/08/2026): fechada por
           // padrão pra quem já concluiu a Jornada (não precisa ver o mapa de
           // fases toda vez que abre a Início), aberta por padrão pra quem
           // ainda tem etapa pendente — assim já enxerga de cara que falta
           // andar, sem precisar tocar pra descobrir. Abrir/fechar continua
           // manual a qualquer momento; isto só decide o estado inicial.
-          // **Posição no topo, antes de tudo o mais** (pedido do dono do
-          // produto, 08/08/2026) — a Jornada é o módulo principal do sistema,
-          // vem antes até do Plano de Ação Mensal.
+          // Renomeada "Módulos da jornada" → "Etapas da Jornada" (pedido do
+          // dono do produto, 09/08/2026) — nome mais claro do que é o
+          // conteúdo (o mapa de fases/etapas, não outro catálogo de módulo).
           <CollapsibleSection
-            title="Módulos da jornada"
+            title="Etapas da Jornada"
             accent="brand"
             rightLabel={
               v.progresso?.concluida
@@ -120,36 +150,11 @@ export function DashboardScreen() {
           <ProximaEtapa faseEfetiva={v.progresso.faseEfetiva} fasesResumo={v.fasesResumo} onPress={() => router.push("/jornada")} />
         ) : null}
 
-        {v.jornada ? (
-          // `flexWrap` em vez de empilhar em coluna no celular (pedido do dono
-          // do produto, 08/08/2026): 2 KPIs por linha em vez de 3 cards cheios
-          // um embaixo do outro — mesmo princípio "mais quadrado, menos rolagem"
-          // do mockup de Investimentos, onde os blocos já vinham em grade mesmo
-          // em largura de celular.
-          <View style={{ flexDirection: "row", flexWrap: compact ? "wrap" : "nowrap", gap: space[4] }}>
-            <KpiCard
-              titulo="Sua primeira venda"
-              valor={v.valorPrimeiraVenda != null ? formatMoney(v.valorPrimeiraVenda) : null}
-              vazio="Ainda não registrada"
-              apoio={v.valorPrimeiraVenda != null ? "registrada na Jornada" : "registre quando fechar a primeira"}
-              compact={compact}
-            />
-            <KpiCard
-              titulo="Ponto de equilíbrio"
-              valor={v.pontoEquilibrio != null ? formatMoney(v.pontoEquilibrio) : null}
-              vazio="Ainda não calculado"
-              apoio={v.pontoEquilibrio != null ? "faturamento mínimo por mês" : "preencha a calculadora do Financeiro"}
-              compact={compact}
-            />
-            <KpiCard
-              titulo="Clientes conquistados"
-              valor={String(v.clientesConquistados)}
-              apoio={v.metaClientes != null ? `de uma meta de ${v.metaClientes}` : "defina sua meta na fase Clientes"}
-              progresso={v.metaClientes ? Math.min(1, v.clientesConquistados / v.metaClientes) : undefined}
-              compact={compact}
-            />
-          </View>
-        ) : null}
+        {/* Resumo do Raio-X Financeiro (pedido do dono do produto,
+            09/08/2026) — só o comparativo em barras + o comentário da Mary,
+            posicionado ACIMA do Plano de Ação Mensal. Some sozinho se nunca
+            houve fechamento (RN-2, ver `RaioXResumoCard.tsx`). */}
+        <RaioXResumoCard />
 
         <PlanoAcaoResumoCard />
 
@@ -559,7 +564,7 @@ function CardDicasDaMary({
   return (
     <>
       <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[4] }}>
-        Material por tema — PDF, vídeo e links — livre pra qualquer um, sem depender de módulo liberado.
+        Material por tema — PDF, vídeo e links — acesse e explore.
       </Text>
 
       {categorias.length === 0 ? (

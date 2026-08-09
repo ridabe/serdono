@@ -27,6 +27,13 @@ module.exports = {
     android: {
       package: "br.com.serdono.app",
       versionCode: 4,
+      // Config do Firebase (projeto "ser-dono") — necessário pro FCM entregar
+      // push notification no Android (SDD-91). Arquivo de cliente, sem
+      // segredo real (protegido por nome de pacote/API restriction do lado
+      // do Google) — commitado igual o resto do app. A credencial que É
+      // sensível (chave da conta de serviço) NUNCA entra no repo: sobe direto
+      // pra EAS via `eas credentials`.
+      googleServicesFile: "./google-services.json",
       adaptiveIcon: {
         backgroundColor: "#0E3A4F",
         foregroundImage: "../../img/app-icon/android-adaptive-foreground-432.png",

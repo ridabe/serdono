@@ -63,6 +63,17 @@ export function ModuleIcon({ slug, color, size = icon.md }: { slug: string; colo
         </>
       ) : null}
 
+      {/* Raio-X Financeiro: barras em crescimento — fechamento mensal comparado. */}
+      {slug === "raio-x-financeiro" ? (
+        <>
+          <Path d="M3.5 20.5h17" {...common} />
+          <Path d="M6.5 20.5v-6" {...common} />
+          <Path d="M11.5 20.5v-9.5" {...common} />
+          <Path d="M16.5 20.5v-13" {...common} />
+          <Path d="M14.5 5l2-1.5 2 2" {...common} />
+        </>
+      ) : null}
+
       {/* Meu Negócio em Dia: calendário com check. */}
       {slug === "meu-negocio-em-dia" ? (
         <>

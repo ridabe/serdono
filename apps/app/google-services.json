@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "109626871024",
+    "project_id": "ser-dono",
+    "storage_bucket": "ser-dono.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109626871024:android:56585508f896e7c5630635",
+        "android_client_info": {
+          "package_name": "br.com.serdono.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsXK9gOTZn5JArc1AHpJ8mDCDemMnKZ8k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import {
-  calcularPlanejamentoFinanceiro,
   calcularProgressoJornada,
   DESCOBERTA_STEPS,
   FASE_JORNADA_LABEL,
   FASES_JORNADA,
-  type FinanceiroInputs,
   type JornadaFaseCore,
 } from "@serdono/core";
 import {
@@ -25,7 +23,6 @@ import {
   type NicheEstruturaInfo,
 } from "@serdono/supabase";
 
-const SLUG_FINANCEIRO_PLANEJAMENTO = "financeiro_planejamento";
 const MAX_MARCOS = 6;
 const MAX_CATEGORIAS_DICAS = 3;
 
@@ -181,16 +178,6 @@ export function useDashboard() {
   const dadosVenda = etapaVenda?.dados_usuario as unknown as { valor: number | null } | undefined;
   const valorPrimeiraVenda = etapaVenda?.status === "concluida" ? (dadosVenda?.valor ?? null) : null;
 
-  const dadosFinanceiro = etapas.find((e) => e.template.slug === SLUG_FINANCEIRO_PLANEJAMENTO)?.dados_usuario as unknown as
-    | Partial<FinanceiroInputs>
-    | undefined;
-  const financeiroCompleto =
-    dadosFinanceiro &&
-    ["capitalDisponivel", "investimentoInicial", "custosFixosMensais", "receitaMensalEsperada", "margemContribuicaoPct", "mesesCapitalGiro", "mesesReserva"].every(
-      (campo) => typeof (dadosFinanceiro as Record<string, unknown>)[campo] === "number"
-    );
-  const financeiro = financeiroCompleto ? calcularPlanejamentoFinanceiro(dadosFinanceiro as FinanceiroInputs) : null;
-
   return {
     loading,
     error,
@@ -203,7 +190,6 @@ export function useDashboard() {
     marcos,
     totalEtapasConcluidas,
     valorPrimeiraVenda,
-    pontoEquilibrio: financeiro?.pontoEquilibrioMensal ?? null,
     clientesConquistados,
     metaClientes,
     categoriasDicas,

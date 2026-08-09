@@ -22,6 +22,7 @@ export const ROTA_POR_SLUG: Record<string, string> = {
   "plano-acao-mensal": "/plano-acao",
   "parceiros-fornecedores": "/parceiros",
   "checkup-mensal": "/checkup",
+  "raio-x-financeiro": "/raio-x-financeiro",
 };
 
 export function rotaDoModulo(slug: string): string | undefined {
