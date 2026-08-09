@@ -2,22 +2,27 @@ import React from "react";
 import { usePathname, useRouter } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { a11y, color, space, type } from "@serdono/ui";
+import { a11y, color, IconBadge, moduleAccent, space, type, type ModuleAccent } from "@serdono/ui";
 import { TabIcon, type TabIconName } from "./TabIcon";
 
 interface Tab {
   href: string;
   label: string;
   icon: TabIconName;
+  /** Cor própria da aba (pedido do dono do produto, 09/08/2026: menu sempre visível
+      merecia mais destaque que ícone monocromático) — mesma paleta de `moduleAccent`
+      já usada no catálogo de módulos (DS-23), reaproveitada aqui como identidade fixa
+      por aba, não cíclica (as 4 abas não mudam, então a cor de cada uma também não). */
+  accent: ModuleAccent;
   /** Prefixos de rota que acendem esta aba. */
   matches: string[];
 }
 
 const BASE_TABS: Tab[] = [
-  { href: "/inicio", label: "Início", icon: "inicio", matches: ["/inicio"] },
-  { href: "/jornada", label: "Jornada", icon: "jornada", matches: ["/jornada"] },
-  { href: "/assistente", label: "Mary", icon: "mary", matches: ["/assistente"] },
-  { href: "/perfil", label: "Perfil", icon: "perfil", matches: ["/perfil", "/completar-cadastro"] },
+  { href: "/inicio", label: "Início", icon: "inicio", accent: "teal", matches: ["/inicio"] },
+  { href: "/jornada", label: "Jornada", icon: "jornada", accent: "gold", matches: ["/jornada"] },
+  { href: "/assistente", label: "Mary", icon: "mary", accent: "blue", matches: ["/assistente"] },
+  { href: "/perfil", label: "Perfil", icon: "perfil", accent: "green", matches: ["/perfil", "/completar-cadastro"] },
 ];
 
 /**
@@ -54,7 +59,13 @@ export function MobileTabBar() {
     >
       {tabs.map((tab) => {
         const ativa = tab.matches.some((m) => pathname === m || pathname.startsWith(`${m}/`));
-        const tint = ativa ? color.action.secondary : color.text.muted;
+        const tons = moduleAccent[tab.accent];
+        // Rótulo colorido só na aba ativa usa o mesmo tom de `tons.bg` (a cor
+        // saturada do acento) — já validado como texto legível em fundo claro
+        // pelo próprio design system (é o mesmo valor usado como `text` dos
+        // acentos equivalentes em `CollapsibleSection`, ex.: `gold` = mesmo
+        // `color.action.primaryHover`), não uma cor nova sem checar contraste.
+        const corRotulo = ativa ? tons.bg : color.text.muted;
         return (
           <Pressable
             key={tab.href}
@@ -67,22 +78,22 @@ export function MobileTabBar() {
               minHeight: a11y.minTouchTarget,
               alignItems: "center",
               justifyContent: "center",
-              gap: 2,
+              gap: 4,
             }}
           >
-            {/* Indicador de aba ativa não é só cor — DS-2: cor sozinha nunca carrega
-                estado. O traço dourado no topo é o segundo sinal. */}
-            <View
-              style={{
-                position: "absolute",
-                top: -space[2],
-                height: 2,
-                width: 28,
-                backgroundColor: ativa ? color.action.primary : "transparent",
-              }}
-            />
-            <TabIcon name={tab.icon} color={tint} />
-            <Text style={{ ...type.caption, color: tint, fontWeight: ativa ? "700" : "500" }}>{tab.label}</Text>
+            {/* Estado ativo não depende só de cor (DS-2): o círculo colorido
+                (presença/ausência) e o negrito no rótulo são os sinais
+                estruturais — a cor em si é só reforço visual. */}
+            {ativa ? (
+              <IconBadge accent={tab.accent} size={36}>
+                <TabIcon name={tab.icon} color={tons.fg} size={18} />
+              </IconBadge>
+            ) : (
+              <View style={{ width: 36, height: 36, alignItems: "center", justifyContent: "center" }}>
+                <TabIcon name={tab.icon} color={tons.bg} size={20} />
+              </View>
+            )}
+            <Text style={{ ...type.caption, color: corRotulo, fontWeight: ativa ? "700" : "500" }}>{tab.label}</Text>
           </Pressable>
         );
       })}
