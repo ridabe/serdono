@@ -14,7 +14,7 @@ module.exports = {
     name: "Ser Dono",
     slug: "serdono",
     scheme: "serdono",
-    version: "0.1.4",
+    version: "0.1.5",
     orientation: "portrait",
     icon: "../../img/app-icon/ios-icon-1024.png",
     userInterfaceStyle: "light",
@@ -26,7 +26,7 @@ module.exports = {
     },
     android: {
       package: "br.com.serdono.app",
-      versionCode: 4,
+      versionCode: 5,
       // Config do Firebase (projeto "ser-dono") — necessário pro FCM entregar
       // push notification no Android (SDD-91). Arquivo de cliente, sem
       // segredo real (protegido por nome de pacote/API restriction do lado
