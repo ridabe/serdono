@@ -83,3 +83,17 @@ export function primeiroDiaMesAtualISO(agora: Date = new Date()): string {
   const mes = String(agora.getMonth() + 1).padStart(2, "0");
   return `${ano}-${mes}-01`;
 }
+
+/**
+ * Em qual das 4 semanas do plano o dia do mês cai — usado pro resumo da
+ * Início destacar a semana corrente sem precisar de mais nenhum dado.
+ * Bucket fixo (1-7/8-14/15-21/22-31), não semana civil real — o plano em si
+ * já nasce dividido em exatamente 4 blocos (SDD-86), não em quantas semanas
+ * o mês tiver de verdade.
+ */
+export function semanaAtualDoMes(diaDoMes: number): number {
+  if (diaDoMes <= 7) return 1;
+  if (diaDoMes <= 14) return 2;
+  if (diaDoMes <= 21) return 3;
+  return 4;
+}

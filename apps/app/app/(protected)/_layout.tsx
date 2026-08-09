@@ -6,6 +6,7 @@ import { color, isNativeApp } from "@serdono/ui";
 import { getCurrentSession, isAnonymousSession, supabase } from "@serdono/supabase";
 import { MobileTabBar } from "../../components/shell/MobileTabBar";
 import { AppDrawer } from "../../components/shell/AppDrawer";
+import { MaryFloatingButton } from "../../components/shell/MaryFloatingButton";
 import { resetMaryIntro } from "../../components/jornada/maryIntroSession";
 
 const PROFILE_ROUTE = "/completar-cadastro";
@@ -14,6 +15,8 @@ const PROFILE_ROUTE = "/completar-cadastro";
 // incompleto é um fluxo obrigatório (dar saída por aba só faria o próprio
 // layout redirecionar de volta), e o painel administrativo é web — não tem
 // aba, e quem chegar nele por link direto navega pelo cabeçalho da tela.
+// Mesma lista serve pro botão flutuante da Mary (SDD nova, 08/08/2026): sair
+// de um fluxo obrigatório ou do painel admin pelo chat também não faz sentido.
 const ROTAS_SEM_TAB_BAR = [PROFILE_ROUTE, "/admin"];
 
 // Guarda de rota: exige uma sessão real (não anônima) antes de renderizar
@@ -92,8 +95,8 @@ export default function ProtectedLayout() {
     );
   }
 
-  const mostrarTabBar =
-    isNativeApp && !ROTAS_SEM_TAB_BAR.some((rota) => pathname === rota || pathname.startsWith(`${rota}/`));
+  const emRotaSemTabBar = ROTAS_SEM_TAB_BAR.some((rota) => pathname === rota || pathname.startsWith(`${rota}/`));
+  const mostrarTabBar = isNativeApp && !emRotaSemTabBar;
 
   return (
     <View style={{ flex: 1, backgroundColor: color.bg.canvas }}>
@@ -102,6 +105,7 @@ export default function ProtectedLayout() {
       </View>
       {mostrarTabBar ? <MobileTabBar /> : null}
       {isNativeApp ? <AppDrawer /> : null}
+      {!emRotaSemTabBar ? <MaryFloatingButton /> : null}
     </View>
   );
 }

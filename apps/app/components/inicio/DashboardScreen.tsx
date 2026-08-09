@@ -1,13 +1,14 @@
 import { useRouter } from "expo-router";
 import { ActivityIndicator, Image, Pressable, ScrollView, Text, useWindowDimensions, View } from "react-native";
 import Svg, { Circle, Path } from "react-native-svg";
-import { breakpoint, Button, Card, chart, color, icon, IconBadge, MaryAvatar, moduleAccent, MODULE_ACCENT_CYCLE, radius, space, type } from "@serdono/ui";
+import { breakpoint, Button, Card, chart, CollapsibleSection, color, icon, IconBadge, moduleAccent, MODULE_ACCENT_CYCLE, radius, space, type } from "@serdono/ui";
 import { FASES_JORNADA, maskCnpj, numeroFase, type JornadaFaseCore } from "@serdono/core";
 import { signOut, type CategoriaComMateriais } from "@serdono/supabase";
 import { ScreenHeader } from "../shell/ScreenHeader";
 import { formatMoney } from "../diagnostico/labels";
 import { FaseIcon } from "./FaseIcon";
 import { NovidadeModuloPopup } from "./NovidadeModuloPopup";
+import { PlanoAcaoResumoCard } from "./PlanoAcaoResumoCard";
 import { useDashboard, type FaseResumo, type Marco } from "./useDashboard";
 
 /**
@@ -91,6 +92,30 @@ export function DashboardScreen() {
           </Card>
         )}
 
+        {v.jornada ? (
+          // Sanfona (pedido do dono do produto, 08/08/2026): fechada por
+          // padrão pra quem já concluiu a Jornada (não precisa ver o mapa de
+          // fases toda vez que abre a Início), aberta por padrão pra quem
+          // ainda tem etapa pendente — assim já enxerga de cara que falta
+          // andar, sem precisar tocar pra descobrir. Abrir/fechar continua
+          // manual a qualquer momento; isto só decide o estado inicial.
+          // **Posição no topo, antes de tudo o mais** (pedido do dono do
+          // produto, 08/08/2026) — a Jornada é o módulo principal do sistema,
+          // vem antes até do Plano de Ação Mensal.
+          <CollapsibleSection
+            title="Módulos da jornada"
+            accent="brand"
+            rightLabel={
+              v.progresso?.concluida
+                ? "Concluída"
+                : `${v.fasesResumo.filter((f) => f.total > 0 && f.concluidas === f.total).length}/${v.fasesResumo.length} fases`
+            }
+            defaultExpanded={!(v.progresso?.concluida ?? false)}
+          >
+            <GradeFases fases={v.fasesResumo} faseAtual={v.progresso?.faseEfetiva ?? null} onPress={() => router.push("/jornada")} compact={compact} />
+          </CollapsibleSection>
+        ) : null}
+
         {v.jornada && v.progresso && !v.progresso.concluida ? (
           <ProximaEtapa faseEfetiva={v.progresso.faseEfetiva} fasesResumo={v.fasesResumo} onPress={() => router.push("/jornada")} />
         ) : null}
@@ -126,14 +151,13 @@ export function DashboardScreen() {
           </View>
         ) : null}
 
-        {v.marcos.length > 0 ? <LinhaDoTempo marcos={v.marcos} total={v.totalEtapasConcluidas} /> : null}
-        {v.jornada ? <GradeFases fases={v.fasesResumo} faseAtual={v.progresso?.faseEfetiva ?? null} onPress={() => router.push("/jornada")} compact={compact} /> : null}
+        <PlanoAcaoResumoCard />
 
-        {/* Cada card abaixo fica sozinho na própria linha (pedido do dono do
-            produto, 08/08/2026): pareado com outro card num grid de 2
-            colunas, "Converse comigo" esticava na vertical pra acompanhar a
-            altura do vizinho — layout de card único evita isso. */}
-        <CardMary onPress={() => router.push("/assistente")} />
+        {v.marcos.length > 0 ? <LinhaDoTempo marcos={v.marcos} total={v.totalEtapasConcluidas} /> : null}
+
+        {/* "Converse comigo" saiu da Início (pedido do dono do produto,
+            08/08/2026) — virou o botão flutuante da Mary, presente em toda
+            tela protegida (`MaryFloatingButton.tsx`), não só aqui. */}
 
         {/* "Seus módulos" removido do Início (pedido do dono do produto,
             08/08/2026) — já existe no menu lateral (DS-22, `AppDrawer`), essa
@@ -412,7 +436,20 @@ function ProximaEtapa({
   );
 }
 
-/** Grade colorida com o mapa de todas as fases da Jornada — pedido do dono do produto (visual mais "app nativo", 08/08/2026, DS-23). Substitui as barras horizontais finas por um card por fase, com badge de cor + status. */
+/**
+ * Grade colorida com o mapa de todas as fases da Jornada — pedido do dono do
+ * produto (visual mais "app nativo", 08/08/2026, DS-23). Um card por fase,
+ * com badge de cor + status.
+ *
+ * **Virou conteúdo de uma `CollapsibleSection` (sanfona), não mais dono do
+ * próprio `Card`/título (pedido do dono do produto, 08/08/2026)** — a seção
+ * inteira estava tomando bastante altura fixa da Início mesmo pra quem já
+ * concluiu a Jornada e não precisa mais olhar aquele mapa toda vez que abre
+ * o app. Quem monta o header/estado aberto-ou-fechado agora é
+ * `DashboardScreen` (`defaultExpanded = jornada NÃO concluída`), porque só
+ * ali existe o dado de progresso geral — este componente só sabe da fase a
+ * fase.
+ */
 function GradeFases({
   fases,
   faseAtual,
@@ -425,12 +462,7 @@ function GradeFases({
   compact: boolean;
 }) {
   return (
-    <Card variant="default" padding={5}>
-      <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: space[4] }}>
-        <Text style={{ ...type.h3, color: color.text.primary }}>Módulos da jornada</Text>
-        <Button label="Abrir Jornada" variant="ghost" size="sm" onPress={onPress} />
-      </View>
-
+    <View style={{ gap: space[4] }}>
       <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3] }}>
         {fases.map((f, i) => {
           const status: "concluido" | "andamento" | "pendente" =
@@ -465,7 +497,8 @@ function GradeFases({
           );
         })}
       </View>
-    </Card>
+      <Button label="Abrir Jornada" variant="primary" size="sm" onPress={onPress} style={{ alignSelf: "flex-start" }} />
+    </View>
   );
 }
 
@@ -489,24 +522,6 @@ function StatusPill({ status }: { status: "concluido" | "andamento" | "pendente"
     <View style={{ alignSelf: "flex-start", backgroundColor: tones.bg, borderRadius: radius.sm, paddingHorizontal: space[2], paddingVertical: 2 }}>
       <Text style={{ ...type.caption, fontSize: 10.5, fontWeight: "700", color: tones.fg }}>{STATUS_PILL_LABEL[status]}</Text>
     </View>
-  );
-}
-
-function CardMary({ onPress }: { onPress: () => void }) {
-  return (
-    <Card variant="brand" padding={5}>
-      <View style={{ flexDirection: "row", gap: space[4], alignItems: "flex-start" }}>
-        <MaryAvatar pose="boas-vindas" size={56} />
-        <View style={{ flex: 1 }}>
-          <Text style={{ ...type.bodyStrong, color: color.text.onBrand }}>Converse comigo</Text>
-          <Text style={{ ...type.body, color: color.bg.brandSubtle, marginTop: space[1] }}>
-            Posso falar sobre o seu negócio e sobre o caminho que você já percorreu — e tirar dúvidas de
-            empreendedorismo, MEI e finanças.
-          </Text>
-          <Button label="Abrir conversa" variant="primary" size="sm" onPress={onPress} style={{ alignSelf: "flex-start", marginTop: space[3] }} />
-        </View>
-      </View>
-    </Card>
   );
 }
 

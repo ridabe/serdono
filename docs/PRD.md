@@ -752,6 +752,19 @@ Detalhamento técnico (schema, fontes reais consultadas, verificação) em SPEC.
 
 Detalhamento técnico (schema, Edge Function, gate de elegibilidade, PDF, comparação) em SPEC.md SDD-86.
 
+### 12.10 Parceiros e Fornecedores (pedido do dono do produto em 08/08/2026)
+
+**Sexto módulo do catálogo, mesma liberação automática dos demais.** Não é dado novo — é a mesma base curada pelo admin (`fornecedores_parceiros`) que já existia desde a Fase 8 da Jornada (§9.7), agora também acessível como módulo próprio, sem depender de estar naquela fase específica nem de já ter um nicho escolhido.
+
+**O módulo mostra a base inteira de parceiros ativos, com:**
+1. **Filtro por categoria** (o tipo de negócio do próprio parceiro — ex.: "Gráfica", "Contabilidade" — não o nicho do empreendedor).
+2. **Um bloco por parceiro**, com logo (quando cadastrado), nome, categoria, descrição e região.
+3. **Contato e site como ação clicável**, não só texto — número de telefone abre o discador, e-mail abre o cliente de e-mail, site abre no navegador. Contato que não é nem telefone nem e-mail reconhecível continua visível, só não vira link (nunca fingir uma ação que não existe).
+
+**Fora de escopo desta versão:** avaliação/comentário de usuário sobre o parceiro, busca por texto livre (só filtro por categoria), qualquer contato direto pelo produto que não seja abrir o app nativo de telefone/e-mail/navegador do próprio aparelho.
+
+Detalhamento técnico em SPEC.md SDD-89.
+
 ---
 
 ## 13. Regras de Negócio Transversais (numeração consolidada)
