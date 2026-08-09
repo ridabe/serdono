@@ -46,7 +46,7 @@ export interface FaseResumo {
 /**
  * Painel do empreendedor (SDD-50). Agrega, numa leitura só, o que a pessoa
  * precisa ver ao entrar sem querer abrir a Jornada: identidade do negócio,
- * o quanto andou, marcos reais datados, módulos, Dicas da Mary e a própria Mary.
+ * o quanto andou, marcos reais datados, Dicas da Mary e a própria Mary.
  *
  * Regra que vale pra toda a tela: **nenhum número é estimado aqui**. Todo KPI
  * só aparece se o dado real existir (a pessoa preencheu a calculadora,

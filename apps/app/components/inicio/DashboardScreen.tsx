@@ -1,13 +1,14 @@
 import { useRouter } from "expo-router";
 import { ActivityIndicator, Image, Pressable, ScrollView, Text, useWindowDimensions, View } from "react-native";
-import Svg, { Circle } from "react-native-svg";
-import { breakpoint, Button, Card, chart, CollapsibleSection, color, IconBadge, MaryAvatar, moduleAccent, MODULE_ACCENT_CYCLE, radius, space, type } from "@serdono/ui";
-import { FASES_JORNADA, maskCnpj, type JornadaFaseCore } from "@serdono/core";
+import Svg, { Circle, Path } from "react-native-svg";
+import { breakpoint, Button, Card, chart, CollapsibleSection, color, icon, IconBadge, moduleAccent, MODULE_ACCENT_CYCLE, radius, space, type } from "@serdono/ui";
+import { FASES_JORNADA, maskCnpj, numeroFase, type JornadaFaseCore } from "@serdono/core";
 import { signOut, type CategoriaComMateriais } from "@serdono/supabase";
 import { ScreenHeader } from "../shell/ScreenHeader";
-import { rotaDoModulo } from "../modulos/rotas";
 import { formatMoney } from "../diagnostico/labels";
 import { FaseIcon } from "./FaseIcon";
+import { NovidadeModuloPopup } from "./NovidadeModuloPopup";
+import { PlanoAcaoResumoCard } from "./PlanoAcaoResumoCard";
 import { useDashboard, type FaseResumo, type Marco } from "./useDashboard";
 
 /**
@@ -40,6 +41,8 @@ export function DashboardScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: color.bg.canvas }}>
+      <NovidadeModuloPopup />
+
       {/* No app instalado esses três destinos são abas (SDD-53) — o cabeçalho
           fica só com a marca. */}
       <ScreenHeader
@@ -56,6 +59,7 @@ export function DashboardScreen() {
           // única entrada de uma área livre presa dentro de um card.
           { label: "Dicas da Mary", onPress: () => router.push("/dicas-da-mary") },
           { label: "Meu perfil", onPress: () => router.push("/perfil") },
+          { label: "Sobre", onPress: () => router.push("/sobre") },
           { label: "Sair", onPress: handleSignOut },
         ]}
       />
@@ -87,6 +91,30 @@ export function DashboardScreen() {
             <Button label="Começar minha Jornada" variant="primary" onPress={() => router.push("/jornada")} style={{ alignSelf: "flex-start" }} />
           </Card>
         )}
+
+        {v.jornada ? (
+          // Sanfona (pedido do dono do produto, 08/08/2026): fechada por
+          // padrão pra quem já concluiu a Jornada (não precisa ver o mapa de
+          // fases toda vez que abre a Início), aberta por padrão pra quem
+          // ainda tem etapa pendente — assim já enxerga de cara que falta
+          // andar, sem precisar tocar pra descobrir. Abrir/fechar continua
+          // manual a qualquer momento; isto só decide o estado inicial.
+          // **Posição no topo, antes de tudo o mais** (pedido do dono do
+          // produto, 08/08/2026) — a Jornada é o módulo principal do sistema,
+          // vem antes até do Plano de Ação Mensal.
+          <CollapsibleSection
+            title="Módulos da jornada"
+            accent="brand"
+            rightLabel={
+              v.progresso?.concluida
+                ? "Concluída"
+                : `${v.fasesResumo.filter((f) => f.total > 0 && f.concluidas === f.total).length}/${v.fasesResumo.length} fases`
+            }
+            defaultExpanded={!(v.progresso?.concluida ?? false)}
+          >
+            <GradeFases fases={v.fasesResumo} faseAtual={v.progresso?.faseEfetiva ?? null} onPress={() => router.push("/jornada")} compact={compact} />
+          </CollapsibleSection>
+        ) : null}
 
         {v.jornada && v.progresso && !v.progresso.concluida ? (
           <ProximaEtapa faseEfetiva={v.progresso.faseEfetiva} fasesResumo={v.fasesResumo} onPress={() => router.push("/jornada")} />
@@ -123,32 +151,28 @@ export function DashboardScreen() {
           </View>
         ) : null}
 
+        <PlanoAcaoResumoCard />
+
         {v.marcos.length > 0 ? <LinhaDoTempo marcos={v.marcos} total={v.totalEtapasConcluidas} /> : null}
-        {v.jornada ? <GradeFases fases={v.fasesResumo} faseAtual={v.progresso?.faseEfetiva ?? null} onPress={() => router.push("/jornada")} compact={compact} /> : null}
 
-        {/* Cada card abaixo fica sozinho na própria linha (pedido do dono do
-            produto, 08/08/2026): pareado com outro card num grid de 2
-            colunas, "Converse comigo" esticava na vertical pra acompanhar a
-            altura do vizinho — layout de card único evita isso. */}
-        <CardMary onPress={() => router.push("/assistente")} />
+        {/* "Converse comigo" saiu da Início (pedido do dono do produto,
+            08/08/2026) — virou o botão flutuante da Mary, presente em toda
+            tela protegida (`MaryFloatingButton.tsx`), não só aqui. */}
 
-        "Seus módulos" vira sanfona (nasce fechada, DS-18.1) — mesmo pedido.
-        <CollapsibleSection title="Seus módulos">
-          <CardModulos
-            modulos={v.modulos}
-            onPress={() => router.push("/modulos")}
-            onAbrirModulo={(slug) => {
-              const rota = rotaDoModulo(slug);
-              if (rota) router.push(rota as never);
-            }}
+        {/* "Seus módulos" removido do Início (pedido do dono do produto,
+            08/08/2026) — já existe no menu lateral (DS-22, `AppDrawer`), essa
+            seção era um segundo caminho pro mesmo destino. */}
+
+        {/* Sanfona recolhida (pedido do dono do produto, 09/08/2026: ganhar
+            espaço vertical na Início) — mesmo padrão de `CollapsibleSection`
+            já usado em "Módulos da jornada" acima. */}
+        <CollapsibleSection title="Dicas da Mary" accent="gold">
+          <CardDicasDaMary
+            categorias={v.categoriasDicas}
+            onPress={() => router.push("/dicas-da-mary")}
+            onAbrirCategoria={(categoriaId) => router.push(`/dicas-da-mary/${categoriaId}`)}
           />
         </CollapsibleSection>
-
-        <CardDicasDaMary
-          categorias={v.categoriasDicas}
-          onPress={() => router.push("/dicas-da-mary")}
-          onAbrirCategoria={(categoriaId) => router.push(`/dicas-da-mary/${categoriaId}`)}
-        />
       </ScrollView>
     </View>
   );
@@ -186,11 +210,20 @@ function HeroNegocio({
   const detalhes = [nicheName, regime ? REGIME_LABEL[regime] : null, cnpj ? maskCnpj(cnpj) : null].filter(Boolean).join(" · ");
 
   return (
+    // Layout compactado (pedido do dono do produto, 08/08/2026): antes, no
+    // celular, logo/nome/anel de progresso empilhavam em 3 blocos verticais
+    // separados (`flexDirection: compact ? "column" : "row"` misturando os
+    // três) e o card sozinho tomava quase metade da tela. Agora logo+nome
+    // sempre ficam lado a lado (nunca empilham, nem no celular — o logo não
+    // pode diminuir de tamanho), o status vem numa linha própria embaixo
+    // deles, e só depois vem o anel de progresso — 3 blocos empilhados vira
+    // 2, e o mais alto dos dois (logo+nome) é bem mais raso que antes.
     <Card variant="brand" padding={6}>
       <Text style={{ ...type.overline, color: color.action.primary, marginBottom: space[3] }}>
         {primeiroNome ? `OI, ${primeiroNome.toUpperCase()}` : "SEU NEGÓCIO"}
       </Text>
-      <View style={{ flexDirection: compact ? "column" : "row", alignItems: compact ? "flex-start" : "center", gap: space[5] }}>
+
+      <View style={{ flexDirection: "row", alignItems: "center", gap: space[4] }}>
         <View style={{ width: 64, height: 64, borderRadius: radius.lg, backgroundColor: color.action.primary, alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
           {logoUrl ? (
             <Image source={{ uri: logoUrl }} style={{ width: "100%", height: "100%" }} resizeMode="cover" accessibilityLabel={`Logo de ${nome}`} />
@@ -200,15 +233,22 @@ function HeroNegocio({
         </View>
 
         <View style={{ flex: 1, minWidth: 0 }}>
-          <Text style={{ ...type.h1, color: color.text.onBrand }}>{nome}</Text>
-          {detalhes ? <Text style={{ ...type.body, color: color.bg.brandSubtle, marginTop: space[1] }}>{detalhes}</Text> : null}
-          <View style={{ flexDirection: "row", marginTop: space[3] }}>
-            <View style={{ backgroundColor: concluida ? color.state.success : "rgba(255,255,255,0.16)", borderRadius: radius.full, paddingHorizontal: space[3], paddingVertical: 4 }}>
-              <Text style={{ ...type.caption, color: color.text.onBrand, fontWeight: "700" }}>
-                {concluida ? "Jornada concluída" : "Jornada em andamento"}
-              </Text>
-            </View>
-          </View>
+          <Text style={{ ...type.h1, color: color.text.onBrand }} numberOfLines={compact ? 2 : 1}>
+            {nome}
+          </Text>
+          {detalhes ? (
+            <Text style={{ ...type.body, color: color.bg.brandSubtle, marginTop: space[1] }} numberOfLines={1}>
+              {detalhes}
+            </Text>
+          ) : null}
+        </View>
+      </View>
+
+      <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: space[4] }}>
+        <View style={{ backgroundColor: concluida ? color.state.success : "rgba(255,255,255,0.16)", borderRadius: radius.full, paddingHorizontal: space[3], paddingVertical: 4 }}>
+          <Text style={{ ...type.caption, color: color.text.onBrand, fontWeight: "700" }}>
+            {concluida ? "Jornada concluída" : "Jornada em andamento"}
+          </Text>
         </View>
 
         <AnelProgresso percentual={percentual} />
@@ -307,9 +347,23 @@ function LinhaDoTempo({ marcos, total }: { marcos: Marco[]; total: number }) {
   const cronologica = [...marcos].reverse();
   return (
     <Card variant="default" padding={5}>
-      <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "baseline", marginBottom: space[4] }}>
-        <Text style={{ ...type.h3, color: color.text.primary }}>Sua linha do tempo</Text>
-        <Text style={{ ...type.caption, color: color.text.muted }}>{total} etapas concluídas</Text>
+      {/* `flexShrink: 1` nos dois textos + `flexWrap: "wrap"` na linha —
+          sem isso, no app nativo (Yoga, `flexShrink` nasce em 0 por padrão,
+          diferente do flexbox da web) o texto do total não encolhe nem quebra
+          linha quando não cabe: ele estoura pra fora do card em vez de ficar
+          contido, mesmo quando o preview web mostra tudo cabendo certinho. */}
+      <View
+        style={{
+          flexDirection: "row",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+          alignItems: "baseline",
+          gap: space[1],
+          marginBottom: space[4],
+        }}
+      >
+        <Text style={{ ...type.h3, color: color.text.primary, flexShrink: 1 }}>Sua linha do tempo</Text>
+        <Text style={{ ...type.caption, color: color.text.muted, flexShrink: 1 }}>{total} etapas concluídas</Text>
       </View>
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingBottom: space[1] }}>
@@ -356,7 +410,9 @@ function ProximaEtapa({
   fasesResumo: FaseResumo[];
   onPress: () => void;
 }) {
-  const ordinal = FASES_JORNADA.indexOf(faseEfetiva) + 2; // +2: Descoberta é a etapa 1, não entra em FASES_JORNADA
+  // Número da fase vem de `numeroFase` (packages/core) — nunca hardcoded
+  // aqui nem em nenhuma tela (achado real de inconsistência, SPEC.md SDD-82).
+  const ordinal = numeroFase(faseEfetiva);
   const resumo = fasesResumo.find((f) => f.fase === faseEfetiva);
   const accent = MODULE_ACCENT_CYCLE[FASES_JORNADA.indexOf(faseEfetiva) % MODULE_ACCENT_CYCLE.length];
   // Nunca inventar um resumo de tarefa — só o dado real de progresso já carregado.
@@ -364,14 +420,18 @@ function ProximaEtapa({
 
   return (
     <Card variant="default" padding={5}>
-      <Text style={{ ...type.overline, color: color.text.muted, marginBottom: space[3] }}>PRÓXIMA ETAPA</Text>
+      {/* "Fase", nunca "Etapa" — "etapa" já é outro conceito no produto (um
+          item de checklist DENTRO de uma fase, `jornada_etapas`). Usar os
+          dois termos pra "a mesma coisa" é exatamente a inconsistência que
+          o dono do produto reportou (SDD-82). */}
+      <Text style={{ ...type.overline, color: color.text.muted, marginBottom: space[3] }}>PRÓXIMA FASE</Text>
       <View style={{ flexDirection: "row", alignItems: "center", gap: space[4] }}>
         <IconBadge accent={accent} size={56}>
           <FaseIcon fase={faseEfetiva} color={moduleAccent[accent].fg} size={26} />
         </IconBadge>
         <View style={{ flex: 1, minWidth: 0 }}>
           <Text style={{ ...type.bodyStrong, color: color.text.primary }}>
-            Etapa {ordinal}: {resumo?.label ?? faseEfetiva}
+            Fase {ordinal}: {resumo?.label ?? faseEfetiva}
           </Text>
           <Text style={{ ...type.caption, color: color.text.muted, marginTop: 2 }}>{apoio}</Text>
         </View>
@@ -381,7 +441,20 @@ function ProximaEtapa({
   );
 }
 
-/** Grade colorida com o mapa de todas as fases da Jornada — pedido do dono do produto (visual mais "app nativo", 08/08/2026, DS-23). Substitui as barras horizontais finas por um card por fase, com badge de cor + status. */
+/**
+ * Grade colorida com o mapa de todas as fases da Jornada — pedido do dono do
+ * produto (visual mais "app nativo", 08/08/2026, DS-23). Um card por fase,
+ * com badge de cor + status.
+ *
+ * **Virou conteúdo de uma `CollapsibleSection` (sanfona), não mais dono do
+ * próprio `Card`/título (pedido do dono do produto, 08/08/2026)** — a seção
+ * inteira estava tomando bastante altura fixa da Início mesmo pra quem já
+ * concluiu a Jornada e não precisa mais olhar aquele mapa toda vez que abre
+ * o app. Quem monta o header/estado aberto-ou-fechado agora é
+ * `DashboardScreen` (`defaultExpanded = jornada NÃO concluída`), porque só
+ * ali existe o dado de progresso geral — este componente só sabe da fase a
+ * fase.
+ */
 function GradeFases({
   fases,
   faseAtual,
@@ -394,12 +467,7 @@ function GradeFases({
   compact: boolean;
 }) {
   return (
-    <Card variant="default" padding={5}>
-      <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: space[4] }}>
-        <Text style={{ ...type.h3, color: color.text.primary }}>Módulos da jornada</Text>
-        <Button label="Abrir Jornada" variant="ghost" size="sm" onPress={onPress} />
-      </View>
-
+    <View style={{ gap: space[4] }}>
       <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3] }}>
         {fases.map((f, i) => {
           const status: "concluido" | "andamento" | "pendente" =
@@ -434,7 +502,8 @@ function GradeFases({
           );
         })}
       </View>
-    </Card>
+      <Button label="Abrir Jornada" variant="primary" size="sm" onPress={onPress} style={{ alignSelf: "flex-start" }} />
+    </View>
   );
 }
 
@@ -461,80 +530,23 @@ function StatusPill({ status }: { status: "concluido" | "andamento" | "pendente"
   );
 }
 
-function CardMary({ onPress }: { onPress: () => void }) {
+// Ícone genérico de "material/dica" (documento com dobra + play) — reaproveitado
+// em cada categoria de Dicas da Mary, cor variando por `MODULE_ACCENT_CYCLE`
+// (DS-24, §9.14/§9.15). Não é `FaseIcon` (aquele é só pras fases da Jornada).
+function DicaIcon({ color: cor, size = icon.md }: { color: string; size?: number }) {
+  const common = { stroke: cor, strokeWidth: icon.strokeWidth, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, fill: "none" };
   return (
-    <Card variant="brand" padding={5}>
-      <View style={{ flexDirection: "row", gap: space[4], alignItems: "flex-start" }}>
-        <MaryAvatar pose="boas-vindas" size={56} />
-        <View style={{ flex: 1 }}>
-          <Text style={{ ...type.bodyStrong, color: color.text.onBrand }}>Converse comigo</Text>
-          <Text style={{ ...type.body, color: color.bg.brandSubtle, marginTop: space[1] }}>
-            Posso falar sobre o seu negócio e sobre o caminho que você já percorreu — e tirar dúvidas de
-            empreendedorismo, MEI e finanças.
-          </Text>
-          <Button label="Abrir conversa" variant="primary" size="sm" onPress={onPress} style={{ alignSelf: "flex-start", marginTop: space[3] }} />
-        </View>
-      </View>
-    </Card>
+    <Svg width={size} height={size} viewBox="0 0 24 24">
+      <Path d="M6.5 3.5h8l4 4V19a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1z" {...common} />
+      <Path d="M14.5 3.5V8h4" {...common} />
+      <Path d="M10 12l4 2.3-4 2.3z" {...common} />
+    </Svg>
   );
 }
 
-// Só o conteúdo — o card/título/expandir agora vem da `CollapsibleSection`
-// que envolve este componente no Início (pedido do dono do produto, DS-18.1).
-function CardModulos({
-  modulos,
-  onPress,
-  onAbrirModulo,
-}: {
-  modulos: { id: string; slug: string; nome: string; descricao: string | null }[];
-  onPress: () => void;
-  onAbrirModulo: (slug: string) => void;
-}) {
-  if (modulos.length === 0) {
-    // RN-2/RN-29: nada de anunciar módulo que não existe nem prometer plano
-    // que ainda não foi definido (PRD §17 segue pendente).
-    return (
-      <Text style={{ ...type.body, color: color.text.secondary }}>
-        Além da Jornada, estamos preparando novos módulos pra te acompanhar depois que o negócio estiver de pé.
-        Assim que um for liberado pra você, ele aparece aqui.
-      </Text>
-    );
-  }
-  return (
-    <View style={{ gap: space[3] }}>
-      {/* Cada módulo abre direto — antes o card só listava nomes e o
-          usuário tinha que passar pelo catálogo pra chegar em qualquer um. */}
-      {modulos.map((m) => {
-        const rota = rotaDoModulo(m.slug);
-        const conteudo = (
-          <>
-            <Text style={{ ...type.bodyStrong, color: rota ? color.action.secondary : color.text.primary }}>
-              {m.nome}
-              {rota ? " →" : ""}
-            </Text>
-            {m.descricao ? <Text style={{ ...type.caption, color: color.text.muted, marginTop: 2 }}>{m.descricao}</Text> : null}
-          </>
-        );
-
-        return rota ? (
-          <Pressable
-            key={m.id}
-            onPress={() => onAbrirModulo(m.slug)}
-            accessibilityRole="link"
-            accessibilityLabel={`Abrir ${m.nome}`}
-            style={{ minHeight: 44, justifyContent: "center" }}
-          >
-            {conteudo}
-          </Pressable>
-        ) : (
-          <View key={m.id}>{conteudo}</View>
-        );
-      })}
-      <Button label="Ver todos" variant="ghost" size="sm" onPress={onPress} style={{ alignSelf: "flex-start" }} />
-    </View>
-  );
-}
-
+// Pedido do dono do produto (08/08/2026): a área estava "muito flat" — virou
+// grade colorida de 2 colunas (DS-24), uma cor de acento por categoria +
+// `DicaIcon`, em vez da lista de texto simples que tinha antes.
 function CardDicasDaMary({
   categorias,
   onPress,
@@ -545,8 +557,7 @@ function CardDicasDaMary({
   onAbrirCategoria: (categoriaId: string) => void;
 }) {
   return (
-    <Card variant="default" padding={5}>
-      <Text style={{ ...type.h3, color: color.text.primary, marginBottom: space[1] }}>Dicas da Mary</Text>
+    <>
       <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[4] }}>
         Material por tema — PDF, vídeo e links — livre pra qualquer um, sem depender de módulo liberado.
       </Text>
@@ -557,22 +568,61 @@ function CardDicasDaMary({
         </Text>
       ) : (
         <View style={{ gap: space[3] }}>
-          {categorias.map((cat) => (
-            <Pressable
-              key={cat.id}
-              onPress={() => onAbrirCategoria(cat.id)}
-              accessibilityRole="link"
-              accessibilityLabel={`Abrir ${cat.titulo}`}
-            >
-              <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>{cat.titulo}</Text>
-              <Text style={{ ...type.caption, color: color.text.muted, marginTop: 2 }} numberOfLines={1}>
-                {cat.materiais.length} material{cat.materiais.length === 1 ? "" : "is"}
-              </Text>
-            </Pressable>
-          ))}
+          {/* Grade de 3 colunas (pedido do dono do produto, 08/08/2026 —
+              antes eram 2; desde 09/08/2026 o conteúdo inteiro vive dentro
+              da sanfona "Dicas da Mary" da Início, não mais num `Card`
+              próprio — mesma métrica de largura interna de antes, já que a
+              `CollapsibleSection` consome o mesmo padding). Sempre
+              3 "quadradinhos" por linha não importa quantos temas existam —
+              quando o número crescer, só nasce mais uma linha, não muda a
+              largura de cada quadradinho. `minWidth: 88`: este `Card` (como
+              o próprio `CardDicasDaMary`) já consome ~40px de padding igual
+              uma `CollapsibleSection` — a largura disponível aqui é ~295px,
+              não 335px, então a conta de 3 colunas precisa de `minWidth`
+              mais baixo que o de uma grade de 2 (mesmo tipo de erro por
+              fração de pixel já registrado em DS-24/§9.15, ver SPEC.md
+              SDD-80 — sempre medir com `getComputedStyle` antes de assumir
+              que um `minWidth` que funcionou noutro lugar funciona aqui).
+              Fonte do título menor (`caption`, não `bodyStrong`) e até 3
+              linhas pra caber título longo tipo "Marketing e Vendas" no
+              quadradinho estreito. */}
+          <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[2], alignItems: "flex-start" }}>
+            {categorias.map((cat, i) => {
+              const accent = MODULE_ACCENT_CYCLE[i % MODULE_ACCENT_CYCLE.length];
+              return (
+                <Pressable
+                  key={cat.id}
+                  onPress={() => onAbrirCategoria(cat.id)}
+                  accessibilityRole="link"
+                  accessibilityLabel={`Abrir ${cat.titulo}`}
+                  style={{ flexBasis: "31%", flexGrow: 1, minWidth: 88 }}
+                >
+                  {/* `height` fixa (não `minHeight`): os 3 quadradinhos da
+                      mesma linha precisam ter o MESMO tamanho sempre, mesmo
+                      quando um título é mais curto que o outro (ex.: 1 linha
+                      vs 3 linhas de "Marketing e Vendas") — sobra espaço
+                      vazio embaixo do conteúdo menor, mas o quadradinho não
+                      encolhe (pedido do dono do produto, 08/08/2026). 130px
+                      cobre o pior caso: ícone 28 + gap + título em 3 linhas +
+                      contador de materiais + padding do Card. */}
+                  <Card variant="outline" padding={3} style={{ height: 130 }}>
+                    <IconBadge accent={accent} size={28}>
+                      <DicaIcon color={moduleAccent[accent].fg} size={14} />
+                    </IconBadge>
+                    <Text style={{ ...type.caption, fontWeight: "700", color: color.action.secondary, marginTop: space[2] }} numberOfLines={3}>
+                      {cat.titulo}
+                    </Text>
+                    <Text style={{ ...type.caption, fontSize: 10.5, color: color.text.muted, marginTop: 2 }} numberOfLines={1}>
+                      {cat.materiais.length} material{cat.materiais.length === 1 ? "" : "is"}
+                    </Text>
+                  </Card>
+                </Pressable>
+              );
+            })}
+          </View>
           <Button label="Ver todas" variant="ghost" size="sm" onPress={onPress} style={{ alignSelf: "flex-start" }} />
         </View>
       )}
-    </Card>
+    </>
   );
 }

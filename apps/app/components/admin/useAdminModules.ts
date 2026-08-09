@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createModule, listModules, setModuleAtivo, type ModuleRow } from "@serdono/supabase";
+import { createModule, listModules, setModuleAtivo, trocarOrdemModules, type ModuleRow } from "@serdono/supabase";
 
 export function useAdminModules() {
   const [modules, setModules] = useState<ModuleRow[]>([]);
@@ -48,5 +48,19 @@ export function useAdminModules() {
     }
   }
 
-  return { modules, loading, saving, error, create, toggleAtivo };
+  /** Sobe (`direcao: -1`) ou desce (`direcao: 1`) um módulo na ordem do menu, trocando `ordem` com o vizinho. */
+  async function mover(module: ModuleRow, direcao: -1 | 1) {
+    const i = modules.findIndex((m) => m.id === module.id);
+    const vizinho = modules[i + direcao];
+    if (!vizinho) return;
+    setError(null);
+    try {
+      await trocarOrdemModules({ id: module.id, ordem: module.ordem }, { id: vizinho.id, ordem: vizinho.ordem });
+      await refresh();
+    } catch (e) {
+      setError((e as Error).message);
+    }
+  }
+
+  return { modules, loading, saving, error, create, toggleAtivo, mover };
 }

@@ -18,7 +18,7 @@ function slugify(nome: string): string {
 
 export function AdminModulesScreen() {
   const router = useRouter();
-  const { modules, loading, saving, error, create, toggleAtivo } = useAdminModules();
+  const { modules, loading, saving, error, create, toggleAtivo, mover } = useAdminModules();
   const [showForm, setShowForm] = useState(false);
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
@@ -57,7 +57,9 @@ export function AdminModulesScreen() {
       <ScrollView contentContainerStyle={{ padding: space[5] }}>
         <Text style={{ ...type.h1, color: color.text.primary, marginBottom: space[1] }}>Módulos</Text>
         <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[4] }}>
-          Catálogo de módulos do sistema. A liberação por usuário fica na tela de cada usuário, em "Usuários".
+          Catálogo de módulos do sistema. Use as setas pra mudar a ordem em que aparecem no menu de todo mundo. "Inativo"
+          esconde o módulo do menu de todos os usuários sem tirar a liberação de ninguém — reative quando quiser que ele
+          volte a aparecer. A liberação por usuário fica na tela de cada usuário, em "Usuários".
         </Text>
 
         {!showForm ? (
@@ -82,9 +84,29 @@ export function AdminModulesScreen() {
           <Text style={{ ...type.body, color: color.text.muted }}>Nenhum módulo cadastrado ainda.</Text>
         ) : (
           <View style={{ gap: space[3] }}>
-            {modules.map((m) => (
+            {modules.map((m, i) => (
               <Card key={m.id} variant="default" padding={4}>
-                <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+                <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: space[3] }}>
+                  <View style={{ gap: 2 }}>
+                    <Pressable
+                      onPress={() => mover(m, -1)}
+                      disabled={i === 0}
+                      accessibilityRole="button"
+                      accessibilityLabel={`Subir ${m.nome} no menu`}
+                      style={{ opacity: i === 0 ? 0.3 : 1, minWidth: 32, minHeight: 22, alignItems: "center", justifyContent: "center" }}
+                    >
+                      <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>▲</Text>
+                    </Pressable>
+                    <Pressable
+                      onPress={() => mover(m, 1)}
+                      disabled={i === modules.length - 1}
+                      accessibilityRole="button"
+                      accessibilityLabel={`Descer ${m.nome} no menu`}
+                      style={{ opacity: i === modules.length - 1 ? 0.3 : 1, minWidth: 32, minHeight: 22, alignItems: "center", justifyContent: "center" }}
+                    >
+                      <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>▼</Text>
+                    </Pressable>
+                  </View>
                   <View style={{ flex: 1 }}>
                     <Text style={{ ...type.bodyStrong, color: color.text.primary }}>{m.nome}</Text>
                     {m.descricao ? <Text style={{ ...type.caption, color: color.text.muted }}>{m.descricao}</Text> : null}

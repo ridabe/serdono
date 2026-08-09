@@ -1,7 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { useRouter } from "expo-router";
 import { Animated, BackHandler, Dimensions, Easing, Modal, Pressable, ScrollView, Text, View } from "react-native";
-import { a11y, color, Logo, motion, radius, space, type } from "@serdono/ui";
+import { a11y, color, IconBadge, Logo, moduleAccent, MODULE_ACCENT_CYCLE, motion, radius, space, type } from "@serdono/ui";
+import { ModuleIcon } from "../modulos/ModuleIcon";
 import { rotaDoModulo } from "../modulos/rotas";
 import { useDrawer } from "./DrawerContext";
 import { MenuIcon } from "./MenuIcon";
@@ -97,11 +98,21 @@ export function AppDrawer() {
             {temOutrosModulos ? (
               <View style={{ marginBottom: space[4] }}>
                 <DrawerSectionLabel texto="Módulos" />
-                {modulos.map((m) => {
+                {modulos.map((m, i) => {
                   const rota = rotaDoModulo(m.slug);
                   if (!rota) return null;
+                  const accent = MODULE_ACCENT_CYCLE[i % MODULE_ACCENT_CYCLE.length];
                   return (
-                    <DrawerItem key={m.id} label={m.nome} onPress={() => ir(rota)} />
+                    <DrawerItem
+                      key={m.id}
+                      label={m.nome}
+                      onPress={() => ir(rota)}
+                      iconNode={
+                        <IconBadge accent={accent} size={28}>
+                          <ModuleIcon slug={m.slug} color={moduleAccent[accent].fg} size={15} />
+                        </IconBadge>
+                      }
+                    />
                   );
                 })}
               </View>
@@ -143,7 +154,18 @@ function DrawerSectionLabel({ texto }: { texto: string }) {
   );
 }
 
-function DrawerItem({ label, icon = "modulos", onPress }: { label: string; icon?: TabIconName; onPress: () => void }) {
+function DrawerItem({
+  label,
+  icon = "modulos",
+  iconNode,
+  onPress,
+}: {
+  label: string;
+  icon?: TabIconName;
+  /** Substitui o `TabIcon` genérico por um nó próprio — usado pelos itens de módulo, que ganham `ModuleIcon` colorido por módulo em vez do ícone único "modulos" repetido pra todos. */
+  iconNode?: ReactNode;
+  onPress: () => void;
+}) {
   return (
     <Pressable
       onPress={onPress}
@@ -156,7 +178,7 @@ function DrawerItem({ label, icon = "modulos", onPress }: { label: string; icon?
         paddingHorizontal: space[5],
       }}
     >
-      <TabIcon name={icon} color={color.text.secondary} size={18} />
+      {iconNode ?? <TabIcon name={icon} color={color.text.secondary} size={18} />}
       <Text style={{ ...type.body, color: color.text.primary, flex: 1 }}>{label}</Text>
       <Text style={{ ...type.body, color: color.text.muted }}>›</Text>
     </Pressable>

@@ -33,6 +33,22 @@ export async function setModuleAtivo(moduleId: string, ativo: boolean): Promise<
   if (error) throw error;
 }
 
+/**
+ * Troca o `ordem` de dois módulos entre si (pedido do dono do produto,
+ * 09/08/2026: admin poder reordenar o menu sem tocar em código). Usado pelos
+ * botões "subir"/"descer" da tela `AdminModulesScreen` — dois updates em vez
+ * de reescrever o `ordem` da lista inteira, então um módulo cadastrado por
+ * outro admin no meio do processo não é sobrescrito por engano.
+ */
+export async function trocarOrdemModules(a: { id: string; ordem: number }, b: { id: string; ordem: number }): Promise<void> {
+  const [{ error: errorA }, { error: errorB }] = await Promise.all([
+    supabase.from("modules").update({ ordem: b.ordem }).eq("id", a.id),
+    supabase.from("modules").update({ ordem: a.ordem }).eq("id", b.id),
+  ]);
+  if (errorA) throw errorA;
+  if (errorB) throw errorB;
+}
+
 // ---- Liberação por usuário (admin gerencia, cliente só lê a própria) ----
 
 export interface ModuleAccessRow extends ModuleRow {
