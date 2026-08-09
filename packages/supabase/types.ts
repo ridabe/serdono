@@ -740,6 +740,7 @@ export type Database = {
       }
       modules: {
         Row: {
+          anuncio_grupo: string | null
           ativo: boolean
           created_at: string
           descricao: string | null
@@ -750,6 +751,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          anuncio_grupo?: string | null
           ativo?: boolean
           created_at?: string
           descricao?: string | null
@@ -760,6 +762,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          anuncio_grupo?: string | null
           ativo?: boolean
           created_at?: string
           descricao?: string | null
@@ -1250,6 +1253,7 @@ export type Database = {
           habilitado_em: string
           id: string
           module_id: string
+          novidade_vista: boolean
           user_id: string
         }
         Insert: {
@@ -1257,6 +1261,7 @@ export type Database = {
           habilitado_em?: string
           id?: string
           module_id: string
+          novidade_vista?: boolean
           user_id: string
         }
         Update: {
@@ -1264,6 +1269,7 @@ export type Database = {
           habilitado_em?: string
           id?: string
           module_id?: string
+          novidade_vista?: boolean
           user_id?: string
         }
         Relationships: [

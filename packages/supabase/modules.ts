@@ -1,4 +1,3 @@
-import type { ModuloParaNovidade } from "@serdono/core";
 import { supabase } from "./client";
 import type { Tables } from "./types";
 
@@ -92,8 +91,20 @@ export async function hasModuleAccess(userId: string, slug: string): Promise<boo
 
 // ---- Pop-up de novidade de módulo (SDD nova, 08/08/2026) ----
 
-/** Módulos liberados pro usuário com `novidade_vista = false` — cada um vira (ou entra n)um pop-up na Início até ser marcado visto. */
-export async function listModulosComNovidadePendente(userId: string): Promise<ModuloParaNovidade[]> {
+// Mesmo formato de `ModuloParaNovidade` de `packages/core/novidadesModulos.ts`
+// (compatível estruturalmente, sem importar de lá — `packages/supabase` não
+// depende de `packages/core`, só o inverso nunca acontece; `apps/app` é quem
+// já depende dos dois e passa este retorno direto pra `agruparNovidadesModulos`).
+export interface ModuloComNovidade {
+  id: string;
+  slug: string;
+  nome: string;
+  descricao: string | null;
+  anuncioGrupo: string | null;
+}
+
+/** Módulos liberados pro usuário com `novidade_vista = false` — entram na fila de pop-up da Início até serem marcados vistos. */
+export async function listModulosComNovidadePendente(userId: string): Promise<ModuloComNovidade[]> {
   const { data, error } = await supabase
     .from("modules")
     .select("id, slug, nome, descricao, anuncio_grupo, user_modules!inner(habilitado, novidade_vista)")

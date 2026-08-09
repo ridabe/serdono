@@ -7,6 +7,7 @@ import { signOut, type CategoriaComMateriais } from "@serdono/supabase";
 import { ScreenHeader } from "../shell/ScreenHeader";
 import { formatMoney } from "../diagnostico/labels";
 import { FaseIcon } from "./FaseIcon";
+import { NovidadeModuloPopup } from "./NovidadeModuloPopup";
 import { useDashboard, type FaseResumo, type Marco } from "./useDashboard";
 
 /**
@@ -39,6 +40,8 @@ export function DashboardScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: color.bg.canvas }}>
+      <NovidadeModuloPopup />
+
       {/* No app instalado esses três destinos são abas (SDD-53) — o cabeçalho
           fica só com a marca. */}
       <ScreenHeader
