@@ -1,9 +1,9 @@
 import { useRouter } from "expo-router";
-import { ActivityIndicator, Image, Pressable, ScrollView, Text, useWindowDimensions, View } from "react-native";
-import Svg, { Circle, Path } from "react-native-svg";
-import { breakpoint, Button, Card, chart, CollapsibleSection, color, icon, IconBadge, moduleAccent, MODULE_ACCENT_CYCLE, radius, space, type } from "@serdono/ui";
+import { ActivityIndicator, Image, ScrollView, Text, useWindowDimensions, View } from "react-native";
+import Svg, { Circle } from "react-native-svg";
+import { breakpoint, Button, Card, chart, CollapsibleSection, color, IconBadge, moduleAccent, MODULE_ACCENT_CYCLE, radius, space, type } from "@serdono/ui";
 import { FASES_JORNADA, maskCnpj, numeroFase, type JornadaFaseCore } from "@serdono/core";
-import { signOut, type CategoriaComMateriais } from "@serdono/supabase";
+import { signOut } from "@serdono/supabase";
 import { ScreenHeader } from "../shell/ScreenHeader";
 import { formatMoney } from "../diagnostico/labels";
 import { FaseIcon } from "./FaseIcon";
@@ -168,16 +168,13 @@ export function DashboardScreen() {
             08/08/2026) — já existe no menu lateral (DS-22, `AppDrawer`), essa
             seção era um segundo caminho pro mesmo destino. */}
 
-        {/* Sanfona recolhida (pedido do dono do produto, 09/08/2026: ganhar
-            espaço vertical na Início) — mesmo padrão de `CollapsibleSection`
-            já usado em "Módulos da jornada" acima. */}
-        <CollapsibleSection title="Dicas da Mary" accent="gold">
-          <CardDicasDaMary
-            categorias={v.categoriasDicas}
-            onPress={() => router.push("/dicas-da-mary")}
-            onAbrirCategoria={(categoriaId) => router.push(`/dicas-da-mary/${categoriaId}`)}
-          />
-        </CollapsibleSection>
+        {/* "Dicas da Mary" removido da Início (pedido do dono do produto,
+            09/08/2026) — virou aba própria na barra do app instalado
+            (`MobileTabBar.tsx`, no lugar da antiga aba "Mary", que era
+            redundante com o botão flutuante). Repetir o card aqui virou o
+            mesmo problema que motivou tirar "Seus módulos": um segundo
+            caminho pro destino que a aba já cobre — e a Início ganhou espaço
+            de volta pra outro card, se precisar. */}
       </ScrollView>
     </View>
   );
@@ -535,99 +532,3 @@ function StatusPill({ status }: { status: "concluido" | "andamento" | "pendente"
   );
 }
 
-// Ícone genérico de "material/dica" (documento com dobra + play) — reaproveitado
-// em cada categoria de Dicas da Mary, cor variando por `MODULE_ACCENT_CYCLE`
-// (DS-24, §9.14/§9.15). Não é `FaseIcon` (aquele é só pras fases da Jornada).
-function DicaIcon({ color: cor, size = icon.md }: { color: string; size?: number }) {
-  const common = { stroke: cor, strokeWidth: icon.strokeWidth, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, fill: "none" };
-  return (
-    <Svg width={size} height={size} viewBox="0 0 24 24">
-      <Path d="M6.5 3.5h8l4 4V19a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1z" {...common} />
-      <Path d="M14.5 3.5V8h4" {...common} />
-      <Path d="M10 12l4 2.3-4 2.3z" {...common} />
-    </Svg>
-  );
-}
-
-// Pedido do dono do produto (08/08/2026): a área estava "muito flat" — virou
-// grade colorida de 2 colunas (DS-24), uma cor de acento por categoria +
-// `DicaIcon`, em vez da lista de texto simples que tinha antes.
-function CardDicasDaMary({
-  categorias,
-  onPress,
-  onAbrirCategoria,
-}: {
-  categorias: CategoriaComMateriais[];
-  onPress: () => void;
-  onAbrirCategoria: (categoriaId: string) => void;
-}) {
-  return (
-    <>
-      <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[4] }}>
-        Material por tema — PDF, vídeo e links — acesse e explore.
-      </Text>
-
-      {categorias.length === 0 ? (
-        <Text style={{ ...type.body, color: color.text.muted }}>
-          Ainda não publiquei nenhuma categoria aqui. Assim que a primeira entrar no ar, ela aparece nesta área.
-        </Text>
-      ) : (
-        <View style={{ gap: space[3] }}>
-          {/* Grade de 3 colunas (pedido do dono do produto, 08/08/2026 —
-              antes eram 2; desde 09/08/2026 o conteúdo inteiro vive dentro
-              da sanfona "Dicas da Mary" da Início, não mais num `Card`
-              próprio — mesma métrica de largura interna de antes, já que a
-              `CollapsibleSection` consome o mesmo padding). Sempre
-              3 "quadradinhos" por linha não importa quantos temas existam —
-              quando o número crescer, só nasce mais uma linha, não muda a
-              largura de cada quadradinho. `minWidth: 88`: este `Card` (como
-              o próprio `CardDicasDaMary`) já consome ~40px de padding igual
-              uma `CollapsibleSection` — a largura disponível aqui é ~295px,
-              não 335px, então a conta de 3 colunas precisa de `minWidth`
-              mais baixo que o de uma grade de 2 (mesmo tipo de erro por
-              fração de pixel já registrado em DS-24/§9.15, ver SPEC.md
-              SDD-80 — sempre medir com `getComputedStyle` antes de assumir
-              que um `minWidth` que funcionou noutro lugar funciona aqui).
-              Fonte do título menor (`caption`, não `bodyStrong`) e até 3
-              linhas pra caber título longo tipo "Marketing e Vendas" no
-              quadradinho estreito. */}
-          <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[2], alignItems: "flex-start" }}>
-            {categorias.map((cat, i) => {
-              const accent = MODULE_ACCENT_CYCLE[i % MODULE_ACCENT_CYCLE.length];
-              return (
-                <Pressable
-                  key={cat.id}
-                  onPress={() => onAbrirCategoria(cat.id)}
-                  accessibilityRole="link"
-                  accessibilityLabel={`Abrir ${cat.titulo}`}
-                  style={{ flexBasis: "31%", flexGrow: 1, minWidth: 88 }}
-                >
-                  {/* `height` fixa (não `minHeight`): os 3 quadradinhos da
-                      mesma linha precisam ter o MESMO tamanho sempre, mesmo
-                      quando um título é mais curto que o outro (ex.: 1 linha
-                      vs 3 linhas de "Marketing e Vendas") — sobra espaço
-                      vazio embaixo do conteúdo menor, mas o quadradinho não
-                      encolhe (pedido do dono do produto, 08/08/2026). 130px
-                      cobre o pior caso: ícone 28 + gap + título em 3 linhas +
-                      contador de materiais + padding do Card. */}
-                  <Card variant="outline" padding={3} style={{ height: 130 }}>
-                    <IconBadge accent={accent} size={28}>
-                      <DicaIcon color={moduleAccent[accent].fg} size={14} />
-                    </IconBadge>
-                    <Text style={{ ...type.caption, fontWeight: "700", color: color.action.secondary, marginTop: space[2] }} numberOfLines={3}>
-                      {cat.titulo}
-                    </Text>
-                    <Text style={{ ...type.caption, fontSize: 10.5, color: color.text.muted, marginTop: 2 }} numberOfLines={1}>
-                      {cat.materiais.length} material{cat.materiais.length === 1 ? "" : "is"}
-                    </Text>
-                  </Card>
-                </Pressable>
-              );
-            })}
-          </View>
-          <Button label="Ver todas" variant="ghost" size="sm" onPress={onPress} style={{ alignSelf: "flex-start" }} />
-        </View>
-      )}
-    </>
-  );
-}

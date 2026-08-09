@@ -21,7 +21,14 @@ interface Tab {
 const BASE_TABS: Tab[] = [
   { href: "/inicio", label: "Início", icon: "inicio", accent: "teal", matches: ["/inicio"] },
   { href: "/jornada", label: "Jornada", icon: "jornada", accent: "gold", matches: ["/jornada"] },
-  { href: "/assistente", label: "Mary", icon: "mary", accent: "blue", matches: ["/assistente"] },
+  // Não é mais "Mary"/`/assistente` (pedido do dono do produto, 09/08/2026):
+  // essa rota já tem 1 toque de distância em qualquer tela via o botão
+  // flutuante (`MaryFloatingButton.tsx`) — a aba levava pro MESMO destino,
+  // pura redundância. "Dicas da Mary" entrou no lugar: era uma "área livre"
+  // (RN-34) meio escondida só no menu lateral, e ganhar aba própria também
+  // liberou espaço na Início (o card resumo de lá saiu, virou redundante
+  // com esta aba — ver `DashboardScreen.tsx`).
+  { href: "/dicas-da-mary", label: "Dicas", icon: "dicas", accent: "blue", matches: ["/dicas-da-mary"] },
   { href: "/perfil", label: "Perfil", icon: "perfil", accent: "green", matches: ["/perfil", "/completar-cadastro"] },
 ];
 

@@ -2,7 +2,7 @@ import React from "react";
 import Svg, { Circle, Path } from "react-native-svg";
 import { icon } from "@serdono/ui";
 
-export type TabIconName = "inicio" | "jornada" | "mary" | "modulos" | "perfil" | "sobre";
+export type TabIconName = "inicio" | "jornada" | "mary" | "modulos" | "perfil" | "sobre" | "dicas";
 
 /**
  * Ícones da barra de abas nativa (DS-20).
@@ -47,6 +47,17 @@ export function TabIcon({ name, color, size = icon.md }: { name: TabIconName; co
         <>
           <Path d="M20 14.5c0 1.1-.9 2-2 2H9l-4 3.5V6c0-1.1.9-2 2-2h11c1.1 0 2 .9 2 2z" {...common} />
           <Path d="M9 8.5h6M9 12h4" {...common} />
+        </>
+      ) : null}
+
+      {/* Dicas da Mary: documento com dobra + play — mesmo glifo já usado nas
+          categorias da tela (`DicaIcon`, DS-24), reaproveitado aqui pra
+          identidade visual consistente entre os dois lugares. */}
+      {name === "dicas" ? (
+        <>
+          <Path d="M6.5 3.5h8l4 4V19a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1z" {...common} />
+          <Path d="M14.5 3.5V8h4" {...common} />
+          <Path d="M10 12l4 2.3-4 2.3z" {...common} />
         </>
       ) : null}
 

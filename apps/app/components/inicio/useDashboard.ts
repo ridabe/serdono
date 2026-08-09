@@ -13,18 +13,15 @@ import {
   getMetaCaptacaoSalva,
   getMyJornada,
   isEtapaEstruturaRelevante,
-  listCategoriasComMateriais,
   listJornadaClientesContatos,
   SLUG_PRIMEIRA_VENDA_REGISTRO,
   supabase,
-  type CategoriaComMateriais,
   type JornadaEtapa,
   type JornadaInstance,
   type NicheEstruturaInfo,
 } from "@serdono/supabase";
 
 const MAX_MARCOS = 6;
-const MAX_CATEGORIAS_DICAS = 3;
 
 export interface Marco {
   id: string;
@@ -43,7 +40,7 @@ export interface FaseResumo {
 /**
  * Painel do empreendedor (SDD-50). Agrega, numa leitura só, o que a pessoa
  * precisa ver ao entrar sem querer abrir a Jornada: identidade do negócio,
- * o quanto andou, marcos reais datados, Dicas da Mary e a própria Mary.
+ * o quanto andou e os marcos reais datados.
  *
  * Regra que vale pra toda a tela: **nenhum número é estimado aqui**. Todo KPI
  * só aparece se o dado real existir (a pessoa preencheu a calculadora,
@@ -60,7 +57,6 @@ export function useDashboard() {
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [etapas, setEtapas] = useState<JornadaEtapa[]>([]);
   const [nicheEstrutura, setNicheEstrutura] = useState<NicheEstruturaInfo | null>(null);
-  const [categoriasDicas, setCategoriasDicas] = useState<CategoriaComMateriais[]>([]);
   const [clientesConquistados, setClientesConquistados] = useState(0);
   const [metaClientes, setMetaClientes] = useState<number | null>(null);
 
@@ -71,16 +67,14 @@ export function useDashboard() {
         const session = await getCurrentSession();
         if (!session) return;
 
-        const [{ data: perfil }, instance, categoriasPublicadas] = await Promise.all([
+        const [{ data: perfil }, instance] = await Promise.all([
           supabase.from("users").select("nome").eq("id", session.user.id).maybeSingle(),
           getMyJornada(session.user.id),
-          listCategoriasComMateriais().catch(() => []),
         ]);
         if (cancelado) return;
 
         setNomeUsuario(perfil?.nome ?? null);
         setJornada(instance);
-        setCategoriasDicas(categoriasPublicadas.slice(0, MAX_CATEGORIAS_DICAS));
 
         if (!instance) return;
 
@@ -192,6 +186,5 @@ export function useDashboard() {
     valorPrimeiraVenda,
     clientesConquistados,
     metaClientes,
-    categoriasDicas,
   };
 }
