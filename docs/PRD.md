@@ -732,6 +732,26 @@ Detalhamento técnico (schema, split de plataforma do player de vídeo, mudança
 
 Detalhamento técnico (schema, fontes reais consultadas, verificação) em SPEC.md SDD-61.
 
+### 12.9 Plano de Ação Mensal (pedido do dono do produto em 08/08/2026)
+
+**Quinto módulo do catálogo (framework em §12.1), liberado automaticamente pra toda conta nova (mesmo mecanismo dos demais módulos desde SPEC.md SDD-73).** Pergunta central: *"o que eu faço esta semana pra fazer meu negócio andar?"* — diferente dos demais módulos, que respondem uma pergunta pontual (retenção, investimento, obrigação fiscal), este dá ao empreendedor um plano de ação recorrente, mês a mês, gerado a partir do que ele mesmo já construiu na Jornada.
+
+**O módulo, todo mês:**
+1. **Gera, por IA, um plano do mês** — 1 objetivo central (ex.: "aumentar vendas") e 4 semanas com 2-3 ações práticas cada, a partir do contexto real do negócio (nicho, entregáveis da Fase 2, etapas concluídas de todas as fases) e, se existir, do plano do mês anterior — dando continuidade ao que ficou pendente em vez de repetir do zero.
+2. **Um plano por mês civil.** A partir do dia 1º, o botão "Gerar plano do mês" libera de novo; depois de gerado, fica indisponível até o mês seguinte — sem meio-termo, sem "gerar de novo".
+3. **Checklist marcável.** O empreendedor só marca/desmarca item concluído — o texto do item, uma vez gerado, é fixo (decisão do dono do produto: não é um editor de tarefas, é um compromisso do mês).
+4. **Barra/anel de progresso** com "X de Y atividades concluídas".
+5. **Export em PDF** do plano do mês, mesmo mecanismo já usado em Formalização/Meu Negócio em Dia.
+6. **Histórico com todos os meses já gerados**, cada um com seu % de conclusão, e **comparação lado a lado de até 3 meses selecionados**.
+
+**RN-39 (nova): o Plano de Ação Mensal só libera depois que a Jornada passar da Fase 2 (Validação da Ideia).** Antes disso não existe contexto de negócio real o bastante (nem persona, nem SWOT, nem etapa preenchida) pra um plano fazer sentido — gerar um plano genérico demais nesse ponto seria pior que não oferecer o módulo ainda.
+
+**RN-40 (nova): itens do plano nunca são editáveis pelo usuário — só a conclusão.** Evita que o módulo vire um gerenciador de tarefas genérico; o valor do produto está no plano vir pronto, contextualizado, não em ser mais um app de to-do list.
+
+**Fora de escopo desta versão:** edição/adição manual de item, lembrete por notificação quando o mês vira, geração de plano pra período diferente do mês corrente (semanal, trimestral), integração do progresso do plano de volta no cálculo de progresso da Jornada (são sistemas independentes).
+
+Detalhamento técnico (schema, Edge Function, gate de elegibilidade, PDF, comparação) em SPEC.md SDD-86.
+
 ---
 
 ## 13. Regras de Negócio Transversais (numeração consolidada)
@@ -776,6 +796,8 @@ Detalhamento técnico (schema, fontes reais consultadas, verificação) em SPEC.
 | RN-36 | Meu Negócio em Dia não calcula imposto devido nem dá orientação fiscal personalizada; regra municipal/estadual nunca é fingida como única — §12.8 |
 | RN-37 | A IA amplia o sinal de perfil (texto livre → vocabulário fechado de áreas) e explica o resultado; nunca decide, ranqueia ou recalcula o Fit Score. O que ela inferiu é persistido e mostrado ao usuário — §7.2 |
 | RN-38 | Sub-negócio sugerido sai sempre do catálogo curado — a IA escolhe, ordena e explica, nunca inventa; e não atribui ao usuário afinidade que ele não declarou — §8.5 |
+| RN-39 | Plano de Ação Mensal só libera depois que a Jornada passar da Fase 2 (Validação da Ideia) — §12.9 |
+| RN-40 | Itens do Plano de Ação Mensal nunca são editáveis pelo usuário, só a conclusão — §12.9 |
 
 ---
 

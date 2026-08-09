@@ -16,4 +16,5 @@ export * from "./dicas";
 export * from "./retencao";
 export * from "./investimentos";
 export * from "./obrigacoes";
+export * from "./planoAcao";
 export type { Database } from "./types";

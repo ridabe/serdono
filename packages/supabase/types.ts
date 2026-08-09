@@ -1038,6 +1038,71 @@ export type Database = {
           },
         ]
       }
+      planos_acao: {
+        Row: {
+          created_at: string
+          gerado_em: string
+          id: string
+          mes_referencia: string
+          objetivo: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          gerado_em?: string
+          id?: string
+          mes_referencia: string
+          objetivo: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          gerado_em?: string
+          id?: string
+          mes_referencia?: string
+          objetivo?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      planos_acao_itens: {
+        Row: {
+          concluido: boolean
+          concluido_em: string | null
+          id: string
+          ordem: number
+          plano_id: string
+          semana: number
+          titulo: string
+        }
+        Insert: {
+          concluido?: boolean
+          concluido_em?: string | null
+          id?: string
+          ordem?: number
+          plano_id: string
+          semana: number
+          titulo: string
+        }
+        Update: {
+          concluido?: boolean
+          concluido_em?: string | null
+          id?: string
+          ordem?: number
+          plano_id?: string
+          semana?: number
+          titulo?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "planos_acao_itens_plano_id_fkey"
+            columns: ["plano_id"]
+            isOneToOne: false
+            referencedRelation: "planos_acao"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       retencao_clientes: {
         Row: {
           created_at: string

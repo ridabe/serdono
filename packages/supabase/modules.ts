@@ -1,3 +1,4 @@
+import type { ModuloParaNovidade } from "@serdono/core";
 import { supabase } from "./client";
 import type { Tables } from "./types";
 
@@ -87,4 +88,35 @@ export async function listMyModules(userId: string): Promise<MyModule[]> {
 export async function hasModuleAccess(userId: string, slug: string): Promise<boolean> {
   const modules = await listMyModules(userId);
   return modules.some((m) => m.slug === slug);
+}
+
+// ---- Pop-up de novidade de módulo (SDD nova, 08/08/2026) ----
+
+/** Módulos liberados pro usuário com `novidade_vista = false` — cada um vira (ou entra n)um pop-up na Início até ser marcado visto. */
+export async function listModulosComNovidadePendente(userId: string): Promise<ModuloParaNovidade[]> {
+  const { data, error } = await supabase
+    .from("modules")
+    .select("id, slug, nome, descricao, anuncio_grupo, user_modules!inner(habilitado, novidade_vista)")
+    .eq("ativo", true)
+    .eq("user_modules.user_id", userId)
+    .eq("user_modules.habilitado", true)
+    .eq("user_modules.novidade_vista", false)
+    .order("ordem");
+  if (error) throw error;
+  return (data as unknown as (ModuleRow & { anuncio_grupo: string | null })[]).map((m) => ({
+    id: m.id,
+    slug: m.slug,
+    nome: m.nome,
+    descricao: m.descricao,
+    anuncioGrupo: m.anuncio_grupo,
+  }));
+}
+
+export async function marcarNovidadesModulosVistas(userId: string, moduleIds: string[]): Promise<void> {
+  const { error } = await supabase
+    .from("user_modules")
+    .update({ novidade_vista: true })
+    .eq("user_id", userId)
+    .in("module_id", moduleIds);
+  if (error) throw error;
 }

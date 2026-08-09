@@ -7,5 +7,7 @@ export * from "./jornadaProgresso";
 export * from "./retencao";
 export * from "./investimentos";
 export * from "./obrigacoes";
+export * from "./planoAcao";
+export * from "./novidadesModulos";
 export * from "./cnpj";
 export * from "./ai/routeModel";
