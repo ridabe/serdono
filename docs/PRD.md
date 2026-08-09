@@ -807,6 +807,32 @@ Detalhamento técnico (schema, Edge Function, integração com o Plano de Ação
 
 Detalhamento técnico (schema, Edge Functions, agendamento) em SPEC.md SDD-91.
 
+### 12.13 Raio-X Financeiro (pedido do dono do produto em 09/08/2026)
+
+**Oitavo módulo do catálogo.** Um fechamento financeiro mensal simples pra quem está começando — nada de contabilidade completa, só os 3 números que todo empreendedor precisa saber sobre o próprio mês.
+
+**Uma vez por mês, o empreendedor confirma 3 valores:**
+1. **Quanto faturou** — digitado manualmente.
+2. **Quanto gastou** — sugerido automaticamente a partir da soma das despesas do dia a dia que ele foi lançando ao longo do mês (tipo + descrição opcional + valor cada uma), mas o valor final que fica salvo é o que ele confirmar — pode ajustar antes de fechar. A tela sempre explica de onde veio a sugestão.
+3. **Quanto retirou pra ele mesmo** — digitado manualmente, mostrado como informação separada (não entra na conta de resultado/margem — é o que ele tirou do que o negócio gerou, não um custo do negócio).
+
+**O produto calcula, sem IA (regra determinística — RN-46):** resultado estimado (faturamento − despesas) e margem estimada (resultado / faturamento). E compara com o mês anterior, quando existir, num gráfico de barras simples.
+
+**A Mary comenta o resultado com UMA frase**, escolhida por regra a partir dos números reais — nunca gerada livremente:
+- Faturamento subiu de forma relevante → comenta o crescimento.
+- Despesas subiram mais rápido que o faturamento → alerta pra investigar antes de afetar a margem.
+- Faturamento caiu → comenta a queda.
+- Sem mudança relevante → comenta estabilidade.
+- Primeiro mês (sem histórico anterior) → mensagem neutra convidando a voltar no mês seguinte.
+
+**RN-46 (nova): o comentário da Mary no Raio-X Financeiro é sempre regra determinística sobre os números que o próprio usuário confirmou, nunca texto gerado por IA.** Diferente do Check-up Mensal (RN-43) e do Plano de Ação, aqui a "inteligência" é só comparação aritmética — decisão do dono do produto pra manter resposta instantânea, sem custo de IA, e sem risco nenhum de a Mary inferir uma tendência que os números não sustentam.
+
+**Despesas do dia a dia são editáveis a qualquer momento** (o usuário pode corrigir ou apagar um lançamento errado) — diferente do fechamento mensal em si, que é imutável depois de confirmado (mesmo princípio de "retrato do mês" já usado no Check-up Mensal e no Plano de Ação).
+
+**Fora de escopo desta versão:** categorização de despesas em grupos fixos (é texto livre por enquanto), gráfico com mais de 6 meses de histórico, exportar/imprimir o fechamento, registro de receita diária (só despesa tem lançamento dia a dia — faturamento é só o total mensal digitado), integração com Check-up Mensal/Plano de Ação (pode entrar depois, seguindo o padrão da RN-42).
+
+Detalhamento técnico (schema, lógica de cálculo) em SPEC.md SDD-94.
+
 ---
 
 ## 13. Regras de Negócio Transversais (numeração consolidada)
@@ -858,6 +884,7 @@ Detalhamento técnico (schema, Edge Functions, agendamento) em SPEC.md SDD-91.
 | RN-43 | A análise de saúde do negócio é sempre leitura qualitativa das respostas do próprio usuário, nunca dado de mercado externo — §12.11 |
 | RN-44 | Cada aviso push só é enviado 1 vez por ocorrência, nunca repetido todo dia enquanto a condição continuar valendo — §12.12 |
 | RN-45 | Notificação push nunca é a única forma de acesso a uma informação — sempre lembrete de algo já visível no produto — §12.12 |
+| RN-46 | O comentário da Mary no Raio-X Financeiro é sempre regra determinística sobre os números confirmados pelo usuário, nunca texto gerado por IA — §12.13 |
 
 ---
 

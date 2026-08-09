@@ -18,5 +18,6 @@ export * from "./investimentos";
 export * from "./obrigacoes";
 export * from "./planoAcao";
 export * from "./checkupMensal";
+export * from "./raioxFinanceiro";
 export * from "./pushNotifications";
 export type { Database } from "./types";

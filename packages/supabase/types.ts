@@ -1160,6 +1160,69 @@ export type Database = {
           },
         ]
       }
+      raiox_despesas_diarias: {
+        Row: {
+          created_at: string
+          data: string
+          descricao: string | null
+          id: string
+          tipo: string
+          user_id: string
+          valor: number
+        }
+        Insert: {
+          created_at?: string
+          data: string
+          descricao?: string | null
+          id?: string
+          tipo: string
+          user_id: string
+          valor: number
+        }
+        Update: {
+          created_at?: string
+          data?: string
+          descricao?: string | null
+          id?: string
+          tipo?: string
+          user_id?: string
+          valor?: number
+        }
+        Relationships: []
+      }
+      raiox_financeiro_mensal: {
+        Row: {
+          created_at: string
+          despesas: number
+          faturamento: number
+          gerado_em: string
+          id: string
+          mes_referencia: string
+          retirada_socio: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          despesas: number
+          faturamento: number
+          gerado_em?: string
+          id?: string
+          mes_referencia: string
+          retirada_socio?: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          despesas?: number
+          faturamento?: number
+          gerado_em?: string
+          id?: string
+          mes_referencia?: string
+          retirada_socio?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
       retencao_clientes: {
         Row: {
           created_at: string
