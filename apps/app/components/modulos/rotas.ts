@@ -21,6 +21,7 @@ export const ROTA_POR_SLUG: Record<string, string> = {
   "meu-negocio-em-dia": "/obrigacoes",
   "plano-acao-mensal": "/plano-acao",
   "parceiros-fornecedores": "/parceiros",
+  "checkup-mensal": "/checkup",
 };
 
 export function rotaDoModulo(slug: string): string | undefined {

@@ -50,6 +50,36 @@ export type Database = {
         }
         Relationships: []
       }
+      checkups_mensais: {
+        Row: {
+          created_at: string
+          gerado_em: string
+          id: string
+          mes_referencia: string
+          respostas: Json
+          saude: Json
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          gerado_em?: string
+          id?: string
+          mes_referencia: string
+          respostas: Json
+          saude: Json
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          gerado_em?: string
+          id?: string
+          mes_referencia?: string
+          respostas?: Json
+          saude?: Json
+          user_id?: string
+        }
+        Relationships: []
+      }
       cotacoes_snapshots: {
         Row: {
           capturado_em: string
@@ -738,6 +768,30 @@ export type Database = {
           },
         ]
       }
+      lembretes_enviados: {
+        Row: {
+          chave: string
+          enviado_em: string
+          id: string
+          tipo: string
+          user_id: string
+        }
+        Insert: {
+          chave: string
+          enviado_em?: string
+          id?: string
+          tipo: string
+          user_id: string
+        }
+        Update: {
+          chave?: string
+          enviado_em?: string
+          id?: string
+          tipo?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       modules: {
         Row: {
           anuncio_grupo: string | null
@@ -1281,6 +1335,33 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      user_push_tokens: {
+        Row: {
+          created_at: string
+          expo_push_token: string
+          id: string
+          platform: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          expo_push_token: string
+          id?: string
+          platform: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          expo_push_token?: string
+          id?: string
+          platform?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       users: {
         Row: {

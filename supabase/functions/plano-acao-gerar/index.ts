@@ -89,6 +89,9 @@ async function gerarPlano(contexto: Record<string, unknown>, mesReferenciaLabel:
     "('divulgar mais' não serve; 'fazer 3 publicações no Instagram sobre a promoção' serve).",
     "Se houver um plano do mês anterior no contexto, leve em conta o que ficou marcado como NÃO concluído — dê",
     "prioridade a retomar isso antes de propor algo totalmente novo, em vez de ignorar o que ficou pendente.",
+    "Se houver um check-up mensal no contexto (`checkup_mensal_mais_recente`), ele é o retrato mais atual e confiável",
+    "do negócio — dê peso extra às prioridades e categorias em pior situação ali (status 'atencao'/'precisa_melhorar')",
+    "na hora de montar o objetivo e as semanas, em vez de se basear só no progresso estrutural da Jornada.",
     "Se o contexto tiver pouca informação do negócio, gere um plano mais genérico de primeiros passos, mas nunca",
     "invente detalhe específico (nome de cliente, valor, concorrente) que não esteja no contexto.",
     "Responda EXCLUSIVAMENTE com um objeto JSON válido, sem markdown, sem texto antes ou depois, no formato:",
@@ -178,7 +181,7 @@ Deno.serve(async (req) => {
       return jsonResponse({ error: "Você já gerou o plano deste mês — o próximo fica liberado no mês que vem." }, 409);
     }
 
-    const [{ data: etapas }, { data: deliverables }, { data: planoAnterior }] = await Promise.all([
+    const [{ data: etapas }, { data: deliverables }, { data: planoAnterior }, { data: checkupAtual }, { data: checkupAnterior }] = await Promise.all([
       supabase
         .from("jornada_etapas")
         .select("dados_usuario, concluido_em, template:jornada_etapa_templates(titulo, fase, slug)")
@@ -200,6 +203,18 @@ Deno.serve(async (req) => {
         .eq("user_id", user.id)
         .eq("mes_referencia", mesAnteriorISO(mesReferencia))
         .maybeSingle(),
+      // Check-up Mensal (módulo irmão, pedido explícito do dono do produto
+      // de conectar os dois): se a pessoa já fez o check-up deste mês antes
+      // de gerar o plano, a IA usa o raio-x de verdade em vez de só
+      // inferir da Jornada. Sem o deste mês, cai pro do mês anterior — ainda
+      // é sinal melhor que nenhum.
+      supabase.from("checkups_mensais").select("respostas, saude").eq("user_id", user.id).eq("mes_referencia", mesReferencia).maybeSingle(),
+      supabase
+        .from("checkups_mensais")
+        .select("respostas, saude")
+        .eq("user_id", user.id)
+        .eq("mes_referencia", mesAnteriorISO(mesReferencia))
+        .maybeSingle(),
     ]);
 
     const contexto = {
@@ -215,6 +230,7 @@ Deno.serve(async (req) => {
         fase: (e.template as unknown as { titulo: string; fase: string })?.fase,
         dados: e.dados_usuario,
       })),
+      checkup_mensal_mais_recente: checkupAtual ?? checkupAnterior ?? null,
       plano_mes_anterior: planoAnterior
         ? { objetivo: planoAnterior.objetivo, itens: planoAnterior.itens }
         : null,

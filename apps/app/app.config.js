@@ -60,6 +60,16 @@ module.exports = {
           resizeMode: "contain",
         },
       ],
+      [
+        "expo-notifications",
+        {
+          // Ícone monocromático já existente (adaptive icon do Android,
+          // SDD-... nenhum asset dedicado de notificação foi pedido ainda)
+          // — cor de acento igual ao resto da marca.
+          icon: "../../img/app-icon/android-adaptive-monochrome-432.png",
+          color: "#0E3A4F",
+        },
+      ],
     ],
     extra: {
       supabaseUrl: process.env.EXPO_PUBLIC_SUPABASE_URL,

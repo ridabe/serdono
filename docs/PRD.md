@@ -765,6 +765,48 @@ Detalhamento técnico (schema, Edge Function, gate de elegibilidade, PDF, compar
 
 Detalhamento técnico em SPEC.md SDD-89.
 
+### 12.11 Check-up Mensal do Negócio (pedido do dono do produto em 08/08/2026 — prioridade nº 1)
+
+**Sétimo módulo do catálogo, e o primeiro logo depois da Jornada Empreendedora na ordem do menu** — pedido explícito do dono do produto de tratar este como prioridade máxima entre os módulos existentes. Pergunta central: *"como está a saúde do meu negócio este mês?"*
+
+**Uma vez por mês, a Mary faz um questionário curto (menos de 5 minutos) em 4 seções:**
+1. **Financeiro** — faixa de faturamento, tendência de vendas e despesas, se sobrou caixa, se teve despesa inesperada.
+2. **Clientes** — clientes novos, clientes antigos que voltaram, reclamações, indicações.
+3. **Marketing** — se fez divulgação, qual canal trouxe mais resultado, se fez promoção.
+4. **Operação** — problema com fornecedor, atraso de entrega, falta de produto, processo demorado.
+
+**A IA devolve, a partir SÓ dessas respostas:**
+- **Status por categoria** (bom / atenção / precisa melhorar) com um comentário curto explicando o porquê.
+- **Uma pontuação geral de 0 a 100.**
+- **As 3 prioridades da Mary pro mês** — recomendações concretas e específicas às respostas dadas, nunca genéricas.
+
+**RN-41 (nova): o Check-up Mensal libera com a Jornada apenas iniciada (nicho confirmado) — não exige nenhuma fase concluída.** Diferente do Plano de Ação Mensal (RN-39, que exige a Fase 2 concluída), aqui a pergunta é sobre o que aconteceu no negócio no mês, não sobre planejamento estratégico prévio — o bar de entrada é bem mais baixo.
+
+**RN-42 (nova): o Check-up Mensal alimenta a geração do Plano de Ação Mensal do mesmo mês.** Pedido explícito do dono do produto de conectar os dois módulos — quando existe um check-up recente, a IA do Plano de Ação dá peso extra às categorias em pior situação (status "atenção"/"precisa melhorar") na hora de montar o objetivo e as ações do mês, em vez de se basear só no progresso estrutural da Jornada.
+
+**RN-43 (nova): a análise de saúde do negócio é sempre uma leitura qualitativa das respostas do PRÓPRIO usuário, nunca um dado de mercado ou benchmark externo.** A IA nunca compara o negócio com "a média do setor" nem com nenhum dado que não esteja nas respostas — mesma disciplina de honestidade já aplicada em outros módulos (RN-1/RN-20/RN-30).
+
+**Fora de escopo desta versão:** editor de admin pras perguntas (catálogo fixo em código, mesmo raciocínio de Meu Negócio em Dia — muda por decisão de produto, não por curadoria editorial recorrente), histórico com todos os check-ups já feitos e comparação entre meses (existe no Plano de Ação Mensal, SDD-86, mas não foi pedido aqui — fica pra quando for priorizado), resumo do check-up na tela Início, lembrete por notificação quando o mês vira.
+
+Detalhamento técnico (schema, Edge Function, integração com o Plano de Ação) em SPEC.md SDD-90.
+
+### 12.12 Avisos no celular — notificação push (pedido do dono do produto em 08/08/2026)
+
+**Opt-in, nunca automático.** No app instalado (Android/iOS — não existe no navegador), a tela Perfil ganhou "Avisos no celular": o usuário ativa explicitamente, e só a partir daí o aparelho recebe notificação. Quem nunca ativa nunca recebe nada.
+
+**Uma vez por dia, o produto analisa 3 situações e avisa quando alguma se aplica:**
+1. **Jornada parada** — uma etapa que depende de ação do empreendedor (`tipo_conclusao = "usuario"`) está esperando há 7 dias ou mais sem ele ter feito nada. **Implementa a RN-14, que estava registrada no PRD desde o início do produto mas nunca tinha sido construída.**
+2. **Check-up Mensal pendente** — a partir do dia 20 do mês, se o Check-up Mensal (§12.11) daquele mês ainda não foi feito.
+3. **Obrigação vencendo** — no módulo Meu Negócio em Dia (§12.8), uma obrigação de vencimento mensal fixo (DAS-MEI, PGDAS, FGTS etc.) a até 3 dias do prazo e ainda sem marcação de resolvida.
+
+**RN-44 (nova): cada aviso só é enviado 1 vez por ocorrência — nunca todo dia enquanto a condição continuar valendo.** Uma etapa parada há 20 dias gera exatamente 1 aviso (no dia 7), não um por dia até ser resolvida.
+
+**RN-45 (nova): notificação push nunca é a única forma de acesso a uma informação — é sempre um lembrete de algo que já está visível dentro do produto.** Quem nunca ativa avisos continua com acesso total a tudo, só sem o lembrete proativo.
+
+**Fora de escopo desta versão:** lembrete pros módulos Retenção de Clientes, Mentoria em Investimentos e Plano de Ação Mensal (cobertura pensada pros 3 casos mais concretos citados pelo dono do produto; os demais módulos podem ganhar lembrete próprio depois, seguindo o mesmo padrão), obrigação de vencimento variável/anual/trimestral na análise automática (só `mensal_dia_fixo` por enquanto), horário de envio configurável pelo usuário, notificação com ação embutida (abrir direto a tela relevante ao tocar).
+
+Detalhamento técnico (schema, Edge Functions, agendamento) em SPEC.md SDD-91.
+
 ---
 
 ## 13. Regras de Negócio Transversais (numeração consolidada)
@@ -811,6 +853,11 @@ Detalhamento técnico em SPEC.md SDD-89.
 | RN-38 | Sub-negócio sugerido sai sempre do catálogo curado — a IA escolhe, ordena e explica, nunca inventa; e não atribui ao usuário afinidade que ele não declarou — §8.5 |
 | RN-39 | Plano de Ação Mensal só libera depois que a Jornada passar da Fase 2 (Validação da Ideia) — §12.9 |
 | RN-40 | Itens do Plano de Ação Mensal nunca são editáveis pelo usuário, só a conclusão — §12.9 |
+| RN-41 | Check-up Mensal libera com a Jornada apenas iniciada, sem exigir fase concluída — §12.11 |
+| RN-42 | O Check-up Mensal alimenta a geração do Plano de Ação Mensal do mesmo mês — §12.11 |
+| RN-43 | A análise de saúde do negócio é sempre leitura qualitativa das respostas do próprio usuário, nunca dado de mercado externo — §12.11 |
+| RN-44 | Cada aviso push só é enviado 1 vez por ocorrência, nunca repetido todo dia enquanto a condição continuar valendo — §12.12 |
+| RN-45 | Notificação push nunca é a única forma de acesso a uma informação — sempre lembrete de algo já visível no produto — §12.12 |
 
 ---
 

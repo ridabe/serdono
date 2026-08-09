@@ -10,5 +10,6 @@ export * from "./obrigacoes";
 export * from "./planoAcao";
 export * from "./novidadesModulos";
 export * from "./parceiros";
+export * from "./checkupMensal";
 export * from "./cnpj";
 export * from "./ai/routeModel";

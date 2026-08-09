@@ -71,16 +71,22 @@ export interface MyModule {
 }
 
 export async function listMyModules(userId: string): Promise<MyModule[]> {
+  // Consulta A PARTIR de `modules` (não de `user_modules`) só pra poder usar
+  // `.order("ordem")` de verdade — `.order(col, {referencedTable})` NÃO
+  // reordena a tabela pai, só o array embutido (doc do postgrest-js), então
+  // a versão anterior (a partir de `user_modules`) sempre devolvia na ordem
+  // em que o módulo foi liberado pro usuário, nunca em `modules.ordem`.
+  // Achado real testando o catálogo: um módulo com `ordem = 1` aparecia por
+  // último por ter sido liberado por último via backfill (SDD-90).
   const { data, error } = await supabase
-    .from("user_modules")
-    .select("modules(id, slug, nome, descricao, ativo)")
-    .eq("user_id", userId)
-    .eq("habilitado", true)
-    .eq("modules.ativo", true);
+    .from("modules")
+    .select("id, slug, nome, descricao, user_modules!inner(habilitado)")
+    .eq("ativo", true)
+    .eq("user_modules.user_id", userId)
+    .eq("user_modules.habilitado", true)
+    .order("ordem");
   if (error) throw error;
-  return (data as unknown as { modules: MyModule & { ativo: boolean } }[])
-    .map((row) => row.modules)
-    .filter((m) => m && m.ativo);
+  return (data as unknown as (MyModule & { user_modules: unknown })[]).map(({ user_modules: _um, ...m }) => m);
 }
 
 /** Checagem rápida usada no redirecionamento pós-login e nos guards de rota de módulo (SDD-31). */
