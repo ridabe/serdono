@@ -50,3 +50,14 @@ export function ChevronRightIcon({ color, size = 18 }: { color: string; size?: n
     </Svg>
   );
 }
+
+/** Ícone genérico de categoria (documento com dobra + play) — usado nos tiles coloridos do hub "Dicas da Mary" (mesmo glifo já validado em DS-24, antes vivia só em `DashboardScreen.tsx`). Categorias são conteúdo livre de admin, sem slug fixo, então o ícone é o mesmo pra todas — a cor do tile é quem diferencia. */
+export function CategoriaIcon({ color, size = 24 }: { color: string; size?: number }) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24">
+      <Path d="M6.5 3.5h8l4 4V19a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1z" {...common(color)} />
+      <Path d="M14.5 3.5V8h4" {...common(color)} />
+      <Path d="M10 12l4 2.3-4 2.3z" {...common(color)} />
+    </Svg>
+  );
+}
