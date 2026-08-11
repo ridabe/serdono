@@ -3,6 +3,7 @@ import { createModule, listModules, setModuleAtivo, trocarOrdemModules, type Mod
 
 export function useAdminModules() {
   const [modules, setModules] = useState<ModuleRow[]>([]);
+  const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -62,5 +63,21 @@ export function useAdminModules() {
     }
   }
 
-  return { modules, loading, saving, error, create, toggleAtivo, mover };
+  const filtro = query.trim().toLowerCase();
+  const filtered = filtro
+    ? modules.filter((m) => m.nome.toLowerCase().includes(filtro) || (m.descricao ?? "").toLowerCase().includes(filtro))
+    : modules;
+
+  return {
+    modules: filtered,
+    buscando: filtro.length > 0,
+    query,
+    setQuery,
+    loading,
+    saving,
+    error,
+    create,
+    toggleAtivo,
+    mover,
+  };
 }

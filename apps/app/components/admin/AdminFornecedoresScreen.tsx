@@ -325,7 +325,7 @@ function FornecedorRow({
         </View>
       </View>
       <View style={{ ...COL.acoes, paddingHorizontal: space[3], paddingVertical: space[2] }}>
-        <Button label={p.ativo ? "Desativar" : "Ativar"} variant={p.ativo ? "outline" : "primary"} size="sm" onPress={onToggleAtivo} style={{ width: 110 }} />
+        <Button label={p.ativo ? "Desativar" : "Ativar"} variant={p.ativo ? "soft" : "primary"} size="sm" onPress={onToggleAtivo} style={{ width: 110 }} />
       </View>
     </View>
   );

@@ -3,6 +3,7 @@ export * from "./platform";
 export * from "./components/Button";
 export * from "./components/Card";
 export * from "./components/CollapsibleSection";
+export * from "./components/ConfirmModal";
 export * from "./components/Input";
 export * from "./components/HoverLift";
 export * from "./components/IconBadge";

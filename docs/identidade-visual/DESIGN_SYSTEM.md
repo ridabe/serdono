@@ -317,6 +317,7 @@ Cada componente abaixo é especificado com variantes, estados e tokens usados �
 | `secondary` | `color.action.secondary` | `color.text.onBrand` | nenhuma | Ação secundária de peso (ex.: "Ver dossiê completo") |
 | `outline` | transparente | `color.action.secondary` | 1.5px `color.action.secondary` | Ação alternativa em tela já carregada de cor |
 | `ghost` | transparente | `color.text.secondary` | nenhuma | Ação terciária, baixo destaque (ex.: "Pular por enquanto") |
+| `soft` | `color.bg.brandSubtle` (`brand.100`) | `color.action.secondary` | nenhuma | Ação secundária dentro de uma linha de tabela/lista densa (DS-26) — nunca `outline`/`ghost` nesse contexto |
 | `danger` | `danger.600` | branco | nenhuma | Cancelar assinatura, excluir dado |
 
 - Altura: `48px` (padrão, alvo de toque confortável), `36px` (`size="sm"`, usado só em contextos densos de web/desktop).
@@ -480,6 +481,15 @@ Pedido do dono do produto (11/08/2026): trocar as barras horizontais do Painel A
 - **Validada por script, não no olho:** faixa de luminosidade, piso de croma, separação sob daltonismo (pior par ΔE 9,4 protan), piso de visão normal (ΔE 19,8) e contraste ≥ 3:1 — todos PASS. Tentativas de 6ª cor (teal/magenta adicionais) falharam o piso de croma e a separação sob daltonismo — ficou em 5.
 - **Ordem fixa, nunca cicle.** Categoria além da 5ª (ex.: uso de IA com muitas Edge Functions) dobra em **"Outras"** (`chart.dashboardOther` = `ink.400`, cor neutra) — nunca gerar uma 6ª cor pra Pizza.
 - **`chart.ramp` continua sendo o default de todo gráfico de magnitude do produto** (DS-19) — esta seção não muda essa regra, só documenta as duas exceções de identidade que já existem (DS-21 e esta) e onde cada uma se aplica.
+
+### 9.17 Botão `soft` — ação secundária em coluna de Ações de tabela (DS-26, registrada em 11/08/2026)
+
+Pedido do dono do produto (11/08/2026): nas tabelas novas do Painel Admin (Usuários, Fornecedores, Dicas da Mary, Módulos), toda ação que não é a principal da linha (`primary`) nem destrutiva (`danger`) usava `outline`/`ghost` — fundo branco/transparente com texto quase preto, ficando "sem cor" perto dos botões cheios ao lado, numa coluna já densa com vários botões lado a lado. Padrão novo, obrigatório daqui pra frente em qualquer coluna de Ações de tabela admin:
+
+- **Token:** variante `soft` do `Button` (`packages/ui/components/Button.tsx`) — fundo `color.bg.brandSubtle` (`brand.100`), texto `color.action.secondary` (`brand.900`), sem borda. Contraste calculado: 7,87:1 (folgado acima do piso AA de 4.5:1, DS-2).
+- **Quando usar:** qualquer botão de ação secundária **dentro de uma linha de tabela** (ex.: "Reenviar senha", "Tornar admin", "Gerenciar materiais", "Despublicar", "Desativar"). Fora de tabela — formulário, tela cheia — `outline`/`ghost` continuam valendo exatamente como antes; esta variante não os substitui em geral, só nesse contexto específico.
+- **O que não muda:** ação principal da linha continua `primary`/`danger` conforme o caso (ex.: "Bloquear" é `danger`, "Ativar" é `primary`); `soft` é sempre a ação de peso médio ao lado.
+- **Telas já migradas:** `AdminUsersScreen`, `AdminFornecedoresScreen`, `AdminDicasCategoriasScreen`, `AdminDicasMateriaisScreen`, `AdminModulesScreen`.
 
 ---
 

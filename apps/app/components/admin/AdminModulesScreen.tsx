@@ -1,7 +1,8 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { ActivityIndicator, Pressable, ScrollView, Text, View } from "react-native";
-import { Button, Card, Input, Logo, color, space, type } from "@serdono/ui";
+import { Button, Card, Input, Logo, color, radius, space, type } from "@serdono/ui";
+import type { ModuleRow } from "@serdono/supabase";
 import { useAdminModules } from "./useAdminModules";
 
 const DIACRITICS_REGEX = new RegExp("[\\u0300-\\u036f]", "g");
@@ -16,9 +17,25 @@ function slugify(nome: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
+const COL = {
+  ordem: { width: 64 },
+  nome: { flex: 1.2, minWidth: 170 },
+  slug: { flex: 1, minWidth: 140 },
+  descricao: { flex: 1.6, minWidth: 220 },
+  status: { flex: 0.7, minWidth: 110 },
+  acoes: { width: 130 },
+};
+
+/**
+ * Admin — catálogo de módulos do sistema (SDD-30). Tabela em vez de cards
+ * empilhados, busca em tempo real e ordenação por setas — mesmo padrão já
+ * aplicado em Usuários, Fornecedores e Dicas da Mary. A liberação por
+ * usuário continua na tela de cada usuário (`/admin/usuarios/[id]`), não
+ * aqui — este catálogo só controla o que existe e se aparece no menu.
+ */
 export function AdminModulesScreen() {
   const router = useRouter();
-  const { modules, loading, saving, error, create, toggleAtivo, mover } = useAdminModules();
+  const { modules, buscando, query, setQuery, loading, saving, error, create, toggleAtivo, mover } = useAdminModules();
   const [showForm, setShowForm] = useState(false);
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
@@ -62,10 +79,17 @@ export function AdminModulesScreen() {
           volte a aparecer. A liberação por usuário fica na tela de cada usuário, em "Usuários".
         </Text>
 
-        {!showForm ? (
-          <Button label="Cadastrar módulo" variant="primary" onPress={() => setShowForm(true)} style={{ marginBottom: space[5] }} />
-        ) : (
-          <Card variant="outline" padding={5} style={{ marginBottom: space[5] }}>
+        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3], alignItems: "flex-start", marginBottom: space[4] }}>
+          <View style={{ flex: 1, minWidth: 220 }}>
+            <Input label="Buscar" value={query} onChangeText={setQuery} placeholder="Nome ou descrição" autoCapitalize="none" />
+          </View>
+          <View style={{ marginTop: type.bodyStrong.lineHeight + space[1] }}>
+            <Button label={showForm ? "Cancelar" : "Cadastrar módulo"} variant={showForm ? "ghost" : "primary"} onPress={() => setShowForm((s) => !s)} />
+          </View>
+        </View>
+
+        {showForm ? (
+          <Card variant="outline" padding={5} style={{ marginBottom: space[4] }}>
             <Text style={{ ...type.bodyStrong, color: color.text.primary, marginBottom: space[3] }}>Novo módulo</Text>
             <Input label="Nome" value={nome} onChangeText={setNome} placeholder="Ex.: Financeiro" />
             <Input label="Descrição" value={descricao} onChangeText={setDescricao} placeholder="Descrição curta (opcional)" />
@@ -74,50 +98,163 @@ export function AdminModulesScreen() {
               <Button label="Cadastrar" variant="primary" loading={saving} onPress={handleCreate} />
             </View>
           </Card>
-        )}
+        ) : null}
 
         {error ? <Text style={{ ...type.caption, color: color.state.danger, marginBottom: space[3] }}>{error}</Text> : null}
 
         {loading ? (
           <ActivityIndicator color={color.bg.brand} />
         ) : modules.length === 0 ? (
-          <Text style={{ ...type.body, color: color.text.muted }}>Nenhum módulo cadastrado ainda.</Text>
+          <Text style={{ ...type.body, color: color.text.muted }}>{buscando ? "Nenhum módulo encontrado." : "Nenhum módulo cadastrado ainda."}</Text>
         ) : (
-          <View style={{ gap: space[3] }}>
-            {modules.map((m, i) => (
-              <Card key={m.id} variant="default" padding={4}>
-                <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: space[3] }}>
-                  <View style={{ gap: 2 }}>
-                    <Pressable
-                      onPress={() => mover(m, -1)}
-                      disabled={i === 0}
-                      accessibilityRole="button"
-                      accessibilityLabel={`Subir ${m.nome} no menu`}
-                      style={{ opacity: i === 0 ? 0.3 : 1, minWidth: 32, minHeight: 22, alignItems: "center", justifyContent: "center" }}
-                    >
-                      <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>▲</Text>
-                    </Pressable>
-                    <Pressable
-                      onPress={() => mover(m, 1)}
-                      disabled={i === modules.length - 1}
-                      accessibilityRole="button"
-                      accessibilityLabel={`Descer ${m.nome} no menu`}
-                      style={{ opacity: i === modules.length - 1 ? 0.3 : 1, minWidth: 32, minHeight: 22, alignItems: "center", justifyContent: "center" }}
-                    >
-                      <Text style={{ ...type.bodyStrong, color: color.action.secondary }}>▼</Text>
-                    </Pressable>
-                  </View>
-                  <View style={{ flex: 1 }}>
-                    <Text style={{ ...type.bodyStrong, color: color.text.primary }}>{m.nome}</Text>
-                    {m.descricao ? <Text style={{ ...type.caption, color: color.text.muted }}>{m.descricao}</Text> : null}
-                  </View>
-                  <Button label={m.ativo ? "Ativo" : "Inativo"} variant={m.ativo ? "outline" : "danger"} size="sm" onPress={() => toggleAtivo(m)} />
-                </View>
-              </Card>
-            ))}
-          </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator contentContainerStyle={{ minWidth: "100%" }}>
+            <View style={{ width: "100%", borderRadius: 12, overflow: "hidden", borderWidth: 1, borderColor: color.border.default }}>
+              <TableHeader />
+              {modules.map((m, i) => (
+                <ModuleRowItem
+                  key={m.id}
+                  modulo={m}
+                  podeReordenar={!buscando}
+                  podeSubir={i > 0}
+                  podeDescer={i < modules.length - 1}
+                  onMoverCima={() => mover(m, -1)}
+                  onMoverBaixo={() => mover(m, 1)}
+                  onToggleAtivo={() => toggleAtivo(m)}
+                />
+              ))}
+            </View>
+          </ScrollView>
         )}
       </ScrollView>
+    </View>
+  );
+}
+
+function TableHeader() {
+  return (
+    <View style={{ flexDirection: "row", backgroundColor: color.bg.surfaceAlt, borderBottomWidth: 1, borderBottomColor: color.border.default }}>
+      <HeaderCell colStyle={COL.ordem} label="Ordem" />
+      <HeaderCell colStyle={COL.nome} label="Nome" />
+      <HeaderCell colStyle={COL.slug} label="Slug" />
+      <HeaderCell colStyle={COL.descricao} label="Descrição" />
+      <HeaderCell colStyle={COL.status} label="Status" />
+      <HeaderCell colStyle={COL.acoes} label="Ações" />
+    </View>
+  );
+}
+
+function HeaderCell({ colStyle, label }: { colStyle: { flex?: number; minWidth?: number; width?: number }; label: string }) {
+  return (
+    <View style={{ ...colStyle, paddingHorizontal: space[3], paddingVertical: space[3] }}>
+      <Text style={{ ...type.overline, color: color.text.muted }}>{label}</Text>
+    </View>
+  );
+}
+
+function OrdemButtons({ podeSubir, podeDescer, onCima, onBaixo }: { podeSubir: boolean; podeDescer: boolean; onCima: () => void; onBaixo: () => void }) {
+  return (
+    <View style={{ flexDirection: "row", gap: 4 }}>
+      <Pressable
+        onPress={onCima}
+        disabled={!podeSubir}
+        accessibilityRole="button"
+        accessibilityLabel="Mover pra cima"
+        style={{
+          width: 26,
+          height: 26,
+          borderRadius: radius.sm,
+          borderWidth: 1,
+          borderColor: color.border.default,
+          alignItems: "center",
+          justifyContent: "center",
+          opacity: podeSubir ? 1 : 0.3,
+        }}
+      >
+        <Text style={{ ...type.caption, color: color.text.secondary }}>↑</Text>
+      </Pressable>
+      <Pressable
+        onPress={onBaixo}
+        disabled={!podeDescer}
+        accessibilityRole="button"
+        accessibilityLabel="Mover pra baixo"
+        style={{
+          width: 26,
+          height: 26,
+          borderRadius: radius.sm,
+          borderWidth: 1,
+          borderColor: color.border.default,
+          alignItems: "center",
+          justifyContent: "center",
+          opacity: podeDescer ? 1 : 0.3,
+        }}
+      >
+        <Text style={{ ...type.caption, color: color.text.secondary }}>↓</Text>
+      </Pressable>
+    </View>
+  );
+}
+
+function StatusBadge({ ativo }: { ativo: boolean }) {
+  return (
+    <View
+      style={{
+        alignSelf: "flex-start",
+        backgroundColor: ativo ? color.state.successBg : color.state.dangerBg,
+        borderRadius: radius.full,
+        paddingHorizontal: space[2],
+        paddingVertical: 2,
+      }}
+    >
+      <Text style={{ ...type.caption, color: ativo ? color.state.success : color.state.danger, fontWeight: "700" }}>
+        {ativo ? "Ativo" : "Inativo"}
+      </Text>
+    </View>
+  );
+}
+
+function ModuleRowItem({
+  modulo: m,
+  podeReordenar,
+  podeSubir,
+  podeDescer,
+  onMoverCima,
+  onMoverBaixo,
+  onToggleAtivo,
+}: {
+  modulo: ModuleRow;
+  podeReordenar: boolean;
+  podeSubir: boolean;
+  podeDescer: boolean;
+  onMoverCima: () => void;
+  onMoverBaixo: () => void;
+  onToggleAtivo: () => void;
+}) {
+  return (
+    <View style={{ flexDirection: "row", alignItems: "center", borderBottomWidth: 1, borderBottomColor: color.border.default }}>
+      <View style={{ ...COL.ordem, paddingHorizontal: space[3], paddingVertical: space[3] }}>
+        {podeReordenar ? <OrdemButtons podeSubir={podeSubir} podeDescer={podeDescer} onCima={onMoverCima} onBaixo={onMoverBaixo} /> : null}
+      </View>
+      <View style={{ ...COL.nome, paddingHorizontal: space[3], paddingVertical: space[3] }}>
+        <Text style={{ ...type.bodyStrong, color: color.text.primary }} numberOfLines={1}>
+          {m.nome}
+        </Text>
+      </View>
+      <View style={{ ...COL.slug, paddingHorizontal: space[3], paddingVertical: space[3] }}>
+        <Text style={{ ...type.mono, color: color.text.muted }} numberOfLines={1}>
+          {m.slug}
+        </Text>
+      </View>
+      <View style={{ ...COL.descricao, paddingHorizontal: space[3], paddingVertical: space[3] }}>
+        <Text style={{ ...type.body, color: m.descricao ? color.text.secondary : color.text.muted }} numberOfLines={2}>
+          {m.descricao || "—"}
+        </Text>
+      </View>
+      <View style={{ ...COL.status, paddingHorizontal: space[3], paddingVertical: space[3] }}>
+        <StatusBadge ativo={m.ativo} />
+      </View>
+      <View style={{ ...COL.acoes, paddingHorizontal: space[3], paddingVertical: space[2] }}>
+        <Button label={m.ativo ? "Desativar" : "Ativar"} variant={m.ativo ? "soft" : "primary"} size="sm" onPress={onToggleAtivo} style={{ width: 100 }} />
+      </View>
     </View>
   );
 }

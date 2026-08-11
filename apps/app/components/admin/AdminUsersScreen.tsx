@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { ActivityIndicator, Modal, Pressable, ScrollView, Text, View } from "react-native";
-import { Button, Card, Input, Logo, color, space, type } from "@serdono/ui";
+import { ActivityIndicator, Pressable, ScrollView, Text, View } from "react-native";
+import { Button, Card, ConfirmModal, Input, Logo, color, space, type } from "@serdono/ui";
 import type { AdminUser } from "@serdono/supabase";
 import { useAdminUsers } from "./useAdminUsers";
 
@@ -276,7 +276,7 @@ function UserRow({
         <View style={{ flexDirection: "row", flexWrap: "nowrap", alignItems: "center", gap: space[2] }}>
           <Button
             label={user.bloqueado ? "Desbloquear" : "Bloquear"}
-            variant={user.bloqueado ? "outline" : "danger"}
+            variant={user.bloqueado ? "soft" : "danger"}
             size="sm"
             loading={acting}
             onPress={onToggleBlocked}
@@ -284,7 +284,7 @@ function UserRow({
           />
           <Button
             label="Reenviar senha"
-            variant="outline"
+            variant="soft"
             size="sm"
             loading={acting}
             onPress={onResendPassword}
@@ -293,13 +293,13 @@ function UserRow({
           />
           <Button
             label={user.role === "admin" ? "Remover admin" : "Tornar admin"}
-            variant="outline"
+            variant="soft"
             size="sm"
             loading={acting}
             onPress={onToggleAdmin}
             style={{ width: ACAO_W.toggleAdmin }}
           />
-          <Button label="Módulos" variant="ghost" size="sm" onPress={onModulos} style={{ width: ACAO_W.modulos }} />
+          <Button label="Módulos" variant="soft" size="sm" onPress={onModulos} style={{ width: ACAO_W.modulos }} />
           <Button label="Excluir" variant="danger" size="sm" onPress={onExcluir} style={{ width: ACAO_W.excluir }} />
         </View>
       </View>
@@ -321,42 +321,3 @@ function Badge({ label, tone }: { label: string; tone: "info" | "danger" | "warn
   );
 }
 
-function ConfirmModal({
-  visible,
-  title,
-  message,
-  confirmLabel,
-  loading,
-  onConfirm,
-  onCancel,
-}: {
-  visible: boolean;
-  title: string;
-  message: string;
-  confirmLabel: string;
-  loading: boolean;
-  onConfirm: () => void;
-  onCancel: () => void;
-}) {
-  return (
-    <Modal transparent visible={visible} animationType="fade" onRequestClose={onCancel}>
-      <Pressable
-        accessibilityRole="button"
-        accessibilityLabel="Fechar"
-        onPress={onCancel}
-        style={{ flex: 1, backgroundColor: "rgba(17, 24, 39, 0.5)", alignItems: "center", justifyContent: "center", padding: space[5] }}
-      >
-        <Pressable onPress={(e) => e.stopPropagation()} style={{ width: "100%", maxWidth: 420 }}>
-          <Card variant="default" padding={5}>
-            <Text style={{ ...type.h3, color: color.text.primary, marginBottom: space[2] }}>{title}</Text>
-            <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[4] }}>{message}</Text>
-            <View style={{ flexDirection: "row", gap: space[2], justifyContent: "flex-end" }}>
-              <Button label="Cancelar" variant="ghost" onPress={onCancel} />
-              <Button label={confirmLabel} variant="danger" loading={loading} onPress={onConfirm} />
-            </View>
-          </Card>
-        </Pressable>
-      </Pressable>
-    </Modal>
-  );
-}
