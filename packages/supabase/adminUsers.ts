@@ -1,21 +1,34 @@
 import { supabase } from "./client";
 import type { UserRole } from "./session";
-import type { Tables } from "./types";
-
-export type AdminUser = Tables<"users">;
 
 /**
- * Gestão de usuários pelo Painel Admin (SDD-30). Leitura de todas as linhas
- * é liberada por RLS (`users_read_admin`) — as escritas sensíveis (papel,
- * banimento) passam pela Edge Function `admin-manage-user`, que usa a
- * service_role key, porque `users.role` tem o UPDATE revogado de
- * authenticated/anon desde a SDD-22 e banir de verdade exige a Admin API do
- * Supabase Auth.
+ * Gestão de usuários pelo Painel Admin (SDD-30). Leitura passa pela RPC
+ * `admin_list_users` (não mais `select * from users`) porque a tela de
+ * usuários agora mostra último acesso e sinaliza cadastro incompleto — os
+ * dois só existem em `auth.users` (`last_sign_in_at`/`is_anonymous`), schema
+ * que o PostgREST não expõe direto pro client. As escritas sensíveis (papel,
+ * banimento) continuam passando pela Edge Function `admin-manage-user`
+ * (service_role, `users.role` tem o UPDATE revogado de authenticated/anon
+ * desde a SDD-22 e banir de verdade exige a Admin API do Supabase Auth).
  */
+export interface AdminUser {
+  id: string;
+  nome: string | null;
+  email: string | null;
+  telefone: string | null;
+  role: UserRole;
+  bloqueado: boolean;
+  created_at: string;
+  /** `null` quando a conta nunca fez login de verdade (só passou por sessão anônima). */
+  last_sign_in_at: string | null;
+  /** Sessão anônima que nunca completou o cadastro (SDD-63) — é a "base suja": tem diagnóstico/jornada mas nunca vira conta de verdade. */
+  is_anonymous: boolean;
+}
+
 export async function listUsers(): Promise<AdminUser[]> {
-  const { data, error } = await supabase.from("users").select("*").order("created_at", { ascending: false });
+  const { data, error } = await supabase.rpc("admin_list_users");
   if (error) throw error;
-  return data;
+  return data as unknown as AdminUser[];
 }
 
 export async function inviteUser(params: { email: string; nome?: string; role?: UserRole }): Promise<string> {

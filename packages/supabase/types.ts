@@ -1595,6 +1595,20 @@ export type Database = {
           total_jornadas: number
         }[]
       }
+      admin_list_users: {
+        Args: never
+        Returns: {
+          bloqueado: boolean
+          created_at: string
+          email: string
+          id: string
+          is_anonymous: boolean
+          last_sign_in_at: string
+          nome: string
+          role: string
+          telefone: string
+        }[]
+      }
       admin_module_adoption: {
         Args: never
         Returns: {

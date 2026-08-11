@@ -43,8 +43,14 @@ export function useAdminUsers() {
   const filtered = users.filter((u) => {
     const q = query.trim().toLowerCase();
     if (!q) return true;
-    return (u.nome ?? "").toLowerCase().includes(q) || (u.email ?? "").toLowerCase().includes(q);
+    return (
+      (u.nome ?? "").toLowerCase().includes(q) ||
+      (u.email ?? "").toLowerCase().includes(q) ||
+      (u.telefone ?? "").toLowerCase().includes(q)
+    );
   });
+
+  const incompletos = filtered.filter((u) => u.is_anonymous);
 
   async function runAction(userId: string, action: () => Promise<void>, successMessage: string) {
     setActingOn(userId);
@@ -61,8 +67,38 @@ export function useAdminUsers() {
     }
   }
 
+  /**
+   * Remove em lote todas as contas anônimas que nunca completaram o
+   * cadastro (SDD-63: `is_anonymous`/`email is null`) — a "base suja" que o
+   * dono do produto pediu pra limpar. Reusa `deleteUser` (Admin API,
+   * cascateia pra todo dado da conta) uma a uma; sequencial de propósito,
+   * pra não estourar rate limit da Admin API do Supabase com dezenas de
+   * chamadas simultâneas.
+   */
+  async function removeIncompletos() {
+    setActingOn("bulk_incompletos");
+    setError(null);
+    setFeedback(null);
+    const alvo = users.filter((u) => u.is_anonymous);
+    let removidos = 0;
+    try {
+      for (const u of alvo) {
+        await deleteUser(u.id);
+        removidos++;
+      }
+      setFeedback(`${removidos} cadastro${removidos === 1 ? "" : "s"} incompleto${removidos === 1 ? "" : "s"} removido${removidos === 1 ? "" : "s"}.`);
+      await refresh();
+    } catch (e) {
+      setError(`Removidos ${removidos} de ${alvo.length} antes do erro: ${(e as Error).message}`);
+      await refresh();
+    } finally {
+      setActingOn(null);
+    }
+  }
+
   return {
     users: filtered,
+    incompletos,
     query,
     setQuery,
     loading,
@@ -70,6 +106,7 @@ export function useAdminUsers() {
     error,
     feedback,
     refresh,
+    removeIncompletos,
     invite: (params: { email: string; nome?: string; role?: UserRole }) =>
       runAction("new", () => inviteUser(params).then(() => undefined), "Convite enviado."),
     toggleBlocked: (user: AdminUser) =>

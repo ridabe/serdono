@@ -1,4 +1,5 @@
 import { useRouter } from "expo-router";
+import { useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import Svg, { Circle, Line, Path } from "react-native-svg";
 import { Card, Logo, chart, color, space, type } from "@serdono/ui";
@@ -84,18 +85,25 @@ export function AdminDashboardScreen() {
 
         {/* ---- KPIs principais ---- */}
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3] }}>
-          <KpiCard label="Usuários totais" value={stats?.total_usuarios} />
-          <KpiCard label="Novos usuários (7 dias)" value={stats?.novos_usuarios_7d} />
+          <KpiCard label="Usuários totais" value={stats?.total_usuarios} onPress={() => router.push("/admin/usuarios")} />
+          <KpiCard label="Novos usuários (7 dias)" value={stats?.novos_usuarios_7d} onPress={() => router.push("/admin/usuarios")} />
           <KpiCard label="Diagnósticos concluídos" value={stats?.diagnosticos_concluidos} />
           <KpiCard label="Nichos destravados" value={stats?.nichos_destravados} />
-          <KpiCard label="Usuários bloqueados" value={stats?.usuarios_bloqueados} tone={stats && stats.usuarios_bloqueados > 0 ? "danger" : undefined} />
+          <KpiCard
+            label="Usuários bloqueados"
+            value={stats?.usuarios_bloqueados}
+            tone={stats && stats.usuarios_bloqueados > 0 ? "danger" : undefined}
+            onPress={() => router.push("/admin/usuarios")}
+          />
         </View>
 
         {/* ---- Crescimento + Alertas ---- */}
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[4] }}>
           <Card variant="default" padding={5} style={{ flexGrow: 2, minWidth: 320 }}>
-            <Text style={{ ...type.h3, color: color.text.primary }}>Crescimento de usuários</Text>
-            <Text style={{ ...type.caption, color: color.text.muted, marginBottom: space[3] }}>Cadastros novos por dia, últimos 30 dias</Text>
+            <CardTitle title="Crescimento de usuários" linkLabel="Ver usuários" onPress={() => router.push("/admin/usuarios")} />
+            <Text style={{ ...type.caption, color: color.text.muted, marginBottom: space[3] }}>
+              Cadastros novos por dia, últimos 30 dias — passe o mouse (ou toque) num ponto pra ver o dia
+            </Text>
             <GrowthChart pontos={crescimento} />
           </Card>
 
@@ -105,7 +113,7 @@ export function AdminDashboardScreen() {
             {loading ? null : alertas.length === 0 ? (
               <Text style={{ ...type.body, color: color.text.muted }}>Nenhum alerta no momento.</Text>
             ) : (
-              alertas.map((a, i) => <AlertRow key={i} alerta={a} />)
+              alertas.map((a, i) => <AlertRow key={i} alerta={a} onNavigate={a.href ? () => router.push(a.href as never) : undefined} />)
             )}
           </Card>
         </View>
@@ -122,17 +130,17 @@ export function AdminDashboardScreen() {
         {/* ---- Rankings ---- */}
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[4] }}>
           <Card variant="default" padding={5} style={{ flexGrow: 1, minWidth: 260 }}>
-            <Text style={{ ...type.h3, color: color.text.primary, marginBottom: space[3] }}>Adoção por módulo</Text>
+            <CardTitle title="Adoção por módulo" linkLabel="Ver módulos" onPress={() => router.push("/admin/modulos")} />
             <RankingModulos modulos={modulos} totalUsuarios={stats?.total_usuarios ?? 0} />
           </Card>
 
           <Card variant="default" padding={5} style={{ flexGrow: 1, minWidth: 260 }}>
-            <Text style={{ ...type.h3, color: color.text.primary, marginBottom: space[3] }}>Fornecedores por categoria</Text>
+            <CardTitle title="Fornecedores por categoria" linkLabel="Ver fornecedores" onPress={() => router.push("/admin/fornecedores")} />
             <RankingBarras dados={fornecedores.map((f) => ({ label: f.categoria, valor: f.total }))} />
           </Card>
 
           <Card variant="default" padding={5} style={{ flexGrow: 1, minWidth: 260 }}>
-            <Text style={{ ...type.h3, color: color.text.primary, marginBottom: space[3] }}>Dicas mais acessadas</Text>
+            <CardTitle title="Dicas mais acessadas" linkLabel="Ver dicas" onPress={() => router.push("/admin/dicas")} />
             <RankingDicas dicas={dicas} />
           </Card>
         </View>
@@ -204,14 +212,36 @@ export function AdminDashboardScreen() {
 // ============================================================================
 // KPI
 // ============================================================================
-function KpiCard({ label, value, tone }: { label: string; value?: number; tone?: "danger" }) {
-  return (
+function KpiCard({ label, value, tone, onPress }: { label: string; value?: number; tone?: "danger"; onPress?: () => void }) {
+  const content = (
     <Card variant="outline" padding={4} style={{ minWidth: 160, flexGrow: 1 }}>
       <Text style={{ ...type.caption, color: color.text.muted, fontWeight: "600" }}>{label}</Text>
       <Text style={{ ...type.h1, color: tone === "danger" && value ? color.state.danger : color.bg.brand, marginTop: space[1] }}>
         {value != null ? formatNumber(value) : "—"}
       </Text>
     </Card>
+  );
+  if (!onPress) return content;
+  return (
+    <Pressable onPress={onPress} accessibilityRole="button" style={{ minWidth: 160, flexGrow: 1 }}>
+      {content}
+    </Pressable>
+  );
+}
+
+/**
+ * Título de card com link pra tela dona daquele dado — padrão a repetir em
+ * todo card do dashboard que resume uma entidade administrável (usuários,
+ * módulos, fornecedores, dicas...).
+ */
+function CardTitle({ title, linkLabel, onPress }: { title: string; linkLabel: string; onPress: () => void }) {
+  return (
+    <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+      <Text style={{ ...type.h3, color: color.text.primary }}>{title}</Text>
+      <Pressable onPress={onPress} accessibilityRole="link" style={{ minHeight: 32, justifyContent: "center" }}>
+        <Text style={{ ...type.caption, color: color.action.secondary, fontWeight: "700" }}>{linkLabel} →</Text>
+      </Pressable>
+    </View>
   );
 }
 
@@ -226,12 +256,16 @@ function MiniStat({ label, value }: { label: string; value: string }) {
 
 // ============================================================================
 // Gráfico de crescimento — linha + área, mesmo token de série única do DS
-// (`chart.series`/`chart.seriesFill`, §12 do Design System).
+// (`chart.series`/`chart.seriesFill`, §12 do Design System). Interativo: uma
+// coluna invisível por dia sobre o SVG reage a hover (web) e toque
+// (nativo/web) — mostra o dia + valor exato num tooltip e realça o ponto,
+// em vez de deixar o admin adivinhar o número pela altura da linha.
 // ============================================================================
 function GrowthChart({ pontos }: { pontos: CrescimentoDia[] }) {
   const LARGURA = 640;
   const ALTURA = 160;
   const PAD = 10;
+  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
 
   if (pontos.length === 0) {
     return <Text style={{ ...type.body, color: color.text.muted }}>Sem dado ainda.</Text>;
@@ -248,17 +282,66 @@ function GrowthChart({ pontos }: { pontos: CrescimentoDia[] }) {
 
   const linha = pontos.map((p, i) => `${i === 0 ? "M" : "L"}${x(i).toFixed(1)},${y(p.novos_usuarios).toFixed(1)}`).join(" ");
   const area = `${linha} L${x(ultimoIndex).toFixed(1)},${(ALTURA - PAD).toFixed(1)} L${x(0).toFixed(1)},${(ALTURA - PAD).toFixed(1)} Z`;
-  const ultimo = pontos[ultimoIndex];
+  const destacado = hoverIndex ?? ultimoIndex;
+  const pontoDestacado = pontos[destacado];
+  const pctEsquerda = ultimoIndex > 0 ? (destacado / ultimoIndex) * 100 : 50;
 
   return (
-    <Svg width="100%" height={ALTURA} viewBox={`0 0 ${LARGURA} ${ALTURA}`}>
-      {[0, 0.5, 1].map((f) => (
-        <Line key={f} x1={PAD} y1={PAD + alturaUtil * f} x2={LARGURA - PAD} y2={PAD + alturaUtil * f} stroke={chart.grid} strokeWidth={1} />
-      ))}
-      <Path d={area} fill={chart.seriesFill} stroke="none" />
-      <Path d={linha} fill="none" stroke={chart.series} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-      <Circle cx={x(ultimoIndex)} cy={y(ultimo.novos_usuarios)} r={4} fill={chart.accent} stroke={color.bg.surface} strokeWidth={2} />
-    </Svg>
+    <View>
+      <View style={{ position: "relative" }}>
+        <Svg width="100%" height={ALTURA} viewBox={`0 0 ${LARGURA} ${ALTURA}`}>
+          {[0, 0.5, 1].map((f) => (
+            <Line key={f} x1={PAD} y1={PAD + alturaUtil * f} x2={LARGURA - PAD} y2={PAD + alturaUtil * f} stroke={chart.grid} strokeWidth={1} />
+          ))}
+          <Path d={area} fill={chart.seriesFill} stroke="none" />
+          <Path d={linha} fill="none" stroke={chart.series} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+          {hoverIndex != null ? (
+            <Line x1={x(hoverIndex)} y1={PAD} x2={x(hoverIndex)} y2={ALTURA - PAD} stroke={chart.axis} strokeWidth={1} strokeDasharray="3 3" />
+          ) : null}
+          <Circle
+            cx={x(destacado)}
+            cy={y(pontoDestacado.novos_usuarios)}
+            r={hoverIndex != null ? 5 : 4}
+            fill={chart.accent}
+            stroke={color.bg.surface}
+            strokeWidth={2}
+          />
+        </Svg>
+
+        {/* Colunas invisíveis, uma por dia — hover na web, toque em qualquer plataforma. */}
+        <View style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, flexDirection: "row" }}>
+          {pontos.map((_, i) => (
+            <Pressable
+              key={i}
+              onHoverIn={() => setHoverIndex(i)}
+              onHoverOut={() => setHoverIndex(null)}
+              onPressIn={() => setHoverIndex(i)}
+              style={{ flex: 1 }}
+            />
+          ))}
+        </View>
+
+        {/* Tooltip — segue a coluna com o mouse/toque, clampado nas bordas do card. */}
+        <View
+          pointerEvents="none"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: `${Math.min(Math.max(pctEsquerda, 10), 90)}%`,
+            transform: [{ translateX: -50 }],
+            backgroundColor: color.bg.brand,
+            borderRadius: 6,
+            paddingHorizontal: space[2],
+            paddingVertical: 4,
+            opacity: hoverIndex != null ? 1 : 0,
+          }}
+        >
+          <Text style={{ ...type.caption, color: color.text.onBrand, fontWeight: "700" }}>
+            {new Date(pontoDestacado.dia).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" })} · {formatNumber(pontoDestacado.novos_usuarios)}
+          </Text>
+        </View>
+      </View>
+    </View>
   );
 }
 
@@ -271,12 +354,19 @@ const ALERTA_COR: Record<AlertaSeveridade, string> = {
   danger: color.state.danger,
 };
 
-function AlertRow({ alerta }: { alerta: Alerta }) {
-  return (
+function AlertRow({ alerta, onNavigate }: { alerta: Alerta; onNavigate?: () => void }) {
+  const conteudo = (
     <View style={{ flexDirection: "row", gap: space[3], paddingVertical: space[2], borderTopWidth: 1, borderTopColor: color.bg.surfaceAlt }}>
       <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: ALERTA_COR[alerta.severidade], marginTop: 6 }} />
       <Text style={{ ...type.body, color: color.text.primary, flex: 1 }}>{alerta.texto}</Text>
+      {onNavigate ? <Text style={{ ...type.caption, color: color.action.secondary, fontWeight: "700" }}>Ver →</Text> : null}
     </View>
+  );
+  if (!onNavigate) return conteudo;
+  return (
+    <Pressable onPress={onNavigate} accessibilityRole="link">
+      {conteudo}
+    </Pressable>
   );
 }
 

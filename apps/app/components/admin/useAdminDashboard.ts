@@ -27,6 +27,8 @@ export type AlertaSeveridade = "info" | "warning" | "danger";
 export interface Alerta {
   severidade: AlertaSeveridade;
   texto: string;
+  /** Rota da tela dona do dado por trás do alerta — some o link "Ver →" quando ausente. */
+  href?: string;
 }
 
 /**
@@ -42,6 +44,7 @@ function derivarAlertas(stats: DashboardStats | null, funil: FunilFase[], modulo
     alertas.push({
       severidade: "danger",
       texto: `${stats.usuarios_bloqueados} usuário${stats.usuarios_bloqueados > 1 ? "s" : ""} bloqueado${stats.usuarios_bloqueados > 1 ? "s" : ""} no sistema.`,
+      href: "/admin/usuarios",
     });
   }
 
@@ -74,6 +77,7 @@ function derivarAlertas(stats: DashboardStats | null, funil: FunilFase[], modulo
       alertas.push({
         severidade: "info",
         texto: `Módulo "${menorAdocao.modulo}" com baixa adoção — só ${Math.round(pct)}% dos usuários.`,
+        href: "/admin/modulos",
       });
     }
   }
