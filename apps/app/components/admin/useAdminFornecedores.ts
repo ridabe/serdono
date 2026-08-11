@@ -16,6 +16,7 @@ export interface NicheOption {
 export function useAdminFornecedores() {
   const [parceiros, setParceiros] = useState<FornecedorParceiro[]>([]);
   const [niches, setNiches] = useState<NicheOption[]>([]);
+  const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -67,5 +68,15 @@ export function useAdminFornecedores() {
     }
   }
 
-  return { parceiros, niches, loading, saving, error, create, toggleAtivo };
+  const filtered = parceiros.filter((p) => {
+    const q = query.trim().toLowerCase();
+    if (!q) return true;
+    return (
+      p.nome.toLowerCase().includes(q) ||
+      p.categoria.toLowerCase().includes(q) ||
+      (p.regiao ?? "").toLowerCase().includes(q)
+    );
+  });
+
+  return { parceiros: filtered, niches, query, setQuery, loading, saving, error, create, toggleAtivo };
 }

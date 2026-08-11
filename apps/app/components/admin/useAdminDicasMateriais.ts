@@ -16,6 +16,7 @@ function randomId(): string {
 
 export function useAdminDicasMateriais(categoriaId: string) {
   const [materiais, setMateriais] = useState<DicasMaterial[]>([]);
+  const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [uploadingPdf, setUploadingPdf] = useState(false);
@@ -114,5 +115,23 @@ export function useAdminDicasMateriais(categoriaId: string) {
     }
   }
 
-  return { materiais, loading, saving, uploadingPdf, error, create, update, toggleAtivo, remove, mover, subirPdf };
+  const filtro = query.trim().toLowerCase();
+  const filtered = filtro ? materiais.filter((m) => m.titulo.toLowerCase().includes(filtro)) : materiais;
+
+  return {
+    materiais: filtered,
+    buscando: filtro.length > 0,
+    query,
+    setQuery,
+    loading,
+    saving,
+    uploadingPdf,
+    error,
+    create,
+    update,
+    toggleAtivo,
+    remove,
+    mover,
+    subirPdf,
+  };
 }

@@ -10,6 +10,7 @@ import {
 
 export function useAdminDicasCategorias() {
   const [categorias, setCategorias] = useState<DicasCategoria[]>([]);
+  const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -94,5 +95,23 @@ export function useAdminDicasCategorias() {
     }
   }
 
-  return { categorias, loading, saving, error, create, update, toggleAtivo, remove, mover };
+  const filtro = query.trim().toLowerCase();
+  const filtered = filtro
+    ? categorias.filter((c) => c.titulo.toLowerCase().includes(filtro) || c.descricao.toLowerCase().includes(filtro))
+    : categorias;
+
+  return {
+    categorias: filtered,
+    buscando: filtro.length > 0,
+    query,
+    setQuery,
+    loading,
+    saving,
+    error,
+    create,
+    update,
+    toggleAtivo,
+    remove,
+    mover,
+  };
 }
