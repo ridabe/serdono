@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
-import Svg, { Circle, Line, Path } from "react-native-svg";
+import Svg, { Circle, Line, Path, Text as SvgText } from "react-native-svg";
 import { Card, Logo, chart, color, space, type } from "@serdono/ui";
 import {
   FASE_LABEL,
@@ -12,7 +12,6 @@ import {
   type DicaRanking,
   type FunilFase,
   type IaUsageDia,
-  type IaUsagePorFuncao,
 } from "@serdono/supabase";
 import { useAdminDashboard, type Alerta, type AlertaSeveridade } from "./useAdminDashboard";
 
@@ -136,7 +135,7 @@ export function AdminDashboardScreen() {
 
           <Card variant="default" padding={5} style={{ flexGrow: 1, minWidth: 260 }}>
             <CardTitle title="Fornecedores por categoria" linkLabel="Ver fornecedores" onPress={() => router.push("/admin/fornecedores")} />
-            <RankingBarras dados={fornecedores.map((f) => ({ label: f.categoria, valor: f.total }))} />
+            <DonutChart dados={fornecedores.map((f) => ({ label: f.categoria, valor: f.total }))} />
           </Card>
 
           <Card variant="default" padding={5} style={{ flexGrow: 1, minWidth: 260 }}>
@@ -168,7 +167,7 @@ export function AdminDashboardScreen() {
             </View>
             <View style={{ flexGrow: 1, minWidth: 220 }}>
               <Text style={{ ...type.caption, color: color.text.muted, fontWeight: "600", marginBottom: space[2] }}>Por função</Text>
-              <RankingFuncoesIa dados={iaPorFuncao} />
+              <DonutChart dados={iaPorFuncao.map((d) => ({ label: d.funcao, valor: d.tokens }))} unidade=" tk" />
             </View>
           </View>
         </Card>
@@ -371,97 +370,199 @@ function AlertRow({ alerta, onNavigate }: { alerta: Alerta; onNavigate?: () => v
 }
 
 // ============================================================================
-// Funil da Jornada — barras horizontais na ordem fixa das fases.
+// Cor por magnitude — passo da rampa ordinal (DS-19) proporcional ao valor
+// da barra, nunca uma cor arbitrária por categoria: estes gráficos comparam
+// grandeza (% de jornada, adoção de módulo), não identidade de série.
+// ============================================================================
+function corPorMagnitude(valor: number, max: number): string {
+  const frac = max > 0 ? valor / max : 0;
+  const idx = Math.min(chart.ramp.length - 1, Math.floor(frac * chart.ramp.length));
+  return chart.ramp[idx];
+}
+
+function truncar(texto: string, max = 14): string {
+  return texto.length > max ? `${texto.slice(0, max - 1)}…` : texto;
+}
+
+// ============================================================================
+// Barra vertical genérica — eixo Y com grade/rótulo de valor, eixo X com o
+// rótulo de cada barra (truncado), cor por magnitude via `corPorMagnitude`.
+// ============================================================================
+function VerticalBarChart({
+  dados,
+  sufixo = "",
+  vazio,
+}: {
+  dados: { chave: string; label: string; valor: number; legenda?: string }[];
+  sufixo?: string;
+  vazio: string;
+}) {
+  if (dados.length === 0) return <Text style={{ ...type.body, color: color.text.muted }}>{vazio}</Text>;
+
+  const ALTURA_BARRAS = 130;
+  const max = Math.max(...dados.map((d) => d.valor), 1);
+
+  return (
+    <View style={{ flexDirection: "row" }}>
+      {/* Eixo Y — máximo, metade, zero. */}
+      <View style={{ width: 36, height: ALTURA_BARRAS, justifyContent: "space-between", paddingBottom: 2 }}>
+        <Text style={{ ...type.caption, color: color.text.muted, fontSize: 10 }}>
+          {formatNumber(Math.round(max))}
+          {sufixo}
+        </Text>
+        <Text style={{ ...type.caption, color: color.text.muted, fontSize: 10 }}>
+          {formatNumber(Math.round(max / 2))}
+          {sufixo}
+        </Text>
+        <Text style={{ ...type.caption, color: color.text.muted, fontSize: 10 }}>0{sufixo}</Text>
+      </View>
+
+      <View style={{ flex: 1 }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "flex-end",
+            height: ALTURA_BARRAS,
+            gap: space[2],
+            borderLeftWidth: 1,
+            borderBottomWidth: 1,
+            borderColor: color.border.default,
+            paddingLeft: space[1],
+          }}
+        >
+          {dados.map((d) => (
+            <View key={d.chave} style={{ flex: 1, alignItems: "center", height: "100%", justifyContent: "flex-end" }}>
+              <Text style={{ ...type.caption, color: color.text.primary, fontWeight: "700", fontSize: 10, marginBottom: 2 }}>
+                {formatNumber(d.valor)}
+                {sufixo}
+              </Text>
+              <View
+                style={{
+                  width: "60%",
+                  minWidth: 10,
+                  height: Math.max((d.valor / max) * (ALTURA_BARRAS - 30), d.valor > 0 ? 4 : 0),
+                  backgroundColor: corPorMagnitude(d.valor, max),
+                  borderRadius: 3,
+                }}
+              />
+            </View>
+          ))}
+        </View>
+
+        {/* Eixo X — rótulo de cada barra. */}
+        <View style={{ flexDirection: "row", gap: space[2], marginTop: 4, paddingLeft: space[1] }}>
+          {dados.map((d) => (
+            <Text key={d.chave} style={{ flex: 1, ...type.caption, color: color.text.muted, fontSize: 10, textAlign: "center" }} numberOfLines={2}>
+              {d.legenda ?? truncar(d.label)}
+            </Text>
+          ))}
+        </View>
+      </View>
+    </View>
+  );
+}
+
+// ============================================================================
+// Pizza/donut — composição (a soma das fatias é o total, ex.: fornecedores
+// por categoria, tokens de IA por função). Cor vem de `chart.dashboardCategorical`
+// (DS-25) — segundo e único outro caso do produto com identidade de série,
+// nunca reaproveitar pra gráfico de magnitude. Categoria além da 5ª dobra em
+// "Outras" (`chart.dashboardOther`, neutro) — nunca gera uma 6ª cor.
+// ============================================================================
+function DonutChart({ dados, unidade = "" }: { dados: { label: string; valor: number }[]; unidade?: string }) {
+  const comValor = dados.filter((d) => d.valor > 0).sort((a, b) => b.valor - a.valor);
+  if (comValor.length === 0) return <Text style={{ ...type.body, color: color.text.muted }}>Sem dado ainda.</Text>;
+
+  const MAX_FATIAS = 5;
+  const principais = comValor.slice(0, MAX_FATIAS);
+  const resto = comValor.slice(MAX_FATIAS).reduce((soma, d) => soma + d.valor, 0);
+  const fatias = resto > 0 ? [...principais, { label: "Outras", valor: resto }] : principais;
+  const cores = fatias.map((_, i) => (i < principais.length ? chart.dashboardCategorical[i] : chart.dashboardOther));
+
+  const total = fatias.reduce((s, d) => s + d.valor, 0);
+  const SIZE = 140;
+  const STROKE = 24;
+  const R = (SIZE - STROKE) / 2;
+  const C = 2 * Math.PI * R;
+  let acumulado = 0;
+
+  return (
+    <View style={{ flexDirection: "row", alignItems: "center", gap: space[4], flexWrap: "wrap" }}>
+      <Svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`}>
+        <Circle cx={SIZE / 2} cy={SIZE / 2} r={R} stroke={color.bg.surfaceAlt} strokeWidth={STROKE} fill="none" />
+        {fatias.map((d, i) => {
+          const frac = d.valor / total;
+          const dashoffset = -acumulado * C;
+          acumulado += frac;
+          return (
+            <Circle
+              key={d.label}
+              cx={SIZE / 2}
+              cy={SIZE / 2}
+              r={R}
+              stroke={cores[i]}
+              strokeWidth={STROKE}
+              fill="none"
+              strokeDasharray={`${frac * C} ${C}`}
+              strokeDashoffset={dashoffset}
+              strokeLinecap="butt"
+              transform={`rotate(-90 ${SIZE / 2} ${SIZE / 2})`}
+            />
+          );
+        })}
+        <SvgText x={SIZE / 2} y={SIZE / 2 - 2} textAnchor="middle" fontSize={18} fontWeight="700" fill={color.text.primary}>
+          {formatNumber(total)}
+        </SvgText>
+        <SvgText x={SIZE / 2} y={SIZE / 2 + 16} textAnchor="middle" fontSize={10} fill={color.text.muted}>
+          total{unidade}
+        </SvgText>
+      </Svg>
+
+      <View style={{ gap: space[2], flex: 1, minWidth: 140 }}>
+        {fatias.map((d, i) => (
+          <View key={d.label} style={{ flexDirection: "row", alignItems: "center", gap: space[2] }}>
+            <View style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: cores[i] }} />
+            <Text style={{ ...type.caption, color: color.text.secondary, flex: 1 }} numberOfLines={1}>
+              {d.label}
+            </Text>
+            <Text style={{ ...type.caption, color: color.text.primary, fontWeight: "700" }}>{Math.round((d.valor / total) * 100)}%</Text>
+          </View>
+        ))}
+      </View>
+    </View>
+  );
+}
+
+// ============================================================================
+// Funil da Jornada — barra vertical, ordem fixa das fases, cor por magnitude.
 // ============================================================================
 function FunilJornada({ funil }: { funil: FunilFase[] }) {
   const porFase = new Map(funil.map((f) => [f.fase, f]));
   const fases = FASE_ORDER.map((f) => porFase.get(f)).filter((f): f is FunilFase => !!f);
 
-  if (fases.length === 0) {
-    return <Text style={{ ...type.body, color: color.text.muted }}>Nenhuma jornada com etapa concluída ainda.</Text>;
-  }
+  const dados = fases.map((f) => ({
+    chave: f.fase,
+    label: FASE_LABEL[f.fase] ?? f.fase,
+    valor: f.total_jornadas > 0 ? Math.round((f.alcancaram / f.total_jornadas) * 100) : 0,
+  }));
 
-  return (
-    <View style={{ gap: space[3] }}>
-      {fases.map((f) => {
-        const pct = f.total_jornadas > 0 ? (f.alcancaram / f.total_jornadas) * 100 : 0;
-        return (
-          <View key={f.fase} style={{ gap: 4 }}>
-            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-              <Text style={{ ...type.caption, color: color.text.secondary, fontWeight: "600" }}>{FASE_LABEL[f.fase] ?? f.fase}</Text>
-              <Text style={{ ...type.caption, color: color.text.muted }}>
-                {Math.round(pct)}% · {formatNumber(f.alcancaram)}/{formatNumber(f.total_jornadas)}
-              </Text>
-            </View>
-            <View style={{ height: 8, borderRadius: 4, backgroundColor: color.bg.surfaceAlt, overflow: "hidden" }}>
-              <View style={{ height: "100%", width: `${Math.max(pct, f.alcancaram > 0 ? 2 : 0)}%`, borderRadius: 4, backgroundColor: chart.series }} />
-            </View>
-          </View>
-        );
-      })}
-    </View>
-  );
+  return <VerticalBarChart dados={dados} sufixo="%" vazio="Nenhuma jornada com etapa concluída ainda." />;
 }
 
 // ============================================================================
-// Rankings — barras horizontais genéricas
+// Adoção por módulo — barra vertical, cor por magnitude (% de usuários).
 // ============================================================================
-function RankingBarras({ dados }: { dados: { label: string; valor: number }[] }) {
-  if (dados.length === 0) return <Text style={{ ...type.body, color: color.text.muted }}>Sem dado ainda.</Text>;
-  const max = Math.max(...dados.map((d) => d.valor), 1);
-  return (
-    <View style={{ gap: space[3] }}>
-      {dados.map((d) => (
-        <View key={d.label} style={{ gap: 4 }}>
-          <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-            <Text style={{ ...type.caption, color: color.text.secondary, fontWeight: "600" }} numberOfLines={1}>
-              {d.label}
-            </Text>
-            <Text style={{ ...type.caption, color: color.text.muted }}>{formatNumber(d.valor)}</Text>
-          </View>
-          <View style={{ height: 7, borderRadius: 4, backgroundColor: color.bg.surfaceAlt, overflow: "hidden" }}>
-            <View
-              style={{
-                height: "100%",
-                width: `${Math.max((d.valor / max) * 100, d.valor > 0 ? 4 : 0)}%`,
-                borderRadius: 4,
-                backgroundColor: chart.series,
-              }}
-            />
-          </View>
-        </View>
-      ))}
-    </View>
-  );
-}
-
 function RankingModulos({ modulos, totalUsuarios }: { modulos: AdocaoModulo[]; totalUsuarios: number }) {
-  if (modulos.length === 0) return <Text style={{ ...type.body, color: color.text.muted }}>Sem dado ainda.</Text>;
-  return (
-    <View style={{ gap: space[3] }}>
-      {modulos.map((m) => {
-        // Clamp de exibição: `habilitados` pode passar de `totalUsuarios` quando existe
-        // `user_modules` de conta que já não está mais em `public.users` (dado real,
-        // não bug desta tela) — nunca mostrar porcentagem acima de 100%.
-        const pct = totalUsuarios > 0 ? Math.min((m.habilitados / totalUsuarios) * 100, 100) : 0;
-        return (
-          <View key={m.modulo} style={{ gap: 4 }}>
-            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-              <Text style={{ ...type.caption, color: color.text.secondary, fontWeight: "600" }} numberOfLines={1}>
-                {m.modulo}
-              </Text>
-              <Text style={{ ...type.caption, color: color.text.muted }}>
-                {Math.round(pct)}% · {formatNumber(m.habilitados)}
-              </Text>
-            </View>
-            <View style={{ height: 7, borderRadius: 4, backgroundColor: color.bg.surfaceAlt, overflow: "hidden" }}>
-              <View style={{ height: "100%", width: `${Math.max(pct, m.habilitados > 0 ? 2 : 0)}%`, borderRadius: 4, backgroundColor: chart.series }} />
-            </View>
-          </View>
-        );
-      })}
-    </View>
-  );
+  // Clamp de exibição: `habilitados` pode passar de `totalUsuarios` quando existe
+  // `user_modules` de conta que já não está mais em `public.users` (dado real,
+  // não bug desta tela) — nunca mostrar porcentagem acima de 100%.
+  const dados = modulos.map((m) => ({
+    chave: m.modulo,
+    label: m.modulo,
+    valor: totalUsuarios > 0 ? Math.min(Math.round((m.habilitados / totalUsuarios) * 100), 100) : 0,
+  }));
+
+  return <VerticalBarChart dados={dados} sufixo="%" vazio="Sem dado ainda." />;
 }
 
 function RankingDicas({ dicas }: { dicas: DicaRanking[] }) {
@@ -496,38 +597,55 @@ function RankingDicas({ dicas }: { dicas: DicaRanking[] }) {
 // ============================================================================
 // Uso de IA
 // ============================================================================
+// Série temporal (dia após dia) — continua monocromática de propósito: cor
+// por categoria aqui sugeriria identidade entre dias, que não existe
+// (DS-19). Eixo Y mostra o máximo; eixo X mostra o primeiro/meio/último dia.
 function IaUsageBarChart({ pontos }: { pontos: IaUsageDia[] }) {
   if (pontos.length === 0) return <Text style={{ ...type.body, color: color.text.muted }}>Sem dado ainda.</Text>;
   const max = Math.max(...pontos.map((p) => p.chamadas), 1);
-  return (
-    <View style={{ flexDirection: "row", alignItems: "flex-end", gap: 3, height: 64 }}>
-      {pontos.map((p) => (
-        <View
-          key={p.dia}
-          style={{
-            flex: 1,
-            height: `${Math.max((p.chamadas / max) * 100, p.chamadas > 0 ? 6 : 2)}%`,
-            backgroundColor: p.chamadas > 0 ? chart.series : color.bg.surfaceAlt,
-            borderRadius: 2,
-          }}
-        />
-      ))}
-    </View>
-  );
-}
+  const meio = Math.floor(pontos.length / 2);
 
-function RankingFuncoesIa({ dados }: { dados: IaUsagePorFuncao[] }) {
-  if (dados.length === 0) return <Text style={{ ...type.body, color: color.text.muted }}>Sem dado ainda.</Text>;
+  function rotuloDia(iso: string): string {
+    return new Date(iso).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
+  }
+
   return (
-    <View style={{ gap: space[2] }}>
-      {dados.slice(0, 5).map((d) => (
-        <View key={d.funcao} style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Text style={{ ...type.caption, color: color.text.secondary }} numberOfLines={1}>
-            {d.funcao}
-          </Text>
-          <Text style={{ ...type.caption, color: color.text.muted, fontWeight: "600" }}>{formatNumber(d.tokens)} tk</Text>
+    <View style={{ flexDirection: "row" }}>
+      <View style={{ width: 28, height: 64, justifyContent: "space-between" }}>
+        <Text style={{ ...type.caption, color: color.text.muted, fontSize: 10 }}>{formatNumber(max)}</Text>
+        <Text style={{ ...type.caption, color: color.text.muted, fontSize: 10 }}>0</Text>
+      </View>
+      <View style={{ flex: 1 }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "flex-end",
+            gap: 3,
+            height: 64,
+            borderLeftWidth: 1,
+            borderBottomWidth: 1,
+            borderColor: color.border.default,
+            paddingLeft: 4,
+          }}
+        >
+          {pontos.map((p) => (
+            <View
+              key={p.dia}
+              style={{
+                flex: 1,
+                height: `${Math.max((p.chamadas / max) * 100, p.chamadas > 0 ? 6 : 2)}%`,
+                backgroundColor: p.chamadas > 0 ? chart.series : color.bg.surfaceAlt,
+                borderRadius: 2,
+              }}
+            />
+          ))}
         </View>
-      ))}
+        <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 4, paddingLeft: 4 }}>
+          <Text style={{ ...type.caption, color: color.text.muted, fontSize: 10 }}>{rotuloDia(pontos[0].dia)}</Text>
+          <Text style={{ ...type.caption, color: color.text.muted, fontSize: 10 }}>{rotuloDia(pontos[meio].dia)}</Text>
+          <Text style={{ ...type.caption, color: color.text.muted, fontSize: 10 }}>{rotuloDia(pontos[pontos.length - 1].dia)}</Text>
+        </View>
+      </View>
     </View>
   );
 }

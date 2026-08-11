@@ -190,6 +190,22 @@ export const chart = {
     poupanca: "#C77A0A",
     cenario: "#8B4FD6",
   },
+  /**
+   * §12.2 Paleta CATEGÓRICA do Painel Admin (DS-25, registrada em 11/08/2026)
+   * — segundo caso do produto com identidade de série (não magnitude): fatia
+   * de gráfico de Pizza numa composição (ex.: fornecedores por categoria, uso
+   * de IA por função — cada fatia é % de um total, não ranking). Nunca usar
+   * em gráfico de barra/funil de magnitude — esses continuam na rampa
+   * ordinal acima (DS-19); dashboardCategorical é só para Pizza/composição.
+   *
+   * Validada pelo script do método de dataviz contra a superfície do
+   * produto: faixa de luminosidade, piso de croma, separação sob daltonismo
+   * (pior par ΔE 9,4 protan), piso de visão normal (ΔE 19,8) e contraste
+   * ≥ 3:1 — todos PASS. **Ordem fixa, nunca cicle.** Categoria além da 5ª
+   * dobra em "Outras" (cor neutra `ink.400`) — nunca gerar uma 6ª cor.
+   */
+  dashboardCategorical: ["#2E6FD4", "#12876A", "#C77A0A", "#8B4FD6", "#0B84A5"],
+  dashboardOther: primitive.ink400,
 } as const;
 
 // ---- §10 Acessibilidade ----
