@@ -13,6 +13,7 @@
 // do chamador, sem service_role.
 
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { logIaUsage } from "../_shared/ia-usage.ts";
 
 const AI_MODEL_AVANCADO = "claude-sonnet-4-5";
 
@@ -51,7 +52,8 @@ function slugify(nome: string): string {
     .slice(0, 40);
 }
 
-async function gerarNomes(contexto: Record<string, unknown>): Promise<string[]> {
+// deno-lint-ignore no-explicit-any
+async function gerarNomes(contexto: Record<string, unknown>, supabase: any, userId: string): Promise<string[]> {
   const system = [
     "Você é o copiloto do Ser Dono, ajudando um empreendedor brasileiro a escolher o nome da empresa,",
     "na Fase 3 (Planejamento) da Jornada Empreendedora.",
@@ -82,6 +84,14 @@ async function gerarNomes(contexto: Record<string, unknown>): Promise<string[]> 
   }
 
   const data = await response.json();
+  await logIaUsage(supabase, {
+    userId,
+    funcao: "jornada-gerar-nomes",
+    provider: "anthropic",
+    modelo: AI_MODEL_AVANCADO,
+    inputTokens: data.usage?.input_tokens ?? null,
+    outputTokens: data.usage?.output_tokens ?? null,
+  });
   const text = data.content?.[0]?.text?.trim();
   if (!text) throw new Error("Resposta vazia do modelo");
 
@@ -209,7 +219,7 @@ Deno.serve(async (req) => {
       });
     }
 
-    const nomes = await gerarNomes({ nicho: instance.niches, palavras_chave });
+    const nomes = await gerarNomes({ nicho: instance.niches, palavras_chave }, supabase, user.id);
     const candidatos = await Promise.all(nomes.map(montarCandidato));
 
     const { data: existente } = await supabase

@@ -23,6 +23,7 @@
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { calculateFitScore, type DiagnosticoParaScore, type NichoParaScore } from "../../../packages/core/fitScore.ts";
 import { corsHeaders } from "../_shared/cors.ts";
+import { logIaUsage } from "../_shared/ia-usage.ts";
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY")!;
@@ -81,7 +82,14 @@ interface SubNegocioDestaque {
   por_que: string;
 }
 
-async function callAnthropic(system: string, userContent: string, maxTokens: number): Promise<string> {
+// deno-lint-ignore no-explicit-any
+async function callAnthropic(
+  system: string,
+  userContent: string,
+  maxTokens: number,
+  supabase: any,
+  userId: string
+): Promise<string> {
   const response = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {
@@ -103,6 +111,14 @@ async function callAnthropic(system: string, userContent: string, maxTokens: num
   }
 
   const data = await response.json();
+  await logIaUsage(supabase, {
+    userId,
+    funcao: "diagnostic-match",
+    provider: "anthropic",
+    modelo: ANTHROPIC_MODEL,
+    inputTokens: data.usage?.input_tokens ?? null,
+    outputTokens: data.usage?.output_tokens ?? null,
+  });
   return data.content?.[0]?.text?.trim() ?? "";
 }
 
@@ -128,7 +144,8 @@ function parseJsonResposta<T>(texto: string): T | null {
  * que o modelo invente uma categoria, ela é descartada antes de influenciar
  * qualquer nota.
  */
-async function inferirAreasDoTexto(texto: string): Promise<string[]> {
+// deno-lint-ignore no-explicit-any
+async function inferirAreasDoTexto(texto: string, supabase: any, userId: string): Promise<string[]> {
   const system = [
     "Você classifica o texto de alguém que quer abrir um negócio nas áreas de atuação com as quais essa pessoa tem afinidade.",
     `As ÚNICAS áreas permitidas são exatamente estas: ${AREAS_VALIDAS.join(", ")}.`,
@@ -138,7 +155,7 @@ async function inferirAreasDoTexto(texto: string): Promise<string[]> {
     "Nunca invente uma área que não esteja na lista permitida.",
   ].join(" ");
 
-  const bruto = await callAnthropic(system, JSON.stringify({ texto }), 150);
+  const bruto = await callAnthropic(system, JSON.stringify({ texto }), 150, supabase, userId);
   const parsed = parseJsonResposta<{ areas?: unknown }>(bruto);
   if (!parsed || !Array.isArray(parsed.areas)) return [];
 
@@ -159,11 +176,14 @@ interface JustificativaResultado {
  * Escreve a justificativa do nicho e escolhe os sub-negócios que mais
  * combinam com o perfil — sempre a partir da lista curada recebida (RN-38).
  */
+// deno-lint-ignore no-explicit-any
 async function gerarJustificativaESubNegocios(
   diagnostico: DiagnosticoParaScore,
   niche: NicheRow,
   scores: ReturnType<typeof calculateFitScore>,
-  subNegocios: SubNegocioRow[]
+  subNegocios: SubNegocioRow[],
+  supabase: any,
+  userId: string
 ): Promise<JustificativaResultado> {
   const system = [
     "Você é o copiloto do Ser Dono, uma plataforma que ajuda brasileiros a decidir qual negócio abrir.",
@@ -217,7 +237,7 @@ async function gerarJustificativaESubNegocios(
     })),
   };
 
-  const bruto = await callAnthropic(system, JSON.stringify(contexto), 700);
+  const bruto = await callAnthropic(system, JSON.stringify(contexto), 700, supabase, userId);
   const parsed = parseJsonResposta<{ justificativa?: unknown; sub_negocios_destaque?: unknown }>(bruto);
 
   const justificativa = stripMarkdown(
@@ -311,7 +331,7 @@ Deno.serve(async (req) => {
     let areasInferidas: string[] = diagnostico.areas_inferidas ?? [];
     if (diagnostico.interesses_texto?.trim()) {
       try {
-        areasInferidas = await inferirAreasDoTexto(diagnostico.interesses_texto);
+        areasInferidas = await inferirAreasDoTexto(diagnostico.interesses_texto, supabase, user.id);
         const { error: areasError } = await supabase
           .from("diagnostic_responses")
           .update({ areas_inferidas: areasInferidas })
@@ -365,7 +385,9 @@ Deno.serve(async (req) => {
           diagnosticoParaScore,
           niche,
           scores,
-          subPorNicho.get(niche.id) ?? []
+          subPorNicho.get(niche.id) ?? [],
+          supabase,
+          user.id
         );
 
         const { error: upsertError } = await supabase.from("niche_matches").upsert(

@@ -9,6 +9,7 @@
 // trava "só 1 por mês" checada no servidor via unique constraint.
 
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { logIaUsage } from "../_shared/ia-usage.ts";
 
 // Inline, não importado de packages/core/ai/routeModel.ts — mesma armadilha
 // de deploy via MCP já documentada nas outras functions. Geração de
@@ -81,7 +82,8 @@ function validarSaudeGerada(valor: unknown): valor is SaudeGerada {
   return v.prioridades.every((p) => typeof p === "string" && p.trim().length > 0);
 }
 
-async function gerarSaude(contexto: Record<string, unknown>): Promise<SaudeGerada> {
+// deno-lint-ignore no-explicit-any
+async function gerarSaude(contexto: Record<string, unknown>, supabase: any, userId: string): Promise<SaudeGerada> {
   const system = [
     "Você é a Mary, copiloto do Ser Dono. Um empreendedor brasileiro acabou de responder o check-up mensal do negócio",
     "dele — respostas curtas sobre financeiro, clientes, marketing e operação. Analise SOMENTE essas respostas (e o",
@@ -119,6 +121,14 @@ async function gerarSaude(contexto: Record<string, unknown>): Promise<SaudeGerad
   }
 
   const data = await response.json();
+  await logIaUsage(supabase, {
+    userId,
+    funcao: "checkup-gerar",
+    provider: "anthropic",
+    modelo: AI_MODEL_AVANCADO,
+    inputTokens: data.usage?.input_tokens ?? null,
+    outputTokens: data.usage?.output_tokens ?? null,
+  });
   const text = data.content?.[0]?.text?.trim();
   if (!text) throw new Error("Resposta vazia do modelo");
 
@@ -201,7 +211,7 @@ Deno.serve(async (req) => {
       checkup_mes_anterior: checkupAnterior ?? null,
     };
 
-    const saude = await gerarSaude(contexto);
+    const saude = await gerarSaude(contexto, supabase, user.id);
 
     const { data: checkup, error: checkupError } = await supabase
       .from("checkups_mensais")

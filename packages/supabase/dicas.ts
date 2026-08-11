@@ -137,3 +137,17 @@ export async function deleteMaterial(id: string): Promise<void> {
   const { error } = await supabase.from("dicas_materiais").delete().eq("id", id);
   if (error) throw error;
 }
+
+// ---- Tracking de acesso (alimenta o ranking "mais acessadas" do Dashboard Admin) ----
+
+export type DicaAcessoTipo = "video" | "pdf" | "link";
+
+/**
+ * Best-effort de propósito (igual ao registro de uso de IA nas Edge
+ * Functions): abrir um material nunca pode falhar por causa do tracking —
+ * loga e segue.
+ */
+export async function logDicaAcesso(materialId: string, userId: string, tipo: DicaAcessoTipo): Promise<void> {
+  const { error } = await supabase.from("dicas_acessos").insert({ material_id: materialId, user_id: userId, tipo });
+  if (error) console.error("Falha ao registrar acesso a dica (seguindo sem bloquear):", error);
+}

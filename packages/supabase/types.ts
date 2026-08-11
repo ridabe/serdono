@@ -170,6 +170,38 @@ export type Database = {
         }
         Relationships: []
       }
+      dicas_acessos: {
+        Row: {
+          created_at: string
+          id: string
+          material_id: string
+          tipo: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          material_id: string
+          tipo: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          material_id?: string
+          tipo?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dicas_acessos_material_id_fkey"
+            columns: ["material_id"]
+            isOneToOne: false
+            referencedRelation: "dicas_materiais"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       dicas_categorias: {
         Row: {
           ativo: boolean
@@ -307,6 +339,45 @@ export type Database = {
           regiao?: string | null
           site?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      ia_usage_logs: {
+        Row: {
+          created_at: string
+          funcao: string
+          id: string
+          input_tokens: number | null
+          modelo: string
+          output_tokens: number | null
+          provider: string
+          total_tokens: number | null
+          unidades: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          funcao: string
+          id?: string
+          input_tokens?: number | null
+          modelo: string
+          output_tokens?: number | null
+          provider: string
+          total_tokens?: number | null
+          unidades?: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          funcao?: string
+          id?: string
+          input_tokens?: number | null
+          modelo?: string
+          output_tokens?: number | null
+          provider?: string
+          total_tokens?: number | null
+          unidades?: number
+          user_id?: string
         }
         Relationships: []
       }
@@ -1483,6 +1554,61 @@ export type Database = {
     }
     Functions: {
       admin_dashboard_stats: { Args: never; Returns: Json }
+      admin_dicas_ranking: {
+        Args: { limite?: number }
+        Returns: {
+          acessos: number
+          categoria: string
+          material_id: string
+          titulo: string
+        }[]
+      }
+      admin_fornecedores_by_categoria: {
+        Args: never
+        Returns: {
+          categoria: string
+          total: number
+        }[]
+      }
+      admin_ia_usage_por_dia: {
+        Args: { dias?: number }
+        Returns: {
+          chamadas: number
+          dia: string
+          tokens: number
+        }[]
+      }
+      admin_ia_usage_por_funcao: {
+        Args: never
+        Returns: {
+          chamadas: number
+          funcao: string
+          tokens: number
+        }[]
+      }
+      admin_ia_usage_totals: { Args: never; Returns: Json }
+      admin_jornada_funnel: {
+        Args: never
+        Returns: {
+          alcancaram: number
+          fase: string
+          total_jornadas: number
+        }[]
+      }
+      admin_module_adoption: {
+        Args: never
+        Returns: {
+          habilitados: number
+          modulo: string
+        }[]
+      }
+      admin_user_growth: {
+        Args: { dias?: number }
+        Returns: {
+          dia: string
+          novos_usuarios: number
+        }[]
+      }
       custom_access_token_hook: { Args: { event: Json }; Returns: Json }
       match_fornecedores_parceiros: {
         Args: {

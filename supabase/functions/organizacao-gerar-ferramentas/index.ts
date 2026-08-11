@@ -13,6 +13,7 @@
 // roteiro de fornecedores.
 
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { logIaUsage } from "../_shared/ia-usage.ts";
 
 const AI_MODEL_ECONOMICO = "claude-haiku-4-5-20251001";
 
@@ -32,7 +33,8 @@ interface CategoriaFerramenta {
   nivel: "basico" | "intermediario" | "avancado";
 }
 
-async function gerarCategorias(nicho: string, nivelMaturidade: number): Promise<CategoriaFerramenta[]> {
+// deno-lint-ignore no-explicit-any
+async function gerarCategorias(nicho: string, nivelMaturidade: number, supabase: any, userId: string): Promise<CategoriaFerramenta[]> {
   const system = [
     "Você é o copiloto do Ser Dono. Gere de 4 a 6 CATEGORIAS de ferramenta de gestão (nunca nome de produto ou marca",
     "específica — ex.: 'planilha de fluxo de caixa', 'sistema de emissão fiscal', 'agenda digital compartilhada',",
@@ -65,6 +67,14 @@ async function gerarCategorias(nicho: string, nivelMaturidade: number): Promise<
   }
 
   const data = await response.json();
+  await logIaUsage(supabase, {
+    userId,
+    funcao: "organizacao-gerar-ferramentas",
+    provider: "anthropic",
+    modelo: AI_MODEL_ECONOMICO,
+    inputTokens: data.usage?.input_tokens ?? null,
+    outputTokens: data.usage?.output_tokens ?? null,
+  });
   const text = data.content?.[0]?.text?.trim();
   if (!text) throw new Error("Resposta vazia do modelo");
 
@@ -131,7 +141,7 @@ Deno.serve(async (req) => {
     }
 
     const nicho = (instance.niches as { nome?: string } | null)?.nome ?? "negócio";
-    const categorias = await gerarCategorias(nicho, nivel_maturidade ?? 1);
+    const categorias = await gerarCategorias(nicho, nivel_maturidade ?? 1, supabase, user.id);
 
     const { data: existente } = await supabase
       .from("jornada_deliverables")

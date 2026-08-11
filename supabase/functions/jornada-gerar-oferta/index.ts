@@ -11,6 +11,7 @@
 // chamada sobrescreve o conteúdo anterior via upsert, incrementando `versao`.
 
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { logIaUsage } from "../_shared/ia-usage.ts";
 
 const AI_MODEL_AVANCADO = "claude-sonnet-4-5";
 
@@ -41,7 +42,8 @@ function extractJson(text: string): unknown {
   return JSON.parse(cleaned);
 }
 
-async function gerarOferta(contexto: Record<string, unknown>): Promise<OfertaComercial> {
+// deno-lint-ignore no-explicit-any
+async function gerarOferta(contexto: Record<string, unknown>, supabase: any, userId: string): Promise<OfertaComercial> {
   const system = [
     "Você é o copiloto do Ser Dono, ajudando um empreendedor brasileiro a estruturar a oferta comercial que vai usar",
     "na Fase Clientes (Captação de Clientes) da Jornada Empreendedora. Gere, com base SOMENTE nos dados fornecidos,",
@@ -75,6 +77,14 @@ async function gerarOferta(contexto: Record<string, unknown>): Promise<OfertaCom
   }
 
   const data = await response.json();
+  await logIaUsage(supabase, {
+    userId,
+    funcao: "jornada-gerar-oferta",
+    provider: "anthropic",
+    modelo: AI_MODEL_AVANCADO,
+    inputTokens: data.usage?.input_tokens ?? null,
+    outputTokens: data.usage?.output_tokens ?? null,
+  });
   const text = data.content?.[0]?.text?.trim();
   if (!text) throw new Error("Resposta vazia do modelo");
 
@@ -151,7 +161,7 @@ Deno.serve(async (req) => {
       proposta_valor: porTipo.get("proposta_valor") ?? null,
     };
 
-    const oferta = await gerarOferta(contexto);
+    const oferta = await gerarOferta(contexto, supabase, user.id);
 
     const { data: existente } = await supabase
       .from("jornada_deliverables")

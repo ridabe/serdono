@@ -15,6 +15,7 @@
 // incrementando `versao`.
 
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { logIaUsage } from "../_shared/ia-usage.ts";
 
 const AI_MODEL_AVANCADO = "claude-sonnet-4-5";
 
@@ -42,7 +43,8 @@ function extractJson(text: string): unknown {
   return JSON.parse(cleaned);
 }
 
-async function gerarConteudo(contexto: Record<string, unknown>): Promise<MarketingConteudo> {
+// deno-lint-ignore no-explicit-any
+async function gerarConteudo(contexto: Record<string, unknown>, supabase: any, userId: string): Promise<MarketingConteudo> {
   const system = [
     "Você é o copiloto do Ser Dono, ajudando um empreendedor brasileiro a começar a divulgar o negócio",
     "na Fase 10 (Marketing) da Jornada Empreendedora. Gere, com base SOMENTE nos dados fornecidos:",
@@ -75,6 +77,14 @@ async function gerarConteudo(contexto: Record<string, unknown>): Promise<Marketi
   }
 
   const data = await response.json();
+  await logIaUsage(supabase, {
+    userId,
+    funcao: "jornada-gerar-marketing",
+    provider: "anthropic",
+    modelo: AI_MODEL_AVANCADO,
+    inputTokens: data.usage?.input_tokens ?? null,
+    outputTokens: data.usage?.output_tokens ?? null,
+  });
   const text = data.content?.[0]?.text?.trim();
   if (!text) throw new Error("Resposta vazia do modelo");
 
@@ -151,7 +161,7 @@ Deno.serve(async (req) => {
       proposta_valor: porTipo.get("proposta_valor") ?? null,
     };
 
-    const conteudo = await gerarConteudo(contexto);
+    const conteudo = await gerarConteudo(contexto, supabase, user.id);
 
     const { data: existente } = await supabase
       .from("jornada_deliverables")

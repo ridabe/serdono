@@ -13,6 +13,7 @@
 // já garante que só a dona da instância grava.
 
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { logIaUsage } from "../_shared/ia-usage.ts";
 
 // Inline (não importado de packages/core/ai/routeModel.ts): o deploy via MCP
 // não resolve import fora do diretório da function (mesma armadilha já
@@ -57,7 +58,8 @@ function extractJson(text: string): unknown {
   return JSON.parse(cleaned);
 }
 
-async function gerarDocumentos(contexto: Record<string, unknown>): Promise<DocumentosGerados> {
+// deno-lint-ignore no-explicit-any
+async function gerarDocumentos(contexto: Record<string, unknown>, supabase: any, userId: string): Promise<DocumentosGerados> {
   const system = [
     "Você é o copiloto do Ser Dono, ajudando um empreendedor brasileiro a validar a ideia do negócio",
     "escolhido, na Fase 2 (Validação da Ideia) da Jornada Empreendedora.",
@@ -91,6 +93,14 @@ async function gerarDocumentos(contexto: Record<string, unknown>): Promise<Docum
   }
 
   const data = await response.json();
+  await logIaUsage(supabase, {
+    userId,
+    funcao: "jornada-gerar-documentos",
+    provider: "anthropic",
+    modelo: AI_MODEL_AVANCADO,
+    inputTokens: data.usage?.input_tokens ?? null,
+    outputTokens: data.usage?.output_tokens ?? null,
+  });
   const text = data.content?.[0]?.text?.trim();
   if (!text) throw new Error("Resposta vazia do modelo");
 
@@ -172,7 +182,7 @@ Deno.serve(async (req) => {
       perfil_empreendedor: diagnostico,
     };
 
-    const documentos = await gerarDocumentos(contexto);
+    const documentos = await gerarDocumentos(contexto, supabase, user.id);
 
     const { data: existentes } = await supabase
       .from("jornada_deliverables")

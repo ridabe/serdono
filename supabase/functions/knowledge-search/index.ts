@@ -14,6 +14,7 @@
 
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { corsHeaders } from "../_shared/cors.ts";
+import { logIaUsage } from "../_shared/ia-usage.ts";
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY")!;
@@ -100,7 +101,8 @@ async function loadBusinessContext(client: any, userId: string): Promise<Busines
   };
 }
 
-async function embedQuestion(question: string): Promise<number[]> {
+// deno-lint-ignore no-explicit-any
+async function embedQuestion(question: string, supabase: any, userId: string): Promise<number[]> {
   const response = await fetch("https://api.openai.com/v1/embeddings", {
     method: "POST",
     headers: {
@@ -113,13 +115,24 @@ async function embedQuestion(question: string): Promise<number[]> {
     throw new Error(`OpenAI embeddings error (${response.status}): ${await response.text()}`);
   }
   const data = await response.json();
+  await logIaUsage(supabase, {
+    userId,
+    funcao: "knowledge-search",
+    provider: "openai",
+    modelo: "text-embedding-3-small",
+    inputTokens: data.usage?.prompt_tokens ?? null,
+    outputTokens: null,
+  });
   return data.data[0].embedding;
 }
 
 async function synthesizeAnswer(
   question: string,
   matches: KnowledgeMatch[],
-  negocio: BusinessContext | null
+  negocio: BusinessContext | null,
+  // deno-lint-ignore no-explicit-any
+  supabase: any,
+  userId: string
 ): Promise<string> {
   // Prefixo FIXO — é o que o cache de prompt guarda (RN-12). O contexto do
   // negócio varia por usuário, então vai na mensagem, nunca aqui: colocá-lo
@@ -179,6 +192,14 @@ async function synthesizeAnswer(
     throw new Error(`Anthropic API error (${response.status}): ${await response.text()}`);
   }
   const data = await response.json();
+  await logIaUsage(supabase, {
+    userId,
+    funcao: "knowledge-search",
+    provider: "anthropic",
+    modelo: ANTHROPIC_MODEL,
+    inputTokens: data.usage?.input_tokens ?? null,
+    outputTokens: data.usage?.output_tokens ?? null,
+  });
   return data.content?.[0]?.text?.trim() ?? "";
 }
 
@@ -222,7 +243,7 @@ Deno.serve(async (req) => {
       });
     }
 
-    const embedding = await embedQuestion(question);
+    const embedding = await embedQuestion(question, supabase, user.id);
     const vectorLiteral = `[${embedding.join(",")}]`;
 
     // O contexto do negócio é best-effort: qualquer falha aqui (usuário sem
@@ -254,7 +275,7 @@ Deno.serve(async (req) => {
       );
     }
 
-    const answer = await synthesizeAnswer(question, relevant, negocio);
+    const answer = await synthesizeAnswer(question, relevant, negocio, supabase, user.id);
 
     const sources = relevant.map((m) => ({
       titulo: m.article_titulo,

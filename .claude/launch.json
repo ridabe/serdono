@@ -2,11 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "serdono-web",
+      "name": "app-web",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["--filter", "@serdono/app", "exec", "expo", "start", "--web"],
-      "port": 8081,
-      "autoPort": true
+      "port": 8081
     }
   ]
 }

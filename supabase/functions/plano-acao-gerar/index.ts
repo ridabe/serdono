@@ -13,6 +13,7 @@
 // client é só UX, não a fronteira de segurança de verdade.
 
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { logIaUsage } from "../_shared/ia-usage.ts";
 
 // Inline (não importado de packages/core/ai/routeModel.ts): o deploy via MCP
 // não resolve import fora do diretório da function (mesma armadilha já
@@ -79,7 +80,8 @@ function validarPlanoGerado(valor: unknown): valor is PlanoGerado {
   );
 }
 
-async function gerarPlano(contexto: Record<string, unknown>, mesReferenciaLabel: string): Promise<PlanoGerado> {
+// deno-lint-ignore no-explicit-any
+async function gerarPlano(contexto: Record<string, unknown>, mesReferenciaLabel: string, supabase: any, userId: string): Promise<PlanoGerado> {
   const system = [
     `Você é a Mary, copiloto do Ser Dono. Gere o Plano de Ação Mensal de ${mesReferenciaLabel} pra este empreendedor,`,
     "baseado SOMENTE no contexto real do negócio fornecido — nunca invente dado de mercado ou fato sobre o negócio",
@@ -118,6 +120,14 @@ async function gerarPlano(contexto: Record<string, unknown>, mesReferenciaLabel:
   }
 
   const data = await response.json();
+  await logIaUsage(supabase, {
+    userId,
+    funcao: "plano-acao-gerar",
+    provider: "anthropic",
+    modelo: AI_MODEL_AVANCADO,
+    inputTokens: data.usage?.input_tokens ?? null,
+    outputTokens: data.usage?.output_tokens ?? null,
+  });
   const text = data.content?.[0]?.text?.trim();
   if (!text) throw new Error("Resposta vazia do modelo");
 
@@ -237,7 +247,7 @@ Deno.serve(async (req) => {
     };
 
     const mesLabel = new Date(`${mesReferencia}T12:00:00`).toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
-    const gerado = await gerarPlano(contexto, mesLabel);
+    const gerado = await gerarPlano(contexto, mesLabel, supabase, user.id);
 
     const { data: plano, error: planoError } = await supabase
       .from("planos_acao")

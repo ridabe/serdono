@@ -16,6 +16,7 @@
 // que só a dona do arquivo grava no próprio caminho.
 
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { logIaUsage } from "../_shared/ia-usage.ts";
 
 const OPENAI_IMAGE_MODEL = "gpt-image-1";
 const BUCKET = "identidade-visual";
@@ -155,6 +156,14 @@ Deno.serve(async (req) => {
       throw new Error(`OpenAI Images API error (${imageResponse.status}): ${await imageResponse.text()}`);
     }
     const imageData = await imageResponse.json();
+    await logIaUsage(supabase, {
+      userId: user.id,
+      funcao: "jornada-gerar-logo-final",
+      provider: "openai",
+      modelo: OPENAI_IMAGE_MODEL,
+      inputTokens: imageData.usage?.input_tokens ?? null,
+      outputTokens: imageData.usage?.output_tokens ?? null,
+    });
     const b64 = imageData.data?.[0]?.b64_json;
     if (!b64) throw new Error("Resposta de imagem vazia da OpenAI");
 

@@ -16,6 +16,7 @@
 // você adorou o último serviço") destrói a confiança na hora.
 
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { logIaUsage } from "../_shared/ia-usage.ts";
 
 const AI_MODEL_AVANCADO = "claude-sonnet-4-5";
 
@@ -45,7 +46,8 @@ function extractJson(text: string): unknown {
   return JSON.parse(cleaned);
 }
 
-async function gerarRoteiro(contexto: Record<string, unknown>): Promise<RoteiroReaproximacao> {
+// deno-lint-ignore no-explicit-any
+async function gerarRoteiro(contexto: Record<string, unknown>, supabase: any, userId: string): Promise<RoteiroReaproximacao> {
   const system = [
     "Você é a Mary, mentora de negócios do Ser Dono, ajudando um empreendedor brasileiro a reaproximar um cliente",
     "que comprou dele e faz tempo que não volta. Escreva em português do Brasil, em tom de pessoa falando com pessoa",
@@ -83,6 +85,14 @@ async function gerarRoteiro(contexto: Record<string, unknown>): Promise<RoteiroR
   }
 
   const data = await response.json();
+  await logIaUsage(supabase, {
+    userId,
+    funcao: "retencao-gerar-roteiro",
+    provider: "anthropic",
+    modelo: AI_MODEL_AVANCADO,
+    inputTokens: data.usage?.input_tokens ?? null,
+    outputTokens: data.usage?.output_tokens ?? null,
+  });
   const text = data.content?.[0]?.text?.trim();
   if (!text) throw new Error("Resposta vazia do modelo");
 
@@ -176,7 +186,7 @@ Deno.serve(async (req) => {
       historico: interacoes ?? [],
     };
 
-    const roteiro = await gerarRoteiro(contexto);
+    const roteiro = await gerarRoteiro(contexto, supabase, user.id);
 
     const { data: existente } = await supabase
       .from("retencao_roteiros")

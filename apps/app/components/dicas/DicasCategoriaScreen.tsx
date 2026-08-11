@@ -1,10 +1,10 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import * as WebBrowser from "expo-web-browser";
 import { ActivityIndicator, Linking, Modal, Platform, Pressable, ScrollView, Text, View } from "react-native";
 import { Button, Card, CollapsibleSection, Input, SECTION_ACCENT_CYCLE, color, radius, space, type } from "@serdono/ui";
-import { MATERIAL_NIVEL_LABEL, type DicasMaterial, type MaterialNivel } from "@serdono/supabase";
+import { getCurrentSession, logDicaAcesso, MATERIAL_NIVEL_LABEL, type DicasMaterial, type MaterialNivel } from "@serdono/supabase";
 import { ScreenHeader } from "../shell/ScreenHeader";
 import { LinkIcon, PdfIcon, PlayIcon } from "./DicasIcons";
 import { YoutubeEmbed } from "./YoutubeEmbed";
@@ -28,6 +28,11 @@ export function DicasCategoriaScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const v = useDicasCategoria(id);
   const [busca, setBusca] = useState("");
+  const [userId, setUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    getCurrentSession().then((session) => setUserId(session?.user.id ?? null));
+  }, []);
 
   const materiaisFiltrados = useMemo(() => {
     const materiais = v.categoria?.materiais ?? [];
@@ -96,7 +101,7 @@ export function DicasCategoriaScreen() {
                         accent={SECTION_ACCENT_CYCLE[i % SECTION_ACCENT_CYCLE.length]}
                         rightLabel={material.nivel ? MATERIAL_NIVEL_LABEL[material.nivel as MaterialNivel] : undefined}
                       >
-                        <MaterialConteudo material={material} />
+                        <MaterialConteudo material={material} userId={userId} />
                       </CollapsibleSection>
                     ))}
                   </View>
@@ -118,6 +123,12 @@ function abrirArquivo(url: string) {
   }
 }
 
+/** Fire-and-forget: nunca atrasa/bloqueia a ação real de abrir o material. */
+function registrarAcesso(materialId: string, userId: string | null, tipo: "video" | "pdf" | "link") {
+  if (!userId) return;
+  logDicaAcesso(materialId, userId, tipo).catch(() => {});
+}
+
 function TipoBadge({ icon, label }: { icon: ReactNode; label: string }) {
   return (
     <View
@@ -137,7 +148,7 @@ function TipoBadge({ icon, label }: { icon: ReactNode; label: string }) {
   );
 }
 
-function MaterialConteudo({ material }: { material: DicasMaterial }) {
+function MaterialConteudo({ material, userId }: { material: DicasMaterial; userId: string | null }) {
   const temMidia = material.arquivo_url || material.video_url || material.link_externo_url;
   const [videoAberto, setVideoAberto] = useState(false);
 
@@ -155,14 +166,25 @@ function MaterialConteudo({ material }: { material: DicasMaterial }) {
 
       <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[2], marginTop: space[3] }}>
         {material.video_url ? (
-          <Button label="Assistir vídeo" variant="primary" size="sm" onPress={() => setVideoAberto(true)} />
+          <Button
+            label="Assistir vídeo"
+            variant="primary"
+            size="sm"
+            onPress={() => {
+              registrarAcesso(material.id, userId, "video");
+              setVideoAberto(true);
+            }}
+          />
         ) : null}
         {material.arquivo_url ? (
           <Button
             label={material.arquivo_nome ? `Baixar ${material.arquivo_nome}` : "Baixar PDF"}
             variant="outline"
             size="sm"
-            onPress={() => abrirArquivo(material.arquivo_url!)}
+            onPress={() => {
+              registrarAcesso(material.id, userId, "pdf");
+              abrirArquivo(material.arquivo_url!);
+            }}
           />
         ) : null}
         {material.link_externo_url ? (
@@ -170,7 +192,10 @@ function MaterialConteudo({ material }: { material: DicasMaterial }) {
             label={material.link_externo_label || "Ver link"}
             variant="ghost"
             size="sm"
-            onPress={() => WebBrowser.openBrowserAsync(material.link_externo_url!)}
+            onPress={() => {
+              registrarAcesso(material.id, userId, "link");
+              WebBrowser.openBrowserAsync(material.link_externo_url!);
+            }}
           />
         ) : null}
       </View>

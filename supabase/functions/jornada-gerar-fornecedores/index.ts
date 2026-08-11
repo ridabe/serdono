@@ -14,6 +14,7 @@
 // porte da geração de slogan em jornada-gerar-identidade.
 
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { logIaUsage } from "../_shared/ia-usage.ts";
 
 const AI_MODEL_ECONOMICO = "claude-haiku-4-5-20251001";
 
@@ -37,7 +38,8 @@ interface RoteiroCategoria extends CategoriaIA {
   busca_google_url: string;
 }
 
-async function gerarCategorias(nomeEmpresa: string, nicho: string): Promise<CategoriaIA[]> {
+// deno-lint-ignore no-explicit-any
+async function gerarCategorias(nomeEmpresa: string, nicho: string, supabase: any, userId: string): Promise<CategoriaIA[]> {
   const system = [
     "Você é o copiloto do Ser Dono. Gere de 4 a 6 CATEGORIAS de fornecedor ou parceiro que um negócio desse",
     "tipo normalmente precisa (ex.: matéria-prima, embalagem, equipamento, uniforme, serviço terceirizado) —",
@@ -69,6 +71,14 @@ async function gerarCategorias(nomeEmpresa: string, nicho: string): Promise<Cate
   }
 
   const data = await response.json();
+  await logIaUsage(supabase, {
+    userId,
+    funcao: "jornada-gerar-fornecedores",
+    provider: "anthropic",
+    modelo: AI_MODEL_ECONOMICO,
+    inputTokens: data.usage?.input_tokens ?? null,
+    outputTokens: data.usage?.output_tokens ?? null,
+  });
   const text = data.content?.[0]?.text?.trim();
   if (!text) throw new Error("Resposta vazia do modelo");
 
@@ -134,7 +144,7 @@ Deno.serve(async (req) => {
     const nomeEmpresa = instance.nome_empresa_escolhido ?? "meu negócio";
     const nicho = (instance.niches as { nome?: string } | null)?.nome ?? "negócio";
 
-    const categoriasIA = await gerarCategorias(nomeEmpresa, nicho);
+    const categoriasIA = await gerarCategorias(nomeEmpresa, nicho, supabase, user.id);
     const categorias: RoteiroCategoria[] = categoriasIA.map((c) => ({
       ...c,
       busca_google_url: `https://www.google.com/search?q=${encodeURIComponent(c.busca_sugerida)}`,

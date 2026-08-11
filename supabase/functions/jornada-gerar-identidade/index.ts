@@ -16,6 +16,7 @@
 // Authorization do chamador, sem service_role.
 
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { logIaUsage } from "../_shared/ia-usage.ts";
 
 const AI_MODEL_ECONOMICO = "claude-haiku-4-5-20251001";
 const OPENAI_IMAGE_MODEL = "gpt-image-1";
@@ -68,7 +69,8 @@ function montarPromptLogo(estilo: Estilo, ctx: Contexto): string {
   return `${base} ${porEstilo[estilo]}`;
 }
 
-async function gerarSlogan(ctx: Contexto): Promise<string> {
+// deno-lint-ignore no-explicit-any
+async function gerarSlogan(ctx: Contexto, supabase: any, userId: string): Promise<string> {
   const system = [
     "Você é o copiloto do Ser Dono. Gere UM slogan curto (até 8 palavras) em português para a empresa descrita,",
     "coerente com o nicho, os valores e a personalidade da marca. Responda EXCLUSIVAMENTE com um objeto JSON",
@@ -95,6 +97,14 @@ async function gerarSlogan(ctx: Contexto): Promise<string> {
   }
 
   const data = await response.json();
+  await logIaUsage(supabase, {
+    userId,
+    funcao: "jornada-gerar-identidade",
+    provider: "anthropic",
+    modelo: AI_MODEL_ECONOMICO,
+    inputTokens: data.usage?.input_tokens ?? null,
+    outputTokens: data.usage?.output_tokens ?? null,
+  });
   const text = data.content?.[0]?.text?.trim();
   if (!text) throw new Error("Resposta vazia do modelo");
 
@@ -106,7 +116,8 @@ async function gerarSlogan(ctx: Contexto): Promise<string> {
   return parsed.slogan;
 }
 
-async function gerarLogoRascunho(estilo: Estilo, ctx: Contexto): Promise<string> {
+// deno-lint-ignore no-explicit-any
+async function gerarLogoRascunho(estilo: Estilo, ctx: Contexto, supabase: any, userId: string): Promise<string> {
   const response = await fetch("https://api.openai.com/v1/images/generations", {
     method: "POST",
     headers: {
@@ -127,6 +138,14 @@ async function gerarLogoRascunho(estilo: Estilo, ctx: Contexto): Promise<string>
   }
 
   const data = await response.json();
+  await logIaUsage(supabase, {
+    userId,
+    funcao: "jornada-gerar-identidade",
+    provider: "openai",
+    modelo: OPENAI_IMAGE_MODEL,
+    inputTokens: data.usage?.input_tokens ?? null,
+    outputTokens: data.usage?.output_tokens ?? null,
+  });
   const b64 = data.data?.[0]?.b64_json;
   if (!b64) throw new Error("Resposta de imagem vazia da OpenAI");
   return b64;
@@ -214,8 +233,8 @@ Deno.serve(async (req) => {
     }
 
     const [slogan, ...logosBase64] = await Promise.all([
-      gerarSlogan(ctx),
-      ...ESTILOS.map((estilo) => gerarLogoRascunho(estilo, ctx)),
+      gerarSlogan(ctx, supabase, user.id),
+      ...ESTILOS.map((estilo) => gerarLogoRascunho(estilo, ctx, supabase, user.id)),
     ]);
 
     const candidatos = ESTILOS.map((estilo, i) => ({ estilo, imagem_base64: logosBase64[i] }));
