@@ -863,6 +863,39 @@ export type Database = {
         }
         Relationships: []
       }
+      maturidade_snapshots: {
+        Row: {
+          categorias: Json
+          created_at: string
+          gerado_em: string
+          id: string
+          mes_referencia: string
+          nivel: string
+          pontuacao_total: number
+          user_id: string
+        }
+        Insert: {
+          categorias: Json
+          created_at?: string
+          gerado_em?: string
+          id?: string
+          mes_referencia: string
+          nivel: string
+          pontuacao_total: number
+          user_id: string
+        }
+        Update: {
+          categorias?: Json
+          created_at?: string
+          gerado_em?: string
+          id?: string
+          mes_referencia?: string
+          nivel?: string
+          pontuacao_total?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
       modules: {
         Row: {
           anuncio_grupo: string | null

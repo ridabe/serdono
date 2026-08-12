@@ -833,6 +833,33 @@ Detalhamento técnico (schema, Edge Functions, agendamento) em SPEC.md SDD-91.
 
 Detalhamento técnico (schema, lógica de cálculo) em SPEC.md SDD-94.
 
+### 12.14 Nível de Maturidade & Ser Dono Score (pedido do dono do produto em 12/08/2026)
+
+**Nono módulo do catálogo.** Gamificação da evolução pós-Jornada: um selo de 5 estágios e um score de 0 a 1000 que resume, num único número, como o negócio está indo em 5 frentes — sem pedir nenhuma pergunta nova ao empreendedor.
+
+**Importante: este é um conceito GLOBAL, separado do diagnóstico de maturidade organizacional 1-4 já existente na Jornada (§9.12, "nível de maturidade calculado" da fase Organização do Negócio).** Aquele avalia só rotina e controles administrativos, dentro de uma etapa específica da Jornada. Este novo módulo é um retrato do negócio inteiro, pensado pra depois da Jornada — os dois convivem sem se sobrepor, e a nomenclatura ("nível") é parecida de propósito só porque o conceito de fundo (maturidade calculada, nunca decorativa) é o mesmo.
+
+**Selo de nível — 5 estágios, do mais inicial ao mais avançado:**
+1. 🌱 Iniciante
+2. 🚀 Em operação
+3. 📈 Em crescimento
+4. 🏆 Estruturado
+5. 💎 Preparado para escalar
+
+**Ser Dono Score — 0 a 1000, calculado uma vez por mês civil, sem formulário próprio.** A Mary lê o que o empreendedor já preencheu em 4 módulos (Jornada, Check-up Mensal, Plano de Ação Mensal, Raio-X Financeiro) e julga uma nota de 0 a 100 pra cada uma de 5 categorias — Financeiro, Marketing, Clientes, Organização e Crescimento —, cada uma com um comentário curto explicando o porquê. **O score total (0-1000) e o nível (1 dos 5 estágios) nunca são decididos pela IA: são sempre a mesma conta determinística** a partir das 5 notas (a média das 5 categorias × 10) — mesmo princípio de honestidade auditável do Fit Score.
+
+**Ao tocar numa categoria, a Mary explica o porquê da nota** (o comentário gerado, sempre sobre o dado real do próprio usuário — RN-43) **e oferece "Criar plano"**, que leva direto ao Plano de Ação Mensal já existente (§12.9) — a gamificação vira ação concreta, não fica só decorativa.
+
+**Fora de escopo desta versão:** histórico/comparação entre meses (a tela mostra sempre o snapshot mais recente, sem tela de linha do tempo própria — pode entrar depois, seguindo o padrão de `plano-acao/historico`), categorias customizáveis pelo usuário, qualquer forma de comparação com outros usuários ou com médias de mercado.
+
+**RN-47 (nova): o Nível de Maturidade libera com a Jornada apenas iniciada, sem exigir fase concluída** — mesma regra do Check-up Mensal (RN-41) e do Raio-X Financeiro: precisa existir negócio pra ter o que avaliar, mas não é preciso ter avançado muito na Jornada.
+
+**RN-48 (nova): o snapshot mensal do Nível de Maturidade é imutável depois de calculado** — mesmo princípio de "retrato do mês" já usado no Check-up Mensal e no Plano de Ação: o snapshot representa o negócio NAQUELE mês, editar depois não faria sentido.
+
+**RN-49 (nova): tocar numa categoria do Ser Dono Score nunca cria um Plano de Ação automaticamente** — sempre abre a explicação da Mary primeiro, com "Criar plano" como uma ação explícita do usuário, nunca disparada sozinha.
+
+Detalhamento técnico (schema, Edge Function, fórmula de agregação) em SPEC.md SDD-96.
+
 ---
 
 ## 13. Regras de Negócio Transversais (numeração consolidada)
@@ -885,6 +912,9 @@ Detalhamento técnico (schema, lógica de cálculo) em SPEC.md SDD-94.
 | RN-44 | Cada aviso push só é enviado 1 vez por ocorrência, nunca repetido todo dia enquanto a condição continuar valendo — §12.12 |
 | RN-45 | Notificação push nunca é a única forma de acesso a uma informação — sempre lembrete de algo já visível no produto — §12.12 |
 | RN-46 | O comentário da Mary no Raio-X Financeiro é sempre regra determinística sobre os números confirmados pelo usuário, nunca texto gerado por IA — §12.13 |
+| RN-47 | Nível de Maturidade libera com a Jornada apenas iniciada, sem exigir fase concluída — §12.14 |
+| RN-48 | O snapshot mensal do Nível de Maturidade é imutável depois de calculado — §12.14 |
+| RN-49 | Tocar numa categoria do Ser Dono Score nunca cria um Plano de Ação automaticamente — sempre exige a ação explícita "Criar plano" — §12.14 |
 
 ---
 

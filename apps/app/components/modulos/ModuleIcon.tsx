@@ -74,6 +74,14 @@ export function ModuleIcon({ slug, color, size = icon.md }: { slug: string; colo
         </>
       ) : null}
 
+      {/* Nível de Maturidade: medalha — selo de evolução do negócio. */}
+      {slug === "nivel-maturidade" ? (
+        <>
+          <Circle cx={12} cy={9} r={6} {...common} />
+          <Path d="M9 14.2 7.5 21l4.5-2.5 4.5 2.5-1.5-6.8" {...common} />
+        </>
+      ) : null}
+
       {/* Meu Negócio em Dia: calendário com check. */}
       {slug === "meu-negocio-em-dia" ? (
         <>

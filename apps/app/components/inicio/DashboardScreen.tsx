@@ -7,6 +7,7 @@ import { signOut } from "@serdono/supabase";
 import { ScreenHeader } from "../shell/ScreenHeader";
 import { formatMoney } from "../diagnostico/labels";
 import { FaseIcon } from "./FaseIcon";
+import { MaturidadeResumoCard } from "./MaturidadeResumoCard";
 import { NovidadeModuloPopup } from "./NovidadeModuloPopup";
 import { PlanoAcaoResumoCard } from "./PlanoAcaoResumoCard";
 import { RaioXResumoCard } from "./RaioXResumoCard";
@@ -149,6 +150,12 @@ export function DashboardScreen() {
         {v.jornada && v.progresso && !v.progresso.concluida ? (
           <ProximaEtapa faseEfetiva={v.progresso.faseEfetiva} fasesResumo={v.fasesResumo} onPress={() => router.push("/jornada")} />
         ) : null}
+
+        {/* Resumo do Nível de Maturidade + Ser Dono Score (pedido do dono do
+            produto, 12/08/2026) — o resumo mais "alto nível" entre os cards
+            de resumo, por isso vem primeiro entre eles. Some sozinho sem
+            snapshot nenhum ainda (RN-2, ver `MaturidadeResumoCard.tsx`). */}
+        <MaturidadeResumoCard />
 
         {/* Resumo do Raio-X Financeiro (pedido do dono do produto,
             09/08/2026) — só o comparativo em barras + o comentário da Mary,
