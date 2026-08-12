@@ -82,6 +82,14 @@ export function ModuleIcon({ slug, color, size = icon.md }: { slug: string; colo
         </>
       ) : null}
 
+      {/* Assistente de Reunião: dois balões de fala. */}
+      {slug === "preparar-reuniao" ? (
+        <>
+          <Path d="M3.5 5.5h11a1.5 1.5 0 0 1 1.5 1.5v6a1.5 1.5 0 0 1-1.5 1.5H10l-3 3v-3H4.5A1.5 1.5 0 0 1 3 13V7a1.5 1.5 0 0 1 .5-1.5z" {...common} />
+          <Path d="M14.5 8.5H19a1.5 1.5 0 0 1 1.5 1.5v4a1.5 1.5 0 0 1-1.5 1.5h-.5v2.5l-2.7-2.5H16" {...common} />
+        </>
+      ) : null}
+
       {/* Meu Negócio em Dia: calendário com check. */}
       {slug === "meu-negocio-em-dia" ? (
         <>

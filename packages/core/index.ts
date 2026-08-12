@@ -13,5 +13,6 @@ export * from "./parceiros";
 export * from "./checkupMensal";
 export * from "./raioxFinanceiro";
 export * from "./maturidadeNegocio";
+export * from "./reuniao";
 export * from "./cnpj";
 export * from "./ai/routeModel";

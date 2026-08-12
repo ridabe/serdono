@@ -1468,6 +1468,45 @@ export type Database = {
           },
         ]
       }
+      reunioes: {
+        Row: {
+          com_quem: string
+          created_at: string
+          gerado_em: string
+          guia: Json
+          id: string
+          objetivo: string
+          observacoes: string | null
+          tipo: string
+          tipo_outro_detalhe: string | null
+          user_id: string
+        }
+        Insert: {
+          com_quem: string
+          created_at?: string
+          gerado_em?: string
+          guia: Json
+          id?: string
+          objetivo: string
+          observacoes?: string | null
+          tipo: string
+          tipo_outro_detalhe?: string | null
+          user_id: string
+        }
+        Update: {
+          com_quem?: string
+          created_at?: string
+          gerado_em?: string
+          guia?: Json
+          id?: string
+          objetivo?: string
+          observacoes?: string | null
+          tipo?: string
+          tipo_outro_detalhe?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_modules: {
         Row: {
           habilitado: boolean

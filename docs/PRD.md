@@ -858,7 +858,29 @@ Detalhamento técnico (schema, lógica de cálculo) em SPEC.md SDD-94.
 
 **RN-49 (nova): tocar numa categoria do Ser Dono Score nunca cria um Plano de Ação automaticamente** — sempre abre a explicação da Mary primeiro, com "Criar plano" como uma ação explícita do usuário, nunca disparada sozinha.
 
-Detalhamento técnico (schema, Edge Function, fórmula de agregação) em SPEC.md SDD-96.
+Detalhamento técnico (schema, Edge Function, fórmula de agregação) em SPEC.md SDD-102.
+
+### 12.15 Assistente de Reunião — V1 (pedido do dono do produto em 12/08/2026)
+
+**Décimo módulo do catálogo.** Empreendedores novos (e até quem já tem negócio aberto) chegam despreparados em reuniões com fornecedor, cliente/prospect, investidor etc. Este módulo gera, a partir de um formulário curto, um guia de preparação personalizado — usando o negócio real do usuário, não texto genérico.
+
+**Formulário:** tipo de reunião (catálogo fixo: Fornecedor, Cliente ou prospect, Investidor, Parceiro de negócio, Banco/crédito, Outro — com campo de texto livre quando "Outro"), com quem é a reunião, o que o empreendedor quer conseguir com ela (objetivo, texto livre) e observações opcionais.
+
+**Guia gerado pela Mary**, lendo o contexto real já coletado pelo produto (nicho, fase da Jornada, entregáveis estratégicos, Check-up Mensal mais recente, Plano de Ação mais recente, Raio-X Financeiro mais recente) — nunca dado de mercado ou concorrência inventado. O guia tem: um resumo de enquadramento, pauta sugerida, perguntas a fazer, dicas de comportamento (adaptadas ao tipo da reunião — fornecedor, investidor e cliente pedem posturas diferentes), erros a evitar e um checklist de preparação. Exportável em **PDF**.
+
+**Histórico simples:** cada guia gerado fica salvo e pode ser reaberto/reexportado depois, sem precisar gerar de novo — mas é só consulta, sem edição.
+
+**Importante — diferente de todo módulo mensal anterior (Check-up, Plano de Ação, Raio-X, Nível de Maturidade): não há limite de "1 por mês".** O empreendedor pode se preparar pra quantas reuniões precisar, a qualquer momento — cada geração é um registro novo no histórico, nunca um snapshot que se sobrescreve.
+
+**Fora de escopo desta versão (V2 futura, não construída agora):** agenda (data/hora/local/link/contato da reunião), envio de e-mail de convite aos participantes com o logo do negócio, lembrete automático antes da reunião, e um campo pra registrar o resultado final da reunião (se teve sucesso, o que ficou combinado). Nada disso libera nesta versão.
+
+**RN-50 (nova): o Assistente de Reunião libera com a Jornada apenas iniciada, sem exigir fase concluída** — mesma regra do Check-up Mensal (RN-41), Raio-X Financeiro e Nível de Maturidade (RN-47): precisa existir negócio pra ter reunião sobre o que preparar.
+
+**RN-51 (nova): o guia gerado é imutável depois de criado** — se a reunião mudou de figura, o empreendedor gera um guia novo, nunca edita o antigo (mesmo princípio de "retrato" já usado nos outros módulos de IA).
+
+**RN-52 (nova): o guia é sempre gerado a partir de dado real do negócio do próprio usuário, nunca de dado de mercado, concorrência ou benchmark externo** — mesmo espírito de RN-43.
+
+Detalhamento técnico (schema, Edge Function, colisão de nome com a rota `/assistente` existente) em SPEC.md SDD-103.
 
 ---
 
@@ -915,6 +937,9 @@ Detalhamento técnico (schema, Edge Function, fórmula de agregação) em SPEC.m
 | RN-47 | Nível de Maturidade libera com a Jornada apenas iniciada, sem exigir fase concluída — §12.14 |
 | RN-48 | O snapshot mensal do Nível de Maturidade é imutável depois de calculado — §12.14 |
 | RN-49 | Tocar numa categoria do Ser Dono Score nunca cria um Plano de Ação automaticamente — sempre exige a ação explícita "Criar plano" — §12.14 |
+| RN-50 | Assistente de Reunião libera com a Jornada apenas iniciada, sem exigir fase concluída — §12.15 |
+| RN-51 | O guia do Assistente de Reunião é imutável depois de gerado — §12.15 |
+| RN-52 | O guia do Assistente de Reunião é sempre gerado a partir de dado real do negócio do usuário, nunca de mercado/concorrência/benchmark externo — §12.15 |
 
 ---
 
