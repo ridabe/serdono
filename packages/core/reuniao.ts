@@ -1,8 +1,9 @@
 /**
  * Assistente de Reunião (pedido do dono do produto, 12/08/2026) — lógica
- * pura (SDD-3). V1: só o formulário → guia gerado por IA → export em PDF.
- * Agenda, convite por e-mail, lembrete automático e histórico com resultado
- * ficam para uma V2 futura (fora de escopo aqui).
+ * pura (SDD-3). V1: formulário → guia gerado por IA → export em PDF.
+ * V2 (fatia 1, 12/08/2026): agendar a reunião (data/hora/local/contato) a
+ * partir de um guia já gerado. Convite por e-mail, lembrete automático e
+ * histórico com resultado continuam fora de escopo.
  *
  * Diferente de todo módulo mensal anterior (Check-up, Plano de Ação,
  * Raio-X, Nível de Maturidade): não há limite de "1 por mês" — o usuário
@@ -38,4 +39,34 @@ export function elegivelAssistenteReuniao(jornadaExiste: boolean): boolean {
 /** `tipo_outro_detalhe` só é obrigatório quando `tipo === "outro"` — mesmo padrão condicional de `processo_demorado_detalhe` no Check-up. */
 export function detalheObrigatorio(tipo: TipoReuniao): boolean {
   return tipo === "outro";
+}
+
+// ---- Agenda (V2, fatia 1) ----
+
+export type LocalTipoReuniao = "presencial" | "online";
+
+export const LOCAL_TIPO_LABEL: Record<LocalTipoReuniao, { tipoLabel: string; campoLabel: string; placeholder: string }> = {
+  presencial: { tipoLabel: "Presencial", campoLabel: "Endereço", placeholder: "Ex.: Av. Paulista, 1000 - sala 12" },
+  online: { tipoLabel: "Online", campoLabel: "Link da chamada", placeholder: "Ex.: https://meet.google.com/..." },
+};
+
+export interface AgendamentoReuniao {
+  dataHoraISO: string;
+  localTipo: LocalTipoReuniao;
+  localValor: string;
+  contatoNome?: string;
+}
+
+/** Nunca deixa agendar reunião no passado — mesmo princípio de nunca fingir dado incoerente (RN-53). */
+export function agendamentoValido(dataHoraISO: string, agora: Date = new Date()): boolean {
+  const data = new Date(dataHoraISO);
+  return !Number.isNaN(data.getTime()) && data.getTime() > agora.getTime();
+}
+
+/** "15/08/2026 às 14:00" — mesma convenção pt-BR de formatação de data já usada no app. */
+export function formatarDataHoraReuniao(dataHoraISO: string): string {
+  const data = new Date(dataHoraISO);
+  const dataFormatada = data.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" });
+  const horaFormatada = data.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+  return `${dataFormatada} às ${horaFormatada}`;
 }

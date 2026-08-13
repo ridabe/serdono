@@ -2,9 +2,10 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { ActivityIndicator, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import { Button, Card, color, Input, radius, space, type } from "@serdono/ui";
-import { detalheObrigatorio, TIPOS_REUNIAO, type GuiaReuniao, type TipoReuniao } from "@serdono/core";
-import { signOut, type ReuniaoRow } from "@serdono/supabase";
+import { detalheObrigatorio, formatarDataHoraReuniao, TIPOS_REUNIAO, type GuiaReuniao, type TipoReuniao } from "@serdono/core";
+import { signOut, type ReuniaoComAgenda, type SalvarAgendamentoParams } from "@serdono/supabase";
 import { ScreenHeader } from "../shell/ScreenHeader";
+import { AgendamentoSecao } from "./AgendamentoSecao";
 import { exportReuniaoPdf } from "./reuniaoPdf";
 import { useReuniao } from "./useReuniao";
 
@@ -52,7 +53,13 @@ export function ReuniaoScreen() {
         ) : v.view === "formulario" ? (
           <Formulario gerando={v.gerando} onGerar={v.gerar} onVoltar={v.voltarParaLista} />
         ) : v.view === "resultado" && v.reuniaoSelecionada ? (
-          <Resultado reuniao={v.reuniaoSelecionada} onVoltar={v.voltarParaLista} />
+          <Resultado
+            reuniao={v.reuniaoSelecionada}
+            agendando={v.agendando}
+            onSalvarAgendamento={(params) => v.agendar(v.reuniaoSelecionada!.id, params)}
+            onCancelarAgendamento={() => v.cancelarAgendamento(v.reuniaoSelecionada!.id)}
+            onVoltar={v.voltarParaLista}
+          />
         ) : (
           <Lista reunioes={v.reunioes} onNovaReuniao={v.novaReuniao} onAbrirReuniao={v.abrirReuniao} />
         )}
@@ -83,9 +90,9 @@ function Lista({
   onNovaReuniao,
   onAbrirReuniao,
 }: {
-  reunioes: ReuniaoRow[];
+  reunioes: ReuniaoComAgenda[];
   onNovaReuniao: () => void;
-  onAbrirReuniao: (reuniao: ReuniaoRow) => void;
+  onAbrirReuniao: (reuniao: ReuniaoComAgenda) => void;
 }) {
   return (
     <View style={{ gap: space[4] }}>
@@ -111,6 +118,11 @@ function Lista({
                     <Text style={{ ...type.caption, color: color.text.muted, marginTop: 2 }} numberOfLines={1}>
                       {reuniao.com_quem} · {formatarDataRelativa(reuniao.created_at)}
                     </Text>
+                    {reuniao.agendamento ? (
+                      <Text style={{ ...type.caption, color: color.bg.brand, fontWeight: "600", marginTop: 2 }} numberOfLines={1}>
+                        Agendada para {formatarDataHoraReuniao(reuniao.agendamento.data_hora)}
+                      </Text>
+                    ) : null}
                   </View>
                   <Text style={{ ...type.body, color: color.text.muted }}>›</Text>
                 </View>
@@ -249,7 +261,19 @@ function ListaSecao({ titulo, itens }: { titulo: string; itens: string[] }) {
   );
 }
 
-function Resultado({ reuniao, onVoltar }: { reuniao: ReuniaoRow; onVoltar: () => void }) {
+function Resultado({
+  reuniao,
+  agendando,
+  onSalvarAgendamento,
+  onCancelarAgendamento,
+  onVoltar,
+}: {
+  reuniao: ReuniaoComAgenda;
+  agendando: boolean;
+  onSalvarAgendamento: (params: SalvarAgendamentoParams) => Promise<boolean>;
+  onCancelarAgendamento: () => Promise<boolean>;
+  onVoltar: () => void;
+}) {
   const guia = reuniao.guia as unknown as GuiaReuniao;
   const tipoLabel = TIPO_LABEL[reuniao.tipo] ?? reuniao.tipo;
   const [exportando, setExportando] = useState(false);
@@ -273,6 +297,13 @@ function Resultado({ reuniao, onVoltar }: { reuniao: ReuniaoRow; onVoltar: () =>
         </Text>
         <Text style={{ ...type.body, color: color.text.onBrand }}>{guia.resumo}</Text>
       </Card>
+
+      <AgendamentoSecao
+        agendamento={reuniao.agendamento}
+        agendando={agendando}
+        onSalvar={onSalvarAgendamento}
+        onCancelar={onCancelarAgendamento}
+      />
 
       <Card variant="default" padding={5}>
         <ListaSecao titulo="Pauta sugerida" itens={guia.pauta} />

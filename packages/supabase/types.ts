@@ -1507,6 +1507,47 @@ export type Database = {
         }
         Relationships: []
       }
+      reunioes_agenda: {
+        Row: {
+          atualizado_em: string
+          contato_nome: string | null
+          criado_em: string
+          data_hora: string
+          id: string
+          local_tipo: string
+          local_valor: string
+          reuniao_id: string
+        }
+        Insert: {
+          atualizado_em?: string
+          contato_nome?: string | null
+          criado_em?: string
+          data_hora: string
+          id?: string
+          local_tipo: string
+          local_valor: string
+          reuniao_id: string
+        }
+        Update: {
+          atualizado_em?: string
+          contato_nome?: string | null
+          criado_em?: string
+          data_hora?: string
+          id?: string
+          local_tipo?: string
+          local_valor?: string
+          reuniao_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reunioes_agenda_reuniao_id_fkey"
+            columns: ["reuniao_id"]
+            isOneToOne: true
+            referencedRelation: "reunioes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_modules: {
         Row: {
           habilitado: boolean

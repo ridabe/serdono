@@ -52,6 +52,7 @@ module.exports = {
       "expo-font",
       "expo-web-browser",
       "expo-video",
+      "@react-native-community/datetimepicker",
       [
         "expo-image-picker",
         {

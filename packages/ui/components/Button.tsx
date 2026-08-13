@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { a11y, color, motion, radius, space, type } from "../tokens";
 
-export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "soft" | "danger";
+export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "soft" | "danger" | "info";
 export type ButtonSize = "md" | "sm";
 
 export interface ButtonProps {
@@ -36,6 +36,7 @@ const variantStyles: Record<ButtonVariant, { bg: string; fg: string; border?: st
   ghost: { bg: "transparent", fg: color.text.secondary },
   soft: { bg: color.bg.brandSubtle, fg: color.action.secondary },
   danger: { bg: color.state.danger, fg: color.text.onBrand },
+  info: { bg: color.state.info, fg: color.text.onBrand },
 };
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);

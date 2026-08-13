@@ -872,7 +872,9 @@ Detalhamento técnico (schema, Edge Function, fórmula de agregação) em SPEC.m
 
 **Importante — diferente de todo módulo mensal anterior (Check-up, Plano de Ação, Raio-X, Nível de Maturidade): não há limite de "1 por mês".** O empreendedor pode se preparar pra quantas reuniões precisar, a qualquer momento — cada geração é um registro novo no histórico, nunca um snapshot que se sobrescreve.
 
-**Fora de escopo desta versão (V2 futura, não construída agora):** agenda (data/hora/local/link/contato da reunião), envio de e-mail de convite aos participantes com o logo do negócio, lembrete automático antes da reunião, e um campo pra registrar o resultado final da reunião (se teve sucesso, o que ficou combinado). Nada disso libera nesta versão.
+**Agenda (V2, fatia 1 — pedido do dono do produto em 12/08/2026):** a partir de um guia já gerado, o empreendedor pode agendar a reunião de verdade — data e hora, tipo de local (Presencial, com endereço, ou Online, com link da chamada) e um contato opcional. Uma vez agendada, a tela mostra a data formatada, o local e o contato, com opção de **reagendar** (mudar data/local/contato a qualquer momento) ou **cancelar o agendamento** (o guia continua salvo, só o agendamento some). A lista de reuniões já geradas mostra "Agendada para [data]" nos cards que têm agendamento.
+
+**Fora de escopo desta versão (V2 futura, ainda não construída):** envio de e-mail de convite aos participantes com o logo do negócio, lembrete automático antes da reunião, e um campo pra registrar o resultado final da reunião (se teve sucesso, o que ficou combinado). Nada disso libera nesta versão.
 
 **RN-50 (nova): o Assistente de Reunião libera com a Jornada apenas iniciada, sem exigir fase concluída** — mesma regra do Check-up Mensal (RN-41), Raio-X Financeiro e Nível de Maturidade (RN-47): precisa existir negócio pra ter reunião sobre o que preparar.
 
@@ -880,7 +882,11 @@ Detalhamento técnico (schema, Edge Function, fórmula de agregação) em SPEC.m
 
 **RN-52 (nova): o guia é sempre gerado a partir de dado real do negócio do próprio usuário, nunca de dado de mercado, concorrência ou benchmark externo** — mesmo espírito de RN-43.
 
-Detalhamento técnico (schema, Edge Function, colisão de nome com a rota `/assistente` existente) em SPEC.md SDD-103.
+**RN-53 (nova): não é possível agendar uma reunião no passado** — a data/hora do agendamento precisa ser sempre futura, validado tanto na tela quanto antes de gravar.
+
+**RN-54 (nova): o agendamento (data/hora/local/contato) é mutável — reagendável e cancelável a qualquer momento —, diferente do guia gerado pela IA, que continua imutável por RN-51.** São dois ciclos de vida diferentes na mesma reunião: o guia é um retrato fechado, o agendamento é informação viva.
+
+Detalhamento técnico (schema, Edge Function, colisão de nome com a rota `/assistente` existente, agenda) em SPEC.md SDD-103/SDD-104.
 
 ---
 
@@ -940,6 +946,8 @@ Detalhamento técnico (schema, Edge Function, colisão de nome com a rota `/assi
 | RN-50 | Assistente de Reunião libera com a Jornada apenas iniciada, sem exigir fase concluída — §12.15 |
 | RN-51 | O guia do Assistente de Reunião é imutável depois de gerado — §12.15 |
 | RN-52 | O guia do Assistente de Reunião é sempre gerado a partir de dado real do negócio do usuário, nunca de mercado/concorrência/benchmark externo — §12.15 |
+| RN-53 | Não é possível agendar uma reunião no Assistente de Reunião no passado — §12.15 |
+| RN-54 | O agendamento do Assistente de Reunião é mutável (reagendável/cancelável), diferente do guia da IA, que continua imutável (RN-51) — §12.15 |
 
 ---
 

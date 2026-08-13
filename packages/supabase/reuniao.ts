@@ -5,21 +5,45 @@ import type { Tables } from "./types";
  * Assistente de Reunião (pedido do dono do produto, 12/08/2026, V1). Sem
  * trava mensal — o usuário pode gerar quantos guias precisar, cada um vira
  * uma linha nova em `reunioes` (histórico simples, sem edição).
+ *
+ * V2 fatia 1 (12/08/2026): agendamento em `reunioes_agenda`, tabela
+ * separada e mutável (reagendar/cancelar) — diferente de `reunioes`, cujo
+ * `guia` continua imutável (RN-51).
  */
 
 export type ReuniaoRow = Tables<"reunioes">;
+export type AgendamentoRow = Tables<"reunioes_agenda">;
 
-/** Mais recentes primeiro — vira a lista/histórico da tela do módulo. */
-export async function listarReunioes(userId: string): Promise<ReuniaoRow[]> {
-  const { data, error } = await supabase.from("reunioes").select("*").eq("user_id", userId).order("created_at", { ascending: false });
-  if (error) throw error;
-  return data;
+export interface ReuniaoComAgenda extends ReuniaoRow {
+  agendamento: AgendamentoRow | null;
 }
 
-export async function buscarReuniao(id: string): Promise<ReuniaoRow | null> {
-  const { data, error } = await supabase.from("reunioes").select("*").eq("id", id).maybeSingle();
+/**
+ * `reunioes_agenda` vem como objeto único no embed (não array): o
+ * `unique(reuniao_id)` da migration faz o PostgREST reconhecer a relação
+ * como 1:1 do lado de `reunioes`, não 1:N — achado testando no preview web
+ * (a suposição original de "vem como array" estava errada).
+ */
+function comAgenda(row: ReuniaoRow & { reunioes_agenda: AgendamentoRow | null }): ReuniaoComAgenda {
+  const { reunioes_agenda, ...reuniao } = row;
+  return { ...reuniao, agendamento: reunioes_agenda ?? null };
+}
+
+/** Mais recentes primeiro — vira a lista/histórico da tela do módulo, já com o agendamento (se houver) embutido. */
+export async function listarReunioes(userId: string): Promise<ReuniaoComAgenda[]> {
+  const { data, error } = await supabase
+    .from("reunioes")
+    .select("*, reunioes_agenda(*)")
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false });
   if (error) throw error;
-  return data;
+  return (data as unknown as (ReuniaoRow & { reunioes_agenda: AgendamentoRow | null })[]).map(comAgenda);
+}
+
+export async function buscarReuniao(id: string): Promise<ReuniaoComAgenda | null> {
+  const { data, error } = await supabase.from("reunioes").select("*, reunioes_agenda(*)").eq("id", id).maybeSingle();
+  if (error) throw error;
+  return data ? comAgenda(data as unknown as ReuniaoRow & { reunioes_agenda: AgendamentoRow | null }) : null;
 }
 
 export interface GerarReuniaoParams {
@@ -53,4 +77,45 @@ export async function gerarReuniao(params: GerarReuniaoParams): Promise<ReuniaoR
     throw error;
   }
   return (data as { reuniao: ReuniaoRow }).reuniao;
+}
+
+// ---- Agenda (V2, fatia 1) ----
+
+export interface SalvarAgendamentoParams {
+  dataHoraISO: string;
+  localTipo: string;
+  localValor: string;
+  contatoNome?: string;
+}
+
+export async function getAgendamento(reuniaoId: string): Promise<AgendamentoRow | null> {
+  const { data, error } = await supabase.from("reunioes_agenda").select("*").eq("reuniao_id", reuniaoId).maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
+/** Upsert por `reuniao_id` (unique na tabela) — cobre criar e reagendar com a mesma função. */
+export async function salvarAgendamento(reuniaoId: string, params: SalvarAgendamentoParams): Promise<AgendamentoRow> {
+  const { data, error } = await supabase
+    .from("reunioes_agenda")
+    .upsert(
+      {
+        reuniao_id: reuniaoId,
+        data_hora: params.dataHoraISO,
+        local_tipo: params.localTipo,
+        local_valor: params.localValor,
+        contato_nome: params.contatoNome ?? null,
+        atualizado_em: new Date().toISOString(),
+      },
+      { onConflict: "reuniao_id" }
+    )
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function cancelarAgendamento(reuniaoId: string): Promise<void> {
+  const { error } = await supabase.from("reunioes_agenda").delete().eq("reuniao_id", reuniaoId);
+  if (error) throw error;
 }

@@ -1,24 +1,36 @@
 import { useCallback, useEffect, useState } from "react";
 import { elegivelAssistenteReuniao } from "@serdono/core";
-import { getCurrentSession, getMyJornada, gerarReuniao, listarReunioes, type GerarReuniaoParams, type ReuniaoRow } from "@serdono/supabase";
+import {
+  cancelarAgendamento as cancelarAgendamentoApi,
+  getCurrentSession,
+  getMyJornada,
+  gerarReuniao,
+  listarReunioes,
+  salvarAgendamento,
+  type GerarReuniaoParams,
+  type ReuniaoComAgenda,
+  type SalvarAgendamentoParams,
+} from "@serdono/supabase";
 
 export type ReuniaoView = "lista" | "formulario" | "resultado";
 
 /**
  * Estado da tela do Assistente de Reunião — elegibilidade, lista de guias já
- * gerados (histórico, mais recente primeiro) e geração de um novo guia.
- * Sem trava mensal (diferente dos outros módulos de IA): o usuário pode
- * gerar quantos guias precisar.
+ * gerados (histórico, mais recente primeiro), geração de um novo guia e
+ * agenda (V2 fatia 1, 12/08/2026: agendar/reagendar/cancelar a partir de um
+ * guia já gerado). Sem trava mensal (diferente dos outros módulos de IA): o
+ * usuário pode gerar quantos guias precisar.
  */
 export function useReuniao() {
   const [userId, setUserId] = useState<string | null>(null);
   const [elegivel, setElegivel] = useState(false);
-  const [reunioes, setReunioes] = useState<ReuniaoRow[]>([]);
+  const [reunioes, setReunioes] = useState<ReuniaoComAgenda[]>([]);
   const [loading, setLoading] = useState(true);
   const [gerando, setGerando] = useState(false);
+  const [agendando, setAgendando] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [view, setView] = useState<ReuniaoView>("lista");
-  const [reuniaoSelecionada, setReuniaoSelecionada] = useState<ReuniaoRow | null>(null);
+  const [reuniaoSelecionada, setReuniaoSelecionada] = useState<ReuniaoComAgenda | null>(null);
 
   const carregar = useCallback(async (uid: string, jornadaExiste: boolean) => {
     const podeUsar = elegivelAssistenteReuniao(jornadaExiste);
@@ -43,13 +55,20 @@ export function useReuniao() {
     })();
   }, [carregar]);
 
+  /** Atualiza uma reunião tanto na lista quanto na seleção corrente, sem novo fetch completo. */
+  function atualizarReuniaoLocal(atualizada: ReuniaoComAgenda) {
+    setReunioes((atual) => atual.map((r) => (r.id === atualizada.id ? atualizada : r)));
+    setReuniaoSelecionada((atual) => (atual?.id === atualizada.id ? atualizada : atual));
+  }
+
   async function gerar(params: GerarReuniaoParams): Promise<boolean> {
     setGerando(true);
     setError(null);
     try {
       const reuniao = await gerarReuniao(params);
-      setReunioes((atual) => [reuniao, ...atual]);
-      setReuniaoSelecionada(reuniao);
+      const comAgenda: ReuniaoComAgenda = { ...reuniao, agendamento: null };
+      setReunioes((atual) => [comAgenda, ...atual]);
+      setReuniaoSelecionada(comAgenda);
       setView("resultado");
       return true;
     } catch (e) {
@@ -60,7 +79,39 @@ export function useReuniao() {
     }
   }
 
-  function abrirReuniao(reuniao: ReuniaoRow) {
+  async function agendar(reuniaoId: string, params: SalvarAgendamentoParams): Promise<boolean> {
+    setAgendando(true);
+    setError(null);
+    try {
+      const agendamento = await salvarAgendamento(reuniaoId, params);
+      const base = reunioes.find((r) => r.id === reuniaoId) ?? reuniaoSelecionada;
+      if (base) atualizarReuniaoLocal({ ...base, agendamento });
+      return true;
+    } catch (e) {
+      setError((e as Error).message);
+      return false;
+    } finally {
+      setAgendando(false);
+    }
+  }
+
+  async function cancelarAgendamento(reuniaoId: string): Promise<boolean> {
+    setAgendando(true);
+    setError(null);
+    try {
+      await cancelarAgendamentoApi(reuniaoId);
+      const base = reunioes.find((r) => r.id === reuniaoId) ?? reuniaoSelecionada;
+      if (base) atualizarReuniaoLocal({ ...base, agendamento: null });
+      return true;
+    } catch (e) {
+      setError((e as Error).message);
+      return false;
+    } finally {
+      setAgendando(false);
+    }
+  }
+
+  function abrirReuniao(reuniao: ReuniaoComAgenda) {
     setReuniaoSelecionada(reuniao);
     setView("resultado");
   }
@@ -75,5 +126,20 @@ export function useReuniao() {
     setView("lista");
   }
 
-  return { loading, gerando, error, elegivel, reunioes, view, reuniaoSelecionada, gerar, abrirReuniao, novaReuniao, voltarParaLista };
+  return {
+    loading,
+    gerando,
+    agendando,
+    error,
+    elegivel,
+    reunioes,
+    view,
+    reuniaoSelecionada,
+    gerar,
+    agendar,
+    cancelarAgendamento,
+    abrirReuniao,
+    novaReuniao,
+    voltarParaLista,
+  };
 }
