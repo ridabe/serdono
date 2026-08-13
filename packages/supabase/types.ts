@@ -1510,7 +1510,9 @@ export type Database = {
       reunioes_agenda: {
         Row: {
           atualizado_em: string
+          contato_email: string | null
           contato_nome: string | null
+          convite_enviado_em: string | null
           criado_em: string
           data_hora: string
           id: string
@@ -1520,7 +1522,9 @@ export type Database = {
         }
         Insert: {
           atualizado_em?: string
+          contato_email?: string | null
           contato_nome?: string | null
+          convite_enviado_em?: string | null
           criado_em?: string
           data_hora: string
           id?: string
@@ -1530,7 +1534,9 @@ export type Database = {
         }
         Update: {
           atualizado_em?: string
+          contato_email?: string | null
           contato_nome?: string | null
+          convite_enviado_em?: string | null
           criado_em?: string
           data_hora?: string
           id?: string
@@ -1541,6 +1547,41 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "reunioes_agenda_reuniao_id_fkey"
+            columns: ["reuniao_id"]
+            isOneToOne: true
+            referencedRelation: "reunioes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reunioes_resultado: {
+        Row: {
+          atualizado_em: string
+          combinado: string | null
+          id: string
+          registrado_em: string
+          reuniao_id: string
+          sucesso: string
+        }
+        Insert: {
+          atualizado_em?: string
+          combinado?: string | null
+          id?: string
+          registrado_em?: string
+          reuniao_id: string
+          sucesso: string
+        }
+        Update: {
+          atualizado_em?: string
+          combinado?: string | null
+          id?: string
+          registrado_em?: string
+          reuniao_id?: string
+          sucesso?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reunioes_resultado_reuniao_id_fkey"
             columns: ["reuniao_id"]
             isOneToOne: true
             referencedRelation: "reunioes"

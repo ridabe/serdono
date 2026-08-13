@@ -877,7 +877,11 @@ Detalhamento técnico (schema, Edge Function, fórmula de agregação) em SPEC.m
 
 **Lembrete automático (V2, fatia 2 — pedido do dono do produto em 12/08/2026):** reaproveita a análise diária de avisos push já existente (§12.12) — uma reunião agendada pra amanhã gera 1 aviso (nunca repetido). Além do push, a **Início mostra um destaque visível** logo abaixo da saudação sempre que há uma reunião agendada pra hoje ou amanhã, pra não deixar passar — e troca sozinho pra próxima reunião elegível assim que a atual sai da janela.
 
-**Fora de escopo desta versão (V2 futura, ainda não construída):** envio de e-mail de convite aos participantes com o logo do negócio, e um campo pra registrar o resultado final da reunião (se teve sucesso, o que ficou combinado). Nada disso libera nesta versão.
+**Convite por e-mail (V2, fatia 3 — pedido do dono do produto em 13/08/2026):** a partir de uma reunião já agendada, o empreendedor pode informar o e-mail do convidado e enviar um convite — data, local/link e o logo do negócio (quando definido na Jornada) — em nome do próprio empreendedor (resposta cai na caixa dele, não no suporte do Ser Dono). **O tipo de reunião (Fornecedor/Cliente ou prospect/Investidor/...) nunca aparece no convite** — é rótulo interno de como o empreendedor está se preparando, não informação pro convidado. Reenvio é sempre uma ação explícita do usuário: reagendar (RN-54) invalida o "convite enviado" da tela, mas nada é reenviado sozinho.
+
+**Resultado da reunião (V2, fatia 4 — pedido do dono do produto em 13/08/2026, fecha o escopo desta versão):** depois que a reunião acontece, o empreendedor pode registrar como foi — sucesso (Sim/Mais ou menos/Não) e o que ficou combinado, texto livre opcional. Não depende de ter usado a agenda: dá pra registrar resultado mesmo de uma reunião marcada por fora. Diferente do guia gerado pela IA (imutável, RN-51), o resultado é **sempre editável** — o empreendedor pode corrigir ou completar depois.
+
+Com esta fatia, o Assistente de Reunião completa o escopo previsto para esta versão — nenhum item restante fora de escopo.
 
 **RN-50 (nova): o Assistente de Reunião libera com a Jornada apenas iniciada, sem exigir fase concluída** — mesma regra do Check-up Mensal (RN-41), Raio-X Financeiro e Nível de Maturidade (RN-47): precisa existir negócio pra ter reunião sobre o que preparar.
 
@@ -891,7 +895,15 @@ Detalhamento técnico (schema, Edge Function, fórmula de agregação) em SPEC.m
 
 **RN-55 (nova): o destaque de reunião na Início nunca substitui o aviso push nem o agendamento em si — é só mais um lugar onde a mesma informação já visível na tela do módulo aparece, seguindo o mesmo espírito de RN-45.** Sem reunião elegível na janela (hoje/amanhã), a Início não mostra nada.
 
-Detalhamento técnico (schema, Edge Function, colisão de nome com a rota `/assistente` existente, agenda, lembrete automático) em SPEC.md SDD-103/SDD-104/SDD-105.
+**RN-56 (nova): o convite por e-mail nunca revela o tipo de reunião (catálogo Fornecedor/Cliente ou prospect/Investidor/...) ao convidado** — é rótulo interno de preparação do empreendedor, não informação que o convidado precisa ou deveria ver.
+
+**RN-57 (nova): não existe idempotência no convite por e-mail — o usuário decide quando (re)enviar, sempre por ação explícita.** Reagendar (RN-54) marca o convite anterior como não-mais-válido na tela (o botão volta a "Enviar convite"), mas nada dispara um reenvio sozinho — diferente do e-mail de boas-vindas (SDD-70), que é idempotente por design.
+
+**RN-58 (nova): o resultado da reunião é independente do agendamento** — o empreendedor pode registrar como foi mesmo sem ter usado a agenda (RN-53/54) pra marcar a reunião.
+
+**RN-59 (nova): o resultado da reunião é sempre editável, diferente do guia gerado pela IA (imutável, RN-51)** — mesmo espírito de RN-54: o guia é um retrato fechado, o resultado é informação viva que pode ser corrigida.
+
+Detalhamento técnico (schema, Edge Function, colisão de nome com a rota `/assistente` existente, agenda, lembrete automático, destaque na Início, convite por e-mail, resultado da reunião) em SPEC.md SDD-103/SDD-104/SDD-105/SDD-106/SDD-107/SDD-108.
 
 ---
 
@@ -954,6 +966,10 @@ Detalhamento técnico (schema, Edge Function, colisão de nome com a rota `/assi
 | RN-53 | Não é possível agendar uma reunião no Assistente de Reunião no passado — §12.15 |
 | RN-54 | O agendamento do Assistente de Reunião é mutável (reagendável/cancelável), diferente do guia da IA, que continua imutável (RN-51) — §12.15 |
 | RN-55 | O destaque de reunião na Início nunca substitui o aviso push nem o agendamento — mesmo espírito de RN-45 — §12.15 |
+| RN-56 | O convite por e-mail do Assistente de Reunião nunca revela o tipo de reunião ao convidado — §12.15 |
+| RN-57 | O convite por e-mail do Assistente de Reunião não é idempotente — reenvio é sempre ação explícita do usuário — §12.15 |
+| RN-58 | O resultado da reunião é independente do agendamento — §12.15 |
+| RN-59 | O resultado da reunião é sempre editável, diferente do guia gerado pela IA (imutável) — §12.15 |
 
 ---
 

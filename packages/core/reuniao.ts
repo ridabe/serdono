@@ -10,6 +10,11 @@
  * Raio-X, Nível de Maturidade): não há limite de "1 por mês" — o usuário
  * pode se preparar pra quantas reuniões precisar, a qualquer momento. Cada
  * geração é um registro novo, não um snapshot que se sobrescreve.
+ *
+ * Convite por e-mail (13/08/2026): item que ficava listado como fora de
+ * escopo até aqui — agora construído, a pedido explícito do dono do
+ * produto. Resultado da reunião (13/08/2026, mesmo dia): último item que
+ * restava fora de escopo, também construído.
  */
 
 export type TipoReuniao = "fornecedor" | "cliente_prospect" | "investidor" | "parceiro" | "banco_credito" | "outro";
@@ -56,6 +61,12 @@ export interface AgendamentoReuniao {
   localTipo: LocalTipoReuniao;
   localValor: string;
   contatoNome?: string;
+  contatoEmail?: string;
+}
+
+/** Checagem leve de formato — só pra evitar erro de digitação óbvio antes de chamar o servidor; a validação de verdade é a entrega do provedor de e-mail. */
+export function emailValido(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 }
 
 /** Nunca deixa agendar reunião no passado — mesmo princípio de nunca fingir dado incoerente (RN-53). */
@@ -97,4 +108,19 @@ export function fimJanelaLembreteInicioISO(agora: Date = new Date()): string {
   const fim = new Date(inicioHojeSP);
   fim.setUTCDate(fim.getUTCDate() + 2); // +2 dias = depois de amanhã 00:00 em SP, exclusivo
   return fim.toISOString();
+}
+
+// ---- Resultado da reunião (13/08/2026) ----
+
+export type SucessoReuniao = "sim" | "nao" | "parcial";
+
+export const SUCESSO_REUNIAO_LABEL: Record<SucessoReuniao, string> = {
+  sim: "Sim, correu bem",
+  parcial: "Mais ou menos",
+  nao: "Não, não deu certo",
+};
+
+export interface ResultadoReuniao {
+  sucesso: SucessoReuniao;
+  combinado?: string;
 }

@@ -1,11 +1,12 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { ActivityIndicator, Pressable, ScrollView, Text, TextInput, View } from "react-native";
-import { Button, Card, color, Input, radius, space, type } from "@serdono/ui";
+import { Button, Card, CollapsibleSection, color, Input, radius, SECTION_ACCENT_CYCLE, space, type } from "@serdono/ui";
 import { detalheObrigatorio, formatarDataHoraReuniao, TIPOS_REUNIAO, type GuiaReuniao, type TipoReuniao } from "@serdono/core";
-import { signOut, type ReuniaoComAgenda, type SalvarAgendamentoParams } from "@serdono/supabase";
+import { signOut, type ReuniaoComAgenda, type SalvarAgendamentoParams, type SalvarResultadoParams } from "@serdono/supabase";
 import { ScreenHeader } from "../shell/ScreenHeader";
 import { AgendamentoSecao } from "./AgendamentoSecao";
+import { DesfechoReuniaoSecao } from "./DesfechoReuniaoSecao";
 import { exportReuniaoPdf } from "./reuniaoPdf";
 import { useReuniao } from "./useReuniao";
 
@@ -56,8 +57,12 @@ export function ReuniaoScreen() {
           <Resultado
             reuniao={v.reuniaoSelecionada}
             agendando={v.agendando}
+            enviandoConvite={v.enviandoConvite}
+            salvandoResultado={v.salvandoResultado}
             onSalvarAgendamento={(params) => v.agendar(v.reuniaoSelecionada!.id, params)}
             onCancelarAgendamento={() => v.cancelarAgendamento(v.reuniaoSelecionada!.id)}
+            onEnviarConvite={() => v.enviarConvite(v.reuniaoSelecionada!.id)}
+            onSalvarResultado={(params) => v.salvarResultado(v.reuniaoSelecionada!.id, params)}
             onVoltar={v.voltarParaLista}
           />
         ) : (
@@ -245,33 +250,47 @@ function Formulario({
   );
 }
 
-function ListaSecao({ titulo, itens }: { titulo: string; itens: string[] }) {
+function ItensLista({ itens }: { itens: string[] }) {
   return (
-    <View style={{ marginBottom: space[4] }}>
-      <Text style={{ ...type.h3, color: color.text.primary, marginBottom: space[2] }}>{titulo}</Text>
-      <View style={{ gap: space[2] }}>
-        {itens.map((item, i) => (
-          <View key={i} style={{ flexDirection: "row", gap: space[2], alignItems: "flex-start" }}>
-            <Text style={{ ...type.body, color: color.bg.brand }}>•</Text>
-            <Text style={{ ...type.body, color: color.text.primary, flex: 1 }}>{item}</Text>
-          </View>
-        ))}
-      </View>
+    <View style={{ gap: space[2] }}>
+      {itens.map((item, i) => (
+        <View key={i} style={{ flexDirection: "row", gap: space[2], alignItems: "flex-start" }}>
+          <Text style={{ ...type.body, color: color.bg.brand }}>•</Text>
+          <Text style={{ ...type.body, color: color.text.primary, flex: 1 }}>{item}</Text>
+        </View>
+      ))}
     </View>
   );
 }
 
+/** Ordem em que as 5 seções do guia aparecem como sanfonas — cor alternada (SECTION_ACCENT_CYCLE) só pra diferenciar visualmente, sem significado próprio. */
+const SECOES_GUIA: { titulo: string; campo: keyof Omit<GuiaReuniao, "resumo"> }[] = [
+  { titulo: "Pauta sugerida", campo: "pauta" },
+  { titulo: "Perguntas a fazer", campo: "perguntas_a_fazer" },
+  { titulo: "Dicas de comportamento", campo: "dicas_comportamento" },
+  { titulo: "Erros a evitar", campo: "erros_a_evitar" },
+  { titulo: "Checklist de preparação", campo: "checklist_preparacao" },
+];
+
 function Resultado({
   reuniao,
   agendando,
+  enviandoConvite,
+  salvandoResultado,
   onSalvarAgendamento,
   onCancelarAgendamento,
+  onEnviarConvite,
+  onSalvarResultado,
   onVoltar,
 }: {
   reuniao: ReuniaoComAgenda;
   agendando: boolean;
+  enviandoConvite: boolean;
+  salvandoResultado: boolean;
   onSalvarAgendamento: (params: SalvarAgendamentoParams) => Promise<boolean>;
   onCancelarAgendamento: () => Promise<boolean>;
+  onEnviarConvite: () => Promise<boolean>;
+  onSalvarResultado: (params: SalvarResultadoParams) => Promise<boolean>;
   onVoltar: () => void;
 }) {
   const guia = reuniao.guia as unknown as GuiaReuniao;
@@ -301,19 +320,19 @@ function Resultado({
       <AgendamentoSecao
         agendamento={reuniao.agendamento}
         agendando={agendando}
+        enviandoConvite={enviandoConvite}
         onSalvar={onSalvarAgendamento}
         onCancelar={onCancelarAgendamento}
+        onEnviarConvite={onEnviarConvite}
       />
 
-      <Card variant="default" padding={5}>
-        <ListaSecao titulo="Pauta sugerida" itens={guia.pauta} />
-        <ListaSecao titulo="Perguntas a fazer" itens={guia.perguntas_a_fazer} />
-        <ListaSecao titulo="Dicas de comportamento" itens={guia.dicas_comportamento} />
-        <ListaSecao titulo="Erros a evitar" itens={guia.erros_a_evitar} />
-        <View style={{ marginBottom: 0 }}>
-          <ListaSecao titulo="Checklist de preparação" itens={guia.checklist_preparacao} />
-        </View>
-      </Card>
+      <DesfechoReuniaoSecao resultado={reuniao.resultado} salvando={salvandoResultado} onSalvar={onSalvarResultado} />
+
+      {SECOES_GUIA.map((secao, i) => (
+        <CollapsibleSection key={secao.campo} title={secao.titulo} accent={SECTION_ACCENT_CYCLE[i % SECTION_ACCENT_CYCLE.length]}>
+          <ItensLista itens={guia[secao.campo]} />
+        </CollapsibleSection>
+      ))}
 
       <Button label="Exportar PDF" variant="primary" fullWidth loading={exportando} onPress={handleExportar} />
     </View>

@@ -3,6 +3,7 @@ import {
   agendamentoValido,
   detalheObrigatorio,
   elegivelAssistenteReuniao,
+  emailValido,
   fimJanelaLembreteInicioISO,
   formatarDataHoraReuniao,
   rotuloQuandoReuniao,
@@ -72,6 +73,20 @@ describe("rotuloQuandoReuniao", () => {
     // 23h em SP ainda é dia 12; em UTC já seria dia 13 (armadilha clássica de fuso).
     const agora = new Date("2026-08-12T23:30:00-03:00");
     expect(rotuloQuandoReuniao("2026-08-12T23:50:00-03:00", agora)).toBe("hoje");
+  });
+});
+
+describe("emailValido", () => {
+  it("aceita e-mail com formato razoável", () => {
+    expect(emailValido("joao@exemplo.com")).toBe(true);
+    expect(emailValido("  joao@exemplo.com.br  ")).toBe(true);
+  });
+
+  it("rejeita string sem @ ou sem domínio", () => {
+    expect(emailValido("joao")).toBe(false);
+    expect(emailValido("joao@")).toBe(false);
+    expect(emailValido("joao@exemplo")).toBe(false);
+    expect(emailValido("")).toBe(false);
   });
 });
 
