@@ -123,9 +123,9 @@ export function AgendamentoSecao({
         <Text style={{ ...type.caption, color: color.state.danger, marginBottom: space[3] }}>A data precisa ser no futuro.</Text>
       ) : null}
 
-      <View style={{ flexDirection: "row", gap: space[2] }}>
+      <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[2] }}>
         <Button label="Salvar agendamento" variant="primary" loading={agendando} disabled={!completo} onPress={handleSalvar} />
-        <Button label="Cancelar" variant="ghost" onPress={() => setEditando(false)} />
+        <Button label="Cancelar" variant="danger" onPress={() => setEditando(false)} />
       </View>
     </Card>
   );

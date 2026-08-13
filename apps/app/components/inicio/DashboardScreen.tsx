@@ -7,6 +7,7 @@ import { signOut } from "@serdono/supabase";
 import { ScreenHeader } from "../shell/ScreenHeader";
 import { formatMoney } from "../diagnostico/labels";
 import { FaseIcon } from "./FaseIcon";
+import { LembreteReuniaoAviso } from "./LembreteReuniaoAviso";
 import { MaturidadeResumoCard } from "./MaturidadeResumoCard";
 import { NovidadeModuloPopup } from "./NovidadeModuloPopup";
 import { PlanoAcaoResumoCard } from "./PlanoAcaoResumoCard";
@@ -231,6 +232,8 @@ function HeroNegocio({
       <Text style={{ ...type.overline, color: color.action.primary, marginBottom: space[3] }}>
         {primeiroNome ? `OI, ${primeiroNome.toUpperCase()}` : "SEU NEGÓCIO"}
       </Text>
+
+      <LembreteReuniaoAviso />
 
       <View style={{ flexDirection: "row", alignItems: "center", gap: space[4] }}>
         <View style={{ width: 64, height: 64, borderRadius: radius.lg, backgroundColor: color.action.primary, alignItems: "center", justifyContent: "center", overflow: "hidden" }}>

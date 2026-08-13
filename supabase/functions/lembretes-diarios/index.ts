@@ -3,12 +3,15 @@
 // essa funcionalidade").
 //
 // Roda uma vez por dia via pg_cron (`cron.schedule`, ver migration/README de
-// deploy). Três análises, cada uma pra um módulo diferente:
+// deploy). Quatro análises, cada uma pra um módulo diferente:
 //   1. Jornada Empreendedora — etapa `aguardando_usuario` parada há 7+ dias
 //      (RN-14 do PRD, nunca implementada até agora).
 //   2. Check-up Mensal — ainda não feito este mês, a partir do dia 20.
 //   3. Meu Negócio em Dia — obrigação com regra `mensal_dia_fixo` vencendo
 //      em até 3 dias e ainda não marcada como resolvida.
+//   4. Assistente de Reunião — reunião agendada pra amanhã (SDD nova,
+//      12/08/2026) — mesma granularidade diária do cron, sem agendador de
+//      precisão novo (decisão já fechada na fatia "agenda").
 //
 // Dedupe via `lembretes_enviados` (unique por user+tipo+chave) — cada
 // ocorrência só gera 1 push, mesmo rodando todo dia enquanto a condição
@@ -24,7 +27,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
 interface Lembrete {
   userId: string;
-  tipo: "jornada_etapa_parada" | "checkup_mensal" | "obrigacao_vencendo";
+  tipo: "jornada_etapa_parada" | "checkup_mensal" | "obrigacao_vencendo" | "reuniao_lembrete";
   chave: string;
   titulo: string;
   corpo: string;
@@ -45,6 +48,15 @@ function hojeSP(): { ano: number; mes: number; dia: number; iso: string } {
 
 function ultimoDiaDoMes(ano: number, mes: number): number {
   return new Date(Date.UTC(ano, mes, 0)).getUTCDate();
+}
+
+/** Início/fim de "amanhã" (dia civil em São Paulo), como instantes UTC — pra filtrar `data_hora timestamptz` por igualdade de dia sem ambiguidade de fuso. */
+function amanhaRangeUTC(hoje: { iso: string }): { inicioISO: string; fimISO: string } {
+  const inicio = new Date(`${hoje.iso}T00:00:00-03:00`);
+  inicio.setUTCDate(inicio.getUTCDate() + 1);
+  const fim = new Date(inicio);
+  fim.setUTCDate(fim.getUTCDate() + 1);
+  return { inicioISO: inicio.toISOString(), fimISO: fim.toISOString() };
 }
 
 // ============================================================================
@@ -162,6 +174,52 @@ async function coletarLembretesObrigacoes(hoje: { ano: number; mes: number; dia:
   return lembretes;
 }
 
+// ============================================================================
+// 4. Assistente de Reunião — reunião agendada (`reunioes_agenda`) pra
+// amanhã, dia civil em São Paulo. Cron roda 1x/dia, então o lembrete chega
+// em algum momento do dia anterior à reunião, nunca numa janela de horas
+// exata antes do horário real — mesma granularidade já aceita pelo resto
+// do cron (RN-44/45 do PRD).
+// ============================================================================
+const TIPO_REUNIAO_LABEL: Record<string, string> = {
+  fornecedor: "fornecedor",
+  cliente_prospect: "cliente",
+  investidor: "investidor",
+  parceiro: "parceiro de negócio",
+  banco_credito: "banco/crédito",
+  outro: "reunião",
+};
+
+async function coletarLembretesReuniao(hoje: { iso: string }): Promise<Lembrete[]> {
+  const { inicioISO, fimISO } = amanhaRangeUTC(hoje);
+
+  const { data: agendamentos, error } = await supabase
+    .from("reunioes_agenda")
+    .select("id, data_hora, local_tipo, local_valor, reunioes!inner(user_id, com_quem, tipo)")
+    .gte("data_hora", inicioISO)
+    .lt("data_hora", fimISO);
+  if (error) throw error;
+
+  return (agendamentos ?? []).map((a) => {
+    const reuniao = (a as unknown as { reunioes: { user_id: string; com_quem: string; tipo: string } }).reunioes;
+    const horario = new Date(a.data_hora as string).toLocaleTimeString("pt-BR", {
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZone: "America/Sao_Paulo",
+    });
+    const localLabel = a.local_tipo === "online" ? "online" : "presencial";
+    const tipoLabel = TIPO_REUNIAO_LABEL[reuniao.tipo] ?? "reunião";
+
+    return {
+      userId: reuniao.user_id,
+      tipo: "reuniao_lembrete" as const,
+      chave: a.id as string,
+      titulo: "Reunião amanhã",
+      corpo: `Sua reunião com ${reuniao.com_quem} (${tipoLabel}) é amanhã às ${horario} — ${localLabel}.`,
+    };
+  });
+}
+
 /** Registra a ocorrência em `lembretes_enviados` (dedupe) — só segue pra envio se a linha foi inserida de verdade (não existia antes). */
 async function filtrarNaoEnviados(lembretes: Lembrete[]): Promise<Lembrete[]> {
   const naoEnviados: Lembrete[] = [];
@@ -204,13 +262,14 @@ Deno.serve(async (req) => {
     }
 
     const hoje = hojeSP();
-    const [jornada, checkup, obrigacoes] = await Promise.all([
+    const [jornada, checkup, obrigacoes, reuniao] = await Promise.all([
       coletarLembretesJornada(hoje),
       coletarLembretesCheckup(hoje),
       coletarLembretesObrigacoes(hoje),
+      coletarLembretesReuniao(hoje),
     ]);
 
-    const candidatos = [...jornada, ...checkup, ...obrigacoes];
+    const candidatos = [...jornada, ...checkup, ...obrigacoes, ...reuniao];
     const paraEnviar = await filtrarNaoEnviados(candidatos);
 
     // Agrupa por (titulo+corpo) exatos pra mandar 1 chamada por mensagem
@@ -226,7 +285,7 @@ Deno.serve(async (req) => {
       JSON.stringify({
         candidatos: candidatos.length,
         enviados: paraEnviar.length,
-        por_tipo: { jornada: jornada.length, checkup: checkup.length, obrigacoes: obrigacoes.length },
+        por_tipo: { jornada: jornada.length, checkup: checkup.length, obrigacoes: obrigacoes.length, reuniao: reuniao.length },
       }),
       { headers: { "content-type": "application/json" } }
     );

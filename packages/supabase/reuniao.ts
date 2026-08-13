@@ -119,3 +119,40 @@ export async function cancelarAgendamento(reuniaoId: string): Promise<void> {
   const { error } = await supabase.from("reunioes_agenda").delete().eq("reuniao_id", reuniaoId);
   if (error) throw error;
 }
+
+// ---- Lembrete automático (V2, fatia 2) ----
+
+export interface ProximoLembreteReuniao {
+  reuniaoId: string;
+  dataHoraISO: string;
+  comQuem: string;
+  tipo: string;
+}
+
+/**
+ * Reunião agendada mais próxima dentro de uma janela (RN-55) — usada pelo
+ * destaque da Início. `agoraISO`/`antesDeISO` vêm de fora (calculados por
+ * `fimJanelaLembreteInicioISO` de `packages/core`) porque este pacote não
+ * depende de `packages/core` (só o inverso, nunca o contrário).
+ */
+export async function getProximoLembreteReuniao(userId: string, agoraISO: string, antesDeISO: string): Promise<ProximoLembreteReuniao | null> {
+  const { data, error } = await supabase
+    .from("reunioes_agenda")
+    .select("reuniao_id, data_hora, reunioes!inner(com_quem, tipo, user_id)")
+    .eq("reunioes.user_id", userId)
+    .gte("data_hora", agoraISO)
+    .lt("data_hora", antesDeISO)
+    .order("data_hora", { ascending: true })
+    .limit(1)
+    .maybeSingle();
+  if (error) throw error;
+  if (!data) return null;
+
+  const reuniao = (data as unknown as { reunioes: { com_quem: string; tipo: string } }).reunioes;
+  return {
+    reuniaoId: data.reuniao_id as string,
+    dataHoraISO: data.data_hora as string,
+    comQuem: reuniao.com_quem,
+    tipo: reuniao.tipo,
+  };
+}

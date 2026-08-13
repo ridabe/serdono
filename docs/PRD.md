@@ -794,18 +794,19 @@ Detalhamento técnico (schema, Edge Function, integração com o Plano de Ação
 
 **Opt-in, nunca automático.** No app instalado (Android/iOS — não existe no navegador), a tela Perfil ganhou "Avisos no celular": o usuário ativa explicitamente, e só a partir daí o aparelho recebe notificação. Quem nunca ativa nunca recebe nada.
 
-**Uma vez por dia, o produto analisa 3 situações e avisa quando alguma se aplica:**
+**Uma vez por dia, o produto analisa 4 situações e avisa quando alguma se aplica:**
 1. **Jornada parada** — uma etapa que depende de ação do empreendedor (`tipo_conclusao = "usuario"`) está esperando há 7 dias ou mais sem ele ter feito nada. **Implementa a RN-14, que estava registrada no PRD desde o início do produto mas nunca tinha sido construída.**
 2. **Check-up Mensal pendente** — a partir do dia 20 do mês, se o Check-up Mensal (§12.11) daquele mês ainda não foi feito.
 3. **Obrigação vencendo** — no módulo Meu Negócio em Dia (§12.8), uma obrigação de vencimento mensal fixo (DAS-MEI, PGDAS, FGTS etc.) a até 3 dias do prazo e ainda sem marcação de resolvida.
+4. **Reunião agendada pra amanhã** — no Assistente de Reunião (§12.15), uma reunião com data/hora marcada cai no dia civil seguinte (fuso de São Paulo). Como a análise roda 1x/dia, o aviso chega em algum momento do dia anterior à reunião, nunca numa janela de horas exata antes do horário marcado.
 
 **RN-44 (nova): cada aviso só é enviado 1 vez por ocorrência — nunca todo dia enquanto a condição continuar valendo.** Uma etapa parada há 20 dias gera exatamente 1 aviso (no dia 7), não um por dia até ser resolvida.
 
 **RN-45 (nova): notificação push nunca é a única forma de acesso a uma informação — é sempre um lembrete de algo que já está visível dentro do produto.** Quem nunca ativa avisos continua com acesso total a tudo, só sem o lembrete proativo.
 
-**Fora de escopo desta versão:** lembrete pros módulos Retenção de Clientes, Mentoria em Investimentos e Plano de Ação Mensal (cobertura pensada pros 3 casos mais concretos citados pelo dono do produto; os demais módulos podem ganhar lembrete próprio depois, seguindo o mesmo padrão), obrigação de vencimento variável/anual/trimestral na análise automática (só `mensal_dia_fixo` por enquanto), horário de envio configurável pelo usuário, notificação com ação embutida (abrir direto a tela relevante ao tocar).
+**Fora de escopo desta versão:** lembrete pros módulos Retenção de Clientes e Mentoria em Investimentos (cobertura pensada pros casos mais concretos citados pelo dono do produto; os demais módulos podem ganhar lembrete próprio depois, seguindo o mesmo padrão), obrigação de vencimento variável/anual/trimestral na análise automática (só `mensal_dia_fixo` por enquanto), horário de envio configurável pelo usuário, notificação com ação embutida (abrir direto a tela relevante ao tocar).
 
-Detalhamento técnico (schema, Edge Functions, agendamento) em SPEC.md SDD-91.
+Detalhamento técnico (schema, Edge Functions, agendamento) em SPEC.md SDD-91/SDD-105.
 
 ### 12.13 Raio-X Financeiro (pedido do dono do produto em 09/08/2026)
 
@@ -874,7 +875,9 @@ Detalhamento técnico (schema, Edge Function, fórmula de agregação) em SPEC.m
 
 **Agenda (V2, fatia 1 — pedido do dono do produto em 12/08/2026):** a partir de um guia já gerado, o empreendedor pode agendar a reunião de verdade — data e hora, tipo de local (Presencial, com endereço, ou Online, com link da chamada) e um contato opcional. Uma vez agendada, a tela mostra a data formatada, o local e o contato, com opção de **reagendar** (mudar data/local/contato a qualquer momento) ou **cancelar o agendamento** (o guia continua salvo, só o agendamento some). A lista de reuniões já geradas mostra "Agendada para [data]" nos cards que têm agendamento.
 
-**Fora de escopo desta versão (V2 futura, ainda não construída):** envio de e-mail de convite aos participantes com o logo do negócio, lembrete automático antes da reunião, e um campo pra registrar o resultado final da reunião (se teve sucesso, o que ficou combinado). Nada disso libera nesta versão.
+**Lembrete automático (V2, fatia 2 — pedido do dono do produto em 12/08/2026):** reaproveita a análise diária de avisos push já existente (§12.12) — uma reunião agendada pra amanhã gera 1 aviso (nunca repetido). Além do push, a **Início mostra um destaque visível** logo abaixo da saudação sempre que há uma reunião agendada pra hoje ou amanhã, pra não deixar passar — e troca sozinho pra próxima reunião elegível assim que a atual sai da janela.
+
+**Fora de escopo desta versão (V2 futura, ainda não construída):** envio de e-mail de convite aos participantes com o logo do negócio, e um campo pra registrar o resultado final da reunião (se teve sucesso, o que ficou combinado). Nada disso libera nesta versão.
 
 **RN-50 (nova): o Assistente de Reunião libera com a Jornada apenas iniciada, sem exigir fase concluída** — mesma regra do Check-up Mensal (RN-41), Raio-X Financeiro e Nível de Maturidade (RN-47): precisa existir negócio pra ter reunião sobre o que preparar.
 
@@ -886,7 +889,9 @@ Detalhamento técnico (schema, Edge Function, fórmula de agregação) em SPEC.m
 
 **RN-54 (nova): o agendamento (data/hora/local/contato) é mutável — reagendável e cancelável a qualquer momento —, diferente do guia gerado pela IA, que continua imutável por RN-51.** São dois ciclos de vida diferentes na mesma reunião: o guia é um retrato fechado, o agendamento é informação viva.
 
-Detalhamento técnico (schema, Edge Function, colisão de nome com a rota `/assistente` existente, agenda) em SPEC.md SDD-103/SDD-104.
+**RN-55 (nova): o destaque de reunião na Início nunca substitui o aviso push nem o agendamento em si — é só mais um lugar onde a mesma informação já visível na tela do módulo aparece, seguindo o mesmo espírito de RN-45.** Sem reunião elegível na janela (hoje/amanhã), a Início não mostra nada.
+
+Detalhamento técnico (schema, Edge Function, colisão de nome com a rota `/assistente` existente, agenda, lembrete automático) em SPEC.md SDD-103/SDD-104/SDD-105.
 
 ---
 
@@ -948,6 +953,7 @@ Detalhamento técnico (schema, Edge Function, colisão de nome com a rota `/assi
 | RN-52 | O guia do Assistente de Reunião é sempre gerado a partir de dado real do negócio do usuário, nunca de mercado/concorrência/benchmark externo — §12.15 |
 | RN-53 | Não é possível agendar uma reunião no Assistente de Reunião no passado — §12.15 |
 | RN-54 | O agendamento do Assistente de Reunião é mutável (reagendável/cancelável), diferente do guia da IA, que continua imutável (RN-51) — §12.15 |
+| RN-55 | O destaque de reunião na Início nunca substitui o aviso push nem o agendamento — mesmo espírito de RN-45 — §12.15 |
 
 ---
 
