@@ -972,6 +972,12 @@ Detalhamento técnico (schema, decisão código-vs-banco pro conteúdo, decisão
 
 **RN-70 (nova): "A Mary responde" (`/assistente`) permanece sem gate de plano, mesmo sendo listado como diferencial do Essencial no documento de custos.**
 
+**Painel Admin de Assinaturas (mudança de 17/08/2026, tarde — pedido do dono do produto):** controle de assinaturas, planos mais assinados, inadimplência e estimativa de receita, em `/admin/assinaturas`. Duas capacidades novas de escrita, deliberadamente unificadas num só mecanismo: **conceder um plano sem cobrança ("brinde")** e **alterar o plano de um usuário manualmente** viram a mesma ação — qualquer plano definido pelo admin (fora do checkout de verdade) nunca conta como receita real, só como receita potencial ("o que entraria se esse cliente pagasse"), mesmo que o motivo real seja o cliente ter pago por fora.
+
+**RN-71 (nova): a estimativa de receita separa sempre MRR real (só assinatura confirmada pela AbacatePay) de MRR potencial (inclui plano concedido pelo admin sem cobrança) — nunca soma os dois como se fossem a mesma coisa.**
+
+**RN-72 (nova): inadimplência não tem sinal automático — a AbacatePay não expõe evento de webhook pra cobrança recorrente que falhou.** A detecção é sob demanda (o admin aciona uma sincronização que consulta a AbacatePay diretamente) e só marca a assinatura como inadimplente; nunca revoga o plano do usuário sozinha — o corte de acesso continua sendo decisão humana do admin.
+
 **Deliberadamente fora desta versão:** migração automática do preço de lançamento pro preço cheio depois de 6 meses (cobra-se o preço de lançamento indefinidamente até decisão de negócio futura); PIX em assinatura recorrente (a AbacatePay só aceita cartão em `/subscriptions/create`); upgrade/downgrade com proração (trocar de plano hoje é assinar o novo e cancelar o antigo manualmente); admin liberar módulo além do plano do usuário.
 
 Detalhamento técnico (schema, Edge Functions, achado da chave de API compartilhada) em SPEC.md SDD-110.

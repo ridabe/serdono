@@ -182,6 +182,11 @@ export function AdminDashboardScreen() {
               onPress={() => router.push("/admin/usuarios")}
             />
             <NavCard
+              title="Assinaturas"
+              description="Planos mais assinados, inadimplência, receita estimada e concessão manual de plano."
+              onPress={() => router.push("/admin/assinaturas")}
+            />
+            <NavCard
               title="Módulos"
               description="Catálogo de módulos do sistema e liberação por usuário."
               onPress={() => router.push("/admin/modulos")}

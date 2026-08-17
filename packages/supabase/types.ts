@@ -1635,9 +1635,12 @@ export type Database = {
           abacatepay_external_id: string
           cancelado_em: string | null
           ciclo: string
+          concedido_por: string | null
           created_at: string
           id: string
           iniciado_em: string | null
+          nota: string | null
+          origem: string
           plano: string
           preco_centavos: number
           renovado_em: string | null
@@ -1651,9 +1654,12 @@ export type Database = {
           abacatepay_external_id: string
           cancelado_em?: string | null
           ciclo?: string
+          concedido_por?: string | null
           created_at?: string
           id?: string
           iniciado_em?: string | null
+          nota?: string | null
+          origem?: string
           plano: string
           preco_centavos: number
           renovado_em?: string | null
@@ -1667,9 +1673,12 @@ export type Database = {
           abacatepay_external_id?: string
           cancelado_em?: string | null
           ciclo?: string
+          concedido_por?: string | null
           created_at?: string
           id?: string
           iniciado_em?: string | null
+          nota?: string | null
+          origem?: string
           plano?: string
           preco_centavos?: number
           renovado_em?: string | null
@@ -1800,6 +1809,33 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_assinaturas_listar: {
+        Args: { filtro_status?: string }
+        Returns: {
+          cancelado_em: string
+          created_at: string
+          email: string
+          id: string
+          nome: string
+          nota: string
+          origem: string
+          plano: string
+          preco_centavos: number
+          renovado_em: string
+          status: string
+          user_id: string
+        }[]
+      }
+      admin_assinaturas_por_plano: {
+        Args: never
+        Returns: {
+          ativos: number
+          ativos_cortesia: number
+          plano: string
+          receita_real_centavos: number
+        }[]
+      }
+      admin_assinaturas_resumo: { Args: never; Returns: Json }
       admin_dashboard_stats: { Args: never; Returns: Json }
       admin_dicas_ranking: {
         Args: { limite?: number }
@@ -1861,6 +1897,17 @@ export type Database = {
         Returns: {
           habilitados: number
           modulo: string
+        }[]
+      }
+      admin_planos_usuarios: {
+        Args: never
+        Returns: {
+          assinatura_id: string
+          email: string
+          nome: string
+          origem: string
+          plano_atual: string
+          user_id: string
         }[]
       }
       admin_user_growth: {

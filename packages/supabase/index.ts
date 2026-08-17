@@ -25,4 +25,5 @@ export * from "./contrato";
 export * from "./assinatura";
 export * from "./pushNotifications";
 export * from "./adminDashboard";
+export * from "./adminAssinaturas";
 export type { Database } from "./types";
