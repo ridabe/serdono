@@ -62,6 +62,7 @@ export function DashboardScreen() {
           // única entrada de uma área livre presa dentro de um card.
           { label: "Dicas da Mary", onPress: () => router.push("/dicas-da-mary") },
           { label: "Meu perfil", onPress: () => router.push("/perfil") },
+          { label: "Minha assinatura", onPress: () => router.push("/assinatura") },
           { label: "Sobre", onPress: () => router.push("/sobre") },
           { label: "Sair", onPress: handleSignOut },
         ]}

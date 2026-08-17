@@ -5,15 +5,34 @@ export type ModuleRow = Tables<"modules">;
 
 /**
  * Framework de módulos (SDD-30/PRD §12.1) — catálogo (`modules`) + liberação
- * por usuário (`user_modules`), independente de plano pago. Todas as
+ * por usuário (`user_modules`) + gate de plano (`modules.plano_minimo` x
+ * `users.plano_atual`, cobrança via AbacatePay, 17/08/2026). Todas as
  * operações aqui passam por RLS direto (sem Edge Function): admin tem
  * policy `for all` via claim JWT, cliente só lê a própria liberação.
  *
- * Toda conta nova já nasce com todos os módulos do catálogo habilitados
- * (SDD-73, trigger em `auth.users` — não faz parte deste arquivo). As
- * funções abaixo continuam sendo o único jeito de alterar isso depois:
- * o admin liga/desliga por conta a qualquer momento, sem limite nenhum.
+ * Toda conta nova já nasce com todos os módulos do catálogo habilitados em
+ * `user_modules.habilitado` (SDD-73, trigger em `auth.users` — não faz parte
+ * deste arquivo). Isso continua valendo: `habilitado` é só o toggle do
+ * admin (bloqueia um usuário específico, independente do plano). O gate de
+ * plano é ADITIVO — um módulo só aparece se `habilitado = true` E o plano
+ * atual atender `plano_minimo`. Admin ainda não consegue liberar módulo
+ * ALÉM do plano nesta versão (limitação aceita, ver SPEC).
  */
+
+const ORDEM_PLANO: Record<string, number> = { gratuito: 0, essencial: 1, master: 2 };
+
+/** Planos que atendem `planoAtual` (ordinal) — usado pra filtrar `modules.plano_minimo` sem importar `packages/core` (regra de camada: este pacote nunca importa de lá). */
+function planosPermitidos(planoAtual: string): string[] {
+  const nivel = ORDEM_PLANO[planoAtual] ?? 0;
+  return Object.keys(ORDEM_PLANO).filter((p) => ORDEM_PLANO[p] <= nivel);
+}
+
+/** Plano vigente do usuário — `gratuito` se a coluna vier nula/desconhecida (nunca trava por erro de leitura). */
+export async function getPlanoAtual(userId: string): Promise<string> {
+  const { data, error } = await supabase.from("users").select("plano_atual").eq("id", userId).single();
+  if (error) throw error;
+  return data.plano_atual ?? "gratuito";
+}
 
 // ---- Catálogo (admin) ----
 
@@ -94,12 +113,14 @@ export async function listMyModules(userId: string): Promise<MyModule[]> {
   // em que o módulo foi liberado pro usuário, nunca em `modules.ordem`.
   // Achado real testando o catálogo: um módulo com `ordem = 1` aparecia por
   // último por ter sido liberado por último via backfill (SDD-90).
+  const planoAtual = await getPlanoAtual(userId);
   const { data, error } = await supabase
     .from("modules")
     .select("id, slug, nome, descricao, user_modules!inner(habilitado)")
     .eq("ativo", true)
     .eq("user_modules.user_id", userId)
     .eq("user_modules.habilitado", true)
+    .in("plano_minimo", planosPermitidos(planoAtual))
     .order("ordem");
   if (error) throw error;
   return (data as unknown as (MyModule & { user_modules: unknown })[]).map(({ user_modules: _um, ...m }) => m);
@@ -127,6 +148,7 @@ export interface ModuloComNovidade {
 
 /** Módulos liberados pro usuário com `novidade_vista = false` — entram na fila de pop-up da Início até serem marcados vistos. */
 export async function listModulosComNovidadePendente(userId: string): Promise<ModuloComNovidade[]> {
+  const planoAtual = await getPlanoAtual(userId);
   const { data, error } = await supabase
     .from("modules")
     .select("id, slug, nome, descricao, anuncio_grupo, user_modules!inner(habilitado, novidade_vista)")
@@ -134,6 +156,7 @@ export async function listModulosComNovidadePendente(userId: string): Promise<Mo
     .eq("user_modules.user_id", userId)
     .eq("user_modules.habilitado", true)
     .eq("user_modules.novidade_vista", false)
+    .in("plano_minimo", planosPermitidos(planoAtual))
     .order("ordem");
   if (error) throw error;
   return (data as unknown as (ModuleRow & { anuncio_grupo: string | null })[]).map((m) => ({

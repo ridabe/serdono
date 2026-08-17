@@ -941,6 +941,7 @@ export type Database = {
           id: string
           nome: string
           ordem: number
+          plano_minimo: string
           slug: string
           updated_at: string
         }
@@ -952,6 +953,7 @@ export type Database = {
           id?: string
           nome: string
           ordem?: number
+          plano_minimo?: string
           slug: string
           updated_at?: string
         }
@@ -963,6 +965,7 @@ export type Database = {
           id?: string
           nome?: string
           ordem?: number
+          plano_minimo?: string
           slug?: string
           updated_at?: string
         }
@@ -1625,6 +1628,57 @@ export type Database = {
           },
         ]
       }
+      subscriptions: {
+        Row: {
+          abacatepay_billing_id: string | null
+          abacatepay_customer_id: string | null
+          abacatepay_external_id: string
+          cancelado_em: string | null
+          ciclo: string
+          created_at: string
+          id: string
+          iniciado_em: string | null
+          plano: string
+          preco_centavos: number
+          renovado_em: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          abacatepay_billing_id?: string | null
+          abacatepay_customer_id?: string | null
+          abacatepay_external_id: string
+          cancelado_em?: string | null
+          ciclo?: string
+          created_at?: string
+          id?: string
+          iniciado_em?: string | null
+          plano: string
+          preco_centavos: number
+          renovado_em?: string | null
+          status: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          abacatepay_billing_id?: string | null
+          abacatepay_customer_id?: string | null
+          abacatepay_external_id?: string
+          cancelado_em?: string | null
+          ciclo?: string
+          created_at?: string
+          id?: string
+          iniciado_em?: string | null
+          plano?: string
+          preco_centavos?: number
+          renovado_em?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_modules: {
         Row: {
           habilitado: boolean
@@ -1699,6 +1753,7 @@ export type Database = {
           id: string
           nome: string | null
           onboarding_status: string
+          plano_atual: string
           role: string
           telefone: string | null
           updated_at: string
@@ -1715,6 +1770,7 @@ export type Database = {
           id: string
           nome?: string | null
           onboarding_status?: string
+          plano_atual?: string
           role?: string
           telefone?: string | null
           updated_at?: string
@@ -1731,6 +1787,7 @@ export type Database = {
           id?: string
           nome?: string | null
           onboarding_status?: string
+          plano_atual?: string
           role?: string
           telefone?: string | null
           updated_at?: string

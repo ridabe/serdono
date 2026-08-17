@@ -4,9 +4,10 @@ import { Pressable, ScrollView, Text, View } from "react-native";
 import { Button, Logo, color, radius, space, type } from "@serdono/ui";
 import type { HomeSection } from "./HomeScreen";
 
-// Só destinos que existem de verdade. "Planos" saiu do menu: plano pago ainda
-// não existe no produto (PRD §12.1 / §17 — gateway é decisão pendente), e
-// "Ajuda" não tinha página. Link que não leva a nada é defeito, não conteúdo.
+// "Ajuda" não tinha página, por isso não entrou aqui — link que não leva a
+// nada é defeito, não conteúdo. "Planos" voltou ao menu em 17/08/2026: agora
+// existe cobrança de verdade via AbacatePay (antes o gateway era decisão
+// pendente, PRD §17).
 const links: { label: string; section: HomeSection }[] = [
   { label: "A Mary", section: "mentor" },
   { label: "Como funciona", section: "jornada" },
@@ -67,6 +68,7 @@ export function NavBar({ compact, onNavigate }: { compact: boolean; onNavigate: 
             {links.map((link) => (
               <NavLink key={link.label} label={link.label} onPress={() => onNavigate(link.section)} />
             ))}
+            <NavLink label="Planos" onPress={() => router.push("/planos")} />
           </View>
         </ScrollView>
       ) : null}

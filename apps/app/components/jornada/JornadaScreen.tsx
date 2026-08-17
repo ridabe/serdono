@@ -3,11 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, ScrollView, Text, useWindowDimensions, View } from "react-native";
 import { breakpoint, Button, Card, color, MaryAvatar, space, type } from "@serdono/ui";
 import { ScreenHeader } from "../shell/ScreenHeader";
-import { calcularProgressoJornada, DESCOBERTA_STEPS, FASE_JORNADA_LABEL, FASES_JORNADA } from "@serdono/core";
+import { calcularProgressoJornada, DESCOBERTA_STEPS, FASE_JORNADA_LABEL, FASES_JORNADA, faseJornadaLiberada, type Plano } from "@serdono/core";
 import {
   getCurrentSession,
   getJornadaEtapas,
   getMyJornada,
+  getPlanoAtual,
   isEtapaEstruturaRelevante,
   signOut,
   supabase,
@@ -95,6 +96,9 @@ export function JornadaScreen() {
   // de já ter avançado pra Marketing, então a trilha lateral virou navegação
   // pra qualquer fase já semeada, não só a atual).
   const [viewFase, setViewFase] = useState<JornadaFase | null>(null);
+  // Gate por fase (cobrança via AbacatePay, 17/08/2026): Gratuito só tem a
+  // fase 1 (Validação da Ideia) — fase 2 em diante exige Essencial+.
+  const [planoAtual, setPlanoAtual] = useState<Plano>("gratuito");
 
   // Recarrega etapas E a própria instância — campos como
   // `nome_empresa_escolhido`/`logo_path` (SDD-34/35) vivem em
@@ -113,7 +117,8 @@ export function JornadaScreen() {
     (async () => {
       const session = await getCurrentSession();
       if (!session) return;
-      const instance = await getMyJornada(session.user.id);
+      const [instance, plano] = await Promise.all([getMyJornada(session.user.id), getPlanoAtual(session.user.id)]);
+      setPlanoAtual((plano as Plano) ?? "gratuito");
       setJornada(instance);
       if (instance?.niche_id) {
         const { data } = await supabase
@@ -202,6 +207,7 @@ export function JornadaScreen() {
   // Organização.
   const faseExibida = viewFase ?? faseAtualEfetiva;
   const etapasFaseExibida = etapasDaFase(faseExibida);
+  const faseBloqueadaPorPlano = !mostrandoConclusao && !faseJornadaLiberada(faseExibida, planoAtual);
 
   const railFases: RailFaseData[] = [
     {
@@ -243,6 +249,15 @@ export function JornadaScreen() {
 
   const detail = mostrandoConclusao ? (
     <JornadaConclusaoScreen jornada={jornada} nicheName={nicheName} resumoFases={resumoFases} />
+  ) : faseBloqueadaPorPlano ? (
+    <Card variant="brand" padding={6}>
+      <Text style={{ ...type.h3, color: color.text.onBrand, marginBottom: space[2] }}>Continue sua Jornada com o Essencial</Text>
+      <Text style={{ ...type.body, color: color.text.onBrand, marginBottom: space[4] }}>
+        O plano Gratuito cobre a Validação da Ideia. Pra seguir pra {FASE_LABEL[faseExibida]} — nome da empresa, CNPJ,
+        preço e o resto da Jornada — é só assinar o Essencial.
+      </Text>
+      <Button label="Ver planos" variant="primary" onPress={() => router.push("/planos")} style={{ alignSelf: "flex-start" }} />
+    </Card>
   ) : faseExibida === "validacao_ideia" ? (
       <ValidacaoIdeiaScreen jornada={jornada} etapas={etapasFaseExibida} onEtapasChanged={() => refreshJornada(jornada.id)} />
     ) : faseExibida === "planejamento" ? (

@@ -17,4 +17,5 @@ export * from "./reuniao";
 export * from "./cnpj";
 export * from "./cpf";
 export * from "./contrato";
+export * from "./planos";
 export * from "./ai/routeModel";

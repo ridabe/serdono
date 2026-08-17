@@ -87,20 +87,20 @@ Banco: Postgres via Supabase. Convenção: `snake_case`, chaves primárias `uuid
 | criado_via | enum | `organico`, `pago`, `indicacao`, `institucional` — alimenta o CAC real (ver Estudo Financeiro) |
 | onboarding_status | enum | `cadastrado`, `diagnostico_concluido`, `assinante`, `negocio_aberto` |
 
-**`subscriptions`**
+**`subscriptions`** (schema abaixo é o RASCUNHO original, nunca implementado — ver o schema real implementado em 17/08/2026 em §12.17/SPEC.md SDD-110: `plano` é `essencial`/`master`, sem `multi`/`operacao`/nicho, ligado à AbacatePay via `abacatepay_customer_id`/`abacatepay_billing_id`)
 
 | Campo | Tipo | Notas |
 |---|---|---|
 | id | uuid | |
 | user_id | uuid (FK) | |
-| plano | enum | `free`, `essencial`, `multi`, `operacao` — ver Documento de Conceito §9.1 |
+| plano | enum | ~~`free`, `essencial`, `multi`, `operacao`~~ — modelo abandonado, ver §12.17 |
 | status | enum | `ativa`, `cancelada`, `inadimplente`, `trial` |
 | ciclo | enum | `mensal`, `anual` |
-| gateway_subscription_id | text | referência externa (Stripe/Pagar.me) |
-| nichos_destravados | int | limite conforme plano (1 para Essencial, 3 para Multi) |
+| gateway_subscription_id | text | ~~referência externa (Stripe/Pagar.me)~~ — gateway definido: AbacatePay (§12.17) |
+| nichos_destravados | int | ~~limite conforme plano~~ — modelo de nicho abandonado, plano agora libera módulo/fase (§12.17) |
 | iniciado_em, renovado_em, cancelado_em | timestamp | |
 
-**RN-3:** Downgrade de plano nunca apaga dados de nichos já destravados — apenas bloqueia edição/avanço até novo upgrade.
+~~RN-3: Downgrade de plano nunca apaga dados de nichos já destravados.~~ Sem equivalente no modelo atual — não existe mais destravamento por nicho.
 
 ### 5.2 Diagnóstico
 
@@ -290,17 +290,24 @@ Esqueleto de tabelas a prever desde já para não quebrar migrações depois: `m
 
 ---
 
-## 8. Módulo: Match de Nichos e Paywall
+## 8. Módulo: Match de Nichos (paywall original aposentado — ver §12.16)
 
-### 8.1 Fluxo
+**Aposentado em 17/08/2026, nunca implementado.** O esboço original desta seção (paywall por NICHO, plano Essencial/Multi/Operação destravando 1/3 nichos, tabela `subscriptions` com `nichos_destravados`) nunca chegou a virar código — nenhuma tabela `subscriptions` existiu até a cobrança de verdade nascer (§12.16), e o próprio §8.5 já registrava que `niches.playbook_md` "não é lido por nenhuma tela", ou seja, o campo que este paywall protegeria nunca foi exibido a ninguém. Substituído pelo modelo de **plano-por-módulo** de §12.16: a cobrança agora gate a Jornada Empreendedora (por fase) e o catálogo de módulos, não nichos individuais. RN-17 (checkout sempre na web, nunca dentro do app) sobrevive e foi implementada de verdade em §12.16 — é a única regra desta seção original que virou código.
+
+<details>
+<summary>Texto original (histórico) — fluxo e RNs do paywall por nicho, nunca implementado</summary>
+
+### 8.1 Fluxo (histórico)
 1. Tela de resultado (7.1.5) → usuário toca em um dos 3 nichos → **tela de detalhe bloqueada** (mostra o título das seções do dossiê completo borrado/parcial, não o conteúdo).
 2. CTA "Destravar este nicho" → tela de planos (Essencial / Multi / Operação, ver Documento de Conceito §9.1).
 3. Checkout → confirmação → dossiê completo liberado → CTA "Começar a construir" leva ao workflow (seção 9).
 
-### 8.2 Regras de negócio
-- **RN-15:** Plano Essencial destrava 1 nicho; Multi destrava até 3 (posições fixadas no momento da escolha, mas trocáveis 1x por ciclo — evita gaming do limite).
-- **RN-16:** Downgrade de Multi para Essencial mantém o nicho mais avançado no workflow (maior nº de `workflow_steps` concluídas), nunca o escolhido por último.
-- **RN-17:** Cobrança preferencialmente pela web (fora da loja de app) para evitar a comissão de 15% — o app mobile deve linkar para checkout web quando a política da loja permitir (verificar guideline vigente da Apple/Google antes de implementar; ver RNF-8).
+### 8.2 Regras de negócio (histórico)
+- ~~RN-15: Plano Essencial destrava 1 nicho; Multi destrava até 3~~ — modelo abandonado, planos agora liberam módulos/fases, não nichos (§12.16).
+- ~~RN-16: Downgrade de Multi para Essencial mantém o nicho mais avançado~~ — sem equivalente no novo modelo (upgrade/downgrade de plano nesta versão não tem lógica de retenção de nicho).
+- **RN-17 (sobrevive, implementada em §12.16):** Cobrança preferencialmente pela web (fora da loja de app) para evitar a comissão de 15% — o app mobile deve linkar para checkout web quando a política da loja permitir (verificar guideline vigente da Apple/Google antes de implementar; ver RNF-8).
+
+</details>
 
 ### 8.3 Porta de entrada "já tenho negócio" (construída em 31/07/2026 — SDD-52)
 
@@ -346,9 +353,9 @@ Detalhamento técnico: SPEC.md SDD-67.
 
 Detalhamento técnico: SPEC.md SDD-66.
 
-### 8.4 Critérios de aceite
-- **CA-4:** Usuário sem assinatura não consegue, por nenhuma rota de URL direta, ler o conteúdo completo de um `niches.playbook_md` de nicho não destravado (checar RLS, não só UI).
-- **CA-5:** Downgrade respeita RN-16 e é reversível dentro do mesmo ciclo de cobrança.
+### 8.4 Critérios de aceite (histórico — paywall por nicho aposentado, ver nota no início da seção 8)
+- ~~CA-4: Usuário sem assinatura não consegue, por nenhuma rota de URL direta, ler o conteúdo completo de um `niches.playbook_md` de nicho não destravado.~~ Sem equivalente — `playbook_md` continua de leitura livre, nunca foi lido por nenhuma tela (§8.5).
+- ~~CA-5: Downgrade respeita RN-16.~~ Sem equivalente no novo modelo de plano-por-módulo.
 
 ---
 
@@ -597,9 +604,11 @@ Marketing, Financeiro, Hub B2B — ver Documento de Conceito §8. **Retenção e
 
 ### 12.1 Framework de módulos (exceção à RN-2, ver §3) — construído em 29/07/2026
 
-O **Painel Admin** ganhou o mecanismo genérico que hospeda os módulos (e os de Fase 2) quando cada um for priorizado: um catálogo de módulos (nome, slug, descrição) e uma tabela de liberação por usuário (`modules`/`user_modules`), **independente de plano pago** — planos pagos ainda não existem no produto (PRD §17 trata gateway como decisão pendente), então por ora liberação é 1:1 por usuário. O menu do app (lado cliente) mostra só os módulos liberados pra aquele usuário; o lado admin mostra o catálogo inteiro + toggle de liberação por usuário, e continua podendo ligar/desligar qualquer módulo pra qualquer pessoa a qualquer momento. Detalhamento técnico em SPEC.md SDD-30.
+O **Painel Admin** ganhou o mecanismo genérico que hospeda os módulos (e os de Fase 2) quando cada um for priorizado: um catálogo de módulos (nome, slug, descrição) e uma tabela de liberação por usuário (`modules`/`user_modules`). Detalhamento técnico em SPEC.md SDD-30.
 
-**Liberação automática no cadastro (mudança de 07/08/2026, SPEC.md SDD-73):** até aqui a liberação de cada módulo pra cada conta nova era 100% manual — na prática, o dono do produto vinha ligando os módulos um a um pra praticamente todo usuário novo. Agora toda conta que completa o cadastro (pelo diagnóstico ou pelo fluxo "já tenho negócio") já nasce com **todos os módulos do catálogo habilitados**; o admin segue com controle total pra desligar/religar qualquer módulo de qualquer conta quando precisar — o que mudou foi só o ponto de partida.
+**Liberação automática no cadastro (mudança de 07/08/2026, SPEC.md SDD-73):** até aqui a liberação de cada módulo pra cada conta nova era 100% manual — na prática, o dono do produto vinha ligando os módulos um a um pra praticamente todo usuário novo. Agora toda conta que completa o cadastro (pelo diagnóstico ou pelo fluxo "já tenho negócio") já nasce com **todos os módulos do catálogo habilitados** em `user_modules.habilitado`; o admin segue com controle total pra desligar/religar qualquer módulo de qualquer conta quando precisar — o que mudou foi só o ponto de partida.
+
+**Gate por plano (mudança de 17/08/2026, §12.16):** ~~planos pagos ainda não existem no produto~~ — agora existem. `user_modules.habilitado` continua sendo só o toggle do admin (bloqueia um usuário específico, independente do plano); por cima dele, um módulo só aparece de verdade se o `plano_atual` do usuário atender o `plano_minimo` do módulo. As duas camadas são aditivas: pra um módulo aparecer, precisa `habilitado = true` **e** o plano atender. Admin ainda não consegue liberar módulo além do plano do usuário nesta versão (só bloquear, nunca estender — risco registrado em SPEC.md SDD-110).
 
 **Primeiro módulo de conteúdo (29/07/2026):** a **Jornada Empreendedora** (ver §5.4, §9, SPEC.md SDD-31) começou a ser construída. É o módulo mais importante do produto: o workflow guiado da escolha do nicho até o negócio aberto e funcionando. Construído incrementalmente, uma etapa de cada vez — a primeira etapa (confirmação/escolha do nicho pós-login) está pronta; a "Fase: Validação da Ideia" é a próxima a ser desenhada.
 
@@ -927,6 +936,44 @@ Detalhamento técnico (schema, Edge Function, colisão de nome com a rota `/assi
 
 Detalhamento técnico (schema, decisão código-vs-banco pro conteúdo, decisão de e-mail em HTML em vez de PDF anexado) em SPEC.md SDD-109.
 
+### 12.17 Cobrança — Planos pagos via AbacatePay (pedido do dono do produto, 17/08/2026)
+
+**Resolve PRD §17 item 2 (gateway de pagamento).** Documento-base: "Ser Dono — Planos, Custos e Ponto de Equilíbrio" (13/08/2026) — 3 planos, preço de lançamento nos 6 primeiros meses, ponto de equilíbrio calculado com mix 70% Essencial / 30% Master.
+
+**Os 3 planos:**
+
+| Plano | Preço de lançamento | Preço cheio | O que libera |
+|---|---|---|---|
+| **Gratuito** | R$ 0 | — | Diagnóstico, escolha de nicho, Jornada — só a fase Validação da Ideia (Persona/SWOT/Canvas/Proposta de Valor), Dicas da Mary, Painel do Empreendedor |
+| **Essencial** | R$ 19,90/mês | R$ 29,90/mês | Tudo do Gratuito + Jornada completa (12 fases, inclusive nome da empresa e logo) + Parceiros e Fornecedores + Meu Negócio em Dia |
+| **Master** | R$ 39,90/mês | R$ 59,90/mês | Tudo do Essencial + Check-up Mensal, Plano de Ação Mensal, Raio-X Financeiro, Nível de Maturidade, Retenção de Clientes, Assistente de Reunião, Assistente de Contrato, Mentoria em Investimentos |
+
+"A Mary responde" (`/assistente`, chat de conhecimento geral) **continua livre a todo autenticado, sem gate** — decisão explícita de manter RN-34/SDD-21 como estão, mesmo o documento de custos listando como diferencial do Essencial: é ferramenta de aquisição/confiança, não de retenção paga.
+
+**Gate por FASE na Jornada, não por módulo inteiro:** o módulo Jornada Empreendedora em si não tem `plano_minimo` (fica `gratuito` no catálogo) — o corte acontece dentro dele. Gratuito só acessa a fase Validação da Ideia; da fase Planejamento em diante (nome da empresa, CNPJ, todo o resto) exige Essencial+.
+
+**Grandfather:** toda conta que já existia antes desta mudança recebeu `plano_atual = 'master'` automaticamente — ninguém que já usava o produto perdeu acesso quando o gate entrou no ar. Só cadastros feitos depois nascem `gratuito`.
+
+**Checkout nasce sempre na web (RN-17):** o app Android nunca cobra dentro dele — abre a URL de checkout da AbacatePay num navegador (in-app ou externo) e volta pro produto depois. Evita a comissão de loja de 15-30%.
+
+**RN-64 (nova): cobrança é recorrente mensal via AbacatePay — assinatura é criada por checkout hospedado, nunca processada dentro do app.**
+
+**RN-65 (nova): a Jornada Empreendedora libera por FASE conforme o plano — Gratuito só tem Validação da Ideia; da fase seguinte em diante exige Essencial ou superior.**
+
+**RN-66 (nova): toda conta pré-existente à cobrança recebeu o plano Master automaticamente (grandfather) — a mudança nunca revoga acesso de quem já usava o produto.**
+
+**RN-67 (nova): a liberação de módulo por plano é aditiva ao toggle do admin — um módulo só aparece se `user_modules.habilitado = true` E o plano atual atender o `plano_minimo` do módulo.** Nesta versão, o admin só consegue bloquear (independente do plano), não liberar um módulo além do plano do usuário.
+
+**RN-68 (nova): cancelamento de assinatura é imediato, sem período de carência — mesmo comportamento nativo da AbacatePay.**
+
+**RN-69 (nova): a origem do webhook de pagamento é verificada por segredo compartilhado (`webhookSecret`) antes de qualquer escrita em `subscriptions`/`users.plano_atual` — nenhuma chamada não autenticada altera o plano de alguém.**
+
+**RN-70 (nova): "A Mary responde" (`/assistente`) permanece sem gate de plano, mesmo sendo listado como diferencial do Essencial no documento de custos.**
+
+**Deliberadamente fora desta versão:** migração automática do preço de lançamento pro preço cheio depois de 6 meses (cobra-se o preço de lançamento indefinidamente até decisão de negócio futura); PIX em assinatura recorrente (a AbacatePay só aceita cartão em `/subscriptions/create`); upgrade/downgrade com proração (trocar de plano hoje é assinar o novo e cancelar o antigo manualmente); admin liberar módulo além do plano do usuário.
+
+Detalhamento técnico (schema, Edge Functions, achado da chave de API compartilhada) em SPEC.md SDD-110.
+
 ---
 
 ## 13. Regras de Negócio Transversais (numeração consolidada)
@@ -935,7 +982,7 @@ Detalhamento técnico (schema, decisão código-vs-banco pro conteúdo, decisão
 |---|---|
 | RN-1 | Linguagem simples em todo o produto; termo técnico sempre acompanhado de explicação em uma frase |
 | RN-2 | Não construir tela/tabela de fase futura antes da fase atual estar em produção |
-| RN-3 | Downgrade nunca apaga dado de nicho destravado |
+| RN-3 | ~~Downgrade nunca apaga dado de nicho destravado~~ — modelo de nicho destravado abandonado, ver §8/§12.17 |
 | RN-4 | Diagnóstico é versionado por schema |
 | RN-5 | Capital sempre em faixas, nunca valor numérico livre |
 | RN-6 | Recalcular Fit Score ao mudar diagnóstico ou a cada 90 dias |
@@ -996,6 +1043,13 @@ Detalhamento técnico (schema, decisão código-vs-banco pro conteúdo, decisão
 | RN-61 | Todo contrato gerado traz aviso legal fixo (não substitui advogado) em tela, PDF e e-mail — §12.16 |
 | RN-62 | O contrato gerado é imutável quanto ao conteúdo; para mudar um campo, gera-se um contrato novo — §12.16 |
 | RN-63 | O envio por e-mail do contrato é sempre ação explícita do usuário, nunca automático nem idempotente — §12.16 |
+| RN-64 | Cobrança recorrente mensal via AbacatePay; assinatura sempre por checkout hospedado, nunca dentro do app — §12.17 |
+| RN-65 | Jornada Empreendedora libera por fase conforme o plano — Gratuito só tem Validação da Ideia — §12.17 |
+| RN-66 | Toda conta pré-existente à cobrança recebeu plano Master automaticamente (grandfather) — §12.17 |
+| RN-67 | Liberação de módulo por plano é aditiva ao toggle do admin — precisa habilitado E plano suficiente — §12.17 |
+| RN-68 | Cancelamento de assinatura é imediato, sem período de carência — §12.17 |
+| RN-69 | Webhook de pagamento é verificado por segredo compartilhado antes de escrever em subscriptions/plano — §12.17 |
+| RN-70 | "A Mary responde" permanece sem gate de plano — §12.17 |
 
 ---
 
@@ -1036,6 +1090,6 @@ Ligado à seção 11 do Documento de Conceito (North Star e funil). Eventos mín
 ## 17. Decisões em aberto (bloqueiam início de código)
 
 1. ~~React Native vs. Flutter para o app mobile~~ — **resolvido:** Expo (React Native, SDK 54) com código único para web e mobile. Ver `docs/SPEC.md` §1–§2.
-2. Gateway de pagamento definitivo (Stripe vs. Pagar.me) — depende de checar suporte a assinatura recorrente + taxa real, ver Estudo de Viabilidade Financeira.
+2. ~~Gateway de pagamento definitivo (Stripe vs. Pagar.me)~~ — **resolvido em 17/08/2026: AbacatePay.** Assinatura recorrente via `/v2/subscriptions/create` (só cartão — sem PIX em recorrência), checkout hospedado, taxa ~4-5%. Ver §12.16/SPEC.md SDD-110.
 3. Cidades-piloto para profundidade real da trilha C (RN-19) — decisão de negócio, não técnica.
 4. Nichos do MVP (5 a 8, ver Documento de Conceito §12) — precisa fechar a lista para popular `niches` antes de qualquer teste real.

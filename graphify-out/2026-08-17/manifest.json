@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1786584321.0525794,
-    "ast_hash": "df199b41788cfa1fefe66761a32c18bf",
+    "mtime": 1786304534.1991525,
+    "ast_hash": "a3f7612640ce7069e10ee09a6fc985b5",
     "semantic_hash": ""
   },
   ".mcp.json": {
@@ -20,8 +20,8 @@
     "semantic_hash": ""
   },
   "apps/app/app.config.js": {
-    "mtime": 1786636462.7216513,
-    "ast_hash": "ef6e6744445c27a190387c232fd68320",
+    "mtime": 1786370387.1671045,
+    "ast_hash": "548d9f35a202cde2b669410962592ccb",
     "semantic_hash": ""
   },
   "apps/app/app/_layout.tsx": {
@@ -110,8 +110,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/home/NavBar.tsx": {
-    "mtime": 1786973710.7534811,
-    "ast_hash": "71afac890ef7f0373d72be7a03f98336",
+    "mtime": 1786109844.7915714,
+    "ast_hash": "112924f8d02a7ea862bcd05b10b126d5",
     "semantic_hash": ""
   },
   "apps/app/components/home/StatsSection.tsx": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "apps/app/package.json": {
-    "mtime": 1786581890.1433532,
-    "ast_hash": "ebf49eb82268b5f4c8e6420a1df75a24",
+    "mtime": 1786302188.7430553,
+    "ast_hash": "3b161351097e2dc33a56f1f34577e172",
     "semantic_hash": ""
   },
   "apps/app/tsconfig.json": {
@@ -160,8 +160,8 @@
     "semantic_hash": ""
   },
   "packages/core/index.ts": {
-    "mtime": 1786973036.0830507,
-    "ast_hash": "f0aab33dc713192b650da9315dbff950",
+    "mtime": 1786308212.0725207,
+    "ast_hash": "88793a934dd75580e8fd2fa51d36e5d8",
     "semantic_hash": ""
   },
   "packages/core/package.json": {
@@ -180,8 +180,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/index.ts": {
-    "mtime": 1786973117.849785,
-    "ast_hash": "c13f9a935c48591789ed895935063842",
+    "mtime": 1786453086.837247,
+    "ast_hash": "ce740e93be14b9204f46cc79c3611a3f",
     "semantic_hash": ""
   },
   "packages/supabase/package.json": {
@@ -200,13 +200,13 @@
     "semantic_hash": ""
   },
   "packages/supabase/types.ts": {
-    "mtime": 1786972997.6386998,
-    "ast_hash": "188e3a2e1daf3749f8b284509c66a8be",
+    "mtime": 1786454568.827991,
+    "ast_hash": "3f6d5eabfc59108deadfc5d920402a83",
     "semantic_hash": ""
   },
   "packages/ui/components/Button.tsx": {
-    "mtime": 1786582435.8877084,
-    "ast_hash": "f2ef6605d3edde3126ada4620c2e8d50",
+    "mtime": 1786456892.0157006,
+    "ast_hash": "6d0cfddedaf35f1a6d02a8cf4a8123a4",
     "semantic_hash": ""
   },
   "packages/ui/components/Card.tsx": {
@@ -265,13 +265,13 @@
     "semantic_hash": ""
   },
   "docs/PRD.md": {
-    "mtime": 1786973988.7457228,
-    "ast_hash": "6b4128de6933b666ede69f94c5641a86",
+    "mtime": 1786308513.862298,
+    "ast_hash": "01c68b637872bd3fad8913d1537b847d",
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1786974048.184226,
-    "ast_hash": "c1938b7415d4881c66ba7cc570209b42",
+    "mtime": 1786369295.8426394,
+    "ast_hash": "92d33c20c3f6220313b36cae6cb9b073",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
@@ -545,8 +545,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/modules.ts": {
-    "mtime": 1786973088.9762065,
-    "ast_hash": "956020bf4e346d7c1015d9ba3576ab06",
+    "mtime": 1786303816.0370464,
+    "ast_hash": "7d4a498b25c84e21c2e3b8e34ef34ecd",
     "semantic_hash": ""
   },
   "packages/ui/components/Input.tsx": {
@@ -580,8 +580,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/jornada/JornadaScreen.tsx": {
-    "mtime": 1786973632.009154,
-    "ast_hash": "25b887ad3c335ebc207e9bdfc4ce82d4",
+    "mtime": 1786216411.7277002,
+    "ast_hash": "2b0a7ff0fd9eab89bcf752e4fa01eb3d",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/ValidacaoIdeiaScreen.tsx": {
@@ -1010,8 +1010,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/inicio/DashboardScreen.tsx": {
-    "mtime": 1786973837.6530168,
-    "ast_hash": "0ee0e4d24f5e842a18d48a81f34f1df6",
+    "mtime": 1786309636.4538546,
+    "ast_hash": "259ecbc1dfe36a51295ddbae289828fe",
     "semantic_hash": ""
   },
   "apps/app/components/inicio/useDashboard.ts": {
@@ -1260,8 +1260,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/modulos/rotas.ts": {
-    "mtime": 1786970622.4037318,
-    "ast_hash": "d014d2f5745d4e4f83957254fb1a634c",
+    "mtime": 1786308341.4466548,
+    "ast_hash": "89fba80f1d687e58e0007fab77c4daad",
     "semantic_hash": ""
   },
   "apps/app/app/(protected)/admin/dicas/[id].tsx": {
@@ -1605,8 +1605,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/modulos/ModuleIcon.tsx": {
-    "mtime": 1786970636.957409,
-    "ast_hash": "50b09844a3a2d3db66b57bde943805cd",
+    "mtime": 1786308347.9247568,
+    "ast_hash": "4dedcda997e9ab4dca42f53c3de0231f",
     "semantic_hash": ""
   },
   "apps/app/components/parceiros/ParceirosScreen.tsx": {
@@ -1745,8 +1745,8 @@
     "semantic_hash": ""
   },
   "supabase/functions/lembretes-diarios/index.ts": {
-    "mtime": 1786582940.5242712,
-    "ast_hash": "81b237a736a12f74f28d81b32de8966e",
+    "mtime": 1786302402.2294538,
+    "ast_hash": "8dd61dc46494a767f6ab1c7385f2b444",
     "semantic_hash": ""
   },
   "supabase/functions/plano-acao-gerar/index.ts": {
@@ -1872,326 +1872,6 @@
   "material-de-apoio/investidores/Ser Dono - Dossie do Produto.pdf": {
     "mtime": 1786387037.9343705,
     "ast_hash": "3ab78616a36e3e5330c38d6cbfe16bb8",
-    "semantic_hash": ""
-  },
-  ".tmp-planos-artes/server.js": {
-    "mtime": 1786979443.372832,
-    "ast_hash": "6f43f4dabc154675fcfd26cff57e6917",
-    "semantic_hash": ""
-  },
-  "apps/app/app/(protected)/assinatura/index.tsx": {
-    "mtime": 1786973809.6142268,
-    "ast_hash": "023ff8d3caf757dc236cb863fe93b1c4",
-    "semantic_hash": ""
-  },
-  "apps/app/app/(protected)/contratos/index.tsx": {
-    "mtime": 1786970619.5778801,
-    "ast_hash": "479e1f56d67c49fa3ea3b3e27dc2d9b7",
-    "semantic_hash": ""
-  },
-  "apps/app/app/(protected)/maturidade/index.tsx": {
-    "mtime": 1786563465.927741,
-    "ast_hash": "dbca73c27d5726302ac15cc26fba28eb",
-    "semantic_hash": ""
-  },
-  "apps/app/app/(protected)/reuniao/index.tsx": {
-    "mtime": 1786566432.6853487,
-    "ast_hash": "0cf9cda1648f008da5cdf8b552d330db",
-    "semantic_hash": ""
-  },
-  "apps/app/app/planos.tsx": {
-    "mtime": 1786973745.3023546,
-    "ast_hash": "7a769ef71f9937bba6a58b694cb31d46",
-    "semantic_hash": ""
-  },
-  "apps/app/components/contrato/ContratoScreen.tsx": {
-    "mtime": 1786970677.9159496,
-    "ast_hash": "666062118c6965c3fdf9ee651558894c",
-    "semantic_hash": ""
-  },
-  "apps/app/components/contrato/SeletorTipoContrato.native.tsx": {
-    "mtime": 1786970502.6625881,
-    "ast_hash": "f94715c048f64198fc698d1980ad5daf",
-    "semantic_hash": ""
-  },
-  "apps/app/components/contrato/SeletorTipoContrato.tsx": {
-    "mtime": 1786970481.1703215,
-    "ast_hash": "75cb95ba129063d26dbe54801e32920e",
-    "semantic_hash": ""
-  },
-  "apps/app/components/contrato/SeletorTipoContrato.web.tsx": {
-    "mtime": 1786970490.842181,
-    "ast_hash": "36d50df71151e123973ae914c9f4f924",
-    "semantic_hash": ""
-  },
-  "apps/app/components/contrato/contratoPdf.ts": {
-    "mtime": 1786970402.0492234,
-    "ast_hash": "bea39981be059de41378406e062f90bd",
-    "semantic_hash": ""
-  },
-  "apps/app/components/contrato/useContrato.ts": {
-    "mtime": 1786970522.5305347,
-    "ast_hash": "3c5c5e37f0faf328c5bee064e0e314df",
-    "semantic_hash": ""
-  },
-  "apps/app/components/inicio/LembreteReuniaoAviso.tsx": {
-    "mtime": 1786584355.1707952,
-    "ast_hash": "a8e8283dfefb9137d797e5341e65da0a",
-    "semantic_hash": ""
-  },
-  "apps/app/components/inicio/MaturidadeResumoCard.tsx": {
-    "mtime": 1786563495.057546,
-    "ast_hash": "9412a35e30ccaac8bdf2ae3733d99def",
-    "semantic_hash": ""
-  },
-  "apps/app/components/maturidade/MaturidadeScreen.tsx": {
-    "mtime": 1786564078.222137,
-    "ast_hash": "2f66f0843c329d0f8f05059faf84db14",
-    "semantic_hash": ""
-  },
-  "apps/app/components/maturidade/useMaturidade.ts": {
-    "mtime": 1786563426.8648815,
-    "ast_hash": "e7ed8850ee0ffae7ece6d3e36d2769ad",
-    "semantic_hash": ""
-  },
-  "apps/app/components/planos/AssinaturaScreen.tsx": {
-    "mtime": 1786973804.387439,
-    "ast_hash": "7a1b873e121f25b9008343583bb77383",
-    "semantic_hash": ""
-  },
-  "apps/app/components/planos/PlanosScreen.tsx": {
-    "mtime": 1786973741.4945915,
-    "ast_hash": "2d17eb3f62b46a575d00207cf1d9b760",
-    "semantic_hash": ""
-  },
-  "apps/app/components/reuniao/AgendamentoSecao.tsx": {
-    "mtime": 1786624446.343703,
-    "ast_hash": "707983606bde4d1240c395a17d1cfd8f",
-    "semantic_hash": ""
-  },
-  "apps/app/components/reuniao/DateTimeField.native.tsx": {
-    "mtime": 1786581593.800823,
-    "ast_hash": "f8bf22bf94fa2b52c3011c26e6b4d876",
-    "semantic_hash": ""
-  },
-  "apps/app/components/reuniao/DateTimeField.tsx": {
-    "mtime": 1786578801.8779528,
-    "ast_hash": "c7ef5dd7290b335e823623d50b6c5b85",
-    "semantic_hash": ""
-  },
-  "apps/app/components/reuniao/DateTimeField.web.tsx": {
-    "mtime": 1786578810.3995092,
-    "ast_hash": "a5470a70cf7027d6a5054712d3493203",
-    "semantic_hash": ""
-  },
-  "apps/app/components/reuniao/DesfechoReuniaoSecao.tsx": {
-    "mtime": 1786633509.06061,
-    "ast_hash": "c77af1088571ed000c0fffcdf92c89b7",
-    "semantic_hash": ""
-  },
-  "apps/app/components/reuniao/ReuniaoScreen.tsx": {
-    "mtime": 1786634587.0765402,
-    "ast_hash": "f46190380862bd01932c22bdac283a8e",
-    "semantic_hash": ""
-  },
-  "apps/app/components/reuniao/reuniaoPdf.ts": {
-    "mtime": 1786566780.6581385,
-    "ast_hash": "b8489c3e039d82d2691276bb65690243",
-    "semantic_hash": ""
-  },
-  "apps/app/components/reuniao/useReuniao.ts": {
-    "mtime": 1786633493.0251079,
-    "ast_hash": "724152c9d580f4e2d5820999c40f562b",
-    "semantic_hash": ""
-  },
-  "packages/core/contrato.test.ts": {
-    "mtime": 1786970022.0533555,
-    "ast_hash": "849f0cfd895a6bd94bf7b43062509e11",
-    "semantic_hash": ""
-  },
-  "packages/core/contrato.ts": {
-    "mtime": 1786969966.2623808,
-    "ast_hash": "9aeafe0340be27aa7c22f8ed3faa8d02",
-    "semantic_hash": ""
-  },
-  "packages/core/cpf.test.ts": {
-    "mtime": 1786969980.0378876,
-    "ast_hash": "85f5a2b3cfb2273a4989cd0769f9c78a",
-    "semantic_hash": ""
-  },
-  "packages/core/cpf.ts": {
-    "mtime": 1786969892.6409328,
-    "ast_hash": "d957af505b85d6da55000f314d2df93a",
-    "semantic_hash": ""
-  },
-  "packages/core/maturidadeNegocio.test.ts": {
-    "mtime": 1786563081.2224848,
-    "ast_hash": "b4d2b6233db920bc077159cd67279cc5",
-    "semantic_hash": ""
-  },
-  "packages/core/maturidadeNegocio.ts": {
-    "mtime": 1786563073.9816144,
-    "ast_hash": "e6fb90e284e6a52a052082bfc4a5ecba",
-    "semantic_hash": ""
-  },
-  "packages/core/planos.test.ts": {
-    "mtime": 1786973032.6964135,
-    "ast_hash": "c667599f31a2725abd18d845bf738304",
-    "semantic_hash": ""
-  },
-  "packages/core/planos.ts": {
-    "mtime": 1786973021.8356068,
-    "ast_hash": "08791ecda3feff2823f86cf3da5c8687",
-    "semantic_hash": ""
-  },
-  "packages/core/reuniao.test.ts": {
-    "mtime": 1786624136.174265,
-    "ast_hash": "e803522addf0f837d2cb38a3dc6aa26a",
-    "semantic_hash": ""
-  },
-  "packages/core/reuniao.ts": {
-    "mtime": 1786633432.870145,
-    "ast_hash": "0f763895541603e21f574fd7d516008c",
-    "semantic_hash": ""
-  },
-  "packages/supabase/assinatura.ts": {
-    "mtime": 1786973130.2187016,
-    "ast_hash": "1b4fb6a7e53544ff027d0a3d204d3db5",
-    "semantic_hash": ""
-  },
-  "packages/supabase/contrato.ts": {
-    "mtime": 1786970111.8361447,
-    "ast_hash": "dff8b54a3bb9dd1a22a22b938b0d0d22",
-    "semantic_hash": ""
-  },
-  "packages/supabase/maturidadeNegocio.ts": {
-    "mtime": 1786563178.81521,
-    "ast_hash": "e1d55d968c2a4b00c3f3f56800ea92b6",
-    "semantic_hash": ""
-  },
-  "packages/supabase/reuniao.ts": {
-    "mtime": 1786633458.267223,
-    "ast_hash": "03c2e833bcbc69f3d4fea5098d47d800",
-    "semantic_hash": ""
-  },
-  "supabase/functions/assinatura-cancelar/index.ts": {
-    "mtime": 1786973481.7314787,
-    "ast_hash": "ae32771798bdff0036c2b419d3335ca6",
-    "semantic_hash": ""
-  },
-  "supabase/functions/assinatura-criar-checkout/index.ts": {
-    "mtime": 1786973438.8214545,
-    "ast_hash": "ffb0afbb59f62a9622f60e14c01a8a9f",
-    "semantic_hash": ""
-  },
-  "supabase/functions/assinatura-webhook/index.ts": {
-    "mtime": 1786973461.3356817,
-    "ast_hash": "043f192ec84d7327ea9b70cd2c393a40",
-    "semantic_hash": ""
-  },
-  "supabase/functions/contrato-enviar-email/clausulas.ts": {
-    "mtime": 1786970184.334288,
-    "ast_hash": "27cd09fc331b62fb08c3b0686af78725",
-    "semantic_hash": ""
-  },
-  "supabase/functions/contrato-enviar-email/index.ts": {
-    "mtime": 1786970224.130041,
-    "ast_hash": "b4d61d34547b84ae581c3e0541168766",
-    "semantic_hash": ""
-  },
-  "supabase/functions/contrato-enviar-email/template.ts": {
-    "mtime": 1786970208.0669844,
-    "ast_hash": "a6f82444694d284d7ceed4809d1d81c1",
-    "semantic_hash": ""
-  },
-  "supabase/functions/maturidade-calcular/index.ts": {
-    "mtime": 1786563162.3350356,
-    "ast_hash": "b96b576ff44b81a8cf75b45cf9d75e96",
-    "semantic_hash": ""
-  },
-  "supabase/functions/reuniao-convite-email/index.ts": {
-    "mtime": 1786624344.2633996,
-    "ast_hash": "2cf246d95e64c23b48e78e48736d730e",
-    "semantic_hash": ""
-  },
-  "supabase/functions/reuniao-convite-email/template.ts": {
-    "mtime": 1786624329.6650827,
-    "ast_hash": "ad71219b5f8a8a4536589bf90f3f3cef",
-    "semantic_hash": ""
-  },
-  "supabase/functions/reuniao-gerar/index.ts": {
-    "mtime": 1786566342.2229433,
-    "ast_hash": "cd95b732144c666e568ab09965729fae",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260812193323_modulo_maturidade_negocio.sql": {
-    "mtime": 1786563116.9399467,
-    "ast_hash": "117c132dab06f400f002d56d3d31f48c",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260812202010_modulo_assistente_reuniao.sql": {
-    "mtime": 1786565999.5487082,
-    "ast_hash": "d266a2fc7057ad757cedceafd56b798b",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260812233920_reuniao_agenda.sql": {
-    "mtime": 1786577950.0954034,
-    "ast_hash": "b756890215e8dcb900c32f1bc149c425",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260813010130_lembrete_reuniao_tipo.sql": {
-    "mtime": 1786584076.5904176,
-    "ast_hash": "e2cdcf33bef00c694936b82334a3dc64",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260813122836_reuniao_convite_email.sql": {
-    "mtime": 1786624112.2688994,
-    "ast_hash": "7e0baa7423af2a4cbf0f1be6ef62998f",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260813150318_reuniao_resultado.sql": {
-    "mtime": 1786633394.7503028,
-    "ast_hash": "a68deef4eb8d74bd4b195b09b7a2fd4c",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260817123415_modulo_assistente_contrato.sql": {
-    "mtime": 1786970044.7945576,
-    "ast_hash": "d1e6671efa9fa54c22ce4ba5be984f5e",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260817132230_billing_abacatepay.sql": {
-    "mtime": 1786972972.1899872,
-    "ast_hash": "338b2a5a52d99017ee553ab1b1c26f33",
-    "semantic_hash": ""
-  },
-  ".tmp-planos-artes/essencial.html": {
-    "mtime": 1786979039.8354905,
-    "ast_hash": "f715b912974726bc2593f0107133b287",
-    "semantic_hash": ""
-  },
-  ".tmp-planos-artes/gratuito.html": {
-    "mtime": 1786979018.4582138,
-    "ast_hash": "70b14ca2faa0929fdb6fcc6f6de23a7b",
-    "semantic_hash": ""
-  },
-  ".tmp-planos-artes/master.html": {
-    "mtime": 1786979062.6304038,
-    "ast_hash": "849c2e4a59344f6cc2a303cf17012948",
-    "semantic_hash": ""
-  },
-  ".tmp-planos-artes/plano-essencial.png": {
-    "mtime": 1786979346.3812892,
-    "ast_hash": "5c336a7fb7fdab4683f3fce9dc7c0156",
-    "semantic_hash": ""
-  },
-  ".tmp-planos-artes/plano-gratuito.png": {
-    "mtime": 1786979476.603088,
-    "ast_hash": "0f2eeaeb4f991ab0e640af4c2685222a",
-    "semantic_hash": ""
-  },
-  ".tmp-planos-artes/plano-master.png": {
-    "mtime": 1786979359.3784943,
-    "ast_hash": "5176f8aa1b2f5bba1781c8abce618bdf",
     "semantic_hash": ""
   }
 }

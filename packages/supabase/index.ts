@@ -22,6 +22,7 @@ export * from "./raioxFinanceiro";
 export * from "./maturidadeNegocio";
 export * from "./reuniao";
 export * from "./contrato";
+export * from "./assinatura";
 export * from "./pushNotifications";
 export * from "./adminDashboard";
 export type { Database } from "./types";
