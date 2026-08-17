@@ -13,6 +13,7 @@ import { MentorSection } from "./MentorSection";
 import { StatsSection } from "./StatsSection";
 import { JourneySection } from "./JourneySection";
 import { ModulesSection } from "./ModulesSection";
+import { PlanosSection } from "./PlanosSection";
 import { InvestimentosSection } from "./InvestimentosSection";
 import { ForWhomSection } from "./ForWhomSection";
 import { PromiseSection } from "./PromiseSection";
@@ -88,6 +89,8 @@ export function HomeScreen() {
       <View ref={bind("modulos")}>
         <ModulesSection compact={compact} />
       </View>
+
+      <PlanosSection compact={compact} />
 
       <InvestimentosSection compact={compact} />
 
