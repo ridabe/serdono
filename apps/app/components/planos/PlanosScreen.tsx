@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import * as WebBrowser from "expo-web-browser";
 import { ActivityIndicator, Platform, ScrollView, Text, useWindowDimensions, View } from "react-native";
-import { breakpoint, Button, Card, color, space, type } from "@serdono/ui";
+import { breakpoint, Button, Card, color, isNativeApp, space, type } from "@serdono/ui";
 import { PLANOS_CATALOGO, type Plano } from "@serdono/core";
 import { criarCheckout, getCurrentSession } from "@serdono/supabase";
 import { ScreenHeader } from "../shell/ScreenHeader";
@@ -55,7 +55,14 @@ export function PlanosScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: color.bg.canvas }}>
-      <ScreenHeader webLinks={[{ label: "← Início", onPress: () => router.push("/") }]} />
+      <ScreenHeader
+        webLinks={[{ label: "← Início", onPress: () => router.push("/") }]}
+        // No app instalado esta tela abre como modal (ver `_layout.tsx`) —
+        // `links` some nas duas plataformas normalmente, mas aqui precisa
+        // aparecer no nativo pra fechar sem depender só do gesto/voltar do
+        // sistema (pedido do dono do produto, 17/08/2026).
+        links={isNativeApp ? [{ label: "✕ Fechar", onPress: () => (router.canGoBack() ? router.back() : router.push("/")) }] : []}
+      />
 
       <ScrollView contentContainerStyle={{ padding: space[5], gap: space[5] }}>
         <View>

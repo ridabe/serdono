@@ -56,7 +56,14 @@ export default function RootLayout() {
             headerShown: false,
             contentStyle: { backgroundColor: color.bg.canvas },
           }}
-        />
+        >
+          {/* `/planos` abre como modal só no app instalado (RN ignora
+              `presentation` na web, então isso não muda a navegação da
+              landing) — pedido do dono do produto: quem só quer espiar
+              preço a partir da tela de boas-vindas não deve sair do fluxo
+              do app, só fechar o modal e continuar de onde estava. */}
+          <Stack.Screen name="planos" options={{ presentation: "modal" }} />
+        </Stack>
         <AppUpdateAlert />
       </DrawerProvider>
     </SafeAreaProvider>

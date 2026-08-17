@@ -8,6 +8,8 @@ export interface ConfirmModalProps {
   title: string;
   message: string;
   confirmLabel: string;
+  /** Cor do botão de confirmação — `"danger"` (padrão) pra ação irreversível, `"primary"` pra confirmação neutra/positiva (ex.: convite pra assinar um plano). */
+  confirmVariant?: "danger" | "primary";
   loading?: boolean;
   onConfirm: () => void;
   onCancel: () => void;
@@ -26,7 +28,16 @@ export interface ConfirmModalProps {
  * envolvendo outros `<button>` é HTML inválido (erro de hidratação do
  * React). O backdrop continua clicável — só não é semanticamente um botão.
  */
-export function ConfirmModal({ visible, title, message, confirmLabel, loading = false, onConfirm, onCancel }: ConfirmModalProps) {
+export function ConfirmModal({
+  visible,
+  title,
+  message,
+  confirmLabel,
+  confirmVariant = "danger",
+  loading = false,
+  onConfirm,
+  onCancel,
+}: ConfirmModalProps) {
   return (
     <Modal transparent visible={visible} animationType="fade" onRequestClose={onCancel}>
       <Pressable
@@ -39,7 +50,7 @@ export function ConfirmModal({ visible, title, message, confirmLabel, loading = 
             <Text style={{ ...type.body, color: color.text.secondary, marginBottom: space[4] }}>{message}</Text>
             <View style={{ flexDirection: "row", gap: space[2], justifyContent: "flex-end" }}>
               <Button label="Cancelar" variant="ghost" onPress={onCancel} />
-              <Button label={confirmLabel} variant="danger" loading={loading} onPress={onConfirm} />
+              <Button label={confirmLabel} variant={confirmVariant} loading={loading} onPress={onConfirm} />
             </View>
           </Card>
         </Pressable>

@@ -1,8 +1,9 @@
 import { useRouter } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
-import { Button, color, radius, space, type } from "@serdono/ui";
-import { enviarPushTeste, signOut } from "@serdono/supabase";
+import { Button, Card, color, radius, space, type } from "@serdono/ui";
+import { labelPlano, type Plano } from "@serdono/core";
+import { enviarPushTeste, getCurrentSession, getPlanoAtual, signOut } from "@serdono/supabase";
 import { usePushNotifications } from "../../hooks/usePushNotifications";
 import { ScreenHeader } from "../shell/ScreenHeader";
 import { PerfilFields } from "./PerfilFields";
@@ -19,6 +20,15 @@ export function PerfilScreen() {
   const [testeEnviado, setTesteEnviado] = useState(false);
   const [testeErro, setTesteErro] = useState<string | null>(null);
   const [testando, setTestando] = useState(false);
+  const [planoAtual, setPlanoAtual] = useState<Plano | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const session = await getCurrentSession();
+      if (!session) return;
+      setPlanoAtual((await getPlanoAtual(session.user.id)) as Plano);
+    })();
+  }, []);
 
   async function handleTestarAviso() {
     setTestando(true);
@@ -93,6 +103,22 @@ export function PerfilScreen() {
 
             <Button label={form.saving ? "Salvando..." : "Salvar alterações"} variant="primary" fullWidth loading={form.saving} onPress={handleSave} />
           </View>
+
+          {/* Plano vigente + atalho pra trocar (pedido do dono do produto,
+              17/08/2026) — histórico de cobrança e cancelamento continuam só
+              em `/assinatura` (`AssinaturaScreen.tsx`), pra não duplicar
+              aquela lógica aqui; este card é só o resumo + porta de entrada. */}
+          {planoAtual ? (
+            <Card variant="brand" padding={6} style={{ marginTop: space[5] }}>
+              <Text style={{ ...type.overline, color: color.action.primary, marginBottom: space[1] }}>SEU PLANO</Text>
+              <Text style={{ ...type.h2, color: color.text.onBrand, marginBottom: space[4] }}>{labelPlano(planoAtual)}</Text>
+              <Button
+                label={planoAtual === "master" ? "Gerenciar assinatura" : "Alterar plano"}
+                variant="secondary"
+                onPress={() => router.push("/assinatura")}
+              />
+            </Card>
+          ) : null}
 
           {push.suportado ? (
             <View

@@ -27,7 +27,10 @@ export function useJornadaConclusao(nomeEmpresa: string, nicheName: string | nul
         const modulos = session ? await listMyModules(session.user.id) : [];
         if (cancelado) return;
         setVideoUrl(config.videoUrl);
-        setProximosModulos(modulos.filter((m) => m.slug !== SLUG_JORNADA_EMPREENDEDORA));
+        // Nunca convida pra um módulo que o plano atual não atende (RN-2/
+        // RN-29: só menciona o que já está de fato liberado) — `bloqueado`
+        // existe pra virar upsell no catálogo/menu, não nesta lista honesta.
+        setProximosModulos(modulos.filter((m) => m.slug !== SLUG_JORNADA_EMPREENDEDORA && !m.bloqueado));
       } catch (e) {
         if (!cancelado) setError((e as Error).message);
       } finally {

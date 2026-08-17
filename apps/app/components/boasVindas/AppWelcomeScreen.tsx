@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "expo-router";
 import { Pressable, ScrollView, Text, useWindowDimensions, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Button, Logo, MaryAvatar, color, radius, space, type } from "@serdono/ui";
+import { a11y, Button, Logo, MaryAvatar, color, radius, space, type } from "@serdono/ui";
 
 /**
  * Tela de abertura do app instalado (SDD-53) — o equivalente nativo de
@@ -37,8 +37,28 @@ export function AppWelcomeScreen() {
           paddingHorizontal: space[6],
         }}
       >
-        <View style={{ alignItems: "center" }}>
+        <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
           <Logo variant="white" size={36} />
+          {/* `position: absolute` de propósito — sai do fluxo, então não
+              disputa altura com o Mary/textos abaixo (pedido do dono do
+              produto, 17/08/2026: a tela inteira precisa caber sem rolagem a
+              375dp). `/planos` abre como modal (`_layout.tsx`), fechar volta
+              exatamente aqui. */}
+          <Pressable
+            onPress={() => router.push("/planos")}
+            accessibilityRole="link"
+            style={{
+              position: "absolute",
+              right: 0,
+              top: -space[2],
+              bottom: -space[2],
+              minWidth: a11y.minTouchTarget,
+              alignItems: "flex-end",
+              justifyContent: "center",
+            }}
+          >
+            <Text style={{ ...type.caption, color: color.action.primary, textDecorationLine: "underline" }}>Planos</Text>
+          </Pressable>
         </View>
 
         <View style={{ alignItems: "center", marginTop: space[6] }}>

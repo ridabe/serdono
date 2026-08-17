@@ -1,7 +1,9 @@
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useRouter } from "expo-router";
 import { Animated, BackHandler, Dimensions, Easing, Modal, Pressable, ScrollView, Text, View } from "react-native";
-import { a11y, color, IconBadge, Logo, moduleAccent, MODULE_ACCENT_CYCLE, motion, radius, space, type } from "@serdono/ui";
+import { a11y, color, ConfirmModal, IconBadge, Logo, moduleAccent, MODULE_ACCENT_CYCLE, motion, radius, space, type } from "@serdono/ui";
+import { labelPlano } from "@serdono/core";
+import type { MyModule } from "@serdono/supabase";
 import { ModuleIcon } from "../modulos/ModuleIcon";
 import { rotaDoModulo } from "../modulos/rotas";
 import { useDrawer } from "./DrawerContext";
@@ -26,6 +28,7 @@ export function AppDrawer() {
   const router = useRouter();
   const { open, closeDrawer } = useDrawer();
   const { temOutrosModulos, modulos } = useModulosExtras();
+  const [moduloBloqueado, setModuloBloqueado] = useState<MyModule | null>(null);
   const translateX = useRef(new Animated.Value(-LARGURA_DRAWER)).current;
 
   useEffect(() => {
@@ -55,6 +58,7 @@ export function AppDrawer() {
   }
 
   return (
+    <>
     <Modal transparent visible={open} animationType="none" statusBarTranslucent onRequestClose={closeDrawer}>
       <View style={{ flex: 1, flexDirection: "row" }}>
         <Animated.View
@@ -106,7 +110,8 @@ export function AppDrawer() {
                     <DrawerItem
                       key={m.id}
                       label={m.nome}
-                      onPress={() => ir(rota)}
+                      locked={m.bloqueado}
+                      onPress={() => (m.bloqueado ? setModuloBloqueado(m) : ir(rota))}
                       iconNode={
                         <IconBadge accent={accent} size={28}>
                           <ModuleIcon slug={m.slug} color={moduleAccent[accent].fg} size={15} />
@@ -143,6 +148,29 @@ export function AppDrawer() {
         />
       </View>
     </Modal>
+
+    {/* Fora do `Modal` do drawer de propósito — dois `<Modal>` nativos
+        aninhados (um dentro do outro na árvore) não se apresentam de forma
+        confiável no Android; como irmãos, cada um controla sua própria
+        janela nativa independente. */}
+    <ConfirmModal
+      visible={!!moduloBloqueado}
+      title={moduloBloqueado ? moduloBloqueado.nome : ""}
+      message={
+        moduloBloqueado
+          ? `Esse módulo faz parte do plano ${labelPlano(moduloBloqueado.planoMinimo as never)}. Assine pra desbloquear.`
+          : ""
+      }
+      confirmLabel="Ver planos"
+      confirmVariant="primary"
+      onConfirm={() => {
+        setModuloBloqueado(null);
+        closeDrawer();
+        router.push("/planos");
+      }}
+      onCancel={() => setModuloBloqueado(null)}
+    />
+    </>
   );
 }
 
@@ -158,12 +186,15 @@ function DrawerItem({
   label,
   icon = "modulos",
   iconNode,
+  /** Módulo do plano acima do atual (RN-67) — item continua tocável (abre aviso de upsell), mas com texto atenuado e cadeado no lugar do "›". */
+  locked = false,
   onPress,
 }: {
   label: string;
   icon?: TabIconName;
   /** Substitui o `TabIcon` genérico por um nó próprio — usado pelos itens de módulo, que ganham `ModuleIcon` colorido por módulo em vez do ícone único "modulos" repetido pra todos. */
   iconNode?: ReactNode;
+  locked?: boolean;
   onPress: () => void;
 }) {
   return (
@@ -176,11 +207,12 @@ function DrawerItem({
         gap: space[3],
         minHeight: a11y.minTouchTarget,
         paddingHorizontal: space[5],
+        opacity: locked ? 0.7 : 1,
       }}
     >
       {iconNode ?? <TabIcon name={icon} color={color.text.secondary} size={18} />}
       <Text style={{ ...type.body, color: color.text.primary, flex: 1 }}>{label}</Text>
-      <Text style={{ ...type.body, color: color.text.muted }}>›</Text>
+      <Text style={{ ...type.body, color: color.text.muted }}>{locked ? "🔒" : "›"}</Text>
     </Pressable>
   );
 }

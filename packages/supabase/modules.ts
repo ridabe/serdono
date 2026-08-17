@@ -103,8 +103,20 @@ export interface MyModule {
   slug: string;
   nome: string;
   descricao: string | null;
+  /** `modules.plano_minimo` (`gratuito`/`essencial`/`master`) — direto pra tela decidir o rótulo do selo sem outra consulta. */
+  planoMinimo: string;
+  /** `true` quando o plano atual do usuário NÃO atende `planoMinimo` — módulo aparece no catálogo/menu, mas some/exibe aviso ao abrir (mudança de 17/08/2026: antes o módulo simplesmente não aparecia; agora aparece bloqueado, com CTA pra trocar de plano). */
+  bloqueado: boolean;
 }
 
+/**
+ * Todo módulo `habilitado` (toggle do admin) e `ativo` — inclusive os que o
+ * plano atual não atende (`bloqueado = true`). Filtrar por plano é decisão de
+ * TELA agora (selo/cadeado + aviso ao tocar), não mais de consulta: antes
+ * (`.in("plano_minimo", planosPermitidos(...))`) o módulo acima do plano
+ * simplesmente sumia do catálogo — troca pedida pelo dono do produto pra
+ * virar upsell em vez de ficar invisível.
+ */
 export async function listMyModules(userId: string): Promise<MyModule[]> {
   // Consulta A PARTIR de `modules` (não de `user_modules`) só pra poder usar
   // `.order("ordem")` de verdade — `.order(col, {referencedTable})` NÃO
@@ -114,22 +126,28 @@ export async function listMyModules(userId: string): Promise<MyModule[]> {
   // Achado real testando o catálogo: um módulo com `ordem = 1` aparecia por
   // último por ter sido liberado por último via backfill (SDD-90).
   const planoAtual = await getPlanoAtual(userId);
+  const permitidos = planosPermitidos(planoAtual);
   const { data, error } = await supabase
     .from("modules")
-    .select("id, slug, nome, descricao, user_modules!inner(habilitado)")
+    .select("id, slug, nome, descricao, plano_minimo, user_modules!inner(habilitado)")
     .eq("ativo", true)
     .eq("user_modules.user_id", userId)
     .eq("user_modules.habilitado", true)
-    .in("plano_minimo", planosPermitidos(planoAtual))
     .order("ordem");
   if (error) throw error;
-  return (data as unknown as (MyModule & { user_modules: unknown })[]).map(({ user_modules: _um, ...m }) => m);
+  return (data as unknown as { id: string; slug: string; nome: string; descricao: string | null; plano_minimo: string; user_modules: unknown }[]).map(
+    ({ user_modules: _um, plano_minimo, ...m }) => ({
+      ...m,
+      planoMinimo: plano_minimo,
+      bloqueado: !permitidos.includes(plano_minimo),
+    })
+  );
 }
 
-/** Checagem rápida usada no redirecionamento pós-login e nos guards de rota de módulo (SDD-31). */
+/** Checagem rápida usada no redirecionamento pós-login e nos guards de rota de módulo (SDD-31) — nunca concede acesso a um módulo `bloqueado` pelo plano. */
 export async function hasModuleAccess(userId: string, slug: string): Promise<boolean> {
   const modules = await listMyModules(userId);
-  return modules.some((m) => m.slug === slug);
+  return modules.some((m) => m.slug === slug && !m.bloqueado);
 }
 
 // ---- Pop-up de novidade de módulo (SDD nova, 08/08/2026) ----

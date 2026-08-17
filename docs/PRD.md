@@ -956,13 +956,15 @@ Detalhamento técnico (schema, decisão código-vs-banco pro conteúdo, decisão
 
 **Checkout nasce sempre na web (RN-17):** o app Android nunca cobra dentro dele — abre a URL de checkout da AbacatePay num navegador (in-app ou externo) e volta pro produto depois. Evita a comissão de loja de 15-30%.
 
+**Entrada pra `/planos` a partir da tela de boas-vindas do app instalado (mudança de 17/08/2026, tarde):** quem abre o app sem conta ainda pode espiar preço antes de decidir — link "Planos" no topo da `AppWelcomeScreen`. A tela abre como modal (desliza por cima, com "✕ Fechar" no cabeçalho), nunca navegação cheia, pra não tirar o usuário deslogado do fluxo de decisão da tela inicial.
+
 **RN-64 (nova): cobrança é recorrente mensal via AbacatePay — assinatura é criada por checkout hospedado, nunca processada dentro do app.**
 
 **RN-65 (nova): a Jornada Empreendedora libera por FASE conforme o plano — Gratuito só tem Validação da Ideia; da fase seguinte em diante exige Essencial ou superior.**
 
 **RN-66 (nova): toda conta pré-existente à cobrança recebeu o plano Master automaticamente (grandfather) — a mudança nunca revoga acesso de quem já usava o produto.**
 
-**RN-67 (nova): a liberação de módulo por plano é aditiva ao toggle do admin — um módulo só aparece se `user_modules.habilitado = true` E o plano atual atender o `plano_minimo` do módulo.** Nesta versão, o admin só consegue bloquear (independente do plano), não liberar um módulo além do plano do usuário.
+**RN-67 (mudança de 17/08/2026, tarde — pedido do dono do produto): a liberação de módulo por plano é aditiva ao toggle do admin — `habilitado = true` continua controlando se o módulo existe pra conta, mas o plano não decide mais se o módulo APARECE, só se ele abre.** Versão original (mesmo dia, manhã): módulo acima do plano simplesmente sumia do catálogo/menu. Trocado por upsell: módulo com `habilitado = true` sempre aparece no catálogo (`/modulos`) e no menu lateral do app, com selo "Plano X" e cadeado se o plano atual não atender `plano_minimo`; tocar nele abre um aviso ("Esse módulo faz parte do plano X — assine pra desbloquear") com atalho pra `/planos`, em vez de abrir a tela do módulo. O guard de rota (`hasModuleAccess`) continua bloqueando de verdade — o aviso não é só visual, a tela do módulo não abre por URL direta também. Admin ainda não consegue liberar módulo além do plano do usuário nesta versão.
 
 **RN-68 (nova): cancelamento de assinatura é imediato, sem período de carência — mesmo comportamento nativo da AbacatePay.**
 
@@ -1046,7 +1048,7 @@ Detalhamento técnico (schema, Edge Functions, achado da chave de API compartilh
 | RN-64 | Cobrança recorrente mensal via AbacatePay; assinatura sempre por checkout hospedado, nunca dentro do app — §12.17 |
 | RN-65 | Jornada Empreendedora libera por fase conforme o plano — Gratuito só tem Validação da Ideia — §12.17 |
 | RN-66 | Toda conta pré-existente à cobrança recebeu plano Master automaticamente (grandfather) — §12.17 |
-| RN-67 | Liberação de módulo por plano é aditiva ao toggle do admin — precisa habilitado E plano suficiente — §12.17 |
+| RN-67 | Liberação de módulo por plano é aditiva ao toggle do admin — precisa habilitado E plano suficiente pra ABRIR; módulo acima do plano continua aparecendo no catálogo/menu, com selo e aviso de upsell — §12.17 |
 | RN-68 | Cancelamento de assinatura é imediato, sem período de carência — §12.17 |
 | RN-69 | Webhook de pagamento é verificado por segredo compartilhado antes de escrever em subscriptions/plano — §12.17 |
 | RN-70 | "A Mary responde" permanece sem gate de plano — §12.17 |
