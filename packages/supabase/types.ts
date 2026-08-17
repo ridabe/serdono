@@ -80,6 +80,42 @@ export type Database = {
         }
         Relationships: []
       }
+      contratos: {
+        Row: {
+          campos: Json
+          created_at: string
+          enviado_em: string | null
+          enviado_para: string | null
+          gerado_em: string
+          id: string
+          tipo: string
+          titulo: string
+          user_id: string
+        }
+        Insert: {
+          campos: Json
+          created_at?: string
+          enviado_em?: string | null
+          enviado_para?: string | null
+          gerado_em?: string
+          id?: string
+          tipo: string
+          titulo: string
+          user_id: string
+        }
+        Update: {
+          campos?: Json
+          created_at?: string
+          enviado_em?: string | null
+          enviado_para?: string | null
+          gerado_em?: string
+          id?: string
+          tipo?: string
+          titulo?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       cotacoes_snapshots: {
         Row: {
           capturado_em: string

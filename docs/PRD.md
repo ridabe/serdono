@@ -905,6 +905,28 @@ Com esta fatia, o Assistente de Reunião completa o escopo previsto para esta ve
 
 Detalhamento técnico (schema, Edge Function, colisão de nome com a rota `/assistente` existente, agenda, lembrete automático, destaque na Início, convite por e-mail, resultado da reunião) em SPEC.md SDD-103/SDD-104/SDD-105/SDD-106/SDD-107/SDD-108.
 
+### 12.16 Assistente de Contrato (pedido do dono do produto, 17/08/2026)
+
+**Décimo primeiro módulo do catálogo.** A maioria dos empreendedores não sabe formular um contrato — de venda, compra, sociedade ou fornecedor. Este módulo deixa o empreendedor escolher um modelo, preencher seus dados e os da contraparte, e baixar o documento pronto em PDF, ou enviá-lo por e-mail. Assinatura eletrônica de terceiros fica para uma versão futura — esta versão para na etapa de disponibilizar modelos, gerar com os dados do usuário e permitir o download/envio.
+
+**Diferente de todo módulo de IA do produto: o texto do contrato é modelo fixo + substituição de campos, nunca gerado por IA (RN-60).** Cláusula jurídica inventada é exatamente o tipo de erro que este módulo existe para evitar — mesmo princípio de honestidade de RN-20/RN-21 e da própria fase Formalização (§9.4, conteúdo curado, não personalizado por IA).
+
+**Catálogo de modelos nesta versão:** Prestação de Serviços, Compra e Venda, Sociedade (contrato social simplificado) e Fornecimento Recorrente. Cada modelo tem seu próprio conjunto de campos (dados do contratante, da contraparte, e específicos do tipo — valor, prazo, cláusulas opcionais como multa por atraso, garantia, reajuste).
+
+**Fluxo:** escolhe o modelo (listbox — pedido explícito do dono do produto em 17/08/2026 pra ganhar espaço na tela, diferente do padrão de chips usado no resto do produto) → preenche o formulário (dados próprios pré-preenchidos a partir da Jornada quando existirem — nome e CNPJ; dados da contraparte sempre digitados, nunca de fonte automática) → revisão do texto gerado, local e instantânea, antes de salvar → contrato salvo, com opção de baixar em PDF ou enviar por e-mail.
+
+**Histórico:** toda a lista de contratos já gerados fica disponível na própria tela do módulo, mais recente primeiro — cada um pode ser reaberto pra reler, baixar o PDF de novo ou (re)enviar por e-mail.
+
+**RN-60 (nova): as cláusulas do contrato são fixas e curadas em código, nunca geradas por IA.**
+
+**RN-61 (nova): todo contrato gerado traz aviso legal fixo — "modelo de orientação geral, não substitui a revisão de um advogado antes de ser assinado" — em toda tela, no PDF e no e-mail.** Aplicação de RN-21.
+
+**RN-62 (nova): o contrato gerado é imutável quanto ao conteúdo — para mudar um campo, o empreendedor gera um contrato novo.** Mesmo princípio de RN-51 (guia do Assistente de Reunião).
+
+**RN-63 (nova): o envio por e-mail é sempre ação explícita do usuário, nunca automático nem idempotente — reenviar é sempre permitido.** Mesmo espírito de RN-57.
+
+Detalhamento técnico (schema, decisão código-vs-banco pro conteúdo, decisão de e-mail em HTML em vez de PDF anexado) em SPEC.md SDD-109.
+
 ---
 
 ## 13. Regras de Negócio Transversais (numeração consolidada)
@@ -970,6 +992,10 @@ Detalhamento técnico (schema, Edge Function, colisão de nome com a rota `/assi
 | RN-57 | O convite por e-mail do Assistente de Reunião não é idempotente — reenvio é sempre ação explícita do usuário — §12.15 |
 | RN-58 | O resultado da reunião é independente do agendamento — §12.15 |
 | RN-59 | O resultado da reunião é sempre editável, diferente do guia gerado pela IA (imutável) — §12.15 |
+| RN-60 | Assistente de Contrato usa cláusulas fixas e curadas em código, nunca geradas por IA — §12.16 |
+| RN-61 | Todo contrato gerado traz aviso legal fixo (não substitui advogado) em tela, PDF e e-mail — §12.16 |
+| RN-62 | O contrato gerado é imutável quanto ao conteúdo; para mudar um campo, gera-se um contrato novo — §12.16 |
+| RN-63 | O envio por e-mail do contrato é sempre ação explícita do usuário, nunca automático nem idempotente — §12.16 |
 
 ---
 

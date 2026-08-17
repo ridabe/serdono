@@ -15,4 +15,6 @@ export * from "./raioxFinanceiro";
 export * from "./maturidadeNegocio";
 export * from "./reuniao";
 export * from "./cnpj";
+export * from "./cpf";
+export * from "./contrato";
 export * from "./ai/routeModel";

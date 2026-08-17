@@ -21,6 +21,7 @@ export * from "./checkupMensal";
 export * from "./raioxFinanceiro";
 export * from "./maturidadeNegocio";
 export * from "./reuniao";
+export * from "./contrato";
 export * from "./pushNotifications";
 export * from "./adminDashboard";
 export type { Database } from "./types";

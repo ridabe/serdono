@@ -98,6 +98,15 @@ export function ModuleIcon({ slug, color, size = icon.md }: { slug: string; colo
           <Path d="M8.5 14.5l2 2 4-4.3" {...common} />
         </>
       ) : null}
+
+      {/* Assistente de Contrato: página com linhas de texto e uma assinatura no rodapé. */}
+      {slug === "assistente-contrato" ? (
+        <>
+          <Path d="M6 3.5h9l3 3V20a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1z" {...common} />
+          <Path d="M15 3.5V6.5a1 1 0 0 0 1 1H19" {...common} />
+          <Path d="M8 11h8M8 14h8M8 17h4" {...common} />
+        </>
+      ) : null}
     </Svg>
   );
 }
