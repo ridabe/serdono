@@ -1,3 +1,4 @@
+import * as Clipboard from "expo-clipboard";
 import * as ImageManipulator from "expo-image-manipulator";
 import * as ImagePicker from "expo-image-picker";
 import { useRouter } from "expo-router";
@@ -243,6 +244,39 @@ function Badge({ label, tone }: { label: string; tone: "info" | "danger" | "warn
   );
 }
 
+/**
+ * ID truncado (`prod_xxxxxxxx…`) + botão de copiar — os ids da AbacatePay são
+ * longos demais pra caber numa coluna de tabela, e são exatamente o dado que
+ * o admin precisa colar em outro lugar (ex.: `ABACATEPAY_PRODUTO_ESSENCIAL`
+ * nos secrets), então mostrar só o começo com um jeito de copiar o valor
+ * inteiro resolve as duas pontas sem alargar a tabela.
+ */
+function IdComCopiar({ id }: { id: string }) {
+  const [copiado, setCopiado] = useState(false);
+
+  async function copiar() {
+    await Clipboard.setStringAsync(id);
+    setCopiado(true);
+    setTimeout(() => setCopiado(false), 1500);
+  }
+
+  return (
+    <View style={{ flexDirection: "row", alignItems: "center", gap: space[2] }}>
+      <Text style={{ ...type.caption, color: color.text.muted, fontFamily: "monospace" }} numberOfLines={1}>
+        {id}
+      </Text>
+      <Pressable
+        onPress={copiar}
+        accessibilityRole="button"
+        accessibilityLabel={`Copiar ID ${id}`}
+        style={{ minWidth: 28, minHeight: 28, alignItems: "center", justifyContent: "center", borderRadius: 6, backgroundColor: color.bg.surfaceAlt }}
+      >
+        <Text style={{ ...type.caption, color: copiado ? color.state.success : color.action.secondary }}>{copiado ? "✓" : "⧉"}</Text>
+      </Pressable>
+    </View>
+  );
+}
+
 function TabHeader({ titulo, acao }: { titulo: string; acao?: React.ReactNode }) {
   return (
     <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: space[3] }}>
@@ -283,6 +317,7 @@ function ProdutosTab() {
               ),
           },
           { label: "Nome", minWidth: 160, render: (r) => <Text style={{ ...type.bodyStrong, color: color.text.primary }} numberOfLines={1}>{r.name}</Text> },
+          { label: "ID", minWidth: 200, render: (r) => <IdComCopiar id={r.id} /> },
           { label: "Preço", minWidth: 100, render: (r) => <Text style={{ ...type.body, color: color.text.secondary }}>{formatMoney(r.price)}</Text> },
           { label: "Ciclo", minWidth: 100, render: (r) => <Text style={{ ...type.body, color: color.text.secondary }}>{r.cycle ?? "avulso"}</Text> },
           { label: "Status", minWidth: 100, render: (r) => <Badge label={r.status} tone={r.status === "ACTIVE" ? "success" : "warning"} /> },
