@@ -2,7 +2,7 @@ import * as Clipboard from "expo-clipboard";
 import * as ImageManipulator from "expo-image-manipulator";
 import * as ImagePicker from "expo-image-picker";
 import { useRouter } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ActivityIndicator, Image, Modal, Pressable, ScrollView, Text, View } from "react-native";
 import { Button, Card, ConfirmModal, CurrencyInput, Input, Logo, color, radius, space, type } from "@serdono/ui";
 import { uploadCapaProdutoAbacatePay } from "@serdono/supabase";
@@ -25,6 +25,7 @@ import {
   listarPixAbacatePay,
   listarProdutosAbacatePay,
   listarWebhooksAbacatePay,
+  listPlanosUsuarios,
   type AbacatePayCliente,
   type AbacatePayCupom,
   type AbacatePayPayout,
@@ -64,6 +65,18 @@ function combina(filtro: string, ...campos: (string | null | undefined)[]): bool
 }
 
 /**
+ * Marcador de "é do Ser Dono" pra Produtos/Webhooks/Cupons (pedido do dono do
+ * produto, 18/08/2026) — tudo que o próprio dono cria pro Ser Dono carrega
+ * "Ser Dono"/"SerDono" no nome (webhook) ou prefixo `serdono-` no externalId
+ * (produto, ver `criarProdutoAbacatePay` abaixo). Normaliza removendo tudo
+ * que não é letra/número antes de comparar, pra "Ser Dono - Assinaturas" e
+ * "serdono-1755..." caírem no mesmo teste sem precisar de duas regras.
+ */
+function ehDoSerDono(...campos: (string | null | undefined)[]): boolean {
+  return campos.some((c) => !!c && c.toLowerCase().replace(/[^a-z0-9]/g, "").includes("serdono"));
+}
+
+/**
  * Painel Admin AbacatePay (pedido do dono do produto, 18/08/2026) — concentra
  * as ações que hoje só davam pra fazer no painel deles: catálogo (produtos,
  * cupons), infraestrutura (webhooks), auditoria (clientes, assinaturas) e
@@ -80,14 +93,18 @@ export function AdminAbacatePayScreen() {
   const router = useRouter();
   const [aba, setAba] = useState<AbaId>("produtos");
   // Conta AbacatePay compartilhada com outros projetos do dono do produto
-  // (Strive, sirvaOS) — filtro de texto aplicado no que já foi carregado
-  // (a API deles não tem conceito de "projeto"/tag pra filtrar no servidor).
-  // Começa vazio (mostra tudo) de propósito: "dono" pega Produto/Webhook
-  // ("Ser Dono"/"SerDono" no nome), mas cupom não segue convenção nenhuma
-  // (ex.: "TESTESD" não contém "dono") — um default fixo esconderia cupom
-  // de verdade sem o admin perceber. Não se aplica a Saques/PIX (movimentação
-  // da conta inteira, não de um produto específico).
+  // (Strive, sirvaOS) — filtro de texto opcional, aplicado em cima do que já
+  // foi carregado (a API deles não tem conceito de "projeto"/tag pra filtrar
+  // no servidor).
   const [filtro, setFiltro] = useState("");
+  // Filtro automático "só Ser Dono" (pedido do dono do produto, 18/08/2026)
+  // — liga por padrão em Produtos/Webhooks/Cupons (nome/externalId/notes com
+  // "Ser Dono"/"serdono", ver `ehDoSerDono`) e em Clientes (e-mail cruzado
+  // com os usuários cadastrados no Ser Dono, ver `listPlanosUsuarios`).
+  // `mostrarTodos` é a válvula de escape pra auditar os outros projetos ou
+  // um cupom que fujir da convenção. Não se aplica a Saques/PIX (movimentação
+  // da conta inteira, não de um produto específico).
+  const [mostrarTodos, setMostrarTodos] = useState(false);
 
   return (
     <View style={{ flex: 1, backgroundColor: color.bg.canvas }}>
@@ -135,20 +152,43 @@ export function AdminAbacatePayScreen() {
         </ScrollView>
 
         {aba !== "saques" && aba !== "pix" ? (
-          <View style={{ maxWidth: 360, marginBottom: space[4] }}>
-            <Input label="Filtrar (nome/ID/endpoint)" value={filtro} onChangeText={setFiltro} placeholder="Ex.: dono" autoCapitalize="none" />
-            <Text style={{ ...type.caption, color: color.text.muted, marginTop: -space[2] }}>
-              Conta compartilhada com outros projetos — vazio mostra tudo. "dono" filtra produto/webhook do Ser Dono; cupom não segue nome padrão, procure pelo código.
-            </Text>
+          <View style={{ maxWidth: 360, marginBottom: space[4], gap: space[2] }}>
+            <Input label="Filtrar (nome/ID/endpoint)" value={filtro} onChangeText={setFiltro} placeholder="Buscar dentro da lista" autoCapitalize="none" />
+            {aba !== "assinaturas" ? (
+              <Pressable
+                onPress={() => setMostrarTodos((v) => !v)}
+                accessibilityRole="checkbox"
+                accessibilityState={{ checked: mostrarTodos }}
+                style={{ flexDirection: "row", alignItems: "center", gap: space[2], minHeight: 32 }}
+              >
+                <View
+                  style={{
+                    width: 18,
+                    height: 18,
+                    borderRadius: 4,
+                    borderWidth: 1,
+                    borderColor: mostrarTodos ? color.border.focus : color.border.default,
+                    backgroundColor: mostrarTodos ? color.bg.brand : "transparent",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {mostrarTodos ? <Text style={{ ...type.caption, color: color.text.onBrand, fontWeight: "700", lineHeight: 14 }}>✓</Text> : null}
+                </View>
+                <Text style={{ ...type.caption, color: color.text.secondary }}>
+                  Mostrar todos os projetos (conta compartilhada com Strive, sirvaOS etc.)
+                </Text>
+              </Pressable>
+            ) : null}
           </View>
         ) : null}
       </View>
 
       <ScrollView contentContainerStyle={{ padding: space[5], paddingTop: 0 }}>
-        {aba === "produtos" ? <ProdutosTab filtro={filtro} /> : null}
-        {aba === "webhooks" ? <WebhooksTab filtro={filtro} /> : null}
-        {aba === "clientes" ? <ClientesTab filtro={filtro} /> : null}
-        {aba === "cupons" ? <CuponsTab filtro={filtro} /> : null}
+        {aba === "produtos" ? <ProdutosTab filtro={filtro} mostrarTodos={mostrarTodos} /> : null}
+        {aba === "webhooks" ? <WebhooksTab filtro={filtro} mostrarTodos={mostrarTodos} /> : null}
+        {aba === "clientes" ? <ClientesTab filtro={filtro} mostrarTodos={mostrarTodos} /> : null}
+        {aba === "cupons" ? <CuponsTab filtro={filtro} mostrarTodos={mostrarTodos} /> : null}
         {aba === "assinaturas" ? <AssinaturasTab filtro={filtro} /> : null}
         {aba === "saques" ? <SaquesTab /> : null}
         {aba === "pix" ? <PixTab /> : null}
@@ -314,12 +354,12 @@ function TabHeader({ titulo, acao }: { titulo: string; acao?: React.ReactNode })
 // ============================================================================
 // Produtos
 // ============================================================================
-function ProdutosTab({ filtro }: { filtro: string }) {
+function ProdutosTab({ filtro, mostrarTodos }: { filtro: string; mostrarTodos: boolean }) {
   const { items, loading, error, pageNumber, hasNext, hasPrev, proxima, anterior, refresh } = usePaginatedAbacatePay(listarProdutosAbacatePay, 10);
   const [criando, setCriando] = useState(false);
   const [apagando, setApagando] = useState<AbacatePayProduto | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
-  const itens = items.filter((p) => combina(filtro, p.name, p.externalId, p.id));
+  const itens = items.filter((p) => combina(filtro, p.name, p.externalId, p.id) && (mostrarTodos || ehDoSerDono(p.name, p.externalId)));
 
   return (
     <View>
@@ -522,12 +562,12 @@ function NovoProdutoModal({ onCancel, onCriado }: { onCancel: () => void; onCria
 // ============================================================================
 // Webhooks
 // ============================================================================
-function WebhooksTab({ filtro }: { filtro: string }) {
+function WebhooksTab({ filtro, mostrarTodos }: { filtro: string; mostrarTodos: boolean }) {
   const { items, loading, error, pageNumber, hasNext, hasPrev, proxima, anterior, refresh } = usePaginatedAbacatePay(listarWebhooksAbacatePay, 10);
   const [criando, setCriando] = useState(false);
   const [apagando, setApagando] = useState<AbacatePayWebhook | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
-  const itens = items.filter((w) => combina(filtro, w.name, w.endpoint, w.id));
+  const itens = items.filter((w) => combina(filtro, w.name, w.endpoint, w.id) && (mostrarTodos || ehDoSerDono(w.name, w.endpoint)));
 
   return (
     <View>
@@ -646,14 +686,25 @@ function NovoWebhookModal({ onCancel, onCriado }: { onCancel: () => void; onCria
 // ============================================================================
 // Clientes
 // ============================================================================
-function ClientesTab({ filtro }: { filtro: string }) {
+function ClientesTab({ filtro, mostrarTodos }: { filtro: string; mostrarTodos: boolean }) {
   const { items, loading, error, pageNumber, hasNext, hasPrev, proxima, anterior, refresh } = usePaginatedAbacatePay(listarClientesAbacatePay, 15);
   const [apagando, setApagando] = useState<AbacatePayCliente | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
   // Cliente não tem vínculo de "projeto" no dado da AbacatePay (nome/e-mail
-  // são da pessoa, não do produto que ela comprou) — o filtro global só ajuda
-  // aqui se o texto digitado bater com nome/e-mail de alguém específico.
-  const itens = items.filter((c) => combina(filtro, c.name, c.email, c.id));
+  // são da pessoa, não do produto que ela comprou) — nome não segue
+  // convenção nenhuma como produto/webhook (`ehDoSerDono` não serve aqui).
+  // Em vez disso cruza com quem tem cadastro de verdade no Ser Dono: busca
+  // todo usuário via `listPlanosUsuarios` (mesma RPC do painel Assinaturas) e
+  // filtra pelos e-mails que baterem.
+  const [emailsSerDono, setEmailsSerDono] = useState<Set<string> | null>(null);
+  useEffect(() => {
+    listPlanosUsuarios()
+      .then((usuarios) => setEmailsSerDono(new Set(usuarios.map((u) => u.email.toLowerCase()))))
+      .catch(() => setEmailsSerDono(new Set()));
+  }, []);
+  const itens = items.filter(
+    (c) => combina(filtro, c.name, c.email, c.id) && (mostrarTodos || !emailsSerDono || (!!c.email && emailsSerDono.has(c.email.toLowerCase())))
+  );
 
   return (
     <View>
@@ -699,15 +750,16 @@ function ClientesTab({ filtro }: { filtro: string }) {
 // ============================================================================
 // Cupons
 // ============================================================================
-function CuponsTab({ filtro }: { filtro: string }) {
+function CuponsTab({ filtro, mostrarTodos }: { filtro: string; mostrarTodos: boolean }) {
   const { items, loading, error, pageNumber, hasNext, hasPrev, proxima, anterior, refresh } = usePaginatedAbacatePay(listarCuponsAbacatePay, 10);
   const [criando, setCriando] = useState(false);
   const [apagando, setApagando] = useState<AbacatePayCupom | null>(null);
   const [alternando, setAlternando] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
-  // Código do cupom não segue convenção de nome ("TESTESD" não contém
-  // "dono") — o filtro só ajuda aqui se o admin souber o código/parte dele.
-  const itens = items.filter((c) => combina(filtro, c.id, c.notes));
+  // Código do cupom nem sempre segue a convenção "Ser Dono"/"serdono" — se um
+  // cupom de verdade sumir da lista com o filtro automático ligado, use
+  // "Mostrar todos os projetos" acima pra achá-lo (ver `ehDoSerDono`).
+  const itens = items.filter((c) => combina(filtro, c.id, c.notes) && (mostrarTodos || ehDoSerDono(c.id, c.notes)));
 
   async function alternar(cupom: AbacatePayCupom) {
     setAlternando(cupom.id);
