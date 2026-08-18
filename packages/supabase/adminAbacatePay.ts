@@ -78,11 +78,53 @@ export async function criarProdutoAbacatePay(params: {
   description?: string;
   price: number;
   cycle?: "WEEKLY" | "MONTHLY" | "QUARTERLY" | "SEMIANNUALLY" | "ANNUALLY";
-  /** URL pública (não é upload de arquivo — a API da AbacatePay só aceita URL). Ver `uploadAbacatePayProdutoImagem` em `storage.ts` pra subir a imagem antes e gerar essa URL. */
+  /** URL pública (não é upload de arquivo — a API da AbacatePay só aceita URL). Ver `uploadCapaProdutoAbacatePay` pra subir a imagem antes e gerar essa URL. */
   imageUrl?: string;
 }): Promise<AbacatePayProduto> {
   const resp = await chamar<{ data: AbacatePayProduto }>("POST", "/products/create", { body: { ...params, currency: "BRL" } });
   return resp.data;
+}
+
+const BASE64_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+/** Sem `btoa` de propósito — não é garantido no runtime nativo (Hermes), mesmo motivo já documentado no decode manual de JWT em `session.ts`. */
+function arrayBufferToBase64(buffer: ArrayBuffer): string {
+  const bytes = new Uint8Array(buffer);
+  let result = "";
+  for (let i = 0; i < bytes.length; i += 3) {
+    const b1 = bytes[i];
+    const b2 = i + 1 < bytes.length ? bytes[i + 1] : undefined;
+    const b3 = i + 2 < bytes.length ? bytes[i + 2] : undefined;
+    result += BASE64_CHARS[b1 >> 2];
+    result += BASE64_CHARS[((b1 & 3) << 4) | (b2 === undefined ? 0 : b2 >> 4)];
+    result += b2 === undefined ? "=" : BASE64_CHARS[((b2 & 15) << 2) | (b3 === undefined ? 0 : b3 >> 6)];
+    result += b3 === undefined ? "=" : BASE64_CHARS[b3 & 63];
+  }
+  return result;
+}
+
+/**
+ * Sobe a capa de produto via Edge Function `admin-abacatepay-upload-imagem`
+ * (service_role) — não é upload direto do client pro Storage (ver comentário
+ * em `storage.ts` sobre o erro de RLS não resolvido nesse caminho). Devolve
+ * a URL pública que vira `imageUrl` em `criarProdutoAbacatePay`.
+ */
+export async function uploadCapaProdutoAbacatePay(externalId: string, uri: string): Promise<string> {
+  const arrayBuffer = await fetch(uri).then((res) => res.arrayBuffer());
+  const base64 = arrayBufferToBase64(arrayBuffer);
+
+  const { data, error } = await supabase.functions.invoke("admin-abacatepay-upload-imagem", {
+    body: { externalId, base64 },
+  });
+  if (error) {
+    const context = (error as { context?: Response }).context;
+    if (context) {
+      const respBody = await context.json().catch(() => null);
+      if (respBody?.error) throw new Error(respBody.error);
+    }
+    throw error;
+  }
+  return (data as { url: string }).url;
 }
 
 export async function apagarProdutoAbacatePay(id: string): Promise<void> {

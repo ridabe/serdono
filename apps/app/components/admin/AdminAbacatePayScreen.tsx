@@ -5,7 +5,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { ActivityIndicator, Image, Modal, Pressable, ScrollView, Text, View } from "react-native";
 import { Button, Card, ConfirmModal, CurrencyInput, Input, Logo, color, radius, space, type } from "@serdono/ui";
-import { uploadAbacatePayProdutoImagem } from "@serdono/supabase";
+import { uploadCapaProdutoAbacatePay } from "@serdono/supabase";
 import {
   EVENTOS_WEBHOOK_DISPONIVEIS,
   alternarCupomAbacatePay,
@@ -410,7 +410,7 @@ function NovoProdutoModal({ onCancel, onCriado }: { onCancel: () => void; onCria
         setEnviandoCapa(true);
         // Sobe primeiro pro Storage do Ser Dono — a API da AbacatePay só
         // aceita `imageUrl` (URL pública), sem upload de arquivo de verdade.
-        imageUrl = await uploadAbacatePayProdutoImagem(externalId, capaUri);
+        imageUrl = await uploadCapaProdutoAbacatePay(externalId, capaUri);
         setEnviandoCapa(false);
       }
       await criarProdutoAbacatePay({

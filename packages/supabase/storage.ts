@@ -3,7 +3,9 @@ import { supabase } from "./client";
 const AVATARS_BUCKET = "avatars";
 const PARCEIROS_LOGOS_BUCKET = "parceiros-logos";
 const DICAS_MATERIAIS_BUCKET = "dicas-materiais";
-const ABACATEPAY_PRODUTOS_BUCKET = "abacatepay-produtos";
+// abacatepay-produtos: bucket existe (migration `abacatepay_produto_imagem_
+// bucket`), mas o upload é feito pela Edge Function `admin-abacatepay-
+// upload-imagem` (service_role), não daqui — ver comentário mais abaixo.
 
 /**
  * Sobe a foto de perfil já padronizada (redimensionada/comprimida pelo
@@ -68,25 +70,12 @@ export async function uploadDicaMaterialPdf(materialId: string, uri: string): Pr
   return data.publicUrl;
 }
 
-/**
- * Sobe a capa de um produto do Painel Admin AbacatePay (pedido do dono do
- * produto, 18/08/2026) — mesmo padrão de `uploadParceiroLogo` (bucket
- * público, upsert por caminho fixo, id gerado no client antes do produto
- * existir de verdade na AbacatePay). A API deles só aceita `imageUrl`
- * (URL pública), sem endpoint de upload de arquivo — por isso sobe aqui
- * primeiro, a URL pública resultante é o que vira `imageUrl` no
- * `POST /products/create`.
- */
-export async function uploadAbacatePayProdutoImagem(externalId: string, uri: string): Promise<string> {
-  const arrayBuffer = await fetch(uri).then((res) => res.arrayBuffer());
-  const path = `${externalId}/capa.jpg`;
-
-  const { error } = await supabase.storage.from(ABACATEPAY_PRODUTOS_BUCKET).upload(path, arrayBuffer, {
-    contentType: "image/jpeg",
-    upsert: true,
-  });
-  if (error) throw error;
-
-  const { data } = supabase.storage.from(ABACATEPAY_PRODUTOS_BUCKET).getPublicUrl(path);
-  return data.publicUrl;
-}
+// Upload de capa de produto do Painel Admin AbacatePay NÃO mora aqui — o
+// upload direto do client pra este bucket (mesmo padrão de
+// `uploadParceiroLogo`, RLS admin-only) devolvia "new row violates row-level
+// security policy" mesmo com bucket e policy conferindo certinho contra o
+// padrão comprovado. Em vez de caçar o motivo exato, a escrita virou
+// responsabilidade da Edge Function `admin-abacatepay-upload-imagem`
+// (service_role, bypassa RLS de propósito — mesmo raciocínio de toda outra
+// escrita do Painel AbacatePay) — ver `criarProdutoComCapaAbacatePay` em
+// `adminAbacatePay.ts`.
