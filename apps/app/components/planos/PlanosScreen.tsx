@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import * as WebBrowser from "expo-web-browser";
 import { ActivityIndicator, Platform, ScrollView, Text, useWindowDimensions, View } from "react-native";
-import { breakpoint, Button, Card, color, isNativeApp, space, type } from "@serdono/ui";
+import { breakpoint, Button, Card, color, Input, isNativeApp, space, type } from "@serdono/ui";
 import { PLANOS_CATALOGO, type Plano } from "@serdono/core";
 import { criarCheckout, getCurrentSession } from "@serdono/supabase";
 import { ScreenHeader } from "../shell/ScreenHeader";
@@ -23,6 +23,7 @@ export function PlanosScreen() {
   const [logado, setLogado] = useState<boolean | null>(null);
   const [carregandoPlano, setCarregandoPlano] = useState<Plano | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [cupom, setCupom] = useState("");
 
   useEffect(() => {
     getCurrentSession().then((session) => setLogado(!!session));
@@ -40,7 +41,7 @@ export function PlanosScreen() {
     setError(null);
     setCarregandoPlano(plano);
     try {
-      const url = await criarCheckout(plano as "essencial" | "master");
+      const url = await criarCheckout(plano as "essencial" | "master", cupom);
       if (Platform.OS === "web") {
         window.location.href = url;
       } else {
@@ -73,6 +74,21 @@ export function PlanosScreen() {
         </View>
 
         {error ? <Text style={{ ...type.caption, color: color.state.danger }}>{error}</Text> : null}
+
+        {logado ? (
+          <View style={{ maxWidth: 320 }}>
+            <Input
+              label="Cupom de desconto (opcional)"
+              value={cupom}
+              onChangeText={setCupom}
+              placeholder="Ex.: BEMVINDO10"
+              autoCapitalize="none"
+            />
+            <Text style={{ ...type.caption, color: color.text.muted, marginTop: -space[2] }}>
+              Se tiver um cupom, digite antes de assinar — o campo aparece na página de pagamento.
+            </Text>
+          </View>
+        ) : null}
 
         <View style={{ flexDirection: compact ? "column" : "row", gap: space[4], alignItems: "stretch" }}>
           {PLANOS_CATALOGO.map((p) => (

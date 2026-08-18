@@ -56,6 +56,12 @@ Deno.serve(async (req) => {
     if (plano !== "essencial" && plano !== "master") {
       return json({ error: "Campo 'plano' precisa ser 'essencial' ou 'master'." }, 400);
     }
+    // Cupom é opcional — a AbacatePay só mostra o campo de cupom na página de
+    // checkout se o código estiver na lista `coupons` enviada na criação
+    // (achado lendo a doc de `subscriptions/create`: sem isso, o campo nem
+    // aparece pro cliente digitar). Não valida aqui se o cupom existe/está
+    // ativo — a própria AbacatePay recusa na hora de aplicar, no checkout.
+    const cupom = typeof body?.cupom === "string" ? body.cupom.trim() : undefined;
 
     const produtoId = PRODUTO_POR_PLANO[plano];
     if (!produtoId) {
@@ -105,6 +111,7 @@ Deno.serve(async (req) => {
         methods: ["CARD"],
         completionUrl: `${BASE_URL}/assinatura`,
         returnUrl: `${BASE_URL}/planos`,
+        ...(cupom ? { coupons: [cupom] } : {}),
       }),
     });
     const bodyCheckout = await respCheckout.json();

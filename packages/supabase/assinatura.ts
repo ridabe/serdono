@@ -24,9 +24,15 @@ export async function listarAssinaturas(userId: string): Promise<SubscriptionRow
   return data;
 }
 
-/** Chama a Edge Function que cria o checkout de assinatura na AbacatePay — devolve a URL pra redirecionar o usuário. */
-export async function criarCheckout(plano: "essencial" | "master"): Promise<string> {
-  const { data, error } = await supabase.functions.invoke("assinatura-criar-checkout", { body: { plano } });
+/**
+ * Chama a Edge Function que cria o checkout de assinatura na AbacatePay —
+ * devolve a URL pra redirecionar o usuário. `cupom` é opcional — sem ele, a
+ * página de checkout nem mostra campo pra digitar código de desconto (a
+ * AbacatePay só libera cupom que estiver na lista `coupons` enviada na
+ * criação, achado lendo a doc de `subscriptions/create`).
+ */
+export async function criarCheckout(plano: "essencial" | "master", cupom?: string): Promise<string> {
+  const { data, error } = await supabase.functions.invoke("assinatura-criar-checkout", { body: { plano, cupom: cupom || undefined } });
   if (error) {
     const context = (error as { context?: Response }).context;
     if (context) {

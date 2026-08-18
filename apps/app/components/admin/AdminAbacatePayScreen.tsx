@@ -56,6 +56,13 @@ const ABAS: { id: AbaId; label: string }[] = [
   { id: "pix", label: "PIX" },
 ];
 
+/** Verifica se algum dos campos passados contém o filtro (case-insensitive). */
+function combina(filtro: string, ...campos: (string | null | undefined)[]): boolean {
+  const f = filtro.trim().toLowerCase();
+  if (!f) return true;
+  return campos.some((c) => !!c && c.toLowerCase().includes(f));
+}
+
 /**
  * Painel Admin AbacatePay (pedido do dono do produto, 18/08/2026) — concentra
  * as ações que hoje só davam pra fazer no painel deles: catálogo (produtos,
@@ -72,6 +79,15 @@ const ABAS: { id: AbaId; label: string }[] = [
 export function AdminAbacatePayScreen() {
   const router = useRouter();
   const [aba, setAba] = useState<AbaId>("produtos");
+  // Conta AbacatePay compartilhada com outros projetos do dono do produto
+  // (Strive, sirvaOS) — filtro de texto aplicado no que já foi carregado
+  // (a API deles não tem conceito de "projeto"/tag pra filtrar no servidor).
+  // Começa vazio (mostra tudo) de propósito: "dono" pega Produto/Webhook
+  // ("Ser Dono"/"SerDono" no nome), mas cupom não segue convenção nenhuma
+  // (ex.: "TESTESD" não contém "dono") — um default fixo esconderia cupom
+  // de verdade sem o admin perceber. Não se aplica a Saques/PIX (movimentação
+  // da conta inteira, não de um produto específico).
+  const [filtro, setFiltro] = useState("");
 
   return (
     <View style={{ flex: 1, backgroundColor: color.bg.canvas }}>
@@ -117,14 +133,23 @@ export function AdminAbacatePayScreen() {
             </Pressable>
           ))}
         </ScrollView>
+
+        {aba !== "saques" && aba !== "pix" ? (
+          <View style={{ maxWidth: 360, marginBottom: space[4] }}>
+            <Input label="Filtrar (nome/ID/endpoint)" value={filtro} onChangeText={setFiltro} placeholder="Ex.: dono" autoCapitalize="none" />
+            <Text style={{ ...type.caption, color: color.text.muted, marginTop: -space[2] }}>
+              Conta compartilhada com outros projetos — vazio mostra tudo. "dono" filtra produto/webhook do Ser Dono; cupom não segue nome padrão, procure pelo código.
+            </Text>
+          </View>
+        ) : null}
       </View>
 
       <ScrollView contentContainerStyle={{ padding: space[5], paddingTop: 0 }}>
-        {aba === "produtos" ? <ProdutosTab /> : null}
-        {aba === "webhooks" ? <WebhooksTab /> : null}
-        {aba === "clientes" ? <ClientesTab /> : null}
-        {aba === "cupons" ? <CuponsTab /> : null}
-        {aba === "assinaturas" ? <AssinaturasTab /> : null}
+        {aba === "produtos" ? <ProdutosTab filtro={filtro} /> : null}
+        {aba === "webhooks" ? <WebhooksTab filtro={filtro} /> : null}
+        {aba === "clientes" ? <ClientesTab filtro={filtro} /> : null}
+        {aba === "cupons" ? <CuponsTab filtro={filtro} /> : null}
+        {aba === "assinaturas" ? <AssinaturasTab filtro={filtro} /> : null}
         {aba === "saques" ? <SaquesTab /> : null}
         {aba === "pix" ? <PixTab /> : null}
       </ScrollView>
@@ -289,11 +314,12 @@ function TabHeader({ titulo, acao }: { titulo: string; acao?: React.ReactNode })
 // ============================================================================
 // Produtos
 // ============================================================================
-function ProdutosTab() {
+function ProdutosTab({ filtro }: { filtro: string }) {
   const { items, loading, error, pageNumber, hasNext, hasPrev, proxima, anterior, refresh } = usePaginatedAbacatePay(listarProdutosAbacatePay, 10);
   const [criando, setCriando] = useState(false);
   const [apagando, setApagando] = useState<AbacatePayProduto | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
+  const itens = items.filter((p) => combina(filtro, p.name, p.externalId, p.id));
 
   return (
     <View>
@@ -304,7 +330,7 @@ function ProdutosTab() {
         loading={loading}
         error={error}
         vazio="Nenhum produto cadastrado."
-        linhas={items}
+        linhas={itens}
         colunas={[
           {
             label: "Capa",
@@ -496,11 +522,12 @@ function NovoProdutoModal({ onCancel, onCriado }: { onCancel: () => void; onCria
 // ============================================================================
 // Webhooks
 // ============================================================================
-function WebhooksTab() {
+function WebhooksTab({ filtro }: { filtro: string }) {
   const { items, loading, error, pageNumber, hasNext, hasPrev, proxima, anterior, refresh } = usePaginatedAbacatePay(listarWebhooksAbacatePay, 10);
   const [criando, setCriando] = useState(false);
   const [apagando, setApagando] = useState<AbacatePayWebhook | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
+  const itens = items.filter((w) => combina(filtro, w.name, w.endpoint, w.id));
 
   return (
     <View>
@@ -511,7 +538,7 @@ function WebhooksTab() {
         loading={loading}
         error={error}
         vazio="Nenhum webhook cadastrado."
-        linhas={items}
+        linhas={itens}
         colunas={[
           { label: "Nome", minWidth: 160, render: (r) => <Text style={{ ...type.bodyStrong, color: color.text.primary }} numberOfLines={1}>{r.name}</Text> },
           { label: "Endpoint", minWidth: 280, render: (r) => <Text style={{ ...type.caption, color: color.text.secondary }} numberOfLines={1}>{r.endpoint}</Text> },
@@ -619,10 +646,14 @@ function NovoWebhookModal({ onCancel, onCriado }: { onCancel: () => void; onCria
 // ============================================================================
 // Clientes
 // ============================================================================
-function ClientesTab() {
+function ClientesTab({ filtro }: { filtro: string }) {
   const { items, loading, error, pageNumber, hasNext, hasPrev, proxima, anterior, refresh } = usePaginatedAbacatePay(listarClientesAbacatePay, 15);
   const [apagando, setApagando] = useState<AbacatePayCliente | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
+  // Cliente não tem vínculo de "projeto" no dado da AbacatePay (nome/e-mail
+  // são da pessoa, não do produto que ela comprou) — o filtro global só ajuda
+  // aqui se o texto digitado bater com nome/e-mail de alguém específico.
+  const itens = items.filter((c) => combina(filtro, c.name, c.email, c.id));
 
   return (
     <View>
@@ -633,7 +664,7 @@ function ClientesTab() {
         loading={loading}
         error={error}
         vazio="Nenhum cliente cadastrado."
-        linhas={items}
+        linhas={itens}
         colunas={[
           { label: "Nome", minWidth: 160, render: (r) => <Text style={{ ...type.bodyStrong, color: color.text.primary }} numberOfLines={1}>{r.name || "(sem nome)"}</Text> },
           { label: "E-mail", minWidth: 200, render: (r) => <Text style={{ ...type.body, color: color.text.secondary }} numberOfLines={1}>{r.email}</Text> },
@@ -668,12 +699,15 @@ function ClientesTab() {
 // ============================================================================
 // Cupons
 // ============================================================================
-function CuponsTab() {
+function CuponsTab({ filtro }: { filtro: string }) {
   const { items, loading, error, pageNumber, hasNext, hasPrev, proxima, anterior, refresh } = usePaginatedAbacatePay(listarCuponsAbacatePay, 10);
   const [criando, setCriando] = useState(false);
   const [apagando, setApagando] = useState<AbacatePayCupom | null>(null);
   const [alternando, setAlternando] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
+  // Código do cupom não segue convenção de nome ("TESTESD" não contém
+  // "dono") — o filtro só ajuda aqui se o admin souber o código/parte dele.
+  const itens = items.filter((c) => combina(filtro, c.id, c.notes));
 
   async function alternar(cupom: AbacatePayCupom) {
     setAlternando(cupom.id);
@@ -697,7 +731,7 @@ function CuponsTab() {
         loading={loading}
         error={error}
         vazio="Nenhum cupom cadastrado."
-        linhas={items}
+        linhas={itens}
         colunas={[
           { label: "Código", minWidth: 120, render: (r) => <Text style={{ ...type.bodyStrong, color: color.text.primary }}>{r.id}</Text> },
           { label: "Desconto", minWidth: 100, render: (r) => <Text style={{ ...type.body, color: color.text.secondary }}>{r.discountKind === "PERCENTAGE" ? `${r.discount}%` : formatMoney(r.discount)}</Text> },
@@ -837,22 +871,27 @@ function NovoCupomModal({ onCancel, onCriado }: { onCancel: () => void; onCriado
 // que é a fonte de verdade do produto; aqui é a visão crua direto na
 // AbacatePay, sem escrita).
 // ============================================================================
-function AssinaturasTab() {
+function AssinaturasTab({ filtro }: { filtro: string }) {
   const { items, loading, error, pageNumber, hasNext, hasPrev, proxima, anterior } = usePaginatedAbacatePay(listarAssinaturasAbacatePay, 15);
+  // O `externalId` das nossas assinaturas de verdade é `<userId>:<plano>:
+  // <timestamp>` (assinatura-criar-checkout) — "essencial"/"master" filtra
+  // bem; "dono" não aparece aqui (não é nome de produto, é id de usuário).
+  const itens = items.filter((a) => combina(filtro, a.externalId, a.id));
 
   return (
     <View>
       <TabHeader titulo="Assinaturas na AbacatePay" />
       <Text style={{ ...type.caption, color: color.text.muted, marginBottom: space[3] }}>
         Visão crua direto na AbacatePay, só leitura. Pra gerenciar plano de usuário, use{" "}
-        <Text style={{ fontWeight: "700" }}>Assinaturas</Text> no Painel Admin.
+        <Text style={{ fontWeight: "700" }}>Assinaturas</Text> no Painel Admin. Filtro aqui busca no ID externo — tente
+        "essencial" ou "master".
       </Text>
 
       <AbacaTable<AbacatePaySubscriptionCheckout>
         loading={loading}
         error={error}
         vazio="Nenhuma assinatura encontrada."
-        linhas={items}
+        linhas={itens}
         colunas={[
           { label: "ID externo", minWidth: 160, render: (r) => <Text style={{ ...type.caption, color: color.text.secondary }} numberOfLines={1}>{r.externalId}</Text> },
           { label: "Status", minWidth: 100, render: (r) => <Badge label={r.status} tone={r.status === "PAID" ? "success" : r.status === "EXPIRED" ? "danger" : "info"} /> },
