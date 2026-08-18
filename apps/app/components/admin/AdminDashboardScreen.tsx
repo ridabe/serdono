@@ -187,6 +187,11 @@ export function AdminDashboardScreen() {
               onPress={() => router.push("/admin/assinaturas")}
             />
             <NavCard
+              title="AbacatePay"
+              description="Produtos, webhooks, clientes, cupons, saques e PIX — direto na conta da AbacatePay."
+              onPress={() => router.push("/admin/abacatepay")}
+            />
+            <NavCard
               title="Módulos"
               description="Catálogo de módulos do sistema e liberação por usuário."
               onPress={() => router.push("/admin/modulos")}

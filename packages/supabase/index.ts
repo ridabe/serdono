@@ -26,4 +26,5 @@ export * from "./assinatura";
 export * from "./pushNotifications";
 export * from "./adminDashboard";
 export * from "./adminAssinaturas";
+export * from "./adminAbacatePay";
 export type { Database } from "./types";
