@@ -332,8 +332,9 @@ function ProdutosTab() {
       {criando ? (
         <NovoProdutoModal
           onCancel={() => setCriando(false)}
-          onCriado={() => {
+          onCriado={(aviso) => {
             setCriando(false);
+            setActionError(aviso ?? null);
             refresh();
           }}
         />
@@ -361,7 +362,7 @@ function ProdutosTab() {
   );
 }
 
-function NovoProdutoModal({ onCancel, onCriado }: { onCancel: () => void; onCriado: () => void }) {
+function NovoProdutoModal({ onCancel, onCriado }: { onCancel: () => void; onCriado: (aviso?: string) => void }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [precoCentavos, setPrecoCentavos] = useState(0);
@@ -403,25 +404,42 @@ function NovoProdutoModal({ onCancel, onCriado }: { onCancel: () => void; onCria
     }
     setSalvando(true);
     setErro(null);
+    const externalId = `serdono-${Date.now()}`;
+    const dadosBase = {
+      externalId,
+      name: name.trim(),
+      description: description.trim() || undefined,
+      price: precoCentavos,
+      cycle: cycle || undefined,
+    };
+
     try {
-      const externalId = `serdono-${Date.now()}`;
       let imageUrl: string | undefined;
+      let avisoCapa: string | undefined;
       if (capaUri) {
         setEnviandoCapa(true);
-        // Sobe primeiro pro Storage do Ser Dono — a API da AbacatePay só
-        // aceita `imageUrl` (URL pública), sem upload de arquivo de verdade.
-        imageUrl = await uploadCapaProdutoAbacatePay(externalId, capaUri);
-        setEnviandoCapa(false);
+        try {
+          // Sobe primeiro pro Storage do Ser Dono — a API da AbacatePay só
+          // aceita `imageUrl` (URL pública), sem upload de arquivo de verdade.
+          imageUrl = await uploadCapaProdutoAbacatePay(externalId, capaUri);
+          await criarProdutoAbacatePay({ ...dadosBase, imageUrl });
+        } catch {
+          // A AbacatePay recusa `imageUrl` externa com frequência ("Invalid
+          // image URL", achado testando — mesmo erro pra URLs públicas de
+          // domínios totalmente diferentes, não é problema do nosso Storage)
+          // — nunca deixa isso bloquear o produto inteiro. Cria sem capa e
+          // avisa; a capa pode ser adicionada depois direto no painel da
+          // AbacatePay (eles têm upload próprio lá, que não passa por essa
+          // validação de URL).
+          await criarProdutoAbacatePay(dadosBase);
+          avisoCapa = "Produto criado, mas a AbacatePay recusou a capa (URL externa). Adicione a imagem direto no painel deles.";
+        } finally {
+          setEnviandoCapa(false);
+        }
+      } else {
+        await criarProdutoAbacatePay(dadosBase);
       }
-      await criarProdutoAbacatePay({
-        externalId,
-        name: name.trim(),
-        description: description.trim() || undefined,
-        price: precoCentavos,
-        cycle: cycle || undefined,
-        imageUrl,
-      });
-      onCriado();
+      onCriado(avisoCapa);
     } catch (e) {
       setErro((e as Error).message);
     } finally {
