@@ -734,7 +734,7 @@ function CuponsTab({ filtro }: { filtro: string }) {
         linhas={itens}
         colunas={[
           { label: "Código", minWidth: 120, render: (r) => <Text style={{ ...type.bodyStrong, color: color.text.primary }}>{r.id}</Text> },
-          { label: "Desconto", minWidth: 100, render: (r) => <Text style={{ ...type.body, color: color.text.secondary }}>{r.discountKind === "PERCENTAGE" ? `${r.discount}%` : formatMoney(r.discount)}</Text> },
+          { label: "Desconto", minWidth: 100, render: (r) => <Text style={{ ...type.body, color: color.text.secondary }}>{r.discountKind === "PERCENTAGE" ? `${r.discount / 100}%` : formatMoney(r.discount)}</Text> },
           { label: "Usos", minWidth: 100, render: (r) => <Text style={{ ...type.body, color: color.text.secondary }}>{r.redeemsCount}{r.maxRedeems > 0 ? ` / ${r.maxRedeems}` : " (ilimitado)"}</Text> },
           { label: "Status", minWidth: 100, render: (r) => <Badge label={r.status} tone={r.status === "ACTIVE" ? "success" : "warning"} /> },
         ]}
@@ -809,9 +809,14 @@ function NovoCupomModal({ onCancel, onCriado }: { onCancel: () => void; onCriado
       await criarCupomAbacatePay({
         code: code.trim(),
         discountKind: tipo,
-        // PERCENTAGE: número puro (10 = 10%, doc oficial). FIXED: centavos,
-        // mesma unidade do resto da API (2000 = R$ 20,00).
-        discount: tipo === "PERCENTAGE" ? Math.round(numPercentual) : descontoCentavos,
+        // PERCENTAGE: a doc oficial diz "10 = 10%", mas isso está ERRADO —
+        // achado testando de verdade: um cupom criado com discount:100
+        // (pra 100%) só deu ~1% de desconto real (20 centavos em R$19,90).
+        // O valor real é centésimo de ponto percentual: discount/100 =
+        // percentual de verdade (10000 = 100%, confirmado num cupom antigo
+        // já correto). FIXED: centavos, mesma unidade do resto da API
+        // (2000 = R$ 20,00) — não tem evidência de que este esteja errado.
+        discount: tipo === "PERCENTAGE" ? Math.round(numPercentual * 100) : descontoCentavos,
         notes: notes.trim() || undefined,
         // A doc diz que `maxRedeems` é opcional (default -1 = ilimitado), mas
         // a API real rejeita a criação sem o campo ("Property 'maxRedeems' is
