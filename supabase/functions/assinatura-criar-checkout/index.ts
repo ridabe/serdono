@@ -63,6 +63,26 @@ Deno.serve(async (req) => {
     // ativo — a própria AbacatePay recusa na hora de aplicar, no checkout.
     const cupom = typeof body?.cupom === "string" ? body.cupom.trim() : undefined;
 
+    // App instalado (Android/iOS) manda um deep link próprio (`serdono://...`,
+    // `Linking.createURL` no client) em vez do destino web padrão — pedido do
+    // dono do produto, 28/08/2026: sem isso, o app Android abria o checkout
+    // num navegador in-app e, ao terminar o pagamento, ficava preso mostrando
+    // o SITE (serdono.com.br), sem sessão nenhuma aí — o usuário tinha que
+    // fechar a aba manualmente pra voltar ao app de verdade. Com o deep link,
+    // `WebBrowser.openAuthSessionAsync` (PlanosScreen.tsx) detecta o retorno e
+    // fecha a aba sozinho, devolvendo o controle pro app.
+    //
+    // Validação simples (só aceita nosso próprio domínio/esquema) — o valor
+    // vem de um usuário autenticado, mas só vira parâmetro passado adiante
+    // pra AbacatePay, sem efeito colateral no nosso lado; ainda assim não faz
+    // sentido aceitar redirecionar o fim do checkout pra um destino arbitrário.
+    function validarRedirect(v: unknown, padrao: string): string {
+      if (typeof v === "string" && (v.startsWith("serdono://") || v.startsWith(BASE_URL))) return v;
+      return padrao;
+    }
+    const completionUrl = validarRedirect(body?.completionUrl, `${BASE_URL}/assinatura`);
+    const returnUrl = validarRedirect(body?.returnUrl, `${BASE_URL}/planos`);
+
     const produtoId = PRODUTO_POR_PLANO[plano];
     if (!produtoId) {
       console.error(`Produto AbacatePay não configurado pro plano ${plano}`);
@@ -109,8 +129,8 @@ Deno.serve(async (req) => {
         customerId,
         externalId,
         methods: ["CARD"],
-        completionUrl: `${BASE_URL}/assinatura`,
-        returnUrl: `${BASE_URL}/planos`,
+        completionUrl,
+        returnUrl,
         ...(cupom ? { coupons: [cupom] } : {}),
       }),
     });

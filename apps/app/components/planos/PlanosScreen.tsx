@@ -1,3 +1,4 @@
+import * as Linking from "expo-linking";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import * as WebBrowser from "expo-web-browser";
@@ -12,8 +13,15 @@ import { ScreenHeader } from "../shell/ScreenHeader";
  * produto, 17/08/2026). Deslogado → manda pro login (fluxo simples, sem
  * threading de "next" pelo login — assina depois de entrar). Logado → chama
  * a Edge Function que cria o checkout na AbacatePay e abre a URL (RN-17/
- * RNF-8: checkout nasce sempre na web — `WebBrowser.openBrowserAsync` no
- * nativo, mesmo padrão de `DicasCategoriaScreen.tsx`; `window.location` na web).
+ * RNF-8: checkout nasce sempre na web — o app nativo só abre a URL num
+ * navegador, nunca cobra dentro do app; `window.location` na web).
+ *
+ * No nativo (achado/corrigido 28/08/2026): `WebBrowser.openAuthSessionAsync`
+ * com um deep link próprio como destino de conclusão, não mais
+ * `openBrowserAsync` puro — sem isso o usuário terminava o pagamento e ficava
+ * preso vendo o site público dentro do navegador in-app, tendo que fechar a
+ * aba manualmente pra voltar ao app. Mesmo mecanismo do login com Google
+ * (`LoginScreen.tsx`).
  */
 export function PlanosScreen() {
   const router = useRouter();
@@ -41,11 +49,29 @@ export function PlanosScreen() {
     setError(null);
     setCarregandoPlano(plano);
     try {
-      const url = await criarCheckout(plano as "essencial" | "master", cupom);
       if (Platform.OS === "web") {
+        const url = await criarCheckout(plano as "essencial" | "master", cupom);
         window.location.href = url;
-      } else {
-        await WebBrowser.openBrowserAsync(url);
+        return;
+      }
+
+      // App instalado (Android/iOS, pedido do dono do produto, 28/08/2026):
+      // manda um deep link próprio (`serdono://assinatura`) como destino de
+      // conclusão — sem isso, o checkout terminava dentro do navegador in-app
+      // mostrando o SITE público (sem sessão nenhuma aí), e o usuário tinha
+      // que fechar a aba manualmente pra voltar ao app de verdade.
+      // `openAuthSessionAsync` (mesmo mecanismo já usado no login com Google,
+      // `LoginScreen.tsx`) observa esse deep link e fecha a aba sozinho assim
+      // que a AbacatePay redireciona pra lá, devolvendo o controle pro app.
+      const completionUrl = Linking.createURL("assinatura");
+      const returnUrl = Linking.createURL("planos");
+      const url = await criarCheckout(plano as "essencial" | "master", cupom, { completionUrl, returnUrl });
+      const result = await WebBrowser.openAuthSessionAsync(url, completionUrl);
+      if (result.type === "success") {
+        // Pagamento pode levar alguns segundos pra confirmar do lado da
+        // AbacatePay/webhook — `AssinaturaScreen` mostra "confirmando" e
+        // repete a consulta sozinha enquanto isso (ver `AssinaturaScreen.tsx`).
+        router.push("/assinatura");
       }
     } catch (e) {
       setError((e as Error).message);

@@ -1,5 +1,6 @@
+import { useFocusEffect } from "@react-navigation/native";
 import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { ActivityIndicator, Pressable, ScrollView, Text, View } from "react-native";
 import { Card, color, ConfirmModal, IconBadge, moduleAccent, MODULE_ACCENT_CYCLE, space, type } from "@serdono/ui";
 import { labelPlano } from "@serdono/core";
@@ -20,6 +21,11 @@ import { ROTA_POR_SLUG } from "./rotas";
  * `packages/supabase/modules.ts`) em vez de sumir do catálogo — cadeado no
  * card, e tocar abre um aviso convidando a trocar de plano em vez de abrir a
  * tela do módulo.
+ *
+ * Recarrega no FOCO da tela, não só no mount (`useFocusEffect`, pedido do
+ * dono do produto, 28/08/2026) — quem acabou de assinar num checkout aberto
+ * a partir daqui e volta pra esta tela (app instalado) precisa ver o cadeado
+ * sumir sem precisar reabrir o app.
  */
 export function ModulosScreen() {
   const router = useRouter();
@@ -27,17 +33,19 @@ export function ModulosScreen() {
   const [loading, setLoading] = useState(true);
   const [moduloBloqueado, setModuloBloqueado] = useState<MyModule | null>(null);
 
-  useEffect(() => {
-    (async () => {
-      const session = await getCurrentSession();
-      if (!session) {
+  useFocusEffect(
+    useCallback(() => {
+      (async () => {
+        const session = await getCurrentSession();
+        if (!session) {
+          setLoading(false);
+          return;
+        }
+        setModules(await listMyModules(session.user.id));
         setLoading(false);
-        return;
-      }
-      setModules(await listMyModules(session.user.id));
-      setLoading(false);
-    })();
-  }, []);
+      })();
+    }, [])
+  );
 
   return (
     <View style={{ flex: 1, backgroundColor: color.bg.canvas }}>

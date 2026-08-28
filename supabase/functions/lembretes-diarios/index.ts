@@ -22,6 +22,14 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+// Achado/corrigido 28/08/2026, testando a function nova `assinatura-
+// verificar-vencidas`: o secret do Vault que autentica o pg_cron aqui
+// (`edge_functions_service_role_key`) estava desatualizado — este cron vinha
+// devolvendo 401 silenciosamente havia quem sabe quanto tempo (nenhum push
+// de lembrete estava saindo, sem nenhum alerta visível disso). Trocado por
+// `CRON_AUTH_TOKEN`, um secret dedicado só pra isso (nunca a service_role
+// key de verdade, que continua só pro client `supabase` acima).
+const CRON_AUTH_TOKEN = Deno.env.get("CRON_AUTH_TOKEN")!;
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
@@ -253,11 +261,11 @@ async function enviarViaExpo(tokens: string[], titulo: string, corpo: string): P
 
 Deno.serve(async (req) => {
   try {
-    // Chamada só pelo pg_cron com a service_role key — não precisa de
-    // Authorization de usuário, mas confere a service_role pra não virar um
+    // Chamada só pelo pg_cron com `CRON_AUTH_TOKEN` — não precisa de
+    // Authorization de usuário, mas confere o token pra não virar um
     // endpoint público que qualquer um pode martelar.
     const authHeader = req.headers.get("Authorization");
-    if (authHeader !== `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`) {
+    if (authHeader !== `Bearer ${CRON_AUTH_TOKEN}`) {
       return new Response(JSON.stringify({ error: "Não autorizado" }), { status: 401 });
     }
 

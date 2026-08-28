@@ -12,6 +12,7 @@ import {
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { color } from "@serdono/ui";
 import { AppUpdateAlert } from "../components/AppUpdateAlert";
+import { InstallAppPrompt } from "../components/InstallAppPrompt";
 import { DrawerProvider } from "../components/shell/DrawerContext";
 
 // DESIGN_SYSTEM.md §3.3 — RN não faz fallback de fonte do sistema: Sora e Inter
@@ -65,6 +66,12 @@ export default function RootLayout() {
           <Stack.Screen name="planos" options={{ presentation: "modal" }} />
         </Stack>
         <AppUpdateAlert />
+        {/* Banner "baixe o app" (pedido do dono do produto, 28/08/2026) — mora
+            na raiz igual `AppUpdateAlert`, de propósito: precisa aparecer em
+            QUALQUER rota acessada pela web (marketing, login, telas
+            protegidas), não só dentro de `(protected)`. Só se auto-renderiza
+            quando `isWebPlatform`, então é inócuo no app instalado. */}
+        <InstallAppPrompt />
       </DrawerProvider>
     </SafeAreaProvider>
   );

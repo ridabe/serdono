@@ -31,8 +31,14 @@ export async function listarAssinaturas(userId: string): Promise<SubscriptionRow
  * AbacatePay só libera cupom que estiver na lista `coupons` enviada na
  * criação, achado lendo a doc de `subscriptions/create`).
  */
-export async function criarCheckout(plano: "essencial" | "master", cupom?: string): Promise<string> {
-  const { data, error } = await supabase.functions.invoke("assinatura-criar-checkout", { body: { plano, cupom: cupom || undefined } });
+export async function criarCheckout(
+  plano: "essencial" | "master",
+  cupom?: string,
+  opts?: { completionUrl?: string; returnUrl?: string }
+): Promise<string> {
+  const { data, error } = await supabase.functions.invoke("assinatura-criar-checkout", {
+    body: { plano, cupom: cupom || undefined, completionUrl: opts?.completionUrl, returnUrl: opts?.returnUrl },
+  });
   if (error) {
     const context = (error as { context?: Response }).context;
     if (context) {
