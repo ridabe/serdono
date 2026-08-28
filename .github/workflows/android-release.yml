@@ -113,29 +113,25 @@ jobs:
       - name: Instalar dependências
         run: pnpm install --frozen-lockfile
 
-      - name: Setup EAS
-        uses: expo/expo-github-action@v8
-        with:
-          # Versão fixa, não "latest" — mitigação preventiva contra release
-          # quebrado do eas-cli (expo/eas-cli#2930), mas ISOLADA não resolveu
-          # o erro de verdade (achado 28/08/2026, testando: `eas-version:
-          # 22.5.0` falhou com o MESMO "yarn failed with exit code 1" que
-          # "latest"/23.0.0 — não é específico de versão do eas-cli).
-          eas-version: 22.5.0
-          token: ${{ secrets.EXPO_TOKEN }}
-        env:
-          # Causa real (confirmada testando a versão fixa acima e eliminando
-          # a hipótese do eas-cli): `expo-github-action@v8` declara
-          # `using: node20` no próprio action.yml — o GitHub passou a rodar
-          # actions Node20 sob um runtime Node24 por padrão (deprecation
-          # 19/09/2025), e é dentro DESSE runtime que a action chama `yarn`
-          # internamente pra instalar o eas-cli. A falha "yarn failed with
-          # exit code 1" só aparece nesse novo runtime — não em código nosso,
-          # não numa versão específica do eas-cli. Variável sugerida pela
-          # própria mensagem de aviso do GitHub força o runtime Node20 de
-          # volta só pra esta action, sem afetar `actions/setup-node` (Node
-          # 20 explícito acima) nem o resto do job.
-          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+      # `expo/expo-github-action@v8` foi removida (achado 28/08/2026, 3ª
+      # tentativa de corrigir o mesmo erro): o passo "Setup EAS" dela instala
+      # o eas-cli internamente via yarn, e essa instalação vem quebrando com
+      # `Error: The process '/usr/local/bin/yarn' failed with exit code 1` —
+      # sobreviveu a fixar a versão do eas-cli (22.5.0 em vez de "latest",
+      # mesmo erro) E a forçar `ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION` (a
+      # causa aparente, deprecation do Node20 nas actions do GitHub desde
+      # 19/09/2025 — variável setada tanto no step quanto no job, mesmo erro
+      # nas duas vezes). Em vez de continuar caçando o escopo certo de uma
+      # correção que expira em 23/09/2026 de qualquer forma, o CLI passou a
+      # ser instalado direto com `npm` (mesmo Node 20 já configurado pelo
+      # `actions/setup-node` acima, sem depender do instalador interno da
+      # action nem do yarn) — `EXPO_TOKEN` vai pro `$GITHUB_ENV` manualmente,
+      # mesmo efeito que o input `token:` da action fazia.
+      - name: Instalar eas-cli
+        run: npm install --global eas-cli@22.5.0
+
+      - name: Autenticar EAS
+        run: echo "EXPO_TOKEN=${{ secrets.EXPO_TOKEN }}" >> "$GITHUB_ENV"
 
       - name: Build AAB (production)
         working-directory: apps/app
