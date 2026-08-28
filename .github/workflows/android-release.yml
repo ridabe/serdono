@@ -116,17 +116,26 @@ jobs:
       - name: Setup EAS
         uses: expo/expo-github-action@v8
         with:
-          # Fixo, não "latest" (achado 28/08/2026): a v23.0.0 do eas-cli quebra
-          # a instalação via yarn dentro do próprio expo-github-action@v8 —
-          # "Usage Error: No project found" (yarn 4.6.0 exige um projeto no
-          # diretório temporário onde a action instala o CLI global), bug já
-          # reportado (expo/eas-cli#2930, sem fix dos mantenedores até agora).
-          # "latest" reintroduz esse risco a qualquer novo release quebrado —
-          # fixar aqui e subir manualmente só depois de confirmar que uma
-          # versão nova funciona. `eas.json` só exige `>= 12.0.0`, então
-          # qualquer versão recente e estável serve.
+          # Versão fixa, não "latest" — mitigação preventiva contra release
+          # quebrado do eas-cli (expo/eas-cli#2930), mas ISOLADA não resolveu
+          # o erro de verdade (achado 28/08/2026, testando: `eas-version:
+          # 22.5.0` falhou com o MESMO "yarn failed with exit code 1" que
+          # "latest"/23.0.0 — não é específico de versão do eas-cli).
           eas-version: 22.5.0
           token: ${{ secrets.EXPO_TOKEN }}
+        env:
+          # Causa real (confirmada testando a versão fixa acima e eliminando
+          # a hipótese do eas-cli): `expo-github-action@v8` declara
+          # `using: node20` no próprio action.yml — o GitHub passou a rodar
+          # actions Node20 sob um runtime Node24 por padrão (deprecation
+          # 19/09/2025), e é dentro DESSE runtime que a action chama `yarn`
+          # internamente pra instalar o eas-cli. A falha "yarn failed with
+          # exit code 1" só aparece nesse novo runtime — não em código nosso,
+          # não numa versão específica do eas-cli. Variável sugerida pela
+          # própria mensagem de aviso do GitHub força o runtime Node20 de
+          # volta só pra esta action, sem afetar `actions/setup-node` (Node
+          # 20 explícito acima) nem o resto do job.
+          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
       - name: Build AAB (production)
         working-directory: apps/app
