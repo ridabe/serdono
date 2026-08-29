@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts as useSora, Sora_600SemiBold, Sora_700Bold } from "@expo-google-fonts/sora";
@@ -13,6 +13,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { color } from "@serdono/ui";
 import { AppUpdateAlert } from "../components/AppUpdateAlert";
 import { InstallAppPrompt } from "../components/InstallAppPrompt";
+import { LinkminerButton } from "../components/LinkminerButton";
 import { DrawerProvider } from "../components/shell/DrawerContext";
 
 // DESIGN_SYSTEM.md §3.3 — RN não faz fallback de fonte do sistema: Sora e Inter
@@ -20,6 +21,12 @@ import { DrawerProvider } from "../components/shell/DrawerContext";
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
 export default function RootLayout() {
+  // Altura de verdade do banner "baixe o app" (pedido do dono do produto,
+  // 28/08/2026) — repassada pro botão "Fale conosco" subir e não ficar
+  // sobreposto ao banner. Ver comentário completo em `InstallAppPrompt.tsx`
+  // (`onAltura`) e `LinkminerButton.web.tsx` (`bottomOffset`).
+  const [installBannerAltura, setInstallBannerAltura] = useState(0);
+
   const [soraLoaded] = useSora({ Sora_600SemiBold, Sora_700Bold });
   const [interLoaded] = useInter({
     Inter_400Regular,
@@ -71,7 +78,16 @@ export default function RootLayout() {
             QUALQUER rota acessada pela web (marketing, login, telas
             protegidas), não só dentro de `(protected)`. Só se auto-renderiza
             quando `isWebPlatform`, então é inócuo no app instalado. */}
-        <InstallAppPrompt />
+        <InstallAppPrompt onAltura={setInstallBannerAltura} />
+        {/* Botão "Fale conosco" da Linkminer (pedido do dono do produto,
+            28/08/2026) — mora na raiz pelo mesmo motivo dos dois acima, mas
+            só se mostra em rota PÚBLICA (detecção por sessão dentro do
+            próprio componente, ver comentário em `LinkminerButton.web.tsx`):
+            nas telas logadas a bolha da Mary já ocupa o mesmo canto da tela.
+            `bottomOffset` sobe o botão quando o banner "baixe o app" está
+            visível, pra não ficar um em cima do outro (achado testando: os
+            dois disputavam o mesmo canto inferior). */}
+        <LinkminerButton bottomOffset={installBannerAltura} />
       </DrawerProvider>
     </SafeAreaProvider>
   );

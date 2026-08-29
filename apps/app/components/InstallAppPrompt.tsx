@@ -70,8 +70,17 @@ function gravarDispensado() {
  * diferente de `AppUpdateAlert.tsx`, que é bloqueio de verdade) — dispensável,
  * lembrado por até 14 dias via `localStorage` (não usa `AsyncStorage`: só
  * roda na web, e web mobile também tem `localStorage` normalmente).
+ *
+ * `onAltura` (pedido do dono do produto, 28/08/2026, achado ao adicionar o
+ * botão "Fale conosco" da Linkminer): reporta a altura de verdade deste
+ * banner (0 quando escondido/dispensado) pro `_layout.tsx` repassar como
+ * `bottomOffset` do botão flutuante — sem isso os dois ficavam sobrepostos
+ * no canto inferior, já que o banner ocupa a largura inteira e o botão
+ * também mora perto do rodapé. Altura MEDIDA (`onLayout`), não estimada: o
+ * texto varia bastante entre os 3 dispositivos (a variação iOS, com as
+ * instruções expandidas, fica bem mais alta que Android/desktop).
  */
-export function InstallAppPrompt() {
+export function InstallAppPrompt({ onAltura }: { onAltura?: (altura: number) => void }) {
   const [dispositivo, setDispositivo] = useState<Dispositivo | null>(null);
   const [storeUrl, setStoreUrl] = useState<string | null>(null);
   const [dispensado, setDispensado] = useState(true);
@@ -86,8 +95,14 @@ export function InstallAppPrompt() {
       .catch(() => {}); // banner promocional — falha de leitura só não mostra o link
   }, []);
 
-  if (!isWebPlatform || !dispositivo || dispensado) return null;
-  if (dispositivo !== "ios" && !storeUrl) return null; // nada pra linkar ainda
+  const visivel = isWebPlatform && !!dispositivo && !dispensado && (dispositivo === "ios" || !!storeUrl);
+
+  useEffect(() => {
+    if (!visivel) onAltura?.(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visivel]);
+
+  if (!visivel || !dispositivo) return null;
 
   function dispensar() {
     gravarDispensado();
@@ -121,6 +136,7 @@ export function InstallAppPrompt() {
     // (só faz sentido na web) — `as any` de propósito, componente inteiro só
     // renderiza quando `isWebPlatform` é verdadeiro.
     <View
+      onLayout={(e) => onAltura?.(e.nativeEvent.layout.height)}
       style={
         {
           position: "fixed",
