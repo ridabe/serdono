@@ -27,7 +27,9 @@ const LARGURA_DRAWER = Math.min(300, Dimensions.get("window").width * 0.82);
 export function AppDrawer() {
   const router = useRouter();
   const { open, closeDrawer } = useDrawer();
-  const { temOutrosModulos, modulos } = useModulosExtras();
+  // `open` como refetchKey (ver comentário em `useModulosExtras.ts`) — busca
+  // de novo toda vez que o menu abre, não só na primeira montagem do app.
+  const { temOutrosModulos, modulos } = useModulosExtras(open);
   const [moduloBloqueado, setModuloBloqueado] = useState<MyModule | null>(null);
   const translateX = useRef(new Animated.Value(-LARGURA_DRAWER)).current;
 

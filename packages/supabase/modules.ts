@@ -72,20 +72,23 @@ export async function trocarOrdemModules(a: { id: string; ordem: number }, b: { 
 
 export interface ModuleAccessRow extends ModuleRow {
   habilitado: boolean;
+  /** Libera o módulo pro usuário mesmo que o plano atual não atenda `plano_minimo` (pedido do dono do produto, 28/08/2026) — cortesia manual, revogável a qualquer momento. */
+  cortesia: boolean;
 }
 
 /** Catálogo inteiro + estado de liberação de um usuário específico, pro admin montar os toggles. */
 export async function listUserModuleAccess(userId: string): Promise<ModuleAccessRow[]> {
   const { data, error } = await supabase
     .from("modules")
-    .select("*, user_modules(habilitado)")
+    .select("*, user_modules(habilitado, cortesia)")
     .eq("user_modules.user_id", userId)
     .order("ordem")
     .order("nome");
   if (error) throw error;
-  return (data as (ModuleRow & { user_modules: { habilitado: boolean }[] })[]).map((m) => ({
+  return (data as (ModuleRow & { user_modules: { habilitado: boolean; cortesia: boolean }[] })[]).map((m) => ({
     ...m,
     habilitado: m.user_modules[0]?.habilitado ?? false,
+    cortesia: m.user_modules[0]?.cortesia ?? false,
   }));
 }
 
@@ -93,6 +96,23 @@ export async function setModuleAccess(userId: string, moduleId: string, habilita
   const { error } = await supabase
     .from("user_modules")
     .upsert({ user_id: userId, module_id: moduleId, habilitado }, { onConflict: "user_id,module_id" });
+  if (error) throw error;
+}
+
+/**
+ * Concede/revoga cortesia de módulo (pedido do dono do produto, 28/08/2026)
+ * — libera um módulo específico pra um usuário mesmo que o plano atual dele
+ * não atenda `plano_minimo`, sem mudar o plano inteiro (diferente de
+ * `admin-plano-definir`, que troca `users.plano_atual` pra sempre). Ao
+ * CONCEDER, reabilita o módulo também (`habilitado: true`) — cortesia pra um
+ * módulo que o admin tinha desligado por outro motivo não devia continuar
+ * escondida; ao REVOGAR, mexe só em `cortesia`, sem tocar em `habilitado`
+ * (não é o botão de desligar o módulo, é só o de tirar o passe livre do plano).
+ */
+export async function setModuleCortesia(userId: string, moduleId: string, cortesia: boolean): Promise<void> {
+  const { error } = await supabase
+    .from("user_modules")
+    .upsert({ user_id: userId, module_id: moduleId, cortesia, ...(cortesia ? { habilitado: true } : {}) }, { onConflict: "user_id,module_id" });
   if (error) throw error;
 }
 
@@ -105,7 +125,7 @@ export interface MyModule {
   descricao: string | null;
   /** `modules.plano_minimo` (`gratuito`/`essencial`/`master`) — direto pra tela decidir o rótulo do selo sem outra consulta. */
   planoMinimo: string;
-  /** `true` quando o plano atual do usuário NÃO atende `planoMinimo` — módulo aparece no catálogo/menu, mas some/exibe aviso ao abrir (mudança de 17/08/2026: antes o módulo simplesmente não aparecia; agora aparece bloqueado, com CTA pra trocar de plano). */
+  /** `true` quando o plano atual do usuário NÃO atende `planoMinimo` E o admin não concedeu cortesia — módulo aparece no catálogo/menu, mas some/exibe aviso ao abrir (mudança de 17/08/2026: antes o módulo simplesmente não aparecia; agora aparece bloqueado, com CTA pra trocar de plano). */
   bloqueado: boolean;
 }
 
@@ -116,6 +136,12 @@ export interface MyModule {
  * (`.in("plano_minimo", planosPermitidos(...))`) o módulo acima do plano
  * simplesmente sumia do catálogo — troca pedida pelo dono do produto pra
  * virar upsell em vez de ficar invisível.
+ *
+ * `user_modules.cortesia` (pedido do dono do produto, 28/08/2026) passa por
+ * cima do gate de plano — um módulo com `cortesia = true` nunca fica
+ * `bloqueado`, mesmo que `plano_minimo` esteja acima de `plano_atual`.
+ * Concedido/revogado pelo admin em `AdminUserModulesScreen.tsx`
+ * (`setModuleCortesia`), nunca pelo próprio usuário.
  */
 export async function listMyModules(userId: string): Promise<MyModule[]> {
   // Consulta A PARTIR de `modules` (não de `user_modules`) só pra poder usar
@@ -129,19 +155,26 @@ export async function listMyModules(userId: string): Promise<MyModule[]> {
   const permitidos = planosPermitidos(planoAtual);
   const { data, error } = await supabase
     .from("modules")
-    .select("id, slug, nome, descricao, plano_minimo, user_modules!inner(habilitado)")
+    .select("id, slug, nome, descricao, plano_minimo, user_modules!inner(habilitado, cortesia)")
     .eq("ativo", true)
     .eq("user_modules.user_id", userId)
     .eq("user_modules.habilitado", true)
     .order("ordem");
   if (error) throw error;
-  return (data as unknown as { id: string; slug: string; nome: string; descricao: string | null; plano_minimo: string; user_modules: unknown }[]).map(
-    ({ user_modules: _um, plano_minimo, ...m }) => ({
-      ...m,
-      planoMinimo: plano_minimo,
-      bloqueado: !permitidos.includes(plano_minimo),
-    })
-  );
+  return (
+    data as unknown as {
+      id: string;
+      slug: string;
+      nome: string;
+      descricao: string | null;
+      plano_minimo: string;
+      user_modules: { cortesia: boolean }[];
+    }[]
+  ).map(({ user_modules, plano_minimo, ...m }) => ({
+    ...m,
+    planoMinimo: plano_minimo,
+    bloqueado: !permitidos.includes(plano_minimo) && !user_modules[0]?.cortesia,
+  }));
 }
 
 /** Checagem rápida usada no redirecionamento pós-login e nos guards de rota de módulo (SDD-31) — nunca concede acesso a um módulo `bloqueado` pelo plano. */
@@ -164,26 +197,34 @@ export interface ModuloComNovidade {
   anuncioGrupo: string | null;
 }
 
-/** Módulos liberados pro usuário com `novidade_vista = false` — entram na fila de pop-up da Início até serem marcados vistos. */
+/**
+ * Módulos liberados pro usuário com `novidade_vista = false` — entram na fila
+ * de pop-up da Início até serem marcados vistos. Filtro de plano feito em
+ * memória (não mais `.in("plano_minimo", ...)` na query), pra um módulo com
+ * `cortesia = true` (28/08/2026) também entrar na fila mesmo acima do plano —
+ * mesmo raciocínio de `listMyModules`.
+ */
 export async function listModulosComNovidadePendente(userId: string): Promise<ModuloComNovidade[]> {
   const planoAtual = await getPlanoAtual(userId);
+  const permitidos = planosPermitidos(planoAtual);
   const { data, error } = await supabase
     .from("modules")
-    .select("id, slug, nome, descricao, anuncio_grupo, user_modules!inner(habilitado, novidade_vista)")
+    .select("id, slug, nome, descricao, anuncio_grupo, plano_minimo, user_modules!inner(habilitado, novidade_vista, cortesia)")
     .eq("ativo", true)
     .eq("user_modules.user_id", userId)
     .eq("user_modules.habilitado", true)
     .eq("user_modules.novidade_vista", false)
-    .in("plano_minimo", planosPermitidos(planoAtual))
     .order("ordem");
   if (error) throw error;
-  return (data as unknown as (ModuleRow & { anuncio_grupo: string | null })[]).map((m) => ({
-    id: m.id,
-    slug: m.slug,
-    nome: m.nome,
-    descricao: m.descricao,
-    anuncioGrupo: m.anuncio_grupo,
-  }));
+  return (data as unknown as (ModuleRow & { anuncio_grupo: string | null; user_modules: { cortesia: boolean }[] })[])
+    .filter((m) => permitidos.includes(m.plano_minimo) || m.user_modules[0]?.cortesia)
+    .map((m) => ({
+      id: m.id,
+      slug: m.slug,
+      nome: m.nome,
+      descricao: m.descricao,
+      anuncioGrupo: m.anuncio_grupo,
+    }));
 }
 
 export async function marcarNovidadesModulosVistas(userId: string, moduleIds: string[]): Promise<void> {

@@ -1690,6 +1690,7 @@ export type Database = {
       }
       user_modules: {
         Row: {
+          cortesia: boolean
           habilitado: boolean
           habilitado_em: string
           id: string
@@ -1698,6 +1699,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          cortesia?: boolean
           habilitado?: boolean
           habilitado_em?: string
           id?: string
@@ -1706,6 +1708,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          cortesia?: boolean
           habilitado?: boolean
           habilitado_em?: string
           id?: string
