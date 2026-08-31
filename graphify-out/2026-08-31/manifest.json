@@ -20,13 +20,13 @@
     "semantic_hash": ""
   },
   "apps/app/app.config.js": {
-    "mtime": 1788008456.9642212,
-    "ast_hash": "29f36ced1896ecb6364f9d36483e0fc1",
+    "mtime": 1786636462.7216513,
+    "ast_hash": "ef6e6744445c27a190387c232fd68320",
     "semantic_hash": ""
   },
   "apps/app/app/_layout.tsx": {
-    "mtime": 1788012117.1029394,
-    "ast_hash": "75248a37981e9f132db45f63c9046d87",
+    "mtime": 1785764063.9728317,
+    "ast_hash": "a8657830413475294c7c92fba6a9eabd",
     "semantic_hash": ""
   },
   "apps/app/app/cadastro/bem-vindo.tsx": {
@@ -70,8 +70,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/diagnostico/ResultadoScreen.tsx": {
-    "mtime": 1788189618.3188286,
-    "ast_hash": "50f0d201f38943a55f5a0d53d01823fd",
+    "mtime": 1785851393.5743418,
+    "ast_hash": "cfb317cbc59894ccf98c8bcc82c9b7b6",
     "semantic_hash": ""
   },
   "apps/app/components/diagnostico/blocks.ts": {
@@ -105,8 +105,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/home/HomeScreen.tsx": {
-    "mtime": 1788014839.1640823,
-    "ast_hash": "54207eff459ee4f3553c3cba3ff34c38",
+    "mtime": 1785704147.1363642,
+    "ast_hash": "0478d9dddf2c3f1e2074d7d7b3e36002",
     "semantic_hash": ""
   },
   "apps/app/components/home/NavBar.tsx": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "apps/app/package.json": {
-    "mtime": 1788014808.5472083,
-    "ast_hash": "56bb4768c4fcd037b53e6b3ce935d585",
+    "mtime": 1786581890.1433532,
+    "ast_hash": "ebf49eb82268b5f4c8e6420a1df75a24",
     "semantic_hash": ""
   },
   "apps/app/tsconfig.json": {
@@ -150,13 +150,13 @@
     "semantic_hash": ""
   },
   "packages/core/fitScore.test.ts": {
-    "mtime": 1788189275.5025089,
-    "ast_hash": "4c4d346c8775f279b08f1d4fc7de3f46",
+    "mtime": 1785851690.3433034,
+    "ast_hash": "a6a9b8d6f3a749be95f2ffac5bf0d92f",
     "semantic_hash": ""
   },
   "packages/core/fitScore.ts": {
-    "mtime": 1788189191.1756692,
-    "ast_hash": "c3a4a71a838eee46ff3fe76b6692f9a3",
+    "mtime": 1785851674.271982,
+    "ast_hash": "6a9b29257e32fa024ba6ce6753814303",
     "semantic_hash": ""
   },
   "packages/core/index.ts": {
@@ -180,8 +180,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/index.ts": {
-    "mtime": 1787061680.0106118,
-    "ast_hash": "0b727b666567b26883d55d38986f38c7",
+    "mtime": 1786973117.849785,
+    "ast_hash": "c13f9a935c48591789ed895935063842",
     "semantic_hash": ""
   },
   "packages/supabase/package.json": {
@@ -200,8 +200,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/types.ts": {
-    "mtime": 1788189563.2866921,
-    "ast_hash": "787240fcee58b62d5c93c6698b271989",
+    "mtime": 1786972997.6386998,
+    "ast_hash": "188e3a2e1daf3749f8b284509c66a8be",
     "semantic_hash": ""
   },
   "packages/ui/components/Button.tsx": {
@@ -220,8 +220,8 @@
     "semantic_hash": ""
   },
   "packages/ui/index.ts": {
-    "mtime": 1787062656.0618553,
-    "ast_hash": "bb09c564d5d5b1510f973cf17129abeb",
+    "mtime": 1786456399.8658836,
+    "ast_hash": "f49bccf7401f7d1b04d733e1c48f2838",
     "semantic_hash": ""
   },
   "packages/ui/package.json": {
@@ -245,8 +245,8 @@
     "semantic_hash": ""
   },
   "supabase/functions/diagnostic-match/index.ts": {
-    "mtime": 1788189444.3893032,
-    "ast_hash": "170e1b32ec024d56ade70ff88c5a9265",
+    "mtime": 1786452915.102573,
+    "ast_hash": "0084dd53aadd7240a4037d7a7282af46",
     "semantic_hash": ""
   },
   "vercel.json": {
@@ -265,13 +265,13 @@
     "semantic_hash": ""
   },
   "docs/PRD.md": {
-    "mtime": 1788179877.2425258,
-    "ast_hash": "010bbdabaff8acdc9e7f977a35828f81",
+    "mtime": 1786973988.7457228,
+    "ast_hash": "6b4128de6933b666ede69f94c5641a86",
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1788179859.5851755,
-    "ast_hash": "41c9f09ac3da7b1cdfe29922e4afc5be",
+    "mtime": 1786974048.184226,
+    "ast_hash": "c1938b7415d4881c66ba7cc570209b42",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
@@ -395,8 +395,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/admin/AdminDashboardScreen.tsx": {
-    "mtime": 1787061872.3811686,
-    "ast_hash": "e9e334a31bd3c03a892c854f81379ba2",
+    "mtime": 1786455912.4917307,
+    "ast_hash": "f66834f2d98222c44c5b7e417561e211",
     "semantic_hash": ""
   },
   "apps/app/components/assistente/AssistenteScreen.tsx": {
@@ -420,8 +420,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/storage.ts": {
-    "mtime": 1787065757.1766038,
-    "ast_hash": "103ed3d158e8098944d2e52f6a8cf440",
+    "mtime": 1785763942.3126612,
+    "ast_hash": "806a1511eb7a38d67bb72b2b447f2757",
     "semantic_hash": ""
   },
   "apps/app/app/(protected)/perfil/index.tsx": {
@@ -435,8 +435,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/perfil/PerfilScreen.tsx": {
-    "mtime": 1786983573.7793317,
-    "ast_hash": "0ce9fd69434b67490dc2dcf60f4a5fb2",
+    "mtime": 1786302277.098154,
+    "ast_hash": "3deb221e1285a3de6083d7a8d4d7e90a",
     "semantic_hash": ""
   },
   "apps/app/components/perfil/usePerfilForm.ts": {
@@ -500,8 +500,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/admin/AdminUserModulesScreen.tsx": {
-    "mtime": 1788008522.498199,
-    "ast_hash": "e7dc6aaa65c9404adde88fcd9f5ac80d",
+    "mtime": 1785335352.5820394,
+    "ast_hash": "41d13de6f8d793b03c062564bbe7a5db",
     "semantic_hash": ""
   },
   "apps/app/components/admin/AdminUsersScreen.tsx": {
@@ -520,8 +520,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/modulos/ModulosScreen.tsx": {
-    "mtime": 1787929341.9042325,
-    "ast_hash": "2bb4066fd59157cf07e5b2ed6863dd6a",
+    "mtime": 1786301941.830875,
+    "ast_hash": "44320bdd9f845d7a103f94741f0f78b1",
     "semantic_hash": ""
   },
   "apps/app/eas.json": {
@@ -545,8 +545,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/modules.ts": {
-    "mtime": 1788008486.015463,
-    "ast_hash": "e7abb8cc6b9cf8106e1db7c0171326a3",
+    "mtime": 1786973088.9762065,
+    "ast_hash": "956020bf4e346d7c1015d9ba3576ab06",
     "semantic_hash": ""
   },
   "packages/ui/components/Input.tsx": {
@@ -560,8 +560,8 @@
     "semantic_hash": ""
   },
   ".github/workflows/android-release.yml": {
-    "mtime": 1787938048.2077334,
-    "ast_hash": "c3e884cd4916271d8ca050a762a33b86",
+    "mtime": 1785333401.028788,
+    "ast_hash": "2b034871a0636e3c81c4be34c6865883",
     "semantic_hash": ""
   },
   "apps/app/app/(protected)/jornada/_layout.tsx": {
@@ -575,8 +575,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/jornada/EscolherNichoScreen.tsx": {
-    "mtime": 1788189630.0765853,
-    "ast_hash": "1ec2ec1d03483ed83c65e4ab1540333f",
+    "mtime": 1785852383.6508944,
+    "ast_hash": "ea2d9edf1d77a6f26327e56fdbe95301",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/JornadaScreen.tsx": {
@@ -1050,8 +1050,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/jornada/useJornadaConclusao.ts": {
-    "mtime": 1786982234.2350945,
-    "ast_hash": "7cc55851cb201c2e4a1cc8be7cf9eceb",
+    "mtime": 1785510661.1777744,
+    "ast_hash": "32261c7137a66d08adb6946f67475315",
     "semantic_hash": ""
   },
   "apps/app/components/jornada/useOrganizacao.ts": {
@@ -1140,8 +1140,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/boasVindas/AppWelcomeScreen.tsx": {
-    "mtime": 1786982706.6220832,
-    "ast_hash": "5cf6926789eeab74221a87082c399ff1",
+    "mtime": 1785688408.6607926,
+    "ast_hash": "fb5cff2b8dbf8e6407cb770a53fa9f09",
     "semantic_hash": ""
   },
   "apps/app/components/shell/MobileTabBar.tsx": {
@@ -1330,8 +1330,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/shell/AppDrawer.tsx": {
-    "mtime": 1788007669.8267016,
-    "ast_hash": "b73b109fbb93e4f6f9a0316aaef8146f",
+    "mtime": 1786303721.4666696,
+    "ast_hash": "44a30d9672cfddd12348d72b94160a4a",
     "semantic_hash": ""
   },
   "apps/app/components/shell/DrawerContext.tsx": {
@@ -1345,8 +1345,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/shell/useModulosExtras.ts": {
-    "mtime": 1788007665.4462922,
-    "ast_hash": "af7a997247631f8a7332f19044a9667a",
+    "mtime": 1785763951.9093192,
+    "ast_hash": "783257a73e9e71e979676c122636a4e9",
     "semantic_hash": ""
   },
   "packages/supabase/dicas.ts": {
@@ -1745,8 +1745,8 @@
     "semantic_hash": ""
   },
   "supabase/functions/lembretes-diarios/index.ts": {
-    "mtime": 1787932095.5810623,
-    "ast_hash": "e8f64f5d06351a76d59f69d8c7a14204",
+    "mtime": 1786582940.5242712,
+    "ast_hash": "81b237a736a12f74f28d81b32de8966e",
     "semantic_hash": ""
   },
   "supabase/functions/plano-acao-gerar/index.ts": {
@@ -1805,8 +1805,8 @@
     "semantic_hash": ""
   },
   "material-de-apoio/instagram-lancamento/story-2-oferta-cta.png": {
-    "mtime": 1788013109.4736185,
-    "ast_hash": "b66e5d85349b5af5234e946523b75793",
+    "mtime": 1786366777.5225189,
+    "ast_hash": "ef10621d8a2aab47037b2c4502bd233d",
     "semantic_hash": ""
   },
   "material-de-apoio/instagram-lancamento/reel-1-o-marco.mp4": {
@@ -1815,8 +1815,8 @@
     "semantic_hash": ""
   },
   "material-de-apoio/instagram-lancamento/reel-2-perguntas.mp4": {
-    "mtime": 1788013109.5293243,
-    "ast_hash": "72cbd34bfa8921f31ef2d95106208058",
+    "mtime": 1786366777.618307,
+    "ast_hash": "91d03719d09646e4ec3d1002e52debb1",
     "semantic_hash": ""
   },
   "apps/app/components/admin/useAdminDashboard.ts": {
@@ -1830,8 +1830,8 @@
     "semantic_hash": ""
   },
   "packages/ui/components/ConfirmModal.tsx": {
-    "mtime": 1786982287.655629,
-    "ast_hash": "0d47aacc702dbeaafda16b8ac0131fb5",
+    "mtime": 1786456618.3940678,
+    "ast_hash": "4c4c80dfb0be0d4867d929cf32256182",
     "semantic_hash": ""
   },
   "supabase/functions/_shared/ia-usage.ts": {
@@ -1872,6 +1872,11 @@
   "material-de-apoio/investidores/Ser Dono - Dossie do Produto.pdf": {
     "mtime": 1786387037.9343705,
     "ast_hash": "3ab78616a36e3e5330c38d6cbfe16bb8",
+    "semantic_hash": ""
+  },
+  ".tmp-planos-artes/server.js": {
+    "mtime": 1786979443.372832,
+    "ast_hash": "6f43f4dabc154675fcfd26cff57e6917",
     "semantic_hash": ""
   },
   "apps/app/app/(protected)/assinatura/index.tsx": {
@@ -1950,13 +1955,13 @@
     "semantic_hash": ""
   },
   "apps/app/components/planos/AssinaturaScreen.tsx": {
-    "mtime": 1787929208.6210735,
-    "ast_hash": "1afbf85b0515c33f626daf269fc98b37",
+    "mtime": 1786973804.387439,
+    "ast_hash": "7a1b873e121f25b9008343583bb77383",
     "semantic_hash": ""
   },
   "apps/app/components/planos/PlanosScreen.tsx": {
-    "mtime": 1787929168.5721462,
-    "ast_hash": "be3dc4a0e0b315df417984ca12b00430",
+    "mtime": 1786973741.4945915,
+    "ast_hash": "2d17eb3f62b46a575d00207cf1d9b760",
     "semantic_hash": ""
   },
   "apps/app/components/reuniao/AgendamentoSecao.tsx": {
@@ -2050,8 +2055,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/assinatura.ts": {
-    "mtime": 1787929147.0680466,
-    "ast_hash": "7cf13d50d75bd59aa594b9f72b4444d6",
+    "mtime": 1786973130.2187016,
+    "ast_hash": "1b4fb6a7e53544ff027d0a3d204d3db5",
     "semantic_hash": ""
   },
   "packages/supabase/contrato.ts": {
@@ -2075,13 +2080,13 @@
     "semantic_hash": ""
   },
   "supabase/functions/assinatura-criar-checkout/index.ts": {
-    "mtime": 1787929142.3603065,
-    "ast_hash": "9ce403a30aab4e3ad3364f432a93f03f",
+    "mtime": 1786973438.8214545,
+    "ast_hash": "ffb0afbb59f62a9622f60e14c01a8a9f",
     "semantic_hash": ""
   },
   "supabase/functions/assinatura-webhook/index.ts": {
-    "mtime": 1787931645.735748,
-    "ast_hash": "54288c98817ea0a0810d5880c99514ed",
+    "mtime": 1786973461.3356817,
+    "ast_hash": "043f192ec84d7327ea9b70cd2c393a40",
     "semantic_hash": ""
   },
   "supabase/functions/contrato-enviar-email/clausulas.ts": {
@@ -2159,279 +2164,34 @@
     "ast_hash": "338b2a5a52d99017ee553ab1b1c26f33",
     "semantic_hash": ""
   },
-  "apps/app/app/(protected)/admin/abacatepay/index.tsx": {
-    "mtime": 1787061921.4036462,
-    "ast_hash": "71a9aeb53c52a22917ad70d4cfc5012e",
+  ".tmp-planos-artes/essencial.html": {
+    "mtime": 1786979039.8354905,
+    "ast_hash": "f715b912974726bc2593f0107133b287",
     "semantic_hash": ""
   },
-  "apps/app/app/(protected)/admin/assinaturas/index.tsx": {
-    "mtime": 1786985702.5451229,
-    "ast_hash": "0fe5a99cff8d02dbec8cc8a6fa6ceb8a",
+  ".tmp-planos-artes/gratuito.html": {
+    "mtime": 1786979018.4582138,
+    "ast_hash": "70b14ca2faa0929fdb6fcc6f6de23a7b",
     "semantic_hash": ""
   },
-  "apps/app/app/quanto-custa/[slug].tsx": {
-    "mtime": 1788014804.9382522,
-    "ast_hash": "fd7f8434792b8ee640e7115702adf48d",
+  ".tmp-planos-artes/master.html": {
+    "mtime": 1786979062.6304038,
+    "ast_hash": "849c2e4a59344f6cc2a303cf17012948",
     "semantic_hash": ""
   },
-  "apps/app/app/quanto-custa/index.tsx": {
-    "mtime": 1788179734.5068426,
-    "ast_hash": "574410a230ea004a53d1df6be35f002b",
+  ".tmp-planos-artes/plano-essencial.png": {
+    "mtime": 1786979346.3812892,
+    "ast_hash": "5c336a7fb7fdab4683f3fce9dc7c0156",
     "semantic_hash": ""
   },
-  "apps/app/components/InstallAppPrompt.tsx": {
-    "mtime": 1788012059.8068137,
-    "ast_hash": "55a81e14b0930bb7943f4bd31b4a8fc8",
-    "semantic_hash": ""
-  },
-  "apps/app/components/LinkminerButton.native.tsx": {
-    "mtime": 1788012071.405681,
-    "ast_hash": "25fb717337a9524cd06fea99035a40a8",
-    "semantic_hash": ""
-  },
-  "apps/app/components/LinkminerButton.tsx": {
-    "mtime": 1788012066.608734,
-    "ast_hash": "c7468edf06a2277f11dd7b457c38881f",
-    "semantic_hash": ""
-  },
-  "apps/app/components/LinkminerButton.web.tsx": {
-    "mtime": 1788012095.1253395,
-    "ast_hash": "57832e323acaedf65a0b4a87425e75f5",
-    "semantic_hash": ""
-  },
-  "apps/app/components/admin/AdminAbacatePayScreen.tsx": {
-    "mtime": 1787070390.587529,
-    "ast_hash": "24e95a0e66c3520d0eee4f8a812b45c7",
-    "semantic_hash": ""
-  },
-  "apps/app/components/admin/AdminAssinaturasScreen.tsx": {
-    "mtime": 1786985702.5440273,
-    "ast_hash": "0fdad9128727e859a1919a937308a9d9",
-    "semantic_hash": ""
-  },
-  "apps/app/components/admin/useAdminAssinaturas.ts": {
-    "mtime": 1786985702.5447843,
-    "ast_hash": "9820615025b4a2ffce94805047e45c94",
-    "semantic_hash": ""
-  },
-  "apps/app/components/admin/usePaginatedAbacatePay.ts": {
-    "mtime": 1787061921.4031334,
-    "ast_hash": "ba583e95b43404db19f90cf98a595498",
-    "semantic_hash": ""
-  },
-  "apps/app/components/home/PlanosSection.tsx": {
-    "mtime": 1786980844.6240315,
-    "ast_hash": "37c8f87b64eef2fa62bf264fdc55b28c",
-    "semantic_hash": ""
-  },
-  "apps/app/components/home/QuantoCustaTeaserSection.tsx": {
-    "mtime": 1788179730.0151792,
-    "ast_hash": "acd52549c9e71a479904fc59d16a23ed",
-    "semantic_hash": ""
-  },
-  "apps/app/components/quantoCusta/QuantoCustaLayout.tsx": {
-    "mtime": 1788014742.8954844,
-    "ast_hash": "54b4644310dadf1b6d77c0ff46c3cdde",
-    "semantic_hash": ""
-  },
-  "apps/app/data/quantoCusta.generated.json": {
-    "mtime": 1788179806.4504516,
-    "ast_hash": "7899afbd3744ff03c16fb54d01fc8f44",
-    "semantic_hash": ""
-  },
-  "apps/app/data/quantoCusta.ts": {
-    "mtime": 1788014561.0926197,
-    "ast_hash": "b0e0f77aa3c1a2c30a15d0bf93aa0b5b",
-    "semantic_hash": ""
-  },
-  "apps/app/scripts/generate-quanto-custa-data.mjs": {
-    "mtime": 1788179802.4415698,
-    "ast_hash": "8d4321db22d83b5b28cb2e2bdc60ab95",
-    "semantic_hash": ""
-  },
-  "packages/supabase/adminAbacatePay.ts": {
-    "mtime": 1787065781.4501631,
-    "ast_hash": "b48b3275e51ff4be6cceca6005e7be6d",
-    "semantic_hash": ""
-  },
-  "packages/supabase/adminAssinaturas.ts": {
-    "mtime": 1786985702.545417,
-    "ast_hash": "21b51de34dd10bd41a2cfdb53dfe88be",
-    "semantic_hash": ""
-  },
-  "packages/ui/components/CurrencyInput.tsx": {
-    "mtime": 1787062649.1629162,
-    "ast_hash": "76fa46aa322e2757d186923ae7015227",
-    "semantic_hash": ""
-  },
-  "supabase/functions/admin-abacatepay-proxy/index.ts": {
-    "mtime": 1787061501.830322,
-    "ast_hash": "b55144fa76aafae5726314c024b4da71",
-    "semantic_hash": ""
-  },
-  "supabase/functions/admin-abacatepay-upload-imagem/index.ts": {
-    "mtime": 1787065703.2163475,
-    "ast_hash": "69a95353b6491c2d0904489a7cfe7baf",
-    "semantic_hash": ""
-  },
-  "supabase/functions/admin-assinaturas-sincronizar/index.ts": {
-    "mtime": 1786985260.517927,
-    "ast_hash": "8313587f3803644763123ff74d13ce9a",
-    "semantic_hash": ""
-  },
-  "supabase/functions/admin-plano-definir/index.ts": {
-    "mtime": 1786985233.1490438,
-    "ast_hash": "8e8836adb500973125edfaca6a202888",
-    "semantic_hash": ""
-  },
-  "supabase/functions/assinatura-verificar-vencidas/index.ts": {
-    "mtime": 1787932373.1788187,
-    "ast_hash": "c6a1dbc7bf66271e8aaf12ea098238c2",
-    "semantic_hash": ""
-  },
-  "supabase/functions/assinatura-verificar-vencidas/template.ts": {
-    "mtime": 1787931607.3088274,
-    "ast_hash": "4a6c776ffdb86a91adf4f6aeac6a9d69",
-    "semantic_hash": ""
-  },
-  "supabase/functions/assinatura-webhook/template.ts": {
-    "mtime": 1787928781.3223448,
-    "ast_hash": "bd29f1cc18ad752efb140de7c3fb2fc1",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260817150000_admin_assinaturas.sql": {
-    "mtime": 1786985169.772418,
-    "ast_hash": "4739a7127ee0e2366d4bf3fb10e9dc62",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260818112416_abacatepay_produto_imagem_bucket.sql": {
-    "mtime": 1787063062.4737122,
-    "ast_hash": "5e8a3aa5dab837b072dbd5cae298935d",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260828150000_inadimplencia_automatica.sql": {
-    "mtime": 1787931559.5561974,
-    "ast_hash": "c64633e295ebc28ac2870d532ff7542a",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260828150100_agendar_verificar_assinaturas_vencidas.sql": {
-    "mtime": 1787931571.707704,
-    "ast_hash": "7217d1cc0d4b9755c5f7667ace4ca7ef",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260828150200_corrigir_secret_cron.sql": {
-    "mtime": 1787932116.9411423,
-    "ast_hash": "bf3169ec727eb7ef3e767457450014fb",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260828160000_modulo_cortesia_admin.sql": {
-    "mtime": 1788008404.8080847,
-    "ast_hash": "c47ec13503b099b985ef186af08bc8af",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260831123625_nichos_baixa_estrutura.sql": {
-    "mtime": 1788179683.248195,
-    "ast_hash": "b0264ed83a53c59520d472d42b0a7b4f",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/20260831151537_diagnostico_precisao_micro_empreendedor.sql": {
-    "mtime": 1788189328.6916773,
-    "ast_hash": "c69457c1161f1bbb878cb42a2c3226f9",
-    "semantic_hash": ""
-  },
-  "material-de-apoio/marketing/PLANO-CAMPANHA-90-DIAS.md": {
-    "mtime": 1788013263.6021907,
-    "ast_hash": "ef5bf5a8ef729144609d332a27bf45b2",
-    "semantic_hash": ""
-  },
-  "material-de-apoio/marketing/semana-01/LEGENDAS.md": {
-    "mtime": 1788013862.557226,
-    "ast_hash": "69f0cbc73e707b3e0ccde57ad5314282",
-    "semantic_hash": ""
-  },
-  "material-de-apoio/marketing/semana-02/legenda.md": {
-    "mtime": 1788179964.0415564,
-    "ast_hash": "e7dcae5bbaa64871bd5d5d2e0088ebf6",
-    "semantic_hash": ""
-  },
-  "docs/identidade-visual/planos/plano-essencial.png": {
-    "mtime": 1786979580.6222744,
-    "ast_hash": "0568aa8d326b891b6ea7f3e341efd546",
-    "semantic_hash": ""
-  },
-  "docs/identidade-visual/planos/plano-gratuito.png": {
+  ".tmp-planos-artes/plano-gratuito.png": {
     "mtime": 1786979476.603088,
     "ast_hash": "0f2eeaeb4f991ab0e640af4c2685222a",
     "semantic_hash": ""
   },
-  "docs/identidade-visual/planos/plano-master.png": {
-    "mtime": 1786979597.378487,
-    "ast_hash": "ab4b3a72352fc0e08f9f6420ea5783da",
-    "semantic_hash": ""
-  },
-  "img/planos/plano-essencial.png": {
-    "mtime": 1786980682.569,
-    "ast_hash": "cc14f8fe125d97feec8ed4ccf87d720f",
-    "semantic_hash": ""
-  },
-  "img/planos/plano-gratuito.png": {
-    "mtime": 1786980682.589,
-    "ast_hash": "a7a8b8b9a8a02bf47b8a92a4a7ca724e",
-    "semantic_hash": ""
-  },
-  "img/planos/plano-master.png": {
-    "mtime": 1786980682.585,
-    "ast_hash": "00a8dd1f303d6ef1cfeeca6540d5b357",
-    "semantic_hash": ""
-  },
-  "material-de-apoio/marketing/semana-01/arte-lancamento-quanto-custa.png": {
-    "mtime": 1788016059.5427115,
-    "ast_hash": "701885ac7844062e1f0ed252f79a4287",
-    "semantic_hash": ""
-  },
-  "material-de-apoio/marketing/semana-01/carrossel-erros/01-capa.png": {
-    "mtime": 1788013868.8694983,
-    "ast_hash": "970a788c35c47451306d4afe5f65e5a9",
-    "semantic_hash": ""
-  },
-  "material-de-apoio/marketing/semana-01/carrossel-erros/02-erro-1.png": {
-    "mtime": 1788013868.903321,
-    "ast_hash": "11493c54197e96f47a89b6a2c78178b7",
-    "semantic_hash": ""
-  },
-  "material-de-apoio/marketing/semana-01/carrossel-erros/03-erro-2.png": {
-    "mtime": 1788013868.9373515,
-    "ast_hash": "fe613073565f00b15a37f2d0c26cf309",
-    "semantic_hash": ""
-  },
-  "material-de-apoio/marketing/semana-01/carrossel-erros/04-erro-3.png": {
-    "mtime": 1788013868.970598,
-    "ast_hash": "266d778b641638e3554c86356ddf1762",
-    "semantic_hash": ""
-  },
-  "material-de-apoio/marketing/semana-01/carrossel-erros/05-erro-4.png": {
-    "mtime": 1788013869.0089166,
-    "ast_hash": "eeb9adc762bf53452d20b081d649b53d",
-    "semantic_hash": ""
-  },
-  "material-de-apoio/marketing/semana-01/carrossel-erros/06-cta.png": {
-    "mtime": 1788013869.058677,
-    "ast_hash": "40a95a138361938991611c615a5a5865",
-    "semantic_hash": ""
-  },
-  "material-de-apoio/marketing/semana-02/arte-lancamento-quanto-custa.png": {
-    "mtime": 1788179943.6995742,
-    "ast_hash": "d009427456b3d12d824d0343d63192fb",
-    "semantic_hash": ""
-  },
-  "material-de-apoio/marketing/semana-01/reel-01-quanto-custa-barbearia.mp4": {
-    "mtime": 1788013868.713284,
-    "ast_hash": "6eb7a0ec6065cf0b679a000d7c710b00",
-    "semantic_hash": ""
-  },
-  "material-de-apoio/marketing/semana-01/reel-02-do-zero-ao-cnpj-ep1.mp4": {
-    "mtime": 1788013868.805231,
-    "ast_hash": "3795f7fc40feda7d87b08dd923770ea1",
+  ".tmp-planos-artes/plano-master.png": {
+    "mtime": 1786979359.3784943,
+    "ast_hash": "5176f8aa1b2f5bba1781c8abce618bdf",
     "semantic_hash": ""
   }
 }

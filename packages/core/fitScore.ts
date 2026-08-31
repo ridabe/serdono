@@ -2,13 +2,16 @@
  * Motor de Fit Score — PRD §5.3, Documento de Conceito §5.2.
  *
  * O Fit Score é uma nota CALCULADA (0-100), nunca gerada por IA — a IA só
- * explica o resultado em linguagem natural depois (RN glossário, "Fit Score").
- * Função pura e testável sem rede, para poder rodar tanto no cliente quanto
- * na Edge Function (SPEC §3, SDD-3).
+ * explica o resultado em linguagem natural depois, e (SDD-66/SDD-135) amplia
+ * o sinal de entrada traduzindo o texto livre do diagnóstico em áreas e
+ * nichos. Função pura e testável sem rede, para poder rodar tanto no cliente
+ * quanto na Edge Function (SPEC §3, SDD-3).
  *
- * Pesos e proxies aqui são a primeira versão do motor — o Documento de
- * Conceito define os 4 componentes mas não a fórmula exata; esta é a
- * implementação de referência, revisável conforme dado real de uso.
+ * Pesos e proxies aqui são revisáveis conforme dado real de uso. Revisão
+ * grande em SDD-135 (o motor sugeria nichos fora do contexto declarado): a
+ * afinidade passou a ser o eixo dominante, o capital deixou de derrubar um
+ * nicho que dá pra começar enxuto, e o "começar de casa" virou parte do
+ * cálculo — o público é micro e pequeno empreendedor, não franqueado.
  */
 
 export type CapitalFaixa = "ate_5k" | "5k_15k" | "15k_40k" | "mais_40k";
@@ -28,16 +31,25 @@ export interface DiagnosticoParaScore {
    * nota. Quem chama a IA é a Edge Function; esta função continua pura.
    */
   areas_inferidas?: string[];
+  /**
+   * Slugs de nicho que a IA extraiu do texto livre (SDD-135). Sinal mais
+   * FORTE que a área: quem escreve "gosto de cortar cabelo e fazer barba"
+   * está apontando `barbearia` / `cabeleireiro-a-domicilio`, não só `beleza`
+   * — e a área sozinha não separa uma coisa da outra. Filtrado contra o
+   * catálogo real antes de chegar aqui (RN-38); a nota segue calculada.
+   */
+  nichos_inferidos?: string[];
 }
 
 export interface NichoParaScore {
+  /** Identificador do nicho no catálogo — usado para casar com `nichos_inferidos`. */
+  slug?: string;
   categoria: string;
   /**
    * Áreas do diagnóstico que este nicho atende (SDD-66). Um nicho pode
    * pertencer a mais de uma ("Agência de marketing digital" é tecnologia E
    * serviços), coisa que a `categoria` única não conseguia expressar — e que
-   * fazia nicho digital ficar escondido sob 'serviços' (defeito corrigido
-   * pontualmente na SDD-65, resolvido de vez aqui). Vazio = usa `categoria`.
+   * fazia nicho digital ficar escondido sob 'serviços'. Vazio = usa `categoria`.
    */
   areas_afinidade?: string[];
   investimento_min: number;
@@ -46,6 +58,19 @@ export interface NichoParaScore {
   complexidade_regulatoria: number; // 1-5
   intensidade_mao_de_obra: number; // 1-5
   nivel_concorrencia: number; // 1-5
+  /**
+   * `true` se a operação madura depende de ponto comercial (loja, salão,
+   * cozinha industrial). Usado também fora do Fit Score (relevância da fase
+   * Estrutura da Jornada) — não mexer no significado.
+   */
+  dependencia_ponto_fisico?: boolean;
+  /**
+   * `true` quando dá pra COMEÇAR de casa / atendendo na casa do cliente, mesmo
+   * que a versão madura queira um ponto (SDD-135). Um barbeiro monta a
+   * primeira cadeira em casa; uma barbearia de rua é o passo seguinte. Junto
+   * com `dependencia_ponto_fisico === false`, libera o piso de entrada enxuto.
+   */
+  permite_inicio_em_casa?: boolean;
 }
 
 export interface FitScoreResult {
@@ -54,11 +79,27 @@ export interface FitScoreResult {
   score_financeiro: number;
   score_contexto: number;
   score_tempo: number;
+  /**
+   * O capital do usuário não cobre nem o começo enxuto deste nicho. A tela de
+   * resultado usa isso pra mostrar "dá pra mirar, só planeje um pouco mais de
+   * caixa" em vez de esconder a sugestão lá no fim da lista (SDD-135).
+   */
+  precisa_de_mais_capital: boolean;
+  /**
+   * O texto livre do diagnóstico apontou este nicho pelo nome. A Edge Function
+   * usa isso pra garantir que um nicho que a pessoa pediu explicitamente não
+   * fique fora dos 3 melhores por causa de um componente secundário
+   * (concorrência, tempo) — o pedido explícito vem primeiro (SDD-135).
+   */
+  afinidade_direta: boolean;
 }
 
-// Pesos dos 4 componentes — capital pesa mais porque é o maior filtro de
-// viabilidade real para a persona primária (PRD §2.1, capital entre R$3-15 mil).
-const WEIGHTS = { perfil: 0.3, financeiro: 0.35, contexto: 0.15, tempo: 0.2 } as const;
+// Pesos dos 4 componentes. Afinidade (dentro de `perfil`) é o eixo dominante:
+// o primeiro contato tem que refletir o que a pessoa DISSE que quer fazer.
+// Capital ainda pesa, mas não manda sozinho no resultado (era 0.35 e
+// empurrava todo perfil pra nicho barato). `contexto` é quase placeholder
+// até existir inteligência regional real — peso baixo de propósito.
+const WEIGHTS = { perfil: 0.4, financeiro: 0.3, contexto: 0.08, tempo: 0.22 } as const;
 
 const CAPITAL_RANGES: Record<CapitalFaixa, { min: number; max: number }> = {
   ate_5k: { min: 0, max: 5_000 },
@@ -71,36 +112,57 @@ function clamp(value: number, min = 0, max = 100): number {
   return Math.min(max, Math.max(min, value));
 }
 
+function normalizar(lista: string[]): string[] {
+  return lista.map((t) => t.toLowerCase().trim()).filter(Boolean);
+}
+
 /** Piso do score de capital para quem consegue começar, mas sem folga nenhuma. */
 const CAPITAL_SO_DA_PRA_COMECAR = 70;
 
 /**
- * Quanto o capital do usuário dá conta do investimento do nicho.
+ * Fração do investimento mínimo de mercado que um negócio SEM dependência de
+ * ponto físico realmente exige pra começar. As faixas do catálogo assumem
+ * ponto alugado, reforma leve e fachada; um barbeiro atendendo em casa
+ * precisa de cadeira, espelho, máquina e esterilizador — não do piso cheio.
+ * SDD-135: sem isso, "Barbearia" (piso R$ 8 mil) sumia pra quem marcou "até
+ * R$ 5 mil" e escreveu explicitamente que quer cortar cabelo.
+ */
+const FATOR_INICIO_ENXUTO = 0.4;
+
+function podeComecarEmCasa(n: NichoParaScore): boolean {
+  return n.dependencia_ponto_fisico === false || n.permite_inicio_em_casa === true;
+}
+
+function pisoDeEntrada(n: NichoParaScore): number {
+  return podeComecarEmCasa(n) ? n.investimento_min * FATOR_INICIO_ENXUTO : n.investimento_min;
+}
+
+/**
+ * Quanto o capital do usuário dá conta de começar este negócio.
  *
- * A pergunta é "você consegue bancar este negócio?", nunca "suas faixas
- * coincidem?". A versão anterior media a SOBREPOSIÇÃO entre a faixa de
- * capital e a faixa de investimento — o que fazia sobrar dinheiro virar
- * penalidade: quem tinha mais de R$ 40 mil tirava ZERO em "Serviço digital"
- * (R$ 300 a R$ 5.000), porque as faixas não se cruzavam. Com 5 nichos isso
- * ficava mascarado; com o catálogo inteiro ativo (SDD-66), passou a mandar no
- * resultado e empurrava perfis de tecnologia pra lavanderia e escola infantil.
- * Ter capital de sobra nunca é desencaixe.
+ * A pergunta é "você consegue começar?", nunca "suas faixas coincidem?". Ter
+ * capital de sobra nunca é desencaixe (regressão da versão que media
+ * sobreposição de faixas). E um negócio que dá pra tocar de casa é medido
+ * pelo piso enxuto, não pelo piso de vitrine.
  */
 function scoreCapital(capitalMax: number, n: NichoParaScore): number {
+  const piso = pisoDeEntrada(n);
+
   // Banca até o teto do nicho — cabe no bolso com folga.
   if (capitalMax >= n.investimento_max) return 100;
 
-  // Banca pelo menos o piso: dá pra começar. Quanto mais da faixa o dinheiro
-  // cobre, mais confortável — mas começar já vale a maior parte da nota.
-  if (capitalMax >= n.investimento_min) {
-    const faixa = n.investimento_max - n.investimento_min || 1;
-    const cobertura = (capitalMax - n.investimento_min) / faixa;
+  // Banca pelo menos o começo enxuto: dá pra começar. Quanto mais da faixa o
+  // dinheiro cobre, mais confortável — mas começar já vale a maior parte da nota.
+  if (capitalMax >= piso) {
+    const faixa = n.investimento_max - piso || 1;
+    const cobertura = (capitalMax - piso) / faixa;
     return clamp(CAPITAL_SO_DA_PRA_COMECAR + cobertura * (100 - CAPITAL_SO_DA_PRA_COMECAR));
   }
 
-  // Não alcança nem o investimento mínimo — aí sim é desencaixe real,
-  // proporcional ao quanto falta.
-  return clamp((capitalMax / n.investimento_min) * CAPITAL_SO_DA_PRA_COMECAR);
+  // Não alcança nem o começo enxuto — aí sim é desencaixe real, proporcional
+  // ao quanto falta. A tela ainda mostra a sugestão (precisa_de_mais_capital),
+  // só não no topo.
+  return clamp((capitalMax / piso) * CAPITAL_SO_DA_PRA_COMECAR);
 }
 
 function scoreFinanceiro(d: DiagnosticoParaScore, n: NichoParaScore): number {
@@ -115,36 +177,36 @@ function scoreFinanceiro(d: DiagnosticoParaScore, n: NichoParaScore): number {
   return clamp(capitalScore * 0.7 + folegoScore * 0.3);
 }
 
-/** Nenhum dado de área de interesse informado — nem penaliza nem favorece nicho nenhum. */
+/** Nenhum dado de área/nicho de interesse informado — nem penaliza nem favorece. */
 const AREA_SEM_DADO = 50;
-/** Área de formação/experiência do usuário bate com a categoria do nicho. */
-const AREA_COM_MATCH = 100;
-/** Usuário informou área(s) de interesse, mas nenhuma bate com este nicho — sinal fraco, não elimina o nicho (RN de sensibilidade sem exclusividade, ver PRD §8). */
-const AREA_SEM_MATCH = 25;
+/** O texto livre apontou ESTE nicho pelo nome — o sinal mais forte que existe. */
+const NICHO_MATCH_DIRETO = 100;
+/** Área de formação/experiência/interesse do usuário bate com uma área do nicho. */
+const AREA_COM_MATCH = 88;
+/** Usuário informou interesse, mas nenhum bate com este nicho — sinal fraco de verdade (não elimina, mas não é quase-neutro como os 25 de antes). */
+const AREA_SEM_MATCH = 15;
 
 /**
- * Aderência entre a(s) área(s) que o usuário demonstrou interesse — marcadas
- * no bloco "Experiência" do diagnóstico, mais as que a IA inferiu do texto
- * livre (SDD-66) — e as áreas que o nicho atende.
+ * Aderência entre o que o usuário demonstrou querer — áreas marcadas no bloco
+ * "Experiência", áreas que a IA inferiu do texto livre (SDD-66) e agora
+ * nichos que a IA inferiu do texto livre (SDD-135) — e o que o nicho é.
  *
- * Antes disso vivia como um bônus fixo de +15 dentro de `scorePerfil`,
- * dependente de `apetite_risco` estar preenchido e diluído por um peso de
- * 30% no fit_score final — na prática, irrelevante pro resultado (o
- * empreendedor que só marcou "Tecnologia / digital" via nicho de comércio de
- * bairro no topo da lista). Virou o próprio eixo, ponderado 50/50 com o
- * ajuste de risco dentro de `scorePerfil`.
+ * Ordem de força: nicho citado no texto > área citada/marcada > área que não
+ * bate. Antes, isto era um bônus de +15 diluído a ponto de o empreendedor que
+ * só marcou "Tecnologia" ver comércio de bairro no topo; virou o próprio eixo.
  */
 function scoreInteresse(d: DiagnosticoParaScore, n: NichoParaScore): number {
-  const tags = [...d.formacao, ...d.experiencia, ...(d.areas_inferidas ?? [])]
-    .map((t) => t.toLowerCase().trim())
-    .filter(Boolean);
+  const slug = n.slug?.toLowerCase().trim();
+  if (slug && normalizar(d.nichos_inferidos ?? []).includes(slug)) {
+    return NICHO_MATCH_DIRETO;
+  }
+
+  const tags = normalizar([...d.formacao, ...d.experiencia, ...(d.areas_inferidas ?? [])]);
   if (tags.length === 0) return AREA_SEM_DADO;
 
   // `areas_afinidade` é a fonte de verdade quando existe; `categoria` fica
   // como fallback pra nicho que ainda não foi mapeado (nenhum fica pior que antes).
-  const areasDoNicho = (n.areas_afinidade?.length ? n.areas_afinidade : [n.categoria])
-    .map((a) => a.toLowerCase().trim())
-    .filter(Boolean);
+  const areasDoNicho = normalizar(n.areas_afinidade?.length ? n.areas_afinidade : [n.categoria]);
 
   const match = tags.some((t) => areasDoNicho.some((a) => t === a || t.includes(a) || a.includes(t)));
   return match ? AREA_COM_MATCH : AREA_SEM_MATCH;
@@ -155,14 +217,22 @@ function scorePerfil(d: DiagnosticoParaScore, n: NichoParaScore): number {
   const riscoNicho = (n.complexidade_regulatoria + n.nivel_concorrencia) / 2;
   const riscoFit = d.apetite_risco ? clamp(100 - Math.abs(d.apetite_risco - riscoNicho) * 25) : 50;
 
-  return clamp(riscoFit * 0.5 + scoreInteresse(d, n) * 0.5);
+  // 70/30 a favor do interesse: o ajuste de risco calibra, o interesse decide.
+  return clamp(riscoFit * 0.3 + scoreInteresse(d, n) * 0.7);
 }
 
-function scoreContexto(n: NichoParaScore): number {
-  // Placeholder honesto até existir inteligência regional real (Documento §7.1,
-  // "camada de inteligência regional") — usa nível de concorrência do nicho
-  // como único proxy disponível hoje. Revisar quando houver dado por cidade.
-  return clamp((6 - n.nivel_concorrencia) * 20);
+function scoreContexto(d: DiagnosticoParaScore, n: NichoParaScore): number {
+  // Proxy de saturação enquanto não existe inteligência regional real
+  // (Documento §7.1) — nível de concorrência do nicho.
+  const concorrencia = clamp((6 - n.nivel_concorrencia) * 20);
+
+  // Viés de micro/pequeno negócio (SDD-135): quem tem pouco capital ou não vai
+  // se dedicar em tempo integral se dá melhor num negócio que não depende de
+  // ponto físico. Nudge pequeno (peso 0.08 no fit), não um filtro.
+  const perfilEnxuto = d.capital_disponivel === "ate_5k" || (!!d.tempo_disponivel && d.tempo_disponivel !== "integral");
+  const semPontoFisico = perfilEnxuto && podeComecarEmCasa(n) ? 100 : 50;
+
+  return clamp(concorrencia * 0.5 + semPontoFisico * 0.5);
 }
 
 function scoreTempo(d: DiagnosticoParaScore, n: NichoParaScore): number {
@@ -183,7 +253,7 @@ function scoreTempo(d: DiagnosticoParaScore, n: NichoParaScore): number {
 export function calculateFitScore(diagnostico: DiagnosticoParaScore, nicho: NichoParaScore): FitScoreResult {
   const score_perfil = scorePerfil(diagnostico, nicho);
   const score_financeiro = scoreFinanceiro(diagnostico, nicho);
-  const score_contexto = scoreContexto(nicho);
+  const score_contexto = scoreContexto(diagnostico, nicho);
   const score_tempo = scoreTempo(diagnostico, nicho);
 
   const fit_score = clamp(
@@ -193,11 +263,19 @@ export function calculateFitScore(diagnostico: DiagnosticoParaScore, nicho: Nich
       score_tempo * WEIGHTS.tempo
   );
 
+  const capital = diagnostico.capital_disponivel ? CAPITAL_RANGES[diagnostico.capital_disponivel] : null;
+  const precisa_de_mais_capital = capital ? capital.max < pisoDeEntrada(nicho) : false;
+
+  const slug = nicho.slug?.toLowerCase().trim();
+  const afinidade_direta = !!slug && normalizar(diagnostico.nichos_inferidos ?? []).includes(slug);
+
   return {
     fit_score: Math.round(fit_score),
     score_perfil: Math.round(score_perfil),
     score_financeiro: Math.round(score_financeiro),
     score_contexto: Math.round(score_contexto),
     score_tempo: Math.round(score_tempo),
+    precisa_de_mais_capital,
+    afinidade_direta,
   };
 }

@@ -42,6 +42,7 @@ export function EscolherNichoScreen() {
         .from("niche_matches")
         .select("niche_id, fit_score, justificativa_ia, niches(nome, investimento_min, investimento_max)")
         .eq("user_id", session.user.id)
+        .order("afinidade_direta", { ascending: false })
         .order("fit_score", { ascending: false })
         .limit(3);
       if (error) setError(error.message);

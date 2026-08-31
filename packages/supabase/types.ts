@@ -151,6 +151,7 @@ export type Database = {
           localizacao_cidade: string | null
           localizacao_estado: string | null
           meses_de_folego: number | null
+          nichos_inferidos: string[]
           objetivo: string | null
           rede_ativos: string[]
           respondido_em: string | null
@@ -173,6 +174,7 @@ export type Database = {
           localizacao_cidade?: string | null
           localizacao_estado?: string | null
           meses_de_folego?: number | null
+          nichos_inferidos?: string[]
           objetivo?: string | null
           rede_ativos?: string[]
           respondido_em?: string | null
@@ -195,6 +197,7 @@ export type Database = {
           localizacao_cidade?: string | null
           localizacao_estado?: string | null
           meses_de_folego?: number | null
+          nichos_inferidos?: string[]
           objetivo?: string | null
           rede_ativos?: string[]
           respondido_em?: string | null
@@ -973,11 +976,13 @@ export type Database = {
       }
       niche_matches: {
         Row: {
+          afinidade_direta: boolean
           fit_score: number
           gerado_em: string
           id: string
           justificativa_ia: string | null
           niche_id: string
+          precisa_de_mais_capital: boolean
           score_contexto: number
           score_financeiro: number
           score_perfil: number
@@ -986,11 +991,13 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          afinidade_direta?: boolean
           fit_score: number
           gerado_em?: string
           id?: string
           justificativa_ia?: string | null
           niche_id: string
+          precisa_de_mais_capital?: boolean
           score_contexto: number
           score_financeiro: number
           score_perfil: number
@@ -999,11 +1006,13 @@ export type Database = {
           user_id: string
         }
         Update: {
+          afinidade_direta?: boolean
           fit_score?: number
           gerado_em?: string
           id?: string
           justificativa_ia?: string | null
           niche_id?: string
+          precisa_de_mais_capital?: boolean
           score_contexto?: number
           score_financeiro?: number
           score_perfil?: number
@@ -1080,6 +1089,7 @@ export type Database = {
           nivel_concorrencia: number
           nome: string
           perfil_cliente: string | null
+          permite_inicio_em_casa: boolean
           playbook_md: string | null
           sazonalidade: Json
           slug: string
@@ -1103,6 +1113,7 @@ export type Database = {
           nivel_concorrencia: number
           nome: string
           perfil_cliente?: string | null
+          permite_inicio_em_casa?: boolean
           playbook_md?: string | null
           sazonalidade?: Json
           slug: string
@@ -1126,6 +1137,7 @@ export type Database = {
           nivel_concorrencia?: number
           nome?: string
           perfil_cliente?: string | null
+          permite_inicio_em_casa?: boolean
           playbook_md?: string | null
           sazonalidade?: Json
           slug?: string
@@ -1638,6 +1650,7 @@ export type Database = {
           concedido_por: string | null
           created_at: string
           id: string
+          inadimplente_desde: string | null
           iniciado_em: string | null
           nota: string | null
           origem: string
@@ -1657,6 +1670,7 @@ export type Database = {
           concedido_por?: string | null
           created_at?: string
           id?: string
+          inadimplente_desde?: string | null
           iniciado_em?: string | null
           nota?: string | null
           origem?: string
@@ -1676,6 +1690,7 @@ export type Database = {
           concedido_por?: string | null
           created_at?: string
           id?: string
+          inadimplente_desde?: string | null
           iniciado_em?: string | null
           nota?: string | null
           origem?: string

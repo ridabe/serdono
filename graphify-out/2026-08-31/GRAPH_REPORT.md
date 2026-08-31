@@ -1,16 +1,16 @@
-# Graph Report - serdono  (2026-08-31)
+# Graph Report - serdono  (2026-08-17)
 
 ## Corpus Check
-- 448 files · ~737,857 words
+- 410 files · ~653,697 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2529 nodes · 4477 edges · 335 communities (152 shown, 183 thin omitted)
+- 2297 nodes · 4053 edges · 315 communities (134 shown, 181 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 43 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `413f3df9`
+- Built from commit: `302c6f69`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -328,39 +328,19 @@
 - [[_COMMUNITY_Community 311|Community 311]]
 - [[_COMMUNITY_Community 312|Community 312]]
 - [[_COMMUNITY_Community 313|Community 313]]
-- [[_COMMUNITY_Community 314|Community 314]]
-- [[_COMMUNITY_Community 315|Community 315]]
 - [[_COMMUNITY_Community 316|Community 316]]
-- [[_COMMUNITY_Community 317|Community 317]]
-- [[_COMMUNITY_Community 318|Community 318]]
-- [[_COMMUNITY_Community 319|Community 319]]
-- [[_COMMUNITY_Community 320|Community 320]]
-- [[_COMMUNITY_Community 321|Community 321]]
-- [[_COMMUNITY_Community 322|Community 322]]
-- [[_COMMUNITY_Community 323|Community 323]]
-- [[_COMMUNITY_Community 324|Community 324]]
-- [[_COMMUNITY_Community 325|Community 325]]
-- [[_COMMUNITY_Community 326|Community 326]]
-- [[_COMMUNITY_Community 327|Community 327]]
-- [[_COMMUNITY_Community 328|Community 328]]
-- [[_COMMUNITY_Community 329|Community 329]]
-- [[_COMMUNITY_Community 330|Community 330]]
-- [[_COMMUNITY_Community 331|Community 331]]
-- [[_COMMUNITY_Community 332|Community 332]]
-- [[_COMMUNITY_Community 333|Community 333]]
-- [[_COMMUNITY_Community 334|Community 334]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `Button()` - 65 edges
-2. `Card()` - 53 edges
-3. `supabase` - 44 edges
-4. `JornadaInstance` - 42 edges
+1. `Button()` - 61 edges
+2. `Card()` - 50 edges
+3. `JornadaInstance` - 42 edges
+4. `supabase` - 41 edges
 5. `JornadaEtapa` - 39 edges
-6. `getCurrentSession()` - 35 edges
+6. `getCurrentSession()` - 33 edges
 7. `logIaUsage()` - 32 edges
-8. `Input()` - 28 edges
-9. `ScreenHeader()` - 26 edges
-10. `Logo()` - 26 edges
+8. `ScreenHeader()` - 26 edges
+9. `numeroFase()` - 25 edges
+10. `Input()` - 25 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Fase 4 — Distribuição: white label, crédito/investimentos, app móvel completo` --REFERENCES--> `Fase 3 — Ecossistema (§12)`  [AMBIGUOUS]
@@ -389,15 +369,15 @@
 - **Lógica econômica do funil: diagnóstico grátis como motor de aquisição, workflow pago como motor de conversão** — doc:economic-logic, doc:plan-free, docs_prd_module_diagnostico, docs_prd_module_workflow [EXTRACTED]
 - **Regra de capital sempre em faixas aplicada de forma idêntica no mockup web e mobile via componente de seleção segmentada** — docs_prd_rn_5, mockweb:screen-landing, mockapp:screen-diagnostico, design:component-input [EXTRACTED]
 
-## Communities (335 total, 183 thin omitted)
+## Communities (315 total, 181 thin omitted)
 
 ### Community 0 - "Layout e Landing Page (App)"
-Cohesion: 0.20
-Nodes (12): CategoriaInput, createCategoria(), createMaterial(), deleteCategoria(), deleteMaterial(), DicaAcessoTipo, DicasMaterial, listCategoriasAdmin() (+4 more)
+Cohesion: 0.16
+Nodes (15): CategoriaComMateriais, CategoriaInput, createCategoria(), createMaterial(), deleteCategoria(), deleteMaterial(), DicaAcessoTipo, DicasCategoria (+7 more)
 
 ### Community 1 - "Dependências Expo/React"
 Cohesion: 0.05
-Nodes (38): dependencies, assert, dotenv, expo, expo-clipboard, expo-constants, expo-device, expo-document-picker (+30 more)
+Nodes (37): dependencies, assert, dotenv, expo, expo-constants, expo-device, expo-document-picker, expo-file-system (+29 more)
 
 ### Community 2 - "Módulo Match de Nichos e Paywall"
 Cohesion: 0.20
@@ -484,24 +464,24 @@ Cohesion: 0.67
 Nodes (3): Indicadores por etapa do funil (aquisição, ativação, conversão, engajamento, progresso, retenção, confiança, receita adicional), North Star Metric: negócios efetivamente abertos e operando por trimestre, Eventos mínimos a instrumentar (cadastro_criado ... assinatura_cancelada)
 
 ### Community 27 - "Cliente Supabase"
-Cohesion: 0.16
-Nodes (15): NicheOption, addJornadaFornecedor(), createParceiro(), FornecedorParceiro, generateRoteiroFornecedores(), getParceirosSugeridos(), getRoteiroFornecedores(), JornadaFornecedor (+7 more)
+Cohesion: 0.06
+Nodes (29): AdminFornecedoresScreen(), COL, NicheOption, useAdminFornecedores(), ParceiroCard(), ParceirosScreen(), useParceiros(), classificarContato() (+21 more)
 
 ### Community 80 - "Community 80"
-Cohesion: 0.15
-Nodes (13): 0. Papel deste documento no fluxo de trabalho, 10. Itens de Roadmap Técnico (fora do MVP, não bloqueiam), 11. Decisões que ainda precisam de dono (bloqueiam itens específicos, não o início geral do código), 12. Decisões registradas durante a implementação da Home/Landing (retroativas a este PR), 1.1 Por que Expo SDK 54, fixado, e não a versão mais nova, 1. Stack Definida, 2. Por que um código único para Web e Mobile (e o que isso custa), 3. Estrutura do Monorepo (+5 more)
+Cohesion: 0.05
+Nodes (38): graphify, Ordem de leitura recomendada ao iniciar qualquer tarefa, Regras de trabalho neste projeto, Ser Dono — Instruções do Projeto para o Claude, 0. Papel deste documento no fluxo de trabalho, 10. Itens de Roadmap Técnico (fora do MVP, não bloqueiam), 11. Decisões que ainda precisam de dono (bloqueiam itens específicos, não o início geral do código), 12. Decisões registradas durante a implementação da Home/Landing (retroativas a este PR) (+30 more)
 
 ### Community 81 - "Community 81"
-Cohesion: 0.05
-Nodes (50): AbaId, ABAS, AdminAbacatePayScreen(), AssinaturasTab(), ClientesTab(), Coluna, CuponsTab(), formatMoney() (+42 more)
+Cohesion: 0.35
+Nodes (8): assuntoBoasVindas(), blocoModulo(), DadosEmailBoasVindas, escapeHtml(), htmlBoasVindas(), Modulo, primeiroNome(), textoBoasVindas()
 
 ### Community 82 - "Community 82"
 Cohesion: 0.40
 Nodes (4): projectId, expo, extra, eas
 
 ### Community 84 - "Community 84"
-Cohesion: 0.26
-Nodes (12): buildDocumentHtml(), escapeHtml(), etapaHtml(), exportChecklistPdf(), exportEtapaPdf(), printEtapa(), printHtmlOnWeb(), shareOrDownload() (+4 more)
+Cohesion: 0.50
+Nodes (8): buildDocumentHtml(), escapeHtml(), etapaHtml(), exportChecklistPdf(), exportEtapaPdf(), printEtapa(), printHtmlOnWeb(), shareOrDownload()
 
 ### Community 85 - "Community 85"
 Cohesion: 0.14
@@ -544,36 +524,36 @@ Cohesion: 0.18
 Nodes (4): AdminModulesScreen(), COL, DIACRITICS_REGEX, useAdminModules()
 
 ### Community 218 - "Community 218"
-Cohesion: 0.14
-Nodes (8): DashboardScreen(), REGIME_LABEL, STATUS_PILL_LABEL, STATUS_PILL_TONES, FaseIcon(), FaseResumo, useDashboard(), JornadaFaseCore
+Cohesion: 0.10
+Nodes (18): DashboardScreen(), ProximaEtapa(), REGIME_LABEL, STATUS_PILL_LABEL, STATUS_PILL_TONES, FaseIcon(), FaseResumo, Marco (+10 more)
 
 ### Community 219 - "Community 219"
 Cohesion: 0.40
 Nodes (5): corsHeaders, DOC_TIPOS, DocumentosGerados, extractJson(), gerarDocumentos()
 
 ### Community 220 - "Community 220"
-Cohesion: 0.19
-Nodes (9): CompletarCadastroScreen(), Session, PerfilFields(), PerfilFieldsProps, PerfilScreen(), usePerfilForm(), usePushNotifications(), enviarPushTeste() (+1 more)
+Cohesion: 0.14
+Nodes (12): CompletarCadastroScreen(), Session, PerfilFields(), PerfilFieldsProps, PerfilScreen(), usePerfilForm(), usePushNotifications(), enviarPushTeste() (+4 more)
 
 ### Community 221 - "Community 221"
-Cohesion: 0.09
-Nodes (23): RaioXResumoCard(), GraficoComparativoBarras(), RaioXFinanceiroScreen(), ResultadoFechamento(), useRaioXFinanceiro(), calcularResultadoMensal(), elegivelRaioXFinanceiro(), formatarPct() (+15 more)
+Cohesion: 0.10
+Nodes (16): RaioXResumoCard(), FechamentoForm(), GraficoComparativoBarras(), RaioXFinanceiroScreen(), ResultadoFechamento(), useRaioXFinanceiro(), ScreenHeader(), calcularResultadoMensal() (+8 more)
 
 ### Community 222 - "Community 222"
-Cohesion: 0.12
-Nodes (18): ACCENT_POR_SECAO, STATUS_LABEL, STATUS_TONES, PerguntaField(), CANAIS_MARKETING, CategoriaSaude, FAIXAS_FATURAMENTO, OpcaoPergunta (+10 more)
+Cohesion: 0.08
+Nodes (26): ACCENT_POR_SECAO, CheckupScreen(), Formulario(), ResultadoCheckup(), STATUS_LABEL, STATUS_TONES, PerguntaField(), useCheckupMensal() (+18 more)
 
 ### Community 223 - "Community 223"
 Cohesion: 0.13
-Nodes (21): ClientesScreen(), useClientes(), calcularMetaCaptacao(), MetaCaptacaoInputs, metaCaptacaoPadrao(), MetaCaptacaoResultado, addJornadaClienteContato(), calcularCriteriosConclusao() (+13 more)
+Nodes (21): useClientes(), calcularMetaCaptacao(), MetaCaptacaoInputs, metaCaptacaoPadrao(), MetaCaptacaoResultado, addJornadaClienteContato(), calcularCriteriosConclusao(), ClienteContatoStatus (+13 more)
 
 ### Community 224 - "Community 224"
 Cohesion: 0.07
 Nodes (42): buildDocumentHtml(), escapeHtml(), exportObrigacoesPdf(), formatarData(), obrigacaoHtml(), printHtmlOnWeb(), shareOrDownload(), formatarData() (+34 more)
 
 ### Community 225 - "Community 225"
-Cohesion: 0.16
-Nodes (11): AssistenteScreen(), Message, signOut(), supabase, askKnowledgeBase(), KnowledgeAnswer, KnowledgeCategory, KnowledgeSource (+3 more)
+Cohesion: 0.27
+Nodes (6): AssistenteScreen(), Message, askKnowledgeBase(), KnowledgeAnswer, KnowledgeCategory, KnowledgeSource
 
 ### Community 226 - "Community 226"
 Cohesion: 0.33
@@ -584,60 +564,60 @@ Cohesion: 0.06
 Nodes (34): ClienteCard(), RetencaoScreen(), SITUACAO_COR, SITUACAO_FUNDO, ClienteNaTela, useRetencao(), calcularResumoRetencao(), classificarCliente() (+26 more)
 
 ### Community 228 - "Community 228"
-Cohesion: 0.14
-Nodes (18): Formulario(), ResultadoCheckup(), PlanoAcaoResumoCard(), ColunaMes(), PlanoHistoricoCard(), ConviteGerar(), PlanoAcaoScreen(), PlanoGerado() (+10 more)
+Cohesion: 0.13
+Nodes (20): PlanoAcaoResumoCard(), ColunaMes(), PlanoAcaoComparacaoScreen(), PlanoHistoricoCard(), ItemCheckRow(), buildDocumentHtml(), escapeHtml(), exportPlanoAcaoPdf() (+12 more)
 
 ### Community 229 - "Community 229"
 Cohesion: 0.07
-Nodes (48): JornadaClienteContato, advanceFase(), avancarParaProximaFasePendente(), CAMPO_PARA_SLUG, CandidatoNomeEmpresa, chooseLogoFinal(), chooseNomeEmpresa(), chooseRegimeFormalizacao() (+40 more)
+Nodes (49): JornadaClienteContato, advanceFase(), avancarParaProximaFasePendente(), CAMPO_PARA_SLUG, CandidatoNomeEmpresa, chooseLogoFinal(), chooseNomeEmpresa(), chooseRegimeFormalizacao() (+41 more)
 
 ### Community 230 - "Community 230"
-Cohesion: 0.15
+Cohesion: 0.13
 Nodes (13): ModuleIcon(), ModulosScreen(), ROTA_POR_SLUG, rotaDoModulo(), AppDrawer(), LARGURA_DRAWER, DrawerContext, DrawerContextValue (+5 more)
 
 ### Community 231 - "Community 231"
-Cohesion: 0.11
-Nodes (14): AREAS_DIAGNOSTICO, ChoiceOption, DIAGNOSTICO_BLOCKS, DiagnosticoBlock, DiagnosticoField, LocationBlock, MultiChoiceBlock, SingleChoiceBlock (+6 more)
+Cohesion: 0.12
+Nodes (13): AREAS_DIAGNOSTICO, ChoiceOption, DIAGNOSTICO_BLOCKS, DiagnosticoBlock, DiagnosticoField, LocationBlock, MultiChoiceBlock, SingleChoiceBlock (+5 more)
 
 ### Community 232 - "Community 232"
-Cohesion: 0.09
-Nodes (25): buildPlanoHtml(), escapeHtml(), exportPlanoOrganizacaoPdf(), PLANO_30_DIAS, printHtmlOnWeb(), CATEGORIAS_INDICADOR_ORDEM, NIVEL_FERRAMENTA_LABEL, OrganizacaoScreen() (+17 more)
+Cohesion: 0.08
+Nodes (27): buildPlanoHtml(), escapeHtml(), exportPlanoOrganizacaoPdf(), PLANO_30_DIAS, printHtmlOnWeb(), CATEGORIAS_INDICADOR_ORDEM, NIVEL_FERRAMENTA_LABEL, OrganizacaoScreen() (+19 more)
 
 ### Community 233 - "Community 233"
-Cohesion: 0.21
-Nodes (9): BusinessContext, embedQuestion(), FASE_LABEL, KnowledgeMatch, synthesizeAnswer(), CategoriaFerramenta, corsHeaders, gerarCategorias() (+1 more)
+Cohesion: 0.12
+Nodes (17): Contexto, corsHeaders, Estilo, ESTILOS, gerarLogoRascunho(), gerarSlogan(), montarPromptLogo(), Respostas (+9 more)
 
 ### Community 234 - "Community 234"
-Cohesion: 0.06
-Nodes (55): buildDocumentHtml(), escapeHtml(), exportContratoPdf(), printHtmlOnWeb(), shareOrDownload(), ContratoScreen(), Detalhe(), formatarDataRelativa() (+47 more)
+Cohesion: 0.05
+Nodes (60): buildDocumentHtml(), escapeHtml(), exportContratoPdf(), printHtmlOnWeb(), shareOrDownload(), ContratoScreen(), Detalhe(), formatarDataRelativa() (+52 more)
 
 ### Community 235 - "Community 235"
-Cohesion: 0.25
-Nodes (5): corsHeaders, Estilo, Respostas, IaUsageParams, SupabaseClient
+Cohesion: 0.17
+Nodes (9): corsHeaders, Estilo, Respostas, corsHeaders, extractJson(), gerarConteudo(), MarketingConteudo, IaUsageParams (+1 more)
 
 ### Community 236 - "Community 236"
-Cohesion: 0.20
-Nodes (4): AdminDicasCategoriasScreen(), COL, useAdminDicasCategorias(), DicasCategoria
+Cohesion: 0.22
+Nodes (3): AdminDicasCategoriasScreen(), COL, useAdminDicasCategorias()
 
 ### Community 237 - "Community 237"
-Cohesion: 0.18
-Nodes (15): ReuniaoView, buscarReuniao(), cancelarAgendamento(), comAgendaEResultado(), enviarConviteReuniao(), gerarReuniao(), GerarReuniaoParams, listarReunioes() (+7 more)
+Cohesion: 0.05
+Nodes (53): LembreteReuniaoAviso(), AgendamentoSecao(), DateTimeField(), DateTimeFieldProps, formatarValor(), DesfechoReuniaoSecao(), OPCOES_SUCESSO, buildDocumentHtml() (+45 more)
 
 ### Community 238 - "Community 238"
 Cohesion: 0.07
 Nodes (28): MaturidadeResumoCard(), CategoriaLinha(), MaturidadeScreen(), tonsPorNota(), useMaturidade(), calcularPontuacaoTotal(), CategoriaResultado, CATEGORIAS_SCORE (+20 more)
 
 ### Community 239 - "Community 239"
-Cohesion: 0.06
-Nodes (41): FinalCta(), ProximaEtapa(), ClientesScreenProps, STATUS_LABEL, STATUS_ORDEM, EstruturaScreen(), EstruturaScreenProps, FinanceiroScreen() (+33 more)
+Cohesion: 0.08
+Nodes (35): ClientesScreenProps, STATUS_LABEL, STATUS_ORDEM, EstruturaScreen(), EstruturaScreenProps, FinanceiroScreenProps, FormalizacaoScreen(), FormalizacaoScreenProps (+27 more)
 
 ### Community 240 - "Community 240"
 Cohesion: 0.11
 Nodes (19): 9.10 Fase "Clientes" — Captação de Clientes (desenhada em 30/07/2026, MVP), 9.11 Fase "Primeira Venda" (desenhada em 31/07/2026), 9.12 Fase "Organização do Negócio" (desenhada em 31/07/2026), 9.13 Conclusão da Jornada (decisão do dono do produto, 31/07/2026), 9.1 Anatomia de uma etapa (aplica-se a toda etapa de toda trilha), 9.2 Fase "Planejamento" — Etapa 1: Nome da Empresa (desenhada em 29/07/2026), 9.2 Trilha A — Validação, 9.3 Fase "Planejamento" — Etapa 2: Identidade Visual (desenhada em 29/07/2026) (+11 more)
 
 ### Community 241 - "Community 241"
-Cohesion: 0.17
-Nodes (7): DicasCategoriaScreen(), registrarAcesso(), useDicasCategoria(), getCategoriaComMateriais(), logDicaAcesso(), MATERIAL_NIVEL_LABEL, MaterialNivel
+Cohesion: 0.21
+Nodes (5): DicasCategoriaScreen(), registrarAcesso(), useDicasCategoria(), logDicaAcesso(), MATERIAL_NIVEL_LABEL
 
 ### Community 242 - "Community 242"
 Cohesion: 0.50
@@ -672,28 +652,28 @@ Cohesion: 0.11
 Nodes (19): 12.10 Parceiros e Fornecedores (pedido do dono do produto em 08/08/2026), 12.11 Check-up Mensal do Negócio (pedido do dono do produto em 08/08/2026 — prioridade nº 1), 12.12 Avisos no celular — notificação push (pedido do dono do produto em 08/08/2026), 12.13 Raio-X Financeiro (pedido do dono do produto em 09/08/2026), 12.14 Nível de Maturidade & Ser Dono Score (pedido do dono do produto em 12/08/2026), 12.15 Assistente de Reunião — V1 (pedido do dono do produto em 12/08/2026), 12.16 Assistente de Contrato (pedido do dono do produto, 17/08/2026), 12.17 Cobrança — Planos pagos via AbacatePay (pedido do dono do produto, 17/08/2026) (+11 more)
 
 ### Community 250 - "Community 250"
-Cohesion: 0.31
-Nodes (6): NovidadeModuloPopup(), useNovidadesModulos(), agruparNovidadesModulos(), GrupoNovidadeModulo, ModuloParaNovidade, marcarNovidadesModulosVistas()
+Cohesion: 0.21
+Nodes (7): NovidadeModuloPopup(), useNovidadesModulos(), ModelKind, agruparNovidadesModulos(), GrupoNovidadeModulo, ModuloParaNovidade, marcarNovidadesModulosVistas()
 
 ### Community 251 - "Community 251"
 Cohesion: 0.20
 Nodes (10): DS-8: alvo de toque mínimo 44x44px, Famílias tipográficas: Sora (display/títulos), Inter (interface), Princípio de design: uma decisão por vez, Princípio 1: uma decisão por vez, RN-5: capital sempre em faixas, nunca valor livre, SDD-2: páginas 100% públicas/SEO podem ficar fora do app Expo, Mockup App Mobile — 6 telas de conceito, Tela 3 — Diagnóstico (capital em faixas por chips) (+2 more)
 
 ### Community 252 - "Community 252"
-Cohesion: 0.11
-Nodes (19): AdminAssinaturasScreen(), formatData(), formatMoney(), HistoricoRow(), PLANOS, STATUS_LABEL, STATUS_TONE, useAdminAssinaturas() (+11 more)
+Cohesion: 0.15
+Nodes (14): CAPITAL_LABEL, OBJETIVO_LABEL, stripMarkdown(), TEMPO_LABEL, BACKGROUND_PHOTO, MatchRow, Perfil, ResultadoScreen() (+6 more)
 
 ### Community 253 - "Community 253"
 Cohesion: 0.08
 Nodes (32): AdminDashboardScreen(), ALERTA_COR, DonutChart(), formatNumber(), GrowthChart(), IaUsageBarChart(), KpiCard(), VerticalBarChart() (+24 more)
 
 ### Community 254 - "Community 254"
-Cohesion: 0.06
-Nodes (43): PRECO_CENTAVOS_POR_PLANO, PRODUTO_POR_PLANO, enviarEmailPlanoAtivado(), assuntoPlanoAtivado(), blocoBeneficio(), CATALOGO_PLANO, DadosEmailPlanoAtivado, escapeHtml() (+35 more)
+Cohesion: 0.19
+Nodes (14): AVISO_LEGAL, ClausulaContrato, formatarMoeda(), gerarClausulas(), LABEL_TIPO, labelTipoContrato(), qualificacaoParte(), TipoContrato (+6 more)
 
 ### Community 255 - "Community 255"
-Cohesion: 0.16
-Nodes (12): BACKGROUND_PHOTO, CadastroStep(), Etapa, ETAPA_NICHO_E_MARCOS, inputStyle(), MarcoStep(), NegocioExistenteScreen(), NicheOption (+4 more)
+Cohesion: 0.15
+Nodes (13): BACKGROUND_PHOTO, CadastroStep(), Etapa, ETAPA_NICHO_E_MARCOS, inputStyle(), MarcoStep(), NegocioExistenteScreen(), NicheOption (+5 more)
 
 ### Community 256 - "Community 256"
 Cohesion: 0.50
@@ -704,8 +684,8 @@ Cohesion: 0.22
 Nodes (9): Componente Input de texto/campo de formulário, DS-2: contraste WCAG AA obrigatório, nunca branco sobre gold.500, Jornada em 5 estágios: Cadastro, Diagnóstico, Match de Nichos, Assinatura, Construção, Operação, Módulo: Diagnóstico (Fase 0/1, grátis), Módulo: Match de Nichos e Paywall, Módulo: Workflow de Construção (trilhas A,B,C — MVP), Mockup Portal Web — 5 telas de conceito, Tela 1 — Tela inicial pública (questionário na dobra) (+1 more)
 
 ### Community 258 - "Community 258"
-Cohesion: 0.10
-Nodes (18): Footer(), Hero(), HomeSection, fases, JourneySection(), MentorSection(), pillars, ModulesSection() (+10 more)
+Cohesion: 0.08
+Nodes (26): FinalCta(), Footer(), ForWhomSection(), scenarios, Hero(), HomeSection, alocacao, InvestimentosSection() (+18 more)
 
 ### Community 259 - "Community 259"
 Cohesion: 0.39
@@ -724,60 +704,60 @@ Cohesion: 0.33
 Nodes (6): Módulo pós-abertura: Assistente Financeiro, Módulo pós-abertura: Hub B2B/Fornecedores, Módulo pós-abertura: Assistente de Marketing, Plano Operação — módulos de marketing/financeiro/B2B, ≈3x Essencial, Risco: assinatura termina quando negócio abre (limita LTV), Plano Operação — em breve, negócio já aberto
 
 ### Community 263 - "Community 263"
-Cohesion: 0.16
-Nodes (5): AdminDicasMateriaisScreen(), COL, NIVEIS, NIVEL_LABEL, useAdminDicasMateriais()
+Cohesion: 0.15
+Nodes (6): AdminDicasMateriaisScreen(), COL, NIVEIS, NIVEL_LABEL, useAdminDicasMateriais(), MaterialNivel
 
 ### Community 264 - "Community 264"
 Cohesion: 0.27
 Nodes (3): LegalLayout(), LegalLayoutProps, LegalSection
 
 ### Community 265 - "Community 265"
-Cohesion: 0.14
-Nodes (9): AuthSession, BACKGROUND_PHOTO, destinationFor(), LoginScreen(), destinationFor(), hasModuleAccess(), decodeBase64Url(), getUserRole() (+1 more)
+Cohesion: 0.16
+Nodes (10): AuthSession, BACKGROUND_PHOTO, destinationFor(), LoginScreen(), destinationFor(), hasModuleAccess(), decodeBase64Url(), ensureSession() (+2 more)
 
 ### Community 266 - "Community 266"
-Cohesion: 0.17
-Nodes (14): styles, articuloPara(), QuantoCustaDetalhe(), styles, AMOSTRA_SLUGS, QuantoCustaTeaserSection(), QuantoCustaLayout(), styles (+6 more)
+Cohesion: 0.11
+Nodes (17): formatMoney(), formatarIndicador(), InvestimentosScreen(), LinhaResultado(), LinhaValor(), CAMPOS_FINANCEIRO, useInvestimentos(), ClientesScreen() (+9 more)
 
 ### Community 267 - "Community 267"
-Cohesion: 0.15
-Nodes (16): AdminUserModulesScreen(), createModule(), getPlanoAtual(), listModules(), listModulosComNovidadePendente(), listMyModules(), listUserModuleAccess(), ModuleAccessRow (+8 more)
+Cohesion: 0.24
+Nodes (12): createModule(), getPlanoAtual(), listModules(), listModulosComNovidadePendente(), listMyModules(), ModuleAccessRow, ModuleRow, ModuloComNovidade (+4 more)
 
 ### Community 268 - "Community 268"
-Cohesion: 0.17
-Nodes (10): ROTAS_SEM_TAB_BAR, resetMaryIntro(), MaryFloatingButton(), BASE_TABS, MobileTabBar(), Tab, TabIcon(), TabIconName (+2 more)
+Cohesion: 0.19
+Nodes (9): ROTAS_SEM_TAB_BAR, dismissMaryIntro(), resetMaryIntro(), MaryFloatingButton(), BASE_TABS, MobileTabBar(), Tab, TabIcon() (+1 more)
 
 ### Community 269 - "Community 269"
-Cohesion: 0.15
-Nodes (13): ACAO_W, AdminUsersScreen(), COL, formatarUltimoAcesso(), UserRow(), useAdminUsers(), AdminUser, deleteUser() (+5 more)
+Cohesion: 0.14
+Nodes (14): ACAO_W, AdminUsersScreen(), COL, formatarUltimoAcesso(), UserRow(), useAdminUsers(), AdminUser, deleteUser() (+6 more)
 
 ### Community 270 - "Community 270"
-Cohesion: 0.14
-Nodes (14): listMyPushTokens(), registerPushToken(), removePushToken(), UserPushToken, CompositeTypes, Constants, Database, DatabaseWithoutInternals (+6 more)
+Cohesion: 0.18
+Nodes (10): CompositeTypes, Constants, Database, DatabaseWithoutInternals, DefaultSchema, Enums, Json, Tables (+2 more)
 
 ### Community 271 - "Community 271"
-Cohesion: 0.24
-Nodes (7): BACKGROUND_PHOTO, consumeRecoveryLink(), RedefinirSenhaScreen(), confirmPasswordRecovery(), signInWithEmail(), signInWithGoogle(), updatePassword()
+Cohesion: 0.19
+Nodes (9): BACKGROUND_PHOTO, consumeRecoveryLink(), RedefinirSenhaScreen(), confirmPasswordRecovery(), signInWithEmail(), signInWithGoogle(), signOut(), updatePassword() (+1 more)
 
 ### Community 272 - "Community 272"
-Cohesion: 0.13
-Nodes (13): AnimatedPressable, Button(), ButtonProps, ButtonSize, ButtonVariant, styles, variantStyles, Card() (+5 more)
+Cohesion: 0.14
+Nodes (11): AnimatedPressable, ButtonProps, ButtonSize, ButtonVariant, styles, variantStyles, CardProps, CardVariant (+3 more)
 
 ### Community 273 - "Community 273"
 Cohesion: 0.40
 Nodes (3): corsHeaders, Cotacoes, Indicador
 
 ### Community 274 - "Community 274"
-Cohesion: 0.20
-Nodes (12): elegivelPlanoAcao(), primeiroDiaMesAtualISO(), getMyJornada(), gerarPlanoAcao(), getPlanoDoMes(), getPlanosAcaoPorIds(), itensDosPlanos(), listPlanosAcaoHistorico() (+4 more)
+Cohesion: 0.17
+Nodes (13): PlanoAcaoHistoricoScreen(), CheckIcon(), useHistoricoPlanoAcao(), primeiroDiaMesAtualISO(), gerarPlanoAcao(), getPlanoDoMes(), getPlanosAcaoPorIds(), itensDosPlanos() (+5 more)
 
 ### Community 275 - "Community 275"
 Cohesion: 0.50
 Nodes (4): corsHeaders, extractJson(), gerarRoteiro(), RoteiroReaproximacao
 
 ### Community 276 - "Community 276"
-Cohesion: 0.20
-Nodes (5): AppWelcomeScreen(), HomeScreen(), LogoProps, symbolColor, symbolWhite
+Cohesion: 0.12
+Nodes (8): EntrepreneurBackgroundProps, InputProps, LogoProps, symbolColor, symbolWhite, MaryAvatarProps, MaryPose, poses
 
 ### Community 277 - "Community 277"
 Cohesion: 0.24
@@ -788,80 +768,76 @@ Cohesion: 0.19
 Nodes (9): amanhaRangeUTC(), coletarLembretesCheckup(), coletarLembretesObrigacoes(), coletarLembretesReuniao(), hojeSP(), Lembrete, pad2(), supabase (+1 more)
 
 ### Community 279 - "Community 279"
-Cohesion: 0.06
-Nodes (41): CAPITAL_LABEL, formatMoney(), OBJETIVO_LABEL, stripMarkdown(), TEMPO_LABEL, BACKGROUND_PHOTO, MatchRow, Perfil (+33 more)
+Cohesion: 0.15
+Nodes (16): ComparadorChart(), SERIES, aliquotaIrPorMeses(), APLICACAO_LABEL, montar(), PontoProjecao, PRAZOS_MESES, ResultadoAplicacao (+8 more)
 
 ### Community 280 - "Community 280"
-Cohesion: 0.11
-Nodes (16): ConceitoIconName, CONCEITOS_ICON, formatMoeda(), ProdutoScreen(), ProdutoScreenProps, baixarModeloPlanilhaProduto(), buildCsvContent(), CABECALHO (+8 more)
+Cohesion: 0.12
+Nodes (15): ConceitoIconName, CONCEITOS_ICON, formatMoeda(), ProdutoScreen(), ProdutoScreenProps, baixarModeloPlanilhaProduto(), buildCsvContent(), CABECALHO (+7 more)
 
 ### Community 281 - "Community 281"
 Cohesion: 0.22
 Nodes (8): devDependencies, @babel/core, @types/react, typescript, main, name, private, version
-
-### Community 282 - "Community 282"
-Cohesion: 0.11
-Nodes (17): 0. Como usar este documento, 10. Proposta de nova bio, 11. Nota sobre a operação da conta, 1. O diagnóstico honesto do ponto de partida, 2. Posicionamento da campanha, 3. A Mary como personagem (a decisão estruturante), 4. Os quatro pilares de conteúdo, 5. Formatos e cadência semanal (+9 more)
 
 ### Community 283 - "Community 283"
 Cohesion: 0.28
 Nodes (5): corsHeaders, extractJson(), gerarPlano(), PlanoGerado, validarPlanoGerado()
 
 ### Community 284 - "Community 284"
-Cohesion: 0.17
-Nodes (7): ParceiroCard(), ParceirosScreen(), useParceiros(), classificarContato(), ContatoClassificado, normalizarUrlSite(), TipoContato
+Cohesion: 0.40
+Nodes (3): elegivelPlanoAcao(), MESES_PT_BR, ProgressoPlanoAcao
 
 ### Community 285 - "Community 285"
-Cohesion: 0.08
-Nodes (18): AdminVersaoAppScreen(), PLATFORM, useAdminVersaoApp(), AppUpdateAlert(), Dispositivo, InstallAppPrompt(), LinkminerButton(), DrawerProvider() (+10 more)
+Cohesion: 0.12
+Nodes (15): AdminVersaoAppScreen(), PLATFORM, useAdminVersaoApp(), AppUpdateAlert(), DrawerProvider(), UP_TO_DATE, UpdateStatus, useAppVersion() (+7 more)
 
 ### Community 286 - "Community 286"
-Cohesion: 0.36
-Nodes (5): generateMarketingConteudo(), getMarketingConteudo(), MarketingAnuncio, MarketingConteudo, MarketingPost
+Cohesion: 0.23
+Nodes (8): MarketingScreen(), MarketingScreenProps, useMarketing(), generateMarketingConteudo(), getMarketingConteudo(), MarketingAnuncio, MarketingConteudo, MarketingPost
 
 ### Community 287 - "Community 287"
-Cohesion: 0.25
-Nodes (8): scripts, android, build:web, generate:quanto-custa, ios, start, typecheck, web
+Cohesion: 0.29
+Nodes (7): scripts, android, build:web, ios, start, typecheck, web
 
 ### Community 288 - "Community 288"
-Cohesion: 0.19
-Nodes (6): PlanoAcaoComparacaoScreen(), PlanoAcaoHistoricoScreen(), CheckIcon(), ItemCheckRow(), useHistoricoPlanoAcao(), ModelKind
+Cohesion: 0.33
+Nodes (9): addDespesaDiaria(), criarFechamentoMensal(), DespesaDiariaRow, FechamentoMensalRow, getFechamentoDoMes(), listDespesasDoMes(), listUltimosFechamentos(), primeiroDiaProximoMes() (+1 more)
 
 ### Community 289 - "Community 289"
-Cohesion: 0.70
-Nodes (4): buildCertificadoHtml(), escapeHtml(), exportCertificadoConclusaoPdf(), printHtmlOnWeb()
+Cohesion: 0.48
+Nodes (5): buildCertificadoHtml(), escapeHtml(), exportCertificadoConclusaoPdf(), printHtmlOnWeb(), getJornadaConclusaoConfig()
 
 ### Community 291 - "Community 291"
 Cohesion: 0.08
-Nodes (41): calcularPlanejamentoFinanceiro(), CAPITAL_FAIXA_PARA_ESTIMATIVA, estimarCapitalDaFaixa(), FinanceiroInputs, FinanceiroResultado, FluxoCaixaMes, sugerirPlanejamentoFinanceiro(), SugestaoNicho (+33 more)
+Nodes (37): calcularPlanejamentoFinanceiro(), CAPITAL_FAIXA_PARA_ESTIMATIVA, estimarCapitalDaFaixa(), FinanceiroInputs, FinanceiroResultado, FluxoCaixaMes, sugerirPlanejamentoFinanceiro(), SugestaoNicho (+29 more)
 
 ### Community 292 - "Community 292"
-Cohesion: 0.09
-Nodes (17): JornadaConclusaoScreen(), JornadaConclusaoScreenProps, ResumoFase, FASE_LABEL, FASES, JornadaScreen(), dismissMaryIntro(), isMaryIntroDismissed() (+9 more)
+Cohesion: 0.12
+Nodes (11): JornadaConclusaoScreen(), FASE_LABEL, FASES, JornadaScreen(), isMaryIntroDismissed(), RailFaseData, RailStepData, StepRail() (+3 more)
 
 ### Community 293 - "Community 293"
 Cohesion: 0.18
 Nodes (6): CATEGORIAS, CategoriasGeradas, corsHeaders, extractJson(), gerarCategorias(), validarCategoriasGeradas()
 
 ### Community 294 - "Community 294"
-Cohesion: 0.13
-Nodes (15): 0. Papel deste documento no fluxo SDD, 10. Acessibilidade, 11.1 Primitivas de movimento (DS-16, registradas em 29/07/2026), 11. Motion (transições), 12. Governança de assets, 13.1 Portal Web — `mockups/portal-web.html`, 13.2 App Mobile — `mockups/app-mobile.html`, 13. Telas de referência (mockups) (+7 more)
+Cohesion: 0.17
+Nodes (12): 0. Papel deste documento no fluxo SDD, 10. Acessibilidade, 11.1 Primitivas de movimento (DS-16, registradas em 29/07/2026), 11. Motion (transições), 12. Governança de assets, 14. Checklist rápido para qualquer tela nova, 4. Espaçamento, 5. Raio de borda, elevação e bordas (+4 more)
 
 ### Community 295 - "Community 295"
-Cohesion: 0.15
-Nodes (7): Formulario(), ReuniaoScreen(), SECOES_GUIA, TIPO_LABEL, useReuniao(), detalheObrigatorio(), TipoReuniao
+Cohesion: 0.24
+Nodes (3): PRECO_CENTAVOS_POR_PLANO, PRODUTO_POR_PLANO, corsHeaders
 
 ### Community 296 - "Community 296"
-Cohesion: 0.31
-Nodes (5): DicasDaMaryScreen(), useTileWidth(), useDicasDaMary(), CategoriaComMateriais, listCategoriasComMateriais()
+Cohesion: 0.33
+Nodes (4): DicasDaMaryScreen(), useTileWidth(), useDicasDaMary(), listCategoriasComMateriais()
 
 ### Community 297 - "Community 297"
-Cohesion: 0.26
-Nodes (13): admin, enviarEmailVencida(), marcarVencidas(), SubscriptionRow, assuntoAssinaturaVencida(), DadosEmailAssinaturaVencida, escapeHtml(), formatData() (+5 more)
+Cohesion: 0.31
+Nodes (7): LOCAL_TIPO_LABEL, assuntoConvite(), DadosConviteReuniao, escapeHtml(), htmlConvite(), primeiroNome(), textoConvite()
 
 ### Community 298 - "Community 298"
-Cohesion: 0.10
-Nodes (13): BACKGROUND_PHOTO, CadastroScreen(), BACKGROUND_PHOTO, EsqueciSenhaScreen(), ENTREPRENEUR_PHOTOS, EntrepreneurPhoto, pickEntrepreneurPhoto(), requestPasswordReset() (+5 more)
+Cohesion: 0.24
+Nodes (5): BACKGROUND_PHOTO, EsqueciSenhaScreen(), ENTREPRENEUR_PHOTOS, EntrepreneurPhoto, pickEntrepreneurPhoto()
 
 ### Community 299 - "Community 299"
 Cohesion: 0.27
@@ -872,8 +848,8 @@ Cohesion: 0.27
 Nodes (8): arrayValido(), corsHeaders, extractJson(), gerarGuia(), GuiaGerado, TIPO_LABEL, TIPOS_VALIDOS, validarGuiaGerado()
 
 ### Community 301 - "Community 301"
-Cohesion: 0.22
-Nodes (9): PlanosScreen(), faseJornadaLiberada(), FASES_JORNADA_GRATUITAS, ORDEM_PLANO, Plano, planoAtende(), PlanoCatalogo, PLANOS_CATALOGO (+1 more)
+Cohesion: 0.39
+Nodes (7): faseJornadaLiberada(), FASES_JORNADA_GRATUITAS, labelPlano(), ORDEM_PLANO, planoAtende(), PlanoCatalogo, PLANOS_CATALOGO
 
 ### Community 302 - "Community 302"
 Cohesion: 0.52
@@ -884,8 +860,8 @@ Cohesion: 0.48
 Nodes (3): YoutubeEmbed(), YoutubeEmbed(), extractYoutubeId()
 
 ### Community 304 - "Community 304"
-Cohesion: 0.18
-Nodes (10): Marco, DESCOBERTA_STEPS, EtapaParaProgresso, FASE_JORNADA_LABEL, FaseComEtapas, FASES_JORNADA, ProgressoJornada, proximaFasePendente() (+2 more)
+Cohesion: 0.40
+Nodes (3): PlanosScreen(), Plano, criarCheckout()
 
 ### Community 305 - "Community 305"
 Cohesion: 0.20
@@ -896,128 +872,60 @@ Cohesion: 0.29
 Nodes (7): 1.1 Conceito escolhido — "O Marco", 1.2 Arquivos-fonte, 1.3 Área de respiro (clear space), 1.4 Tamanho mínimo, 1.5 Uso incorreto (não fazer), 1.6 Variantes de cor do logo, 1. Fundamento da Marca
 
 ### Community 307 - "Community 307"
-Cohesion: 0.26
-Nodes (12): AgendamentoSecao(), AgendamentoReuniao, agendamentoValido(), elegivelAssistenteReuniao(), emailValido(), fimJanelaLembreteInicioISO(), formatarDataHoraReuniao(), LOCAL_TIPO_LABEL (+4 more)
+Cohesion: 0.22
+Nodes (5): BACKGROUND_PHOTO, CadastroScreen(), supabase, enviarEmailBoasVindas(), isAnonymousSession()
 
 ### Community 308 - "Community 308"
 Cohesion: 0.33
 Nodes (6): 2.1 Paleta primitiva (não usar direto em componentes — ver §2.2), 2.2-bis Cores de dado — gráficos (`chart`, registradas em 31/07/2026), 2.2 Tokens semânticos (o que o código de fato consome), 2.3 Regra de contraste (obrigatória), 2.4 Dark mode, 2. Cor
 
 ### Community 309 - "Community 309"
-Cohesion: 0.19
-Nodes (12): all, clean, COLUMNS, __dirname, MIGRATIONS_DIR, OUT_FILE, parseInsertBlock(), SOURCE_FILES (+4 more)
+Cohesion: 0.40
+Nodes (3): AdminUserModulesScreen(), listUserModuleAccess(), setModuleAccess()
 
 ### Community 310 - "Community 310"
 Cohesion: 0.60
 Nodes (4): DateTimeField(), DateTimeFieldProps, pad(), paraInputValue()
 
 ### Community 311 - "Community 311"
-Cohesion: 0.22
-Nodes (3): AdminFornecedoresScreen(), COL, useAdminFornecedores()
+Cohesion: 0.40
+Nodes (4): fs, http, path, server
 
 ### Community 312 - "Community 312"
-Cohesion: 0.18
-Nodes (7): ForWhomSection(), scenarios, alocacao, InvestimentosSection(), pontosDeApoio, HoverLift(), HoverLiftProps
+Cohesion: 0.40
+Nodes (4): ACCENT_TONES, CollapsibleSectionProps, SECTION_ACCENT_CYCLE, SectionAccent
 
 ### Community 313 - "Community 313"
 Cohesion: 0.50
 Nodes (4): 3.1 Famílias, 3.2 Escala tipográfica, 3.3 Carregamento de fonte em React Native / Expo, 3. Tipografia
 
-### Community 314 - "Community 314"
-Cohesion: 0.24
-Nodes (6): CheckupScreen(), useCheckupMensal(), elegivelCheckupMensal(), CheckupMensalRow, gerarCheckupMensal(), getCheckupDoMes()
-
-### Community 315 - "Community 315"
-Cohesion: 0.20
-Nodes (10): Escopo por fase, Estrutura do monorepo (alvo), Identidade visual, Personas, Princípios de produto (não negociáveis), Regras de trabalho, Ser Dono, Sobre o projeto (+2 more)
-
 ### Community 316 - "Community 316"
-Cohesion: 0.22
-Nodes (4): graphify, Ordem de leitura recomendada ao iniciar qualquer tarefa, Regras de trabalho neste projeto, Ser Dono — Instruções do Projeto para o Claude
-
-### Community 317 - "Community 317"
-Cohesion: 0.25
-Nodes (8): Contexto, corsHeaders, Estilo, ESTILOS, gerarLogoRascunho(), gerarSlogan(), montarPromptLogo(), Respostas
-
-### Community 318 - "Community 318"
-Cohesion: 0.46
-Nodes (7): buildDocumentHtml(), escapeHtml(), exportReuniaoPdf(), printHtmlOnWeb(), secaoHtml(), shareOrDownload(), GuiaReuniao
-
-### Community 319 - "Community 319"
-Cohesion: 0.57
-Nodes (5): HeroNegocio(), digitoVerificador(), isValidCnpj(), maskCnpj(), unmaskCnpj()
-
-### Community 320 - "Community 320"
-Cohesion: 0.48
-Nodes (5): buildDocumentHtml(), escapeHtml(), exportPlanoAcaoPdf(), printHtmlOnWeb(), shareOrDownload()
-
-### Community 321 - "Community 321"
-Cohesion: 0.29
-Nodes (6): O que medir na segunda seguinte (20 min), Quarta · Carrossel — `carrossel-erros/` (6 telas, em ordem), Segunda · Reel — `reel-01-quanto-custa-barbearia.mp4`, Semana 1 — peças e legendas, Sexta · Reel — `reel-02-do-zero-ao-cnpj-ep1.mp4`, Stories da semana (2 a 3 por dia, 15 min/dia)
-
-### Community 322 - "Community 322"
-Cohesion: 0.29
-Nodes (4): ALLOWLIST, corsHeaders, Metodo, MOVIMENTA_DINHEIRO
-
-### Community 323 - "Community 323"
-Cohesion: 0.33
-Nodes (5): artePlanoEssencial, artePlanoGratuito, artePlanoMaster, planos, PlanosSection()
-
-### Community 324 - "Community 324"
-Cohesion: 0.33
-Nodes (5): DesfechoReuniaoSecao(), OPCOES_SUCESSO, SUCESSO_REUNIAO_LABEL, SucessoReuniao, ResultadoRow
-
-### Community 325 - "Community 325"
-Cohesion: 0.33
-Nodes (6): 7.1 Gatilho, 7.2 `app.config.js` continua a única fonte de verdade de versão, 7.3 Pipeline (`.github/workflows/android-release.yml`), 7.4 Publicação na Play Store, 7.5 iOS, 7. Build Mobile Automatizado (GitHub Actions + EAS local)
-
-### Community 326 - "Community 326"
-Cohesion: 0.40
-Nodes (4): buscarStatusAbacatePay(), corsHeaders, json(), StatusAbacatePay
-
-### Community 327 - "Community 327"
-Cohesion: 0.50
-Nodes (4): LembreteReuniaoAviso(), rotuloQuandoReuniao(), getProximoLembreteReuniao(), ProximoLembreteReuniao
-
-### Community 328 - "Community 328"
-Cohesion: 0.50
-Nodes (3): DateTimeField(), DateTimeFieldProps, formatarValor()
-
-### Community 329 - "Community 329"
-Cohesion: 0.40
-Nodes (5): 4.1 Migrations, 4.2 Padrão de políticas RLS, 4.3 Papéis e claims, 4.4 Tipos TypeScript, 4. Modelo de Dados → Supabase
-
-### Community 331 - "Community 331"
-Cohesion: 0.50
-Nodes (4): corsHeaders, extractJson(), gerarConteudo(), MarketingConteudo
-
-### Community 332 - "Community 332"
-Cohesion: 0.50
-Nodes (3): MaryAvatarProps, MaryPose, poses
+Cohesion: 0.67
+Nodes (3): 13.1 Portal Web — `mockups/portal-web.html`, 13.2 App Mobile — `mockups/app-mobile.html`, 13. Telas de referência (mockups)
 
 ## Ambiguous Edges - Review These
 - `Fase 3 — Ecossistema (§12)` → `Fase 4 — Distribuição: white label, crédito/investimentos, app móvel completo`  [AMBIGUOUS]
   Documento de Conceito v0.1.pdf · relation: REFERENCES
 
 ## Knowledge Gaps
-- **892 isolated node(s):** `supabase`, `projectId`, `path`, `ROTAS_SEM_TAB_BAR`, `styles` (+887 more)
+- **832 isolated node(s):** `supabase`, `http`, `fs`, `path`, `server` (+827 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **183 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **181 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **What is the exact relationship between `Fase 3 — Ecossistema (§12)` and `Fase 4 — Distribuição: white label, crédito/investimentos, app móvel completo`?**
   _Edge tagged AMBIGUOUS (relation: REFERENCES) - confidence is low._
-- **Why does `logIaUsage()` connect `Community 233` to `Community 256`, `Community 226`, `Community 291`, `Community 293`, `Community 235`, `Community 331`, `Community 300`, `Community 283`, `Community 242`, `Community 275`, `Community 277`, `Community 219`, `Community 317`?**
-  _High betweenness centrality (0.031) - this node is a cross-community bridge._
-- **Why does `Button()` connect `Community 272` to `Community 258`, `Community 263`, `Community 265`, `Community 266`, `Community 269`, `Community 271`, `Community 276`, `Community 279`, `Community 280`, `Community 284`, `Community 285`, `Community 288`, `Community 292`, `Community 295`, `Community 298`, `Community 299`, `Community 301`, `Community 305`, `Community 307`, `Community 311`, `Community 323`, `Community 324`, `Community 81`, `Community 84`, `Community 217`, `Community 218`, `Community 220`, `Community 221`, `Community 222`, `Community 224`, `Community 227`, `Community 228`, `Community 231`, `Community 232`, `Community 234`, `Community 236`, `Community 238`, `Community 239`, `Community 241`, `Community 243`, `Community 250`, `Community 252`, `Community 255`?**
-  _High betweenness centrality (0.023) - this node is a cross-community bridge._
-- **Why does `Card()` connect `Community 272` to `Community 263`, `Community 267`, `Community 269`, `Community 279`, `Community 280`, `Community 284`, `Community 285`, `Community 288`, `Community 292`, `Community 295`, `Community 296`, `Community 299`, `Community 301`, `Community 305`, `Community 307`, `Community 311`, `Community 324`, `Community 81`, `Community 84`, `Community 217`, `Community 218`, `Community 220`, `Community 221`, `Community 222`, `Community 224`, `Community 227`, `Community 228`, `Community 230`, `Community 232`, `Community 234`, `Community 236`, `Community 238`, `Community 239`, `Community 241`, `Community 243`, `Community 252`, `Community 253`?**
-  _High betweenness centrality (0.013) - this node is a cross-community bridge._
-- **What connects `supabase`, `projectId`, `path` to the rest of the system?**
-  _893 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `logIaUsage()` connect `Community 233` to `Community 256`, `Community 226`, `Community 291`, `Community 293`, `Community 235`, `Community 300`, `Community 283`, `Community 242`, `Community 275`, `Community 277`, `Community 219`?**
+  _High betweenness centrality (0.024) - this node is a cross-community bridge._
+- **Why does `Button()` connect `Community 239` to `Community 258`, `Community 263`, `Community 265`, `Community 266`, `Community 269`, `Community 271`, `Community 272`, `Community 274`, `Community 280`, `Community 282`, `Cliente Supabase`, `Community 285`, `Community 286`, `Community 292`, `Community 298`, `Community 299`, `Community 304`, `Community 305`, `Community 307`, `Community 217`, `Community 218`, `Community 220`, `Community 221`, `Community 222`, `Community 224`, `Community 227`, `Community 228`, `Community 231`, `Community 232`, `Community 234`, `Community 236`, `Community 237`, `Community 238`, `Community 241`, `Community 243`, `Community 250`, `Community 252`, `Community 255`?**
+  _High betweenness centrality (0.019) - this node is a cross-community bridge._
+- **Why does `corsHeaders` connect `Community 295` to `Community 291`, `Community 233`, `Community 297`, `Community 81`, `Community 254`?**
+  _High betweenness centrality (0.017) - this node is a cross-community bridge._
+- **What connects `supabase`, `http`, `fs` to the rest of the system?**
+  _833 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Dependências Expo/React` be split into smaller, more focused modules?**
-  _Cohesion score 0.05263157894736842 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05405405405405406 - nodes in this community are weakly interconnected._
 - **Should `Configuração Expo (app.json)` be split into smaller, more focused modules?**
   _Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected._

@@ -19,6 +19,8 @@ interface MatchRow {
   fit_score: number;
   justificativa_ia: string | null;
   sub_negocios_destaque: SubNegocioDestaque[] | null;
+  precisa_de_mais_capital: boolean;
+  afinidade_direta: boolean;
   niches: {
     nome: string;
     slug: string;
@@ -34,10 +36,13 @@ interface Perfil {
   localizacao_cidade: string | null;
   localizacao_estado: string | null;
   areas_inferidas: string[] | null;
+  nichos_inferidos: string[] | null;
 }
 
 const MATCH_SELECT =
-  "niche_id, fit_score, justificativa_ia, sub_negocios_destaque, niches(nome, slug, investimento_min, investimento_max)";
+  "niche_id, fit_score, justificativa_ia, sub_negocios_destaque, precisa_de_mais_capital, afinidade_direta, niches(nome, slug, investimento_min, investimento_max)";
+const PERFIL_SELECT =
+  "capital_disponivel, tempo_disponivel, objetivo, localizacao_cidade, localizacao_estado, areas_inferidas, nichos_inferidos";
 
 export function ResultadoScreen() {
   const router = useRouter();
@@ -56,16 +61,19 @@ export function ResultadoScreen() {
 
         const { data: diag, error: diagError } = await supabase
           .from("diagnostic_responses")
-          .select("capital_disponivel, tempo_disponivel, objetivo, localizacao_cidade, localizacao_estado, areas_inferidas")
+          .select(PERFIL_SELECT)
           .eq("user_id", session.user.id)
           .maybeSingle();
         if (diagError) throw diagError;
         setPerfil(diag as Perfil);
 
+        // Um ramo que a pessoa citou no texto livre (afinidade_direta) vem
+        // antes do fit_score — o pedido explícito manda (SDD-135).
         let { data: matchRows, error: matchError } = await supabase
           .from("niche_matches")
           .select(MATCH_SELECT)
           .eq("user_id", session.user.id)
+          .order("afinidade_direta", { ascending: false })
           .order("fit_score", { ascending: false })
           .limit(3);
         if (matchError) throw matchError;
@@ -77,16 +85,17 @@ export function ResultadoScreen() {
             .from("niche_matches")
             .select(MATCH_SELECT)
             .eq("user_id", session.user.id)
+            .order("afinidade_direta", { ascending: false })
             .order("fit_score", { ascending: false })
             .limit(3);
           if (retry.error) throw retry.error;
           matchRows = retry.data;
 
-          // A function pode ter inferido áreas do texto livre agora — recarrega
-          // pra linha "entendi afinidade com…" aparecer já nesta renderização.
+          // A function pode ter inferido áreas/nichos do texto livre agora —
+          // recarrega pra linha "entendi afinidade com…" aparecer já aqui.
           const { data: diagAtualizado } = await supabase
             .from("diagnostic_responses")
-            .select("capital_disponivel, tempo_disponivel, objetivo, localizacao_cidade, localizacao_estado, areas_inferidas")
+            .select(PERFIL_SELECT)
             .eq("user_id", session.user.id)
             .maybeSingle();
           if (diagAtualizado) setPerfil(diagAtualizado as Perfil);
@@ -258,6 +267,24 @@ export function ResultadoScreen() {
                       {formatMoney(match.niches.investimento_min)} a {formatMoney(match.niches.investimento_max)}
                     </Text>
                   </Text>
+                ) : null}
+
+                {/* SDD-135: capital apertado não esconde a sugestão — avisa e segue. */}
+                {match.precisa_de_mais_capital ? (
+                  <View
+                    style={{
+                      marginTop: space[3],
+                      backgroundColor: color.state.warningBg,
+                      borderRadius: radius.md,
+                      paddingHorizontal: space[3],
+                      paddingVertical: space[2],
+                    }}
+                  >
+                    <Text style={{ ...type.caption, color: color.text.primary }}>
+                      Dá pra mirar esse caminho, mas o valor que você tem hoje é apertado pra ele — vale
+                      planejar um pouco mais de caixa antes de começar.
+                    </Text>
+                  </View>
                 ) : null}
               </View>
             ))}

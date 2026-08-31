@@ -351,6 +351,18 @@ Detalhamento técnico: SPEC.md SDD-67.
 
 **RN-38 (nova): sub-negócio sugerido sai sempre do catálogo curado — a IA escolhe, ordena e explica, nunca inventa.** O nome devolvido pela IA é conferido contra a tabela antes de ir pra tela; o que não existir é descartado, e se a escolha falhar o produto mostra os primeiros da ordem curada. Mesma disciplina de RN-32 (roteiro de reaproximação). A justificativa também **não pode atribuir ao usuário uma afinidade que ele não declarou** — as áreas do nicho descrevem o nicho, não a pessoa.
 
+### 8.7 Motor pensa como micro e pequeno empreendedor (revisão de precisão em 31/08/2026 — SDD-135)
+
+**Origem:** teste real do dono do produto — "até R$ 5 mil", meio período, marcou Beleza, escreveu "gosto de cortar cabelo e fazer barba" — e o motor devolveu vendedor / aulas particulares / serviço digital, com Barbearia em 19º. A afinidade quase não pesava, e as faixas de investimento do catálogo (que assumem ponto de rua) derrubavam qualquer negócio que o público, na prática, começaria de casa.
+
+**O que mudou:**
+- **Afinidade virou o eixo dominante do Fit Score.** O que a pessoa marca e, principalmente, **escreve** ("corto cabelo e faço barba") agora decide a sugestão. A IA traduz o texto livre em nichos específicos do catálogo (não só na área grossa "beleza"), sempre filtrados contra a tabela real — a nota segue calculada, nunca gerada pela IA.
+- **"Começar de casa" entrou na conta.** Um barbeiro monta a primeira cadeira em casa; não precisa dos R$ 8 mil de uma barbearia de rua. Nichos que dão pra bootstrapar de casa são avaliados por um piso de investimento enxuto, e a versão "a domicílio"/"por encomenda" de cada ramo (catálogo da SDD-134) agora aparece no diagnóstico.
+- **Capital apertado não esconde mais a sugestão.** Se o valor informado não cobre nem o começo enxuto, o ramo ainda aparece — com um aviso honesto de "vale planejar um pouco mais de caixa", em vez de sumir no fim da lista.
+- **Um ramo pedido com todas as letras não fica fora dos 3 melhores** por causa de um fator secundário (concorrência alta, trabalho intenso).
+
+Detalhamento técnico: SPEC.md SDD-135.
+
 **Deliberadamente fora desta versão:** investimento e margem por sub-negócio. A descrição do que cada negócio faz é conhecimento geral e não exige fonte; número de mercado exige, e as faixas com fonte real (Sebrae + data) são as do nicho-pai. Inventar "Fonte: Sebrae" para dado não consultado é exatamente o que a RN-20 previne.
 
 Detalhamento técnico: SPEC.md SDD-66.

@@ -44,6 +44,7 @@ describe("calculateFitScore", () => {
   it("retorna nota entre 0 e 100 em todos os componentes", () => {
     const result = calculateFitScore(diagnosticoBase, nichoServicosDomiciliares);
     for (const value of Object.values(result)) {
+      if (typeof value !== "number") continue;
       expect(value).toBeGreaterThanOrEqual(0);
       expect(value).toBeLessThanOrEqual(100);
     }
@@ -225,6 +226,100 @@ describe("calculateFitScore", () => {
       );
       const soAlimentacao = calculateFitScore({ ...perfilTecnologia, formacao: ["alimentação"] }, nichoServicoDigital);
       expect(r.score_perfil).toBeGreaterThan(soAlimentacao.score_perfil);
+    });
+  });
+
+  // SDD-135: o motor devolvia nichos fora do contexto declarado. Caso real
+  // reportado: "até R$ 5 mil", meio período, marcou Beleza, escreveu "gosto de
+  // cortar cabelo e fazer barba" → recebeu vendedor/aulas/serviço digital, e
+  // Barbearia em 19º de 31.
+  describe("caso barbeiro (SDD-135)", () => {
+    const perfilBarbeiro: DiagnosticoParaScore = {
+      capital_disponivel: "ate_5k",
+      meses_de_folego: null,
+      apetite_risco: null,
+      tempo_disponivel: "parcial",
+      formacao: ["beleza"],
+      experiencia: [],
+    };
+
+    // Barbearia real do catálogo: piso de mercado R$ 8 mil (assume ponto de
+    // rua), mas dá pra começar a primeira cadeira em casa.
+    const nichoBarbearia: NichoParaScore = {
+      slug: "barbearia",
+      categoria: "beleza",
+      areas_afinidade: ["beleza", "serviços"],
+      investimento_min: 8000,
+      investimento_max: 40000,
+      tempo_ate_equilibrio_meses: 8,
+      complexidade_regulatoria: 2,
+      intensidade_mao_de_obra: 4,
+      nivel_concorrencia: 5,
+      dependencia_ponto_fisico: true,
+      permite_inicio_em_casa: true,
+    };
+
+    const nichoCabeleireiroCasa: NichoParaScore = {
+      slug: "cabeleireiro-a-domicilio",
+      categoria: "beleza",
+      areas_afinidade: ["beleza", "serviços"],
+      investimento_min: 500,
+      investimento_max: 5000,
+      tempo_ate_equilibrio_meses: 2,
+      complexidade_regulatoria: 2,
+      intensidade_mao_de_obra: 4,
+      nivel_concorrencia: 4,
+      dependencia_ponto_fisico: false,
+    };
+
+    it("piso de entrada enxuto: capital de R$ 5 mil já dá pra começar uma barbearia em casa", () => {
+      const r = calculateFitScore(perfilBarbeiro, nichoBarbearia);
+      // Piso enxuto = 8000 * 0.4 = 3200; R$ 5 mil cobre → não é desencaixe.
+      expect(r.score_financeiro).toBeGreaterThan(65);
+      expect(r.precisa_de_mais_capital).toBe(false);
+    });
+
+    it("sem 'permite_inicio_em_casa', o mesmo capital vira desencaixe (piso cheio de R$ 8 mil)", () => {
+      const r = calculateFitScore(perfilBarbeiro, { ...nichoBarbearia, permite_inicio_em_casa: false });
+      expect(r.score_financeiro).toBeLessThan(50);
+      expect(r.precisa_de_mais_capital).toBe(true);
+    });
+
+    it("nicho citado no texto livre vira afinidade máxima e é marcado como afinidade direta", () => {
+      const semTexto = calculateFitScore(perfilBarbeiro, nichoBarbearia);
+      const comTexto = calculateFitScore(
+        { ...perfilBarbeiro, nichos_inferidos: ["barbearia"] },
+        nichoBarbearia
+      );
+      expect(comTexto.score_perfil).toBeGreaterThan(semTexto.score_perfil);
+      expect(comTexto.afinidade_direta).toBe(true);
+      expect(semTexto.afinidade_direta).toBe(false);
+    });
+
+    it("Barbearia bate um nicho barato porém sem relação (era o contrário)", () => {
+      const barbearia = calculateFitScore(
+        { ...perfilBarbeiro, nichos_inferidos: ["barbearia"] },
+        nichoBarbearia
+      );
+      const aulas = calculateFitScore(perfilBarbeiro, {
+        slug: "aulas-particulares-idiomas",
+        categoria: "educação",
+        areas_afinidade: ["educação", "serviços"],
+        investimento_min: 300,
+        investimento_max: 5000,
+        tempo_ate_equilibrio_meses: 3,
+        complexidade_regulatoria: 1,
+        intensidade_mao_de_obra: 2,
+        nivel_concorrencia: 3,
+        dependencia_ponto_fisico: false,
+      });
+      expect(barbearia.fit_score).toBeGreaterThan(aulas.fit_score);
+    });
+
+    it("a versão 'de casa' do mesmo ramo fica na frente da versão formal quando o capital é curto", () => {
+      const casa = calculateFitScore({ ...perfilBarbeiro, nichos_inferidos: ["barbearia", "cabeleireiro-a-domicilio"] }, nichoCabeleireiroCasa);
+      const formal = calculateFitScore({ ...perfilBarbeiro, nichos_inferidos: ["barbearia", "cabeleireiro-a-domicilio"] }, nichoBarbearia);
+      expect(casa.fit_score).toBeGreaterThan(formal.fit_score);
     });
   });
 });

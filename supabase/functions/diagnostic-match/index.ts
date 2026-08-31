@@ -64,6 +64,8 @@ interface NicheRow extends NichoParaScore {
   investimento_min: number;
   investimento_max: number;
   margem_tipica_pct: number | null;
+  dependencia_ponto_fisico: boolean;
+  permite_inicio_em_casa: boolean;
   fonte: string | null;
   fonte_data: string | null;
 }
@@ -167,6 +169,56 @@ async function inferirAreasDoTexto(texto: string, supabase: any, userId: string)
     .slice(0, 3);
 }
 
+const MAX_NICHOS_INFERIDOS = 3;
+
+/**
+ * Traduz o texto livre do bloco 6 em SLUGS de nicho do catálogo (SDD-135).
+ *
+ * A área sozinha é grossa demais: "gosto de cortar cabelo e fazer barba" e
+ * "faço limpeza de pele" caem os dois em `beleza`, e o motor não separava um
+ * barbeiro de uma esteticista. Aqui a IA aponta o ramo pelo nome — e pensa
+ * como quem abre micro/pequeno negócio: se a pessoa descreve uma habilidade
+ * que dá pra tocar de casa, prefere a versão "a domicílio" / "em casa" / "por
+ * encomenda" quando ela existe no catálogo.
+ *
+ * Mesma disciplina da RN-38: a saída é filtrada contra os slugs reais — o que
+ * o modelo inventar morre antes de tocar em qualquer nota. A nota segue
+ * calculada por fórmula; isto só amplia o sinal de entrada.
+ */
+// deno-lint-ignore no-explicit-any
+async function inferirNichosDoTexto(
+  texto: string,
+  catalogo: { slug: string; nome: string; categoria: string; permite_inicio_em_casa: boolean }[],
+  supabase: any,
+  userId: string
+): Promise<string[]> {
+  const system = [
+    "Você lê o texto de alguém que quer abrir um negócio e aponta, no catálogo fornecido, os ramos que a pessoa CLARAMENTE demonstra querer ou já saber fazer.",
+    "O público é micro e pequeno empreendedor, que quase sempre começa pequeno e muitas vezes de casa.",
+    "Se a pessoa descreve uma habilidade que dá pra tocar de casa ou atendendo na casa do cliente, e existe no catálogo uma versão 'a domicílio' / 'em casa' / 'por encomenda' / 'freelancer', prefira essa — e cite também a versão formal se ela existir.",
+    "Responda SOMENTE um JSON no formato {\"slugs\": [\"...\"]}, sem texto antes ou depois.",
+    `No máximo ${MAX_NICHOS_INFERIDOS} slugs, do mais evidente para o menos evidente.`,
+    "Use EXCLUSIVAMENTE os valores do campo 'slug' do catálogo. Nunca invente um slug.",
+    'Se o texto não apontar nenhum ramo com clareza, devolva {"slugs": []} — não chute por associação vaga.',
+  ].join(" ");
+
+  const userContent = JSON.stringify({
+    texto,
+    catalogo: catalogo.map((n) => ({ slug: n.slug, nome: n.nome, categoria: n.categoria, comeca_de_casa: n.permite_inicio_em_casa })),
+  });
+
+  const bruto = await callAnthropic(system, userContent, 200, supabase, userId);
+  const parsed = parseJsonResposta<{ slugs?: unknown }>(bruto);
+  if (!parsed || !Array.isArray(parsed.slugs)) return [];
+
+  const slugsValidos = new Set(catalogo.map((n) => n.slug));
+  return parsed.slugs
+    .filter((s): s is string => typeof s === "string")
+    .map((s) => s.toLowerCase().trim())
+    .filter((s) => slugsValidos.has(s))
+    .slice(0, MAX_NICHOS_INFERIDOS);
+}
+
 interface JustificativaResultado {
   justificativa: string;
   sub_negocios_destaque: SubNegocioDestaque[];
@@ -186,10 +238,13 @@ async function gerarJustificativaESubNegocios(
   userId: string
 ): Promise<JustificativaResultado> {
   const system = [
-    "Você é o copiloto do Ser Dono, uma plataforma que ajuda brasileiros a decidir qual negócio abrir.",
+    "Você é o copiloto do Ser Dono, uma plataforma que ajuda brasileiros de micro e pequeno negócio a decidir qual negócio abrir.",
+    "Pense como quem começa pequeno: a maioria vai abrir com pouco capital, muitas vezes de casa ou atendendo na casa do cliente, antes de pensar em ponto de rua.",
     "A nota de aderência (Fit Score) JÁ FOI CALCULADA por fórmula — você só explica o resultado, nunca decide ou recalcula a nota.",
     "Sua resposta tem duas partes:",
     "1) 'justificativa': 1 a 2 frases curtas, em português simples e sem jargão, dizendo por que este nicho combina com o perfil.",
+    "Se 'nicho.comeca_de_casa' for true, deixe explícito que dá pra começar de casa ou na casa do cliente, sem alugar ponto.",
+    "Se 'precisa_de_mais_capital' for true, diga com honestidade que o capital informado é apertado pra esse ramo e que vale planejar um pouco mais de caixa — sem desanimar.",
     `2) 'sub_negocios_destaque': até ${MAX_SUB_NEGOCIOS_DESTAQUE} negócios concretos, ESCOLHIDOS EXCLUSIVAMENTE da lista 'sub_negocios_disponiveis' que você recebe.`,
     "REGRA ABSOLUTA: nunca sugira um negócio que não esteja nessa lista, e copie o campo 'nome' exatamente como recebido.",
     "Para cada um, escreva 'por_que': uma frase curta ligando aquele caminho ao perfil da pessoa (capital, tempo disponível, apetite a risco ou área de afinidade).",
@@ -202,7 +257,11 @@ async function gerarJustificativaESubNegocios(
   ].join(" ");
 
   const contexto = {
-    nicho: niche.nome,
+    nicho: {
+      nome: niche.nome,
+      categoria: niche.categoria,
+      comeca_de_casa: niche.permite_inicio_em_casa || niche.dependencia_ponto_fisico === false,
+    },
     categoria: niche.categoria,
     areas_afinidade: niche.areas_afinidade,
     faixa_investimento: `R$ ${niche.investimento_min} a R$ ${niche.investimento_max}`,
@@ -211,6 +270,8 @@ async function gerarJustificativaESubNegocios(
     fonte: niche.fonte,
     fonte_data: niche.fonte_data,
     fit_score: scores.fit_score,
+    precisa_de_mais_capital: scores.precisa_de_mais_capital,
+    citado_no_texto_livre: scores.afinidade_direta,
     componentes: {
       perfil: scores.score_perfil,
       financeiro: scores.score_financeiro,
@@ -324,22 +385,34 @@ Deno.serve(async (req) => {
       });
     }
 
-    // ---- Passo 1: texto livre → áreas (RN-37) ----
+    // ---- Passo 1: texto livre → áreas + nichos (RN-37, SDD-135) ----
     // Best-effort: se a IA falhar, o diagnóstico segue com o sinal dos
     // checkboxes, exatamente como antes desta feature (mesmo padrão de
     // degradação graciosa de `loadBusinessContext` na knowledge-search).
     let areasInferidas: string[] = diagnostico.areas_inferidas ?? [];
+    let nichosInferidos: string[] = diagnostico.nichos_inferidos ?? [];
     if (diagnostico.interesses_texto?.trim()) {
+      const texto = diagnostico.interesses_texto;
+      const catalogo = (niches as NicheRow[]).map((n) => ({
+        slug: n.slug,
+        nome: n.nome,
+        categoria: n.categoria,
+        permite_inicio_em_casa: n.permite_inicio_em_casa,
+      }));
       try {
-        areasInferidas = await inferirAreasDoTexto(diagnostico.interesses_texto, supabase, user.id);
-        const { error: areasError } = await supabase
+        [areasInferidas, nichosInferidos] = await Promise.all([
+          inferirAreasDoTexto(texto, supabase, user.id),
+          inferirNichosDoTexto(texto, catalogo, supabase, user.id),
+        ]);
+        const { error: updErr } = await supabase
           .from("diagnostic_responses")
-          .update({ areas_inferidas: areasInferidas })
+          .update({ areas_inferidas: areasInferidas, nichos_inferidos: nichosInferidos })
           .eq("user_id", user.id);
-        if (areasError) throw areasError;
+        if (updErr) throw updErr;
       } catch (e) {
-        console.error("Falha ao inferir áreas do texto livre (seguindo sem elas):", e);
+        console.error("Falha ao interpretar o texto livre (seguindo sem ele):", e);
         areasInferidas = [];
+        nichosInferidos = [];
       }
     }
 
@@ -351,12 +424,20 @@ Deno.serve(async (req) => {
       formacao: diagnostico.formacao ?? [],
       experiencia: diagnostico.experiencia ?? [],
       areas_inferidas: areasInferidas,
+      nichos_inferidos: nichosInferidos,
     };
 
     // ---- Passo 2: nota determinística ----
+    // Ordena por fit_score, mas um ramo que a pessoa CITOU no texto livre e que
+    // tem nota mínima razoável vem primeiro — não deixa um pedido explícito
+    // ficar fora dos 3 melhores por causa de concorrência ou intensidade de
+    // trabalho (SDD-135). O `+1000` é só chave de ordenação, não entra na nota.
+    const AFINIDADE_DIRETA_FIT_MINIMO = 40;
+    const chaveOrdem = (s: ReturnType<typeof calculateFitScore>) =>
+      s.fit_score + (s.afinidade_direta && s.fit_score >= AFINIDADE_DIRETA_FIT_MINIMO ? 1000 : 0);
     const scored = (niches as NicheRow[])
       .map((niche) => ({ niche, scores: calculateFitScore(diagnosticoParaScore, niche) }))
-      .sort((a, b) => b.scores.fit_score - a.scores.fit_score);
+      .sort((a, b) => chaveOrdem(b.scores) - chaveOrdem(a.scores));
 
     const top = scored.slice(0, PREVIEW_SIZE);
 
@@ -399,6 +480,8 @@ Deno.serve(async (req) => {
             score_financeiro: scores.score_financeiro,
             score_contexto: scores.score_contexto,
             score_tempo: scores.score_tempo,
+            precisa_de_mais_capital: scores.precisa_de_mais_capital,
+            afinidade_direta: scores.afinidade_direta,
             justificativa_ia: justificativa,
             sub_negocios_destaque,
             gerado_em: new Date().toISOString(),
@@ -420,9 +503,10 @@ Deno.serve(async (req) => {
       })
     );
 
-    return new Response(JSON.stringify({ matches: results, areas_inferidas: areasInferidas }), {
-      headers: { ...corsHeaders, "content-type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ matches: results, areas_inferidas: areasInferidas, nichos_inferidos: nichosInferidos }),
+      { headers: { ...corsHeaders, "content-type": "application/json" } }
+    );
   } catch (error) {
     console.error(error);
     return new Response(JSON.stringify({ error: (error as Error).message ?? "Erro inesperado" }), {

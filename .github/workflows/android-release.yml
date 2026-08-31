@@ -19,7 +19,7 @@ name: Android Release (AAB)
 
 on:
   push:
-    branches: [main]
+    branches: [master]
     paths:
       - "apps/app/app.config.js"
   workflow_dispatch:
