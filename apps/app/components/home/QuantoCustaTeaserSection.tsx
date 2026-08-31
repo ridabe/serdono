@@ -8,9 +8,9 @@ import { nichos, formatBRL } from "../../data/quantoCusta";
  * Teaser da Home para /quanto-custa (SDD-93, docs/SPEC.md) — três ramos como
  * amostra, com link real (`<Link>`, não `router.push` num Pressable) tanto
  * aqui quanto na página de índice: é o caminho de rastreamento que faz o
- * Google encontrar as 31 páginas de detalhe a partir da home pública.
+ * Google encontrar todas as páginas de detalhe a partir da home pública.
  */
-const AMOSTRA_SLUGS = ["barbearia", "cafeteria", "servicos-domiciliares"];
+const AMOSTRA_SLUGS = ["bolo-de-pote", "cuidador-de-idosos", "servicos-domiciliares"];
 
 export function QuantoCustaTeaserSection({ compact }: { compact: boolean }) {
   const amostra = AMOSTRA_SLUGS.map((slug) => nichos.find((n) => n.slug === slug)).filter(
@@ -38,7 +38,8 @@ export function QuantoCustaTeaserSection({ compact }: { compact: boolean }) {
             { color: color.text.secondary, marginBottom: space[6], maxWidth: 620 },
           ]}
         >
-          31 ramos com investimento, tempo até o equilíbrio e margem típica — sempre com fonte e data.
+          {nichos.length} ramos com investimento, tempo até o equilíbrio e margem típica — sempre com
+          fonte e data.
         </Text>
 
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[4], marginBottom: space[6] }}>
@@ -64,7 +65,7 @@ export function QuantoCustaTeaserSection({ compact }: { compact: boolean }) {
 
         <Link href="/quanto-custa">
           <Text style={[type.bodyStrong, { color: color.action.secondary }]}>
-            Ver os 31 ramos completos →
+            Ver os {nichos.length} ramos completos →
           </Text>
         </Link>
       </View>

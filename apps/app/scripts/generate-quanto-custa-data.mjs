@@ -33,6 +33,7 @@ const OUT_FILE = path.resolve(__dirname, "../data/quantoCusta.generated.json");
 const SOURCE_FILES = [
   "20260728154009_seed_nichos_mvp.sql",
   "20260731200000_expandir_nichos.sql",
+  "20260831123625_nichos_baixa_estrutura.sql",
 ];
 
 const COLUMNS = [

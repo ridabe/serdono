@@ -42,6 +42,34 @@
     "fonteData": "2026-07-01"
   },
   {
+    "nome": "Assistente virtual (suporte administrativo remoto)",
+    "slug": "assistente-virtual",
+    "categoria": "serviços",
+    "investimentoMin": 300,
+    "investimentoMax": 4000,
+    "tempoEquilibrioMeses": 3,
+    "margemTipicaPct": 60,
+    "nivelConcorrencia": 4,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Pequenas empresas e outros empreendedores que precisam terceirizar agenda, e-mail e planilhas.",
+    "fonte": "Sebrae — Assessoria Administrativa, MEI",
+    "fonteData": "2026-08-31"
+  },
+  {
+    "nome": "Ateliê de artesanato e lembrancinhas",
+    "slug": "atelie-de-artesanato",
+    "categoria": "varejo",
+    "investimentoMin": 500,
+    "investimentoMax": 5000,
+    "tempoEquilibrioMeses": 4,
+    "margemTipicaPct": 50,
+    "nivelConcorrencia": 3,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Famílias e assessorias de evento comprando lembrancinha e peça personalizada.",
+    "fonte": "Sebrae — Artesanato, guia de ideia de negócio",
+    "fonteData": "2026-08-31"
+  },
+  {
     "nome": "Ateliê de costura",
     "slug": "atelie-costura",
     "categoria": "moda",
@@ -98,6 +126,20 @@
     "fonteData": "2026-07-01"
   },
   {
+    "nome": "Bolo de pote e sobremesas no pote",
+    "slug": "bolo-de-pote",
+    "categoria": "alimentação",
+    "investimentoMin": 300,
+    "investimentoMax": 3000,
+    "tempoEquilibrioMeses": 2,
+    "margemTipicaPct": 60,
+    "nivelConcorrencia": 4,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Consumidores locais e encomendas por redes sociais e WhatsApp.",
+    "fonte": "Sebrae — MEI Doceira(o), guia de ideia de negócio",
+    "fonteData": "2026-08-31"
+  },
+  {
     "nome": "Brechó e moda usada",
     "slug": "brecho-moda-usada",
     "categoria": "varejo",
@@ -124,6 +166,20 @@
     "perfilCliente": "Famílias e empresas organizando eventos.",
     "fonte": "Sebrae — Buffet, Guia de Investimento",
     "fonteData": "2026-07-31"
+  },
+  {
+    "nome": "Cabeleireiro e barbeiro a domicílio",
+    "slug": "cabeleireiro-a-domicilio",
+    "categoria": "beleza",
+    "investimentoMin": 500,
+    "investimentoMax": 5000,
+    "tempoEquilibrioMeses": 2,
+    "margemTipicaPct": 60,
+    "nivelConcorrencia": 4,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Clientes que preferem ser atendidos em casa ou no trabalho.",
+    "fonte": "Sebrae — Cabeleireiro(a), MEI",
+    "fonteData": "2026-08-31"
   },
   {
     "nome": "Cafeteria",
@@ -194,6 +250,76 @@
     "perfilCliente": "Pequenas empresas.",
     "fonte": "Sebrae — Consultoria Empresarial",
     "fonteData": "2026-07-31"
+  },
+  {
+    "nome": "Cuidador de idosos e acompanhante",
+    "slug": "cuidador-de-idosos",
+    "categoria": "saúde",
+    "investimentoMin": 300,
+    "investimentoMax": 3000,
+    "tempoEquilibrioMeses": 1,
+    "margemTipicaPct": 60,
+    "nivelConcorrencia": 3,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Famílias que precisam de apoio no cuidado de um familiar idoso.",
+    "fonte": "Sebrae — Cuidador de Idosos, MEI",
+    "fonteData": "2026-08-31"
+  },
+  {
+    "nome": "Cuidador de pets (hospedagem e creche em casa)",
+    "slug": "cuidador-de-pets",
+    "categoria": "serviços",
+    "investimentoMin": 300,
+    "investimentoMax": 4000,
+    "tempoEquilibrioMeses": 2,
+    "margemTipicaPct": 65,
+    "nivelConcorrencia": 3,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Tutores que viajam ou passam o dia fora e não querem deixar o pet sozinho.",
+    "fonte": "Sebrae — Hospedagem para Animais, guia de ideia de negócio",
+    "fonteData": "2026-08-31"
+  },
+  {
+    "nome": "Designer de sobrancelhas e cílios",
+    "slug": "designer-de-sobrancelhas",
+    "categoria": "beleza",
+    "investimentoMin": 800,
+    "investimentoMax": 8000,
+    "tempoEquilibrioMeses": 3,
+    "margemTipicaPct": 60,
+    "nivelConcorrencia": 4,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Público que busca design, henna e extensão de cílios com agenda por indicação.",
+    "fonte": "Sebrae — Design de Sobrancelhas, guia de ideia de negócio",
+    "fonteData": "2026-08-31"
+  },
+  {
+    "nome": "Designer gráfico freelancer",
+    "slug": "designer-grafico-freelancer",
+    "categoria": "serviços",
+    "investimentoMin": 300,
+    "investimentoMax": 5000,
+    "tempoEquilibrioMeses": 3,
+    "margemTipicaPct": 65,
+    "nivelConcorrencia": 4,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Pequenos negócios abrindo ou renovando marca, embalagem e material de divulgação.",
+    "fonte": "Sebrae — Designer Gráfico, MEI",
+    "fonteData": "2026-08-31"
+  },
+  {
+    "nome": "Doces para festa por encomenda",
+    "slug": "doces-para-festa",
+    "categoria": "alimentação",
+    "investimentoMin": 500,
+    "investimentoMax": 5000,
+    "tempoEquilibrioMeses": 3,
+    "margemTipicaPct": 55,
+    "nivelConcorrencia": 4,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Famílias e assessorias de evento comprando docinho por cento.",
+    "fonte": "Sebrae — MEI Doceira(o), guia de ideia de negócio",
+    "fonteData": "2026-08-31"
   },
   {
     "nome": "Escola infantil e berçário",
@@ -336,6 +462,20 @@
     "fonteData": "2026-07-31"
   },
   {
+    "nome": "Manicure e nail designer em casa",
+    "slug": "manicure-em-casa",
+    "categoria": "beleza",
+    "investimentoMin": 500,
+    "investimentoMax": 5000,
+    "tempoEquilibrioMeses": 2,
+    "margemTipicaPct": 65,
+    "nivelConcorrencia": 4,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Clientela recorrente que atende em casa ou recebe em um espaço no próprio lar.",
+    "fonte": "Sebrae — Manicure e Pedicure, MEI",
+    "fonteData": "2026-08-31"
+  },
+  {
     "nome": "Manutenção de informática e celular",
     "slug": "manutencao-informatica-celular",
     "categoria": "serviços",
@@ -364,6 +504,34 @@
     "fonteData": "2026-07-31"
   },
   {
+    "nome": "Marido de aluguel (pequenos reparos)",
+    "slug": "marido-de-aluguel",
+    "categoria": "serviços",
+    "investimentoMin": 500,
+    "investimentoMax": 5000,
+    "tempoEquilibrioMeses": 2,
+    "margemTipicaPct": 60,
+    "nivelConcorrencia": 3,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Moradores que precisam de conserto rápido e não têm ferramenta ou tempo.",
+    "fonte": "Sebrae — Serviços de Reparos, MEI",
+    "fonteData": "2026-08-31"
+  },
+  {
+    "nome": "Marmitas fitness e congeladas",
+    "slug": "marmitas-congeladas",
+    "categoria": "alimentação",
+    "investimentoMin": 800,
+    "investimentoMax": 6000,
+    "tempoEquilibrioMeses": 3,
+    "margemTipicaPct": 45,
+    "nivelConcorrencia": 4,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Pessoas sem tempo de cozinhar e público de academia.",
+    "fonte": "Sebrae — Marmitas Congeladas, guia de ideia de negócio",
+    "fonteData": "2026-08-31"
+  },
+  {
     "nome": "Papelaria e presentes",
     "slug": "papelaria-presentes",
     "categoria": "varejo",
@@ -376,6 +544,34 @@
     "perfilCliente": "Estudantes, famílias e escritórios.",
     "fonte": "Sebrae — Papelaria, Guia de Investimento",
     "fonteData": "2026-07-31"
+  },
+  {
+    "nome": "Papelaria personalizada e convites",
+    "slug": "papelaria-personalizada",
+    "categoria": "varejo",
+    "investimentoMin": 800,
+    "investimentoMax": 8000,
+    "tempoEquilibrioMeses": 4,
+    "margemTipicaPct": 50,
+    "nivelConcorrencia": 4,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Quem organiza festa, casamento e chá e quer papelaria sob medida.",
+    "fonte": "Sebrae — Papelaria Personalizada, guia de ideia de negócio",
+    "fonteData": "2026-08-31"
+  },
+  {
+    "nome": "Passadoria e lavanderia domiciliar",
+    "slug": "passadoria-domiciliar",
+    "categoria": "serviços",
+    "investimentoMin": 300,
+    "investimentoMax": 3000,
+    "tempoEquilibrioMeses": 2,
+    "margemTipicaPct": 45,
+    "nivelConcorrencia": 3,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Famílias e profissionais sem tempo para lavar e passar roupa.",
+    "fonte": "Sebrae — Lavanderia e Passadoria, guia de ideia de negócio",
+    "fonteData": "2026-08-31"
   },
   {
     "nome": "Pequenas reformas e construção",
@@ -392,6 +588,20 @@
     "fonteData": "2026-07-31"
   },
   {
+    "nome": "Personal organizer",
+    "slug": "personal-organizer",
+    "categoria": "serviços",
+    "investimentoMin": 300,
+    "investimentoMax": 4000,
+    "tempoEquilibrioMeses": 3,
+    "margemTipicaPct": 65,
+    "nivelConcorrencia": 3,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Famílias e profissionais ocupados que querem organizar armários, documentos e a casa.",
+    "fonte": "Sebrae — Personal Organizer, guia de ideia de negócio",
+    "fonteData": "2026-08-31"
+  },
+  {
     "nome": "Pet shop (banho e tosa)",
     "slug": "pet-shop-banho-tosa",
     "categoria": "serviços",
@@ -404,6 +614,34 @@
     "perfilCliente": "Tutores de pets.",
     "fonte": "Sebrae — Ideias de Negócio, Pet Shop",
     "fonteData": "2026-07-31"
+  },
+  {
+    "nome": "Revenda de roupas (sacoleira e catálogo)",
+    "slug": "revenda-de-roupas",
+    "categoria": "moda",
+    "investimentoMin": 500,
+    "investimentoMax": 6000,
+    "tempoEquilibrioMeses": 3,
+    "margemTipicaPct": 40,
+    "nivelConcorrencia": 4,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Consumidores locais que compram por catálogo, WhatsApp e no boca a boca.",
+    "fonte": "Sebrae — Revenda de Roupas, guia de ideia de negócio",
+    "fonteData": "2026-08-31"
+  },
+  {
+    "nome": "Salgados para festa e congelados",
+    "slug": "salgados-para-festa",
+    "categoria": "alimentação",
+    "investimentoMin": 500,
+    "investimentoMax": 5000,
+    "tempoEquilibrioMeses": 3,
+    "margemTipicaPct": 55,
+    "nivelConcorrencia": 4,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Famílias organizando festa e comércios que revendem.",
+    "fonte": "Sebrae — Fabricação de Salgados, guia de ideia de negócio",
+    "fonteData": "2026-08-31"
   },
   {
     "nome": "Serviço digital",
@@ -432,5 +670,19 @@
     "perfilCliente": "Famílias e profissionais ocupados que preferem terceirizar limpeza, pequenos reparos e manutenção residencial.",
     "fonte": "Sebrae — MEI Faxineiro(a), guia de ideia de negócio",
     "fonteData": "2026-07-01"
+  },
+  {
+    "nome": "Social media freelancer",
+    "slug": "social-media-freelancer",
+    "categoria": "serviços",
+    "investimentoMin": 300,
+    "investimentoMax": 4000,
+    "tempoEquilibrioMeses": 3,
+    "margemTipicaPct": 60,
+    "nivelConcorrencia": 5,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Pequenos negócios que precisam de presença nas redes mas não têm equipe própria.",
+    "fonte": "Sebrae — Gestão de Redes Sociais, MEI",
+    "fonteData": "2026-08-31"
   }
 ]

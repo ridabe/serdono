@@ -6,15 +6,16 @@ import { color, radius, space, type } from "@serdono/ui";
 import { QuantoCustaLayout } from "../../components/quantoCusta/QuantoCustaLayout";
 import { nichos, formatBRL, concorrenciaLabel } from "../../data/quantoCusta";
 
-// Página pública e estática (SDD-93, docs/SPEC.md) — índice dos 31 ramos de
-// negócio catalogados, cada um linkando para /quanto-custa/[slug]. É a
+// Página pública e estática (SDD-93, docs/SPEC.md) — índice de todos os ramos
+// de negócio catalogados, cada um linkando para /quanto-custa/[slug]. É a
 // página que o Google indexa para "quanto custa abrir X" e a que os posts
 // do Instagram (campanha de divulgação, material-de-apoio/marketing)
 // direcionam via link na bio.
 
-const TITLE = "Quanto custa abrir um negócio? 31 ramos, com número real | Ser Dono";
+const TOTAL = nichos.length;
+const TITLE = `Quanto custa abrir um negócio? ${TOTAL} ramos, com número real | Ser Dono`;
 const DESCRIPTION =
-  "Investimento inicial, tempo até o equilíbrio, margem típica e concorrência de 31 ramos de negócio — com fonte Sebrae e data. Descubra quanto custa abrir o seu.";
+  `Investimento inicial, tempo até o equilíbrio, margem típica e concorrência de ${TOTAL} ramos de negócio — com fonte Sebrae e data. Descubra quanto custa abrir o seu.`;
 
 export default function QuantoCustaIndex() {
   return (
@@ -30,8 +31,9 @@ export default function QuantoCustaIndex() {
       <QuantoCustaLayout>
         <Text style={[type.display, styles.h1]}>Quanto custa abrir o seu negócio?</Text>
         <Text style={[type.bodyLg, styles.lead]}>
-          31 ramos, com investimento inicial, tempo até o equilíbrio e margem típica — cada número com
-          fonte e data, nunca estimativa solta.
+          {TOTAL} ramos — do negócio de casa (bolo de pote, cuidador de pets, designer freelancer) ao
+          que precisa de ponto — com investimento inicial, tempo até o equilíbrio e margem típica.
+          Cada número com fonte e data, nunca estimativa solta.
         </Text>
 
         <View style={styles.grid}>
