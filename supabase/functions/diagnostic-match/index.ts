@@ -27,6 +27,7 @@ import { logIaUsage } from "../_shared/ia-usage.ts";
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY")!;
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const ANTHROPIC_API_KEY = Deno.env.get("ANTHROPIC_API_KEY")!;
 const ANTHROPIC_MODEL = "claude-haiku-4-5-20251001"; // RN-10: modelo econômico para classificação e justificativa curta
 
@@ -67,6 +68,7 @@ interface NicheRow extends NichoParaScore {
   dependencia_ponto_fisico: boolean;
   permite_inicio_em_casa: boolean;
   perfil_cliente: string | null;
+  origem: "curado" | "ia";
   fonte: string | null;
   fonte_data: string | null;
 }
@@ -181,6 +183,91 @@ interface CatalogoItem {
   comeca_de_casa: boolean;
 }
 
+/** Nicho que a IA propõe quando NADA no catálogo representa a ideia (SDD-137). Números são estimativa. */
+interface NichoNovoIA {
+  nome: string;
+  categoria: string;
+  areas_afinidade: string[];
+  investimento_min: number;
+  investimento_max: number;
+  tempo_ate_equilibrio_meses: number | null;
+  margem_tipica_pct: number | null;
+  complexidade_regulatoria: number;
+  intensidade_mao_de_obra: number;
+  nivel_concorrencia: number;
+  dependencia_ponto_fisico: boolean;
+  permite_inicio_em_casa: boolean;
+  perfil_cliente: string | null;
+}
+
+interface RankingResultado {
+  ranking: string[];
+  nicho_novo: (NichoNovoIA & { slug: string }) | null;
+}
+
+function inteiro1a5(v: unknown, padrao = 3): number {
+  const n = Math.round(Number(v));
+  return Number.isFinite(n) ? Math.min(5, Math.max(1, n)) : padrao;
+}
+
+function slugify(nome: string): string {
+  return nome
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60);
+}
+
+/**
+ * Valida e higieniza o `nicho_novo` da IA (SDD-137). A IA não tem pesquisa de
+ * mercado — os números vêm rotulados como estimativa —, mas ainda precisam
+ * caber nas checks do banco e fazer sentido. Qualquer coisa fora do razoável
+ * derruba a proposta inteira (o diagnóstico segue com o catálogo).
+ */
+function sanitizarNichoNovo(bruto: unknown): (NichoNovoIA & { slug: string }) | null {
+  if (typeof bruto !== "object" || bruto === null) return null;
+  const b = bruto as Record<string, unknown>;
+
+  const nome = typeof b.nome === "string" ? b.nome.trim() : "";
+  if (nome.length < 3 || nome.length > 60) return null;
+  const slug = slugify(nome);
+  if (!slug) return null;
+
+  const categoria = typeof b.categoria === "string" ? b.categoria.toLowerCase().trim() : "";
+  if (!AREAS_VALIDAS.includes(categoria)) return null;
+
+  let min = Math.round(Number(b.investimento_min));
+  let max = Math.round(Number(b.investimento_max));
+  if (!Number.isFinite(min) || !Number.isFinite(max) || min < 0 || max <= 0 || max > 10_000_000) return null;
+  if (min > max) [min, max] = [max, min];
+
+  const areas = Array.isArray(b.areas_afinidade)
+    ? b.areas_afinidade.filter((a): a is string => typeof a === "string").map((a) => a.toLowerCase().trim()).filter((a) => AREAS_VALIDAS.includes(a))
+    : [];
+
+  const tempo = b.tempo_ate_equilibrio_meses == null ? null : Math.min(60, Math.max(1, Math.round(Number(b.tempo_ate_equilibrio_meses))));
+  const margem = b.margem_tipica_pct == null ? null : Math.min(95, Math.max(1, Math.round(Number(b.margem_tipica_pct))));
+
+  return {
+    slug,
+    nome,
+    categoria,
+    areas_afinidade: areas.length ? [...new Set(areas)] : [categoria],
+    investimento_min: min,
+    investimento_max: max,
+    tempo_ate_equilibrio_meses: Number.isFinite(tempo as number) ? tempo : null,
+    margem_tipica_pct: Number.isFinite(margem as number) ? margem : null,
+    complexidade_regulatoria: inteiro1a5(b.complexidade_regulatoria),
+    intensidade_mao_de_obra: inteiro1a5(b.intensidade_mao_de_obra),
+    nivel_concorrencia: inteiro1a5(b.nivel_concorrencia),
+    dependencia_ponto_fisico: b.dependencia_ponto_fisico === true,
+    permite_inicio_em_casa: b.permite_inicio_em_casa === true,
+    perfil_cliente: typeof b.perfil_cliente === "string" ? b.perfil_cliente.trim().slice(0, 400) || null : null,
+  };
+}
+
 /**
  * A IA ranqueia o CATÁLOGO INTEIRO contra o perfil da pessoa (SDD-136).
  *
@@ -210,7 +297,7 @@ async function ranquearNichosPorPerfil(
   catalogo: CatalogoItem[],
   supabase: any,
   userId: string
-): Promise<string[]> {
+): Promise<RankingResultado> {
   const catalogoTxt = catalogo
     .map(
       (n) =>
@@ -222,12 +309,18 @@ async function ranquearNichosPorPerfil(
 
   const system = [
     "Você é consultor de negócios do Ser Dono, especialista em micro e pequeno empreendedor no Brasil.",
-    "Recebe o PERFIL de uma pessoa que quer abrir um negócio e escolhe, no CATÁLOGO abaixo, os ramos que mais combinam com o que ela quer fazer e consegue tocar na prática — em ordem, do mais aderente para o menos.",
-    "O texto livre é o sinal mais forte: se a pessoa diz que programa e faz sistemas, o ramo é desenvolvimento de software — não conserto de computador, não loja virtual, não um ramo de outra área só porque é barato.",
+    "Recebe o PERFIL de uma pessoa que quer abrir um negócio e monta a lista dos ramos que mais combinam com o que ela quer fazer e consegue tocar na prática — em ordem, do mais aderente para o menos.",
+    "O texto livre é o sinal mais forte: se a pessoa diz que programa e faz sistemas, o ramo é desenvolvimento de software — não conserto de computador, não um ramo de outra área só porque é barato.",
     "Só inclua um ramo com relação REAL com o que a pessoa descreveu ou marcou. Melhor 2 certeiros do que 6 com enchimento.",
-    "Capital e tempo entram como desempate: um ramo muito aderente mas caro pode entrar, só mais abaixo. Um ramo sem relação nenhuma nunca entra, por mais barato que seja.",
-    `Responda SOMENTE um JSON {"ranking": ["slug", ...]}, no máximo ${MAX_NICHOS_RANQUEADOS} slugs, do mais aderente para o menos.`,
-    'Use EXATAMENTE os slugs do catálogo. Se nada combinar de verdade, devolva {"ranking": []}.',
+    "Capital e tempo entram como desempate: um ramo muito aderente mas caro pode entrar, só mais abaixo. Um ramo sem relação nenhuma nunca entra.",
+    "",
+    "1) `ranking`: até " + MAX_NICHOS_RANQUEADOS + ' slugs do CATÁLOGO abaixo, EXATAMENTE como escritos. Se nada combinar, [].',
+    "2) `nicho_novo`: preencha SOMENTE se a pessoa descreve um ramo específico que NENHUM item do catálogo representa, nem de longe (ex.: 'cervejaria artesanal', 'escola de mergulho', 'corretora de seguros'). Caso contrário, null.",
+    "   Você NÃO tem pesquisa de mercado — os números de `nicho_novo` são ESTIMATIVA sua, então chute conservador e redondo, coerente com micro/pequeno negócio no Brasil.",
+    "   `nicho_novo` e `ranking` convivem: pode propor o nicho novo E trazer 1-2 vizinhos do catálogo como plano B.",
+    `   Campos de nicho_novo: nome (curto), categoria (UMA de: ${AREAS_VALIDAS.join(", ")}), areas_afinidade (1-2 dessas), investimento_min e investimento_max (reais, número), tempo_ate_equilibrio_meses (número), margem_tipica_pct (número), complexidade_regulatoria / intensidade_mao_de_obra / nivel_concorrencia (inteiro de 1 a 5), dependencia_ponto_fisico e permite_inicio_em_casa (true/false), perfil_cliente (uma frase de quem compra).`,
+    "",
+    'Responda SOMENTE um JSON {"ranking": [...], "nicho_novo": {...} | null}, sem texto antes ou depois.',
     "",
     "CATÁLOGO:",
     catalogoTxt,
@@ -241,17 +334,21 @@ async function ranquearNichosPorPerfil(
     texto_livre: diagnostico.interesses_texto,
   };
 
-  const bruto = await callAnthropic(system, JSON.stringify(perfil), 250, supabase, userId);
-  const parsed = parseJsonResposta<{ ranking?: unknown }>(bruto);
-  if (!parsed || !Array.isArray(parsed.ranking)) return [];
+  const bruto = await callAnthropic(system, JSON.stringify(perfil), 500, supabase, userId);
+  const parsed = parseJsonResposta<{ ranking?: unknown; nicho_novo?: unknown }>(bruto);
+  if (!parsed) return { ranking: [], nicho_novo: null };
 
   const slugsValidos = new Set(catalogo.map((n) => n.slug));
   const vistos = new Set<string>();
-  return parsed.ranking
-    .filter((s): s is string => typeof s === "string")
-    .map((s) => s.toLowerCase().trim())
-    .filter((s) => slugsValidos.has(s) && !vistos.has(s) && vistos.add(s))
-    .slice(0, MAX_NICHOS_RANQUEADOS);
+  const ranking = Array.isArray(parsed.ranking)
+    ? parsed.ranking
+        .filter((s): s is string => typeof s === "string")
+        .map((s) => s.toLowerCase().trim())
+        .filter((s) => slugsValidos.has(s) && !vistos.has(s) && vistos.add(s))
+        .slice(0, MAX_NICHOS_RANQUEADOS)
+    : [];
+
+  return { ranking, nicho_novo: sanitizarNichoNovo(parsed.nicho_novo) };
 }
 
 interface JustificativaResultado {
@@ -280,6 +377,7 @@ async function gerarJustificativaESubNegocios(
     "1) 'justificativa': 1 a 2 frases curtas, em português simples e sem jargão, dizendo por que este nicho combina com o perfil.",
     "Se 'nicho.comeca_de_casa' for true, deixe explícito que dá pra começar de casa ou na casa do cliente, sem alugar ponto.",
     "Se 'precisa_de_mais_capital' for true, diga com honestidade que o capital informado é apertado pra esse ramo e que vale planejar um pouco mais de caixa — sem desanimar.",
+    "Se 'nicho.numeros_sao_estimativa' for true, NÃO cite fonte, e deixe claro numa frase que os números são uma estimativa pra dar um ponto de partida, não pesquisa de mercado.",
     `2) 'sub_negocios_destaque': até ${MAX_SUB_NEGOCIOS_DESTAQUE} negócios concretos, ESCOLHIDOS EXCLUSIVAMENTE da lista 'sub_negocios_disponiveis' que você recebe.`,
     "REGRA ABSOLUTA: nunca sugira um negócio que não esteja nessa lista, e copie o campo 'nome' exatamente como recebido.",
     "Para cada um, escreva 'por_que': uma frase curta ligando aquele caminho ao perfil da pessoa (capital, tempo disponível, apetite a risco ou área de afinidade).",
@@ -296,6 +394,7 @@ async function gerarJustificativaESubNegocios(
       nome: niche.nome,
       categoria: niche.categoria,
       comeca_de_casa: niche.permite_inicio_em_casa || niche.dependencia_ponto_fisico === false,
+      numeros_sao_estimativa: niche.origem === "ia",
     },
     categoria: niche.categoria,
     areas_afinidade: niche.areas_afinidade,
@@ -439,12 +538,58 @@ Deno.serve(async (req) => {
 
     try {
       const texto = diagnostico.interesses_texto?.trim() ? diagnostico.interesses_texto : null;
-      const [ranking, areas] = await Promise.all([
+      const [rankRes, areas] = await Promise.all([
         ranquearNichosPorPerfil(diagnostico, catalogo, supabase, user.id),
         texto ? inferirAreasDoTexto(texto, supabase, user.id) : Promise.resolve(areasInferidas),
       ]);
-      nichosRanqueados = ranking;
+      nichosRanqueados = rankRes.ranking;
       areasInferidas = areas;
+
+      // SDD-137: a IA propôs um ramo que não existe no catálogo → grava (com
+      // service_role, porque `niches_write_admin` bloqueia o usuário comum) e
+      // coloca na frente do ranking. `origem = 'ia'` faz a tela mostrar
+      // "estimativa, não pesquisa" e o admin revisar depois.
+      if (rankRes.nicho_novo) {
+        const nn = rankRes.nicho_novo;
+        const jaExiste = (niches as NicheRow[]).some((n) => n.slug === nn.slug);
+        if (!jaExiste) {
+          const admin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+          const linha = {
+            nome: nn.nome,
+            slug: nn.slug,
+            categoria: nn.categoria,
+            areas_afinidade: nn.areas_afinidade,
+            investimento_min: nn.investimento_min,
+            investimento_max: nn.investimento_max,
+            tempo_ate_equilibrio_meses: nn.tempo_ate_equilibrio_meses,
+            margem_tipica_pct: nn.margem_tipica_pct,
+            complexidade_regulatoria: nn.complexidade_regulatoria,
+            intensidade_mao_de_obra: nn.intensidade_mao_de_obra,
+            nivel_concorrencia: nn.nivel_concorrencia,
+            dependencia_ponto_fisico: nn.dependencia_ponto_fisico,
+            permite_inicio_em_casa: nn.permite_inicio_em_casa,
+            perfil_cliente: nn.perfil_cliente,
+            sazonalidade: {},
+            playbook_md: null,
+            ativo_no_mvp: true,
+            origem: "ia",
+            fonte: "Estimativa da IA — sem pesquisa de mercado, pendente de revisão",
+            fonte_data: new Date().toISOString().slice(0, 10),
+          };
+          const { data: inserido, error: insNichoErr } = await admin.from("niches").insert(linha).select("*").single();
+          if (insNichoErr && insNichoErr.code !== "23505") throw insNichoErr;
+          const { data: usar } = inserido
+            ? { data: inserido }
+            : await admin.from("niches").select("*").eq("slug", nn.slug).single();
+          if (usar) {
+            (niches as NicheRow[]).push(usar as NicheRow);
+            nichosRanqueados = [nn.slug, ...rankRes.ranking.filter((s) => s !== nn.slug)];
+          }
+        } else {
+          nichosRanqueados = [nn.slug, ...rankRes.ranking.filter((s) => s !== nn.slug)];
+        }
+      }
+
       const { error: updErr } = await supabase
         .from("diagnostic_responses")
         .update({ areas_inferidas: areasInferidas, nichos_inferidos: nichosRanqueados })
@@ -554,6 +699,7 @@ Deno.serve(async (req) => {
       slug: niche.slug,
       investimento_min: niche.investimento_min,
       investimento_max: niche.investimento_max,
+      origem: niche.origem,
       ...scores,
       justificativa_ia: justificativa,
       sub_negocios_destaque,

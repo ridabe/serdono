@@ -26,6 +26,7 @@ interface MatchRow {
     slug: string;
     investimento_min: number;
     investimento_max: number;
+    origem: "curado" | "ia";
   } | null;
 }
 
@@ -40,7 +41,7 @@ interface Perfil {
 }
 
 const MATCH_SELECT =
-  "niche_id, fit_score, justificativa_ia, sub_negocios_destaque, precisa_de_mais_capital, afinidade_direta, niches(nome, slug, investimento_min, investimento_max)";
+  "niche_id, fit_score, justificativa_ia, sub_negocios_destaque, precisa_de_mais_capital, afinidade_direta, niches(nome, slug, investimento_min, investimento_max, origem)";
 const PERFIL_SELECT =
   "capital_disponivel, tempo_disponivel, objetivo, localizacao_cidade, localizacao_estado, areas_inferidas, nichos_inferidos";
 
@@ -281,6 +282,25 @@ export function ResultadoScreen() {
                     <Text style={{ ...type.caption, color: color.text.primary }}>
                       Dá pra mirar esse caminho, mas o valor que você tem hoje é apertado pra ele — vale
                       planejar um pouco mais de caixa antes de começar.
+                    </Text>
+                  </View>
+                ) : null}
+
+                {/* SDD-137: ramo que a Mary montou porque não estava no nosso mapa — números são estimativa. */}
+                {match.niches?.origem === "ia" ? (
+                  <View
+                    style={{
+                      marginTop: space[3],
+                      backgroundColor: color.state.infoBg,
+                      borderRadius: radius.md,
+                      paddingHorizontal: space[3],
+                      paddingVertical: space[2],
+                    }}
+                  >
+                    <Text style={{ ...type.caption, color: color.text.primary }}>
+                      Esse ramo ainda não estava no nosso mapa de mercado — montei ele a partir do que
+                      você descreveu. Os números acima são uma estimativa pra você ter um ponto de
+                      partida, não uma pesquisa fechada. A gente refina isso junto na Jornada.
                     </Text>
                   </View>
                 ) : null}

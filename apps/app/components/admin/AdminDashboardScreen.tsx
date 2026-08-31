@@ -202,6 +202,11 @@ export function AdminDashboardScreen() {
               onPress={() => router.push("/admin/fornecedores")}
             />
             <NavCard
+              title="Nichos gerados pela IA"
+              description="Ramos que a Mary montou no diagnóstico fora do catálogo. Revisar: promover a curado ou apagar."
+              onPress={() => router.push("/admin/nichos")}
+            />
+            <NavCard
               title="Dicas da Mary"
               description="Categorias de estudo com PDF, vídeo e links — liberado a todo usuário, sem gate de módulo."
               onPress={() => router.push("/admin/dicas")}

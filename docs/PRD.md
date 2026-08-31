@@ -62,7 +62,7 @@ Chega por canal institucional (ver Documento de Conceito, seção 9.2). Mais vel
 
 1. **Uma decisão por vez.** Toda tela mostra no máximo uma decisão principal.
 2. **Nada trava.** Se uma etapa depende de terceiros, o sistema oferece a próxima etapa disponível em outra trilha (RN-14).
-3. **Todo dado de mercado citado precisa ter fonte e data visíveis.** Sem exceção — inclusive em texto gerado por IA (RN-20).
+3. **Todo dado de mercado citado precisa ter fonte e data visíveis.** Inclusive em texto gerado por IA (RN-20). **Única exceção (SDD-137):** um nicho que a IA cria no diagnóstico porque a ideia da pessoa não existe no catálogo pode ter números **estimados** — e aí a tela mostra "estimativa, não pesquisa" no lugar da fonte, e o nicho fica marcado (`origem = 'ia'`) até um humano revisar.
 4. **Toda recomendação sensível (jurídica, fiscal, sanitária) traz aviso de que não substitui profissional habilitado** (RN-21).
 5. **Mobile e web têm paridade de funcionalidade.** Nenhuma etapa do workflow existe só em uma plataforma.
 
@@ -363,7 +363,9 @@ Detalhamento técnico: SPEC.md SDD-67.
 
 **Revisão 2 (mesmo dia, à tarde — SDD-136): quem ORDENA as 3 sugestões é a IA, não o cálculo.** Segundo teste: perfil de programador ("python, desenvolvimento de sistema") recebeu Cabeleireiro em 1º. A causa: o cálculo casava por "área", e "serviços" bate com meio catálogo. Agora a IA lê o perfil inteiro (checkboxes + texto livre) e ranqueia o catálogo por aderência real; o cálculo continua dando a nota de viabilidade (dá pra bancar? tem tempo?) e serve de rede de segurança, mas a ordem é da IA. Também: novo ramo **"Desenvolvimento de software e sistemas"** (o catálogo não tinha nada de programação), e correção de um bug que deixava sugestões de um diagnóstico anterior misturadas com as novas.
 
-Detalhamento técnico: SPEC.md SDD-135 e SDD-136.
+**Revisão 3 (mesmo dia, à noite — SDD-137): a IA CRIA o nicho quando a ideia não está na base.** Se a pessoa descreve um ramo que não existe no catálogo (cervejaria artesanal, escola de mergulho...), a IA monta o nicho com números estimados, grava na base marcado como `origem = 'ia'`, e a tela mostra "estimativa, não pesquisa" no lugar da fonte. O admin revisa em /admin/nichos e ou promove a dado oficial ou apaga. É a única exceção à RN-20.
+
+Detalhamento técnico: SPEC.md SDD-135, SDD-136 e SDD-137.
 
 **Deliberadamente fora desta versão:** investimento e margem por sub-negócio. A descrição do que cada negócio faz é conhecimento geral e não exige fonte; número de mercado exige, e as faixas com fonte real (Sebrae + data) são as do nicho-pai. Inventar "Fonte: Sebrae" para dado não consultado é exatamente o que a RN-20 previne.
 
@@ -1023,7 +1025,7 @@ Detalhamento técnico (schema, Edge Functions, achado da chave de API compartilh
 | RN-17 | Preferência de cobrança pela web para evitar comissão de loja |
 | RN-18 | Viabilidade econômica bloqueia início da trilha C |
 | RN-19 | Profundidade real só nas cidades piloto; demais cidades com aviso de conteúdo genérico |
-| RN-20 | Todo dado de mercado citado tem fonte e data visíveis |
+| RN-20 | Todo dado de mercado citado tem fonte e data visíveis — exceto nicho gerado pela IA no diagnóstico (números estimados, rotulados como tal; SDD-137) |
 | RN-21 | Toda recomendação sensível traz aviso de não substituir profissional habilitado |
 | RN-22 | App Android verifica versão mínima suportada; abaixo dela, bloqueia uso até atualizar via Play Store |
 | RN-23 | Etapas da fase Formalização nunca travam entre si — sempre navegáveis e desmarcáveis livremente |

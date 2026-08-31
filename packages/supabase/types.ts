@@ -1091,6 +1091,7 @@ export type Database = {
           margem_tipica_pct: number | null
           nivel_concorrencia: number
           nome: string
+          origem: string
           perfil_cliente: string | null
           permite_inicio_em_casa: boolean
           playbook_md: string | null
@@ -1115,6 +1116,7 @@ export type Database = {
           margem_tipica_pct?: number | null
           nivel_concorrencia: number
           nome: string
+          origem?: string
           perfil_cliente?: string | null
           permite_inicio_em_casa?: boolean
           playbook_md?: string | null
@@ -1139,6 +1141,7 @@ export type Database = {
           margem_tipica_pct?: number | null
           nivel_concorrencia?: number
           nome?: string
+          origem?: string
           perfil_cliente?: string | null
           permite_inicio_em_casa?: boolean
           playbook_md?: string | null
