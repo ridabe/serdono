@@ -34,6 +34,7 @@ const SOURCE_FILES = [
   "20260728154009_seed_nichos_mvp.sql",
   "20260731200000_expandir_nichos.sql",
   "20260831123625_nichos_baixa_estrutura.sql",
+  "20260831162322_nicho_desenvolvimento_software.sql",
 ];
 
 const COLUMNS = [

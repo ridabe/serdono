@@ -982,6 +982,7 @@ export type Database = {
           id: string
           justificativa_ia: string | null
           niche_id: string
+          ordem: number
           precisa_de_mais_capital: boolean
           score_contexto: number
           score_financeiro: number
@@ -997,6 +998,7 @@ export type Database = {
           id?: string
           justificativa_ia?: string | null
           niche_id: string
+          ordem?: number
           precisa_de_mais_capital?: boolean
           score_contexto: number
           score_financeiro: number
@@ -1012,6 +1014,7 @@ export type Database = {
           id?: string
           justificativa_ia?: string | null
           niche_id?: string
+          ordem?: number
           precisa_de_mais_capital?: boolean
           score_contexto?: number
           score_financeiro?: number

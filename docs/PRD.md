@@ -154,7 +154,7 @@ Banco: Postgres via Supabase. Convenção: `snake_case`, chaves primárias `uuid
 | gerado_em | timestamp | |
 
 **RN-6:** Recalcular `niche_matches` sempre que `diagnostic_responses` mudar OU a cada 90 dias (dados de mercado envelhecem).
-**RN-7:** Apenas os 3 melhores `fit_score` aparecem na prévia gratuita (RN definida no Documento de Conceito, aqui apenas implementada).
+**RN-7:** A prévia gratuita mostra sempre 3 nichos. **Desde SDD-136:** quem escolhe e ORDENA esses 3 é a IA (ranking por aderência ao perfil, texto livre incluso), não o `fit_score` sozinho — o `fit_score` continua calculado (nunca gerado por IA) e entra como nota de viabilidade e desempate. Se a IA falhar, a prévia cai nos 3 melhores `fit_score`.
 
 ### 5.4 Workflow
 
@@ -361,7 +361,9 @@ Detalhamento técnico: SPEC.md SDD-67.
 - **Capital apertado não esconde mais a sugestão.** Se o valor informado não cobre nem o começo enxuto, o ramo ainda aparece — com um aviso honesto de "vale planejar um pouco mais de caixa", em vez de sumir no fim da lista.
 - **Um ramo pedido com todas as letras não fica fora dos 3 melhores** por causa de um fator secundário (concorrência alta, trabalho intenso).
 
-Detalhamento técnico: SPEC.md SDD-135.
+**Revisão 2 (mesmo dia, à tarde — SDD-136): quem ORDENA as 3 sugestões é a IA, não o cálculo.** Segundo teste: perfil de programador ("python, desenvolvimento de sistema") recebeu Cabeleireiro em 1º. A causa: o cálculo casava por "área", e "serviços" bate com meio catálogo. Agora a IA lê o perfil inteiro (checkboxes + texto livre) e ranqueia o catálogo por aderência real; o cálculo continua dando a nota de viabilidade (dá pra bancar? tem tempo?) e serve de rede de segurança, mas a ordem é da IA. Também: novo ramo **"Desenvolvimento de software e sistemas"** (o catálogo não tinha nada de programação), e correção de um bug que deixava sugestões de um diagnóstico anterior misturadas com as novas.
+
+Detalhamento técnico: SPEC.md SDD-135 e SDD-136.
 
 **Deliberadamente fora desta versão:** investimento e margem por sub-negócio. A descrição do que cada negócio faz é conhecimento geral e não exige fonte; número de mercado exige, e as faixas com fonte real (Sebrae + data) são as do nicho-pai. Inventar "Fonte: Sebrae" para dado não consultado é exatamente o que a RN-20 previne.
 
@@ -1102,7 +1104,7 @@ Ligado à seção 11 do Documento de Conceito (North Star e funil). Eventos mín
 
 ## 16. Glossário rápido
 
-- **Fit Score** — nota calculada de aderência entre usuário e nicho (não gerada por IA, apenas explicada por ela).
+- **Fit Score** — nota calculada de aderência entre usuário e nicho (o número nunca é gerado por IA, só explicado por ela). Desde SDD-136, a IA decide QUAIS 3 nichos aparecem e em que ordem; o Fit Score é a nota de viabilidade de cada um.
 - **Business memory** — registro estruturado de decisões do negócio, injetado em todo prompt.
 - **Trilha** — agrupamento paralelo de etapas do workflow (A a F).
 - **Dossiê** — conjunto de entregáveis de um negócio, exportável.

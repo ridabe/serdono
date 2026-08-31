@@ -66,6 +66,7 @@ interface NicheRow extends NichoParaScore {
   margem_tipica_pct: number | null;
   dependencia_ponto_fisico: boolean;
   permite_inicio_em_casa: boolean;
+  perfil_cliente: string | null;
   fonte: string | null;
   fonte_data: string | null;
 }
@@ -169,54 +170,88 @@ async function inferirAreasDoTexto(texto: string, supabase: any, userId: string)
     .slice(0, 3);
 }
 
-const MAX_NICHOS_INFERIDOS = 3;
+const MAX_NICHOS_RANQUEADOS = 6;
+
+interface CatalogoItem {
+  slug: string;
+  nome: string;
+  categoria: string;
+  perfil_cliente: string | null;
+  faixa_investimento: string;
+  comeca_de_casa: boolean;
+}
 
 /**
- * Traduz o texto livre do bloco 6 em SLUGS de nicho do catálogo (SDD-135).
+ * A IA ranqueia o CATÁLOGO INTEIRO contra o perfil da pessoa (SDD-136).
  *
- * A área sozinha é grossa demais: "gosto de cortar cabelo e fazer barba" e
- * "faço limpeza de pele" caem os dois em `beleza`, e o motor não separava um
- * barbeiro de uma esteticista. Aqui a IA aponta o ramo pelo nome — e pensa
- * como quem abre micro/pequeno negócio: se a pessoa descreve uma habilidade
- * que dá pra tocar de casa, prefere a versão "a domicílio" / "em casa" / "por
- * encomenda" quando ela existe no catálogo.
+ * Virada de abordagem: antes o cálculo determinístico é que decidia quais
+ * nichos apareciam, casando "áreas" — e "serviços" bate com meio catálogo, aí
+ * um dev que escreveu "python, sistemas" recebia Cabeleireiro no topo. Agora
+ * quem decide RELEVÂNCIA é a IA (consultor de negócio lendo o perfil todo,
+ * texto livre incluso); o cálculo determinístico continua dando a NOTA
+ * (financeiro, tempo, risco) e a flag de capital apertado — mas a ORDEM é a
+ * da IA. Menos cálculo frio, mais leitura de contexto (pedido do dono do
+ * produto, 31/08/2026).
  *
- * Mesma disciplina da RN-38: a saída é filtrada contra os slugs reais — o que
- * o modelo inventar morre antes de tocar em qualquer nota. A nota segue
- * calculada por fórmula; isto só amplia o sinal de entrada.
+ * Disciplina de sempre (RN-38): a saída é filtrada contra os slugs reais.
+ * Se a IA falhar ou devolver vazio, o chamador cai no ranking determinístico
+ * por `fit_score` — nunca quebra.
  */
 // deno-lint-ignore no-explicit-any
-async function inferirNichosDoTexto(
-  texto: string,
-  catalogo: { slug: string; nome: string; categoria: string; permite_inicio_em_casa: boolean }[],
+async function ranquearNichosPorPerfil(
+  diagnostico: {
+    capital_disponivel: string | null;
+    tempo_disponivel: string | null;
+    apetite_risco: number | null;
+    formacao: string[];
+    experiencia: string[];
+    interesses_texto: string | null;
+  },
+  catalogo: CatalogoItem[],
   supabase: any,
   userId: string
 ): Promise<string[]> {
+  const catalogoTxt = catalogo
+    .map(
+      (n) =>
+        `- ${n.slug} | ${n.nome} (${n.categoria}) | investimento ${n.faixa_investimento} | ${
+          n.comeca_de_casa ? "dá pra começar de casa" : "precisa de ponto comercial"
+        } | quem compra: ${n.perfil_cliente ?? "—"}`
+    )
+    .join("\n");
+
   const system = [
-    "Você lê o texto de alguém que quer abrir um negócio e aponta, no catálogo fornecido, os ramos que a pessoa CLARAMENTE demonstra querer ou já saber fazer.",
-    "O público é micro e pequeno empreendedor, que quase sempre começa pequeno e muitas vezes de casa.",
-    "Se a pessoa descreve uma habilidade que dá pra tocar de casa ou atendendo na casa do cliente, e existe no catálogo uma versão 'a domicílio' / 'em casa' / 'por encomenda' / 'freelancer', prefira essa — e cite também a versão formal se ela existir.",
-    "Responda SOMENTE um JSON no formato {\"slugs\": [\"...\"]}, sem texto antes ou depois.",
-    `No máximo ${MAX_NICHOS_INFERIDOS} slugs, do mais evidente para o menos evidente.`,
-    "Use EXCLUSIVAMENTE os valores do campo 'slug' do catálogo. Nunca invente um slug.",
-    'Se o texto não apontar nenhum ramo com clareza, devolva {"slugs": []} — não chute por associação vaga.',
-  ].join(" ");
+    "Você é consultor de negócios do Ser Dono, especialista em micro e pequeno empreendedor no Brasil.",
+    "Recebe o PERFIL de uma pessoa que quer abrir um negócio e escolhe, no CATÁLOGO abaixo, os ramos que mais combinam com o que ela quer fazer e consegue tocar na prática — em ordem, do mais aderente para o menos.",
+    "O texto livre é o sinal mais forte: se a pessoa diz que programa e faz sistemas, o ramo é desenvolvimento de software — não conserto de computador, não loja virtual, não um ramo de outra área só porque é barato.",
+    "Só inclua um ramo com relação REAL com o que a pessoa descreveu ou marcou. Melhor 2 certeiros do que 6 com enchimento.",
+    "Capital e tempo entram como desempate: um ramo muito aderente mas caro pode entrar, só mais abaixo. Um ramo sem relação nenhuma nunca entra, por mais barato que seja.",
+    `Responda SOMENTE um JSON {"ranking": ["slug", ...]}, no máximo ${MAX_NICHOS_RANQUEADOS} slugs, do mais aderente para o menos.`,
+    'Use EXATAMENTE os slugs do catálogo. Se nada combinar de verdade, devolva {"ranking": []}.',
+    "",
+    "CATÁLOGO:",
+    catalogoTxt,
+  ].join("\n");
 
-  const userContent = JSON.stringify({
-    texto,
-    catalogo: catalogo.map((n) => ({ slug: n.slug, nome: n.nome, categoria: n.categoria, comeca_de_casa: n.permite_inicio_em_casa })),
-  });
+  const perfil = {
+    capital_disponivel: diagnostico.capital_disponivel,
+    tempo_disponivel: diagnostico.tempo_disponivel,
+    apetite_risco: diagnostico.apetite_risco,
+    areas_marcadas: [...(diagnostico.formacao ?? []), ...(diagnostico.experiencia ?? [])],
+    texto_livre: diagnostico.interesses_texto,
+  };
 
-  const bruto = await callAnthropic(system, userContent, 200, supabase, userId);
-  const parsed = parseJsonResposta<{ slugs?: unknown }>(bruto);
-  if (!parsed || !Array.isArray(parsed.slugs)) return [];
+  const bruto = await callAnthropic(system, JSON.stringify(perfil), 250, supabase, userId);
+  const parsed = parseJsonResposta<{ ranking?: unknown }>(bruto);
+  if (!parsed || !Array.isArray(parsed.ranking)) return [];
 
   const slugsValidos = new Set(catalogo.map((n) => n.slug));
-  return parsed.slugs
+  const vistos = new Set<string>();
+  return parsed.ranking
     .filter((s): s is string => typeof s === "string")
     .map((s) => s.toLowerCase().trim())
-    .filter((s) => slugsValidos.has(s))
-    .slice(0, MAX_NICHOS_INFERIDOS);
+    .filter((s) => slugsValidos.has(s) && !vistos.has(s) && vistos.add(s))
+    .slice(0, MAX_NICHOS_RANQUEADOS);
 }
 
 interface JustificativaResultado {
@@ -271,7 +306,7 @@ async function gerarJustificativaESubNegocios(
     fonte_data: niche.fonte_data,
     fit_score: scores.fit_score,
     precisa_de_mais_capital: scores.precisa_de_mais_capital,
-    citado_no_texto_livre: scores.afinidade_direta,
+    escolhido_pela_ia_como_aderente: scores.afinidade_direta,
     componentes: {
       perfil: scores.score_perfil,
       financeiro: scores.score_financeiro,
@@ -385,36 +420,42 @@ Deno.serve(async (req) => {
       });
     }
 
-    // ---- Passo 1: texto livre → áreas + nichos (RN-37, SDD-135) ----
-    // Best-effort: se a IA falhar, o diagnóstico segue com o sinal dos
-    // checkboxes, exatamente como antes desta feature (mesmo padrão de
-    // degradação graciosa de `loadBusinessContext` na knowledge-search).
+    // ---- Passo 1: IA lê o perfil (RN-37, SDD-135/136) ----
+    // A IA ranqueia o catálogo pelo perfil (sempre) e classifica o texto livre
+    // em áreas (só se houver texto — alimenta a exibição "entendi afinidade
+    // com…" e o fallback determinístico). Best-effort: qualquer falha degrada
+    // pro ranking por `fit_score`, sem quebrar (padrão de `loadBusinessContext`).
     let areasInferidas: string[] = diagnostico.areas_inferidas ?? [];
-    let nichosInferidos: string[] = diagnostico.nichos_inferidos ?? [];
-    if (diagnostico.interesses_texto?.trim()) {
-      const texto = diagnostico.interesses_texto;
-      const catalogo = (niches as NicheRow[]).map((n) => ({
-        slug: n.slug,
-        nome: n.nome,
-        categoria: n.categoria,
-        permite_inicio_em_casa: n.permite_inicio_em_casa,
-      }));
-      try {
-        [areasInferidas, nichosInferidos] = await Promise.all([
-          inferirAreasDoTexto(texto, supabase, user.id),
-          inferirNichosDoTexto(texto, catalogo, supabase, user.id),
-        ]);
-        const { error: updErr } = await supabase
-          .from("diagnostic_responses")
-          .update({ areas_inferidas: areasInferidas, nichos_inferidos: nichosInferidos })
-          .eq("user_id", user.id);
-        if (updErr) throw updErr;
-      } catch (e) {
-        console.error("Falha ao interpretar o texto livre (seguindo sem ele):", e);
-        areasInferidas = [];
-        nichosInferidos = [];
-      }
+    let nichosRanqueados: string[] = [];
+
+    const catalogo: CatalogoItem[] = (niches as NicheRow[]).map((n) => ({
+      slug: n.slug,
+      nome: n.nome,
+      categoria: n.categoria,
+      perfil_cliente: n.perfil_cliente,
+      faixa_investimento: `R$ ${n.investimento_min}–${n.investimento_max}`,
+      comeca_de_casa: n.permite_inicio_em_casa || n.dependencia_ponto_fisico === false,
+    }));
+
+    try {
+      const texto = diagnostico.interesses_texto?.trim() ? diagnostico.interesses_texto : null;
+      const [ranking, areas] = await Promise.all([
+        ranquearNichosPorPerfil(diagnostico, catalogo, supabase, user.id),
+        texto ? inferirAreasDoTexto(texto, supabase, user.id) : Promise.resolve(areasInferidas),
+      ]);
+      nichosRanqueados = ranking;
+      areasInferidas = areas;
+      const { error: updErr } = await supabase
+        .from("diagnostic_responses")
+        .update({ areas_inferidas: areasInferidas, nichos_inferidos: nichosRanqueados })
+        .eq("user_id", user.id);
+      if (updErr) throw updErr;
+    } catch (e) {
+      console.error("Falha na leitura de perfil pela IA (seguindo com o ranking determinístico):", e);
+      nichosRanqueados = [];
+      areasInferidas = diagnostico.interesses_texto?.trim() ? [] : areasInferidas;
     }
+    const nichosInferidos = nichosRanqueados;
 
     const diagnosticoParaScore: DiagnosticoParaScore = {
       capital_disponivel: diagnostico.capital_disponivel,
@@ -427,19 +468,25 @@ Deno.serve(async (req) => {
       nichos_inferidos: nichosInferidos,
     };
 
-    // ---- Passo 2: nota determinística ----
-    // Ordena por fit_score, mas um ramo que a pessoa CITOU no texto livre e que
-    // tem nota mínima razoável vem primeiro — não deixa um pedido explícito
-    // ficar fora dos 3 melhores por causa de concorrência ou intensidade de
-    // trabalho (SDD-135). O `+1000` é só chave de ordenação, não entra na nota.
-    const AFINIDADE_DIRETA_FIT_MINIMO = 40;
-    const chaveOrdem = (s: ReturnType<typeof calculateFitScore>) =>
-      s.fit_score + (s.afinidade_direta && s.fit_score >= AFINIDADE_DIRETA_FIT_MINIMO ? 1000 : 0);
-    const scored = (niches as NicheRow[])
-      .map((niche) => ({ niche, scores: calculateFitScore(diagnosticoParaScore, niche) }))
-      .sort((a, b) => chaveOrdem(b.scores) - chaveOrdem(a.scores));
+    // ---- Passo 2: nota determinística + ordem da IA ----
+    // A nota (financeiro, tempo, risco, e a flag de capital) é sempre
+    // calculada. A ORDEM final segue o ranking da IA (SDD-136); o cálculo
+    // entra só como desempate e rede de segurança.
+    const scored = (niches as NicheRow[]).map((niche) => ({
+      niche,
+      scores: calculateFitScore(diagnosticoParaScore, niche),
+    }));
+    const porFitScore = [...scored].sort((a, b) => b.scores.fit_score - a.scores.fit_score);
 
-    const top = scored.slice(0, PREVIEW_SIZE);
+    // Ranking da IA na ordem dela; completa com o melhor do cálculo se a IA
+    // devolveu menos de 3 (ou nada — fallback total pro ranking determinístico).
+    const porSlug = new Map(scored.map((s) => [s.niche.slug, s]));
+    const doRankingIA = nichosRanqueados
+      .map((slug) => porSlug.get(slug))
+      .filter((s): s is (typeof scored)[number] => !!s);
+    const jaNoTop = new Set(doRankingIA.map((s) => s.niche.id));
+    const complemento = porFitScore.filter((s) => !jaNoTop.has(s.niche.id));
+    const top = [...doRankingIA, ...complemento].slice(0, PREVIEW_SIZE);
 
     // ---- Passo 3: catálogo curado de sub-negócios só dos 3 escolhidos ----
     const { data: subNegocios, error: subError } = await supabase
@@ -460,8 +507,8 @@ Deno.serve(async (req) => {
       subPorNicho.set(s.niche_id, lista);
     }
 
-    const results = await Promise.all(
-      top.map(async ({ niche, scores }) => {
+    const gerados = await Promise.all(
+      top.map(async ({ niche, scores }, i) => {
         const { justificativa, sub_negocios_destaque } = await gerarJustificativaESubNegocios(
           diagnosticoParaScore,
           niche,
@@ -470,38 +517,47 @@ Deno.serve(async (req) => {
           supabase,
           user.id
         );
-
-        const { error: upsertError } = await supabase.from("niche_matches").upsert(
-          {
-            user_id: user.id,
-            niche_id: niche.id,
-            fit_score: scores.fit_score,
-            score_perfil: scores.score_perfil,
-            score_financeiro: scores.score_financeiro,
-            score_contexto: scores.score_contexto,
-            score_tempo: scores.score_tempo,
-            precisa_de_mais_capital: scores.precisa_de_mais_capital,
-            afinidade_direta: scores.afinidade_direta,
-            justificativa_ia: justificativa,
-            sub_negocios_destaque,
-            gerado_em: new Date().toISOString(),
-          },
-          { onConflict: "user_id,niche_id" }
-        );
-        if (upsertError) throw upsertError;
-
-        return {
-          niche_id: niche.id,
-          nome: niche.nome,
-          slug: niche.slug,
-          investimento_min: niche.investimento_min,
-          investimento_max: niche.investimento_max,
-          ...scores,
-          justificativa_ia: justificativa,
-          sub_negocios_destaque,
-        };
+        return { niche, scores, justificativa, sub_negocios_destaque, ordem: i };
       })
     );
+
+    // Regrava do zero: apaga os matches antigos deste usuário antes de inserir
+    // os 3 novos. Sem isso, uma execução anterior com ranking diferente
+    // deixava linhas órfãs, e a tela (que ordena e faz LIMIT 3 sobre TODAS as
+    // linhas) misturava sugestão velha com nova — causa do "Cabeleireiro 89"
+    // aparecendo pra um perfil de programador (SDD-136).
+    const { error: delError } = await supabase.from("niche_matches").delete().eq("user_id", user.id);
+    if (delError) throw delError;
+
+    const { error: insError } = await supabase.from("niche_matches").insert(
+      gerados.map(({ niche, scores, justificativa, sub_negocios_destaque, ordem }) => ({
+        user_id: user.id,
+        niche_id: niche.id,
+        ordem,
+        fit_score: scores.fit_score,
+        score_perfil: scores.score_perfil,
+        score_financeiro: scores.score_financeiro,
+        score_contexto: scores.score_contexto,
+        score_tempo: scores.score_tempo,
+        precisa_de_mais_capital: scores.precisa_de_mais_capital,
+        afinidade_direta: scores.afinidade_direta,
+        justificativa_ia: justificativa,
+        sub_negocios_destaque,
+        gerado_em: new Date().toISOString(),
+      }))
+    );
+    if (insError) throw insError;
+
+    const results = gerados.map(({ niche, scores, justificativa, sub_negocios_destaque }) => ({
+      niche_id: niche.id,
+      nome: niche.nome,
+      slug: niche.slug,
+      investimento_min: niche.investimento_min,
+      investimento_max: niche.investimento_max,
+      ...scores,
+      justificativa_ia: justificativa,
+      sub_negocios_destaque,
+    }));
 
     return new Response(
       JSON.stringify({ matches: results, areas_inferidas: areasInferidas, nichos_inferidos: nichosInferidos }),

@@ -280,6 +280,20 @@
     "fonteData": "2026-08-31"
   },
   {
+    "nome": "Desenvolvimento de software e sistemas",
+    "slug": "desenvolvimento-de-software",
+    "categoria": "tecnologia",
+    "investimentoMin": 500,
+    "investimentoMax": 20000,
+    "tempoEquilibrioMeses": 4,
+    "margemTipicaPct": 65,
+    "nivelConcorrencia": 4,
+    "dependenciaPontoFisico": false,
+    "perfilCliente": "Empresas que precisam de sistema sob medida, automação ou aplicativo, e outros negócios digitais que terceirizam a parte técnica.",
+    "fonte": "Sebrae — Desenvolvimento de Software, guia de ideia de negócio",
+    "fonteData": "2026-08-31"
+  },
+  {
     "nome": "Designer de sobrancelhas e cílios",
     "slug": "designer-de-sobrancelhas",
     "categoria": "beleza",

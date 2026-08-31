@@ -67,14 +67,13 @@ export function ResultadoScreen() {
         if (diagError) throw diagError;
         setPerfil(diag as Perfil);
 
-        // Um ramo que a pessoa citou no texto livre (afinidade_direta) vem
-        // antes do fit_score — o pedido explícito manda (SDD-135).
+        // A ordem é a do ranking da IA (coluna `ordem`), não a do fit_score
+        // (SDD-136).
         let { data: matchRows, error: matchError } = await supabase
           .from("niche_matches")
           .select(MATCH_SELECT)
           .eq("user_id", session.user.id)
-          .order("afinidade_direta", { ascending: false })
-          .order("fit_score", { ascending: false })
+          .order("ordem", { ascending: true })
           .limit(3);
         if (matchError) throw matchError;
 
@@ -85,8 +84,7 @@ export function ResultadoScreen() {
             .from("niche_matches")
             .select(MATCH_SELECT)
             .eq("user_id", session.user.id)
-            .order("afinidade_direta", { ascending: false })
-            .order("fit_score", { ascending: false })
+            .order("ordem", { ascending: true })
             .limit(3);
           if (retry.error) throw retry.error;
           matchRows = retry.data;

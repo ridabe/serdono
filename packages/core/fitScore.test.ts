@@ -172,12 +172,21 @@ describe("calculateFitScore", () => {
       nivel_concorrencia: 5,
     };
 
-    it("casa por qualquer uma das áreas do nicho, não só pela categoria", () => {
+    it("casa por uma área específica do nicho (tecnologia), não só pela categoria genérica", () => {
       // Categoria é 'serviços', mas o nicho também é de tecnologia.
       const porTecnologia = calculateFitScore(perfilTecnologia, agenciaMarketing);
-      const perfilServicos = { ...perfilTecnologia, formacao: ["serviços"] };
-      const porServicos = calculateFitScore(perfilServicos, agenciaMarketing);
-      expect(porTecnologia.score_perfil).toBe(porServicos.score_perfil);
+      const perfilOutraArea = { ...perfilTecnologia, formacao: ["alimentação"] };
+      const semMatch = calculateFitScore(perfilOutraArea, agenciaMarketing);
+      expect(porTecnologia.score_perfil).toBeGreaterThan(semMatch.score_perfil);
+    });
+
+    // SDD-136: "serviços"/"varejo" são rótulo de categoria, não afinidade —
+    // casar só por eles quase não vale nada (era a fonte nº 1 de falso positivo,
+    // tipo um dev "de serviços" batendo com barbearia "de serviços").
+    it("casar só por área genérica ('serviços') pesa bem menos que casar por área específica", () => {
+      const porTecnologia = calculateFitScore(perfilTecnologia, agenciaMarketing);
+      const soPorServicos = calculateFitScore({ ...perfilTecnologia, formacao: ["serviços"] }, agenciaMarketing);
+      expect(soPorServicos.score_perfil).toBeLessThan(porTecnologia.score_perfil);
     });
 
     it("sem areas_afinidade, continua caindo na categoria (nenhum nicho fica pior que antes)", () => {

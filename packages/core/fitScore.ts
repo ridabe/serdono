@@ -32,11 +32,13 @@ export interface DiagnosticoParaScore {
    */
   areas_inferidas?: string[];
   /**
-   * Slugs de nicho que a IA extraiu do texto livre (SDD-135). Sinal mais
-   * FORTE que a área: quem escreve "gosto de cortar cabelo e fazer barba"
-   * está apontando `barbearia` / `cabeleireiro-a-domicilio`, não só `beleza`
-   * — e a área sozinha não separa uma coisa da outra. Filtrado contra o
-   * catálogo real antes de chegar aqui (RN-38); a nota segue calculada.
+   * Slugs de nicho que a IA apontou como relevantes pro perfil (SDD-135/136):
+   * a partir da SDD-136, a IA ranqueia o catálogo inteiro contra o perfil
+   * completo (checkboxes + texto livre) e devolve os mais aderentes em ordem —
+   * "gosto de cortar cabelo" → `barbearia`/`cabeleireiro-a-domicilio`,
+   * "python, sistemas" → `desenvolvimento-de-software`. Filtrado contra o
+   * catálogo real (RN-38). Estes nichos entram com afinidade máxima; a nota
+   * (financeiro, tempo, risco) segue calculada, e a ORDEM final é a da IA.
    */
   nichos_inferidos?: string[];
 }
@@ -179,12 +181,21 @@ function scoreFinanceiro(d: DiagnosticoParaScore, n: NichoParaScore): number {
 
 /** Nenhum dado de área/nicho de interesse informado — nem penaliza nem favorece. */
 const AREA_SEM_DADO = 50;
-/** O texto livre apontou ESTE nicho pelo nome — o sinal mais forte que existe. */
+/** O texto livre apontou ESTE nicho pelo nome (ou a IA o ranqueou como relevante) — o sinal mais forte que existe. */
 const NICHO_MATCH_DIRETO = 100;
-/** Área de formação/experiência/interesse do usuário bate com uma área do nicho. */
+/** Área específica (beleza, alimentação, tecnologia…) do usuário bate com uma área do nicho. */
 const AREA_COM_MATCH = 88;
-/** Usuário informou interesse, mas nenhum bate com este nicho — sinal fraco de verdade (não elimina, mas não é quase-neutro como os 25 de antes). */
+/** O único ponto em comum é uma área genérica ("serviços"/"varejo"), que quase todo nicho carrega — quase não diz nada. */
+const AREA_MATCH_GENERICO = 45;
+/** Usuário informou interesse, mas nenhum bate com este nicho. */
 const AREA_SEM_MATCH = 15;
+
+/**
+ * "serviços" e "varejo" são rótulos de categoria, não afinidade — quase todo
+ * nicho tem um dos dois. Casar só por eles (um dev "de serviços" batendo com
+ * barbearia "de serviços") era a maior fonte de falso positivo do motor.
+ */
+const AREAS_GENERICAS = new Set(["serviços", "varejo"]);
 
 /**
  * Aderência entre o que o usuário demonstrou querer — áreas marcadas no bloco
@@ -208,8 +219,14 @@ function scoreInteresse(d: DiagnosticoParaScore, n: NichoParaScore): number {
   // como fallback pra nicho que ainda não foi mapeado (nenhum fica pior que antes).
   const areasDoNicho = normalizar(n.areas_afinidade?.length ? n.areas_afinidade : [n.categoria]);
 
-  const match = tags.some((t) => areasDoNicho.some((a) => t === a || t.includes(a) || a.includes(t)));
-  return match ? AREA_COM_MATCH : AREA_SEM_MATCH;
+  const casa = (t: string, a: string) => t === a || t.includes(a) || a.includes(t);
+  const matchEspecifico = tags.some((t) =>
+    areasDoNicho.some((a) => !AREAS_GENERICAS.has(a) && casa(t, a))
+  );
+  if (matchEspecifico) return AREA_COM_MATCH;
+
+  const matchGenerico = tags.some((t) => areasDoNicho.some((a) => casa(t, a)));
+  return matchGenerico ? AREA_MATCH_GENERICO : AREA_SEM_MATCH;
 }
 
 function scorePerfil(d: DiagnosticoParaScore, n: NichoParaScore): number {
