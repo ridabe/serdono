@@ -1,0 +1,55 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="stylesheet" href="_base.css">
+<style>
+  body{ width:1200px; height:1600px; background:var(--brand900); overflow:hidden; position:relative; color:var(--white); }
+  /* textura de linhas "O Marco" ao fundo */
+  .bg{ position:absolute; inset:0; opacity:.10; }
+  .wrap{ position:absolute; inset:0; display:flex; flex-direction:column; padding:96px 96px 80px; }
+  .top{ display:flex; align-items:center; gap:20px; }
+  .mark{ width:64px; height:64px; }
+  .word{ font-size:34px; font-weight:800; letter-spacing:-.5px; }
+  .word b{ color:var(--gold500); font-weight:800; }
+  .kicker{ margin-top:150px; display:inline-flex; align-self:flex-start; align-items:center; gap:12px;
+    background:var(--gold500); color:var(--brand900); font-weight:700; font-size:22px; letter-spacing:2px;
+    padding:14px 26px; border-radius:999px; }
+  h1{ margin-top:48px; font-size:98px; line-height:1.04; font-weight:800; letter-spacing:-2px; max-width:15ch; }
+  h1 .hl{ color:var(--gold500); }
+  .sub{ margin-top:44px; font-size:32px; line-height:1.5; color:var(--brand100); max-width:24ch; font-weight:400; }
+  .spacer{ flex:1; }
+  .foot{ display:flex; align-items:center; gap:18px; font-size:24px; color:var(--brand100); }
+  .dot{ width:10px; height:10px; border-radius:999px; background:var(--gold500); }
+  .steps{ position:absolute; right:-40px; bottom:-40px; width:560px; height:560px; opacity:.9; }
+</style></head>
+<body>
+<svg class="bg" viewBox="0 0 1200 1600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" stroke="#BFD4DC" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-100 1500 H150 V1250 H400 V1000 H650 V750 H900 V500 H1150 V250 H1400"/>
+    <path d="M-100 1700 H250 V1400 H550 V1120 H820 V860 H1080 V600 H1340"/>
+  </g>
+</svg>
+<div class="wrap">
+  <div class="top">
+    <svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100" height="100" rx="24" fill="#F2B03D"/>
+      <path d="M23 78 H41 V62 H59 V46 H72" fill="none" stroke="#0E3A4F" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="72" cy="27" r="9" fill="#0E3A4F"/>
+    </svg>
+    <span class="word sora">Ser<b>Dono</b></span>
+  </div>
+
+  <span class="kicker sora">GUIA GRATUITO</span>
+  <h1 class="sora">Abrir um negócio <span class="hl">do zero</span></h1>
+  <p class="sub">O mercado, as vantagens, os cuidados — e como sair do papel com ajuda de verdade.</p>
+
+  <div class="spacer"></div>
+  <div class="foot">
+    <span class="dot"></span>
+    <span>Direto ao ponto · sem enrolação · sem venda escondida</span>
+  </div>
+</div>
+
+<svg class="steps" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 92 H30 V70 H52 V48 H74" fill="none" stroke="#F2B03D" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="74" cy="26" r="11" fill="#F2B03D"/>
+</svg>
+</body></html>

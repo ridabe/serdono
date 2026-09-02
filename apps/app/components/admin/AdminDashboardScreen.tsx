@@ -207,6 +207,11 @@ export function AdminDashboardScreen() {
               onPress={() => router.push("/admin/nichos")}
             />
             <NavCard
+              title="Leads do e-book"
+              description="Quem preencheu o formulário e baixou o guia na landing /ebook — contato, respostas e exportação de e-mails."
+              onPress={() => router.push("/admin/leads")}
+            />
+            <NavCard
               title="Dicas da Mary"
               description="Categorias de estudo com PDF, vídeo e links — liberado a todo usuário, sem gate de módulo."
               onPress={() => router.push("/admin/dicas")}

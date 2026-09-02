@@ -28,4 +28,6 @@ export * from "./adminDashboard";
 export * from "./adminAssinaturas";
 export * from "./adminAbacatePay";
 export * from "./nichos";
+export * from "./leadMagnet";
+export * from "./adminLeadMagnet";
 export type { Database } from "./types";

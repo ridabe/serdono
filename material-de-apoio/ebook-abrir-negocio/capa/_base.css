@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root{
+  --brand900:#0E3A4F; --brand700:#17546E; --brand100:#BFD4DC;
+  --gold500:#F2B03D; --gold100:#FCE9C2; --white:#FFFFFF;
+}
+html,body{ font-family:'Inter',-apple-system,Segoe UI,Roboto,sans-serif; }
+.sora{ font-family:'Sora','Inter',sans-serif; }
