@@ -180,8 +180,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/index.ts": {
-    "mtime": 1788358030.5154586,
-    "ast_hash": "d477b1abdc7ba9f097c5017c20734d18",
+    "mtime": 1788358744.2548025,
+    "ast_hash": "7f0a7bb7a8e0b8a7fd5aec136226f67e",
     "semantic_hash": ""
   },
   "packages/supabase/package.json": {
@@ -270,8 +270,8 @@
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1788358368.2412555,
-    "ast_hash": "86fde52344630935c71413871d6f5a62",
+    "mtime": 1788359133.8451192,
+    "ast_hash": "bd31fa14f3cde4297e540bc19c9ac04a",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
@@ -395,8 +395,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/admin/AdminDashboardScreen.tsx": {
-    "mtime": 1788196265.9073944,
-    "ast_hash": "1b7b82accfb4a07402e598c14a5ca5ac",
+    "mtime": 1788358744.255064,
+    "ast_hash": "69325ca24979a44ac060bba40946fb4a",
     "semantic_hash": ""
   },
   "apps/app/components/assistente/AssistenteScreen.tsx": {
@@ -2552,6 +2552,36 @@
   "supabase/migrations/20260902140127_lead_magnet_leads.sql": {
     "mtime": 1788357681.846835,
     "ast_hash": "c8a27e00f8177f0feb211e888c840d4f",
+    "semantic_hash": ""
+  },
+  "apps/app/app/(protected)/admin/leads/index.tsx": {
+    "mtime": 1788358744.2540812,
+    "ast_hash": "700242ee722cc27da51b0f7114395b23",
+    "semantic_hash": ""
+  },
+  "apps/app/components/admin/AdminLeadMagnetScreen.tsx": {
+    "mtime": 1788359028.1049683,
+    "ast_hash": "e29fbed239b98ac5f1471fbcf3dca5e5",
+    "semantic_hash": ""
+  },
+  "apps/app/components/admin/useAdminLeadMagnet.ts": {
+    "mtime": 1788359028.1056888,
+    "ast_hash": "e6499625cb651839203a09b1a18b6d1a",
+    "semantic_hash": ""
+  },
+  "packages/supabase/adminLeadMagnet.ts": {
+    "mtime": 1788358744.25438,
+    "ast_hash": "30b7c285f526bb7b314ed5d09b4619e5",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20260902141537_lead_magnet_leads_admin_write.sql": {
+    "mtime": 1788358533.6149392,
+    "ast_hash": "574a2bfaa993df7dffd9ab1fc67b8da5",
+    "semantic_hash": ""
+  },
+  "material-de-apoio/ebook-abrir-negocio/post-ebook-lancamento.png": {
+    "mtime": 1788359135.913707,
+    "ast_hash": "879c7ec567a907050c80de5782569bec",
     "semantic_hash": ""
   }
 }

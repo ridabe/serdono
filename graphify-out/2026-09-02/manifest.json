@@ -180,8 +180,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/index.ts": {
-    "mtime": 1788196176.0888648,
-    "ast_hash": "4cf1bc26d7ac5016eee3972aeabbb795",
+    "mtime": 1788358030.5154586,
+    "ast_hash": "d477b1abdc7ba9f097c5017c20734d18",
     "semantic_hash": ""
   },
   "packages/supabase/package.json": {
@@ -200,8 +200,8 @@
     "semantic_hash": ""
   },
   "packages/supabase/types.ts": {
-    "mtime": 1788196196.6543167,
-    "ast_hash": "b2ca159402a8f1719e8bb95769a621de",
+    "mtime": 1788357774.095992,
+    "ast_hash": "e4f5bd11229dfd183bae2b0e6453aa7a",
     "semantic_hash": ""
   },
   "packages/ui/components/Button.tsx": {
@@ -270,8 +270,8 @@
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1788357347.5409365,
-    "ast_hash": "ba4a787801916766f0db6fe7348988cd",
+    "mtime": 1788358368.2412555,
+    "ast_hash": "86fde52344630935c71413871d6f5a62",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
@@ -2507,6 +2507,51 @@
   "material-de-apoio/ebook-abrir-negocio/capa/capa-vertical.png": {
     "mtime": 1788357104.2455127,
     "ast_hash": "bf2623c1960fc0ee19fd10354b7cce98",
+    "semantic_hash": ""
+  },
+  "apps/app/app/ebook/baixar.tsx": {
+    "mtime": 1788358030.5142329,
+    "ast_hash": "0a6d75208cab3fb1ab35cbd77dc556f9",
+    "semantic_hash": ""
+  },
+  "apps/app/app/ebook/index.tsx": {
+    "mtime": 1788358030.5145354,
+    "ast_hash": "21c398336b4fbd8b1779f25385202f8e",
+    "semantic_hash": ""
+  },
+  "apps/app/components/ebook/EbookCountdown.tsx": {
+    "mtime": 1788358030.5132563,
+    "ast_hash": "dfdf426e0a6db6422a52821602194ede",
+    "semantic_hash": ""
+  },
+  "apps/app/components/ebook/EbookFormScreen.tsx": {
+    "mtime": 1788358253.298778,
+    "ast_hash": "11e0928dc8d495798cd97643a99b61c5",
+    "semantic_hash": ""
+  },
+  "apps/app/components/ebook/EbookLandingScreen.tsx": {
+    "mtime": 1788358030.5138714,
+    "ast_hash": "2b8d7a754e852826730ee938840e2898",
+    "semantic_hash": ""
+  },
+  "apps/app/data/ebook.ts": {
+    "mtime": 1788358030.5148466,
+    "ast_hash": "bc36a32b9168349600f5dc741a3d00fb",
+    "semantic_hash": ""
+  },
+  "packages/supabase/leadMagnet.ts": {
+    "mtime": 1788358030.515159,
+    "ast_hash": "3574105c104ce65af1f731f403e94765",
+    "semantic_hash": ""
+  },
+  "supabase/functions/lead-capturar/index.ts": {
+    "mtime": 1788357716.1232853,
+    "ast_hash": "538c4876753c4f566bc2f2bb3bc0af39",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20260902140127_lead_magnet_leads.sql": {
+    "mtime": 1788357681.846835,
+    "ast_hash": "c8a27e00f8177f0feb211e888c840d4f",
     "semantic_hash": ""
   }
 }
