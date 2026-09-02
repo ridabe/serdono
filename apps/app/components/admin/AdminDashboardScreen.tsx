@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import Svg, { Circle, Line, Path, Text as SvgText } from "react-native-svg";
-import { Card, Logo, chart, color, space, type } from "@serdono/ui";
+import { Card, IconBadge, Logo, MODULE_ACCENT_CYCLE, chart, color, radius, space, type } from "@serdono/ui";
 import {
   FASE_LABEL,
   FASE_ORDER,
@@ -96,6 +96,9 @@ export function AdminDashboardScreen() {
           />
         </View>
 
+        {/* ---- Atalhos rápidos (logo no topo — é a navegação principal do painel) ---- */}
+        <QuickShortcuts onNavigate={(href) => router.push(href as never)} />
+
         {/* ---- Crescimento + Alertas ---- */}
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[4] }}>
           <Card variant="default" padding={5} style={{ flexGrow: 2, minWidth: 320 }}>
@@ -172,57 +175,6 @@ export function AdminDashboardScreen() {
           </View>
         </Card>
 
-        {/* ---- Atalhos rápidos ---- */}
-        <View>
-          <Text style={{ ...type.h3, color: color.text.primary, marginBottom: space[3] }}>Atalhos rápidos</Text>
-          <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3] }}>
-            <NavCard
-              title="Usuários"
-              description="Adicionar, bloquear, reenviar senha e promover administradores."
-              onPress={() => router.push("/admin/usuarios")}
-            />
-            <NavCard
-              title="Assinaturas"
-              description="Planos mais assinados, inadimplência, receita estimada e concessão manual de plano."
-              onPress={() => router.push("/admin/assinaturas")}
-            />
-            <NavCard
-              title="AbacatePay"
-              description="Produtos, webhooks, clientes, cupons, saques e PIX — direto na conta da AbacatePay."
-              onPress={() => router.push("/admin/abacatepay")}
-            />
-            <NavCard
-              title="Módulos"
-              description="Catálogo de módulos do sistema e liberação por usuário."
-              onPress={() => router.push("/admin/modulos")}
-            />
-            <NavCard
-              title="Fornecedores"
-              description="Base de parceiros sugerida ao empreendedor na Fase 8 da Jornada, filtrada por nicho."
-              onPress={() => router.push("/admin/fornecedores")}
-            />
-            <NavCard
-              title="Nichos gerados pela IA"
-              description="Ramos que a Mary montou no diagnóstico fora do catálogo. Revisar: promover a curado ou apagar."
-              onPress={() => router.push("/admin/nichos")}
-            />
-            <NavCard
-              title="Leads do e-book"
-              description="Quem preencheu o formulário e baixou o guia na landing /ebook — contato, respostas e exportação de e-mails."
-              onPress={() => router.push("/admin/leads")}
-            />
-            <NavCard
-              title="Dicas da Mary"
-              description="Categorias de estudo com PDF, vídeo e links — liberado a todo usuário, sem gate de módulo."
-              onPress={() => router.push("/admin/dicas")}
-            />
-            <NavCard
-              title="Versão do App"
-              description="Versão publicada, versão mínima suportada, atualização obrigatória e link da Play Store."
-              onPress={() => router.push("/admin/versao")}
-            />
-          </View>
-        </View>
       </ScrollView>
     </View>
   );
@@ -671,15 +623,104 @@ function IaUsageBarChart({ pontos }: { pontos: IaUsageDia[] }) {
 }
 
 // ============================================================================
-// Atalhos
+// Atalhos rápidos — grade densa de tiles (ícone + título + 1 linha), logo
+// abaixo dos KPIs. Antes eram cards largura-cheia lá no rodapé: só 2 por
+// linha, altos, e fora da primeira dobra (pedido do dono do produto:
+// "preciso correr a página até o final pra acessar").
 // ============================================================================
-function NavCard({ title, description, onPress }: { title: string; description: string; onPress: () => void }) {
+type ShortcutHref =
+  | "/admin/usuarios"
+  | "/admin/assinaturas"
+  | "/admin/abacatepay"
+  | "/admin/modulos"
+  | "/admin/fornecedores"
+  | "/admin/nichos"
+  | "/admin/leads"
+  | "/admin/dicas"
+  | "/admin/versao";
+
+const SHORTCUTS: { icon: string; title: string; description: string; href: ShortcutHref }[] = [
+  { icon: "👥", title: "Usuários", description: "Contas, bloqueios e promoção de admins", href: "/admin/usuarios" },
+  { icon: "💳", title: "Assinaturas", description: "Planos, receita estimada e inadimplência", href: "/admin/assinaturas" },
+  { icon: "🥑", title: "AbacatePay", description: "Produtos, cupons, webhooks, saques e PIX", href: "/admin/abacatepay" },
+  { icon: "🧩", title: "Módulos", description: "Catálogo e liberação por usuário", href: "/admin/modulos" },
+  { icon: "🤝", title: "Fornecedores", description: "Parceiros sugeridos na Fase 8 da Jornada", href: "/admin/fornecedores" },
+  { icon: "✨", title: "Nichos gerados pela IA", description: "Revisar ramos criados fora do catálogo", href: "/admin/nichos" },
+  { icon: "📖", title: "Leads do e-book", description: "Cadastros da landing /ebook", href: "/admin/leads" },
+  { icon: "💡", title: "Dicas da Mary", description: "Conteúdos de estudo (PDF, vídeo, links)", href: "/admin/dicas" },
+  { icon: "📱", title: "Versão do App", description: "Publicação e atualização obrigatória", href: "/admin/versao" },
+];
+
+function QuickShortcuts({ onNavigate }: { onNavigate: (href: ShortcutHref) => void }) {
   return (
-    <Pressable onPress={onPress} accessibilityRole="button" style={{ flexGrow: 1, minWidth: 240 }}>
-      <Card variant="default" padding={5}>
-        <Text style={{ ...type.h3, color: color.text.primary, marginBottom: space[1] }}>{title} →</Text>
-        <Text style={{ ...type.body, color: color.text.secondary }}>{description}</Text>
-      </Card>
+    <View>
+      <Text style={{ ...type.h3, color: color.text.primary, marginBottom: space[3] }}>Atalhos rápidos</Text>
+      <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space[3] }}>
+        {SHORTCUTS.map((s, i) => (
+          <ShortcutTile
+            key={s.href}
+            icon={s.icon}
+            accent={MODULE_ACCENT_CYCLE[i % MODULE_ACCENT_CYCLE.length]}
+            title={s.title}
+            description={s.description}
+            onPress={() => onNavigate(s.href)}
+          />
+        ))}
+      </View>
+    </View>
+  );
+}
+
+function ShortcutTile({
+  icon,
+  accent,
+  title,
+  description,
+  onPress,
+}: {
+  icon: string;
+  accent: (typeof MODULE_ACCENT_CYCLE)[number];
+  title: string;
+  description: string;
+  onPress: () => void;
+}) {
+  return (
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={title}
+      // flexBasis fixo + flexGrow: preenche a linha por igual, sem esticar
+      // além de `maxWidth` (o defeito antigo: 2 tiles ocupando 50% cada).
+      style={{ flexGrow: 1, flexBasis: 230, maxWidth: 340, minHeight: 44 }}
+    >
+      {/* `hovered` só existe no react-native-web — tipado como any, mesmo padrão do NavBar da home. */}
+      {({ hovered }: any) => (
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            gap: space[3],
+            padding: space[3],
+            borderRadius: radius.lg,
+            borderWidth: 1,
+            borderColor: hovered ? color.action.primary : color.border.default,
+            backgroundColor: hovered ? color.action.primarySubtle : color.bg.surface,
+          }}
+        >
+          <IconBadge accent={accent} size={40}>
+            <Text style={{ fontSize: 20 }}>{icon}</Text>
+          </IconBadge>
+          <View style={{ flex: 1, gap: 2 }}>
+            <Text style={{ ...type.bodyStrong, color: color.text.primary }} numberOfLines={1}>
+              {title}
+            </Text>
+            <Text style={{ ...type.caption, color: color.text.muted }} numberOfLines={2}>
+              {description}
+            </Text>
+          </View>
+          <Text style={{ ...type.body, color: hovered ? color.action.primaryHover : color.text.muted }}>›</Text>
+        </View>
+      )}
     </Pressable>
   );
 }

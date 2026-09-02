@@ -270,8 +270,8 @@
     "semantic_hash": ""
   },
   "docs/SPEC.md": {
-    "mtime": 1788359133.8451192,
-    "ast_hash": "bd31fa14f3cde4297e540bc19c9ac04a",
+    "mtime": 1788360364.5445962,
+    "ast_hash": "0eb7f4a8e9407c2aefb483206523cffc",
     "semantic_hash": ""
   },
   "docs/identidade-visual/DESIGN_SYSTEM.md": {
@@ -395,8 +395,8 @@
     "semantic_hash": ""
   },
   "apps/app/components/admin/AdminDashboardScreen.tsx": {
-    "mtime": 1788358744.255064,
-    "ast_hash": "69325ca24979a44ac060bba40946fb4a",
+    "mtime": 1788360279.5101511,
+    "ast_hash": "29be515db7aeb8bf74855e357504499b",
     "semantic_hash": ""
   },
   "apps/app/components/assistente/AssistenteScreen.tsx": {
